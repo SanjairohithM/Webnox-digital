@@ -27,7 +27,7 @@ export default function Home() {
       <OurSolutions/>
       <NextGen/>
       <LetsConnect/>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

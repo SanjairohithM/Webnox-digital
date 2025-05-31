@@ -81,7 +81,7 @@ function Spheres({ isActive, shouldReset }) {
 
   const sphereData = useMemo(() => {
     const safeWidth = 80
-    const safeHeight = 15
+    const safeHeight = 60
     const safeDepth = 6
 
     return Array.from({ length: SPHERE_COUNT }).map((_, i) => ({
@@ -154,7 +154,7 @@ export default function PhysicsSpheres() {
   useGSAP(() => {
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: "top bottom",
+      start: "top 80%",
       end: "bottom top",
       onEnter: () => {
         setIsActive(true)
