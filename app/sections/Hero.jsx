@@ -20,7 +20,6 @@ export default function Hero() {
             >
               <Sphere position={[-1.9,.5,0]} />
             </Float>
-
             <Float
               speed={2}
               rotationIntensity={0}
