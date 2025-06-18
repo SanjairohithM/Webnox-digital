@@ -9,7 +9,7 @@ import Robot from "@/Three/Models/Robot"
 
 export default function Hero() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white overflow-hidden relative">
+    <main className="min-h-[100vh] bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white overflow-hidden relative">
         <View className="w-[100%] h-[100%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
             {/* <CarIdelScene /> */}
             <Float
@@ -72,7 +72,7 @@ export default function Hero() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-12 pb-24 text-center relative z-10">
+      <section className="container mx-auto px-4 pt-12 flex flex-col justify-center relative z-10" style={{ height: 'calc(100vh - 88px)' }}>
         <div className="max-w-3xl mx-auto mb-8 relative flex justify-center items-center">
           <div className="absolute left-1/2 top-[115%] -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full -z-10 bg-gradient-to-b from-[#2acbec]/70 via-white/10 to-white/10  shadow-[inset_0px_0.91px_43.29px_0px_#F9F9F9] backdrop-blur-0"></div>
           {/* <Image src="/robot.png" alt="AI Robot" width={400} height={400} className="mx-auto relative" /> */}

@@ -1,10 +1,11 @@
-import { Canvas } from "@react-three/fiber"
+import { Canvas, useThree } from "@react-three/fiber"
 import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier"
 import { useTexture } from "@react-three/drei"
-import { useMemo, useRef, useState, useEffect } from "react"
+import { useMemo, useRef, useState, useEffect, useCallback } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import * as THREE from "three"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -31,7 +32,13 @@ const logoTextureUrls = [
 
 function Sphere({ initialPosition, texture, isActive, shouldReset }) {
   const rigidBodyRef = useRef(null)
+  const { camera } = useThree()
+  const [isDragging, setIsDragging] = useState(false)
+  const dragPlaneRef = useRef(new THREE.Plane(new THREE.Vector3(0, 1, 0), 0))
+  const offsetRef = useRef(new THREE.Vector3())
+  const spherePositionRef = useRef(new THREE.Vector3())
 
+  // Reset sphere when shouldReset changes
   useEffect(() => {
     if (rigidBodyRef.current && shouldReset) {
       rigidBodyRef.current.setTranslation({ 
@@ -41,16 +48,93 @@ function Sphere({ initialPosition, texture, isActive, shouldReset }) {
       })
       rigidBodyRef.current.setLinvel({ x: 0, y: 0, z: 0 })
       rigidBodyRef.current.setAngvel({ x: 0, y: 0, z: 0 })
+      setIsDragging(false)
     }
   }, [shouldReset, initialPosition])
 
-  const handleClick = () => {
+  const handlePointerDown = useCallback((e) => {
+    e.stopPropagation()
+    if (!isActive) return // Only allow interaction when physics is active
+    
+    // Get current sphere position
+    const position = rigidBodyRef.current.translation()
+    spherePositionRef.current.set(position.x, position.y, position.z)
+    
+    // Create drag plane at sphere's height
+    dragPlaneRef.current.setFromNormalAndCoplanarPoint(
+      new THREE.Vector3(0, 1, 0),
+      spherePositionRef.current
+    )
+    
+    // Calculate mouse offset from sphere center
+    const mouse = new THREE.Vector2(
+      (e.clientX / window.innerWidth) * 2 - 1,
+      -(e.clientY / window.innerHeight) * 2 + 1
+    )
+    
+    const raycaster = new THREE.Raycaster()
+    raycaster.setFromCamera(mouse, camera)
+    const intersection = new THREE.Vector3()
+    raycaster.ray.intersectPlane(dragPlaneRef.current, intersection)
+    offsetRef.current.copy(spherePositionRef.current).sub(intersection)
+    
+    setIsDragging(true)
+    document.body.style.cursor = "grabbing"
+    rigidBodyRef.current.setBodyType("kinematicPosition")
+  }, [camera, isActive])
+
+  const handlePointerMove = useCallback((e) => {
+    if (!isDragging) return
+    
+    // Calculate new position
+    const mouse = new THREE.Vector2(
+      (e.clientX / window.innerWidth) * 2 - 1,
+      -(e.clientY / window.innerHeight) * 2 + 1
+    )
+    
+    const raycaster = new THREE.Raycaster()
+    raycaster.setFromCamera(mouse, camera)
+    const intersection = new THREE.Vector3()
+    raycaster.ray.intersectPlane(dragPlaneRef.current, intersection)
+    
+    // Apply offset correction
+    const newPosition = intersection.add(offsetRef.current)
+    rigidBodyRef.current.setTranslation(newPosition)
+  }, [isDragging, camera])
+
+  const handlePointerUp = useCallback(() => {
+    if (!isDragging) return
+    
+    setIsDragging(false)
+    document.body.style.cursor = "default"
+    
+    if (rigidBodyRef.current) {
+      rigidBodyRef.current.setBodyType("dynamic")
+    }
+  }, [isDragging])
+
+  // Handle drag events
+  useEffect(() => {
+    if (isDragging) {
+      window.addEventListener("pointermove", handlePointerMove)
+      window.addEventListener("pointerup", handlePointerUp)
+    }
+    
+    return () => {
+      window.removeEventListener("pointermove", handlePointerMove)
+      window.removeEventListener("pointerup", handlePointerUp)
+    }
+  }, [isDragging, handlePointerMove, handlePointerUp])
+
+  const handleClick = useCallback(() => {
+    if (isDragging || !isActive) return
+    
     if (rigidBodyRef.current) {
       const randomX = (Math.random() - 0.5) * 10
       rigidBodyRef.current.applyImpulse({ x: randomX, y: 25, z: 0 }, true)
       rigidBodyRef.current.applyTorqueImpulse({ x: randomX, y: 0, z: randomX })
     }
-  }
+  }, [isActive, isDragging])
 
   return (
     <RigidBody
@@ -63,7 +147,15 @@ function Sphere({ initialPosition, texture, isActive, shouldReset }) {
       linearDamping={0.2}
       type={isActive ? "dynamic" : "fixed"}
     >
-      <mesh castShadow receiveShadow onClick={handleClick} userData={{ type: "sphere" }}>
+      <mesh 
+        castShadow 
+        receiveShadow 
+        onClick={handleClick}
+        onPointerDown={handlePointerDown}
+        onPointerOver={() => isActive && (document.body.style.cursor = "grab")}
+        onPointerOut={() => !isDragging && (document.body.style.cursor = "default")}
+        userData={{ type: "sphere" }}
+      >
         <sphereGeometry args={[SPHERE_RADIUS, 32, 32]} />
         <meshStandardMaterial
           color="white"

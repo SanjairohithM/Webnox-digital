@@ -13,9 +13,10 @@ import OurSolutions from "./sections/OurSolutions";
 import NextGen from "./sections/NextGen";
 import LetsConnect from "./sections/LetsConnect";
 import Footer from "./sections/Footer";
+
 export default function Home() {
   return (
-    <div className="w-full h-screen">
+    <div className="w-full relative overflow-x-hidden">
       <ViewCanvas />
       {/* <CanvasWrapper> */}
       {/* <BoxRotationScene /> */}
