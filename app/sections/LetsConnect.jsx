@@ -66,8 +66,7 @@ function LetsConnect() {
     >
       <div
         ref={r3fContainerRef}
-        className="absolute inset-0 z-0 opacity-0"
-        style={{ pointerEvents: "none" }}
+        className="absolute inset-0 z-20 opacity-0"
       >
         <PhysicsSpheres />
       </div>

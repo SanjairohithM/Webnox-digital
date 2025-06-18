@@ -52,6 +52,30 @@ function Sphere({ initialPosition, texture, isActive, shouldReset }) {
     }
   }, [shouldReset, initialPosition])
 
+  // Add velocity limiting effect
+  useEffect(() => {
+    if (!rigidBodyRef.current || !isActive) return
+
+    const checkVelocity = () => {
+      if (!rigidBodyRef.current) return
+      
+      const vel = rigidBodyRef.current.linvel()
+      const speed = Math.sqrt(vel.x * vel.x + vel.y * vel.y + vel.z * vel.z)
+      
+      if (speed > 30) {  // Max speed limit
+        const scale = 30 / speed
+        rigidBodyRef.current.setLinvel({
+          x: vel.x * scale,
+          y: vel.y * scale,
+          z: vel.z * scale
+        })
+      }
+    }
+
+    const intervalId = setInterval(checkVelocity, 16)  // Check ~60 times per second
+    return () => clearInterval(intervalId)
+  }, [isActive])
+
   const handlePointerDown = useCallback((e) => {
     e.stopPropagation()
     if (!isActive) return // Only allow interaction when physics is active
@@ -99,7 +123,20 @@ function Sphere({ initialPosition, texture, isActive, shouldReset }) {
     
     // Apply offset correction
     const newPosition = intersection.add(offsetRef.current)
-    rigidBodyRef.current.setTranslation(newPosition)
+    
+    // Clamp position within bounds
+    const boxWidth = 90
+    const boxHeight = 40
+    const boxDepth = 10
+    const clampedX = Math.max(-boxWidth/2 + SPHERE_RADIUS, Math.min(boxWidth/2 - SPHERE_RADIUS, newPosition.x))
+    const clampedY = Math.max(-boxHeight/2 + SPHERE_RADIUS, Math.min(boxHeight/2 - SPHERE_RADIUS, newPosition.y))
+    const clampedZ = Math.max(-boxDepth/2 + SPHERE_RADIUS, Math.min(boxDepth/2 - SPHERE_RADIUS, newPosition.z))
+    
+    rigidBodyRef.current.setTranslation({
+      x: clampedX,
+      y: clampedY,
+      z: clampedZ
+    })
   }, [isDragging, camera])
 
   const handlePointerUp = useCallback(() => {
@@ -130,8 +167,8 @@ function Sphere({ initialPosition, texture, isActive, shouldReset }) {
     if (isDragging || !isActive) return
     
     if (rigidBodyRef.current) {
-      const randomX = (Math.random() - 0.5) * 10
-      rigidBodyRef.current.applyImpulse({ x: randomX, y: 25, z: 0 }, true)
+      const randomX = (Math.random() - 0.5) * 5  // Reduced force
+      rigidBodyRef.current.applyImpulse({ x: randomX, y: 15, z: 0 }, true)  // Reduced upward force
       rigidBodyRef.current.applyTorqueImpulse({ x: randomX, y: 0, z: randomX })
     }
   }, [isActive, isDragging])
@@ -140,12 +177,14 @@ function Sphere({ initialPosition, texture, isActive, shouldReset }) {
     <RigidBody
       ref={rigidBodyRef}
       colliders="ball"
-      restitution={0.7}
-      friction={0.5}
+      restitution={0.5}  // Reduced bounciness
+      friction={0.8}     // Increased friction
       position={initialPosition}
-      angularDamping={0.8}
-      linearDamping={0.2}
+      angularDamping={0.9}  // Increased angular damping
+      linearDamping={0.5}   // Increased linear damping
+      mass={1}              // Added explicit mass
       type={isActive ? "dynamic" : "fixed"}
+      ccd={true}           // Enable continuous collision detection
     >
       <mesh 
         castShadow 
@@ -207,32 +246,69 @@ function BoundingBox() {
   const boxWidth = 90
   const boxHeight = 40
   const boxDepth = 10
+  const wallColor = "#4ecdc4"
+  const wallOpacity = 0.2
 
   return (
     <>
-      <RigidBody type="fixed" restitution={0.5} friction={0.8}>
+      {/* Floor */}
+      <RigidBody type="fixed" restitution={0.3} friction={1}>
         <CuboidCollider
           args={[boxWidth / 2, wallThickness / 2, boxDepth / 2]}
           position={[0, -boxHeight / 2 - wallThickness / 2, 0]}
+          sensor={false}
         />
+        <mesh position={[0, -boxHeight / 2 - wallThickness / 2, 0]} receiveShadow>
+          <boxGeometry args={[boxWidth, wallThickness, boxDepth]} />
+          <meshStandardMaterial color={wallColor} transparent opacity={wallOpacity} />
+        </mesh>
       </RigidBody>
-      <RigidBody type="fixed" restitution={0.3} friction={0.8}>
+
+      {/* Walls */}
+      <RigidBody type="fixed" restitution={0.3} friction={1}>
+        {/* Left Wall */}
         <CuboidCollider
           args={[wallThickness / 2, boxHeight / 2 + wallThickness, boxDepth / 2]}
           position={[-boxWidth / 2 - wallThickness / 2, 0, 0]}
+          sensor={false}
         />
+        <mesh position={[-boxWidth / 2 - wallThickness / 2, 0, 0]} receiveShadow>
+          <boxGeometry args={[wallThickness, boxHeight + wallThickness * 2, boxDepth]} />
+          <meshStandardMaterial color={wallColor} transparent opacity={wallOpacity} />
+        </mesh>
+
+        {/* Right Wall */}
         <CuboidCollider
           args={[wallThickness / 2, boxHeight / 2 + wallThickness, boxDepth / 2]}
           position={[boxWidth / 2 + wallThickness / 2, 0, 0]}
+          sensor={false}
         />
+        <mesh position={[boxWidth / 2 + wallThickness / 2, 0, 0]} receiveShadow>
+          <boxGeometry args={[wallThickness, boxHeight + wallThickness * 2, boxDepth]} />
+          <meshStandardMaterial color={wallColor} transparent opacity={wallOpacity} />
+        </mesh>
+
+        {/* Back Wall */}
         <CuboidCollider
           args={[boxWidth / 2, boxHeight / 2 + wallThickness, wallThickness / 2]}
           position={[0, 0, -boxDepth / 2 - wallThickness / 2]}
+          sensor={false}
         />
+        <mesh position={[0, 0, -boxDepth / 2 - wallThickness / 2]} receiveShadow>
+          <boxGeometry args={[boxWidth, boxHeight + wallThickness * 2, wallThickness]} />
+          <meshStandardMaterial color={wallColor} transparent opacity={wallOpacity} />
+        </mesh>
+
+        {/* Front Wall */}
         <CuboidCollider
           args={[boxWidth / 2, boxHeight / 2 + wallThickness, wallThickness / 2]}
           position={[0, 0, boxDepth / 2 + wallThickness / 2]}
+          sensor={false}
         />
+        <mesh position={[0, 0, boxDepth / 2 + wallThickness / 2]} receiveShadow>
+          <boxGeometry args={[boxWidth, boxHeight + wallThickness * 2, wallThickness]} />
+          <meshStandardMaterial color={wallColor} transparent opacity={wallOpacity} />
+        </mesh>
       </RigidBody>
     </>
   )
@@ -268,11 +344,11 @@ export default function PhysicsSpheres() {
   }, [])
 
   return (
-    <div ref={containerRef} style={{ width: "100%", height: "100vh" }}>
+    <div ref={containerRef} style={{ width: "100%", height: "100vh", position: "relative" }}>
       <Canvas
         shadows
-        camera={{ position: [0, 10, 60], fov: 40 }}
-        style={{ width: "100%", height: "100%" }}
+        camera={{ position: [0, 10, 60], fov: 45 }}
+        style={{ width: "100%", height: "100%", position: "absolute", top: 0, left: 0 }}
         gl={{ antialias: true }}
       >
         <ambientLight intensity={1} />
@@ -288,7 +364,7 @@ export default function PhysicsSpheres() {
           shadow-camera-top={50}
           shadow-camera-bottom={-50}
         />
-        <Physics gravity={[0, -20, 0]}>
+        <Physics gravity={[0, -20, 0]} maxStabilizationIterations={10} maxVelocityIterations={10}>
           <Spheres isActive={isActive} shouldReset={shouldReset} />
           <BoundingBox />
         </Physics>
