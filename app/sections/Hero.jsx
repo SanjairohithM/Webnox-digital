@@ -15,28 +15,69 @@ export default function Hero() {
   const headingRef = useRef(null)
   const paragraphRef = useRef(null)
   const buttonRef = useRef(null)
+  const textRef = useRef(null)
+  const shimmerRef = useRef(null)
+  const shadowRef = useRef(null)
   const backgroundCircleRef = useRef(null)
   const headerRef = useRef(null)
 
   useEffect(() => {
     // Set initial states
-    gsap.set([robotRef.current, headingRef.current, paragraphRef.current, buttonRef.current], {
+    gsap.set([robotRef.current, headingRef.current], {
       opacity: 0,
       y: 50
-    })
+    });
+
+    // Button initial setup
+    gsap.set([buttonRef.current, textRef.current], {
+      opacity: 0,
+      y: 30,
+      scale: 0.95
+    });
+
+    gsap.set(shimmerRef.current, {
+      x: '-100%',
+      opacity: 0
+    });
+
+    gsap.set(shadowRef.current, {
+      scale: 0.8,
+      opacity: 0
+    });
     
     gsap.set(backgroundCircleRef.current, {
       opacity: 0,
       scale: 0.8
-    })
+    });
 
     gsap.set(headerRef.current, {
       opacity: 0,
       y: -30
-    })
+    });
+
+    // Split text into words for smoother animation
+    const paragraph = paragraphRef.current;
+    const text = paragraph.innerHTML;
+    paragraph.innerHTML = '';
+    
+    const wrapper = document.createElement('div');
+    wrapper.style.opacity = '0';
+    wrapper.style.display = 'flex';
+    wrapper.style.flexWrap = 'wrap';
+    wrapper.style.gap = '0.25em';
+    wrapper.style.justifyContent = 'center';
+    paragraph.appendChild(wrapper);
+    
+    text.split(' ').forEach((word) => {
+      const span = document.createElement('span');
+      span.textContent = word;
+      span.style.opacity = '0';
+      span.style.transform = 'translateY(20px)';
+      wrapper.appendChild(span);
+    });
 
     // Create timeline for entrance animations
-    const tl = gsap.timeline()
+    const tl = gsap.timeline();
 
     // Header animation
     tl.to(headerRef.current, {
@@ -44,7 +85,7 @@ export default function Hero() {
       y: 0,
       duration: 1.2,
       ease: "power1.out"
-    })
+    });
 
     // Background circle animation
     tl.to(backgroundCircleRef.current, {
@@ -52,7 +93,7 @@ export default function Hero() {
       scale: 1,
       duration: 1.8,
       ease: "power2.inOut"
-    }, "-=0.8")
+    }, "-=0.8");
 
     // Robot animation
     tl.to(robotRef.current, {
@@ -60,29 +101,192 @@ export default function Hero() {
       y: 0,
       duration: 1.5,
       ease: "power2.inOut"
-    }, "-=1.2")
+    }, "-=1.2");
 
-    // Text animations with stagger
+    // Heading animation
     tl.to(headingRef.current, {
       opacity: 1,
       y: 0,
       duration: 1.2,
       ease: "power1.out"
-    }, "-=0.6")
-    
-    tl.to(paragraphRef.current, {
+    }, "-=0.6");
+
+    // Text reveal animation
+    tl.to(wrapper, {
+      opacity: 1,
+      duration: 0.1
+    }).to(wrapper.children, {
       opacity: 1,
       y: 0,
-      duration: 1.2,
-      ease: "power1.out"
-    }, "-=0.8")
-    
-    tl.to(buttonRef.current, {
+      duration: 0.8,
+      stagger: {
+        each: 0.05,
+        ease: "power1.out"
+      },
+      ease: "power2.out"
+    });
+
+    // Button entrance animation
+    const entranceTL = gsap.timeline({ delay: 0.5 });
+
+    entranceTL.to(shadowRef.current, {
+      scale: 1,
+      opacity: 0.3,
+      duration: 0.8,
+      ease: "power2.out"
+    });
+
+    entranceTL.to(buttonRef.current, {
       opacity: 1,
       y: 0,
+      scale: 1,
       duration: 1.2,
-      ease: "power1.out"
-    }, "-=0.8")
+      ease: "back.out(1.7)"
+    }, "-=0.4");
+
+    entranceTL.to(textRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out"
+    }, "-=0.6");
+
+    entranceTL.to(shimmerRef.current, {
+      opacity: 1,
+      duration: 0.1
+    }, "-=0.2")
+    .to(shimmerRef.current, {
+      x: '100%',
+      duration: 1.5,
+      ease: "power2.inOut"
+    })
+    .to(shimmerRef.current, {
+      opacity: 0,
+      duration: 0.3
+    }, "-=0.3");
+
+    // Continuous subtle pulse animation for button
+    gsap.to(buttonRef.current, {
+      scale: 1.02,
+      duration: 2,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1,
+      delay: 2
+    });
+
+    // Button hover animations
+    const handleMouseEnter = () => {
+      gsap.killTweensOf([buttonRef.current, textRef.current, shadowRef.current]);
+      
+      const hoverTL = gsap.timeline();
+      
+      hoverTL.to(buttonRef.current, {
+        scale: 1.05,
+        y: -2,
+        duration: 0.3,
+        ease: "power2.out"
+      })
+      .to(shadowRef.current, {
+        scale: 1.1,
+        opacity: 0.4,
+        y: 4,
+        duration: 0.3,
+        ease: "power2.out"
+      }, 0)
+      .to(textRef.current, {
+        letterSpacing: "0.02em",
+        duration: 0.3,
+        ease: "power2.out"
+      }, 0);
+
+      gsap.set(shimmerRef.current, { x: '-100%', opacity: 1 });
+      gsap.to(shimmerRef.current, {
+        x: '100%',
+        duration: 0.8,
+        ease: "power2.inOut"
+      });
+      gsap.to(shimmerRef.current, {
+        opacity: 0,
+        duration: 0.2,
+        delay: 0.6
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.killTweensOf([buttonRef.current, textRef.current, shadowRef.current]);
+      
+      const leaveTL = gsap.timeline();
+      
+      leaveTL.to(buttonRef.current, {
+        scale: 1,
+        y: 0,
+        duration: 0.4,
+        ease: "power2.out"
+      })
+      .to(shadowRef.current, {
+        scale: 1,
+        opacity: 0.3,
+        y: 0,
+        duration: 0.4,
+        ease: "power2.out"
+      }, 0)
+      .to(textRef.current, {
+        letterSpacing: "0em",
+        duration: 0.4,
+        ease: "power2.out"
+      }, 0);
+
+      gsap.to(buttonRef.current, {
+        scale: 1.02,
+        duration: 2,
+        ease: "power1.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: 0.5
+      });
+    };
+
+    const handleClick = () => {
+      gsap.killTweensOf([buttonRef.current, textRef.current]);
+      
+      const clickTL = gsap.timeline();
+      
+      clickTL.to(buttonRef.current, {
+        scale: 0.95,
+        duration: 0.1,
+        ease: "power2.out"
+      })
+      .to(buttonRef.current, {
+        scale: 1.03,
+        duration: 0.2,
+        ease: "back.out(1.7)"
+      })
+      .to(buttonRef.current, {
+        scale: 1,
+        duration: 0.2,
+        ease: "power2.out"
+      });
+
+      gsap.set(shimmerRef.current, { x: '-100%', opacity: 1 });
+      gsap.to(shimmerRef.current, {
+        x: '100%',
+        duration: 0.6,
+        ease: "power2.inOut",
+        delay: 0.1
+      });
+      gsap.to(shimmerRef.current, {
+        opacity: 0,
+        duration: 0.2,
+        delay: 0.5
+      });
+    };
+
+    // Add button event listeners
+    const button = buttonRef.current;
+    button.addEventListener('mouseenter', handleMouseEnter);
+    button.addEventListener('mouseleave', handleMouseLeave);
+    button.addEventListener('click', handleClick);
 
     // Add continuous floating animation for robot
     gsap.to(robotRef.current, {
@@ -91,9 +295,16 @@ export default function Hero() {
       ease: "power1.inOut",
       yoyo: true,
       repeat: -1
-    })
+    });
 
-  }, [])
+    // Cleanup
+    return () => {
+      button.removeEventListener('mouseenter', handleMouseEnter);
+      button.removeEventListener('mouseleave', handleMouseLeave);
+      button.removeEventListener('click', handleClick);
+      gsap.killTweensOf([buttonRef.current, textRef.current, shimmerRef.current, shadowRef.current]);
+    };
+  }, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white overflow-hidden relative">
@@ -187,12 +398,31 @@ export default function Hero() {
         >
         Webnox Digital is a leading software development company specializing in AI-powered solutions and business automation, and end-to-end digital transformation. We help organisations to streamline operations, improve efficiency, and scale faster through intelligent 
         </p>
-        <button 
-          ref={buttonRef}
-          className="bg-black text-white px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors"
-        >
-        Let's Build Your AI Solution
-        </button>
+        <div className="relative inline-block">
+          {/* Shadow element */}
+          <div 
+            ref={shadowRef}
+            className="absolute inset-0 bg-black/20 rounded-full blur-lg"
+            style={{ transform: 'translateY(8px)' }}
+          ></div>
+          
+          {/* Main button */}
+          <button 
+            ref={buttonRef}
+            className="relative bg-black text-white px-12 py-5 rounded-full font-semibold text-lg md:text-xl overflow-hidden transition-colors duration-300 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-black/20"
+          >
+            {/* Shimmer overlay */}
+            <div 
+              ref={shimmerRef}
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
+            ></div>
+            
+            {/* Button text */}
+            <span ref={textRef} className="relative z-10 text-lg md:text-xl">
+              Let's Build Your AI Solution
+            </span>
+          </button>
+        </div>
     
       </section>
     </main>
