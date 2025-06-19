@@ -179,12 +179,11 @@ export default function Component() {
     finalTextContainer.className = 'final-text-container absolute w-full text-center';
     finalTextContainer.innerHTML = `
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6">
-        Fueling progress through scalable &<br/>actionable solutions
+        Transforming Businesses Through 
+ &<br/>Intelligent Automation
       </h1>
       <p class="text-white/80 text-lg max-w-3xl mx-auto px-4">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorpe mattis,
-        pulvinar dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-        luctus nec ullamcorpe mattis, pulvinar dapibus leo.
+        At Webnox Digital, we harness the power of AI, cloud, and automation to help businesses operate smarter, scale faster, and innovate at speed. Our agile-driven software solutions are designed to streamline operations, enhance customer experiences, and unlock new digital value.
       </p>
     `;
 
@@ -225,7 +224,7 @@ export default function Component() {
 
     // Move robot up and fade in text
     finalStage.to(miniRobotRef.current, {
-      top: "calc(30%)",
+      top: "calc(20%)",
       duration: 0.8,
       ease: "power2.inOut"
     });
@@ -242,17 +241,31 @@ export default function Component() {
     // Stage 5: Final transition to solutions text
     const solutionsStage = gsap.timeline();
 
-    // Fade out background and description text
+    // Move the text up towards the robot without fading
+    solutionsStage.to(finalTextContainer, {
+      y: -150,
+      duration: 0.8,
+      ease: "power2.inOut"
+    });
+
+    // Start fading out the text exactly when it reaches robot position
+    solutionsStage.to(finalTextContainer, {
+      opacity: 0,
+      duration: 0.5,
+      ease: "power1.out"
+    }, "-=0");
+
+    // Then move robot to center and fade out background
+    solutionsStage.to(miniRobotRef.current, {
+      top: "calc(50% - 25vh)",
+      duration: 0.8,
+      ease: "power2.inOut"
+    }, ">");
+
     solutionsStage.to(miniRobotContainerRef.current, {
       backgroundColor: 'transparent',
       backgroundImage: 'none',
       duration: 0.6
-    });
-
-    solutionsStage.to(finalTextContainer, {
-      opacity: 0,
-      y: -50,
-      duration: 0.4
     }, "<");
 
     // Fade in and animate solutions text
@@ -382,7 +395,7 @@ export default function Component() {
                     </h2>
                     <div className="space-y-2 text-gray-700 pl-4">
                       <p>
-                        To empower visionary businesses with transformative digital power.  We’re here to turn your global ambition into a digital reality.
+                        To empower visionary businesses with transformative digital power.  We're here to turn your global ambition into a digital reality.
                       </p>
 
                     </div>
@@ -456,3 +469,4 @@ export default function Component() {
     </div>
   );
 }
+  
