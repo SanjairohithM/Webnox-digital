@@ -73,10 +73,10 @@ export default function Hero() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-12 flex flex-col items-center justify-center relative z-[15]" style={{ height: 'calc(100vh - 88px)' }}>
+      <section className="container mx-auto px-4 pt-[120px] flex flex-col items-center justify-center relative z-[15]" style={{ height: 'calc(100vh - 88px)' }}>
         <div className="max-w-3xl mx-auto mb-8 relative flex justify-center items-center">
           <div className="absolute left-1/2 top-[115%] -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full z-[2] bg-gradient-to-b from-[#2acbec]/70 via-white/10 to-white/10 shadow-[inset_0px_0.91px_43.29px_0px_#F9F9F9] backdrop-blur-0"></div>
-          <div className="relative z-[5]">
+          <div className="relative z-[5] scale-90">
             <Robot />
           </div>
         </div>
