@@ -63,6 +63,7 @@ function NextGen() {
   const cardsRef = useRef([]);
   const containerRef = useRef(null);
   const finalTextRef = useRef(null);
+  const newFinalTextRef = useRef(null);
 
   useGSAP(() => {
     // Set initial states
@@ -78,11 +79,16 @@ function NextGen() {
       y: 50
     });
 
+    gsap.set(newFinalTextRef.current, {
+      opacity: 0,
+      y: 50
+    });
+
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=400%",
+        end: "+=500%",
         pin: true,
         scrub: 1,
         // markers: true
@@ -158,19 +164,37 @@ function NextGen() {
         y: "-100%",
         opacity: 0,
         scale: 0.8,
-        duration: 1.5,
+        duration: 2,
         stagger: {
-          each: 0.1,
+          each: 0.15,
           from: "end"
         },
-        ease: "power2.inOut"
+        ease: "power1.inOut"
       })
       .to(finalTextRef.current, {
         opacity: 1,
         y: 0,
-        duration: 1.5,
-        ease: "power2.out"
-      }, "-=1");
+        duration: 2,
+        ease: "power1.out"
+      }, "-=1.5");
+
+    // Stage 5: Transition to new final text
+    timeline
+      .to({}, { duration: 1 })
+      .to(finalTextRef.current, {
+        opacity: 0,
+        y: -50,
+        duration: 2,
+        ease: "power1.inOut"
+      })
+      .to(newFinalTextRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 2.5,
+        ease: "power1.out"
+      }, "-=1.5");
+
+    timeline.timeScale(0.8);
 
   }, []);
 
@@ -186,7 +210,7 @@ function NextGen() {
 
         </h1>
 
-        {/* Final Text */}
+        {/* Current Final Text */}
         <div 
           ref={finalTextRef}
           className="absolute z-20 text-center text-black"
@@ -196,6 +220,16 @@ function NextGen() {
           </h2>
           <h2 className="text-[42px] font-normal font-urbanist leading-[1.3]">
             Be the brand that leads the industry.
+          </h2>
+        </div>
+
+        {/* New Final Text */}
+        <div 
+          ref={newFinalTextRef}
+          className="absolute z-20 text-center text-black"
+        >
+          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3] mb-4">
+            Step into the AI era with strategies designed to lead, not catch up.
           </h2>
         </div>
 
