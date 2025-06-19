@@ -9,7 +9,8 @@ import Robot from "@/Three/Models/Robot"
 
 export default function Hero() {
   return (
-    <main className="min-h-[100vh] bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white overflow-hidden relative">
+    
+    <main className="min-h-[100vh] bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white ">
       <View className="w-[100%] h-[100%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[1]">
         {/* <CarIdelScene /> */}
         <Float
@@ -81,13 +82,13 @@ export default function Hero() {
         </div>
 
         <div className="text-center relative z-[10] mt-8">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-5xl mx-auto text-gray-800">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-5xl mx-auto text-gray-800 ">
             We Build. We Scale. We Transform.
             <span className="text-[#2acbec]"> </span>
             <p className="text-gray-700 max-w-3xl mx-auto">Lead the Future</p>
           </h1>
 
-          <p className="text-gray-700 max-w-3xl mx-auto mb-8">
+          <p className="text-gray-700 max-w-3xl mx-auto mb-8 edu-font">
             Webnox Digital is a leading software development company specializing in AI-powered solutions and business automation, and end-to-end digital transformation. We help organisations to streamline operations, improve efficiency, and scale faster through intelligent
           </p>
 

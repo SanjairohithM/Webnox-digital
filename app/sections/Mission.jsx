@@ -122,7 +122,7 @@ export default function Component() {
           contentRefs.mission.current,
           contentRefs.canvas.current,
           smarterText
-        ], { 
+        ], {
           visibility: "visible",
           opacity: 1,
           y: 0
@@ -136,7 +136,7 @@ export default function Component() {
 
     // Stage 3: Expand container and scale robot simultaneously
     const expandTimeline = gsap.timeline();
-    
+
     expandTimeline.to(miniRobotContainerRef.current, {
       width: "120vw",
       height: "120vh",
@@ -197,11 +197,11 @@ export default function Component() {
         <h1 class="solutions-text text-[6vw] font-bold bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] text-transparent bg-clip-text">SOLUTIONS</h1>
       </div>
     `;
-    
+
     // Insert the containers
     miniRobotContainerRef.current.appendChild(finalTextContainer);
     miniRobotContainerRef.current.appendChild(solutionsContainer);
-    
+
     // Set initial states
     gsap.set(finalTextContainer, {
       opacity: 0,
@@ -256,7 +256,7 @@ export default function Component() {
     }, "<");
 
     // Fade in and animate solutions text
-    solutionsStage.fromTo('.solutions-text-container', 
+    solutionsStage.fromTo('.solutions-text-container',
       {
         opacity: 0,
         y: 30
@@ -301,8 +301,8 @@ export default function Component() {
 
   return (
     <div ref={mainRef} className="relative w-full">
-      <div 
-        ref={stickyRef} 
+      <div
+        ref={stickyRef}
         className="relative h-screen w-full overflow-hidden"
       >
         <main className="bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff] h-full w-full">
@@ -314,13 +314,13 @@ export default function Component() {
                 <div ref={contentRefs.headlines} className="space-y-4">
                   <div className="flex items-center gap-4 flex-wrap mb-5">
                     <h1 className="text-5xl md:text-6xl lg:text-8xl font-[511] text-gray-800 tracking-tight">
-                      INNOVATION
+                      AI-Driven Innovation for a
                     </h1>
                   </div>
 
                   <div className="flex items-center gap-4 flex-wrap mb-5">
-                    <div 
-                      ref={miniRobotContainerRef} 
+                    <div
+                      ref={miniRobotContainerRef}
                       className="mini-robot_container bg-gradient-to-b from-[#3FD7F1] to-[#1B80D5] overflow-hidden"
                       style={{ borderRadius: '9999px' }}
                     >
@@ -329,7 +329,7 @@ export default function Component() {
                         src="/images/robot.png"
                         alt="Robot icon"
                         className="w-[61px] h-[80px] transform rotate-[-33.83deg]"
-                        style={{ 
+                        style={{
                           left: '1rem'
                         }}
                         width={200}
@@ -338,13 +338,14 @@ export default function Component() {
                     </div>
 
                     <h1 className="smarter-text text-5xl md:text-6xl lg:text-8xl font-[511] text-gray-800 tracking-tight">
-                      OF SMARTER
+                      Digitally Connected World
+
                     </h1>
                   </div>
 
-                  <h1 className="text-5xl md:text-6xl lg:text-8xl font-[511] text-gray-800 tracking-tight ml-[3rem]">
+                  {/* <h1 className="text-5xl md:text-6xl lg:text-8xl font-[511] text-gray-800 tracking-tight ml-[3rem]">
                     AI SOLUTIONS
-                  </h1>
+                  </h1> */}
                 </div>
 
                 {/* Content Sections */}
@@ -359,14 +360,11 @@ export default function Component() {
                       height={1000}
                     />
                     <h1 className="text-xl font-extrabold text-black text-right pr-4">
-                      Our strategy
-                      <br />
-                      is simple:
+                      Approach
                     </h1>
                     <div className="space-y-2 text-gray-700 text-right pr-4">
-                      <p>Think global</p>
-                      <p>Build smarter</p>
-                      <p>Deliver impact</p>
+                      <p>Innovation meets precision in everything we do. We blend creativity and code to build digital success stories.Think global</p>
+
                     </div>
                   </div>
 
@@ -384,14 +382,9 @@ export default function Component() {
                     </h2>
                     <div className="space-y-2 text-gray-700 pl-4">
                       <p>
-                        To empower visionary businesses with transformative
-                        digital
+                        To empower visionary businesses with transformative digital power.  We’re here to turn your global ambition into a digital reality.
                       </p>
-                      <p>
-                        power. We're here to turn your global ambition into a
-                        digital
-                      </p>
-                      <p>reality.</p>
+
                     </div>
                   </div>
                 </div>
