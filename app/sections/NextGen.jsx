@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const stats = [
   {
     number: "14+",
-    text: "Years of Industry Experience",
+    text: "Years of Proven Expertise",
     position: { left: '10%', top: '40%' },
     color: "#764ED3",
     image: "/images/Years of Industry Experience.png",
@@ -17,7 +17,7 @@ const stats = [
   },
   {
     number: "1000+",
-    text: "Projects Delivered",
+    text: " Projects Delivered",
     position: { left: '35%', top: '20%' },
     color: "#30C857",
     image: "/images/Projects Delivered.png",
@@ -25,15 +25,15 @@ const stats = [
   },
   {
     number: "15+",
-    text: "Clients Across Countries",
+    text: "Countries Served",
     position: { right: '15%', top: '15%' },
     color: "#4E9AD3",
     image: "/images/Clients Across Countries.png",
     imageSize: "w-[100px] h-[100px]"
   },
   {
-    number: "Agile + DevOps",
-    text: "Driven Workflow",
+    number: "Agile + ",
+    text: " DevOps DNA",
     position: { left: '30%', bottom: '4%' },
     color: "#4ED3C3",
     image: "/images/Driven Workflow.png",
@@ -42,9 +42,17 @@ const stats = [
   {
     number: "4.9★",
     text: "Client Satisfaction",
-    position: { right: '15%', bottom: '15%' },
+    position: { right: '25%', bottom: '15%' },
     color: "#D34E50",
     image: "/images/Client Satisfaction.png",
+    imageSize: "w-[100px] h-[100px]"
+  },
+  {
+    number: "100%",
+    text: "Scalable & Secure Solutions",
+    position: { right: '5%', bottom: '40%' },
+    color: "#7B4019",
+    image: "/images/safety.png",
     imageSize: "w-[100px] h-[100px]"
   }
 ];
@@ -174,9 +182,8 @@ function NextGen() {
           ref={headingRef}
           className="text-[42px] font-normal font-urbanist text-center leading-[1.3] max-w-[800px] text-black absolute z-10"
         >
-          Let's create next-gen digital solutions—
-          <br />
-          faster, better, smarter.
+          Next-gen software solutions that elevate your business to stay ahead of change!
+
         </h1>
 
         {/* Final Text */}
