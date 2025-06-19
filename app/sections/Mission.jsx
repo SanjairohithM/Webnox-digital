@@ -71,8 +71,6 @@ export default function Component() {
     // Initial fade in of all elements together
     timeline.from([
       contentRefs.headlines.current.children,
-      contentRefs.strategy.current,
-      contentRefs.mission.current,
       contentRefs.canvas.current
     ], {
       opacity: 0,
@@ -80,6 +78,35 @@ export default function Component() {
       duration: 0.3,
       ease: "power3.out"
     });
+
+    // Set initial state for cards - rotated to show backs
+    gsap.set([contentRefs.strategy.current, contentRefs.mission.current], {
+      rotationY: 180,
+      opacity: 0,
+      transformPerspective: 1000,
+      transformStyle: "preserve-3d"
+    });
+
+    // Create card flip animations
+    const cardFlipTimeline = gsap.timeline();
+
+    // Strategy card flip
+    cardFlipTimeline.to(contentRefs.strategy.current, {
+      opacity: 1,
+      rotationY: 0,
+      duration: 1.2,
+      ease: "power2.inOut"
+    });
+
+    // Mission card flip with slight delay
+    cardFlipTimeline.to(contentRefs.mission.current, {
+      opacity: 1,
+      rotationY: 0,
+      duration: 1.2,
+      ease: "power2.inOut"
+    }, "-=0.8");
+
+    timeline.add(cardFlipTimeline, "+=0.3");
 
     // Stage 1: Fade out everything except mini robot container
     const smarterText = contentRefs.headlines.current.querySelector('.smarter-text');
@@ -379,42 +406,72 @@ export default function Component() {
                 </div>
 
                 {/* Content Sections */}
-                <div className="grid md:grid-cols-2 gap-8 mt-16">
+                <div className="grid md:grid-cols-2 gap-8 mt-16 perspective-[1000px]">
                   {/* Strategy Section */}
-                  <div ref={contentRefs.strategy} className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[20rem] rounded-4xl flex flex-col justify-center p-4">
-                    <Image
-                      src="/images/robot1.png"
-                      alt="Robot background"
-                      className="absolute w-full h-full object-cover"
-                      width={1000}
-                      height={1000}
-                    />
-                    <h1 className="text-xl font-extrabold text-black text-right pr-4">
-                      Approach
-                    </h1>
-                    <div className="space-y-2 text-gray-700 text-right pr-4">
-                      <p>Innovation meets precision in everything we do. We blend creativity and code to build digital success stories.Think global</p>
-
+                  <div 
+                    ref={contentRefs.strategy} 
+                    className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[24rem] rounded-4xl flex flex-col justify-center p-8 transform-gpu"
+                    style={{ transformStyle: 'preserve-3d' }}
+                  >
+                    <div className="absolute inset-0 bg-[#2ACBEC]/20 rounded-4xl backface-hidden" 
+                         style={{ transform: 'rotateY(180deg)' }}>
+                      {/* Back of card content */}
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="relative backface-hidden w-full h-full">
+                      <Image
+                        src="/images/robot1.png"
+                        alt="Robot background"
+                        className="absolute inset-0 w-full h-full object-cover rounded-4xl"
+                        width={1000}
+                        height={1000}
+                      />
+                      <div className="relative z-10 h-full flex flex-col justify-center">
+                        <h1 className="text-2xl font-extrabold text-black text-right pr-4 mb-6">
+                          Approach
+                        </h1>
+                        <div className="text-gray-700 text-right pr-4">
+                          <p className="text-lg">Innovation meets precision in everything we do. We blend creativity and code to build digital success stories. Think global</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
                   {/* Mission Section */}
-                  <div ref={contentRefs.mission} className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[20rem] rounded-4xl flex flex-col justify-center p-4 overflow-hidden">
-                    <Image
-                      src="/images/robot2.png"
-                      alt="Robot background"
-                      className="absolute w-full h-full object-cover"
-                      width={1000}
-                      height={1000}
-                    />
-                    <h2 className="text-xl font-extrabold text-black pl-4">
-                      Our Mission
-                    </h2>
-                    <div className="space-y-2 text-gray-700 pl-4">
-                      <p>
-                        To empower visionary businesses with transformative digital power.  We're here to turn your global ambition into a digital reality.
-                      </p>
-
+                  <div 
+                    ref={contentRefs.mission} 
+                    className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[24rem] rounded-4xl flex flex-col justify-center p-8 overflow-hidden transform-gpu"
+                    style={{ transformStyle: 'preserve-3d' }}
+                  >
+                    <div className="absolute inset-0 bg-[#2ACBEC]/20 rounded-4xl backface-hidden" 
+                         style={{ transform: 'rotateY(180deg)' }}>
+                      {/* Back of card content */}
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="w-16 h-16 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
+                      </div>
+                    </div>
+                    
+                    <div className="relative backface-hidden w-full h-full">
+                      <Image
+                        src="/images/robot2.png"
+                        alt="Robot background"
+                        className="absolute inset-0 w-full h-full object-cover rounded-4xl"
+                        width={1000}
+                        height={1000}
+                      />
+                      <div className="relative z-10 h-full flex flex-col justify-center">
+                        <h2 className="text-2xl font-extrabold text-black pl-4 mb-6">
+                          Our Mission
+                        </h2>
+                        <div className="text-gray-700 pl-4">
+                          <p className="text-lg">
+                            To empower visionary businesses with transformative digital power. We're here to turn your global ambition into a digital reality.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
