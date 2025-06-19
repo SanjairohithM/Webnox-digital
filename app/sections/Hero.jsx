@@ -9,31 +9,31 @@ import Robot from "@/Three/Models/Robot"
 
 export default function Hero() {
   return (
-    
-    <main className="min-h-[100vh] bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white ">
-      <View className="w-[100%] h-[100%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[1]">
-        {/* <CarIdelScene /> */}
-        <Float
-          speed={2}
-          rotationIntensity={0}
-          floatIntensity={2}
-          floatingRange={[0, 0.15]}
-        >
-          <Sphere position={[-1.9, .5, 0]} />
-        </Float>
-        <Float
-          speed={2}
-          rotationIntensity={0}
-          floatIntensity={2}
-          floatingRange={[0, 0.15]}
-        >
-          <Sphere position={[1.9, -.5, 0]} />
-        </Float>
-      </View>
+    <main className="min-h-screen bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white overflow-hidden relative">
+        <View className="w-[100%] h-[100%] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
+            {/* <CarIdelScene /> */}
+            <Float
+              speed={2}
+              rotationIntensity={0}
+              floatIntensity={2}
+              floatingRange={[0, 0.15]}
+            >
+              <Sphere position={[-1.9,.5,0]} />
+            </Float>
 
+            <Float
+              speed={2}
+              rotationIntensity={0}
+              floatIntensity={2}
+              floatingRange={[0, 0.15]}
+            >
+              <Sphere position={[1.9,-.5,0]} />
+            </Float>
+        </View>
+    
 
       {/* Header */}
-      <header className="container mx-auto px-4 py-6 flex justify-between items-center relative z-[20]">
+      <header className="container mx-auto px-4 py-6 flex justify-between items-center relative z-10">
         <div className="flex">
           <Image src="/webnox-logo.png" alt="Webnox Logo" width={180} height={50} className="object-contain" />
         </div>
@@ -73,29 +73,25 @@ export default function Hero() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-[120px] flex flex-col items-center justify-center relative z-[15]" style={{ height: 'calc(100vh - 88px)' }}>
+      <section className="container mx-auto px-4 pt-12 pb-24 text-center relative z-10">
         <div className="max-w-3xl mx-auto mb-8 relative flex justify-center items-center">
-          <div className="absolute left-1/2 top-[115%] -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full z-[2] bg-gradient-to-b from-[#2acbec]/70 via-white/10 to-white/10 shadow-[inset_0px_0.91px_43.29px_0px_#F9F9F9] backdrop-blur-0"></div>
-          <div className="relative z-[5] scale-90">
-            <Robot />
-          </div>
+          <div className="absolute left-1/2 top-[115%] -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full -z-10 bg-gradient-to-b from-[#2acbec]/70 via-white/10 to-white/10  shadow-[inset_0px_0.91px_43.29px_0px_#F9F9F9] backdrop-blur-0"></div>
+          {/* <Image src="/robot.png" alt="AI Robot" width={400} height={400} className="mx-auto relative" /> */}
+          <Robot />
         </div>
 
-        <div className="text-center relative z-[10] mt-8">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-5xl mx-auto text-gray-800 ">
-            We Build. We Scale. We Transform.
-            <span className="text-[#2acbec]"> </span>
-            <p className="text-gray-700 max-w-3xl mx-auto">Lead the Future</p>
-          </h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 max-w-5xl mx-auto text-gray-800">
+        We Build. We Scale. We Transform. -<span className="text-[#2acbec]"> Lead the Future
+        </span>
+        </h1>
 
-          <p className="text-gray-700 max-w-3xl mx-auto mb-8 edu-font">
-            Webnox Digital is a leading software development company specializing in AI-powered solutions and business automation, and end-to-end digital transformation. We help organisations to streamline operations, improve efficiency, and scale faster through intelligent
-          </p>
-
-          <button className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800 transition-colors text-lg font-medium">
-            Let's Build Your AI Solution
-          </button>
-        </div>
+        <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10 ">
+        Webnox Digital is a leading software development company specializing in AI-powered solutions and business automation, and end-to-end digital transformation. We help organisations to streamline operations, improve efficiency, and scale faster through intelligent 
+        </p>
+        <button className="bg-black text-white px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors">
+        Let's Build Your AI Solution
+        </button>
+    
       </section>
     </main>
   )
