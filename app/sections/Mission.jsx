@@ -162,7 +162,7 @@ export default function Component() {
       rotation: 0,
       position: "absolute",
       left: "calc(50% - 10vw)",
-      top: "calc(50% - 25vh)",
+      top: "calc(50% - 5vh)",
       xPercent: -50,
       yPercent: -50,
       duration: 0.8,
@@ -191,7 +191,7 @@ export default function Component() {
     const solutionsContainer = document.createElement('div');
     solutionsContainer.className = 'solutions-text-container absolute w-full';
     solutionsContainer.innerHTML = `
-      <div class="flex items-center justify-center gap-[15vw]">
+      <div class="flex items-center justify-center gap-[18vw] ml-[-12vw]">
         <h1 class="our-text text-[6vw] font-bold bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] text-transparent bg-clip-text">OUR</h1>
         <h1 class="solutions-text text-[6vw] font-bold bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] text-transparent bg-clip-text">SOLUTIONS</h1>
       </div>
@@ -219,7 +219,8 @@ export default function Component() {
       left: '50%',
       xPercent: -50,
       yPercent: -50,
-      zIndex: 60
+      zIndex: 60,
+      width: '100%'
     });
 
     // Move robot up and fade in text
@@ -257,7 +258,8 @@ export default function Component() {
 
     // Then move robot to center and fade out background
     solutionsStage.to(miniRobotRef.current, {
-      top: "calc(50% - 25vh)",
+      top: "calc(50% - 15vh)",
+      left: "calc(50% - 15vw)",
       duration: 0.8,
       ease: "power2.inOut"
     }, ">");
