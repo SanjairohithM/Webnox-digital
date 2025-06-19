@@ -10,42 +10,42 @@ gsap.registerPlugin(ScrollTrigger);
 const solutions = [
   {
     title: "BRANDING",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Build a brand that speaks before you do. We craft visual identities that are bold, memorable, and strategically aligned with your business goals.",
     image: "/images/BRANDING.png"
   },
   {
     title: "SOFTWARE DEVELOPMENT",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "From MVPs to enterprise systems — we engineer scalable, high-performance software that drives innovation and business growth.",
     image: "/images/Software Development.png"
   },
   {
     title: "DIGITAL MARKETING",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Reach, engage, and convert. Our data-driven marketing campaigns put your brand in front of the right audience at the right time.",
     image: "/images/Digital Marketing.png"
   },
   {
     title: "ECOMMERCE STORE DEVELOPMENT",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Launch fast. Sell smart. Grow big. We develop intuitive, conversion-optimized online stores tailored for your brand.",
     image: "/images/ECommerce Store Development.png"
   },
   {
     title: "WEB DEVELOPMENT",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Pixel-perfect, performance-first websites built using the latest tech — designed to impress and built to scale.",
     image: "/images/Web Development.png"
   },
   {
     title: "DATA & ANALYSIS",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Make every decision count. We help you turn raw data into real-time insights that drive smarter strategies and better outcomes.",
     image: "/images/DATA & ANALYSIS.png"
   },
   {
     title: "UI UX DESIGN",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Designs that delight. Experiences that retain. We create intuitive, engaging interfaces that users love.",
     image: "/images/ui ux design.png"
   },
   {
     title: "IT SUPPORT",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Stay online, always. Our proactive support keeps your systems running smoothly and securely, 24/7.",
     image: "/images/IT SUPPORT.png"
   }
 ];

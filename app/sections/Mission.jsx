@@ -39,7 +39,7 @@ export default function Component() {
       scrollTrigger: {
         trigger: stickyRef.current,
         start: "top top",
-        end: "+=300%",
+        end: "+=400%",
         pin: true,
         pinSpacing: true,
         scrub: 1,
@@ -239,24 +239,23 @@ export default function Component() {
 
     timeline.add(finalStage);
 
-    // Stage 5: Final transition to solutions text
+    // Add the solutions stage with pause
     const solutionsStage = gsap.timeline();
 
-    // Move the text up towards the robot without fading
+    // First fade out the text as it moves up
     solutionsStage.to(finalTextContainer, {
       y: -150,
       duration: 0.8,
       ease: "power2.inOut"
     });
 
-    // Start fading out the text exactly when it reaches robot position
     solutionsStage.to(finalTextContainer, {
       opacity: 0,
       duration: 0.5,
       ease: "power1.out"
     }, "-=0");
 
-    // Then move robot to center and fade out background
+    // Move robot to position and fade out background
     solutionsStage.to(miniRobotRef.current, {
       top: "calc(50% - 15vh)",
       left: "calc(50% - 15vw)",
@@ -270,7 +269,7 @@ export default function Component() {
       duration: 0.6
     }, "<");
 
-    // Fade in and animate solutions text
+    // Fade in solutions text and add pause
     solutionsStage.fromTo('.solutions-text-container',
       {
         opacity: 0,
@@ -283,7 +282,23 @@ export default function Component() {
       }
     );
 
+    // Add a pause duration
+    solutionsStage.to({}, { duration: 1 }); // This creates a pause
+
+    // Create final fade out stage
+    const fadeOutStage = gsap.timeline();
+
+    // Fade out everything together
+    fadeOutStage.to(['.solutions-text-container', miniRobotRef.current], {
+      opacity: 0,
+      y: -50,
+      duration: 0.8,
+      ease: "power2.in"
+    });
+
+    // Add stages to main timeline
     timeline.add(solutionsStage);
+    timeline.add(fadeOutStage);
 
     return () => {
       // Cleanup
