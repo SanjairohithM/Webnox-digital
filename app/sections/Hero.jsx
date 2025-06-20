@@ -2,7 +2,6 @@
 import { useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Menu } from "lucide-react"
 import { View } from "@react-three/drei"
 import { CarIdelScene } from "@/Three/Scenes/Car"
 import Sphere from "@/Three/Models/Sphere"
@@ -19,7 +18,6 @@ export default function Hero() {
   const shimmerRef = useRef(null)
   const shadowRef = useRef(null)
   const backgroundCircleRef = useRef(null)
-  const headerRef = useRef(null)
 
   useEffect(() => {
     // Set initial states
@@ -50,11 +48,6 @@ export default function Hero() {
       scale: 0.8
     });
 
-    gsap.set(headerRef.current, {
-      opacity: 0,
-      y: -30
-    });
-
     // Split text into words for smoother animation
     const paragraph = paragraphRef.current;
     const text = paragraph.innerHTML;
@@ -78,14 +71,6 @@ export default function Hero() {
 
     // Create timeline for entrance animations
     const tl = gsap.timeline();
-
-    // Header animation
-    tl.to(headerRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 1.2,
-      ease: "power1.out"
-    });
 
     // Background circle animation
     tl.to(backgroundCircleRef.current, {
@@ -328,51 +313,9 @@ export default function Hero() {
               <Sphere position={[1.9,-.5,0]} />
             </Float>
         </View>
-    
-
-      {/* Header */}
-      <header ref={headerRef} className="container mx-auto px-4 py-6 flex justify-between items-center relative z-10">
-        <div className="flex">
-          <Image src="/webnox-logo.png" alt="Webnox Logo" width={180} height={50} className="object-contain" />
-        </div>
-
-        <nav className="hidden md:flex items-center max-w-[45rem] w-full gap-8  px-[3rem] py-[1rem] rounded-full border border-gray-400 justify-between backdrop-filter backdrop-blur-lg bg-opacity-30 ">
-          <Link href="#" className="text-gray-800 hover:text-[#2acbec] transition-colors">
-            About
-          </Link>
-          <Link href="#" className="text-gray-800 hover:text-[#2acbec] transition-colors">
-            Solutions
-          </Link>
-          <Link href="#" className="text-gray-800 hover:text-[#2acbec] transition-colors">
-            Industries
-          </Link>
-          <Link href="#" className="text-gray-800 hover:text-[#2acbec] transition-colors">
-            Expertise
-          </Link>
-          <Link href="#" className="text-gray-800 hover:text-[#2acbec] transition-colors">
-            AI
-          </Link>
-          <Link href="#" className="text-gray-800 hover:text-[#2acbec] transition-colors">
-            Resources
-          </Link>
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <button className="md:hidden rounded-full p-2 hover:bg-white/20 cursor-pointer bg-white/10 backdrop-blur-sm border border-white/20">
-            <Menu className="h-6 w-6 text-black" />
-          </button>
-          <Link
-            href="#"
-            className="hidden md:block bg-black text-white px-6 py-2.5 rounded-full hover:bg-gray-800 transition-colors"
-          >
-            Let's talk
-          </Link>
-        </div>
-      </header>
 
       {/* Hero Section */}
-
-      <section className="container mx-auto px-4 pt-12 pb-24 text-center relative z-10">
+      <section className="container mx-auto px-4 pt-32 pb-24 text-center relative z-10">
         <div className="max-w-3xl mx-auto mb-8 relative flex justify-center items-center">
           <div 
             ref={backgroundCircleRef}
@@ -423,7 +366,6 @@ export default function Hero() {
             </span>
           </button>
         </div>
-    
       </section>
     </main>
   )
