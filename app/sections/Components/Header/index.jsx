@@ -21,6 +21,7 @@ export default function Header() {
       items={navItems}
       logo="/webnox-logo.png"
       brandName="Webnox"
+      showLogo={isHomePage}
     />
   )
 }

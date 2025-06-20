@@ -17,7 +17,8 @@ const AnimatedNavbar = ({
     { name: "Resources", href: "#resources", icon: <Settings size={20} /> }
   ],
   logo = "/webnox-logo.png",
-  brandName = "Webnox"
+  brandName = "Webnox",
+  showLogo = false
 }) => {
   const navRef = useRef(null)
   const hamburgerRef = useRef(null)
@@ -59,6 +60,9 @@ const AnimatedNavbar = ({
               backgroundColor: "rgba(255, 255, 255, 0.9)",
               backdropFilter: "blur(20px)",
               padding: "0",
+              left: showLogo ? "50%" : "50%",
+              right: "auto",
+              transform: "translateX(-50%)",
               duration: 0.6,
               ease: "power3.out"
             })
@@ -85,7 +89,10 @@ const AnimatedNavbar = ({
               borderRadius: "12px",
               backgroundColor: "rgba(255, 255, 255, 0.9)",
               backdropFilter: "blur(20px)",
-              padding: "1rem 2rem",
+              padding: showLogo ? "1rem 2rem" : "1rem 2rem",
+              left: showLogo ? "1rem" : "50%",
+              right: showLogo ? "1rem" : "auto",
+              transform: showLogo ? "none" : "translateX(-50%)",
               duration: 0.6,
               ease: "power3.out"
             })
@@ -217,24 +224,33 @@ const AnimatedNavbar = ({
       {/* Main Navbar */}
       <nav
         ref={navRef}
-        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300"
+        className={`fixed top-4 z-50 transition-all duration-300 ${
+          showLogo 
+            ? 'left-4 right-4 transform-none' 
+            : 'left-1/2 transform -translate-x-1/2'
+        }`}
         style={{
           backgroundColor: "rgba(255, 255, 255, 0.9)",
           backdropFilter: "blur(20px)",
           border: "1px solid rgba(255, 255, 255, 0.2)",
           borderRadius: "12px",
-          padding: "1rem 2rem",
-          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)"
+          padding: showLogo ? "1rem 2rem" : "1rem 2rem",
+          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+          maxWidth: showLogo ? "none" : "auto"
         }}
       >
         {/* Full Navbar Content */}
-        <div className="nav-content flex items-center gap-8">
-          <div className="flex items-center gap-3">
-            <Image src={logo} alt="Logo" width={32} height={32} className="object-contain" />
-            <span className="text-gray-800 font-semibold text-lg">{brandName}</span>
-          </div>
+        <div className="nav-content flex items-center justify-between w-full">
+          {/* Logo Section - Only show on home page */}
+          {showLogo && (
+            <div className="flex items-center gap-3">
+              <Image src={logo} alt="Logo" width={48} height={48} className="object-contain" />
+              <span className="text-gray-800 font-semibold text-xl">{brandName}</span>
+            </div>
+          )}
           
-          <div className="hidden md:flex items-center gap-6">
+          {/* Navigation Items - Center them when no logo, otherwise keep right */}
+          <div className={`hidden md:flex items-center gap-6 ${!showLogo ? 'flex-1 justify-center' : ''}`}>
             {items.map((item, index) => (
               <a
                 key={index}
@@ -253,6 +269,15 @@ const AnimatedNavbar = ({
               </a>
             ))}
           </div>
+
+          {/* Let's Talk Button - Only show on home page */}
+          {showLogo && (
+            <div className="flex items-center">
+              <button className="bg-gradient-to-r from-[#2acbec] to-[#6149cd] text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                Let's Talk
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Hamburger Menu (Hidden Initially) */}
