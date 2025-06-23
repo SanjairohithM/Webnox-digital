@@ -12,20 +12,31 @@ export async function POST(request) {
       )
     }
 
-    // Create transporter (You'll need to configure this with your email service)
+    // Create transporter with better configuration for Vercel
     const transporter = nodemailer.createTransport({
-      service: 'gmail', // or your email service
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
       auth: {
-        user: process.env.EMAIL_USER, // Your email address
-        pass: process.env.EMAIL_PASS, // Your email password or app password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
+      // Add these for better Vercel compatibility
+      pool: true,
+      maxConnections: 1,
+      rateDelta: 20000,
+      rateLimit: 5,
+      // Additional options for serverless
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+      socketTimeout: 10000,
     })
 
     // Email template
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: process.env.RECIPIENT_EMAIL, // The email where you want to receive messages
-      replyTo: email, // When you reply, it will go to the user's email
+      to: process.env.RECIPIENT_EMAIL,
+      replyTo: email, // When you reply, it goes to the user's email
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -45,17 +56,44 @@ export async function POST(request) {
       `,
     }
 
-    // Send email
-    await transporter.sendMail(mailOptions)
+    // Send email with timeout handling
+    await Promise.race([
+      transporter.sendMail(mailOptions),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Email timeout')), 10000)
+      )
+    ])
 
     return Response.json(
       { message: 'Email sent successfully!' },
       { status: 200 }
     )
   } catch (error) {
-    console.error('Error sending email:', error)
+    console.error('Detailed error:', {
+      message: error.message,
+      code: error.code,
+      command: error.command,
+      response: error.response,
+      stack: error.stack
+    })
+    
+    // More specific error messages
+    if (error.message.includes('timeout')) {
+      return Response.json(
+        { error: 'Email service timeout. Please try again.' },
+        { status: 408 }
+      )
+    }
+
+    if (error.code === 'ECONNECTION' || error.code === 'ETIMEDOUT') {
+      return Response.json(
+        { error: 'Connection failed. SMTP may be blocked.' },
+        { status: 503 }
+      )
+    }
+    
     return Response.json(
-      { error: 'Failed to send email. Please try again.' },
+      { error: `Failed to send email: ${error.message}` },
       { status: 500 }
     )
   }

@@ -51,7 +51,7 @@ function LetsConnect() {
     setSubmitStatus('')
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/api/contact-alternative', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
