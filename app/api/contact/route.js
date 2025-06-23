@@ -14,9 +14,7 @@ export async function POST(request) {
 
     // Create transporter with better configuration for Vercel
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false, // true for 465, false for other ports
+      service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -26,10 +24,6 @@ export async function POST(request) {
       maxConnections: 1,
       rateDelta: 20000,
       rateLimit: 5,
-      // Additional options for serverless
-      connectionTimeout: 10000,
-      greetingTimeout: 10000,
-      socketTimeout: 10000,
     })
 
     // Email template
@@ -69,13 +63,7 @@ export async function POST(request) {
       { status: 200 }
     )
   } catch (error) {
-    console.error('Detailed error:', {
-      message: error.message,
-      code: error.code,
-      command: error.command,
-      response: error.response,
-      stack: error.stack
-    })
+    console.error('Error sending email:', error)
     
     // More specific error messages
     if (error.message.includes('timeout')) {
@@ -84,16 +72,9 @@ export async function POST(request) {
         { status: 408 }
       )
     }
-
-    if (error.code === 'ECONNECTION' || error.code === 'ETIMEDOUT') {
-      return Response.json(
-        { error: 'Connection failed. SMTP may be blocked.' },
-        { status: 503 }
-      )
-    }
     
     return Response.json(
-      { error: `Failed to send email: ${error.message}` },
+      { error: 'Failed to send email. Please try again.' },
       { status: 500 }
     )
   }

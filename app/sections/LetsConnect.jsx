@@ -51,7 +51,7 @@ function LetsConnect() {
     setSubmitStatus('')
 
     try {
-      const response = await fetch('/api/contact-alternative', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -136,30 +136,30 @@ function LetsConnect() {
         <form onSubmit={handleSubmit} className="w-full max-w-md space-y-8">
           <div ref={inputRef} className="opacity-0">
             <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
-                aria-label="Your Name"
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
+            aria-label="Your Name"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-              />
-              <input
+          />
+          <input
                 type="email"
                 placeholder="Email"
-                className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
+            className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
                 aria-label="Email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-              />
-              <input
+          />
+          <input
                 type="tel"
                 placeholder="Contact Number"
-                className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
+            className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
                 aria-label="Contact Number"
                 name="contactNumber"
                 value={formData.contactNumber}
@@ -175,18 +175,18 @@ function LetsConnect() {
                 value={formData.enquiry}
                 onChange={handleInputChange}
                 required
-              />
-            </div>
+          />
+        </div>
           </div>
           <div ref={buttonRef} className="opacity-0">
-            <button
+          <button
               type="submit"
               disabled={isSubmitting}
               className="w-full px-12 py-6 text-lg bg-[#4ecdc4] hover:bg-[#45b8af] disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-full transition-colors"
-            >
+          >
               {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-          </div>
+          </button>
+        </div>
         </form>
       </div>
 
