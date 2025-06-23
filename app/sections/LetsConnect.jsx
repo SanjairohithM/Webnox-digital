@@ -25,8 +25,37 @@ function LetsConnect() {
     contactNumber: '',
     enquiry: ''
   })
+  const [currentStep, setCurrentStep] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState('')
+
+  // Define steps
+  const steps = [
+    {
+      field: 'name',
+      placeholder: 'Your Name',
+      type: 'text',
+      title: "Let's Connect, What is your name?"
+    },
+    {
+      field: 'email',
+      placeholder: 'Your Email',
+      type: 'email',
+      title: "What's your email address?"
+    },
+    {
+      field: 'contactNumber',
+      placeholder: 'Your Contact Number',
+      type: 'tel',
+      title: "How can we reach you?"
+    },
+    {
+      field: 'enquiry',
+      placeholder: 'Tell us about your enquiry...',
+      type: 'textarea',
+      title: "What can we help you with?"
+    }
+  ]
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -37,13 +66,46 @@ function LetsConnect() {
     }))
   }
 
+  // Handle next step
+  const handleNext = () => {
+    const currentField = steps[currentStep].field
+    const currentValue = formData[currentField]
+    
+    // Validate current field
+    if (!currentValue.trim()) {
+      setSubmitStatus('Please fill in this field')
+      return
+    }
+    
+    setSubmitStatus('')
+    
+    // Animate out current content
+    gsap.to([titleRef.current, inputRef.current, buttonRef.current], {
+      opacity: 0,
+      y: -30,
+      duration: 0.3,
+      ease: "power2.in",
+      onComplete: () => {
+        setCurrentStep(prev => prev + 1)
+        // Animate in new content
+        gsap.to([titleRef.current, inputRef.current, buttonRef.current], {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power3.out",
+          stagger: 0.1
+        })
+      }
+    })
+  }
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    // Validate form
-    if (!formData.name || !formData.email || !formData.contactNumber || !formData.enquiry) {
-      setSubmitStatus('Please fill in all fields')
+    // Validate final field
+    if (!formData.enquiry.trim()) {
+      setSubmitStatus('Please tell us about your enquiry')
       return
     }
 
@@ -64,6 +126,7 @@ function LetsConnect() {
       if (response.ok) {
         setSubmitStatus('Message sent successfully! We\'ll get back to you soon.')
         setFormData({ name: '', email: '', contactNumber: '', enquiry: '' })
+        setCurrentStep(0)
       } else {
         setSubmitStatus(result.error || 'Failed to send message. Please try again.')
       }
@@ -72,6 +135,29 @@ function LetsConnect() {
       setSubmitStatus('Network error. Please check your connection and try again.')
     } finally {
       setIsSubmitting(false)
+    }
+  }
+
+  // Handle going back
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setSubmitStatus('')
+      gsap.to([titleRef.current, inputRef.current, buttonRef.current], {
+        opacity: 0,
+        y: 30,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => {
+          setCurrentStep(prev => prev - 1)
+          gsap.to([titleRef.current, inputRef.current, buttonRef.current], {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power3.out",
+            stagger: 0.1
+          })
+        }
+      })
     }
   }
 
@@ -114,6 +200,9 @@ function LetsConnect() {
     { scope: sectionRef },
   )
 
+  const currentStepData = steps[currentStep]
+  const isLastStep = currentStep === steps.length - 1
+
   return (
     <section
       ref={sectionRef}
@@ -130,65 +219,69 @@ function LetsConnect() {
         <p ref={subtitleRef} className="text-lg text-gray-700 opacity-0">
           Tell About Yourself
         </p>
-        <h1 ref={titleRef} className="text-4xl sm:text-5xl font-bold text-gray-900 opacity-0 whitespace-nowrap">
-          Let's Connect, What is your name?
+        
+        {/* Progress indicator */}
+        <div className="flex space-x-2 mb-4">
+          {steps.map((_, index) => (
+            <div
+              key={index}
+              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+                index <= currentStep ? 'bg-[#4ecdc4]' : 'bg-gray-300'
+              }`}
+            />
+          ))}
+        </div>
+
+        <h1 ref={titleRef} className="text-4xl sm:text-5xl font-bold text-gray-900 opacity-0">
+          {currentStepData.title}
         </h1>
-        <form onSubmit={handleSubmit} className="w-full max-w-md space-y-8">
+        
+        <form onSubmit={isLastStep ? handleSubmit : (e) => { e.preventDefault(); handleNext(); }} className="w-full max-w-md space-y-8">
           <div ref={inputRef} className="opacity-0">
-            <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
-            aria-label="Your Name"
-                name="name"
-                value={formData.name}
+            {currentStepData.type === 'textarea' ? (
+              <textarea
+                placeholder={currentStepData.placeholder}
+                rows="4"
+                className="w-full p-4 text-lg rounded-2xl border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400 resize-none"
+                name={currentStepData.field}
+                value={formData[currentStepData.field]}
                 onChange={handleInputChange}
                 required
           />
+            ) : (
           <input
-                type="email"
-                placeholder="Email"
+                type={currentStepData.type}
+                placeholder={currentStepData.placeholder}
             className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
-                aria-label="Email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-          />
-          <input
-                type="tel"
-                placeholder="Contact Number"
-            className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
-                aria-label="Contact Number"
-                name="contactNumber"
-                value={formData.contactNumber}
+                name={currentStepData.field}
+                value={formData[currentStepData.field]}
                 onChange={handleInputChange}
                 required
               />
-              <textarea
-                placeholder="Tell us about your enquiry..."
-                rows="4"
-                className="w-full p-4 text-lg rounded-2xl border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400 resize-none"
-                aria-label="Enquiry"
-                name="enquiry"
-                value={formData.enquiry}
-                onChange={handleInputChange}
-                required
-          />
-        </div>
+            )}
           </div>
-          <div ref={buttonRef} className="opacity-0">
+          
+          <div ref={buttonRef} className="opacity-0 space-y-4">
+            <div className="flex gap-4">
+              {currentStep > 0 && (
+                <button
+                  type="button"
+                  onClick={handleBack}
+                  className="flex-1 px-8 py-4 text-lg bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full transition-colors"
+                >
+                  Back
+                </button>
+              )}
           <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-12 py-6 text-lg bg-[#4ecdc4] hover:bg-[#45b8af] disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-full transition-colors"
+                className="flex-1 px-12 py-4 text-lg bg-[#4ecdc4] hover:bg-[#45b8af] disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-full transition-colors"
           >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? 'Sending...' : (isLastStep ? 'Send Message' : 'Next')}
           </button>
+            </div>
         </div>
         </form>
-      </div>
 
               {submitStatus && (
           <div className={`mt-4 p-4 text-center text-sm rounded-lg ${
@@ -199,7 +292,7 @@ function LetsConnect() {
             {submitStatus}
           </div>
         )}
-
+      </div>
     </section>
   )
 }

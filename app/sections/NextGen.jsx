@@ -51,7 +51,7 @@ const stats = [
     number: "100%",
     text: "Scalable & Secure Solutions",
     position: { right: '5%', bottom: '40%' },
-    color: "#7B4019",
+    color: "#DDA853",
     image: "/images/safety.png",
     imageSize: "w-[100px] h-[100px]"
   }
