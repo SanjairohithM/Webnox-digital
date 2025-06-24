@@ -156,7 +156,7 @@ function About() {
             {/* Let's Talk Button - Top Right */}
             <div ref={letsTalkRef} className="fixed top-12 right-12 z-30 transition-all duration-300">
                 <button
-                    className="bg-[#25C3E5] hover:bg-[#1fb8d9] text-white font-bold p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl"
+                    className="bg-[#25C3E5] hover:bg-[#1fb8d9] text-white font-urbanist p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl"
                     onClick={() => {
                         const element = document.querySelector("#contact")
                         if (element) {
@@ -170,7 +170,7 @@ function About() {
 
             <section
                 ref={sectionRef}
-                className="relative w-full min-h-screen flex items-center pt-42 pb-20 px-4 sm:px-6 lg:px-20 bg-gradient-to-br from-white via-[#f8fafc] to-[#f1f5f9] overflow-hidden font-urbanist"
+                className="relative w-full min-h-screen flex items-center pt-42 pb-20 px-4 sm:px-6 lg:px-20 bg-white overflow-hidden font-urbanist"
             >
                 <div className=" mx-auto w-full">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
@@ -198,7 +198,7 @@ function About() {
                             {/* Description */}
                             <p
                                 ref={descriptionRef}
-                                className="text-lg md:text-xl text-gray-400 leading-relaxed opacity-0"
+                                className="text-lg md:text-xl text-gray-400 leading-relaxed opacity-0 font-urbanist"
                             >
                                 We are a digital transformation partner committed to empowering
                                 businesses with cutting-edge technology, strategic insight, and measurable
@@ -212,7 +212,7 @@ function About() {
                                     <div className="text-6xl font-bold text-[#25C3E5] mb-2">
                                         14+
                                     </div>
-                                    <div className="text-lg text-gray-600 font-medium text-center">
+                                    <div className="text-lg text-gray-600 font-urbanist text-center">
                                         Years of
                                         <br />
                                         Experiences
@@ -283,17 +283,17 @@ function About() {
                             <div className="absolute top-16 right-0 space-y-8 pointer-events-none right-stats">
                                 <div className="space-y-8">
                                     <div className="">
-                                        <div className="text-[#25C3E5] text-6xl font-bold">
+                                        <div className="text-[#25C3E5] text-6xl font-urbanist">
                                             1000+
                                         </div>
-                                        <div className="text-gray-400 mt-2 text-lg font-medium">Projects Delivered</div>
+                                        <div className="text-gray-400 mt-2 text-lg font-urbanist">Projects Delivered</div>
                                     </div>
 
                                     <div className="pt-5">
-                                        <div className="text-[#25C3E5] text-6xl font-bold">
+                                        <div className="text-[#25C3E5] text-6xl font-urbanist">
                                             15+
                                         </div>
-                                        <div className="text-gray-400 mt-2 text-lg font-medium">Clients Across Countries</div>
+                                        <div className="text-gray-400 mt-2 text-lg font-urbanist">Clients Across Countries</div>
                                     </div>
                                 </div>
                             </div>

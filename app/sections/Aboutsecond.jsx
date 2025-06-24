@@ -117,34 +117,31 @@ export default function Component() {
       }}
     >
       <div className="relative z-10 container mx-auto px-8 py-16 lg:py-20">
-        
-        {/* Header Section - Left Aligned */}
-        <div className="text-left mb-16">
-          <p ref={subtitleRef} className="text-lg font-normal text-gray-600 leading-relaxed mb-4">
-            Innovative Software Solutions for the
-          </p>
-          <h1 ref={titleRef} className="text-5xl lg:text-6xl font-bold text-[#25C3E5] leading-tight">
-            Next-Gen Digital Transformation
-          </h1>
+        <div className="mb-8"> 
+          <p className="text-8xl font-urbanist text-gray-200 font-bold mb-3">D I G I T A L </p>
+
+          {/* Header Section - Left Aligned */}
+          <div className="text-left mb-16">
+            <p ref={subtitleRef} className="text-2xl font-urbanist text-gray-600 mb-5">
+              Innovative Software Solutions for the
+            </p>
+            <h1 ref={titleRef} className="text-6xl font-urbanist font-bold text-[#25C3E5] leading-tight mb-5">
+              Next-Gen Digital Transformation
+            </h1>
+          </div>
         </div>
 
-        {/* Description - Left Aligned */}
-        <div ref={text1Ref} className="text-left max-w-4xl mb-16">
-          <p className="text-lg text-gray-700 leading-relaxed">
-            At Webnox Digital, we architect intelligent, scalable, and future-ready digital platforms that enable
-            businesses to thrive in a rapidly evolving digital world. Our approach is rooted in innovation, agility,
-            and deep technological expertise.
-          </p>
-        </div>
 
-        {/* 3-Column Grid Layout with Staggered Image Positioning */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-16 min-h-[600px]">
-          
+
+
+                  {/* 3-Column Grid Layout with Staggered Image Positioning */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mb-16 min-h-[800px] -mt-8">
+
           {/* Left Image with Text - Positioned in CENTER */}
-          <div className="flex flex-col justify-center">
-            <div ref={imageText1Ref} className="mb-4">
-              <p className="text-base text-gray-700 leading-relaxed text-center">
-                From custom software and mobile apps to SaaS products and cloud-based platforms, we focus on building solutions that drive efficiency, growth, and competitive advantage.
+          <div className="flex flex-col justify-center -mt-40">
+            <div ref={imageText1Ref} className="mb-8">
+              <p className=" text-gray-400 font-urbanist leading-relaxed">
+                At Webnox Digital, we architect intelligent, scalable, and future-ready digital platforms that enable businesses to thrive in a rapidly evolving digital world. Our approach is rooted in innovation, agility, and deep technological expertise.
               </p>
             </div>
             <div ref={image1Ref} className="flex justify-center">
@@ -154,7 +151,7 @@ export default function Component() {
                   alt="Team collaboration with digital interfaces"
                   width={400}
                   height={300}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-80 object-cover"
                 />
               </div>
             </div>
@@ -162,8 +159,8 @@ export default function Component() {
 
           {/* Center Image with Text - Positioned at END (BOTTOM) */}
           <div className="flex flex-col justify-end">
-            <div ref={imageText2Ref} className="mb-4">
-              <p className="text-base text-gray-700 leading-relaxed text-center">
+            <div ref={imageText2Ref} className="mb-8">
+              <p className="text-base text-gray-400 font-urbanist leading-relaxed">
                 We specialize in delivering transformative digital solutions that not only solve complex problems but also create seamless and impactful user experiences.
               </p>
             </div>
@@ -174,17 +171,17 @@ export default function Component() {
                   alt="Cloud computing visualization"
                   width={400}
                   height={300}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-80 object-cover"
                 />
               </div>
             </div>
           </div>
 
           {/* Right Image with Text - Positioned at START (TOP) */}
-          <div className="flex flex-col justify-start">
-            <div ref={imageText3Ref} className="mb-4">
-              <p className="text-base text-gray-700 leading-relaxed text-center">
-                Our innovative approach combines cutting-edge technology with strategic insights to deliver measurable business impact and sustainable growth.
+          <div className="flex flex-col justify-start -mt-20">
+            <div ref={imageText3Ref} className="mb-8">
+              <p className="text-base text-gray-400 font-urbanist leading-relaxed">
+                From custom software and mobile apps to SaaS products and cloud-based platforms, we focus on building solutions that drive efficiency, growth, and competitive advantage.
               </p>
             </div>
             <div ref={image3Ref} className="flex justify-center">
@@ -194,7 +191,7 @@ export default function Component() {
                   alt="Diverse team working together"
                   width={400}
                   height={300}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-80 object-cover"
                 />
               </div>
             </div>
