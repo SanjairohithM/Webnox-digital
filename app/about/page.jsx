@@ -156,7 +156,7 @@ function About() {
             {/* Let's Talk Button - Top Right */}
             <div ref={letsTalkRef} className="fixed top-12 right-12 z-30 transition-all duration-300">
                 <button
-                    className="bg-[#2acbec] hover:bg-[#1fb8d9] text-white font-bold p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl"
+                    className="bg-[#25C3E5] hover:bg-[#1fb8d9] text-white font-bold p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl"
                     onClick={() => {
                         const element = document.querySelector("#contact")
                         if (element) {
@@ -175,107 +175,132 @@ function About() {
                 <div className=" mx-auto w-full">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
                         {/* Left Content */}
-                        <div className=" space-y-8 col-span-5">
-                            {/* Main Headlines */}
-                            <div className="space-y-4">
+                        <div className=" col-span-5 flex flex-col justify-start gap-[110px] pt-[100px]">
+                           
+                           <div className=" flex flex-col gap-[50px]">
+                             {/* Main Headlines */}
+                             <div className="flex flex-col gap-[20px]">
                                 <h1
                                     ref={titleRef}
-                                    className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-700 opacity-0"
+                                    className="text-5xl font-light text-gray-500 opacity-0"
                                 >
                                     Driven by Innovation.
                                 </h1>
                                 <h1
                                     ref={subtitleRef}
-                                    className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] text-transparent bg-clip-text opacity-0"
+                                    className="text-6xl font-bold text-transparent bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] bg-clip-text opacity-0"
                                 >
                                     Defined by Results.
                                 </h1>
                             </div>
 
+
                             {/* Description */}
                             <p
                                 ref={descriptionRef}
-                                className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-lg opacity-0"
+                                className="text-lg md:text-xl text-gray-400 leading-relaxed opacity-0"
                             >
                                 We are a digital transformation partner committed to empowering
                                 businesses with cutting-edge technology, strategic insight, and measurable
                                 impact.
                             </p>
+                           </div>
 
-                            {/* Years of Experience Card - positioned on left */}
-                            <div className="pt-8">
-                                <div ref={statsRef} className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/50 shadow-lg opacity-0 max-w-xs">
-                                    <div className="text-4xl font-bold bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] text-transparent bg-clip-text">
+                            {/* Years of Experience and Redefining Section - Justify Between */}
+                            <div className="pt-8 flex justify-between items-start pl-[70px]">
+                                <div ref={statsRef} className="bg-white/70 backdrop-blur-sm rounded-lg p-8 border-2 border-[#25C3E5] shadow-lg opacity-0 w-48 h-48 flex flex-col items-center justify-center">
+                                    <div className="text-6xl font-bold text-[#25C3E5] mb-2">
                                         14+
                                     </div>
-                                    <div className="text-gray-600 mt-2 font-medium">
+                                    <div className="text-lg text-gray-600 font-medium text-center">
                                         Years of
                                         <br />
                                         Experiences
                                     </div>
                                 </div>
+
+                               
                             </div>
 
-                            {/* Redefining Section */}
-                            <div
-                                ref={redefiningSectionRef}
-                                className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 shadow-lg mt-12 opacity-0 max-w-md"
-                            >
-                                <div className="flex items-center gap-4 mb-4">
-                                    <h3 className="text-2xl font-semibold text-gray-800">
-                                        Redefining the digital
-                                    </h3>
-                                    <div className="flex gap-2">
-                                        <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-                                        <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-                                        <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
-                                        <div className="w-8 h-8 bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] rounded-full flex items-center justify-center">
-                                            <span className="text-white text-lg font-bold">+</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p className="text-gray-600">
-                                    Dive into compelling narratives set in a dystopian future.
-                                </p>
-                            </div>
                         </div>
 
-                        {/* Robot Image - Centered but slightly left */}
-                  
+                        
 
-
-                        <div className="relative col-span-7 ">
-
-                            <div>
+                        {/* Right Content */}
+                        <div className="relative col-span-7 flex flex-row justify-start">
+                            {/* Robot Image */}
+                            <div ref={robotRef} className=" justify-self-start">
                                 <Image
                                     src="/images/aboutrobotpng1.png"
                                     alt="AI Robot with VR headset"
                                     width={800}
                                     height={1000}
-                                    className="w-[90%] h-[90%] object-cover"
-                                // priority
+                                    className="w-full h-full "
+                                    priority
                                 />
                             </div>
 
-                            <div className=" absolute top-16 right-0 space-y-8 pointer-events-none right-stats ">
+             
+
+                            <div className=" flex flex-col gap-[20px] w-[400px] absolute top-[60%] -left-[320px]">
+
+                                <div className=" flex flex-row justify-between items-center">
+                                    <p className=" w-[120px] text-2xl text-gray-600">Redefining the digital</p>
+                                    <div className=" flex flex-row ">
+                                        <Image
+                                            src="/images/Line 2.png"
+                                            alt="Connection Line"
+                                            width={40}
+                                            height={2}
+                                            className="object-contain w-[220px]"
+                                        />
+                                        <Image
+                                            src="/images/Ecllipse.png"
+                                            alt="Eclipse"
+                                            width={16}
+                                            height={16}
+                                            className="object-contain w-[50px] h-[50px]"
+                                        />
+                                    </div>
+                                </div>
+
+                                <p className="text-gray-600 text-sm leading-relaxed w-[200px]">
+                                    Dive into compelling narratives set in a dystopian future.
+                                </p>
+
+                                <Image
+                                    src="/images/Costumerimage.png"
+                                    alt="Customer"
+                                    width={92}
+                                    height={62}
+                                    className="w-[150px] h-[50px] object-contain"
+                                />
+
+
+                            </div>
+
+                            {/* Right Side Statistics - Floating */}
+                            <div className="absolute top-16 right-0 space-y-8 pointer-events-none right-stats">
                                 <div className="space-y-8">
                                     <div className="">
-                                        <div className="">
+                                        <div className="text-[#25C3E5] text-6xl font-bold">
                                             1000+
                                         </div>
-                                        <div className="">Projects Delivered</div>
+                                        <div className="text-gray-400 mt-2 text-lg font-medium">Projects Delivered</div>
                                     </div>
 
-                                    <div className="">
-                                        <div className="">
+                                    <div className="pt-5">
+                                        <div className="text-[#25C3E5] text-6xl font-bold">
                                             15+
                                         </div>
-                                        <div className="text-gray-600 mt-2 font-medium">Clients Across Countries</div>
+                                        <div className="text-gray-400 mt-2 text-lg font-medium">Clients Across Countries</div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
+
+
 
 
                     </div>
