@@ -6,6 +6,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import Aboutsecond from "@/app/sections/Aboutsecond"
+import { Aboutthird } from "@/app/sections/Aboutthird"
 gsap.registerPlugin(ScrollTrigger)
 
 function About() {
@@ -148,7 +149,7 @@ function About() {
                         alt="Webnox Digital Logo"
                         width={160}
                         height={160}
-                        className="object-contain drop-shadow-2xl"
+                        className="object-cover drop-shadow-2xl"
                     />
                 </div>
             </div>
@@ -308,6 +309,7 @@ function About() {
 
             </section>
             <Aboutsecond />
+            <Aboutthird />
         </>
 
     )
