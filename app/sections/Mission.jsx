@@ -391,19 +391,19 @@ export default function Component() {
                     ref={contentRefs.strategy} 
                     className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[24rem] rounded-4xl flex flex-col justify-center p-8"
                   >
-                    <Image
-                      src="/images/robot1.png"
-                      alt="Robot background"
-                      className="absolute inset-0 w-full h-full object-cover rounded-4xl"
-                      width={1000}
-                      height={1000}
-                    />
-                    <div className="relative z-10 h-full flex flex-col justify-center">
-                      <h1 className="text-2xl font-extrabold text-black text-right pr-4 mb-6">
-                        Approach
-                      </h1>
-                      <div className="text-gray-700 text-right pr-4">
-                        <p className="text-lg">Innovation meets precision in everything we do. We blend creativity and code to build digital success stories. Think global</p>
+                      <Image
+                        src="/images/robot1.png"
+                        alt="Robot background"
+                        className="absolute inset-0 w-full h-full object-cover rounded-4xl"
+                        width={1000}
+                        height={1000}
+                      />
+                      <div className="relative z-10 h-full flex flex-col justify-center">
+                        <h1 className="text-2xl font-extrabold text-black text-right pr-4 mb-6">
+                          Approach
+                        </h1>
+                        <div className="text-gray-700 text-right pr-4">
+                          <p className="text-lg">Innovation meets precision in everything we do. We blend creativity and code to build digital success stories. Think global</p>
                       </div>
                     </div>
                   </div>
@@ -413,21 +413,21 @@ export default function Component() {
                     ref={contentRefs.mission} 
                     className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[24rem] rounded-4xl flex flex-col justify-center p-8 overflow-hidden"
                   >
-                    <Image
-                      src="/images/robot2.png"
-                      alt="Robot background"
-                      className="absolute inset-0 w-full h-full object-cover rounded-4xl"
-                      width={1000}
-                      height={1000}
-                    />
-                    <div className="relative z-10 h-full flex flex-col justify-center">
-                      <h2 className="text-2xl font-extrabold text-black pl-4 mb-6">
-                        Our Mission
-                      </h2>
-                      <div className="text-gray-700 pl-4">
-                        <p className="text-lg">
-                          To empower visionary businesses with transformative digital power. We're here to turn your global ambition into a digital reality.
-                        </p>
+                      <Image
+                        src="/images/robot2.png"
+                        alt="Robot background"
+                        className="absolute inset-0 w-full h-full object-cover rounded-4xl"
+                        width={1000}
+                        height={1000}
+                      />
+                      <div className="relative z-10 h-full flex flex-col justify-center">
+                        <h2 className="text-2xl font-extrabold text-black pl-4 mb-6">
+                          Our Mission
+                        </h2>
+                        <div className="text-gray-700 pl-4">
+                          <p className="text-lg">
+                            To empower visionary businesses with transformative digital power. We're here to turn your global ambition into a digital reality.
+                          </p>
                       </div>
                     </div>
                   </div>
