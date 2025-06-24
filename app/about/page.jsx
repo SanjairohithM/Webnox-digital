@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
-
+import Aboutsecond from "@/app/sections/Aboutsecond"
 gsap.registerPlugin(ScrollTrigger)
 
 function About() {
@@ -307,7 +307,9 @@ function About() {
                 </div>
 
             </section>
+            <Aboutsecond />
         </>
+
     )
 }
 
