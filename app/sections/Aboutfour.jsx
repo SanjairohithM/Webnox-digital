@@ -1,0 +1,206 @@
+"use client"
+
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ArrowRight } from "lucide-react"
+import Image from "next/image"
+// import { Button } from "@/components/ui/button"
+
+gsap.registerPlugin(ScrollTrigger)
+
+const expertiseData = [
+  {
+    id: 1,
+    title: "Brand Strategy",
+    description:
+      "We specialize in crafting unique brand experiences that resonate with your audience and drive long-term growth.",
+    image: "/images/expertise1.png",
+  },
+  {
+    id: 2,
+    title: "Website Development",
+    description: "We build websites that not only look great but also perform exceptionally well across all devices.",
+    image: "/images/expertise2.png",
+  },
+  {
+    id: 3,
+    title: "SEO & Search Dominance",
+    description:
+      "Organic traffic is our forte. We optimize your website to rank higher and attract more qualified leads.",
+    image: "/images/expertise3.png",
+  },
+  {
+    id: 4,
+    title: "Performance Marketing",
+    description: "Data-driven campaigns that deliver measurable results and maximize your return on investment.",
+    image: "/images/expertise4.png",
+  },
+  {
+    id: 5,
+    title: "Lead Generation",
+    description: "We help you attract, nurture, and convert high-quality leads that drive business growth.",
+    image: "/images/expertise5.png",
+  },
+  {
+    id: 6,
+    title: "Social Media That Sells",
+    description: "Strategic social media campaigns that build brand awareness and drive conversions.",
+    image: "/images/expertise6.png",
+  },
+]
+
+export default function ExpertiseSection() {
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const cardsRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Title animation
+      gsap.fromTo(
+        titleRef.current,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      )
+
+      // Set initial states for directional animations
+      gsap.set(".left-card", {
+        opacity: 0,
+        x: -200,
+        scale: 0.8
+      })
+
+      gsap.set(".right-card", {
+        opacity: 0,
+        x: 200,
+        scale: 0.8
+      })
+
+      // Row-by-row timeline animations with more spacing
+      const rows = [
+        { left: ".card-1", right: ".card-2", trigger: "top 80%" },   // First row
+        { left: ".card-3", right: ".card-4", trigger: "top 50%" },   // Second row (more scroll needed)
+        { left: ".card-5", right: ".card-6", trigger: "top 20%" }    // Third row (even more scroll)
+      ]
+
+      rows.forEach((row, index) => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: row.trigger,
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+            // markers: true, // Uncomment to see trigger points during development
+          }
+        })
+
+        // Animate left card from left
+        tl.to(row.left, {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1,
+          ease: "power3.out"
+        })
+        // Animate right card from right (with slight overlap)
+        .to(row.right, {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1,
+          ease: "power3.out"
+        }, "-=0.7")
+      })
+
+      // Hover animations for cards
+      document.querySelectorAll(".expertise-card").forEach((card) => {
+        const icon = card.querySelector(".card-icon")
+        const button = card.querySelector(".card-button")
+
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, { scale: 1.02, duration: 0.3, ease: "power2.out" })
+          gsap.to(icon, { scale: 1.1, rotation: 5, duration: 0.3, ease: "power2.out" })
+          gsap.to(button, { x: 5, duration: 0.3, ease: "power2.out" })
+        })
+
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, { scale: 1, duration: 0.3, ease: "power2.out" })
+          gsap.to(icon, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.out" })
+          gsap.to(button, { x: 0, duration: 0.3, ease: "power2.out" })
+        })
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="relative min-h-screen bg-white py-32 px-6 lg:px-16 overflow-hidden">
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-8xl mx-auto">
+        {/* Header */}
+        <div ref={titleRef} className="text-center mb-32">
+          <p className="text-gray-500 text-2xl mb-8 font-urbanist tracking-wide">Our Expertise</p>
+          <h2 className="text-5xl font-urbanist font-bold text-gray-800 leading-tight max-w-6xl mx-auto">
+            AI That Listens, Learns, and Delivers Precision for{" "}
+            <br />
+            <span className="text-gray-800">Every Unique Project</span>
+          </h2>
+        </div>
+
+        {/* Cards Grid - Full width 2 columns layout with more spacing */}
+        <div ref={cardsRef} className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10 w-full max-w-none">
+          {expertiseData.map((item, index) => {
+            const isLeftCard = index % 2 === 0
+            const cardNumber = index + 1
+            
+            return (
+                              <div
+                  key={item.id}
+                  className={`expertise-card ${isLeftCard ? 'left-card' : 'right-card'} card-${cardNumber}  rounded-3xl p-12  transition-all duration-300 cursor-pointer   w-full`}
+                >
+                  {/* Icon and Title in same line */}
+                  <div className="flex items-center mb-8">
+                    <div className="card-icon w-20 h-20 rounded-full flex items-center justify-center mr-6">
+                      <Image 
+                        src={item.image} 
+                        alt={`${item.title} icon`} 
+                        width={72} 
+                        height={72} 
+                        className="object-contain"
+                      />
+                    </div>
+                    <h3 className="text-4xl font-bold text-[#00B9FF] leading-tight flex-1">{item.title}</h3>
+                  </div>
+
+                  {/* Content */}
+                  <p className="text-gray-400 mb-12 font-medium font-urbanist leading-relaxed text-xl">{item.description}</p>
+
+                  {/* Button */}
+                  <button className="card-button group flex items-center text-[#00B9FF] hover:text-[#00B9FF] font-urbanist transition-colors duration-300 text-xl rounded-full px-8 py-4 border-2 border-[#00B9FF] hover:border-[#00B9FF] hover:bg-[#00B9FF] hover:text-white">
+                    Learn more
+                    <ArrowRight className="ml-4 h-6 w-6 transition-transform group-hover:translate-x-1" />
+                  </button>
+                </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}

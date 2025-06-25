@@ -23,25 +23,30 @@ export default function Component() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(
-        [
-          titleRef.current,
-          subtitleRef.current,
-          image1Ref.current,
-          image2Ref.current,
-          image3Ref.current,
-          text1Ref.current,
-          text2Ref.current,
-          text3Ref.current,
-          imageText1Ref.current,
-          imageText2Ref.current,
-          imageText3Ref.current,
-        ],
-        {
-          opacity: 0,
-          y: 50,
-        },
-      )
+      // Set initial states for header elements (come from top)
+      gsap.set([titleRef.current, subtitleRef.current], {
+        opacity: 0,
+        y: -50,
+      })
+
+      // Set initial states for cards with different directions
+      // First card - from left
+      gsap.set([image1Ref.current, imageText1Ref.current], {
+        opacity: 0,
+        x: -100,
+      })
+
+      // Second card - from bottom
+      gsap.set([image2Ref.current, imageText2Ref.current], {
+        opacity: 0,
+        y: 100,
+      })
+
+      // Third card - from right
+      gsap.set([image3Ref.current, imageText3Ref.current], {
+        opacity: 0,
+        x: 100,
+      })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -52,6 +57,7 @@ export default function Component() {
         },
       })
 
+      // Header animations
       tl.to(titleRef.current, {
         opacity: 1,
         y: 0,
@@ -68,18 +74,23 @@ export default function Component() {
           },
           "-=0.5",
         )
+        
+        // First card - from left
         .to(
-          text1Ref.current,
+          [imageText1Ref.current, image1Ref.current],
           {
             opacity: 1,
-            y: 0,
+            x: 0,
             duration: 0.8,
             ease: "power2.out",
+            stagger: 0.1,
           },
           "-=0.3",
         )
+        
+        // Second card - from bottom
         .to(
-          [imageText1Ref.current, imageText2Ref.current, imageText3Ref.current],
+          [imageText2Ref.current, image2Ref.current],
           {
             opacity: 1,
             y: 0,
@@ -87,18 +98,20 @@ export default function Component() {
             ease: "power2.out",
             stagger: 0.1,
           },
-          "-=0.5",
+          "-=0.6",
         )
+        
+        // Third card - from right
         .to(
-          [image1Ref.current, image2Ref.current, image3Ref.current],
+          [imageText3Ref.current, image3Ref.current],
           {
             opacity: 1,
-            y: 0,
+            x: 0,
             duration: 0.8,
             ease: "power2.out",
-            stagger: 0.2,
+            stagger: 0.1,
           },
-          "-=0.5",
+          "-=0.6",
         )
     }, containerRef)
 

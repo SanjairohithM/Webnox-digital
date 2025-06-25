@@ -53,13 +53,55 @@ const AnimatedNavbar = ({
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isHeroVisible, setIsHeroVisible] = useState(() => {
-    // Check initial hero visibility on mount
+    // Check initial hero visibility on mount - only show in first screen area
     if (typeof window !== "undefined") {
-      const heroSection = document.querySelector('main[class*="min-h-screen"][class*="bg-gradient-to-br"]')
-      return heroSection ? window.scrollY < heroSection.offsetHeight - 100 : false
+      return window.scrollY < (window.innerHeight * 0.8)
     }
     return true
   })
+  const heroVisibleRef = useRef(isHeroVisible)
+  
+  // Sync ref with state on mount and add fallback scroll listener
+  useEffect(() => {
+    heroVisibleRef.current = isHeroVisible
+    
+    // Fallback scroll listener to ensure visibility detection always works
+    const handleScroll = () => {
+      const heroVisible = window.scrollY < (window.innerHeight * 0.8)
+      
+      if (heroVisible !== heroVisibleRef.current) {
+        heroVisibleRef.current = heroVisible
+        setIsHeroVisible(heroVisible)
+        
+        const heroLogo = heroLogoRef.current
+        const letsTalk = letsTalkRef.current
+        
+        if (heroLogo) {
+          gsap.to(heroLogo, {
+            opacity: heroVisible ? 1 : 0,
+            y: heroVisible ? 0 : -20,
+            duration: 0.3,
+            ease: "power2.out",
+          })
+        }
+        
+        if (letsTalk) {
+          gsap.to(letsTalk, {
+            opacity: heroVisible ? 1 : 0,
+            y: heroVisible ? 0 : -20,
+            duration: 0.3,
+            ease: "power2.out",
+          })
+        }
+      }
+    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
   const [currentHoveredIcon, setCurrentHoveredIcon] = useState(null)
 
   // Custom cursor movement
@@ -92,9 +134,9 @@ const AnimatedNavbar = ({
     // Initial animations
     gsap.fromTo(navbar, { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" })
 
-    // Check if we're initially in hero section
-    const heroSection = document.querySelector('main[class*="min-h-screen"][class*="bg-gradient-to-br"]')
-    const initiallyInHero = heroSection && window.scrollY < heroSection.offsetHeight - 100
+    // Check if we're initially in hero section - only first screen area
+    const initiallyInHero = window.scrollY < (window.innerHeight * 0.8)
+    heroVisibleRef.current = initiallyInHero
 
     // Animate hero logo and let's talk button only if in hero section
     if (heroLogo && initiallyInHero) {
@@ -116,12 +158,12 @@ const AnimatedNavbar = ({
       end: "bottom bottom",
       onUpdate: (self) => {
         const scrolled = self.scroll() > 50
-        // More precise hero detection - only show in hero section
-        const heroSection = document.querySelector('main[class*="min-h-screen"][class*="bg-gradient-to-br"]')
-        const heroVisible = heroSection ? self.scroll() < heroSection.offsetHeight - 100 : false
+        // More precise hero detection - only show in the first/hero section
+        const heroVisible = self.scroll() < (window.innerHeight * 0.8)
 
-        // Handle hero elements visibility
-        if (heroVisible !== isHeroVisible) {
+        // Handle hero elements visibility - Always update, don't rely on state comparison
+        if (heroVisible !== heroVisibleRef.current) {
+          heroVisibleRef.current = heroVisible
           setIsHeroVisible(heroVisible)
 
           if (heroLogo) {
@@ -229,7 +271,7 @@ const AnimatedNavbar = ({
       }
       document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [isScrolled, isHeroVisible, isMenuOpen])
+  }, [isScrolled, isMenuOpen]) // Removed isHeroVisible from dependencies
 
   const toggleMenu = () => {
     const fullscreenMenu = fullscreenMenuRef.current
@@ -412,7 +454,7 @@ const AnimatedNavbar = ({
       }
 
       // Show logo and let's talk button again (only if in hero section)
-      if (heroLogoRef.current && isHeroVisible) {
+      if (heroLogoRef.current && heroVisibleRef.current) {
         gsap.to(heroLogoRef.current, {
           opacity: 1,
           scale: 1,
@@ -422,7 +464,7 @@ const AnimatedNavbar = ({
         })
       }
 
-      if (letsTalkRef.current && isHeroVisible) {
+      if (letsTalkRef.current && heroVisibleRef.current) {
         gsap.to(letsTalkRef.current, {
           opacity: 1,
           scale: 1,
