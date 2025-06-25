@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-
+import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
 import { gsap } from "gsap"
 import { ChevronDown } from "lucide-react"
@@ -56,52 +56,52 @@ export default function Footer() {
   }
 
   return (
-    <footer ref={footerRef} className="bg-gray-50 px-6 py-16 lg:px-12">
-      <div className="mx-auto max-w-7xl">
+    <footer ref={footerRef} className="bg-white px-8 py-24 lg:px-16">
+      <div className="mx-auto max-w-8xl">
         {/* Main Content Section */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-24">
           {/* Left Content */}
-          <div ref={formRef} className="lg:max-w-2xl mb-8 lg:mb-0">
-            <h2 className="text-4xl lg:text-5xl font-light text-gray-900 mb-4 leading-tight">
+          <div ref={formRef} className="lg:max-w-3xl mb-12 lg:mb-0">
+            <h2 className="text-5xl lg:text-6xl font-light text-gray-900 mb-8 leading-tight">
               Do you have
               <br />
               any questions?
             </h2>
-            <p className="text-gray-600 mb-8 text-lg">
+            <p className="text-gray-600 mb-12 text-xl leading-relaxed">
               Feel free to send us your questions or request a free consultation.
             </p>
 
             {/* Email Form */}
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 mb-8">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-6 mb-12">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter Your Email"
-                className="flex-1 px-6 py-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-gray-900 placeholder-gray-500"
+                className="flex-1 px-8 py-6 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-gray-900 placeholder-gray-500 text-lg"
                 required
               />
               <button
                 type="submit"
-                className="px-8 py-4 bg-cyan-400 hover:bg-cyan-500 text-white font-medium rounded-lg transition-colors duration-200"
+                className="px-10 py-6 bg-[#00B9FF] hover:bg-[#00B9FF] text-white font-urbanist rounded-xl transition-colors duration-200 text-lg"
               >
                 Get Started
               </button>
             </form>
 
             {/* Disclaimer */}
-            <div className="border-t border-gray-200 pt-4">
+            <div className="border-t border-gray-200 pt-6">
               <button
                 onClick={toggleDisclaimer}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                className="flex items-center gap-3 text-gray-600 hover:text-gray-900 transition-colors duration-200 text-lg"
               >
                 <span>Disclaimer</span>
                 <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${isDisclaimerOpen ? "rotate-180" : ""}`}
+                  className={`w-5 h-5 transition-transform duration-200 ${isDisclaimerOpen ? "rotate-180" : ""}`}
                 />
               </button>
               <div ref={disclaimerRef} className="overflow-hidden" style={{ height: 0, opacity: 0 }}>
-                <p className="text-sm text-gray-500 mt-3 leading-relaxed">
+                <p className="text-base text-gray-500 mt-6 leading-relaxed">
                   By submitting this form, you agree to our terms of service and privacy policy. We will use your
                   information to respond to your inquiry and may contact you about our services.
                 </p>
@@ -111,20 +111,22 @@ export default function Footer() {
 
           {/* Logo */}
           <div ref={logoRef} className="flex justify-center lg:justify-end">
-            <div className="text-4xl font-light text-gray-400">
-              <span className="text-gray-600">W</span>
-              <span className="text-cyan-400">eo</span>
-              <span className="text-gray-600">nox</span>
-            </div>
+            <Image
+              src="/webnox-logo.png"
+              alt="Webnox Digital Logo"
+              width={280}
+              height={120}
+              className="object-contain"
+            />
           </div>
         </div>
 
         {/* Navigation Links */}
-        <nav className="border-t border-gray-200 pt-8 mb-12">
-          <ul className="flex flex-wrap gap-8 text-gray-600">
+        <nav className="border-t border-gray-200 pt-12 mb-16">
+          <ul className="flex flex-wrap gap-18 font-urbanist font-semibold text-gray-500">
             {["Home", "About", "Solutions", "Industries", "Expertise", "AI", "Resource"].map((item) => (
               <li key={item}>
-                <a href="#" className="hover:text-gray-900 transition-colors duration-200">
+                <a href="#" className="hover:text-gray-900 transition-colors duration-200 text-lg font-urbanist">
                   {item}
                 </a>
               </li>
@@ -133,33 +135,34 @@ export default function Footer() {
         </nav>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-200 pt-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+        <div className="border-t border-gray-200 pt-12">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
             {/* Contact Info */}
-            <div className="flex flex-col sm:flex-row gap-8 lg:gap-16">
+            <div className="flex flex-col sm:flex-row gap-12 ">
               <div>
-                <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">SIGN UP</h4>
-                <p className="text-gray-900 font-medium">+000 0000 0000</p>
+                <h4 className="text-base font-urbanist text-gray-500 uppercase tracking-wider mb-3">SIGN UP</h4>
+                <p className="text-gray-900 font-urbanist font-semibold text-lg">+000 0000 0000</p>
               </div>
 
               <div>
-                <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">OPENING HOURS</h4>
-                <p className="text-gray-900 font-medium">24/7</p>
+                <h4 className="text-base font-urbanist text-gray-500 uppercase tracking-wider mb-3">OPENING HOURS</h4>
+                <p className="text-gray-900 font-urbanist font-semibold text-lg">24/7</p>
               </div>
 
               <div>
-                <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">EMAIL</h4>
-                <p className="text-gray-900 font-medium">youremail@mail.com</p>
+                <h4 className="text-base font-urbanist text-gray-500 uppercase tracking-wider mb-3">EMAIL</h4>
+                <p className="text-gray-900 font-urbanist font-semibold text-lg">youremail@mail.com</p>
               </div>
             </div>
 
             {/* Tagline */}
             <div className="text-right">
-              <p className="text-gray-900 font-medium">
+              <p className="text-gray-900 font-urbanist text-xl leading-relaxed">
                 Transforming Ideas into Intelligent
                 <br />
                 Solutions
               </p>
+              <p className="text-gray-400 font-urbanist font-semibold text-lg">© 2045-Copyright</p>
             </div>
           </div>
         </div>

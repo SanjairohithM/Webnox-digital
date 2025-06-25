@@ -3,6 +3,7 @@ import { Urbanist } from "next/font/google"
 import "./globals.css"
 import Header from "./sections/Components/Header"
 import SmoothScrollProvider from "@/components/SmoothScrollProvider"
+import Footer from "./sections/Footer"
 
 const urbanist = Urbanist({
   variable: "--font-urbanist",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>
+        <Footer />
       </body>
     </html>
   )

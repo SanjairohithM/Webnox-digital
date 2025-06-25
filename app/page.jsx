@@ -12,7 +12,7 @@ import Progress from "./sections/Progress";
 import OurSolutions from "./sections/OurSolutions";
 import NextGen from "./sections/NextGen";
 import LetsConnect from "./sections/LetsConnect";
-import Footer from "./sections/Footer";
+// import Footer from "./sections/Footer"; 
 
 export default function Home() {
   return (
@@ -28,7 +28,7 @@ export default function Home() {
       <OurSolutions/>
       <NextGen/>
       <LetsConnect/>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }
