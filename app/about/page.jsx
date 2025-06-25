@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import Aboutsecond from "@/app/sections/Aboutsecond"
 import { Aboutthird } from "@/app/sections/Aboutthird"
+import AnimatedNavbar from "@/app/sections/Components/Header/AnimatedNavbar"
 gsap.registerPlugin(ScrollTrigger)
 
 function About() {
@@ -17,8 +18,6 @@ function About() {
     const statsRef = useRef(null)
     const robotRef = useRef(null)
     const redefiningSectionRef = useRef(null)
-    const heroLogoRef = useRef(null)
-    const letsTalkRef = useRef(null)
 
     useGSAP(
         () => {
@@ -31,21 +30,6 @@ function About() {
             ].filter(Boolean)
 
             gsap.set(elementsToAnimate, { opacity: 0, y: 50 })
-
-            // Animate hero logo and let's talk button on initial load
-            if (heroLogoRef.current) {
-                gsap.fromTo(heroLogoRef.current,
-                    { x: -100, opacity: 0 },
-                    { x: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power3.out" }
-                )
-            }
-
-            if (letsTalkRef.current) {
-                gsap.fromTo(letsTalkRef.current,
-                    { x: 100, opacity: 0 },
-                    { x: 0, opacity: 1, duration: 1, delay: 0.5, ease: "power3.out" }
-                )
-            }
 
             ScrollTrigger.create({
                 trigger: sectionRef.current,
@@ -105,73 +89,18 @@ function About() {
                     })
                 },
             })
-
-            // Scroll trigger for header elements visibility
-            ScrollTrigger.create({
-                trigger: "body",
-                start: "top -50",
-                end: "bottom bottom",
-                onUpdate: (self) => {
-                    const scrolled = self.scroll() > 50
-
-                    if (heroLogoRef.current) {
-                        gsap.to(heroLogoRef.current, {
-                            opacity: scrolled ? 0.8 : 1,
-                            scale: scrolled ? 0.9 : 1,
-                            y: scrolled ? -10 : 0,
-                            duration: 0.3,
-                            ease: "power2.out",
-                        })
-                    }
-
-                    if (letsTalkRef.current) {
-                        gsap.to(letsTalkRef.current, {
-                            opacity: scrolled ? 0.8 : 1,
-                            scale: scrolled ? 0.9 : 1,
-                            y: scrolled ? -10 : 0,
-                            duration: 0.3,
-                            ease: "power2.out",
-                        })
-                    }
-                },
-            })
         },
         { scope: sectionRef },
     )
 
     return (
         <>
-            {/* Hero Logo - Top Left */}
-            <div ref={heroLogoRef} className="fixed top-12 left-12 z-50 transition-all duration-300">
-                <div className="flex items-center">
-                    <Image
-                        src="/webnox-logo.png"
-                        alt="Webnox Digital Logo"
-                        width={160}
-                        height={160}
-                        className="object-cover drop-shadow-2xl"
-                    />
-                </div>
-            </div>
+            {/* Navbar Component */}
+            <AnimatedNavbar />
 
-            {/* Let's Talk Button - Top Right */}
-            <div ref={letsTalkRef} className="fixed top-12 right-12 z-30 transition-all duration-300">
-                <button
-                    className="bg-[#25C3E5] hover:bg-[#1fb8d9] text-white font-urbanist p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl"
-                    onClick={() => {
-                        const element = document.querySelector("#contact")
-                        if (element) {
-                            element.scrollIntoView({ behavior: "smooth" })
-                        }
-                    }}
-                >
-                    Let's Talk
-                </button>
-            </div>
-
-            <section
+            <main
                 ref={sectionRef}
-                className="relative w-full min-h-screen flex items-center pt-42 pb-20 px-4 sm:px-6 lg:px-20 bg-white overflow-hidden font-urbanist"
+                className="relative w-full min-h-screen flex items-center pt-42 pb-20 px-4 sm:px-6 lg:px-20 bg-gradient-to-br from-white to-gray-50 overflow-hidden font-urbanist"
             >
                 <div className=" mx-auto w-full">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
@@ -307,7 +236,7 @@ function About() {
                     </div>
                 </div>
 
-            </section>
+            </main>
             <Aboutsecond />
             <Aboutthird />
         </>

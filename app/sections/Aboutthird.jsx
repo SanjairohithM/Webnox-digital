@@ -142,7 +142,7 @@ export const Aboutthird = () => {
 
           {/* Main Title */}
           <div ref={titleRef} className="mb-8">
-            <h2 className="text-4xl lg:text-5xl font-urbanist font-bold text-gray-800 leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-urbanist  text-gray-600 leading-tight">
               <span className="text-[#25C3E5]">Boost Efficiency,</span> Maximize Profits with <br />
               Smart AI Solutions.
             </h2>
