@@ -24,8 +24,8 @@ const solutions = [
     image: "/images/Digital Marketing.png"
   },
   {
-    title: "ECOMMERCE STORE DEVELOPMENT",
-    description: "Launch fast. Sell smart. Grow big. We develop intuitive, conversion-optimized online stores tailored for your brand.",
+    title: "App Development",
+    description: "We design and develop mobile apps that are fast, user-friendly, and built to grow with your business. From intuitive UI/UX to powerful backend systems, our apps deliver seamless experiences across Android, iOS, and hybrid platforms.",
     image: "/images/ECommerce Store Development.png"
   },
   {
