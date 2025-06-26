@@ -46,48 +46,61 @@ export default function Hero() {
       });
 
       gsap.set(headingRef.current, {
-        opacity: 0,
-        y: 50
-      });
+      opacity: 0,
+      y: 50
+    });
 
-      gsap.set([buttonRef.current, textRef.current], {
-        opacity: 0,
-        y: 30,
-        scale: 0.95
-      });
+    gsap.set([buttonRef.current, textRef.current], {
+      opacity: 0,
+      y: 30,
+      scale: 0.95
+    });
+
+    // Safety fallback - ensure button becomes visible after 5 seconds regardless of animation state
+    setTimeout(() => {
+      if (buttonRef.current && textRef.current) {
+        gsap.to([buttonRef.current, textRef.current], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      }
+    }, 5000);
 
       gsap.set([shimmerRef.current, shadowRef.current], {
-        opacity: 0
-      });
+      opacity: 0
+    });
 
       gsap.set(shimmerRef.current, {
         x: '-100%'
-      });
-
+    });
+    
       gsap.set(shadowRef.current, {
-        scale: 0.8
-      });
+      scale: 0.8
+    });
 
       // Split paragraph text into words for smoother animation
-      const paragraph = paragraphRef.current;
-      const text = paragraph.innerHTML;
-      paragraph.innerHTML = '';
-      
-      const wrapper = document.createElement('div');
-      wrapper.style.opacity = '0';
-      wrapper.style.display = 'flex';
-      wrapper.style.flexWrap = 'wrap';
-      wrapper.style.gap = '0.25em';
-      wrapper.style.justifyContent = 'center';
-      paragraph.appendChild(wrapper);
-      
-      text.split(' ').forEach((word) => {
-        const span = document.createElement('span');
-        span.textContent = word;
-        span.style.opacity = '0';
-        span.style.transform = 'translateY(20px)';
-        wrapper.appendChild(span);
-      });
+    const paragraph = paragraphRef.current;
+    const text = paragraph.innerHTML;
+    paragraph.innerHTML = '';
+    
+    const wrapper = document.createElement('div');
+    wrapper.style.opacity = '0';
+    wrapper.style.display = 'flex';
+    wrapper.style.flexWrap = 'wrap';
+    wrapper.style.gap = '0.25em';
+    wrapper.style.justifyContent = 'center';
+    paragraph.appendChild(wrapper);
+    
+    text.split(' ').forEach((word) => {
+      const span = document.createElement('span');
+      span.textContent = word;
+      span.style.opacity = '0';
+      span.style.transform = 'translateY(20px)';
+      wrapper.appendChild(span);
+    });
 
       // Main entrance timeline - sequence as requested
       const mainTimeline = gsap.timeline({ delay: 0.5 });
@@ -112,85 +125,85 @@ export default function Hero() {
         
         // 2. Then the robot and background circle
         .to(backgroundCircleRef.current, {
-          opacity: 1,
-          scale: 1,
+      opacity: 1,
+      scale: 1,
           duration: 1.5,
-          ease: "power2.inOut"
+      ease: "power2.inOut"
         }, "+=0.8")
-        
+
         .to(robotRef.current, {
-          opacity: 1,
+      opacity: 1,
           scale: 1,
-          y: 0,
-          duration: 1.5,
-          ease: "power2.inOut"
+      y: 0,
+      duration: 1.5,
+      ease: "power2.inOut"
         }, "-=1.2")
-        
+
         // 3. Then the text below
         .to(headingRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power1.out"
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      ease: "power1.out"
         }, "+=0.2")
-        
+
         .to(wrapper, {
-          opacity: 1,
-          duration: 0.1
+      opacity: 1,
+      duration: 0.1
         }, "+=0.1")
         
         .to(wrapper.children, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: {
-            each: 0.05,
-            ease: "power1.out"
-          },
-          ease: "power2.out"
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: {
+        each: 0.05,
+        ease: "power1.out"
+      },
+      ease: "power2.out"
         })
-        
-        // Button animation
+
+        // Button animation - simplified and more reliable
+        .to([buttonRef.current, textRef.current], {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 1.0,
+      ease: "power2.out"
+        }, "+=0.3")
+
         .to(shadowRef.current, {
-          scale: 1,
-          opacity: 0.3,
-          duration: 0.8,
-          ease: "power2.out"
-        }, "+=0.2")
-        
-        .to(buttonRef.current, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.2,
-          ease: "back.out(1.7)"
-        }, "-=0.4")
-        
-        .to(textRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out"
-        }, "-=0.6")
-        
+      scale: 1,
+      opacity: 0.3,
+      duration: 0.6,
+      ease: "power2.out"
+        }, "-=0.3")
+
         .to(shimmerRef.current, {
-          opacity: 1,
-          duration: 0.1
-        }, "-=0.2")
+      opacity: 1,
+      duration: 0.1
+    }, "-=0.2")
         
-        .to(shimmerRef.current, {
-          x: '100%',
-          duration: 1.5,
-          ease: "power2.inOut"
-        })
+    .to(shimmerRef.current, {
+      x: '100%',
+      duration: 1.5,
+      ease: "power2.inOut"
+    })
         
-        .to(shimmerRef.current, {
-          opacity: 0,
-          duration: 0.3
-        }, "-=0.3");
+    .to(shimmerRef.current, {
+      opacity: 0,
+      duration: 0.3
+    }, "-=0.3");
 
       // Continuous animations after entrance
       mainTimeline.add(() => {
+        // Safety check - ensure button is visible
+        gsap.set([buttonRef.current, textRef.current], {
+          opacity: 1,
+          scale: 1,
+          y: 0
+        });
+
         // Continuous subtle pulse animation for button
         gsap.to(buttonRef.current, {
           scale: 1.02,
@@ -219,135 +232,135 @@ export default function Hero() {
         scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress;
-          const scale = 1 - (progress * 0.3); // Scale down to 70% at full scroll
-          const opacity = 1 - (progress * 0.7); // Fade out to 30% opacity
+          const scale = 1 - (progress * 0.2); // Scale down to 80% at full scroll
+          const opacity = 1 - (progress * 0.5); // Fade out to 50% opacity
           
           gsap.set(heroSectionRef.current, {
-            scale: Math.max(scale, 0.7),
-            opacity: Math.max(opacity, 0.3),
-            y: progress * -100
+            scale: Math.max(scale, 0.8),
+            opacity: Math.max(opacity, 0.5),
+            y: progress * -50
           });
         }
+    });
+
+    // Button hover animations
+    const handleMouseEnter = () => {
+      gsap.killTweensOf([buttonRef.current, textRef.current, shadowRef.current]);
+      
+      const hoverTL = gsap.timeline();
+      
+      hoverTL.to(buttonRef.current, {
+        scale: 1.05,
+        y: -2,
+        duration: 0.3,
+        ease: "power2.out"
+      })
+      .to(shadowRef.current, {
+        scale: 1.1,
+        opacity: 0.4,
+        y: 4,
+        duration: 0.3,
+        ease: "power2.out"
+      }, 0)
+      .to(textRef.current, {
+        letterSpacing: "0.02em",
+        duration: 0.3,
+        ease: "power2.out"
+      }, 0);
+
+      gsap.set(shimmerRef.current, { x: '-100%', opacity: 1 });
+      gsap.to(shimmerRef.current, {
+        x: '100%',
+        duration: 0.8,
+        ease: "power2.inOut"
+      });
+      gsap.to(shimmerRef.current, {
+        opacity: 0,
+        duration: 0.2,
+        delay: 0.6
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.killTweensOf([buttonRef.current, textRef.current, shadowRef.current]);
+      
+      const leaveTL = gsap.timeline();
+      
+      leaveTL.to(buttonRef.current, {
+        scale: 1,
+        y: 0,
+        duration: 0.4,
+        ease: "power2.out"
+      })
+      .to(shadowRef.current, {
+        scale: 1,
+        opacity: 0.3,
+        y: 0,
+        duration: 0.4,
+        ease: "power2.out"
+      }, 0)
+      .to(textRef.current, {
+        letterSpacing: "0em",
+        duration: 0.4,
+        ease: "power2.out"
+      }, 0);
+
+      gsap.to(buttonRef.current, {
+        scale: 1.02,
+        duration: 2,
+        ease: "power1.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: 0.5
+      });
+    };
+
+    const handleClick = () => {
+      gsap.killTweensOf([buttonRef.current, textRef.current]);
+      
+      const clickTL = gsap.timeline();
+      
+      clickTL.to(buttonRef.current, {
+        scale: 0.95,
+        duration: 0.1,
+        ease: "power2.out"
+      })
+      .to(buttonRef.current, {
+        scale: 1.03,
+        duration: 0.2,
+        ease: "back.out(1.7)"
+      })
+      .to(buttonRef.current, {
+        scale: 1,
+        duration: 0.2,
+        ease: "power2.out"
       });
 
-      // Button hover animations
-      const handleMouseEnter = () => {
-        gsap.killTweensOf([buttonRef.current, textRef.current, shadowRef.current]);
-        
-        const hoverTL = gsap.timeline();
-        
-        hoverTL.to(buttonRef.current, {
-          scale: 1.05,
-          y: -2,
-          duration: 0.3,
-          ease: "power2.out"
-        })
-        .to(shadowRef.current, {
-          scale: 1.1,
-          opacity: 0.4,
-          y: 4,
-          duration: 0.3,
-          ease: "power2.out"
-        }, 0)
-        .to(textRef.current, {
-          letterSpacing: "0.02em",
-          duration: 0.3,
-          ease: "power2.out"
-        }, 0);
+      gsap.set(shimmerRef.current, { x: '-100%', opacity: 1 });
+      gsap.to(shimmerRef.current, {
+        x: '100%',
+        duration: 0.6,
+        ease: "power2.inOut",
+        delay: 0.1
+      });
+      gsap.to(shimmerRef.current, {
+        opacity: 0,
+        duration: 0.2,
+        delay: 0.5
+      });
+    };
 
-        gsap.set(shimmerRef.current, { x: '-100%', opacity: 1 });
-        gsap.to(shimmerRef.current, {
-          x: '100%',
-          duration: 0.8,
-          ease: "power2.inOut"
-        });
-        gsap.to(shimmerRef.current, {
-          opacity: 0,
-          duration: 0.2,
-          delay: 0.6
-        });
-      };
-
-      const handleMouseLeave = () => {
-        gsap.killTweensOf([buttonRef.current, textRef.current, shadowRef.current]);
-        
-        const leaveTL = gsap.timeline();
-        
-        leaveTL.to(buttonRef.current, {
-          scale: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power2.out"
-        })
-        .to(shadowRef.current, {
-          scale: 1,
-          opacity: 0.3,
-          y: 0,
-          duration: 0.4,
-          ease: "power2.out"
-        }, 0)
-        .to(textRef.current, {
-          letterSpacing: "0em",
-          duration: 0.4,
-          ease: "power2.out"
-        }, 0);
-
-        gsap.to(buttonRef.current, {
-          scale: 1.02,
-          duration: 2,
-          ease: "power1.inOut",
-          yoyo: true,
-          repeat: -1,
-          delay: 0.5
-        });
-      };
-
-      const handleClick = () => {
-        gsap.killTweensOf([buttonRef.current, textRef.current]);
-        
-        const clickTL = gsap.timeline();
-        
-        clickTL.to(buttonRef.current, {
-          scale: 0.95,
-          duration: 0.1,
-          ease: "power2.out"
-        })
-        .to(buttonRef.current, {
-          scale: 1.03,
-          duration: 0.2,
-          ease: "back.out(1.7)"
-        })
-        .to(buttonRef.current, {
-          scale: 1,
-          duration: 0.2,
-          ease: "power2.out"
-        });
-
-        gsap.set(shimmerRef.current, { x: '-100%', opacity: 1 });
-        gsap.to(shimmerRef.current, {
-          x: '100%',
-          duration: 0.6,
-          ease: "power2.inOut",
-          delay: 0.1
-        });
-        gsap.to(shimmerRef.current, {
-          opacity: 0,
-          duration: 0.2,
-          delay: 0.5
-        });
-      };
-
-      // Add button event listeners
-      const button = buttonRef.current;
-      button.addEventListener('mouseenter', handleMouseEnter);
-      button.addEventListener('mouseleave', handleMouseLeave);
-      button.addEventListener('click', handleClick);
+    // Add button event listeners
+    const button = buttonRef.current;
+    button.addEventListener('mouseenter', handleMouseEnter);
+    button.addEventListener('mouseleave', handleMouseLeave);
+    button.addEventListener('click', handleClick);
 
       // Store cleanup function in ref for later use
       const cleanup = () => {
-        button.removeEventListener('mouseenter', handleMouseEnter);
-        button.removeEventListener('mouseleave', handleMouseLeave);
-        button.removeEventListener('click', handleClick);
+      button.removeEventListener('mouseenter', handleMouseEnter);
+      button.removeEventListener('mouseleave', handleMouseLeave);
+      button.removeEventListener('click', handleClick);
         ScrollTrigger.getAll().forEach(st => st.kill());
         gsap.killTweensOf("*");
       };
@@ -379,7 +392,7 @@ export default function Hero() {
               floatingRange={[0, 0.15]}
             >
               <group ref={sphere1Ref}>
-                <Sphere position={[-1.9,.5,0]} />
+              <Sphere position={[-1.9,.5,0]} />
               </group>
             </Float>
 
@@ -390,7 +403,7 @@ export default function Hero() {
               floatingRange={[0, 0.15]}
             >
               <group ref={sphere2Ref}>
-                <Sphere position={[1.9,-.5,0]} />
+              <Sphere position={[1.9,-.5,0]} />
               </group>
             </Float>
         </View>

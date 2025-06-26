@@ -14,6 +14,7 @@ import NextGen from "./sections/NextGen";
 import LetsConnect from "./sections/LetsConnect";
 // import Footer from "./sections/Footer"; 
 
+  
 export default function Home() {
   return (
     <div className="w-full relative overflow-x-hidden">
@@ -23,6 +24,7 @@ export default function Home() {
       {/* <CarIdelScene /> */}
       {/* <Ground /> */}
       {/* </CanvasWrapper> */}
+      
       <Hero />
       <Mission/>
       <OurSolutions/>

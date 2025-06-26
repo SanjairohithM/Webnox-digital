@@ -60,44 +60,57 @@ export default function Component() {
       top: "auto",
     })
 
-    // Stage 1: First show the robot/canvas
+    // Stage 1: First show the robot/canvas - coming from right
     timeline.from(contentRefs.canvas.current, {
       opacity: 0,
+      x: 100,
       y: 50,
-      duration: 0.4,
+      duration: 0.6,
       ease: "power3.out",
     })
 
-    // Stage 2: Then show the text and cards
+    // Stage 2: Then show the first part of text
     timeline.from(
-      contentRefs.headlines.current.children,
+      contentRefs.headlines.current.children[0],
       {
         opacity: 0,
         y: 50,
-        duration: 0.3,
+        duration: 0.5,
         ease: "power3.out",
       },
       "-=0.1",
     )
+    
+    // Stage 3: Then show the second part of text from left with fade
+    timeline.from(
+      contentRefs.headlines.current.children[1],
+      {
+        opacity: 0,
+        x: -100,
+        duration: 0.8,
+        ease: "power2.out",
+      },
+      "+=0.3",
+    )
 
+    // Stage 4: Then show the strategy and mission cards
     timeline.from(
       [contentRefs.strategy.current, contentRefs.mission.current],
       {
         opacity: 0,
         y: 50,
-        duration: 0.5,
+        duration: 0.6,
         ease: "power2.out",
       },
-      "-=0.2",
+      "+=0.2",
     )
 
-    // Stage 1: Fade out everything except mini robot container
+    // Stage 5: Fade out everything except mini robot container
     const smarterText = contentRefs.headlines.current.querySelector(".smarter-text")
+    const firstHeadline = contentRefs.headlines.current.children[0]
     timeline.to(
       [
-        ...Array.from(contentRefs.headlines.current.children).filter(
-          (child) => !child.contains(miniRobotContainerRef.current),
-        ),
+        firstHeadline,
         contentRefs.strategy.current,
         contentRefs.mission.current,
         contentRefs.canvas.current,
@@ -106,11 +119,11 @@ export default function Component() {
       {
         opacity: 0,
         y: -50,
-        duration: 0.3,
+        duration: 0.4,
         ease: "power3.in",
         onComplete: () => {
           gsap.set(
-            [contentRefs.strategy.current, contentRefs.mission.current, contentRefs.canvas.current, smarterText],
+            [contentRefs.strategy.current, contentRefs.mission.current, contentRefs.canvas.current, smarterText, firstHeadline],
             { visibility: "hidden" },
           )
         },
@@ -128,7 +141,7 @@ export default function Component() {
         })
       },
       onReverseComplete: () => {
-        gsap.set([contentRefs.strategy.current, contentRefs.mission.current, contentRefs.canvas.current, smarterText], {
+        gsap.set([contentRefs.strategy.current, contentRefs.mission.current, contentRefs.canvas.current, smarterText, firstHeadline], {
           visibility: "visible",
           opacity: 1,
           y: 0,

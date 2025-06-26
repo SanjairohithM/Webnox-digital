@@ -44,7 +44,7 @@ export default function Component() {
 
       // Third card - from right
       gsap.set([image3Ref.current, imageText3Ref.current], {
-        opacity: 0,
+          opacity: 0,
         x: 100,
       })
 
