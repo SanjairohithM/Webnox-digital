@@ -10,6 +10,49 @@ import { Canvas } from "@react-three/fiber"
 
 gsap.registerPlugin(ScrollTrigger)
 
+const solutions = [
+  {
+    title: "BRANDING",
+    description: "Build a brand that speaks before you do. We craft visual identities that are bold, memorable, and strategically aligned with your business goals.",
+    image: "/images/BRANDING.png"
+  },
+  {
+    title: "SOFTWARE DEVELOPMENT",
+    description: "From MVPs to enterprise systems — we engineer scalable, high-performance software that drives innovation and business growth.",
+    image: "/images/Software Development.png"
+  },
+  {
+    title: "DIGITAL MARKETING",
+    description: "Reach, engage, and convert. Our data-driven marketing campaigns put your brand in front of the right audience at the right time.",
+    image: "/images/Digital Marketing.png"
+  },
+  {
+    title: "App Development",
+    description: "We design and develop mobile apps that are fast, user-friendly, and built to grow with your business. From intuitive UI/UX to powerful backend systems, our apps deliver seamless experiences across Android, iOS, and hybrid platforms.",
+    image: "/images/ECommerce Store Development.png"
+  },
+  {
+    title: "WEB DEVELOPMENT",
+    description: "Pixel-perfect, performance-first websites built using the latest tech — designed to impress and built to scale.",
+    image: "/images/Web Development.png"
+  },
+  {
+    title: "DATA & ANALYSIS",
+    description: "Make every decision count. We help you turn raw data into real-time insights that drive smarter strategies and better outcomes.",
+    image: "/images/DATA & ANALYSIS.png"
+  },
+  {
+    title: "UI UX DESIGN",
+    description: "Designs that delight. Experiences that retain. We create intuitive, engaging interfaces that users love.",
+    image: "/images/ui ux design.png"
+  },
+  {
+    title: "IT SUPPORT",
+    description: "Stay online, always. Our proactive support keeps your systems running smoothly and securely, 24/7.",
+    image: "/images/IT SUPPORT.png"
+  }
+];
+
 export default function Component() {
   const robotRef = useRef(null)
   const mainRef = useRef(null)
@@ -220,9 +263,33 @@ export default function Component() {
       </div>
     `
 
+    // Add the solutions grid container
+    const solutionsGridContainer = document.createElement("div")
+    solutionsGridContainer.className = "solutions-grid-container absolute w-full h-full"
+    solutionsGridContainer.innerHTML = `
+      <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-24 pb-8 px-8 overflow-y-auto">
+        <div class="w-full">
+          <div class="grid grid-cols-3 gap-x-10 gap-y-24  w-[95vw] ">
+            ${solutions.map((solution, index) => `
+              <div class="solution-card flex items-start gap-8 group opacity-0" data-index="${index}">
+                <div class="w-[140px] h-[140px] relative flex-shrink-0 transition-all duration-300">
+                  <img src="${solution.image}" alt="${solution.title}" class="w-full h-full object-contain" />
+                </div>
+                <div class="flex-1 pt-6">
+                  <h3 class="text-xl font-semibold text-gray-800 mb-3 leading-tight">${solution.title}</h3>
+                  <p class="text-gray-600 text-[15px] leading-relaxed">${solution.description}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `
+
     // Insert the containers
     miniRobotContainerRef.current.appendChild(finalTextContainer)
     miniRobotContainerRef.current.appendChild(solutionsContainer)
+    miniRobotContainerRef.current.appendChild(solutionsGridContainer)
 
     // Set initial states
     gsap.set(finalTextContainer, {
@@ -244,6 +311,21 @@ export default function Component() {
       yPercent: -50,
       zIndex: 60,
       width: "100%",
+    })
+
+    gsap.set(solutionsGridContainer, {
+      opacity: 0,
+      position: "absolute",
+      top: "0%",
+      left: "0%",
+      width: "100%",
+      height: "100%",
+      zIndex: 50,
+    })
+
+    gsap.set(".solution-card", {
+      opacity: 0,
+      y: 50,
     })
 
     // Move robot up and fade in text
@@ -325,11 +407,62 @@ export default function Component() {
     // Add a pause duration
     solutionsStage.to({}, { duration: 1 }) // This creates a pause
 
+    // Add new stage: Shrink and move "OUR SOLUTIONS" text to top as title
+    const shrinkTextStage = gsap.timeline()
+    
+    shrinkTextStage.to(".solutions-text-container", {
+      scale: 0.4,
+      top: "5%",
+      left: "45%",
+      xPercent: -50,
+      duration: 0.8,
+      ease: "power2.inOut",
+    })
+    
+    // Animate the gap between words to become smaller
+    shrinkTextStage.to(".solutions-text-container > div", {
+      gap: "1vw",
+      marginLeft: "0vw",
+      duration: 0.8,
+      ease: "power2.inOut",
+    }, "<")
+
+    // Fade in solutions grid background
+    shrinkTextStage.to(solutionsGridContainer, {
+      opacity: 1,
+      duration: 0.6,
+      ease: "power2.out",
+    }, "-=0.4")
+
+    // Fade out robot
+    shrinkTextStage.to(miniRobotRef.current, {
+      opacity: 0,
+      scale: 0.8,
+      duration: 0.6,
+      ease: "power2.out",
+    }, "<")
+
+    // Animate solution cards in with stagger
+    shrinkTextStage.to(".solution-card", {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      stagger: {
+        each: 0.15,
+        grid: [3, 3],
+        from: "start"
+      },
+      ease: "power3.out",
+    }, "-=0.2")
+
+    // Add another pause to show the final state
+    shrinkTextStage.to({}, { duration: 2 })
+
     // Create final fade out stage
     const fadeOutStage = gsap.timeline()
 
     // Fade out everything together
-    fadeOutStage.to([".solutions-text-container", miniRobotRef.current], {
+    fadeOutStage.to([".solutions-text-container", solutionsGridContainer], {
       opacity: 0,
       y: -50,
       duration: 0.8,
@@ -338,6 +471,7 @@ export default function Component() {
 
     // Add stages to main timeline
     timeline.add(solutionsStage)
+    timeline.add(shrinkTextStage)
     timeline.add(fadeOutStage)
 
     return () => {
@@ -348,6 +482,9 @@ export default function Component() {
       }
       if (solutionsContainer && solutionsContainer.parentNode) {
         solutionsContainer.parentNode.removeChild(solutionsContainer)
+      }
+      if (solutionsGridContainer && solutionsGridContainer.parentNode) {
+        solutionsGridContainer.parentNode.removeChild(solutionsGridContainer)
       }
     }
   }, [])

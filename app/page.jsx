@@ -27,7 +27,7 @@ export default function Home() {
       
       <Hero />
       <Mission/>
-      <OurSolutions/>
+      {/* <OurSolutions/> */}
       <NextGen/>
       <LetsConnect/>
       {/* <Footer/> */}
