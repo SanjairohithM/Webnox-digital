@@ -3,6 +3,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import { CircleX, CircleCheck } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -370,7 +371,7 @@ function NextGen() {
         ease: "power2.out"
       })
       
-      // Step 7: Success text 1 appears, IMAGES FULLY VISIBLE in grids
+      // Step 7: Success text 1 appears, IMAGES START PYRAMID FORMATION - Top step only
       .to(warningRefs.current[0], {
         opacity: 0,
         x: -50,
@@ -385,11 +386,36 @@ function NextGen() {
       }, "<0.2")
       .to(waitImagesRef.current, {
         opacity: 1,
-        duration: 0.8,
+        left: (i) => {
+          // STEP 1: Only top step (1 image each side), others stay in original grids
+          if (i === 0) return "16%"; // Left top center
+          if (i === 6) return "84%"; // Right top center
+          
+          // Keep other images in their grid positions but visible
+          if (i < 6) {
+            return ["5%", "15%", "25%", "10%", "20%", "30%"][i]; // LEFT GRID
+          } else {
+            return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
+          }
+        },
+        top: (i) => {
+          if (i === 0 || i === 6) return "30%"; // Top step level
+          
+          // Keep others in their original positions
+          const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+          const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+          
+          if (i < 6) {
+            return leftPositions[i];
+          } else {
+            return rightPositions[i - 6];
+          }
+        },
+        duration: 1.0,
         ease: "power2.out"
       }, "<")
       
-      // Step 8: Success text 2 appears, START PYRAMID FORMATION (Top step - 1 image each side)
+      // Step 8: Success text 2 appears, ADD MIDDLE STEP (2 images each side)
       .to(warningRefs.current[1], {
         opacity: 0,
         x: -50,
@@ -404,22 +430,42 @@ function NextGen() {
       }, "<0.2")
       .to(waitImagesRef.current, {
         left: (i) => {
-          // TOP STEP: 1 image each side (without spacing)
-          if (i === 0) return "16%"; // Left top center
-          if (i === 6) return "84%"; // Right top center
+          // STEP 2: Top step + Middle step
+          if (i === 0) return "16%"; // Left top
+          if (i === 6) return "84%"; // Right top
           
-          // Hide other images temporarily
-          return "200%";
+          // MIDDLE STEP: Add 2 images each side
+          if (i === 1) return "12%"; // Left middle left
+          if (i === 2) return "20%"; // Left middle right
+          if (i === 7) return "80%"; // Right middle left  
+          if (i === 8) return "88%"; // Right middle right
+          
+          // Keep remaining images in grid positions
+          if (i < 6) {
+            return ["5%", "15%", "25%", "10%", "20%", "30%"][i]; // LEFT GRID
+          } else {
+            return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
+          }
         },
         top: (i) => {
-          if (i === 0 || i === 6) return "30%"; // Top step level
-          return "200%"; // Hide others
+          if (i === 0 || i === 6) return "30%"; // Top step
+          if (i === 1 || i === 2 || i === 7 || i === 8) return "45%"; // Middle step
+          
+          // Keep others in original positions
+          const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+          const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+          
+          if (i < 6) {
+            return leftPositions[i];
+          } else {
+            return rightPositions[i - 6];
+          }
         },
         duration: 1.0,
         ease: "power2.out"
       }, "<")
       
-      // Step 9: Success text 3 appears, MIDDLE STEP (2 images each side, no spacing)
+      // Step 9: Success text 3 appears, ALMOST COMPLETE PYRAMID (add more to bottom)
       .to(warningRefs.current[2], {
         opacity: 0,
         x: -50,
@@ -434,28 +480,49 @@ function NextGen() {
       }, "<0.2")
       .to(waitImagesRef.current, {
         left: (i) => {
-          // TOP STEP: 1 image each side
+          // STEP 3: Top + Middle + Partial Bottom
           if (i === 0) return "16%"; // Left top
           if (i === 6) return "84%"; // Right top
           
-          // MIDDLE STEP: 2 images each side (no spacing)
+          // MIDDLE STEP
           if (i === 1) return "12%"; // Left middle left
           if (i === 2) return "20%"; // Left middle right
           if (i === 7) return "80%"; // Right middle left  
           if (i === 8) return "88%"; // Right middle right
           
-          return "200%"; // Hide others
+          // BOTTOM STEP: Add 2 more images each side
+          if (i === 3) return "8%";  // Left bottom left
+          if (i === 4) return "16%"; // Left bottom center
+          if (i === 9) return "84%"; // Right bottom left
+          if (i === 10) return "92%"; // Right bottom right
+          
+          // Keep remaining in grid
+          if (i < 6) {
+            return ["5%", "15%", "25%", "10%", "20%", "30%"][i]; // LEFT GRID
+          } else {
+            return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
+          }
         },
         top: (i) => {
           if (i === 0 || i === 6) return "30%"; // Top step
           if (i === 1 || i === 2 || i === 7 || i === 8) return "45%"; // Middle step
-          return "200%"; // Hide others
+          if (i === 3 || i === 4 || i === 9 || i === 10) return "60%"; // Bottom step
+          
+          // Keep others in original positions
+          const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+          const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+          
+          if (i < 6) {
+            return leftPositions[i];
+          } else {
+            return rightPositions[i - 6];
+          }
         },
         duration: 1.0,
         ease: "power2.out"
       }, "<")
       
-      // Step 10: Success text 4 appears, BOTTOM STEP (3 images each side, no spacing) - COMPLETE PYRAMID
+      // Step 10: Success text 4 appears, COMPLETE PYRAMID (all images in formation)
       .to(warningRefs.current[3], {
         opacity: 0,
         x: -50,
@@ -470,7 +537,7 @@ function NextGen() {
       }, "<0.2")
       .to(waitImagesRef.current, {
         left: (i) => {
-          // COMPLETE PYRAMID FORMATION (no spacing)
+          // FINAL STEP: COMPLETE PYRAMID FORMATION (original perfect positions)
           
           // LEFT SIDE PYRAMID
           if (i === 0) return "19%"; // Top (1 image)
@@ -488,14 +555,14 @@ function NextGen() {
           if (i === 10) return "83%"; // Bottom center
           if (i === 11) return "91%"; // Bottom right
           
-          return "200%"; // Hide extras
+          return "50%"; // Fallback center
         },
         top: (i) => {
-          // PYRAMID HEIGHTS (3 levels)
+          // PYRAMID HEIGHTS (3 levels) - original perfect positions
           if (i === 0 || i === 6) return "30%"; // Top step
           if (i === 1 || i === 2 || i === 7 || i === 8) return "45%"; // Middle step
           if (i === 3 || i === 4 || i === 5 || i === 9 || i === 10 || i === 11) return "60%"; // Bottom step
-          return "200%"; // Hide extras
+          return "50%"; // Fallback center
         },
         duration: 1.2,
         ease: "power2.out"
@@ -570,40 +637,40 @@ function NextGen() {
           
           {/* Warning texts */}
           <div className="space-y-6 max-w-xl mx-auto px-8">
-            <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0 bg-white/20 backdrop-blur-sm rounded-lg py-3 px-4">
-              <span className="text-red-500 text-2xl mr-4">✗</span>
+            <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
+              <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">Revenue stays stagnant</span>
             </div>
-            <div ref={el => warningRefs.current[1] = el} className="flex items-center justify-start opacity-0 bg-white/20 backdrop-blur-sm rounded-lg py-3 px-4">
-              <span className="text-red-500 text-2xl mr-4">✗</span>
+            <div ref={el => warningRefs.current[1] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
+              <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">Competitors overtake your space</span>
             </div>
-            <div ref={el => warningRefs.current[2] = el} className="flex items-center justify-start opacity-0 bg-white/20 backdrop-blur-sm rounded-lg py-3 px-4">
-              <span className="text-red-500 text-2xl mr-4">✗</span>
+            <div ref={el => warningRefs.current[2] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
+              <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">AI replaces inefficiency</span>
             </div>
-            <div ref={el => warningRefs.current[3] = el} className="flex items-center justify-start opacity-0 bg-white/20 backdrop-blur-sm rounded-lg py-3 px-4">
-              <span className="text-red-500 text-2xl mr-4">✗</span>
+            <div ref={el => warningRefs.current[3] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
+              <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">Your brand fades into obscurity</span>
             </div>
           </div>
 
           {/* Success texts (hidden initially, same position as warnings) */}
           <div className="space-y-6 max-w-xl mx-auto px-8 absolute inset-0 top-16">
-            <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0 bg-white/20 backdrop-blur-sm rounded-lg py-3 px-4">
-              <span className="text-green-500 text-2xl mr-4">✓</span>
+            <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
+              <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">Smart AI Integration</span>
             </div>
-            <div ref={el => successRefs.current[1] = el} className="flex items-center justify-start opacity-0 bg-white/20 backdrop-blur-sm rounded-lg py-3 px-4">
-              <span className="text-green-500 text-2xl mr-4">✓</span>
+            <div ref={el => successRefs.current[1] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
+              <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">Marketing Automation</span>
             </div>
-            <div ref={el => successRefs.current[2] = el} className="flex items-center justify-start opacity-0 bg-white/20 backdrop-blur-sm rounded-lg py-3 px-4">
-              <span className="text-green-500 text-2xl mr-4">✓</span>
+            <div ref={el => successRefs.current[2] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
+              <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">Websites that Sell</span>
             </div>
-            <div ref={el => successRefs.current[3] = el} className="flex items-center justify-start opacity-0 bg-white/20 backdrop-blur-sm rounded-lg py-3 px-4">
-              <span className="text-green-500 text-2xl mr-4">✓</span>
+            <div ref={el => successRefs.current[3] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
+              <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">Higher Profit Margins</span>
             </div>
           </div>
