@@ -603,7 +603,7 @@ function NextGen() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="w-full min-h-screen bg-gradient-to-tr from-[#e8e0ff] via-[#e0f8ff] to-white">
+    <div ref={sectionRef} className="w-full min-h-screen bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff]">
       <div className="max-w-[1600px] mx-auto px-8 relative min-h-screen flex items-center justify-center">
         {/* Initial Heading */}
         <h1 

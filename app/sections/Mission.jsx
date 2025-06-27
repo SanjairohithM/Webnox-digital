@@ -463,10 +463,11 @@ export default function Component() {
 
     // Fade out everything together
     fadeOutStage.to([".solutions-text-container", solutionsGridContainer], {
-      opacity: 0,
+      opacity: 0.5,
       y: -50,
-      duration: 0.8,
+      duration: 10,
       ease: "power2.in",
+      
     })
 
     // Add stages to main timeline
