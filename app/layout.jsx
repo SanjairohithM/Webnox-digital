@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   )
