@@ -19,6 +19,7 @@ export default function WebnoxLogoLoader({ onComplete }) {
 
     return () => clearTimeout(timer);
   }, [onComplete]);
+  
 
   return (
     <div 
@@ -29,6 +30,7 @@ export default function WebnoxLogoLoader({ onComplete }) {
         background: 'linear-gradient(135deg, #e8e0ff 0%, #e0f8ff 50%, #ffffff 100%)',
         pointerEvents: isVisible ? 'auto' : 'none'
       }}
+      
     >
       {/* 3D Canvas with WebnoxLogo */}
       <Canvas

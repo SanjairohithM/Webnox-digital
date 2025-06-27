@@ -229,7 +229,7 @@ const AnimatedNavbar = ({
               backgroundColor: "rgba(255, 255, 255, 0.95)",
               backdropFilter: "blur(25px)",
               padding: "1.5rem 3rem",
-              left: "calc(50% - 50px)",
+              left: "50%",
               transform: "translateX(-50%)",
               duration: 0.6,
               ease: "power3.out",

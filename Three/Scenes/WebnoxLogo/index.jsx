@@ -46,9 +46,9 @@ const WebnoxLogoScene = () => {
         ease: "power2.inOut"
       })
       
-      // Go inside the "b" and stop there
+      // Enter the "b" and stop at the entrance
       .to(camera.position, {
-        z: -0.5, // Go inside the model and stop
+        z: 0.2, // Just enter the model - stop at entrance
         duration: 2,
         ease: "power2.inOut"
       });

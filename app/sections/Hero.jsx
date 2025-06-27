@@ -69,7 +69,12 @@ export default function Hero() {
       }
     }, 5000);
 
-      gsap.set([shimmerRef.current, shadowRef.current], {
+      gsap.set(paragraphRef.current, {
+      opacity: 0,
+      y: 30
+    });
+
+    gsap.set([shimmerRef.current, shadowRef.current], {
       opacity: 0
     });
 
@@ -79,27 +84,6 @@ export default function Hero() {
     
       gsap.set(shadowRef.current, {
       scale: 0.8
-    });
-
-      // Split paragraph text into words for smoother animation
-    const paragraph = paragraphRef.current;
-    const text = paragraph.innerHTML;
-    paragraph.innerHTML = '';
-    
-    const wrapper = document.createElement('div');
-    wrapper.style.opacity = '0';
-    wrapper.style.display = 'flex';
-    wrapper.style.flexWrap = 'wrap';
-    wrapper.style.gap = '0.25em';
-    wrapper.style.justifyContent = 'center';
-    paragraph.appendChild(wrapper);
-    
-    text.split(' ').forEach((word) => {
-      const span = document.createElement('span');
-      span.textContent = word;
-      span.style.opacity = '0';
-      span.style.transform = 'translateY(20px)';
-      wrapper.appendChild(span);
     });
 
       // Main entrance timeline - sequence as requested
@@ -147,21 +131,12 @@ export default function Hero() {
       ease: "power1.out"
         }, "+=0.2")
 
-        .to(wrapper, {
-      opacity: 1,
-      duration: 0.1
-        }, "+=0.1")
-        
-        .to(wrapper.children, {
+        .to(paragraphRef.current, {
       opacity: 1,
       y: 0,
-      duration: 0.8,
-      stagger: {
-        each: 0.05,
-        ease: "power1.out"
-      },
+      duration: 1.0,
       ease: "power2.out"
-        })
+        }, "+=0.2")
 
         // Button animation - simplified and more reliable
         .to([buttonRef.current, textRef.current], {
@@ -224,8 +199,9 @@ export default function Hero() {
         });
       });
 
-      // Scroll-triggered zoom out effect
+      // Scroll-triggered zoom out effect for hero section
       ScrollTrigger.create({
+        id: "hero-scroll-trigger",
         trigger: mainContainerRef.current,
         start: "top top",
         end: "bottom top",
@@ -361,8 +337,9 @@ export default function Hero() {
       button.removeEventListener('mouseenter', handleMouseEnter);
       button.removeEventListener('mouseleave', handleMouseLeave);
       button.removeEventListener('click', handleClick);
-        ScrollTrigger.getAll().forEach(st => st.kill());
-        gsap.killTweensOf("*");
+        // Only kill hero-specific ScrollTrigger
+        ScrollTrigger.getById("hero-scroll-trigger")?.kill();
+        gsap.killTweensOf([heroSectionRef.current, buttonRef.current, textRef.current, robotRef.current]);
       };
 
       // Return cleanup function
@@ -408,8 +385,8 @@ export default function Hero() {
             </Float>
         </View>
 
-      {/* Hero Section - Higher z-index to ensure text is visible */}
-      <section ref={heroSectionRef} className="container mx-auto px-4 pt-32 pb-24 text-center relative z-20">
+      {/* Hero Section - Lower z-index to avoid navbar conflicts */}
+      <section ref={heroSectionRef} className="container mx-auto px-4 pt-32 pb-24 text-center relative z-10">
         <div className="max-w-3xl mx-auto mb-8 relative flex justify-center items-center z-10">
           <div 
             ref={backgroundCircleRef}
@@ -423,7 +400,7 @@ export default function Hero() {
 
         <h1 
           ref={headingRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 max-w-5xl mx-auto text-gray-800 relative z-30"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 max-w-5xl mx-auto text-gray-800 relative z-5"
         >
         We Build. We Scale. We Transform. -<span className="text-[#2acbec]"> Lead the Future
         </span>
@@ -431,11 +408,11 @@ export default function Hero() {
 
         <p 
           ref={paragraphRef}
-          className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10 relative z-30"
+          className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10 relative z-5 font-urbanist"
         >
         Webnox Digital is a leading software development company specializing in AI-powered solutions and business automation, and end-to-end digital transformation. We help organisations to streamline operations, improve efficiency, and scale faster through intelligent 
         </p>
-        <div className="relative inline-block z-30">
+        <div className="relative inline-block z-5">
           {/* Shadow element */}
           <div 
             ref={shadowRef}
