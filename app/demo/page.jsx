@@ -6,7 +6,7 @@ import WebnoxLogoScene from "@/Three/Scenes/WebnoxLogo";
 
 export default function Demo() {
   return (
-    <div className="w-full h-screen bg-white">
+    <div className="w-full h-screen bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white">
       <div className="absolute top-4 left-4 z-10 text-white">
        
       </div>

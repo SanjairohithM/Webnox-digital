@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import Camera from "@/Three/Camera";
 import CanvasWrapper from "@/Three/CanvasWrapper";
 import Box from "@/Three/Models/Box";
@@ -12,25 +13,44 @@ import Progress from "./sections/Progress";
 import OurSolutions from "./sections/OurSolutions";
 import NextGen from "./sections/NextGen";
 import LetsConnect from "./sections/LetsConnect";
+import WebnoxLogoLoader from "./sections/WebnoxLogoIntro";
 // import Footer from "./sections/Footer"; 
 
   
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+
+  const handleLoaderComplete = () => {
+    setIsLoading(false);
+    setTimeout(() => {
+      setShowContent(true);
+    }, 100);
+  };
+
   return (
     <div className="w-full relative overflow-x-hidden">
-      <ViewCanvas />
-      {/* <CanvasWrapper> */}
-      {/* <BoxRotationScene /> */}
-      {/* <CarIdelScene /> */}
-      {/* <Ground /> */}
-      {/* </CanvasWrapper> */}
+      {/* Loader - shows only once when page loads */}
+      {isLoading && <WebnoxLogoLoader onComplete={handleLoaderComplete} />}
       
-      <Hero />
-      <Mission/>
-      {/* <OurSolutions/> */}
-      <NextGen/>
-      <LetsConnect/>
-      {/* <Footer/> */}
+      {/* Main content - shows after loader completes */}
+      {showContent && (
+        <>
+          <ViewCanvas />
+          {/* <CanvasWrapper> */}
+          {/* <BoxRotationScene /> */}
+          {/* <CarIdelScene /> */}
+          {/* <Ground /> */}
+          {/* </CanvasWrapper> */}
+          
+          <Hero />
+          <Mission/>
+          {/* <OurSolutions/> */}
+          <NextGen/>
+          <LetsConnect/>
+          {/* <Footer/> */}
+        </>
+      )}
     </div>
   );
 }
