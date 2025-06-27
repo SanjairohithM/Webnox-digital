@@ -164,9 +164,9 @@ function NextGen() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=500%",
+        end: "+=200%",
         pin: true,
-        scrub: 1,
+        scrub: 2,
         // markers: true
       }
     });
@@ -176,13 +176,13 @@ function NextGen() {
       opacity: 0,
       y: 50,
       scale: 1,
-      duration: 1
+      duration: 2
     });
 
     // Stage 2: Zoom out text slightly and bring in cards
     timeline.to(headingRef.current, {
       scale: 0.85,
-      duration: 1,
+      duration: 2,
       ease: "power2.inOut"
     });
 
@@ -194,9 +194,9 @@ function NextGen() {
         scale: 1,
         x: position.left || position.right || "0%",
         y: position.top || position.bottom || "0%",
-        duration: 1,
+        duration: 2,
         ease: "power2.out",
-      }, "-=0.8");
+      }, "-=1.5");
     });
 
     // Stage 3: Stack cards in center and fade out text
@@ -204,7 +204,7 @@ function NextGen() {
       .to(headingRef.current, {
         opacity: 0,
         scale: 0.7,
-        duration: 1,
+        duration: 2,
         ease: "power2.inOut"
       })
       .to(cardsRef.current, {
@@ -217,7 +217,7 @@ function NextGen() {
         x: 0,
         y: 0,
         scale: 1,
-        duration: 1,
+        duration: 2,
         ease: "power2.inOut"
       })
       .to(cardsRef.current, {
@@ -226,9 +226,9 @@ function NextGen() {
         rotateY: 0,
         rotateZ: 0,
         scale: 1,
-        duration: 1,
+        duration: 2,
         stagger: {
-          each: 0.1,
+          each: 0.2,
           from: "end"
         },
         ease: "power2.inOut"
@@ -240,9 +240,9 @@ function NextGen() {
         y: "-100%",
         opacity: 0,
         scale: 0.8,
-        duration: 2,
+        duration: 3,
         stagger: {
-          each: 0.15,
+          each: 0.3,
           from: "end"
         },
         ease: "power1.inOut"
@@ -250,48 +250,48 @@ function NextGen() {
       .to(finalTextRef.current, {
         opacity: 1,
         y: 0,
-        duration: 2,
+        duration: 3,
         ease: "power1.out"
-      }, "-=1.5");
+      }, "-=2");
 
     // Stage 5: Transition to "if you wait" text and warning sequence
     timeline
-      .to({}, { duration: 1 })
+      .to({}, { duration: 2 })
       .to(finalTextRef.current, {
         opacity: 0,
         y: -50,
-        duration: 1.5,
+        duration: 2,
         ease: "power1.inOut"
       })
       .to(finalText2Ref.current, {
         opacity: 1,
         y: 0,
-        duration: 2,
+        duration: 3,
         ease: "power1.out"
-      }, "-=1")
+      }, "-=1.5")
       
-      // PHASE 1: CENTER CONTENT ANIMATION (TEXT DRIVEN)
+      // FIRST SCROLL: WARNING PHASE
       
       // Step 1: Heading appears from right, images fade in
       .to(centerHeadingRef.current, {
         opacity: 1,
         x: 0,
-        duration: 1,
+        duration: 2,
         ease: "power2.out"
-      }, "+=0.5")
+      }, "+=1")
       .to(waitImagesRef.current, {
         opacity: 0.6,
-        duration: 0.8,
+        duration: 2,
         ease: "power1.out"
       }, "<")
       
-            // Step 2: Warning text 1 appears, images STAY IN LEFT/RIGHT GRIDS
+      // Step 2: Warning text 1 appears, images STAY IN LEFT/RIGHT GRIDS
       .to(warningRefs.current[0], {
         opacity: 1,
         x: 0,
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
-      }, "+=0.4")
+      }, "+=1")
       .to(waitImagesRef.current, {
         left: (i) => {
           // LEFT GRID: 0-33% | RIGHT GRID: 67-100% | CENTER GRID: 33-67% (TEXT ONLY)
@@ -301,7 +301,7 @@ function NextGen() {
             return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID ONLY
           }
         },
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
       }, "<")
       
@@ -309,25 +309,25 @@ function NextGen() {
       .to(warningRefs.current[1], {
         opacity: 1,
         x: 0,
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
-      }, "+=0.4")
+      }, "+=1")
       
       // Step 4: Warning text 3 appears, images stay in grids
       .to(warningRefs.current[2], {
         opacity: 1,
         x: 0,
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
-      }, "+=0.4")
+      }, "+=1")
       
       // Step 5: Warning text 4 appears, images SURROUND TEXT with BIG GAPS
       .to(warningRefs.current[3], {
         opacity: 1,
         x: 0,
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
-      }, "+=0.4")
+      }, "+=1")
       .to(waitImagesRef.current, {
         left: (i) => {
           // SURROUND text with BIG GAPS - stay in grids
@@ -348,42 +348,42 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 1.0,
+        duration: 2,
         ease: "power2.out"
       }, "<")
       
-      // PHASE 2: SUCCESS TEXT with STEP PYRAMID FORMATION
+      // SECOND SCROLL: SUCCESS PHASE
       
       // Step 6: Change heading to "If you act now..."
       .to(centerHeadingRef.current, {
         opacity: 0,
         x: -100,
-        duration: 0.6,
+        duration: 2,
         ease: "power2.in"
-      }, "+=1")
+      }, "+=2")
       .set(centerHeadingRef.current, {
         innerHTML: "If you act now..."
       })
       .to(centerHeadingRef.current, {
         opacity: 1,
         x: 0,
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
       })
       
-      // Step 7: Success text 1 appears, IMAGES START PYRAMID FORMATION - Top step only
+      // Success animations with slower pyramid formation
       .to(warningRefs.current[0], {
         opacity: 0,
         x: -50,
-        duration: 0.6,
+        duration: 2,
         ease: "power2.in"
-      }, "+=0.5")
+      }, "+=1")
       .to(successRefs.current[0], {
         opacity: 1,
         x: 0,
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
-      }, "<0.2")
+      }, "<0.5")
       .to(waitImagesRef.current, {
         opacity: 1,
         left: (i) => {
@@ -411,23 +411,23 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 1.0,
+        duration: 2,
         ease: "power2.out"
       }, "<")
       
-      // Step 8: Success text 2 appears, ADD MIDDLE STEP (2 images each side)
+      // Step 7: Success text 2 appears, ADD MIDDLE STEP (2 images each side)
       .to(warningRefs.current[1], {
         opacity: 0,
         x: -50,
-        duration: 0.6,
+        duration: 2,
         ease: "power2.in"
-      }, "+=0.4")
+      }, "+=1")
       .to(successRefs.current[1], {
         opacity: 1,
         x: 0,
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
-      }, "<0.2")
+      }, "<0.5")
       .to(waitImagesRef.current, {
         left: (i) => {
           // STEP 2: Top step + Middle step
@@ -461,23 +461,23 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 1.0,
+        duration: 2,
         ease: "power2.out"
       }, "<")
       
-      // Step 9: Success text 3 appears, ALMOST COMPLETE PYRAMID (add more to bottom)
+      // Step 8: Success text 3 appears, ALMOST COMPLETE PYRAMID (add more to bottom)
       .to(warningRefs.current[2], {
         opacity: 0,
         x: -50,
-        duration: 0.6,
+        duration: 2,
         ease: "power2.in"
-      }, "+=0.4")
+      }, "+=1")
       .to(successRefs.current[2], {
         opacity: 1,
         x: 0,
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
-      }, "<0.2")
+      }, "<0.5")
       .to(waitImagesRef.current, {
         left: (i) => {
           // STEP 3: Top + Middle + Partial Bottom
@@ -518,23 +518,23 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 1.0,
+        duration: 2,
         ease: "power2.out"
       }, "<")
       
-      // Step 10: Success text 4 appears, COMPLETE PYRAMID (all images in formation)
+      // Step 9: Success text 4 appears, COMPLETE PYRAMID (all images in formation)
       .to(warningRefs.current[3], {
         opacity: 0,
         x: -50,
-        duration: 0.6,
+        duration: 2,
         ease: "power2.in"
-      }, "+=0.4")
+      }, "+=1")
       .to(successRefs.current[3], {
         opacity: 1,
         x: 0,
-        duration: 0.8,
+        duration: 2,
         ease: "power2.out"
-      }, "<0.2")
+      }, "<0.5")
       .to(waitImagesRef.current, {
         left: (i) => {
           // FINAL STEP: COMPLETE PYRAMID FORMATION (original perfect positions)
@@ -564,41 +564,41 @@ function NextGen() {
           if (i === 3 || i === 4 || i === 5 || i === 9 || i === 10 || i === 11) return "60%"; // Bottom step
           return "50%"; // Fallback center
         },
-        duration: 1.2,
+        duration: 3,
         ease: "power2.out"
       }, "<");
 
-    // Stage 6: Fade out all "if you wait" elements and transition to final text
+    // Stage 6: Fade out all elements
     timeline
-      .to({}, { duration: 2 })
-      .to([finalText2Ref.current, ...warningRefs.current], {
+      .to({}, { duration: 3 })
+      .to([finalText2Ref.current, ...warningRefs.current, ...successRefs.current, centerHeadingRef.current], {
         opacity: 0,
         y: -50,
-        duration: 2,
+        duration: 3,
         ease: "power1.inOut",
         stagger: {
-          each: 0.1,
+          each: 0.2,
           from: "start"
         }
       })
       .to(waitImagesRef.current, {
         opacity: 0,
         scale: 0.5,
-        duration: 1.5,
+        duration: 3,
         ease: "power1.inOut",
         stagger: {
-          each: 0.05,
+          each: 0.1,
           from: "random"
         }
       }, "<")
       .to(newFinalTextRef.current, {
         opacity: 1,
         y: 0,
-        duration: 2.5,
+        duration: 4,
         ease: "power1.out"
-      }, "-=1");
+      }, "-=2");
 
-    timeline.timeScale(0.8);
+    timeline.timeScale(0.5);
 
   }, []);
 
