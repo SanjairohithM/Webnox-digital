@@ -14,7 +14,7 @@ import OurSolutions from "./sections/OurSolutions";
 import NextGen from "./sections/NextGen";
 import LetsConnect from "./sections/LetsConnect";
 import WebnoxLogoLoader from "./sections/WebnoxLogoIntro";
-import AnimatedNavbar from "./sections/Components/Header/AnimatedNavbar";
+ // import AnimatedNavbar from "./sections/Components/Header/AnimatedNavbar";
 // import Footer from "./sections/Footer"; 
 
   
@@ -39,7 +39,7 @@ export default function Home() {
         <>
           <ViewCanvas />
           {/* Add the AnimatedNavbar here */}
-          <AnimatedNavbar />
+       
           {/* <CanvasWrapper> */}
           {/* <BoxRotationScene /> */}
           {/* <CarIdelScene /> */}
