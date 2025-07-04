@@ -74,7 +74,7 @@ export default function Component() {
       scrollTrigger: {
         trigger: stickyRef.current,
         start: "top top",
-        end: "+=400%",
+        end: "+=200%",
         pin: true,
         pinSpacing: true,
         scrub: 1,

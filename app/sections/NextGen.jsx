@@ -66,11 +66,12 @@ function NextGen() {
   const finalTextRef = useRef(null);
   const finalText2Ref = useRef(null);
   const newFinalTextRef = useRef(null);
+  const newbeforeFinalTextRef = useRef(null);
   const warningRefs = useRef([]);
   const successRefs = useRef([]);
   const waitImagesRef = useRef([]);
   const centerHeadingRef = useRef(null);
-
+  
   useGSAP(() => {
     // Set initial states
     gsap.set(cardsRef.current, {
@@ -91,6 +92,11 @@ function NextGen() {
     });
 
     gsap.set(newFinalTextRef.current, {
+      opacity: 0,
+      y: 50
+    });
+
+    gsap.set(newbeforeFinalTextRef.current, {
       opacity: 0,
       y: 50
     });
@@ -568,37 +574,70 @@ function NextGen() {
         ease: "power2.out"
       }, "<");
 
-    // Stage 6: Fade out all elements
+    // Stage 6: Fade out all elements with custom pyramid animation
     timeline
       .to({}, { duration: 3 })
+      
+      // Center texts (warning/success) go up and fade - SLOW FADE
       .to([finalText2Ref.current, ...warningRefs.current, ...successRefs.current, centerHeadingRef.current], {
         opacity: 0,
-        y: -50,
-        duration: 3,
+        y: -100,
+        duration: 6,
+        ease: "power1.inOut",
+        stagger: {
+          each: 0.3,
+          from: "start"
+        }
+      })
+      
+      // Left side pyramid (indices 0-5) goes down and fades - SLOW FADE
+      .to([waitImagesRef.current[0], waitImagesRef.current[1], waitImagesRef.current[2], waitImagesRef.current[3], waitImagesRef.current[4], waitImagesRef.current[5]], {
+        opacity: 0,
+        y: "100px",
+        scale: 0.5,
+        duration: 6,
         ease: "power1.inOut",
         stagger: {
           each: 0.2,
           from: "start"
         }
-      })
-      .to(waitImagesRef.current, {
+      }, "<")
+      
+      // Right side pyramid (indices 6-11) goes down and fades - SLOW FADE
+      .to([waitImagesRef.current[6], waitImagesRef.current[7], waitImagesRef.current[8], waitImagesRef.current[9], waitImagesRef.current[10], waitImagesRef.current[11]], {
         opacity: 0,
+        y: "100px", 
         scale: 0.5,
-        duration: 3,
+        duration: 6,
         ease: "power1.inOut",
         stagger: {
-          each: 0.1,
-          from: "random"
+          each: 0.2,
+          from: "start"
         }
       }, "<")
+      
+      // Show "Your digital journey with webnox"
+      .to(newbeforeFinalTextRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 3,
+        ease: "power1.out"
+      }, "-=1")
+      .to({}, { duration: 2 })
+      .to(newbeforeFinalTextRef.current, {
+        opacity: 0,
+        y: -50,
+        duration: 2,
+        ease: "power1.inOut"
+      })
       .to(newFinalTextRef.current, {
         opacity: 1,
         y: 0,
         duration: 4,
         ease: "power1.out"
-      }, "-=2");
+      }, "-=1");
 
-    timeline.timeScale(0.5);
+    timeline.timeScale(0.3);
 
   }, []);
 
@@ -675,6 +714,16 @@ function NextGen() {
             </div>
           </div>
          
+        </div>
+
+
+        <div 
+          ref={newbeforeFinalTextRef}
+          className="absolute z-20 text-center text-black"
+        >
+          <h2 className="text-[52px] font-bold font-urbanist leading-[1.3] mb-4">
+            Your digital journey with <span className="text-[#2acbec]">webnox</span>
+          </h2>
         </div>
 
         {/* New Final Text */}

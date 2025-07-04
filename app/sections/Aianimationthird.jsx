@@ -81,6 +81,49 @@ export default function OurApproachSection() {
           },
           "-=0.3",
         )
+
+      // Animate SVG elements (robot and gear) after image is visible
+      const svgTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: imageRef.current,
+          start: "top 70%",
+          end: "bottom 30%",
+          toggleActions: "play none none reverse",
+        },
+      })
+
+      // Wait for image to load, then animate SVG elements
+      setTimeout(() => {
+        const svgElement = imageRef.current?.querySelector('svg')
+        if (svgElement) {
+          // Target robot elements (common SVG element selectors)
+          const robotElements = svgElement.querySelectorAll('[id*="robot"], [class*="robot"], [id*="bot"], [class*="bot"]')
+          const gearElements = svgElement.querySelectorAll('[id*="gear"], [class*="gear"], [id*="cog"], [class*="cog"]')
+          
+          // Set initial scale for robot and gear elements
+          gsap.set([...robotElements, ...gearElements], {
+            scale: 0.8,
+            transformOrigin: "center center",
+          })
+
+          // Animate robot elements
+          svgTimeline.to(robotElements, {
+            scale: 1.3,
+            duration: 1.2,
+            ease: "elastic.out(1, 0.5)",
+            stagger: 0.1,
+          })
+
+          // Animate gear elements with rotation
+          svgTimeline.to(gearElements, {
+            scale: 1.4,
+            rotation: 360,
+            duration: 1.5,
+            ease: "back.out(1.7)",
+            stagger: 0.15,
+          }, "-=0.8")
+        }
+      }, 500)
     }, sectionRef)
 
     return () => ctx.revert()
@@ -94,7 +137,7 @@ export default function OurApproachSection() {
           <div ref={leftContentRef} className="order-2 lg:order-1">
             <div ref={imageRef} className="relative">
               <Image
-                src="/images/our-approach.png"
+                src="/aiauto1.svg"
                 alt="Our Approach - Built Around You"
                 width={600}
                 height={400}
