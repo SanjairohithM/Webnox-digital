@@ -67,6 +67,8 @@ function NextGen() {
   const finalText2Ref = useRef(null);
   const newFinalTextRef = useRef(null);
   const newbeforeFinalTextRef = useRef(null);
+  const journeyRef = useRef(null);
+  const journeyStepsRef = useRef([]);
   const warningRefs = useRef([]);
   const successRefs = useRef([]);
   const waitImagesRef = useRef([]);
@@ -99,6 +101,17 @@ function NextGen() {
     gsap.set(newbeforeFinalTextRef.current, {
       opacity: 0,
       y: 50
+    });
+
+    gsap.set(journeyRef.current, {
+      opacity: 0,
+      y: 50
+    });
+
+    gsap.set(journeyStepsRef.current, {
+      opacity: 0,
+      y: 50,
+      scale: 0.8
     });
 
     // Set initial states for all text elements
@@ -520,6 +533,7 @@ function NextGen() {
           
           if (i < 6) {
             return leftPositions[i];
+            
           } else {
             return rightPositions[i - 6];
           }
@@ -630,6 +644,48 @@ function NextGen() {
         duration: 2,
         ease: "power1.inOut"
       })
+      
+      // Journey Section
+      .to(journeyRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 3,
+        ease: "power2.out"
+      }, "+=1")
+      
+      // Animate steps appearing one by one
+      .to(journeyStepsRef.current[0], {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 2,
+        ease: "back.out(1.7)"
+      }, "-=1")
+      .to(journeyStepsRef.current[1], {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 2,
+        ease: "back.out(1.7)"
+      }, "-=1.5")
+      .to(journeyStepsRef.current[2], {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 2,
+        ease: "back.out(1.7)"
+      }, "-=1")
+      
+      // Hold the journey for a moment
+      .to({}, { duration: 3 })
+      
+      // Fade out journey and show final text
+      .to(journeyRef.current, {
+        opacity: 0,
+        y: -100,
+        duration: 3,
+        ease: "power2.in"
+      })
       .to(newFinalTextRef.current, {
         opacity: 1,
         y: 0,
@@ -724,6 +780,135 @@ function NextGen() {
           <h2 className="text-[52px] font-bold font-urbanist leading-[1.3] mb-4">
             Your digital journey with <span className="text-[#2acbec]">webnox</span>
           </h2>
+        </div>
+
+        {/* Journey Section */}
+        <div 
+          ref={journeyRef}
+          className="absolute z-20 w-full h-full flex items-center justify-center"
+        >
+          <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+            
+            {/* Step 1: Discover & Define - hexagon-line-circle-text (RIGHT LAYOUT) */}
+            <div 
+              ref={el => journeyStepsRef.current[0] = el}
+              className="absolute"
+              style={{ right: '25%', top: '20%', transform: 'translateY(-50%)' }}
+            >
+              <div className="relative flex items-center justify-center">
+                {/* Hexagon */}
+                <div className="relative">
+                  <div 
+                    className="w-32 h-32 bg-gray-100 flex items-center justify-center shadow-lg relative"
+                    style={{
+                      clipPath: 'polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)'
+                    }}
+                  >
+                    <span className="text-4xl font-bold text-[#25c3e5] z-10">1</span>
+                  </div>
+                  
+                  {/* Line starting from hexagon right edge */}
+                  <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
+                    <div 
+                      className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
+                      style={{ width: '250px' }}
+                    ></div>
+                  </div>
+                </div>
+                
+                {/* Blue Circle */}
+                <div className="relative ml-[246px]">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10"></div>
+                </div>
+                
+                {/* Text Content */}
+                <div className="text-content ml-8">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Discover & Define</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed max-w-sm">We don't offer solutions until we understand the problem</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 2: Experience-Led Design - text-circle-line-hexagon (LEFT LAYOUT) */}
+            <div 
+              ref={el => journeyStepsRef.current[1] = el}
+              className="absolute"
+              style={{ left: '5%', top: '40%', transform: 'translateY(-50%)' }}
+            >
+              <div className="relative flex items-center justify-center">
+                {/* Text Content */}
+                <div className="text-content mr-8">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Experience-Led Design</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Smart tech meets meaningful design</p>
+                </div>
+                
+                {/* Blue Circle */}
+                <div className="relative">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10"></div>
+                </div>
+                
+                {/* Hexagon */}
+                <div className="relative ml-[246px]">
+                  <div 
+                    className="w-32 h-32 bg-gray-100 flex items-center justify-center shadow-lg relative"
+                    style={{
+                      clipPath: 'polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)'
+                    }}
+                  >
+                    <span className="text-4xl font-bold text-[#25c3e5] z-10">2</span>
+                  </div>
+                  
+                  {/* Line starting from hexagon left edge */}
+                  <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
+                    <div 
+                      className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
+                      style={{ width: '250px' }}
+                    ></div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 3: Agile Development - hexagon-line-circle-text (RIGHT LAYOUT) */}
+            <div 
+              ref={el => journeyStepsRef.current[2] = el}
+              className="absolute"
+              style={{ right: '25%', bottom: '20%', transform: 'translateY(50%)' }}
+            >
+              <div className="relative flex items-center justify-center">
+                {/* Hexagon */}
+                <div className="relative">
+                  <div 
+                    className="w-32 h-32 bg-gray-100 flex items-center justify-center shadow-lg relative"
+                    style={{
+                      clipPath: 'polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)'
+                    }}
+                  >
+                    <span className="text-4xl font-bold text-[#25c3e5] z-10">3</span>
+                  </div>
+                  
+                  {/* Line starting from hexagon right edge */}
+                  <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
+                    <div 
+                      className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
+                      style={{ width: '250px' }}
+                    ></div>
+                  </div>
+                </div>
+                
+                {/* Blue Circle */}
+                <div className="relative ml-[246px]">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10"></div>
+                </div>
+                
+                {/* Text Content */}
+                <div className="text-content ml-8">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Agile Development</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Progress without chaos. Speed with stability</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* New Final Text */}
