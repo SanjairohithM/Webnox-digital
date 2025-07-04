@@ -83,6 +83,12 @@ function NextGen() {
   const path2CircleRefs = useRef([]);
   const newbeforeJourney2TextRef = useRef(null);
 
+  // Third journey refs
+  const journey3Ref = useRef(null);
+  const journey3StepsRef = useRef([]);
+  const journey3PathRef = useRef(null);
+  const path3CircleRefs = useRef([]);
+
   useGSAP(() => {
     // Set initial states
     gsap.set(cardsRef.current, {
@@ -228,6 +234,32 @@ function NextGen() {
     const path2Element = journey2PathRef.current?.querySelector('#motionPath2');
     if (path2Element) {
       gsap.set(path2Element, {
+        strokeDasharray: 1000,
+        strokeDashoffset: 1000
+      });
+    }
+
+    // Third journey initial states
+    gsap.set(journey3Ref.current, {
+      opacity: 0,
+      y: 50
+    });
+
+    gsap.set(journey3StepsRef.current, {
+      opacity: 0,
+      y: 50,
+      scale: 0.8
+    });
+
+    // Set initial states for third journey path and circles
+    gsap.set(journey3PathRef.current, {
+      opacity: 0
+    });
+
+    // Set initial state for the third path stroke
+    const path3Element = journey3PathRef.current?.querySelector('#motionPath3');
+    if (path3Element) {
+      gsap.set(path3Element, {
         strokeDasharray: 1000,
         strokeDashoffset: 1000
       });
@@ -833,8 +865,79 @@ function NextGen() {
       // Hold the second journey for a moment
       .to({}, { duration: 3 })
 
-      // Fade out second journey and show final text
+      // Fade out second journey
       .to(journey2Ref.current, {
+        opacity: 0,
+        y: -100,
+        duration: 3,
+        ease: "power2.in"
+      })
+
+      // Third Journey Section
+      .to(journey3Ref.current, {
+        opacity: 1,
+        y: 0,
+        duration: 3,
+        ease: "power2.out"
+      }, "+=1")
+
+      // Animate third journey steps appearing one by one
+      .to(journey3StepsRef.current[0], {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 2,
+        ease: "back.out(1.7)"
+      }, "-=1")
+      .to(journey3StepsRef.current[1], {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 2,
+        ease: "back.out(1.7)"
+      }, "-=1.5")
+      .to(journey3StepsRef.current[2], {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 2,
+        ease: "back.out(1.7)"
+      }, "-=1")
+
+      // Show the third SVG container
+      .to(journey3PathRef.current, {
+        opacity: 1,
+        duration: 0.5
+      }, "-=1")
+
+      // Animate the third curved path drawing
+      .to(journey3PathRef.current.querySelector('#motionPath3'), {
+        strokeDashoffset: 0,
+        duration: 3,
+        ease: "power2.inOut"
+      }, "-=0.5")
+
+      // Animate static start point circle for third journey
+      .to(path3CircleRefs.current[0], {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: "back.out(2)"
+      }, "-=1.5")
+
+      // Animate static end point circle for third journey
+      .to(path3CircleRefs.current[1], {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: "back.out(2)"
+      }, "-=1")
+
+      // Hold the third journey for a moment
+      .to({}, { duration: 3 })
+
+      // Fade out third journey and show final text
+      .to(journey3Ref.current, {
         opacity: 0,
         y: -100,
         duration: 3,
@@ -1155,28 +1258,28 @@ function NextGen() {
           ref={journey2Ref}
           className="absolute z-20 w-full h-full pointer-events-none"
         >
-                    {/* SVG Curved Path for Second Journey */}
-          <div 
+          {/* SVG Curved Path for Second Journey */}
+          <div
             ref={journey2PathRef}
             className="absolute"
-            style={{ 
-              top: '20%', 
-              left: '10%', 
-              width: '60%', 
+            style={{
+              top: '20%',
+              left: '10%',
+              width: '60%',
               height: '60%',
               zIndex: 1
             }}
           >
-            <svg 
-              viewBox="0 0 448 498" 
+            <svg
+              viewBox="0 0 448 498"
               className="w-full h-full"
               style={{ overflow: 'visible' }}
             >
               <defs>
                 <linearGradient id="paint0_linear_1525_37081_journey2" x1="-13.8615" y1="-128.398" x2="491.708" y2="563.316" gradientUnits="userSpaceOnUse">
-                  <stop offset="0.0420851" stopColor="#0076D9"/>
-                  <stop offset="0.88859" stopColor="#00B9FF"/>
-                  <stop offset="1" stopColor="white" stopOpacity="0"/>
+                  <stop offset="0.0420851" stopColor="#0076D9" />
+                  <stop offset="0.88859" stopColor="#00B9FF" />
+                  <stop offset="1" stopColor="white" stopOpacity="0" />
                 </linearGradient>
               </defs>
               <path
@@ -1194,7 +1297,7 @@ function NextGen() {
             {/* Static circles for second journey path start and end points */}
             <div className="absolute inset-0">
               {/* Start point circle (positioned at path start) */}
-              <div 
+              <div
                 ref={el => path2CircleRefs.current[0] = el}
                 className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                 style={{
@@ -1202,9 +1305,9 @@ function NextGen() {
                   left: 'calc(10% + 18%)'
                 }}
               ></div>
-              
+
               {/* End point circle (positioned at path end) */}
-              <div 
+              <div
                 ref={el => path2CircleRefs.current[1] = el}
                 className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                 style={{
@@ -1362,6 +1465,236 @@ function NextGen() {
                       className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
                       style={{ width: '250px' }}
                     ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Third Journey Section */}
+        <div
+          ref={journey3Ref}
+          className="absolute z-20 w-full h-full flex items-center justify-center left-50"
+        >
+          <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+
+            {/* Curved Path SVG from thirdline.svg */}
+            <div 
+              ref={journey3PathRef}
+              className="absolute"
+              style={{ 
+                top: '25%', 
+                left: '5%', 
+                width: '55%', 
+                height: '65%',
+                zIndex: 1
+              }}
+            >
+              <svg 
+                viewBox="0 0 460 526" 
+                className="w-full h-full"
+                style={{ overflow: 'visible' }}
+              >
+                <defs>
+                  <linearGradient id="paint0_linear_1525_37082_journey3" x1="159.98" y1="-99.3735" x2="473.21" y2="430.425" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.0420851" stopColor="#0076D9"/>
+                    <stop offset="0.88859" stopColor="#00B9FF"/>
+                    <stop offset="1" stopColor="white" stopOpacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path
+                  id="motionPath3"
+                  d="M40.082 39C40.0849 86.8002 128.82 196.581 385.519 249.193C426.378 257.568 432.708 254.547 391.803 262.692C370.899 266.854 347.005 273.569 324.556 283.756C239.646 322.287 221.824 473.889 129.06 483.332C111.844 485.084 91.6807 485.116 67.9926 482.817"
+                  stroke="url(#paint0_linear_1525_37082_journey3)"
+                  strokeWidth="32"
+                  strokeLinecap="round"
+                  fill="none"
+                  strokeDasharray="1000"
+                  strokeDashoffset="1000"
+                />
+              </svg>
+
+              {/* Static circles for third journey path start and end points */}
+              <div className="absolute inset-0">
+                {/* Start point circle (positioned at path start) */}
+                <div 
+                  ref={el => path3CircleRefs.current[0] = el}
+                  className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                  style={{
+                    top: 'calc(25% + 25%)',
+                    left: 'calc(5% + 60%)'
+                  }}
+                ></div>
+                
+                {/* End point circle (positioned at path end) */}
+                <div 
+                  ref={el => path3CircleRefs.current[1] = el}
+                  className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                  style={{
+                    top: 'calc(25% + 110%)',
+                    left: 'calc(5% + 60%)'
+                  }}
+                ></div>
+{/* //middle circle */}
+                <div 
+                  ref={el => path3CircleRefs.current[2] = el}
+                  className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                  style={{
+                    top: 'calc(25% + 68%)',
+                    left: 'calc(5% + 125%)'
+                  }}
+                ></div>
+
+              </div>
+            </div>
+
+            {/* Journey Steps for Third Journey */}
+            <div className="relative w-full h-full" style={{ zIndex: 10 }}>
+              {/* Step 7: Optimize & Automate - hexagon-line-circle-text (RIGHT LAYOUT) */}
+              <div
+                ref={el => journey3StepsRef.current[0] = el}
+                className="absolute"
+                style={{ right: '45%', top: '25%', transform: 'translateY(-50%)' }}
+              >
+                <div className="relative flex items-center justify-center">
+                  {/* Hexagon */}
+                  <div className="relative">
+                    <div
+                      className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                      style={{
+                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                      }}
+                    >
+                      {/* Inner hexagon for content */}
+                      <div
+                        className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        <span className="text-4xl font-bold text-[#0ea5e9] z-10">7</span>
+                      </div>
+                    </div>
+
+                    {/* Line starting from hexagon right edge */}
+                    <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
+                      <div
+                        className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
+                        style={{ width: '250px' }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Blue Circle */}
+                  <div className="relative ml-[246px]">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="text-content ml-8">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Optimize Across Touchpoints</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed max-w-sm">We refine user journeys with UX audits, mobile app
+                      enhancements, eCommerce upgrades, and
+                      performance tuning.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 8: Monitor & Enhance - text-circle-line-hexagon (LEFT LAYOUT) */}
+              <div
+                ref={el => journey3StepsRef.current[1] = el}
+                className="absolute"
+                style={{ left: '2%', top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <div className="relative flex items-center justify-center">
+                  {/* Text Content */}
+                  <div className="text-content mr-32">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Support & Sustain</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Post-launch isn’t the end. It’s where we scale,
+                      monitor, support, and evolve your digital assets
+                      for long-term success.</p>
+                  </div>
+
+                  {/* Blue Circle */}
+                  <div className="relative ml-8">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                  </div>
+
+                  {/* Hexagon */}
+                  <div className="relative ml-[246px]">
+                    <div
+                      className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                      style={{
+                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                      }}
+                    >
+                      {/* Inner hexagon for content */}
+                      <div
+                        className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        <span className="text-4xl font-bold text-[#0ea5e9] z-10">8</span>
+                      </div>
+                    </div>
+
+                    {/* Line starting from hexagon left edge */}
+                    <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
+                      <div
+                        className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
+                        style={{ width: '250px' }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 9: Evolve & Lead - hexagon-line-circle-text (RIGHT LAYOUT) */}
+              <div
+                ref={el => journey3StepsRef.current[2] = el}
+                className="absolute"
+                style={{ right: '45%', bottom: '15%', transform: 'translateY(50%)' }}
+              >
+                <div className="relative flex items-center justify-center">
+                  {/* Hexagon */}
+                  <div className="relative">
+                    <div
+                      className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                      style={{
+                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                      }}
+                    >
+                      {/* Inner hexagon for content */}
+                      <div
+                        className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        <span className="text-4xl font-bold text-[#0ea5e9] z-10">9</span>
+                      </div>
+                    </div>
+
+                    {/* Line starting from hexagon right edge */}
+                    <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
+                      <div
+                        className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
+                        style={{ width: '250px' }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Blue Circle */}
+                  <div className="relative ml-[246px]">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="text-content ml-8">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Scale & Evolve</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Tech grows. You grow. And we grow with you.</p>
                   </div>
                 </div>
               </div>
