@@ -52,6 +52,7 @@ const AnimatedNavbar = ({
   const cursorIconRef = useRef(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const [isHeroVisible, setIsHeroVisible] = useState(() => {
     // Check initial hero visibility on mount - only show in first screen area
     if (typeof window !== "undefined") {
@@ -60,6 +61,18 @@ const AnimatedNavbar = ({
     return true
   })
   const heroVisibleRef = useRef(isHeroVisible)
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
   
   // Sync ref with state on mount and add fallback scroll listener
   useEffect(() => {
@@ -185,18 +198,18 @@ const AnimatedNavbar = ({
           }
         }
 
-        // Handle navbar transformation
-        if (scrolled !== isScrolled) {
+        // Handle navbar transformation - ONLY for mobile devices
+        if (isMobile && scrolled !== isScrolled) {
           setIsScrolled(scrolled)
 
           if (scrolled) {
-            // Transform to hamburger positioned on the right
+            // Transform to hamburger positioned on the right - MOBILE ONLY
             gsap.to(navbar, {
               width: "70px",
               height: "70px",
               borderRadius: "50%",
-              backgroundColor: "rgba(255, 255, 255, 0.95)",
-              backdropFilter: "blur(25px)",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              backdropFilter: "blur(20px)",
               padding: "0",
               left: "calc(100% - 100px)", // Position to the right
               transform: "translateX(0)",
@@ -221,15 +234,15 @@ const AnimatedNavbar = ({
               ease: "back.out(1.7)",
             })
           } else {
-            // Transform back to full navbar
+            // Transform back to full navbar - MOBILE ONLY
             gsap.to(navbar, {
               width: "auto",
               height: "auto",
               borderRadius: "50px",
-              backgroundColor: "rgba(255, 255, 255, 0.95)",
-              backdropFilter: "blur(25px)",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              backdropFilter: "blur(20px)",
               padding: "1.5rem 3rem",
-              left: "50%",
+              left: "calc(50% + 40px)",
               transform: "translateX(-50%)",
               duration: 0.6,
               ease: "power3.out",
@@ -271,7 +284,7 @@ const AnimatedNavbar = ({
       }
       document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [isScrolled, isMenuOpen]) // Removed isHeroVisible from dependencies
+  }, [isScrolled, isMenuOpen, isMobile]) // Added isMobile to dependencies
 
   const toggleMenu = () => {
     const fullscreenMenu = fullscreenMenuRef.current
@@ -669,14 +682,14 @@ const AnimatedNavbar = ({
         ref={navRef}
         className="fixed top-6 z-40 transition-all duration-300"
         style={{
-          left: "calc(50% - 50px)",
+          left: "calc(50% + 40px)",
           transform: "translateX(-50%)",
-          backgroundColor: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(25px)",
-          border: "1px solid rgba(255, 255, 255, 0.3)",
+          backgroundColor: "rgba(255, 255, 255, 0.1)",
+          backdropFilter: "blur(20px)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
           borderRadius: "50px",
           padding: "1.5rem 3rem",
-          boxShadow: "0 8px 40px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
         }}
       >
         {/* Full Navbar Content - No Logo */}
@@ -686,7 +699,7 @@ const AnimatedNavbar = ({
               <a
                 key={index}
                 href={item.href}
-                className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-3 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full hover:bg-[#2acbec]/5"
+                className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-3 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full"
                 onClick={(e) => {
                   e.preventDefault()
                   const element = document.querySelector(item.href)
@@ -716,10 +729,10 @@ const AnimatedNavbar = ({
           </div>
         </div>
 
-        {/* Hamburger Menu (Hidden Initially) - Positioned to the Right */}
+        {/* Hamburger Menu (Hidden Initially) - Positioned to the Right - MOBILE ONLY */}
         <div
           ref={hamburgerRef}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer opacity-0 scale-75 z-50"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer opacity-0 scale-75 z-50 md:hidden"
           onClick={toggleMenu}
         >
           <div className="flex flex-col gap-1.5">
@@ -747,7 +760,7 @@ const AnimatedNavbar = ({
           onClick={toggleMenu}
         >
           <div className="relative w-12 h-12 flex items-center justify-center">
-            <X size={40} className="group-hover:scale-110 transition-transform duration-300" />
+            <X size={40} strokeWidth={2} className="group-hover:scale-110 transition-transform duration-300" />
             <div className="absolute inset-0 border-2 border-white/20 rounded-full group-hover:border-[#2acbec]/50 transition-colors duration-300"></div>
           </div>
         </button>
@@ -780,9 +793,7 @@ const AnimatedNavbar = ({
                     handleMenuItemHover(item, true)
 
                     const menuItem = e.currentTarget
-                    const icon = menuItem.querySelector(".icon-container")
                     const text = menuItem.querySelector(".menu-text")
-                    const bg = menuItem.querySelector(".absolute.inset-0")
 
                     gsap.to(menuItem, {
                       scale: 1.05,
@@ -791,24 +802,10 @@ const AnimatedNavbar = ({
                       ease: "power2.out",
                     })
 
-                    gsap.to(icon, {
-                      scale: 1.3,
-                      backgroundColor: "#2acbec",
-                      boxShadow: "0 0 30px rgba(42, 203, 236, 0.6)",
-                      duration: 0.5,
-                      ease: "back.out(1.7)",
-                    })
-
                     gsap.to(text, {
                       x: 10,
                       letterSpacing: "0.05em",
                       duration: 0.3,
-                      ease: "power2.out",
-                    })
-
-                    gsap.to(bg, {
-                      scaleX: 1,
-                      duration: 0.4,
                       ease: "power2.out",
                     })
                   }}
@@ -816,9 +813,7 @@ const AnimatedNavbar = ({
                     handleMenuItemHover(item, false)
 
                     const menuItem = e.currentTarget
-                    const icon = menuItem.querySelector(".icon-container")
                     const text = menuItem.querySelector(".menu-text")
-                    const bg = menuItem.querySelector(".absolute.inset-0")
 
                     gsap.to(menuItem, {
                       scale: 1,
@@ -827,24 +822,10 @@ const AnimatedNavbar = ({
                       ease: "power2.out",
                     })
 
-                    gsap.to(icon, {
-                      scale: 1,
-                      backgroundColor: "rgba(255, 255, 255, 0.2)",
-                      boxShadow: "none",
-                      duration: 0.4,
-                      ease: "power2.out",
-                    })
-
                     gsap.to(text, {
                       x: 0,
                       letterSpacing: "0em",
                       duration: 0.3,
-                      ease: "power2.out",
-                    })
-
-                    gsap.to(bg, {
-                      scaleX: 0,
-                      duration: 0.4,
                       ease: "power2.out",
                     })
                   }}
@@ -874,14 +855,10 @@ const AnimatedNavbar = ({
                     <span className="menu-text relative cursor-none">
                       {item.name}
                       <div
-                        className="absolute bottom-0 left-0 w-0 bg-[#2acbec] group-hover:w-full transition-all duration-500"
-                        style={{ height: "3px" }}
+                        className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2acbec] group-hover:w-full transition-all duration-500"
                       ></div>
                     </span>
                   </div>
-
-                  {/* Animated background on hover */}
-                  <div className="absolute inset-0 bg-[#2acbec]/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                 </a>
 
                 {/* Separator line between items */}
