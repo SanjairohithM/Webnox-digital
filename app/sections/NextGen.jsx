@@ -1522,8 +1522,8 @@ function NextGen() {
                   ref={el => path3CircleRefs.current[0] = el}
                   className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                   style={{
-                    top: 'calc(25% + 25%)',
-                    left: 'calc(5% + 60%)'
+                    top: 'calc(25% + -22%)',
+                    left: 'calc(5% + 10%)'
                   }}
                 ></div>
                 
@@ -1532,8 +1532,8 @@ function NextGen() {
                   ref={el => path3CircleRefs.current[1] = el}
                   className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                   style={{
-                    top: 'calc(25% + 110%)',
-                    left: 'calc(5% + 60%)'
+                    top: 'calc(25% + 60%)',
+                    left: 'calc(5% + 14%)'
                   }}
                 ></div>
 {/* //middle circle */}
@@ -1541,8 +1541,8 @@ function NextGen() {
                   ref={el => path3CircleRefs.current[2] = el}
                   className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                   style={{
-                    top: 'calc(25% + 68%)',
-                    left: 'calc(5% + 125%)'
+                    top: 'calc(25% + 20%)',
+                    left: 'calc(5% + 70%)'
                   }}
                 ></div>
 

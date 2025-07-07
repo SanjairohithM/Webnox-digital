@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import PhysicsSpheres from "./physics-spheres"
+import TechImages2D from "./TechImages2D"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -15,8 +15,7 @@ function LetsConnect() {
   const inputRef = useRef(null)
   const buttonRef = useRef(null)
   const r3fContainerRef = useRef(null)
-  const techIconsContainerRef = useRef(null)
-  const individualTechIconsRef = useRef([])
+
 
   // Form state
   const [formData, setFormData] = useState({
@@ -172,7 +171,6 @@ function LetsConnect() {
       ]
 
       gsap.set(elementsToAnimate, { opacity: 0, y: 50 })
-      gsap.set(individualTechIconsRef.current, { opacity: 0, y: 30 })
 
       ScrollTrigger.create({
         trigger: sectionRef.current,
@@ -185,14 +183,6 @@ function LetsConnect() {
             duration: 0.8,
             stagger: 0.2,
             ease: "power3.out",
-          })
-          gsap.to(individualTechIconsRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: "power3.out",
-            delay: 0.5,
           })
         },
       })
@@ -210,9 +200,9 @@ function LetsConnect() {
     >
       <div
         ref={r3fContainerRef}
-        className="absolute inset-0 z-0 opacity-0"
+        className="absolute inset-0 z-0"
       >
-        <PhysicsSpheres />
+        <TechImages2D />
       </div>
 
       <div className="relative z-30 flex flex-col items-center text-center space-y-8 max-w-xl w-full">

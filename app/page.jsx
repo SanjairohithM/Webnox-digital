@@ -14,6 +14,7 @@ import OurSolutions from "./sections/OurSolutions";
 import NextGen from "./sections/NextGen";
 import LetsConnect from "./sections/LetsConnect";
 import WebnoxLogoLoader from "./sections/WebnoxLogoIntro";
+import Demoballsection from "./sections/Demoballsection";
  // import AnimatedNavbar from "./sections/Components/Header/AnimatedNavbar";
 // import Footer from "./sections/Footer"; 
 
@@ -48,6 +49,7 @@ export default function Home() {
           
           <Hero />
           <Mission/>
+          {/* <Demoballsection/>  */}
           {/* <OurSolutions/> */}
           <NextGen/>
           <LetsConnect/>
