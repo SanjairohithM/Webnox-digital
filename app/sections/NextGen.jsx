@@ -1042,7 +1042,7 @@ function NextGen() {
         {/* Journey Section */}
         <div
           ref={journeyRef}
-          className="absolute z-20 w-full h-full flex items-center justify-center left-50"
+          className="absolute z-20 w-full h-full flex items-center justify-center left-50 "
         >
           <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
 
@@ -1108,7 +1108,7 @@ function NextGen() {
             {/* Step 1: Discover & Define - hexagon-line-circle-text (RIGHT LAYOUT) */}
             <div
               ref={el => journeyStepsRef.current[0] = el}
-              className="absolute"
+              className="absolute "
               style={{ right: '45%', top: '25%', transform: 'translateY(-50%)' }}
             >
               <div className="relative flex items-center justify-center">
@@ -1146,9 +1146,9 @@ function NextGen() {
                 </div>
 
                 {/* Text Content */}
-                <div className="text-content ml-8">
+                <div className="text-content ml-8 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Discover & Define</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed max-w-sm">We don't offer solutions until we understand the problem</p>
+                  <p className="text-gray-600 text-sm leading-relaxed w-80">We don't offer solutions until we understand the problem</p>
                 </div>
               </div>
             </div>
@@ -1161,9 +1161,9 @@ function NextGen() {
             >
               <div className="relative flex items-center justify-center">
                 {/* Text Content */}
-                <div className="text-content mr-32">
+                <div className="text-content mr-32 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Experience-Led Design</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Smart tech meets meaningful design</p>
+                  <p className="text-gray-600 text-sm leading-relaxed w-80">Smart tech meets meaningful design</p>
                 </div>
 
                 {/* Blue Circle */}
@@ -1242,9 +1242,9 @@ function NextGen() {
                 </div>
 
                 {/* Text Content */}
-                <div className="text-content ml-8">
+                <div className="text-content ml-8 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Agile Development</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Progress without chaos. Speed with stability</p>
+                  <p className="text-gray-600 text-sm leading-relaxed w-80">Progress without chaos. Speed with stability</p>
                 </div>
               </div>
             </div>
@@ -1256,14 +1256,14 @@ function NextGen() {
         {/* Second Journey Section */}
         <div
           ref={journey2Ref}
-          className="absolute z-20 w-full h-full pointer-events-none"
+          className="absolute z-20 w-full h-full pointer-events-none pt-2"
         >
           {/* SVG Curved Path for Second Journey */}
           <div
             ref={journey2PathRef}
             className="absolute"
             style={{
-              top: '20%',
+              top: '30%',
               left: '10%',
               width: '60%',
               height: '60%',
@@ -1301,8 +1301,8 @@ function NextGen() {
                 ref={el => path2CircleRefs.current[0] = el}
                 className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                 style={{
-                  top: 'calc(20% + -17%)',
-                  left: 'calc(10% + 18%)'
+                  top: 'calc(30% + -27%)',
+                  left: 'calc(10% + 16%)'
                 }}
               ></div>
 
@@ -1311,8 +1311,8 @@ function NextGen() {
                 ref={el => path2CircleRefs.current[1] = el}
                 className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                 style={{
-                  top: 'calc(20% + 64%)',
-                  left: 'calc(10% + 56%)'
+                  top: 'calc(30% + 60%)',
+                  left: 'calc(10% + 57%)'
                 }}
               ></div>
             </div>
@@ -1324,13 +1324,13 @@ function NextGen() {
             <div
               ref={el => journey2StepsRef.current[0] = el}
               className="absolute"
-              style={{ left: '20%', top: '15%', transform: 'translateY(-50%)' }}
+              style={{ left: '20%', top: '25%', transform: 'translateY(-50%)' }}
             >
               <div className="relative flex items-center justify-center">
                 {/* Text Content */}
-                <div className="text-content mr-32">
+                <div className="text-content mr-32 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Intelligent Integration</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed max-w-sm">AI tools to create a streamlined digital backbone
+                  <p className="text-gray-600 text-sm leading-relaxed w-80">AI tools to create a streamlined digital backbone
                     for your busine We unify your ecosystem seamlessly
                     connecting CRMs, ERPs, APIs, cloud services, ss.</p>
                 </div>
@@ -1374,7 +1374,7 @@ function NextGen() {
             <div
               ref={el => journey2StepsRef.current[1] = el}
               className="absolute"
-              style={{ right: '25%', top: '40%', transform: 'translateY(-50%)' }}
+              style={{ right: '25%', top: '50%', transform: 'translateY(-50%)' }}
             >
               <div className="relative flex items-center justify-center">
                 {/* Hexagon */}
@@ -1411,9 +1411,9 @@ function NextGen() {
                 </div>
 
                 {/* Text Content */}
-                <div className="text-content ml-8">
+                <div className="text-content ml-8 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Launch & Learn</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed max-w-sm">We monitor real-world performance, gather insights,
+                  <p className="text-gray-600 text-sm leading-relaxed w-80">We monitor real-world performance, gather insights,
                     and iterate quickly to ensure sustained growth and
                     continuous improvement.</p>
                 </div>
@@ -1428,9 +1428,9 @@ function NextGen() {
             >
               <div className="relative flex items-center justify-center">
                 {/* Text Content */}
-                <div className="text-content mr-32">
+                <div className="text-content mr-32 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Scale with Digital Marketing</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed max-w-sm">From visibility to virality, we help your brand grow
+                  <p className="text-gray-600 text-sm leading-relaxed w-80">From visibility to virality, we help your brand grow
                     through strategic marketing, SEO, content, and
                     campaigns that convert.</p>
                 </div>
@@ -1485,7 +1485,7 @@ function NextGen() {
               className="absolute"
               style={{ 
                 top: '25%', 
-                left: '5%', 
+                left: '1%', 
                 width: '55%', 
                 height: '65%',
                 zIndex: 1
@@ -1523,7 +1523,7 @@ function NextGen() {
                   className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                   style={{
                     top: 'calc(25% + -22%)',
-                    left: 'calc(5% + 10%)'
+                    left: 'calc(5% + 8%)'
                   }}
                 ></div>
                 
@@ -1532,8 +1532,8 @@ function NextGen() {
                   ref={el => path3CircleRefs.current[1] = el}
                   className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                   style={{
-                    top: 'calc(25% + 60%)',
-                    left: 'calc(5% + 14%)'
+                    top: 'calc(25% + 62%)',
+                    left: 'calc(5% + 13%)'
                   }}
                 ></div>
 {/* //middle circle */}
@@ -1542,7 +1542,7 @@ function NextGen() {
                   className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
                   style={{
                     top: 'calc(25% + 20%)',
-                    left: 'calc(5% + 70%)'
+                    left: 'calc(5% + 73%)'
                   }}
                 ></div>
 
@@ -1555,7 +1555,7 @@ function NextGen() {
               <div
                 ref={el => journey3StepsRef.current[0] = el}
                 className="absolute"
-                style={{ right: '45%', top: '25%', transform: 'translateY(-50%)' }}
+                style={{ right: '40%', top: '25%', transform: 'translateY(-50%)' }}
               >
                 <div className="relative flex items-center justify-center">
                   {/* Hexagon */}
@@ -1592,9 +1592,9 @@ function NextGen() {
                   </div>
 
                   {/* Text Content */}
-                  <div className="text-content ml-8">
+                  <div className="text-content ml-8 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Optimize Across Touchpoints</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed max-w-sm">We refine user journeys with UX audits, mobile app
+                    <p className="text-gray-600 text-sm leading-relaxed w-80">We refine user journeys with UX audits, mobile app
                       enhancements, eCommerce upgrades, and
                       performance tuning.</p>
                   </div>
@@ -1605,11 +1605,11 @@ function NextGen() {
               <div
                 ref={el => journey3StepsRef.current[1] = el}
                 className="absolute"
-                style={{ left: '2%', top: '50%', transform: 'translateY(-50%)' }}
+                style={{ left: '-5%', top: '50%', transform: 'translateY(-50%)' }}
               >
                 <div className="relative flex items-center justify-center">
                   {/* Text Content */}
-                  <div className="text-content mr-32">
+                  <div className="text-content mr-32 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Support & Sustain</h3>
                     <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Post-launch isn’t the end. It’s where we scale,
                       monitor, support, and evolve your digital assets
@@ -1655,7 +1655,7 @@ function NextGen() {
               <div
                 ref={el => journey3StepsRef.current[2] = el}
                 className="absolute"
-                style={{ right: '45%', bottom: '15%', transform: 'translateY(50%)' }}
+                style={{ right: '40%', bottom: '15%', transform: 'translateY(50%)' }}
               >
                 <div className="relative flex items-center justify-center">
                   {/* Hexagon */}
@@ -1692,9 +1692,9 @@ function NextGen() {
                   </div>
 
                   {/* Text Content */}
-                  <div className="text-content ml-8">
+                  <div className="text-content ml-8 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Scale & Evolve</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Tech grows. You grow. And we grow with you.</p>
+                    <p className="text-gray-600 text-sm leading-relaxed w-80">Tech grows. You grow. And we grow with you.</p>
                   </div>
                 </div>
               </div>

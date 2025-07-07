@@ -4,8 +4,43 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { X, Info, Lightbulb, Building2, GraduationCap, Bot, BookOpen } from "lucide-react"
 import Image from "next/image"
+import { FloatingNav } from "@/components/ui/floating-navbar"
 
 gsap.registerPlugin(ScrollTrigger)
+
+// Navigation items for FloatingNav
+const navItems = [
+  {
+    name: "About",
+    link: "#about",
+    icon: <Info className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  },
+  {
+    name: "Solutions", 
+    link: "#solutions",
+    icon: <Lightbulb className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  },
+  {
+    name: "Industries",
+    link: "#industries", 
+    icon: <Building2 className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  },
+  {
+    name: "Expertise",
+    link: "#expertise",
+    icon: <GraduationCap className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  },
+  {
+    name: "AI",
+    link: "#ai",
+    icon: <Bot className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  },
+  {
+    name: "Resources", 
+    link: "#resources",
+    icon: <BookOpen className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  },
+]
 
 const AnimatedNavbar = ({
   items = [
@@ -47,6 +82,7 @@ const AnimatedNavbar = ({
   const fullscreenMenuRef = useRef(null)
   const menuItemsRef = useRef(null)
   const heroLogoRef = useRef(null)
+  const heroMenuRef = useRef(null)
   const letsTalkRef = useRef(null)
   const customCursorRef = useRef(null)
   const cursorIconRef = useRef(null)
@@ -54,13 +90,13 @@ const AnimatedNavbar = ({
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isHeroVisible, setIsHeroVisible] = useState(() => {
-    // Check initial hero visibility on mount - only show in first screen area
     if (typeof window !== "undefined") {
       return window.scrollY < (window.innerHeight * 0.8)
     }
     return true
   })
   const heroVisibleRef = useRef(isHeroVisible)
+  const [currentHoveredIcon, setCurrentHoveredIcon] = useState(null)
   
   // Check if device is mobile
   useEffect(() => {
@@ -78,7 +114,6 @@ const AnimatedNavbar = ({
   useEffect(() => {
     heroVisibleRef.current = isHeroVisible
     
-    // Fallback scroll listener to ensure visibility detection always works
     const handleScroll = () => {
       const heroVisible = window.scrollY < (window.innerHeight * 0.8)
       
@@ -87,10 +122,20 @@ const AnimatedNavbar = ({
         setIsHeroVisible(heroVisible)
         
         const heroLogo = heroLogoRef.current
+        const heroMenu = heroMenuRef.current
         const letsTalk = letsTalkRef.current
         
         if (heroLogo) {
           gsap.to(heroLogo, {
+            opacity: heroVisible ? 1 : 0,
+            y: heroVisible ? 0 : -20,
+            duration: 0.3,
+            ease: "power2.out",
+          })
+        }
+        
+        if (heroMenu) {
+          gsap.to(heroMenu, {
             opacity: heroVisible ? 1 : 0,
             y: heroVisible ? 0 : -20,
             duration: 0.3,
@@ -115,7 +160,6 @@ const AnimatedNavbar = ({
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
-  const [currentHoveredIcon, setCurrentHoveredIcon] = useState(null)
 
   // Custom cursor movement
   useEffect(() => {
@@ -141,21 +185,29 @@ const AnimatedNavbar = ({
     const fullscreenMenu = fullscreenMenuRef.current
     const menuItems = menuItemsRef.current
     const heroLogo = heroLogoRef.current
+    const heroMenu = heroMenuRef.current
     const letsTalk = letsTalkRef.current
+    
     if (!navbar || !hamburger || !fullscreenMenu || !menuItems) return
 
-    // Initial animations
+    // Initial animations for hero elements
     gsap.fromTo(navbar, { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" })
 
-    // Check if we're initially in hero section - only first screen area
+    // Check if we're initially in hero section
     const initiallyInHero = window.scrollY < (window.innerHeight * 0.8)
     heroVisibleRef.current = initiallyInHero
 
-    // Animate hero logo and let's talk button only if in hero section
+    // Animate hero elements only if in hero section
     if (heroLogo && initiallyInHero) {
       gsap.fromTo(heroLogo, { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power3.out" })
     } else if (heroLogo) {
       gsap.set(heroLogo, { opacity: 0 })
+    }
+
+    if (heroMenu && initiallyInHero) {
+      gsap.fromTo(heroMenu, { y: -50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.4, ease: "power3.out" })
+    } else if (heroMenu) {
+      gsap.set(heroMenu, { opacity: 0 })
     }
 
     if (letsTalk && initiallyInHero) {
@@ -171,16 +223,24 @@ const AnimatedNavbar = ({
       end: "bottom bottom",
       onUpdate: (self) => {
         const scrolled = self.scroll() > 50
-        // More precise hero detection - only show in the first/hero section
         const heroVisible = self.scroll() < (window.innerHeight * 0.8)
 
-        // Handle hero elements visibility - Always update, don't rely on state comparison
+        // Handle hero elements visibility
         if (heroVisible !== heroVisibleRef.current) {
           heroVisibleRef.current = heroVisible
           setIsHeroVisible(heroVisible)
 
           if (heroLogo) {
             gsap.to(heroLogo, {
+              opacity: heroVisible ? 1 : 0,
+              y: heroVisible ? 0 : -20,
+              duration: 0.3,
+              ease: "power2.out",
+            })
+          }
+
+          if (heroMenu) {
+            gsap.to(heroMenu, {
               opacity: heroVisible ? 1 : 0,
               y: heroVisible ? 0 : -20,
               duration: 0.3,
@@ -198,7 +258,7 @@ const AnimatedNavbar = ({
           }
         }
 
-        // Handle navbar transformation - ONLY for mobile devices
+        // Handle mobile navbar transformation
         if (isMobile && scrolled !== isScrolled) {
           setIsScrolled(scrolled)
 
@@ -211,7 +271,7 @@ const AnimatedNavbar = ({
               backgroundColor: "rgba(255, 255, 255, 0.1)",
               backdropFilter: "blur(20px)",
               padding: "0",
-              left: "calc(100% - 100px)", // Position to the right
+              left: "calc(100% - 100px)",
               transform: "translateX(0)",
               duration: 0.6,
               ease: "power3.out",
@@ -241,8 +301,8 @@ const AnimatedNavbar = ({
               borderRadius: "50px",
               backgroundColor: "rgba(255, 255, 255, 0.1)",
               backdropFilter: "blur(20px)",
-              padding: "1.5rem 3rem",
-              left: "calc(50% + 40px)",
+              padding: "1rem 2rem",
+              left: "50%",
               transform: "translateX(-50%)",
               duration: 0.6,
               ease: "power3.out",
@@ -278,19 +338,22 @@ const AnimatedNavbar = ({
     document.addEventListener("keydown", handleKeyDown)
 
     return () => {
-      // Only kill the navbar's ScrollTrigger, not all ScrollTriggers
       if (navbarScrollTrigger) {
         navbarScrollTrigger.kill()
       }
       document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [isScrolled, isMenuOpen, isMobile]) // Added isMobile to dependencies
+  }, [isScrolled, isMenuOpen, isMobile])
 
   const toggleMenu = () => {
     const fullscreenMenu = fullscreenMenuRef.current
     const menuItems = menuItemsRef.current
     const hamburger = hamburgerRef.current
     const cursor = customCursorRef.current
+    const heroLogo = heroLogoRef.current
+    const heroMenu = heroMenuRef.current
+    const letsTalk = letsTalkRef.current
+    
     if (!fullscreenMenu || !menuItems || !hamburger) return
 
     if (!isMenuOpen) {
@@ -303,9 +366,9 @@ const AnimatedNavbar = ({
         gsap.fromTo(cursor, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "back.out(1.7)" })
       }
 
-      // Hide logo and let's talk button
-      if (heroLogoRef.current) {
-        gsap.to(heroLogoRef.current, {
+      // Hide hero elements
+      if (heroLogo) {
+        gsap.to(heroLogo, {
           opacity: 0,
           scale: 0.8,
           duration: 0.3,
@@ -313,8 +376,17 @@ const AnimatedNavbar = ({
         })
       }
 
-      if (letsTalkRef.current) {
-        gsap.to(letsTalkRef.current, {
+      if (heroMenu) {
+        gsap.to(heroMenu, {
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.3,
+          ease: "power2.out",
+        })
+      }
+
+      if (letsTalk) {
+        gsap.to(letsTalk, {
           opacity: 0,
           scale: 0.8,
           duration: 0.3,
@@ -363,7 +435,7 @@ const AnimatedNavbar = ({
         }
       )
 
-      // Animate menu items with advanced staggered entrance
+      // Animate menu items with staggered entrance
       gsap.fromTo(
         fullscreenMenu.querySelectorAll(".menu-item"),
         {
@@ -386,42 +458,6 @@ const AnimatedNavbar = ({
         }
       )
 
-      // Animate icons separately with bounce effect (no rotation)
-      gsap.fromTo(
-        fullscreenMenu.querySelectorAll(".menu-item .icon-container"),
-        {
-          scale: 0,
-          opacity: 0,
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          delay: 0.8,
-          ease: "elastic.out(1, 0.5)",
-        }
-      )
-
-      // Animate text with typewriter effect
-      gsap.fromTo(
-        fullscreenMenu.querySelectorAll(".menu-text"),
-        {
-          opacity: 0,
-          x: 50,
-          skewX: 15,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          skewX: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          delay: 0.9,
-          ease: "power2.out",
-        }
-      )
-
       // Animate separator lines with glow effect
       gsap.fromTo(
         fullscreenMenu.querySelectorAll(".separator-line"),
@@ -441,17 +477,6 @@ const AnimatedNavbar = ({
         }
       )
 
-      // Add continuous floating animation for menu items
-      gsap.to(fullscreenMenu.querySelectorAll(".menu-item"), {
-        y: "random(-10, 10)",
-        duration: "random(3, 5)",
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: "random(0, 2)",
-      })
-
-
     } else {
       document.body.style.overflow = "auto"
 
@@ -466,9 +491,9 @@ const AnimatedNavbar = ({
         })
       }
 
-      // Show logo and let's talk button again (only if in hero section)
-      if (heroLogoRef.current && heroVisibleRef.current) {
-        gsap.to(heroLogoRef.current, {
+      // Show hero elements again (only if in hero section)
+      if (heroLogo && heroVisibleRef.current) {
+        gsap.to(heroLogo, {
           opacity: 1,
           scale: 1,
           duration: 0.4,
@@ -477,8 +502,8 @@ const AnimatedNavbar = ({
         })
       }
 
-      if (letsTalkRef.current && heroVisibleRef.current) {
-        gsap.to(letsTalkRef.current, {
+      if (heroMenu && heroVisibleRef.current) {
+        gsap.to(heroMenu, {
           opacity: 1,
           scale: 1,
           duration: 0.4,
@@ -487,7 +512,17 @@ const AnimatedNavbar = ({
         })
       }
 
-      // Animate menu items out with advanced staggered exit
+      if (letsTalk && heroVisibleRef.current) {
+        gsap.to(letsTalk, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.4,
+          delay: 0.2,
+          ease: "power2.out",
+        })
+      }
+
+      // Animate menu items out
       gsap.to(fullscreenMenu.querySelectorAll(".menu-item"), {
         x: -200,
         opacity: 0,
@@ -498,28 +533,6 @@ const AnimatedNavbar = ({
         stagger: 0.06,
         ease: "power3.in",
       })
-
-      // Animate icons out separately (no rotation)
-      gsap.to(fullscreenMenu.querySelectorAll(".icon-container"), {
-        scale: 0,
-        opacity: 0,
-        duration: 0.3,
-        stagger: 0.05,
-        ease: "power2.in",
-      })
-
-      // Animate text out with skew effect
-      gsap.to(fullscreenMenu.querySelectorAll(".menu-text"), {
-        opacity: 0,
-        x: -100,
-        skewX: -20,
-        duration: 0.4,
-        stagger: 0.05,
-        ease: "power2.in",
-      })
-
-      // Kill continuous animations
-      gsap.killTweensOf(fullscreenMenu.querySelectorAll(".menu-item"))
 
       // Animate separator lines out
       gsap.to(fullscreenMenu.querySelectorAll(".separator-line"), {
@@ -605,27 +618,16 @@ const AnimatedNavbar = ({
     }
   }
 
-  const getIconComponent = (itemName) => {
-    switch (itemName) {
-      case "About":
-        return Info
-      case "Solutions":
-        return Lightbulb
-      case "Industries":
-        return Building2
-      case "Expertise":
-        return GraduationCap
-      case "AI":
-        return Bot
-      case "Resources":
-        return BookOpen
-      default:
-        return Info
-    }
-  }
-
   return (
     <>
+      {/* FloatingNav for Desktop - Shows in non-hero sections */}
+      <div className="hidden md:block">
+        <FloatingNav
+          navItems={navItems}
+          className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl"
+        />
+      </div>
+
       {/* Custom Cursor - Only shows when hovering menu items */}
       <div
         ref={customCursorRef}
@@ -649,7 +651,7 @@ const AnimatedNavbar = ({
         </div>
       </div>
 
-      {/* Hero Logo - Top Left */}
+      {/* Hero Logo - Top Left - Separate Element */}
       <div ref={heroLogoRef} className="fixed top-12 left-12 z-50 transition-all duration-300">
         <div className="flex items-center">
           <Image
@@ -662,7 +664,38 @@ const AnimatedNavbar = ({
         </div>
       </div>
 
-      {/* Let's Talk Button - Top Right */}
+      {/* Hero Menu Items - Top Center - Separate Element */}
+      <div ref={heroMenuRef} className="hidden md:block fixed top-12 z-50 transition-all duration-300" style={{ left: "50%", transform: "translateX(-50%)" }}>
+        <div 
+          className="flex items-center gap-8 py-4 px-8 rounded-full"
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            backdropFilter: "blur(20px)",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+          }}
+        >
+          {items.map((item, index) => (
+            <a
+              key={index}
+              href={item.href}
+              className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-2 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full"
+              onClick={(e) => {
+                e.preventDefault()
+                const element = document.querySelector(item.href)
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth" })
+                }
+              }}
+            >
+              {item.name}
+              <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#2acbec] group-hover:w-full transition-all duration-300"></div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Let's Talk Button - Top Right - Separate Element */}
       <div ref={letsTalkRef} className="fixed top-12 right-12 z-30 transition-all duration-300">
         <button
           className="bg-[#2acbec] hover:bg-[#1fb8d9] text-white font-bold p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl"
@@ -677,62 +710,29 @@ const AnimatedNavbar = ({
         </button>
       </div>
 
-      {/* Main Navbar */}
+      {/* Mobile Scroll Navbar - Only shows on scroll for mobile */}
       <nav
         ref={navRef}
-        className="fixed top-6 z-40 transition-all duration-300"
+        className="fixed top-6 z-40 transition-all duration-300 md:hidden"
         style={{
-          left: "calc(50% + 40px)",
+          left: "50%",
           transform: "translateX(-50%)",
           backgroundColor: "rgba(255, 255, 255, 0.1)",
           backdropFilter: "blur(20px)",
           border: "1px solid rgba(255, 255, 255, 0.2)",
           borderRadius: "50px",
-          padding: "1.5rem 3rem",
+          padding: "1rem 2rem",
           boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
         }}
       >
-        {/* Full Navbar Content - No Logo */}
-        <div className="nav-content flex items-center justify-between w-full">
-          <div className="hidden md:flex items-center justify-center gap-10 w-full">
-            {items.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-3 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full"
-                onClick={(e) => {
-                  e.preventDefault()
-                  const element = document.querySelector(item.href)
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" })
-                  }
-                }}
-              >
-                {item.name}
-                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#2acbec] group-hover:w-full transition-all duration-300"></div>
-              </a>
-            ))}
-          </div>
-          
-          {/* Mobile Hamburger Menu - Always visible on small screens, positioned right */}
-          <div className="md:hidden flex items-center justify-end w-full">
-            <div
-              className="cursor-pointer p-2"
-              onClick={toggleMenu}
-            >
-              <div className="flex flex-col gap-1.5">
-                <div className="w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
-                <div className="w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
-                <div className="w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
-              </div>
-            </div>
-          </div>
+        <div className="nav-content flex items-center justify-center">
+          <span className="text-gray-800 font-semibold">Menu</span>
         </div>
 
-        {/* Hamburger Menu (Hidden Initially) - Positioned to the Right - MOBILE ONLY */}
+        {/* Hamburger Menu (Hidden Initially) - Shows on scroll */}
         <div
           ref={hamburgerRef}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer opacity-0 scale-75 z-50 md:hidden"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer opacity-0 scale-75 z-50"
           onClick={toggleMenu}
         >
           <div className="flex flex-col gap-1.5">
@@ -743,12 +743,11 @@ const AnimatedNavbar = ({
         </div>
       </nav>
 
-      {/* Fullscreen Menu - Left Aligned */}
+      {/* Fullscreen Menu */}
       <div
         ref={fullscreenMenuRef}
         className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl hidden overflow-hidden"
         onClick={(e) => {
-          // Close menu if clicking on the background (not on menu items)
           if (e.target === fullscreenMenuRef.current) {
             toggleMenu()
           }
@@ -832,7 +831,6 @@ const AnimatedNavbar = ({
                   onClick={(e) => {
                     e.preventDefault()
 
-                    // Click animation
                     const item = e.currentTarget
                     gsap.to(item, {
                       scale: 0.95,
@@ -876,11 +874,6 @@ const AnimatedNavbar = ({
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Close instruction */}
-        <div className="absolute bottom-6 left-6 text-white/60" style={{ fontSize: "clamp(0.75rem, 1.5vw, 1rem)" }}>
-          {/* <p>Press ESC or click outside to close</p> */}
         </div>
       </div>
     </>
