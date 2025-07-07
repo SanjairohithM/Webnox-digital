@@ -74,10 +74,10 @@ export default function Component() {
       scrollTrigger: {
         trigger: stickyRef.current,
         start: "top top",
-        end: "+=200%",
+        end: "+=300%",
         pin: true,
         pinSpacing: true,
-        scrub: 1,
+        scrub: 2.5,
         markers: false,
       },
     })
@@ -267,7 +267,7 @@ export default function Component() {
     const solutionsGridContainer = document.createElement("div")
     solutionsGridContainer.className = "solutions-grid-container absolute w-full h-full"
     solutionsGridContainer.innerHTML = `
-      <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-24 pb-8 px-8 overflow-y-auto">
+      <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-40 pb-8 px-8 overflow-y-auto">
         <div class="w-full">
           <div class="grid grid-cols-3 gap-x-10 gap-y-24  w-[95vw] ">
             ${solutions.map((solution, index) => `
@@ -412,7 +412,7 @@ export default function Component() {
     
     shrinkTextStage.to(".solutions-text-container", {
       scale: 0.4,
-      top: "5%",
+      top: "12%",
       left: "45%",
       xPercent: -50,
       duration: 0.8,

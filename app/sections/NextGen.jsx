@@ -269,9 +269,9 @@ function NextGen() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=200%",
+        end: "+=350%",
         pin: true,
-        scrub: 2,
+        scrub: 4,
         // markers: true
       }
     });
