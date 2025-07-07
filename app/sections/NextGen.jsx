@@ -269,9 +269,9 @@ function NextGen() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=350%",
+        end: "+=500%",
         pin: true,
-        scrub: 4,
+        scrub: 8,
         // markers: true
       }
     });
@@ -950,7 +950,7 @@ function NextGen() {
         ease: "power1.out"
       }, "-=1");
 
-    timeline.timeScale(0.3);
+    timeline.timeScale(0.15);
 
   }, []);
 
@@ -1324,7 +1324,7 @@ function NextGen() {
             <div
               ref={el => journey2StepsRef.current[0] = el}
               className="absolute"
-              style={{ left: '20%', top: '25%', transform: 'translateY(-50%)' }}
+              style={{ left: '20%', top: '15%', transform: 'translateY(-50%)' }}
             >
               <div className="relative flex items-center justify-center">
                 {/* Text Content */}

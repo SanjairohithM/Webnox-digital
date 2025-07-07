@@ -267,11 +267,11 @@ export default function Component() {
     const solutionsGridContainer = document.createElement("div")
     solutionsGridContainer.className = "solutions-grid-container absolute w-full h-full"
     solutionsGridContainer.innerHTML = `
-      <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-14 pb-8 px-8 overflow-y-auto">
+      <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-17 pb-8 px-8 overflow-y-auto">
         <div class="w-full">
           <div class="grid grid-cols-3 gap-x-10 gap-y-24  w-[95vw] ">
             ${solutions.map((solution, index) => `
-              <div class="solution-card flex items-start gap-6 group opacity-0" data-index="${index}">
+              <div class="solution-card flex items-start gap-15 group opacity-0" data-index="${index}">
                 <div class="w-[140px] h-[140px] relative flex-shrink-0 transition-all duration-300">
                   <img src="${solution.image}" alt="${solution.title}" class="w-full h-full object-contain" />
                 </div>
