@@ -74,10 +74,10 @@ export default function Component() {
       scrollTrigger: {
         trigger: stickyRef.current,
         start: "top top",
-        end: "+=300%",
+        end: "+=450%",
         pin: true,
         pinSpacing: true,
-        scrub: 2.5,
+        scrub: 4,
         markers: false,
       },
     })
@@ -400,12 +400,12 @@ export default function Component() {
       {
         opacity: 1,
         y: 0,
-        duration: 0.6,
+        duration: 0.3,
       },
     )
 
     // Add a pause duration
-    solutionsStage.to({}, { duration: 1 }) // This creates a pause
+    solutionsStage.to({}, { duration: 0.4 }) // This creates a pause
 
     // Add new stage: Shrink and move "OUR SOLUTIONS" text to top as title
     const shrinkTextStage = gsap.timeline()
@@ -415,7 +415,7 @@ export default function Component() {
       top: "5%",
       left: "45%",
       xPercent: -50,
-      duration: 0.8,
+      duration: 0.4,
       ease: "power2.inOut",
     })
     
@@ -423,22 +423,22 @@ export default function Component() {
     shrinkTextStage.to(".solutions-text-container > div", {
       gap: "1vw",
       marginLeft: "0vw",
-      duration: 0.8,
+      duration: 0.4,
       ease: "power2.inOut",
     }, "<")
 
     // Fade in solutions grid background
     shrinkTextStage.to(solutionsGridContainer, {
       opacity: 1,
-      duration: 0.6,
+      duration: 0.3,
       ease: "power2.out",
-    }, "-=0.4")
+    }, "-=0.2")
 
     // Fade out robot
     shrinkTextStage.to(miniRobotRef.current, {
       opacity: 0,
       scale: 0.8,
-      duration: 0.6,
+      duration: 0.3,
       ease: "power2.out",
     }, "<")
 
@@ -446,17 +446,17 @@ export default function Component() {
     shrinkTextStage.to(".solution-card", {
       opacity: 1,
       y: 0,
-      duration: 0.8,
+      duration: 0.4,
       stagger: {
-        each: 0.15,
+        each: 0.08,
         grid: [3, 3],
         from: "start"
       },
       ease: "power3.out",
-    }, "-=0.2")
+    }, "-=0.1")
 
     // Add another pause to show the final state
-    shrinkTextStage.to({}, { duration: 2 })
+    shrinkTextStage.to({}, { duration: 0.8 })
 
     // Create final fade out stage
     const fadeOutStage = gsap.timeline()
@@ -465,7 +465,7 @@ export default function Component() {
     fadeOutStage.to([".solutions-text-container", solutionsGridContainer], {
       opacity: 0.5,
       y: -50,
-      duration: 10,
+      duration: 4,
       ease: "power2.in",
       
     })
