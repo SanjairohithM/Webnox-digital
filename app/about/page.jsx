@@ -9,6 +9,8 @@ import Aboutsecond from "@/app/sections/Aboutsecond"
 import { Aboutthird } from "@/app/sections/Aboutthird"
 import Aboutfour from "@/app/sections/Aboutfour"
 import AnimatedNavbar from "@/app/sections/Components/Header/AnimatedNavbar"
+import { AnimatedTooltip } from "@/app/components/ui/animated-tooltip"
+import { User, Plus } from "lucide-react"
 gsap.registerPlugin(ScrollTrigger)
 
 function About() {
@@ -19,6 +21,34 @@ function About() {
     const statsRef = useRef(null)
     const robotRef = useRef(null)
     const redefiningSectionRef = useRef(null)
+
+    // Customer review data for animated tooltip
+    const customerReviews = [
+        {
+            id: 1,
+            name: "Sarah Johnson",
+            designation: "CEO, TechStart",
+            icon: <User className="w-6 h-6 text-gray-600" />
+        },
+        {
+            id: 2,
+            name: "Mike Chen",
+            designation: "CTO, InnovateCorp",
+            icon: <User className="w-6 h-6 text-gray-600" />
+        },
+        {
+            id: 3,
+            name: "Emma Davis",
+            designation: "Product Manager",
+            icon: <User className="w-6 h-6 text-gray-600" />
+        },
+        {
+            id: 4,
+            name: "View More",
+            designation: "Customer Reviews",
+            icon: <Plus className="w-6 h-6 text-[#25C3E5]" />
+        }
+    ]
 
     useGSAP(
         () => {
@@ -205,21 +235,13 @@ function About() {
 
                                 <div className=" flex flex-row justify-between items-center">
                                     <p className=" w-[120px] text-2xl text-gray-600">Redefining the digital</p>
-                                    <div className=" flex flex-row ">
-                                        <Image
-                                            src="/images/Line 2.png"
-                                            alt="Connection Line"
-                                            width={40}
-                                            height={2}
-                                            className="object-contain w-[220px]"
-                                        />
-                                        <Image
-                                            src="/images/Ecllipse.png"
-                                            alt="Eclipse"
-                                            width={16}
-                                            height={16}
-                                            className="object-contain w-[50px] h-[50px]"
-                                        />
+                                    <div className=" flex flex-row items-center">
+                                        {/* CSS Line */}
+                                        <div className="w-[220px] h-[2px] bg-[#25C3E5]"></div>
+                                        {/* CSS Circle with gradient */}
+                                        <div className="w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] flex items-center justify-center">
+                                            <div className="w-[20px] h-[20px] rounded-full bg-white/30 backdrop-blur-md border border-white/20"></div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -227,13 +249,10 @@ function About() {
                                     Dive into compelling narratives set in a dystopian future.
                                 </p>
 
-                                <Image
-                                    src="/images/Costumerimage.png"
-                                    alt="Customer"
-                                    width={92}
-                                    height={62}
-                                    className="w-[150px] h-[50px] object-contain"
-                                />
+                                {/* Customer Review with Animated Tooltip */}
+                                <div className="flex items-center">
+                                    <AnimatedTooltip items={customerReviews} />
+                                </div>
 
 
                             </div>
