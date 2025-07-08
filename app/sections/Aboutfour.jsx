@@ -15,38 +15,38 @@ const expertiseData = [
     title: "Brand Strategy",
     description:
       "We specialize in crafting unique brand experiences that resonate with your audience and drive long-term growth.",
-    image: "/images/expertise1.png",
+    image: "/images/expertise1.webp",
   },
   {
     id: 2,
     title: "Website Development",
     description: "We build websites that not only look great but also perform exceptionally well across all devices.",
-    image: "/images/expertise2.png",
+    image: "/images/expertise2.webp",
   },
   {
     id: 3,
     title: "SEO & Search Dominance",
     description:
       "Organic traffic is our forte. We optimize your website to rank higher and attract more qualified leads.",
-    image: "/images/expertise3.png",
+    image: "/images/expertise3.webp",
   },
   {
     id: 4,
     title: "Performance Marketing",
     description: "Data-driven campaigns that deliver measurable results and maximize your return on investment.",
-    image: "/images/expertise4.png",
+    image: "/images/expertise4.webp",
   },
   {
     id: 5,
     title: "Lead Generation",
     description: "We help you attract, nurture, and convert high-quality leads that drive business growth.",
-    image: "/images/expertise5.png",
+    image: "/images/expertise5.webp",
   },
   {
     id: 6,
     title: "Social Media That Sells",
     description: "Strategic social media campaigns that build brand awareness and drive conversions.",
-    image: "/images/expertise6.png",
+    image: "/images/expertise6.webp",
   },
 ]
 

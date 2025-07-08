@@ -190,7 +190,7 @@ function About() {
                             {/* Robot Image */}
                             <div ref={robotRef} className=" justify-self-start">
                                 <Image
-                                    src="/images/aboutrobotpng1.png"
+                                    src="/images/aboutrobotpng1.webp"
                                     alt="AI Robot with VR headset"
                                     width={800}
                                     height={1000}

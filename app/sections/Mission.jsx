@@ -14,42 +14,42 @@ const solutions = [
   {
     title: "BRANDING",
     description: "Build a brand that speaks before you do. We craft visual identities that are bold, memorable, and strategically aligned with your business goals.",
-    image: "/images/BRANDING.png"
+    image: "/images/BRANDING.webp"
   },
   {
     title: "SOFTWARE DEVELOPMENT",
     description: "From MVPs to enterprise systems — we engineer scalable, high-performance software that drives innovation and business growth.",
-    image: "/images/Software Development.png"
+    image: "/images/Software Development.webp"
   },
   {
     title: "DIGITAL MARKETING",
     description: "Reach, engage, and convert. Our data-driven marketing campaigns put your brand in front of the right audience at the right time.",
-    image: "/images/Digital Marketing.png"
+    image: "/images/Digital Marketing.webp"
   },
   {
     title: "App Development",
     description: "We design and develop mobile apps that are fast, user-friendly, and built to grow with your business. From intuitive UI/UX to powerful backend systems, our apps deliver seamless experiences across Android, iOS, and hybrid platforms.",
-    image: "/images/ECommerce Store Development.png"
+    image: "/images/ECommerce Store Development.webp"
   },
   {
     title: "WEB DEVELOPMENT",
     description: "Pixel-perfect, performance-first websites built using the latest tech — designed to impress and built to scale.",
-    image: "/images/Web Development.png"
+    image: "/images/Web Development.webp"
   },
   {
     title: "DATA & ANALYSIS",
     description: "Make every decision count. We help you turn raw data into real-time insights that drive smarter strategies and better outcomes.",
-    image: "/images/DATA & ANALYSIS.png"
+    image: "/images/DATA & ANALYSIS.webp"
   },
   {
     title: "UI UX DESIGN",
     description: "Designs that delight. Experiences that retain. We create intuitive, engaging interfaces that users love.",
-    image: "/images/ui ux design.png"
+    image: "/images/ui ux design.webp"
   },
   {
     title: "IT SUPPORT",
     description: "Stay online, always. Our proactive support keeps your systems running smoothly and securely, 24/7.",
-    image: "/images/IT SUPPORT.png"
+    image: "/images/IT SUPPORT.webp"
   }
 ];
 
@@ -405,7 +405,7 @@ export default function Component() {
     )
 
     // Add a pause duration
-    solutionsStage.to({}, { duration: 0.4 }) // This creates a pause
+    solutionsStage.to({}, { duration: 0.4 })
 
     // Add new stage: Shrink and move "OUR SOLUTIONS" text to top as title
     const shrinkTextStage = gsap.timeline()
@@ -415,40 +415,40 @@ export default function Component() {
       top: "5%",
       left: "45%",
       xPercent: -50,
-      duration: 0.4,
-      ease: "power2.inOut",
+      duration: 0.8,
+      ease: "power2.out",
     })
     
     // Animate the gap between words to become smaller
     shrinkTextStage.to(".solutions-text-container > div", {
       gap: "1vw",
       marginLeft: "0vw",
-      duration: 0.4,
-      ease: "power2.inOut",
+      duration: 0.8,
+      ease: "power2.out",
+    }, "<")
+
+    // Fade out robot completely during title transformation
+    shrinkTextStage.to(miniRobotRef.current, {
+      opacity: 0,
+      scale: 0.5,
+      duration: 0.6,
+      ease: "power2.out",
     }, "<")
 
     // Fade in solutions grid background
     shrinkTextStage.to(solutionsGridContainer, {
       opacity: 1,
-      duration: 0.3,
+      duration: 0.15,
       ease: "power2.out",
     }, "-=0.2")
-
-    // Fade out robot
-    shrinkTextStage.to(miniRobotRef.current, {
-      opacity: 0,
-      scale: 0.8,
-      duration: 0.3,
-      ease: "power2.out",
-    }, "<")
 
     // Animate solution cards in with stagger
     shrinkTextStage.to(".solution-card", {
       opacity: 1,
       y: 0,
-      duration: 0.4,
+      duration: 0.25,
       stagger: {
-        each: 0.08,
+        each: 0.05,
         grid: [3, 3],
         from: "start"
       },
@@ -456,7 +456,7 @@ export default function Component() {
     }, "-=0.1")
 
     // Add another pause to show the final state
-    shrinkTextStage.to({}, { duration: 0.8 })
+    shrinkTextStage.to({}, { duration: 0.3 })
 
     // Create final fade out stage
     const fadeOutStage = gsap.timeline()
@@ -465,7 +465,7 @@ export default function Component() {
     fadeOutStage.to([".solutions-text-container", solutionsGridContainer], {
       opacity: 0.5,
       y: -50,
-      duration: 4,
+      duration: 1.5,
       ease: "power2.in",
       
     })
@@ -531,7 +531,7 @@ export default function Component() {
                     >
                       <Image
                         ref={miniRobotRef}
-                        src="/images/robot.png"
+                        src="/images/robot.webp"
                         alt="Robot icon"
                         className="w-[61px] h-[80px] transform rotate-[-33.83deg]"
                         style={{
@@ -560,7 +560,7 @@ export default function Component() {
                     className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[24rem] rounded-4xl flex flex-col justify-center p-8"
                   >
                     <Image
-                      src="/images/robot1.png"
+                      src="/images/robot1.webp"
                       alt="Robot background"
                       className="absolute inset-0 w-full h-full object-cover rounded-4xl"
                       width={1000}
@@ -583,7 +583,7 @@ export default function Component() {
                     className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[24rem] rounded-4xl flex flex-col justify-center p-8 overflow-hidden"
                   >
                     <Image
-                      src="/images/robot2.png"
+                      src="/images/robot2.webp"
                       alt="Robot background"
                       className="absolute inset-0 w-full h-full object-cover rounded-4xl"
                       width={1000}

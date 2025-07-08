@@ -123,7 +123,7 @@ export default function Component() {
       ref={containerRef}
       className="relative min-h-screen w-full overflow-hidden"
       style={{
-        backgroundImage: "url('/images/bgimgabout.png')",
+        backgroundImage: "url('/images/bgimgabout.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -160,7 +160,7 @@ export default function Component() {
             <div ref={image1Ref} className="flex justify-center">
               <div className="relative overflow-hidden rounded-lg shadow-xl w-full max-w-md">
                 <Image
-                  src="/images/aboutimg1.png"
+                  src="/images/aboutimg1.webp"
                   alt="Team collaboration with digital interfaces"
                   width={400}
                   height={300}
@@ -180,7 +180,7 @@ export default function Component() {
             <div ref={image2Ref} className="flex justify-center">
               <div className="relative overflow-hidden rounded-lg shadow-xl w-full max-w-md">
                 <Image
-                  src="/images/aboutimg2.png"
+                  src="/images/aboutimg2.webp"
                   alt="Cloud computing visualization"
                   width={400}
                   height={300}
@@ -200,7 +200,7 @@ export default function Component() {
             <div ref={image3Ref} className="flex justify-center">
               <div className="relative overflow-hidden rounded-lg shadow-xl w-full max-w-md">
                 <Image
-                  src="/images/aboutimg3.png"
+                  src="/images/aboutimg3.webp"
                   alt="Diverse team working together"
                   width={400}
                   height={300}

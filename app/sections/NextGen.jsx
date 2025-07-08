@@ -13,7 +13,7 @@ const stats = [
     text: "Years of Proven Expertise",
     position: { left: '10%', top: '40%' },
     color: "#764ED3",
-    image: "/images/Years of Industry Experience.png",
+    image: "/images/Years of Industry Experience.webp",
     imageSize: "w-[100px] h-[100px]"
   },
   {
@@ -21,7 +21,7 @@ const stats = [
     text: " Projects Delivered",
     position: { left: '35%', top: '20%' },
     color: "#30C857",
-    image: "/images/Projects Delivered.png",
+    image: "/images/Projects Delivered.webp",
     imageSize: "w-[100px] h-[100px]"
   },
   {
@@ -29,7 +29,7 @@ const stats = [
     text: "Countries Served",
     position: { right: '15%', top: '15%' },
     color: "#4E9AD3",
-    image: "/images/Clients Across Countries.png",
+    image: "/images/Clients Across Countries.webp",
     imageSize: "w-[100px] h-[100px]"
   },
   {
@@ -37,7 +37,7 @@ const stats = [
     text: " DevOps DNA",
     position: { left: '30%', bottom: '4%' },
     color: "#4ED3C3",
-    image: "/images/Driven Workflow.png",
+    image: "/images/Driven Workflow.webp",
     imageSize: "w-[100px] h-[100px]"
   },
   {
@@ -45,7 +45,7 @@ const stats = [
     text: "Client Satisfaction",
     position: { right: '25%', bottom: '15%' },
     color: "#D34E50",
-    image: "/images/Client Satisfaction.png",
+    image: "/images/Client Satisfaction.webp",
     imageSize: "w-[100px] h-[100px]"
   },
   {
@@ -53,7 +53,7 @@ const stats = [
     text: "Scalable & Secure Solutions",
     position: { right: '5%', bottom: '40%' },
     color: "#DDA853",
-    image: "/images/safety.png",
+    image: "/images/safety.webp",
     imageSize: "w-[100px] h-[100px]"
   }
 ];
@@ -1725,7 +1725,7 @@ function NextGen() {
               }}
             >
               <Image
-                src={`/images/wait${i + 1}.png`}
+                src={`/images/wait${i + 1}.webp`}
                 alt={`Wait icon ${i + 1}`}
                 width={170}
                 height={170}

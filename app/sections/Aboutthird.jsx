@@ -163,7 +163,7 @@ export const Aboutthird = () => {
           <div ref={imageRef} className="lg:col-span-1">
             <div className="relative overflow-hidden rounded-2xl shadow-2xl h-[600px]">
               <Image
-                src="/images/thirdabout.png"
+                src="/images/thirdabout.webp"
                 alt="Team collaboration with AI brain visualization"
                 width={700}
                 height={800}
