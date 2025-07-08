@@ -25,9 +25,8 @@ export default function Home() {
 
   const handleLoaderComplete = () => {
     setIsLoading(false);
-    setTimeout(() => {
-      setShowContent(true);
-    }, 100);
+    // No delay - show content immediately to prevent empty screen
+    setShowContent(true);
   };
 
   return (

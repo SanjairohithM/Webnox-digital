@@ -11,6 +11,7 @@ export default function Component() {
   const containerRef = useRef(null)
   const titleRef = useRef(null)
   const subtitleRef = useRef(null)
+  const digitalTextRef = useRef(null)
   const image1Ref = useRef(null)
   const image2Ref = useRef(null)
   const image3Ref = useRef(null)
@@ -27,6 +28,13 @@ export default function Component() {
       gsap.set([titleRef.current, subtitleRef.current], {
         opacity: 0,
         y: -50,
+      })
+
+      // Set initial state for DIGITAL letters
+      gsap.set(".digital-letter", {
+        opacity: 0,
+        y: 30,
+        scale: 0.8,
       })
 
       // Set initial states for cards with different directions
@@ -57,13 +65,23 @@ export default function Component() {
         },
       })
 
-      // Header animations
-      tl.to(titleRef.current, {
+      // DIGITAL letters animation - letter by letter
+      tl.to(".digital-letter", {
         opacity: 1,
         y: 0,
-        duration: 1,
-        ease: "power2.out",
+        scale: 1,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+        stagger: 0.2,
       })
+        
+      // Header animations
+        .to(titleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+        }, "-=0.5")
         .to(
           subtitleRef.current,
           {
@@ -131,7 +149,15 @@ export default function Component() {
     >
       <div className="relative z-10 container mx-auto px-8 py-16 lg:py-20">
         <div className="mb-8"> 
-          <p className="text-8xl font-urbanist text-gray-200 font-bold mb-3">D I G I T A L </p>
+          <p ref={digitalTextRef} className="text-8xl font-urbanist text-gray-200 font-bold mb-3">
+            <span className="digital-letter">D</span>
+            <span className="digital-letter ml-4">I</span>
+            <span className="digital-letter ml-4">G</span>
+            <span className="digital-letter ml-4">I</span>
+            <span className="digital-letter ml-4">T</span>
+            <span className="digital-letter ml-4">A</span>
+            <span className="digital-letter ml-4">L</span>
+          </p>
 
           {/* Header Section - Left Aligned */}
           <div className="text-left mb-16">

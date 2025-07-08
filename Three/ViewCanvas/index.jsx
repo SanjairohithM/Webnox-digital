@@ -32,11 +32,11 @@ export function ViewCanvas({}) {
           position: [0, 0, 5],
         }}
       >
-        <Suspense fallback={null}>
+        {/* <Suspense fallback={null}> */}
           <View.Port />
-        </Suspense>
+        {/* </Suspense> */}
       </Canvas>
-      <Loader />
+      {/* <Loader /> */}
     </>
   );
 }

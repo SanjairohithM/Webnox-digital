@@ -53,30 +53,47 @@ const expertiseData = [
 export default function ExpertiseSection() {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const mainTitleRef = useRef(null)
   const cardsRef = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
-      gsap.fromTo(
-        titleRef.current,
-        {
-          opacity: 0,
-          y: 50,
+      // Set initial states
+      gsap.set(subtitleRef.current, {
+        opacity: 0,
+        y: -50, // Come from top
+      })
+
+      gsap.set(mainTitleRef.current, {
+        opacity: 0,
+        y: 50, // Come from bottom
+      })
+
+      // Title animations timeline
+      const headerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
         },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: titleRef.current,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      )
+      })
+
+      // "Our Expertise" from top
+      headerTl.to(subtitleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      })
+      // Main title from bottom
+      .to(mainTitleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      }, "-=0.4") // Start 0.4s before the previous animation ends
 
       // Set initial states for directional animations
       gsap.set(".left-card", {
@@ -155,8 +172,8 @@ export default function ExpertiseSection() {
       <div className="relative z-10 w-full max-w-8xl mx-auto">
         {/* Header */}
         <div ref={titleRef} className="text-center mb-32">
-          <p className="text-gray-500 text-2xl mb-8 font-urbanist tracking-wide">Our Expertise</p>
-          <h2 className="text-5xl font-urbanist font-bold text-gray-800 leading-tight max-w-6xl mx-auto">
+          <p ref={subtitleRef} className="text-gray-500 text-3xl mb-8 font-urbanist tracking-wide opacity-0">Our Expertise</p>
+          <h2 ref={mainTitleRef} className="text-5xl font-urbanist font-semibold text-gray-800 leading-tight max-w-6xl mx-auto opacity-0">
             AI That Listens, Learns, and Delivers Precision for{" "}
             <br />
             <span className="text-gray-800">Every Unique Project</span>

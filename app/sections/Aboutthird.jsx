@@ -135,7 +135,7 @@ export const Aboutthird = () => {
         <div className="mb-16">
           {/* Header */}
           <div ref={headerRef} className="mb-6">
-            <p className="text-[#25C3E5] font-urbanist text-lg font-medium tracking-wider uppercase">
+            <p className="text-[#25C3E5] font-urbanist text-xl font-medium tracking-wider uppercase">
               OUR VALUES
             </p>
           </div>
@@ -161,13 +161,13 @@ export const Aboutthird = () => {
           
           {/* Column 1 - Image */}
           <div ref={imageRef} className="lg:col-span-1">
-            <div className="relative overflow-hidden rounded-2xl shadow-2xl h-[600px]">
+            <div className="relative overflow-hidden rounded-2xl shadow-2xl ">
               <Image
                 src="/images/thirdabout.webp"
                 alt="Team collaboration with AI brain visualization"
                 width={700}
-                height={800}
-                className="w-full h-full object-cover"
+                height={300}
+                className=" object-contain"
                 priority
               />
             </div>

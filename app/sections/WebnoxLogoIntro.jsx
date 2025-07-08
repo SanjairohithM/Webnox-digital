@@ -5,17 +5,12 @@ import { Suspense, useEffect, useState } from "react";
 import WebnoxLogoScene from "@/Three/Scenes/WebnoxLogo";
 
 export default function WebnoxLogoLoader({ onComplete }) {
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Animation duration: 2s (letter b) + 2s (all meshes) + 2s (approach) + 2s (inside) = 8s
-    // Add 1s buffer for smooth transition
+    // Animation duration: 2.5s (letter b) + 2.5s (zoom) + 2.5s (enter) = 7.5s
     const timer = setTimeout(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        onComplete();
-      }, 500); // Fade out duration
-    }, 8500);
+      onComplete(); // Immediate completion - no fade
+    }, 6500); // Updated timing for slower animation
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -23,12 +18,9 @@ export default function WebnoxLogoLoader({ onComplete }) {
 
   return (
     <div 
-      className={`fixed inset-0 z-50 transition-opacity duration-500 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      }`}
+      className="fixed inset-0 z-50"
       style={{ 
         background: 'linear-gradient(135deg, #e8e0ff 0%, #e0f8ff 50%, #ffffff 100%)',
-        pointerEvents: isVisible ? 'auto' : 'none'
       }}
       
     >
@@ -41,9 +33,9 @@ export default function WebnoxLogoLoader({ onComplete }) {
         style={{ width: "100%", height: "100%" }}
         scale={2}
       >
-        <Suspense fallback={null}>
+        {/* <Suspense fallback={null}> */}
           <WebnoxLogoScene />
-        </Suspense>
+        {/* </Suspense> */}
       </Canvas>
     </div>
   );

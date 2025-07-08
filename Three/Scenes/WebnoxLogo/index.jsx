@@ -27,8 +27,8 @@ const WebnoxLogoScene = () => {
       // GSAP Timeline for staged animation
       const tl = gsap.timeline();
 
-      // Stage 1: Show only Curve003 (letter "b") for 2 seconds
-      tl.to({}, { duration: 2 }) // Wait 2 seconds
+      // Stage 1: Show only Curve003 (letter "b") for 2.5 seconds
+      tl.to({}, { duration: 2.5 }) // Slower wait time
       
       // Stage 2: Show all other meshes
       .call(() => {
@@ -39,18 +39,24 @@ const WebnoxLogoScene = () => {
         if (logoRef.current?.curve005) logoRef.current.curve005.visible = true;
       })
       
-      // Stage 3: Zoom into the "b" letter immediately
+      // Stage 3: Zoom into the "b" letter
       .to(camera.position, {
         z: 1,   // Get close to the model
-        duration: 2,
+        duration: 2.5, // Slower zoom
         ease: "power2.inOut"
       })
       
-      // Enter the "b" and stop at the entrance
+      // Enter the "b" 
       .to(camera.position, {
-        z: 0.2, // Just enter the model - stop at entrance
-        duration: 2,
+        z: 0.2, // Just enter the model
+        duration: 2.5, // Slower entry
         ease: "power2.inOut"
+      })
+      
+      // Immediate completion - no waiting
+      .call(() => {
+        // Animation complete, ready to transition
+        console.log("Logo animation complete");
       });
 
       return tl;
