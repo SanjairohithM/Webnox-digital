@@ -7,15 +7,15 @@ import { MoveUpRight } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
-
-
 const ContactPage = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        website: '',
-        message: ''
+        contactNumber: '',
+        enquiry: ''
     })
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submitStatus, setSubmitStatus] = useState('')
 
     // GSAP refs for services
     const servicesGridRef = useRef(null)
@@ -50,8 +50,39 @@ const ContactPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // Handle form submission here
-        console.log('Form submitted:', formData)
+        
+        // Validate required fields
+        if (!formData.name.trim() || !formData.email.trim() || !formData.contactNumber.trim() || !formData.enquiry.trim()) {
+            setSubmitStatus('Please fill in all required fields')
+            return
+        }
+
+        setIsSubmitting(true)
+        setSubmitStatus('')
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+
+            const result = await response.json()
+
+            if (response.ok) {
+                setSubmitStatus('Message sent successfully! We\'ll get back to you soon.')
+                setFormData({ name: '', email: '', contactNumber: '', enquiry: '' })
+            } else {
+                setSubmitStatus(result.error || 'Failed to send message. Please try again.')
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error)
+            setSubmitStatus('Network error. Please check your connection and try again.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     const handleChange = (e) => {
@@ -59,6 +90,10 @@ const ContactPage = () => {
             ...formData,
             [e.target.name]: e.target.value
         })
+        // Clear status message when user starts typing
+        if (submitStatus) {
+            setSubmitStatus('')
+        }
     }
 
     // Helper to set refs for cards
@@ -196,19 +231,20 @@ const ContactPage = () => {
                                 </div>
                                 <div>
                                     <input
-                                        type="url"
-                                        name="website"
-                                        placeholder="Website"
-                                        value={formData.website}
+                                        type="tel"
+                                        name="contactNumber"
+                                        placeholder="Contact Number"
+                                        value={formData.contactNumber}
                                         onChange={handleChange}
                                         className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                                        required
                                     />
                                 </div>
                                 <div>
                                     <textarea
-                                        name="message"
+                                        name="enquiry"
                                         placeholder="Message"
-                                        value={formData.message}
+                                        value={formData.enquiry}
                                         onChange={handleChange}
                                         rows={6}
                                         className="w-full px-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
@@ -217,10 +253,20 @@ const ContactPage = () => {
                                 </div>
                                 <button
                                     type="submit"
-                                    className="w-full bg-[#00b9ff] text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-colors"
+                                    className="w-full bg-[#00b9ff] text-white px-6 py-4 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                    disabled={isSubmitting}
                                 >
-                                    Submit
+                                    {isSubmitting ? 'Sending...' : 'Submit'}
                                 </button>
+                                {submitStatus && (
+                                    <div className={`mt-4 p-4 text-center text-sm rounded-lg ${
+                                        submitStatus.includes('successfully') 
+                                            ? 'bg-green-100 text-green-800 border border-green-200' 
+                                            : 'bg-red-100 text-red-800 border border-red-200'
+                                    }`}>
+                                        {submitStatus}
+                                    </div>
+                                )}
                             </form>
                         </div>
                     </div>
