@@ -23,6 +23,23 @@ const TECH_IMAGES = [
   { country: "Technology 13", flag: "/ShpereTextures/Group-12.png", size: "w-12 h-12" },
   { country: "Technology 14", flag: "/ShpereTextures/Group-13.png", size: "w-14 h-14" },
   { country: "Technology 15", flag: "/ShpereTextures/Group-14.png", size: "w-12 h-12" },
+  { country: "Technology 16", flag: "/ShpereTextures/Group15.png", size: "w-14 h-14" },
+  { country: "Technology 17", flag: "/ShpereTextures/Group16.png", size: "w-12 h-12" },
+  { country: "Technology 18", flag: "/ShpereTextures/Group17.png", size: "w-14 h-14" },
+  { country: "Technology 19", flag: "/ShpereTextures/Group18.png", size: "w-12 h-12" },
+  { country: "Technology 20", flag: "/ShpereTextures/Group19.png", size: "w-14 h-14" },
+  { country: "Technology 21", flag: "/ShpereTextures/Group20.png", size: "w-12 h-12" },
+  { country: "Technology 22", flag: "/ShpereTextures/Group21.png", size: "w-14 h-14" },
+  { country: "Technology 23", flag: "/ShpereTextures/Group22.png", size: "w-12 h-12" },
+  { country: "Technology 24", flag: "/ShpereTextures/Group23.png", size: "w-14 h-14" },
+  { country: "Technology 25", flag: "/ShpereTextures/Rectangle.png", size: "w-12 h-12" },
+  { country: "Technology 26", flag: "/ShpereTextures/Rectangle-1.png", size: "w-14 h-14" },
+  { country: "Technology 27", flag: "/ShpereTextures/Rectangle-2.png", size: "w-12 h-12" },
+  { country: "Technology 28", flag: "/ShpereTextures/Rectangle-3.png", size: "w-14 h-14" },
+  { country: "Technology 29", flag: "/ShpereTextures/Rectangle-4.png", size: "w-12 h-12" },
+  { country: "Technology 30", flag: "/ShpereTextures/Rectangle-5.png", size: "w-14 h-14" },
+  { country: "Technology 31", flag: "/ShpereTextures/Rectangle-6.png", size: "w-12 h-12" },
+  { country: "Technology 32", flag: "/ShpereTextures/Clip path group.png", size: "w-14 h-14" },
 ]
 
 function TechImage({ 

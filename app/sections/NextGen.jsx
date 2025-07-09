@@ -35,7 +35,7 @@ const stats = [
   {
     number: "Agile + ",
     text: " DevOps DNA",
-    position: { left: '30%', bottom: '4%' },
+    position: { left: '30%', bottom: '-5%' },
     color: "#4ED3C3",
     image: "/images/Driven Workflow.webp",
     imageSize: "w-[100px] h-[100px]"
@@ -43,7 +43,7 @@ const stats = [
   {
     number: "4.9★",
     text: "Client Satisfaction",
-    position: { right: '25%', bottom: '15%' },
+    position: { right: '25%', bottom: '-5%' },
     color: "#D34E50",
     image: "/images/Client Satisfaction.webp",
     imageSize: "w-[100px] h-[100px]"
@@ -51,7 +51,7 @@ const stats = [
   {
     number: "100%",
     text: "Scalable & Secure Solutions",
-    position: { right: '5%', bottom: '40%' },
+    position: { right: '-2%', bottom: '30%' },
     color: "#DDA853",
     image: "/images/safety.webp",
     imageSize: "w-[100px] h-[100px]"
@@ -269,29 +269,29 @@ function NextGen() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=500%",
+        end: "+=800%",
         pin: true,
-        scrub: 8,
+        scrub: 3,
         // markers: true
       }
     });
 
-    // Stage 1: Fade in text
+    // Stage 1: Head text appears (first scroll)
     timeline.from(headingRef.current, {
       opacity: 0,
       y: 50,
       scale: 1,
-      duration: 2
+      duration: 1.5
     });
 
-    // Stage 2: Zoom out text slightly and bring in cards
+    // Stage 2: All 6 stats cards appear slowly one by one (second scroll)
     timeline.to(headingRef.current, {
       scale: 0.85,
-      duration: 2,
+      duration: 1,
       ease: "power2.inOut"
     });
 
-    // Cards appear and move to their positions
+    // Cards appear and move to their positions one by one
     cardsRef.current.forEach((card, index) => {
       const position = stats[index].position;
       timeline.to(card, {
@@ -299,18 +299,19 @@ function NextGen() {
         scale: 1,
         x: position.left || position.right || "0%",
         y: position.top || position.bottom || "0%",
-        duration: 2,
-        ease: "power2.out",
-      }, "-=1.5");
+        duration: 1.2,
+        ease: "power3.out"
+      }, `+=${index === 0 ? 0 : 0.8}`); // 0.8 second delay between each card
     });
 
-    // Stage 3: Stack cards in center and fade out text
+    // Stage 3: All cards stack in center (third scroll)
     timeline
+      .to({}, { duration: 2 }) // Hold cards in position
       .to(headingRef.current, {
         opacity: 0,
         scale: 0.7,
-        duration: 2,
-        ease: "power2.inOut"
+        duration: 3,
+        ease: "power3.inOut"
       })
       .to(cardsRef.current, {
         xPercent: -50,
@@ -322,8 +323,8 @@ function NextGen() {
         x: 0,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "power2.inOut"
+        duration: 4,
+        ease: "power3.inOut"
       })
       .to(cardsRef.current, {
         z: (i) => -i * 10,
@@ -331,32 +332,33 @@ function NextGen() {
         rotateY: 0,
         rotateZ: 0,
         scale: 1,
-        duration: 2,
+        duration: 3,
         stagger: {
-          each: 0.2,
+          each: 0.6,
           from: "end"
         },
-        ease: "power2.inOut"
+        ease: "power3.inOut"
       });
 
     // Stage 4: Move cards up and fade out, bring in final text
     timeline
+      .to({}, { duration: 3 }) // Hold stacked cards
       .to(cardsRef.current, {
         y: "-100%",
         opacity: 0,
         scale: 0.8,
-        duration: 3,
+        duration: 4,
         stagger: {
-          each: 0.3,
+          each: 0.8,
           from: "end"
         },
-        ease: "power1.inOut"
+        ease: "power2.inOut"
       })
       .to(finalTextRef.current, {
         opacity: 1,
         y: 0,
         duration: 3,
-        ease: "power1.out"
+        ease: "power2.out"
       }, "-=2");
 
     // Stage 5: Transition to "if you wait" text and warning sequence
@@ -386,8 +388,8 @@ function NextGen() {
       }, "+=1")
       .to(waitImagesRef.current, {
         opacity: 0.6,
-        duration: 2,
-        ease: "power1.out"
+        duration: 3,
+        ease: "power2.out"
       }, "<")
 
       // Step 2: Warning text 1 appears, images STAY IN LEFT/RIGHT GRIDS
@@ -397,6 +399,7 @@ function NextGen() {
         duration: 2,
         ease: "power2.out"
       }, "+=1")
+      // Smooth movement to grid positions in one step
       .to(waitImagesRef.current, {
         left: (i) => {
           // LEFT GRID: 0-33% | RIGHT GRID: 67-100% | CENTER GRID: 33-67% (TEXT ONLY)
@@ -406,8 +409,18 @@ function NextGen() {
             return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID ONLY
           }
         },
-        duration: 2,
-        ease: "power2.out"
+        top: (i) => {
+          const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+          const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+
+          if (i < 6) {
+            return leftPositions[i];
+          } else {
+            return rightPositions[i - 6];
+          }
+        },
+        duration: 6,
+        ease: "power2.inOut"
       }, "<")
 
       // Step 3: Warning text 2 appears, images stay in grids
@@ -433,6 +446,7 @@ function NextGen() {
         duration: 2,
         ease: "power2.out"
       }, "+=1")
+      // Move images to surround text with gradual positioning
       .to(waitImagesRef.current, {
         left: (i) => {
           // SURROUND text with BIG GAPS - stay in grids
@@ -453,9 +467,9 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 2,
-        ease: "power2.out"
-      }, "<")
+        duration: 4,
+        ease: "power2.inOut"
+      }, "+=1")
 
       // SECOND SCROLL: SUCCESS PHASE
 
@@ -472,6 +486,7 @@ function NextGen() {
       .to(centerHeadingRef.current, {
         opacity: 1,
         x: 0,
+        y: -20,
         duration: 2,
         ease: "power2.out"
       })
@@ -489,6 +504,7 @@ function NextGen() {
         duration: 2,
         ease: "power2.out"
       }, "<0.5")
+      // Start pyramid formation - move top images first
       .to(waitImagesRef.current, {
         opacity: 1,
         left: (i) => {
@@ -516,9 +532,9 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 2,
-        ease: "power2.out"
-      }, "<")
+        duration: 4,
+        ease: "power2.inOut"
+      }, "+=1")
 
       // Step 7: Success text 2 appears, ADD MIDDLE STEP (2 images each side)
       .to(warningRefs.current[1], {
@@ -533,6 +549,7 @@ function NextGen() {
         duration: 2,
         ease: "power2.out"
       }, "<0.5")
+      // Add middle step to pyramid
       .to(waitImagesRef.current, {
         left: (i) => {
           // STEP 2: Top step + Middle step
@@ -566,9 +583,9 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 2,
-        ease: "power2.out"
-      }, "<")
+        duration: 4,
+        ease: "power2.inOut"
+      }, "+=1")
 
       // Step 8: Success text 3 appears, ALMOST COMPLETE PYRAMID (add more to bottom)
       .to(warningRefs.current[2], {
@@ -583,6 +600,7 @@ function NextGen() {
         duration: 2,
         ease: "power2.out"
       }, "<0.5")
+      // Add partial bottom step to pyramid
       .to(waitImagesRef.current, {
         left: (i) => {
           // STEP 3: Top + Middle + Partial Bottom
@@ -624,9 +642,9 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 2,
-        ease: "power2.out"
-      }, "<")
+        duration: 4,
+        ease: "power2.inOut"
+      }, "+=1")
 
       // Step 9: Success text 4 appears, COMPLETE PYRAMID (all images in formation)
       .to(warningRefs.current[3], {
@@ -641,6 +659,7 @@ function NextGen() {
         duration: 2,
         ease: "power2.out"
       }, "<0.5")
+      // Complete the pyramid formation
       .to(waitImagesRef.current, {
         left: (i) => {
           // FINAL STEP: COMPLETE PYRAMID FORMATION (original perfect positions)
@@ -664,15 +683,15 @@ function NextGen() {
           return "50%"; // Fallback center
         },
         top: (i) => {
-          // PYRAMID HEIGHTS (3 levels) - original perfect positions
-          if (i === 0 || i === 6) return "30%"; // Top step
-          if (i === 1 || i === 2 || i === 7 || i === 8) return "45%"; // Middle step
-          if (i === 3 || i === 4 || i === 5 || i === 9 || i === 10 || i === 11) return "60%"; // Bottom step
+          // PYRAMID HEIGHTS (3 levels) - adjusted for better spacing
+          if (i === 0 || i === 6) return "25%"; // Top step - moved up
+          if (i === 1 || i === 2 || i === 7 || i === 8) return "42%"; // Middle step - same
+          if (i === 3 || i === 4 || i === 5 || i === 9 || i === 10 || i === 11) return "59%"; // Bottom step - moved down
           return "50%"; // Fallback center
         },
-        duration: 3,
-        ease: "power2.out"
-      }, "<");
+        duration: 5,
+        ease: "power2.inOut"
+      }, "+=1");
 
     // Stage 6: Fade out all elements with custom pyramid animation
     timeline
@@ -695,10 +714,10 @@ function NextGen() {
         opacity: 0,
         y: "100px",
         scale: 0.5,
-        duration: 6,
-        ease: "power1.inOut",
+        duration: 8,
+        ease: "power2.inOut",
         stagger: {
-          each: 0.2,
+          each: 0.4,
           from: "start"
         }
       }, "<")
@@ -708,10 +727,10 @@ function NextGen() {
         opacity: 0,
         y: "100px",
         scale: 0.5,
-        duration: 6,
-        ease: "power1.inOut",
+        duration: 8,
+        ease: "power2.inOut",
         stagger: {
-          each: 0.2,
+          each: 0.4,
           from: "start"
         }
       }, "<")
@@ -950,7 +969,8 @@ function NextGen() {
         ease: "power1.out"
       }, "-=1");
 
-    timeline.timeScale(0.15);
+    // Remove timeScale since we're using scrub now
+    // timeline.timeScale(0.05);
 
   }, []);
 
@@ -961,6 +981,7 @@ function NextGen() {
         <h1
           ref={headingRef}
           className="text-[42px] font-normal font-urbanist text-center leading-[1.3] max-w-[800px] text-black absolute z-10"
+          style={{ fontFamily: 'var(--font-urbanist)' }}
         >
           Next-gen software solutions that elevate your business to stay ahead of change!
 
@@ -969,26 +990,30 @@ function NextGen() {
         {/* Current Final Text */}
         <div
           ref={finalTextRef}
-          className="absolute z-20 text-center text-black"
+          className="absolute text-center text-black"
+          style={{ zIndex: 25 }}
         >
-          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3] mb-4">
+          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3] mb-4" style={{ fontFamily: 'var(--font-urbanist)' }}>
             Don't be the business that ignores AI.
           </h2>
-          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3]">
+          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3]" style={{ fontFamily: 'var(--font-urbanist)' }}>
             Be the brand that leads the industry.
           </h2>
         </div>
 
         <div
           ref={finalText2Ref}
-          className="absolute z-20 text-center text-black w-full"
+          className="absolute text-center text-black w-full"
+          style={{ transform: 'translateX(7%) translateY(-10%)', zIndex: 25 }}
         >
-          <h2 ref={centerHeadingRef} className="text-[42px] font-normal font-urbanist leading-[1.3] mb-8">
+          <h2 ref={centerHeadingRef} className="text-[72px] font-urbanist leading-[1.3] mb-8" style={{ fontFamily: 'var(--font-urbanist)' }}>
             If you wait....
           </h2>
 
+
+
           {/* Warning texts */}
-          <div className="space-y-6 max-w-xl mx-auto px-8">
+          <div className="space-y-6 max-w-xl mx-auto px-8" style={{ zIndex: 10 }}>
             <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">Revenue stays stagnant</span>
@@ -1008,7 +1033,7 @@ function NextGen() {
           </div>
 
           {/* Success texts (hidden initially, same position as warnings) */}
-          <div className="space-y-6 max-w-xl mx-auto px-8 absolute inset-0 top-16">
+          <div className="space-y-6 max-w-xl mx-auto px-8 absolute inset-0 top-16" style={{ zIndex: 10 }}>
             <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
               <span className="text-lg font-medium">Smart AI Integration</span>
@@ -1032,9 +1057,10 @@ function NextGen() {
 
         <div
           ref={newbeforeFinalTextRef}
-          className="absolute z-20 text-center text-black"
+          className="absolute text-center text-black"
+          style={{ zIndex: 25 }}
         >
-          <h2 className="text-[52px] font-bold font-urbanist leading-[1.3] mb-4">
+          <h2 className="text-[52px] font-bold font-urbanist leading-[1.3] mb-4" style={{ fontFamily: 'var(--font-urbanist)' }}>
             Your digital journey with <span className="text-[#2acbec]">webnox</span>
           </h2>
         </div>
@@ -1705,15 +1731,16 @@ function NextGen() {
         {/* New Final Text */}
         <div
           ref={newFinalTextRef}
-          className="absolute z-20 text-center text-black"
+          className="absolute text-center text-black"
+          style={{ zIndex: 25 }}
         >
-          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3] mb-4">
+          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3] mb-4" style={{ fontFamily: 'var(--font-urbanist)' }}>
             Step into the AI era with strategies designed to lead, not catch up.
           </h2>
         </div>
 
         {/* Background Wait Images */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 30 }}>
           {Array.from({ length: 12 }, (_, i) => (
             <div
               key={i}
@@ -1722,6 +1749,7 @@ function NextGen() {
               style={{
                 left: i < 6 ? `${5 + (i * 12)}%` : `${50 + ((i - 6) * 8)}%`,
                 bottom: '-100px',
+                zIndex: 30
               }}
             >
               <Image

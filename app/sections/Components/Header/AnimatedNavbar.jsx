@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger)
 const navItems = [
   {
     name: "About",
-    link: "#about",
+    link: "/about",
     icon: <Info className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
@@ -46,7 +46,7 @@ const AnimatedNavbar = ({
   items = [
     {
       name: "About",
-      href: "#about",
+      href: "/about",
       IconComponent: Info,
     },
     {
@@ -682,9 +682,15 @@ const AnimatedNavbar = ({
               className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-2 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full"
               onClick={(e) => {
                 e.preventDefault()
-                const element = document.querySelector(item.href)
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" })
+                if (item.href.startsWith('/')) {
+                  // Handle page navigation for routes like /about
+                  window.location.href = item.href
+                } else {
+                  // Handle anchor links like #solutions
+                  const element = document.querySelector(item.href)
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" })
+                  }
                 }
               }}
             >
@@ -831,8 +837,8 @@ const AnimatedNavbar = ({
                   onClick={(e) => {
                     e.preventDefault()
 
-                    const item = e.currentTarget
-                    gsap.to(item, {
+                    const menuItem = e.currentTarget
+                    gsap.to(menuItem, {
                       scale: 0.95,
                       duration: 0.1,
                       ease: "power2.out",
@@ -842,9 +848,15 @@ const AnimatedNavbar = ({
 
                     setTimeout(() => {
                       toggleMenu()
-                      const element = document.querySelector(item.href)
-                      if (element) {
-                        element.scrollIntoView({ behavior: "smooth" })
+                      if (item.href.startsWith('/')) {
+                        // Handle page navigation for routes like /about
+                        window.location.href = item.href
+                      } else {
+                        // Handle anchor links like #solutions
+                        const element = document.querySelector(item.href)
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" })
+                        }
                       }
                     }, 200)
                   }}
