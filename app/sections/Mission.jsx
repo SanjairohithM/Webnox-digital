@@ -13,44 +13,50 @@ gsap.registerPlugin(ScrollTrigger)
 const solutions = [
   {
     title: "BRANDING",
-    description: "Build a brand that speaks before you do. We craft visual identities that are bold, memorable, and strategically aligned with your business goals.",
+    description: "We build unique brand identities that are bold, memorable, and aligned with your business vision to leave a lasting impression.",
     image: "/images/BRANDING.webp"
   },
   {
     title: "SOFTWARE DEVELOPMENT",
-    description: "From MVPs to enterprise systems — we engineer scalable, high-performance software that drives innovation and business growth.",
+    description: "From MVPs to enterprise-grade systems, we build scalable, secure, and efficient software tailored to your goals and growth.",
     image: "/images/Software Development.webp"
   },
   {
     title: "DIGITAL MARKETING",
-    description: "Reach, engage, and convert. Our data-driven marketing campaigns put your brand in front of the right audience at the right time.",
+    description: "We create data-driven marketing strategies to reach, engage, and convert your ideal audience across all digital touchpoints.",
     image: "/images/Digital Marketing.webp"
   },
   {
-    title: "App Development",
-    description: "We design and develop mobile apps that are fast, user-friendly, and built to grow with your business. From intuitive UI/UX to powerful backend systems, our apps deliver seamless experiences across Android, iOS, and hybrid platforms.",
+    title: "IOS & ANDROID APP DEVELOPMENT",
+    description: "We develop high-performance mobile apps with seamless UI, built to grow with your business across Android, iOS, and hybrid platforms.",
     image: "/images/ECommerce Store Development.webp"
   },
   {
-    title: "WEB DEVELOPMENT",
-    description: "Pixel-perfect, performance-first websites built using the latest tech — designed to impress and built to scale.",
+    title: "CUSTOM WEB SOLUTIONS",
+    description: "We craft fast, scalable, and visually stunning websites that reflect your brand identity, drive results, and work seamlessly across all devices.",
     image: "/images/Web Development.webp"
   },
   {
     title: "DATA & ANALYSIS",
-    description: "Make every decision count. We help you turn raw data into real-time insights that drive smarter strategies and better outcomes.",
+    description: "We turn your raw data into actionable insights, helping you make smarter business decisions backed by real-time analytics.",
     image: "/images/DATA & ANALYSIS.webp"
   },
   {
     title: "UI UX DESIGN",
-    description: "Designs that delight. Experiences that retain. We create intuitive, engaging interfaces that users love.",
+    description: "We create intuitive and delightful interfaces that engage users, simplify navigation, and enhance user retention for your product..",
     image: "/images/ui ux design.webp"
   },
   {
     title: "IT SUPPORT",
-    description: "Stay online, always. Our proactive support keeps your systems running smoothly and securely, 24/7.",
+    description: "We provide proactive, 24/7 support that ensures your systems run smoothly, stay secure, and perform at peak efficiency.",
     image: "/images/IT SUPPORT.webp"
-  }
+  },
+  {
+    title: "WEB-BASED 3D VISUALIZATION",
+    description: "Captivate your audience with stunning 3D web experiences. Sleek, interactive designs that set your brand apart",
+    image: "/images/3dimagesolution.webp"
+  },
+  
 ];
 
 export default function Component() {
@@ -74,10 +80,10 @@ export default function Component() {
       scrollTrigger: {
         trigger: stickyRef.current,
         start: "top top",
-        end: "+=350%",
+        end: "+=800%",
         pin: true,
         pinSpacing: true,
-        scrub: 4,
+        scrub: 1,
         markers: false,
       },
     })

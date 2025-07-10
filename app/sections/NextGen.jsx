@@ -304,13 +304,13 @@ function NextGen() {
       }, `+=${index === 0 ? 0 : 0.8}`); // 0.8 second delay between each card
     });
 
-    // Stage 3: All cards stack in center (third scroll)
+    // Stage 3: All cards stack in center (third scroll) - MUCH SLOWER
     timeline
-      .to({}, { duration: 2 }) // Hold cards in position
+      .to({}, { duration: 5 }) // Hold cards in position longer
       .to(headingRef.current, {
         opacity: 0,
         scale: 0.7,
-        duration: 3,
+        duration: 8,
         ease: "power3.inOut"
       })
       .to(cardsRef.current, {
@@ -323,8 +323,8 @@ function NextGen() {
         x: 0,
         y: 0,
         scale: 1,
-        duration: 4,
-        ease: "power3.inOut"
+        duration: 12, // Much slower movement to center
+        ease: "power2.inOut"
       })
       .to(cardsRef.current, {
         z: (i) => -i * 10,
@@ -332,63 +332,63 @@ function NextGen() {
         rotateY: 0,
         rotateZ: 0,
         scale: 1,
-        duration: 3,
+        duration: 8, // Slower stacking
         stagger: {
-          each: 0.6,
+          each: 1.2, // Longer delay between each card
           from: "end"
         },
-        ease: "power3.inOut"
+        ease: "power2.inOut"
       });
 
-    // Stage 4: Move cards up and fade out, bring in final text
+    // Stage 4: Move cards up and fade out, bring in final text - MUCH SLOWER
     timeline
-      .to({}, { duration: 3 }) // Hold stacked cards
+      .to({}, { duration: 8 }) // Hold stacked cards much longer
       .to(cardsRef.current, {
         y: "-100%",
         opacity: 0,
         scale: 0.8,
-        duration: 4,
+        duration: 10, // Much slower cards exit
         stagger: {
-          each: 0.8,
+          each: 1.5, // Longer delay between each card exit
           from: "end"
         },
-        ease: "power2.inOut"
+        ease: "power1.inOut" // Gentler easing
       })
       .to(finalTextRef.current, {
         opacity: 1,
         y: 0,
-        duration: 3,
-        ease: "power2.out"
-      }, "-=2");
+        duration: 6, // Slower final text appearance
+        ease: "power1.out"
+      }, "-=4"); // Start text animation earlier in the sequence
 
-    // Stage 5: Transition to "if you wait" text and warning sequence
+    // Stage 5: Transition to "if you wait" text and warning sequence - MUCH SLOWER
     timeline
-      .to({}, { duration: 2 })
+      .to({}, { duration: 6 }) // Hold much longer
       .to(finalTextRef.current, {
         opacity: 0,
         y: -50,
-        duration: 2,
+        duration: 5, // Slower fade out
         ease: "power1.inOut"
       })
       .to(finalText2Ref.current, {
         opacity: 1,
         y: 0,
-        duration: 3,
+        duration: 6, // Slower appearance
         ease: "power1.out"
-      }, "-=1.5")
+      }, "-=3") // Better overlap
 
-      // FIRST SCROLL: WARNING PHASE
+      // FIRST SCROLL: WARNING PHASE - MUCH SLOWER
 
       // Step 1: Heading appears from right, images fade in
       .to(centerHeadingRef.current, {
         opacity: 1,
         x: 0,
-        duration: 2,
+        duration: 5, // Much slower heading appearance
         ease: "power2.out"
-      }, "+=1")
+      }, "+=3") // Longer delay
       .to(waitImagesRef.current, {
         opacity: 0.6,
-        duration: 3,
+        duration: 6, // Slower image fade in
         ease: "power2.out"
       }, "<")
 
@@ -396,9 +396,9 @@ function NextGen() {
       .to(warningRefs.current[0], {
         opacity: 1,
         x: 0,
-        duration: 2,
+        duration: 4, // Slower warning text appearance
         ease: "power2.out"
-      }, "+=1")
+      }, "+=3") // Longer delay between steps
       // Smooth movement to grid positions in one step
       .to(waitImagesRef.current, {
         left: (i) => {
@@ -419,33 +419,33 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 6,
-        ease: "power2.inOut"
+        duration: 10, // Much slower image movement
+        ease: "power1.inOut"
       }, "<")
 
       // Step 3: Warning text 2 appears, images stay in grids
       .to(warningRefs.current[1], {
         opacity: 1,
         x: 0,
-        duration: 2,
+        duration: 4, // Slower warning text 2
         ease: "power2.out"
-      }, "+=1")
+      }, "+=3") // Longer delay
 
       // Step 4: Warning text 3 appears, images stay in grids
       .to(warningRefs.current[2], {
         opacity: 1,
         x: 0,
-        duration: 2,
+        duration: 4, // Slower warning text 3
         ease: "power2.out"
-      }, "+=1")
+      }, "+=3") // Longer delay
 
       // Step 5: Warning text 4 appears, images SURROUND TEXT with BIG GAPS
       .to(warningRefs.current[3], {
         opacity: 1,
         x: 0,
-        duration: 2,
+        duration: 4, // Slower warning text 4
         ease: "power2.out"
-      }, "+=1")
+      }, "+=3") // Longer delay
       // Move images to surround text with gradual positioning
       .to(waitImagesRef.current, {
         left: (i) => {
@@ -467,19 +467,19 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 4,
-        ease: "power2.inOut"
-      }, "+=1")
+        duration: 8, // Much slower image repositioning
+        ease: "power1.inOut"
+      }, "+=2") // Longer delay before repositioning
 
-      // SECOND SCROLL: SUCCESS PHASE
+      // SECOND SCROLL: SUCCESS PHASE - MUCH SLOWER
 
       // Step 6: Change heading to "If you act now..."
       .to(centerHeadingRef.current, {
         opacity: 0,
         x: -100,
-        duration: 2,
+        duration: 5, // Slower heading fade out
         ease: "power2.in"
-      }, "+=2")
+      }, "+=4") // Longer delay before phase transition
       .set(centerHeadingRef.current, {
         innerHTML: "If you act now..."
       })
@@ -487,7 +487,7 @@ function NextGen() {
         opacity: 1,
         x: 0,
         y: -20,
-        duration: 2,
+        duration: 5, // Slower heading appearance
         ease: "power2.out"
       })
 
@@ -495,15 +495,15 @@ function NextGen() {
       .to(warningRefs.current[0], {
         opacity: 0,
         x: -50,
-        duration: 2,
+        duration: 4, // Slower warning fade out
         ease: "power2.in"
-      }, "+=1")
+      }, "+=3") // Longer delay
       .to(successRefs.current[0], {
         opacity: 1,
         x: 0,
-        duration: 2,
+        duration: 4, // Slower success text appearance
         ease: "power2.out"
-      }, "<0.5")
+      }, "<1")
       // Start pyramid formation - move top images first
       .to(waitImagesRef.current, {
         opacity: 1,
@@ -532,23 +532,23 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 4,
-        ease: "power2.inOut"
-      }, "+=1")
+        duration: 8, // Much slower pyramid formation start
+        ease: "power1.inOut"
+      }, "+=3") // Longer delay
 
       // Step 7: Success text 2 appears, ADD MIDDLE STEP (2 images each side)
       .to(warningRefs.current[1], {
         opacity: 0,
         x: -50,
-        duration: 2,
+        duration: 4, // Slower warning fade
         ease: "power2.in"
-      }, "+=1")
+      }, "+=3") // Longer delay
       .to(successRefs.current[1], {
         opacity: 1,
         x: 0,
-        duration: 2,
+        duration: 4, // Slower success text
         ease: "power2.out"
-      }, "<0.5")
+      }, "<1")
       // Add middle step to pyramid
       .to(waitImagesRef.current, {
         left: (i) => {
@@ -583,23 +583,23 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 4,
-        ease: "power2.inOut"
-      }, "+=1")
+        duration: 8, // Much slower middle step formation
+        ease: "power1.inOut"
+      }, "+=3") // Longer delay
 
       // Step 8: Success text 3 appears, ALMOST COMPLETE PYRAMID (add more to bottom)
       .to(warningRefs.current[2], {
         opacity: 0,
         x: -50,
-        duration: 2,
+        duration: 4, // Slower warning fade
         ease: "power2.in"
-      }, "+=1")
+      }, "+=3") // Longer delay
       .to(successRefs.current[2], {
         opacity: 1,
         x: 0,
-        duration: 2,
+        duration: 4, // Slower success text
         ease: "power2.out"
-      }, "<0.5")
+      }, "<1")
       // Add partial bottom step to pyramid
       .to(waitImagesRef.current, {
         left: (i) => {
@@ -642,23 +642,23 @@ function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 4,
-        ease: "power2.inOut"
-      }, "+=1")
+        duration: 8, // Much slower partial bottom formation
+        ease: "power1.inOut"
+      }, "+=3") // Longer delay
 
       // Step 9: Success text 4 appears, COMPLETE PYRAMID (all images in formation)
       .to(warningRefs.current[3], {
         opacity: 0,
         x: -50,
-        duration: 2,
+        duration: 4, // Slower final warning fade
         ease: "power2.in"
-      }, "+=1")
+      }, "+=3") // Longer delay
       .to(successRefs.current[3], {
         opacity: 1,
         x: 0,
-        duration: 2,
+        duration: 4, // Slower final success text
         ease: "power2.out"
-      }, "<0.5")
+      }, "<1")
       // Complete the pyramid formation
       .to(waitImagesRef.current, {
         left: (i) => {
@@ -689,48 +689,48 @@ function NextGen() {
           if (i === 3 || i === 4 || i === 5 || i === 9 || i === 10 || i === 11) return "59%"; // Bottom step - moved down
           return "50%"; // Fallback center
         },
-        duration: 5,
-        ease: "power2.inOut"
-      }, "+=1");
+        duration: 10, // Much slower final pyramid completion
+        ease: "power1.inOut"
+      }, "+=3"); // Longer delay before final formation
 
-    // Stage 6: Fade out all elements with custom pyramid animation
+    // Stage 6: Fade out all elements with custom pyramid animation - MUCH SLOWER
     timeline
-      .to({}, { duration: 3 })
+      .to({}, { duration: 8 }) // Hold final pyramid much longer
 
-      // Center texts (warning/success) go up and fade - SLOW FADE
+      // Center texts (warning/success) go up and fade - MUCH SLOWER FADE
       .to([finalText2Ref.current, ...warningRefs.current, ...successRefs.current, centerHeadingRef.current], {
         opacity: 0,
         y: -100,
-        duration: 6,
+        duration: 12, // Much slower text fade out
         ease: "power1.inOut",
         stagger: {
-          each: 0.3,
+          each: 0.8, // Longer stagger between each text
           from: "start"
         }
       })
 
-      // Left side pyramid (indices 0-5) goes down and fades - SLOW FADE
+      // Left side pyramid (indices 0-5) goes down and fades - MUCH SLOWER FADE
       .to([waitImagesRef.current[0], waitImagesRef.current[1], waitImagesRef.current[2], waitImagesRef.current[3], waitImagesRef.current[4], waitImagesRef.current[5]], {
         opacity: 0,
         y: "100px",
         scale: 0.5,
-        duration: 8,
-        ease: "power2.inOut",
+        duration: 15, // Much slower left pyramid fade
+        ease: "power1.inOut",
         stagger: {
-          each: 0.4,
+          each: 1.0, // Longer stagger between each image
           from: "start"
         }
       }, "<")
 
-      // Right side pyramid (indices 6-11) goes down and fades - SLOW FADE
+      // Right side pyramid (indices 6-11) goes down and fades - MUCH SLOWER FADE
       .to([waitImagesRef.current[6], waitImagesRef.current[7], waitImagesRef.current[8], waitImagesRef.current[9], waitImagesRef.current[10], waitImagesRef.current[11]], {
         opacity: 0,
         y: "100px",
         scale: 0.5,
-        duration: 8,
-        ease: "power2.inOut",
+        duration: 15, // Much slower right pyramid fade
+        ease: "power1.inOut",
         stagger: {
-          each: 0.4,
+          each: 1.0, // Longer stagger between each image
           from: "start"
         }
       }, "<")
@@ -739,235 +739,235 @@ function NextGen() {
       .to(newbeforeFinalTextRef.current, {
         opacity: 1,
         y: 0,
-        duration: 3,
+        duration: 6, // Slower appearance
         ease: "power1.out"
-      }, "-=1")
-      .to({}, { duration: 2 })
+      }, "-=3") // Start earlier for smoother transition
+      .to({}, { duration: 6 }) // Hold journey text much longer
       .to(newbeforeFinalTextRef.current, {
         opacity: 0,
         y: -50,
-        duration: 2,
+        duration: 5, // Slower fade out
         ease: "power1.inOut"
       })
 
-      // Journey Section
+      // Journey Section - EXTREMELY SLOW
       .to(journeyRef.current, {
         opacity: 1,
         y: 0,
-        duration: 3,
-        ease: "power2.out"
-      }, "+=1")
+        duration: 10, // Much slower journey section appearance
+        ease: "power1.out"
+      }, "+=5") // Much longer delay before journey starts
 
-      // Animate steps appearing one by one
+      // Animate steps appearing one by one - EXTREMELY SLOW
       .to(journeyStepsRef.current[0], {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "back.out(1.7)"
-      }, "-=1")
+        duration: 8, // Much slower step 1 appearance
+        ease: "back.out(1.5)"
+      }, "-=3")
       .to(journeyStepsRef.current[1], {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "back.out(1.7)"
-      }, "-=1.5")
+        duration: 8, // Much slower step 2 appearance
+        ease: "back.out(1.5)"
+      }, "-=4") // Much longer overlap with previous step
       .to(journeyStepsRef.current[2], {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "back.out(1.7)"
-      }, "-=1")
+        duration: 8, // Much slower step 3 appearance
+        ease: "back.out(1.5)"
+      }, "-=4") // Much longer overlap with previous step
 
-      // Show the SVG container
+      // Show the SVG container - MUCH SLOWER
       .to(journeyPathRef.current, {
         opacity: 1,
-        duration: 0.5
-      }, "-=1")
+        duration: 4 // Much slower SVG container appearance
+      }, "-=4")
 
-      // Animate the curved path drawing
+      // Animate the curved path drawing - EXTREMELY SLOW
       .to(journeyPathRef.current.querySelector('#motionPath'), {
         strokeDashoffset: 0,
-        duration: 8,
+        duration: 25, // Extremely slow path drawing
         ease: "power1.inOut"
-      }, "-=0.5")
+      }, "-=2")
 
-      // Animate static start point circle (Hexagon 2)
+      // Animate static start point circle (Hexagon 2) - MUCH SLOWER
       .to(pathCircleRefs.current[0], {
         opacity: 1,
         scale: 1,
-        duration: 0.6,
-        ease: "back.out(2)"
-      }, "-=1.5")
+        duration: 4, // Much slower circle appearance
+        ease: "back.out(1.5)"
+      }, "-=5")
 
-      // Animate static end point circle (Hexagon 3) 
+      // Animate static end point circle (Hexagon 3) - MUCH SLOWER
       .to(pathCircleRefs.current[1], {
         opacity: 1,
         scale: 1,
-        duration: 0.6,
-        ease: "back.out(2)"
-      }, "-=1")
+        duration: 4, // Much slower circle appearance
+        ease: "back.out(1.5)"
+      }, "-=4")
 
-      // Hold the journey for a moment
-      .to({}, { duration: 3 })
+      // Hold the journey for an extremely long time
+      .to({}, { duration: 15 }) // Extremely long hold time
 
-      // Fade out journey and show final text
+      // Fade out journey and show final text - MUCH SLOWER
       .to(journeyRef.current, {
         opacity: 0,
         y: -100,
-        duration: 3,
-        ease: "power2.in"
+        duration: 10, // Much slower journey fade out
+        ease: "power1.in"
       })
 
-      // Second Journey Section
+      // Second Journey Section - EXTREMELY SLOW
       .to(journey2Ref.current, {
         opacity: 1,
         y: 0,
-        duration: 3,
-        ease: "power2.out"
-      }, "+=1")
+        duration: 10, // Much slower second journey appearance
+        ease: "power1.out"
+      }, "+=5") // Much longer delay
 
-      // Animate second journey steps appearing one by one
+      // Animate second journey steps appearing one by one - EXTREMELY SLOW
       .to(journey2StepsRef.current[0], {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "back.out(1.7)"
-      }, "-=1")
+        duration: 8, // Much slower step 4 appearance
+        ease: "back.out(1.5)"
+      }, "-=3")
       .to(journey2StepsRef.current[1], {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "back.out(1.7)"
-      }, "-=1.5")
+        duration: 8, // Much slower step 5 appearance
+        ease: "back.out(1.5)"
+      }, "-=4") // Much longer overlap
       .to(journey2StepsRef.current[2], {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "back.out(1.7)"
-      }, "-=1")
+        duration: 8, // Much slower step 6 appearance
+        ease: "back.out(1.5)"
+      }, "-=4") // Much longer overlap
 
-      // Show the second SVG container
+      // Show the second SVG container - MUCH SLOWER
       .to(journey2PathRef.current, {
         opacity: 1,
-        duration: 0.5
-      }, "-=1")
+        duration: 4 // Much slower second SVG appearance
+      }, "-=4")
 
-      // Animate the second curved path drawing
+      // Animate the second curved path drawing - EXTREMELY SLOW
       .to(journey2PathRef.current.querySelector('#motionPath2'), {
         strokeDashoffset: 0,
-        duration: 8,
+        duration: 25, // Extremely slow second path drawing
         ease: "power1.inOut"
-      }, "-=0.5")
+      }, "-=2")
 
-      // Animate static start point circle for second journey
+      // Animate static start point circle for second journey - MUCH SLOWER
       .to(path2CircleRefs.current[0], {
         opacity: 1,
         scale: 1,
-        duration: 0.6,
-        ease: "back.out(2)"
-      }, "-=1.5")
+        duration: 4, // Much slower circle appearance
+        ease: "back.out(1.5)"
+      }, "-=5")
 
-      // Animate static end point circle for second journey
+      // Animate static end point circle for second journey - MUCH SLOWER
       .to(path2CircleRefs.current[1], {
         opacity: 1,
         scale: 1,
-        duration: 0.6,
-        ease: "back.out(2)"
-      }, "-=1")
+        duration: 4, // Much slower circle appearance
+        ease: "back.out(1.5)"
+      }, "-=4")
 
-      // Hold the second journey for a moment
-      .to({}, { duration: 3 })
+      // Hold the second journey for an extremely long time
+      .to({}, { duration: 15 }) // Extremely long hold time
 
-      // Fade out second journey
+      // Fade out second journey - MUCH SLOWER
       .to(journey2Ref.current, {
         opacity: 0,
         y: -100,
-        duration: 3,
-        ease: "power2.in"
+        duration: 10, // Much slower second journey fade out
+        ease: "power1.in"
       })
 
-      // Third Journey Section
+      // Third Journey Section - EXTREMELY SLOW
       .to(journey3Ref.current, {
         opacity: 1,
         y: 0,
-        duration: 3,
-        ease: "power2.out"
-      }, "+=1")
+        duration: 10, // Much slower third journey appearance
+        ease: "power1.out"
+      }, "+=5") // Much longer delay
 
-      // Animate third journey steps appearing one by one
+      // Animate third journey steps appearing one by one - EXTREMELY SLOW
       .to(journey3StepsRef.current[0], {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "back.out(1.7)"
-      }, "-=1")
+        duration: 8, // Much slower step 7 appearance
+        ease: "back.out(1.5)"
+      }, "-=3")
       .to(journey3StepsRef.current[1], {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "back.out(1.7)"
-      }, "-=1.5")
+        duration: 8, // Much slower step 8 appearance
+        ease: "back.out(1.5)"
+      }, "-=4") // Much longer overlap
       .to(journey3StepsRef.current[2], {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 2,
-        ease: "back.out(1.7)"
-      }, "-=1")
+        duration: 8, // Much slower step 9 appearance
+        ease: "back.out(1.5)"
+      }, "-=4") // Much longer overlap
 
-      // Show the third SVG container
+      // Show the third SVG container - MUCH SLOWER
       .to(journey3PathRef.current, {
         opacity: 1,
-        duration: 0.5
-      }, "-=1")
+        duration: 4 // Much slower third SVG appearance
+      }, "-=4")
 
-      // Animate the third curved path drawing
+      // Animate the third curved path drawing - EXTREMELY SLOW
       .to(journey3PathRef.current.querySelector('#motionPath3'), {
         strokeDashoffset: 0,
-        duration: 8,
+        duration: 25, // Extremely slow third path drawing
         ease: "power1.inOut"
-      }, "-=0.5")
+      }, "-=2")
 
-      // Animate static start point circle for third journey
+      // Animate static start point circle for third journey - MUCH SLOWER
       .to(path3CircleRefs.current[0], {
         opacity: 1,
         scale: 1,
-        duration: 0.6,
-        ease: "back.out(2)"
-      }, "-=1.5")
+        duration: 4, // Much slower circle appearance
+        ease: "back.out(1.5)"
+      }, "-=5")
 
-      // Animate static end point circle for third journey
+      // Animate static end point circle for third journey - MUCH SLOWER
       .to(path3CircleRefs.current[1], {
         opacity: 1,
         scale: 1,
-        duration: 0.6,
-        ease: "back.out(2)"
-      }, "-=1")
+        duration: 4, // Much slower circle appearance
+        ease: "back.out(1.5)"
+      }, "-=4")
 
-      // Hold the third journey for a moment
-      .to({}, { duration: 3 })
+      // Hold the third journey for an extremely long time
+      .to({}, { duration: 15 }) // Extremely long hold time
 
-      // Fade out third journey and show final text
+      // Fade out third journey and show final text - EXTREMELY SLOW
       .to(journey3Ref.current, {
         opacity: 0,
         y: -100,
-        duration: 3,
-        ease: "power2.in"
+        duration: 10, // Much slower third journey fade out
+        ease: "power1.in"
       })
       .to(newFinalTextRef.current, {
         opacity: 1,
         y: 0,
-        duration: 4,
+        duration: 12, // Extremely slow final text appearance
         ease: "power1.out"
-      }, "-=1");
+      }, "-=3"); // Better overlap timing
 
     // Remove timeScale since we're using scrub now
     // timeline.timeScale(0.05);
