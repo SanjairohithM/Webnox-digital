@@ -191,9 +191,9 @@ const ContactPage = () => {
             {/* Contact Information */}
             <section className="py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Address */}
-                        <div className="bg-gray-100 rounded-xl p-8 shadow-sm ">
+                        {/* <div className="bg-gray-100 rounded-xl p-8 shadow-sm ">
                             <div className="flex items-center justify-between mb-6">
                                 <h3 className="text-2xl font-semibold text-gray-900">Address</h3>
                                 <div className="w-12 h-12 bg-[#00b9ff] rounded-full flex items-center justify-center">
@@ -203,7 +203,7 @@ const ContactPage = () => {
                             <p className="text-gray-600 leading-relaxed">
                                 Webnox Technologies No 721/2, Venky complex, Second floor, cross cut road, Seth Narang Das Layout, Coimbatore – 641 012.
                             </p>
-                        </div>
+                        </div> */}
 
                         {/* Email */}
                         <div className="bg-gray-100 rounded-xl p-8 shadow-sm">

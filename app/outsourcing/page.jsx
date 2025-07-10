@@ -35,18 +35,28 @@ const HeroSection = () => {
   }, [])
 
   return (
-    <section ref={heroRef} className="relative bg-white py-20">
-      {/* Background Image with Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
-      
-      <div className="relative max-w-5xl mx-auto px-4 text-center">
-        <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
-          Outsourcing Services by Webnox Digital
+    <section ref={heroRef} className="relative flex items-center justify-center min-h-[420px] md:min-h-[480px] lg:min-h-[520px] xl:min-h-[600px] w-full overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/images/outsource.webp"
+          alt="Outsourcing background"
+          fill
+          className="object-cover w-full h-full"
+          priority
+        />
+        {/* Strong white fade at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/60 to-white"></div>
+      </div>
+      <div className="relative w-full flex flex-col items-center justify-center text-center px-4">
+        <h1 ref={titleRef} className="text-2xl md:text-4xl lg:text-5xl  font-sans font-bold text-black mb-6">
+          Outsourcing Services by <span className="text-[#13b4ee]">Webnox Digital</span>
         </h1>
-        <p ref={descRef} className="text-lg md:text-xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed">
-          At Webnox Digital, we understand that managing everything in-house can slow down your business growth. 
-          That's why we offer smart, efficient, and affordable outsourcing solutions to help you stay focused on what 
-          matters most growing your business.
+        <p
+          ref={descRef}
+          className="text-[#222] text-lg md:text-xl max-w-2xl font-sans leading-relaxed text-center mx-auto tracking-wide mt-4"
+        >
+          At Webnox Digital, we understand that managing everything in-house can slow down your business growth. That’s why we offer smart, efficient, and affordable outsourcing solutions to help you stay focused on what matters most: growing your business.
         </p>
       </div>
     </section>
@@ -356,13 +366,11 @@ const FAQSection = () => {
 const OutsourcingPage = () => {
   return (
     <main className="@/outsourcing">
-     
       <HeroSection />
       <WhyChooseSection />
       <ApproachSection />
       <TickerSection />
       <FAQSection />
-    
     </main>
   )
 }
