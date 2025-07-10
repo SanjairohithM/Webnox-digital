@@ -21,7 +21,7 @@ import Demoballsection from "./sections/Demoballsection";
   
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(true);
+  const [showContent, setShowContent] = useState(false);
 
   const handleLoaderComplete = () => {
     setIsLoading(false);
@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <div className="w-full relative overflow-x-hidden">
       {/* Loader - shows only once when page loads */}
-      {/* {isLoading && <WebnoxLogoLoader onComplete={handleLoaderComplete} />} */}
+      {isLoading && <WebnoxLogoLoader onComplete={handleLoaderComplete} />}
       
       {/* Main content - shows after loader completes */}
       {showContent && (
