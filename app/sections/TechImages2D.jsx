@@ -60,6 +60,7 @@ function TechImage({
   const [hasStarted, setHasStarted] = useState(false)
   const [isSettled, setIsSettled] = useState(false)
   const lastBounceRef = useRef(0)
+  const [isBouncing, setIsBouncing] = useState(false)
   
   // Function to wake up a settled ball
   const wakeUp = useCallback(() => {
@@ -91,12 +92,12 @@ function TechImage({
 
   // Animation loop for physics-like movement with gravity (only during dropping)
   useEffect(() => {
-    if (!isActive || isDragging || isSettled) return
+    if (!isActive || isDragging || isSettled || isBouncing) return
 
     const animate = () => {
       setPosition(prev => {
-        const newX = prev.x + velocity.x
-        const newY = prev.y + velocity.y
+        let newX = prev.x + velocity.x
+        let newY = prev.y + velocity.y
         
         // Boundary collision detection
         const containerWidth = window.innerWidth
@@ -117,63 +118,73 @@ function TechImage({
         let newVelX = velocity.x
         let newVelY = velocity.y + gravity // Apply gravity
         
-        // Wall collision with GSAP bounce effects
-        let bounced = false
-        
+        let bounced = false;
+
         // Left wall collision
         if (newX <= 0) {
-          newVelX = Math.abs(newVelX) * 0.85 // Stronger bounce right
-          bounced = true
+          newVelX = Math.abs(newVelX) * 0.85; // Bounce right
+          bounced = true;
+          newX = 0;
         }
-        
-        // Right wall collision  
+
+        // Right wall collision
         if (newX >= containerWidth - flagSize) {
-          newVelX = -Math.abs(newVelX) * 0.85 // Stronger bounce left
-          bounced = true
+          newVelX = -Math.abs(newVelX) * 0.85; // Bounce left
+          bounced = true;
+          newX = containerWidth - flagSize;
         }
-        
+
         // Top wall collision
         if (newY <= 0) {
-          newVelY = Math.abs(newVelY) * 0.85 // Stronger bounce down
-          bounced = true
+          newVelY = Math.abs(newVelY) * 0.85; // Bounce down
+          bounced = true;
+          newY = 0;
         }
-        
-        // Bottom wall collision - trigger GSAP bounce, then settle after 2s
-        if (newY >= containerHeight - flagSize && !isSettled) {
-          newVelY = 0
-          newVelX = 0
 
-          // Only trigger bounce if not already bouncing/settled
+        // Bottom wall collision - only trigger once
+        if (newY >= containerHeight - flagSize && !isSettled && !isBouncing) {
+          setIsBouncing(true);
+          setVelocity({ x: 0, y: 0 });
+
+          // Animate bounce with GSAP
           if (flagRef.current) {
             gsap.to(flagRef.current, {
-              y: "-=40", // bounce up 40px
-              duration: 0.5,
+              y: "-=60", // bounce up 60px
+              duration: 2,
               ease: "bounce.out",
-              yoyo: true,
-              repeat: 1,
               onComplete: () => {
                 // After bounce, snap to bottom and settle
-                gsap.to(flagRef.current, {
-                  y: 0,
-                  duration: 0.2,
-                  onComplete: () => {
-                    setIsSettled(true)
-                    setVelocity({ x: 0, y: 0 })
-                  }
-                })
+                gsap.set(flagRef.current, { y: 0 });
+                setIsSettled(true);
+                setIsBouncing(false);
+                setVelocity({ x: 0, y: 0 });
+                setPosition({
+                  x: Math.max(0, Math.min(containerWidth - flagSize, newX)),
+                  y: containerHeight - flagSize
+                });
               }
-            })
+            });
           }
 
           // Prevent further physics updates during bounce
-          setTimeout(() => {
-            setIsSettled(true)
-            setVelocity({ x: 0, y: 0 })
-          }, 2000) // 2 seconds
-
           return {
             x: Math.max(0, Math.min(containerWidth - flagSize, newX)),
             y: containerHeight - flagSize // Snap to bottom
+          };
+        }
+
+        // GSAP bounce scale effect on any wall collision (throttled)
+        if (bounced && flagRef.current) {
+          const now = Date.now();
+          if (now - lastBounceRef.current > 200) {
+            lastBounceRef.current = now;
+            gsap.to(flagRef.current, {
+              scale: 1.25,
+              duration: 0.12,
+              ease: "elastic.out(1.2, 0.4)",
+              yoyo: true,
+              repeat: 1
+            });
           }
         }
         
@@ -255,21 +266,6 @@ function TechImage({
           })
         }
         
-        // Add GSAP bounce effect when hitting walls (with throttling)
-        if (bounced && flagRef.current) {
-          const now = Date.now()
-          if (now - lastBounceRef.current > 200) { // Throttle bounces to prevent spam
-            lastBounceRef.current = now
-            gsap.to(flagRef.current, {
-              scale: 1.25,
-              duration: 0.12,
-              ease: "elastic.out(1.2, 0.4)",
-              yoyo: true,
-              repeat: 1
-            })
-          }
-        }
-        
         // Apply air resistance during drop - less resistance for faster movement
         newVelX *= 0.98
         newVelY *= 0.995 // Very light air resistance on vertical movement
@@ -285,7 +281,7 @@ function TechImage({
 
     const intervalId = setInterval(animate, 20) // ~50fps - faster animation
     return () => clearInterval(intervalId)
-  }, [velocity, isActive, isDragging, isSettled])
+  }, [velocity, isActive, isDragging, isSettled, isBouncing])
 
   // Give initial horizontal velocity when becoming active
   useEffect(() => {
