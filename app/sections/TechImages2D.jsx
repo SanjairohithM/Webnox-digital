@@ -138,12 +138,39 @@ function TechImage({
           bounced = true
         }
         
-        // Bottom wall collision - settle completely
-        if (newY >= containerHeight - flagSize) {
+        // Bottom wall collision - trigger GSAP bounce, then settle after 2s
+        if (newY >= containerHeight - flagSize && !isSettled) {
           newVelY = 0
           newVelX = 0
-          setIsSettled(true) // Stop all automatic physics
-          setVelocity({ x: 0, y: 0 })
+
+          // Only trigger bounce if not already bouncing/settled
+          if (flagRef.current) {
+            gsap.to(flagRef.current, {
+              y: "-=40", // bounce up 40px
+              duration: 0.5,
+              ease: "bounce.out",
+              yoyo: true,
+              repeat: 1,
+              onComplete: () => {
+                // After bounce, snap to bottom and settle
+                gsap.to(flagRef.current, {
+                  y: 0,
+                  duration: 0.2,
+                  onComplete: () => {
+                    setIsSettled(true)
+                    setVelocity({ x: 0, y: 0 })
+                  }
+                })
+              }
+            })
+          }
+
+          // Prevent further physics updates during bounce
+          setTimeout(() => {
+            setIsSettled(true)
+            setVelocity({ x: 0, y: 0 })
+          }, 2000) // 2 seconds
+
           return {
             x: Math.max(0, Math.min(containerWidth - flagSize, newX)),
             y: containerHeight - flagSize // Snap to bottom
