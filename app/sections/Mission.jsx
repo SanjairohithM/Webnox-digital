@@ -74,7 +74,7 @@ export default function Component() {
       scrollTrigger: {
         trigger: stickyRef.current,
         start: "top top",
-        end: "+=450%",
+        end: "+=350%",
         pin: true,
         pinSpacing: true,
         scrub: 4,
@@ -456,24 +456,11 @@ export default function Component() {
     }, "-=0.1")
 
     // Add another pause to show the final state
-    shrinkTextStage.to({}, { duration: 0.3 })
-
-    // Create final fade out stage
-    const fadeOutStage = gsap.timeline()
-
-    // Fade out everything together
-    fadeOutStage.to([".solutions-text-container", solutionsGridContainer], {
-      opacity: 0.5,
-      y: -50,
-      duration: 1.5,
-      ease: "power2.in",
-      
-    })
+    shrinkTextStage.to({}, { duration: 0.5 })
 
     // Add stages to main timeline
     timeline.add(solutionsStage)
     timeline.add(shrinkTextStage)
-    timeline.add(fadeOutStage)
 
     return () => {
       // Cleanup
