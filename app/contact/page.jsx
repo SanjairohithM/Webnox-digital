@@ -4,6 +4,7 @@ import Image from 'next/image'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MoveUpRight } from 'lucide-react'
+import Robot from "@/Three/Models/Robot"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -17,32 +18,79 @@ const ContactPage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState('')
 
-    // GSAP refs for services
+    // GSAP refs for services and robot
     const servicesGridRef = useRef(null)
     const cardRefs = useRef([])
+    const robotRef = useRef(null)
     cardRefs.current = []
 
     useEffect(() => {
-        if (!servicesGridRef.current) return
-        cardRefs.current.forEach((el, i) => {
-            if (!el) return
-            gsap.fromTo(
-                el,
-                { opacity: 0, y: 40 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.7,
-                    delay: i * 0.08,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: el,
-                        start: 'top 90%',
-                        toggleActions: 'play none none none',
-                    },
-                }
-            )
-        })
+        // Card animations
+        if (servicesGridRef.current) {
+            cardRefs.current.forEach((el, i) => {
+                if (!el) return
+                gsap.fromTo(
+                    el,
+                    { opacity: 0, y: 40 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.7,
+                        delay: i * 0.08,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: el,
+                            start: 'top 90%',
+                            toggleActions: 'play none none none',
+                        },
+                    }
+                )
+            })
+        }
+
+        // Robot animation setup for Spline component
+        const setupRobotAnimations = () => {
+            console.log('Setting up robot animations...')
+            console.log('Robot ref current:', robotRef.current)
+            
+            if (robotRef.current) {
+                console.log('Robot container found, setting up CSS animations')
+                
+                // Entrance animation - scale from 0 to 1
+                gsap.to(robotRef.current, {
+                    scale: 1,
+                    duration: 2,
+                    ease: "back.out(1.7)",
+                    delay: 0.5,
+                    onComplete: () => console.log('Robot entrance animation complete')
+                })
+
+                // Continuous floating animation using CSS transforms
+                gsap.to(robotRef.current, {
+                    y: "+=15",
+                    duration: 4,
+                    ease: "power1.inOut",
+                    yoyo: true,
+                    repeat: -1
+                })
+
+                // Gentle rotation animation
+                gsap.to(robotRef.current, {
+                    rotation: "+=5",
+                    duration: 8,
+                    ease: "power1.inOut",
+                    yoyo: true,
+                    repeat: -1
+                })
+            } else {
+                console.log('Robot container not found, retrying in 200ms...')
+                setTimeout(setupRobotAnimations, 200)
+            }
+        }
+
+        // Start robot animation setup after a small delay to ensure DOM is ready
+        setTimeout(setupRobotAnimations, 100)
+
         return () => {
             ScrollTrigger.getAll().forEach(t => t.kill())
         }
@@ -102,7 +150,7 @@ const ContactPage = () => {
     }
 
     return (
-        <div className=" bg-white mt-35 ">
+        <div className=" bg-white mt-55 ">
             {/* Hero Section */}
        
 
@@ -195,14 +243,19 @@ const ContactPage = () => {
             <section className="py-5">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-                        {/* Left: Robot Image (spans two columns) */}
-                        <div className="lg:col-span-2 flex items-center w-[700px] h-[700px] pl-0">
-                            <img
-                                src="/images/contact2.webp"
-                                alt="Contact Robot"
-                                className="w-full h-full object-contain"
-                                style={{ objectPosition: 'left center' }}
-                            />
+                        {/* Left: Robot Model (spans two columns) */}
+                        <div className="lg:col-span-2 flex items-center justify-center w-[700px] h-[700px] relative">
+                            {/* Robot Container with ref for animations */}
+                            <div 
+                                ref={robotRef} 
+                                className="w-full h-full flex items-center justify-center transform-gpu"
+                                style={{ transform: 'scale(0)' }}
+                            >
+                                <Robot />
+                            </div>
+                            
+                            {/* Debug Info */}
+                      
                         </div>
                         {/* Right: Contact Form (spans one column) */}
                         <div className="max-w-md w-full mx-auto">
