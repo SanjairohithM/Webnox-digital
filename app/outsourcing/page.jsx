@@ -66,11 +66,11 @@ const HeroSection = () => {
 // Why Choose Section Component
 const WhyChooseSection = () => {
   const sectionRef = useRef(null)
-  const titleRef = useRef(null)
   const subtitleRef = useRef(null)
+  const titleRef = useRef(null)
   const descRef = useRef(null)
   const buttonRef = useRef(null)
-  const cardsRef = useRef([])
+  const featuresRef = useRef([])
 
   const features = [
     {
@@ -79,13 +79,13 @@ const WhyChooseSection = () => {
       desc: "Get access to experienced designers, developers, digital marketers, and support teams without the cost of hiring."
     },
     {
-      number: "2", 
+      number: "2",
       title: "Scalable Solutions",
       desc: "Whether you're a startup or an enterprise, our services scale with your needs."
     },
     {
       number: "3",
-      title: "Time-Zone Advantage", 
+      title: "Time-Zone Advantage",
       desc: "With our offshore team, your work progresses even after your office closes."
     },
     {
@@ -97,74 +97,146 @@ const WhyChooseSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, subtitleRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 30 })
-      gsap.set(cardsRef.current, { opacity: 0, y: 50 })
-      
-      const tl = gsap.timeline({
+      gsap.set([
+        subtitleRef.current,
+        titleRef.current,
+        descRef.current,
+        buttonRef.current,
+        ...featuresRef.current
+      ], { opacity: 0, y: 30 })
+      gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
         }
       })
-      
-      tl.to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-        .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
-        .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
-        .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-        .to(cardsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out" }, "-=0.4")
+        .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" })
+        .to(titleRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2")
+        .to(descRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, "-=0.2")
+        .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, "-=0.2")
+        .to(featuresRef.current, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }, "-=0.3")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-gray-50 py-20 relative">
-      {/* Decorative Circle */}
-      <div className="absolute top-16 right-32 w-96 h-96 bg-blue-50 rounded-full opacity-60"></div>
-      
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
-          <div>
-            <p ref={subtitleRef} className="text-cyan-500 font-medium text-lg mb-4">WHY CHOOSE</p>
-            <h2 ref={titleRef} className="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
-              Webnox for Outsourcing
-            </h2>
-            <p ref={descRef} className="text-gray-600 text-lg leading-relaxed mb-8">
-              At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. 
-              Our tailored services are designed to help businesses scale faster, operate efficiently, 
-              and focus on their core strengths.
-            </p>
-            <div ref={buttonRef}>
-              <button className="bg-cyan-500 text-white px-8 py-4 rounded-full font-semibold hover:bg-cyan-600 transition-colors">
-                Get Started
-              </button>
+    <section ref={sectionRef} className="relative bg-white py-20 px-4 md:px-8 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto relative min-h-[500px]">
+        
+        {/* Left Column Content */}
+        <div className="absolute left-0 top-0 w-full lg:w-[40%] flex flex-col items-start">
+          <span ref={subtitleRef} className="text-[#13b4ee] text-sm font-semibold uppercase mb-2 tracking-wide">Why Choose</span>
+          <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-black font-sans text-black mb-4 leading-tight text-left">Webnox for Outsourcing</h2>
+          <p ref={descRef} className="text-[#6b6b6b] text-base md:text-lg font-sans font-normal leading-relaxed mb-6 text-left max-w-md">
+            At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster, operate efficiently, and focus on their core strengths.
+          </p>
+          <button ref={buttonRef} className="bg-[#13b4ee] text-white px-7 py-3 rounded-full font-semibold text-base shadow-md hover:bg-[#0ea5e9] transition mb-8">
+            Get Started
+          </button>
+          
+          {/* First Feature - Below Button */}
+          <div
+            ref={el => featuresRef.current[0] = el}
+            className="relative flex flex-col items-start justify-start max-w-sm"
+          >
+            {/* Large faint number */}
+            <span className="absolute right-0 top-[-120px] text-[190px] font-black text-[#e5e7eb] opacity-40 select-none pointer-events-none z-0">
+              1
+            </span>
+            {/* Feature content */}
+            <div className="relative z-10">
+              <h3 className="text-lg md:text-xl font-bold text-black mb-2 font-sans leading-tight">{features[0].title}</h3>
+              <p className="text-[#6b6b6b] text-base font-normal font-sans leading-snug max-w-xs">
+                {features[0].desc}
+              </p>
             </div>
           </div>
 
-          {/* Right Content - Feature Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {features.map((feature, index) => (
-              <div 
-                key={index}
-                ref={el => cardsRef.current[index] = el}
-                className="relative"
-              >
-                {/* Large Number */}
-                <div className="text-9xl font-black text-gray-900 opacity-20 absolute -top-4 -left-4">
-                  {feature.number}
-                </div>
-                
-                {/* Card Content */}
-                <div className="relative bg-white p-6 rounded-2xl shadow-lg">
-                  <div className="w-16 h-16 bg-white rounded-2xl shadow-md flex items-center justify-center mb-4">
-                    <div className="w-6 h-6 bg-gray-300 rounded-lg"></div>
-                  </div>
-                  <h3 className="text-xl font-extrabold text-gray-900 mb-3">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
-                </div>
-              </div>
-            ))}
+          {/* Second Feature - Higher and more right of 1 */}
+          <div
+            ref={el => featuresRef.current[1] = el}
+            className="absolute left-[380px] top-[250px] flex flex-col items-start justify-start w-[320px]"
+          >
+            {/* Large faint number */}
+            <span className="absolute right-0 top-[-120px] text-[190px] font-black text-[#e5e7eb] opacity-40 select-none pointer-events-none z-0">
+              2
+            </span>
+            {/* Feature content */}
+            <div className="relative z-10">
+              <h3 className="text-lg md:text-xl font-bold text-black mb-2 font-sans leading-tight">{features[1].title}</h3>
+              <p className="text-[#6b6b6b] text-base font-normal font-sans leading-snug">
+                {features[1].desc}
+              </p>
+            </div>
           </div>
+
+        {/* Third Feature - Time-Zone Advantage */}
+        <div
+          ref={el => featuresRef.current[2] = el}
+          className="absolute left-[820px] top-[150px] flex flex-col items-start justify-start w-[320px]"
+        >
+          {/* Large faint number */}
+          <span className="absolute right-0 top-[-120px] text-[190px] font-black text-[#e5e7eb] opacity-40 select-none pointer-events-none z-0">
+            3
+          </span>
+          {/* Feature content */}
+          <div className="relative z-10">
+            <h3 className="text-lg md:text-xl font-bold text-black mb-2 font-sans leading-tight">{features[2].title}</h3>
+            <p className="text-[#6b6b6b] text-base font-normal font-sans leading-snug">
+              {features[2].desc}
+            </p>
+          </div>
+        </div>
+
+        {/* Fourth Feature - Reliable Communication */}
+        <div
+          ref={el => featuresRef.current[3] = el}
+          className="absolute left-[1120px] top-[10px] flex flex-col items-start justify-start w-[320px]"
+        >
+          {/* Large faint number */}
+          <span className="absolute right-0 top-[-120px] text-[190px] font-black text-[#e5e7eb] opacity-40 select-none pointer-events-none z-0">
+            4
+          </span>
+          {/* Feature content */}
+          <div className="relative z-10">
+            <h3 className="text-lg md:text-xl font-bold text-black mb-2 font-sans leading-tight">{features[3].title}</h3>
+            <p className="text-[#6b6b6b] text-base font-normal font-sans leading-snug">
+              {features[3].desc}
+            </p>
+          </div>
+        </div>
+        </div>
+
+        {/* Connection Points and SVG Curve */}
+        <div className="absolute inset-0 pointer-events-none z-5">
+          {/* Connection Dots */}
+          {/* Dot 1 - Above Feature 1 (Skilled Professionals) */}
+          <div className="absolute left-[80px] top-[320px] w-6 h-6 bg-white border-3 border-[#13b4ee] rounded-full"></div>
+          
+          {/* Dot 2 - Above Feature 2 (Scalable Solutions) */}
+          <div className="absolute left-[460px] top-[220px] w-6 h-6 bg-white border-3 border-[#13b4ee] rounded-full"></div>
+          
+          {/* Dot 3 - Above Feature 3 (Time-Zone Advantage) */}
+          <div className="absolute left-[900px] top-[120px] w-6 h-6 bg-white border-3 border-[#13b4ee] rounded-full"></div>
+          
+          {/* Dot 4 - Above Feature 4 (Reliable Communication) */}
+          <div className="absolute left-[1200px] top-[-20px] w-6 h-6 bg-white border-3 border-[#13b4ee] rounded-full"></div>
+          
+          {/* SVG Curve connecting all 4 dots */}
+          <svg
+            viewBox="0 0 1400 400"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="absolute left-0 top-0 w-full h-full pointer-events-none"
+          >
+            <path
+              d="M88 328 Q 250 270 468 228 Q 650 170 908 128 Q 1050 50 1208 -12"
+              stroke="#13b4ee"
+              strokeWidth="3"
+              fill="none"
+              strokeDasharray="0"
+            />
+          </svg>
         </div>
       </div>
     </section>
