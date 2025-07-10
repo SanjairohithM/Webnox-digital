@@ -790,8 +790,8 @@ function NextGen() {
       // Animate the curved path drawing
       .to(journeyPathRef.current.querySelector('#motionPath'), {
         strokeDashoffset: 0,
-        duration: 3,
-        ease: "power2.inOut"
+        duration: 8,
+        ease: "power1.inOut"
       }, "-=0.5")
 
       // Animate static start point circle (Hexagon 2)
@@ -861,8 +861,8 @@ function NextGen() {
       // Animate the second curved path drawing
       .to(journey2PathRef.current.querySelector('#motionPath2'), {
         strokeDashoffset: 0,
-        duration: 3,
-        ease: "power2.inOut"
+        duration: 8,
+        ease: "power1.inOut"
       }, "-=0.5")
 
       // Animate static start point circle for second journey
@@ -932,8 +932,8 @@ function NextGen() {
       // Animate the third curved path drawing
       .to(journey3PathRef.current.querySelector('#motionPath3'), {
         strokeDashoffset: 0,
-        duration: 3,
-        ease: "power2.inOut"
+        duration: 8,
+        ease: "power1.inOut"
       }, "-=0.5")
 
       // Animate static start point circle for third journey

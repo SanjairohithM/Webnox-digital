@@ -204,7 +204,7 @@ export default function Hero() {
         id: "hero-scroll-trigger",
         trigger: mainContainerRef.current,
         start: "top top",
-        end: "bottom top",
+        end: "top bottom",
         scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress;
@@ -386,7 +386,7 @@ export default function Hero() {
         </View>
 
       {/* Hero Section - Lower z-index to avoid navbar conflicts */}
-      <section ref={heroSectionRef} className="container mx-auto px-4 pt-32 pb-24 text-center relative z-10">
+      <section ref={heroSectionRef} className="container mx-auto px-4 pt-32 text-center relative z-10">
         <div className="max-w-3xl mx-auto mb-8 relative flex justify-center items-center z-10">
           <div 
             ref={backgroundCircleRef}
