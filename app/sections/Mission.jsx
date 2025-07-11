@@ -206,10 +206,10 @@ export default function Component() {
     const expandTimeline = gsap.timeline()
 
     expandTimeline.to(miniRobotContainerRef.current, {
-      width: "120vw",
-      height: "120vh",
-      top: "-25vh",
-      left: "-10vw",
+      width: "200vw",
+      height: "200vh",
+      top: "-80vh",
+      left: "-50vw",
       xPercent: 0,
       yPercent: 0,
       margin: 0,
@@ -232,7 +232,7 @@ export default function Component() {
         rotation: 0,
         position: "absolute",
         left: "calc(50% - 10vw)",
-        top: "calc(50% - 5vh)",
+        top: "calc(50% + 15vh)",
         xPercent: -50,
         yPercent: -50,
         duration: 0.8,
@@ -248,15 +248,17 @@ export default function Component() {
 
     // Add the final text elements
     const finalTextContainer = document.createElement("div")
-    finalTextContainer.className = "final-text-container absolute w-full text-center"
+    finalTextContainer.className = "final-text-container absolute w-full text-center flex items-center justify-center font-sans"
     finalTextContainer.innerHTML = `
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6">
-        Transforming Businesses Through 
- &<br/>Intelligent Automation
-      </h1>
-      <p class="text-white/80 text-lg max-w-3xl mx-auto px-4">
-        At Webnox Digital, we harness the power of AI, cloud, and automation to help businesses operate smarter, scale faster, and innovate at speed. Our agile-driven software solutions are designed to streamline operations, enhance customer experiences, and unlock new digital value.
-      </p>
+      <div class="w-full max-w-6xl mx-auto px-4">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-white mb-4 md:mb-6 text-center leading-tight">
+          <span class="whitespace-nowrap lg:whitespace-normal">Transforming Businesses Through</span>
+          <span class="whitespace-nowrap">&nbsp;& Intelligent Automation</span>
+        </h1>
+        <p class="text-white/80 text-base md:text-lg lg:text-xl mx-auto text-center leading-relaxed max-w-4xl">
+          At Webnox Digital, we harness the power of AI, cloud, and automation to help businesses operate smarter, scale faster, and innovate at speed. Our agile-driven software solutions are designed to streamline operations, enhance customer experiences, and unlock new digital value.
+        </p>
+      </div>
     `
 
     // Add the solutions text containers
@@ -302,16 +304,17 @@ export default function Component() {
       opacity: 0,
       y: 50,
       position: "absolute",
-      bottom: "20%",
+      top: "65%",
       left: "45%",
       xPercent: -50,
+      width: "100%",
       zIndex: 60,
     })
 
     gsap.set(solutionsContainer, {
       opacity: 0,
       position: "absolute",
-      top: "35%",
+      top: "55%",
       left: "50%",
       xPercent: -50,
       yPercent: -50,
@@ -336,7 +339,7 @@ export default function Component() {
 
     // Move robot up and fade in text
     finalStage.to(miniRobotRef.current, {
-      top: "calc(20%)",
+      top: "calc(35%)",
       duration: 0.8,
       ease: "power2.inOut",
     })
@@ -346,6 +349,9 @@ export default function Component() {
       {
         opacity: 1,
         y: 0,
+        top: "50%",
+        left: "45%",
+        xPercent: -50,
         duration: 0.6,
         ease: "power2.out",
       },
@@ -359,7 +365,10 @@ export default function Component() {
 
     // First fade out the text as it moves up
     solutionsStage.to(finalTextContainer, {
-      y: -150,
+      y: -100,
+      top: "15%",
+      left: "45%",
+      xPercent: -50,
       duration: 0.8,
       ease: "power2.inOut",
     })
@@ -371,14 +380,14 @@ export default function Component() {
         duration: 0.5,
         ease: "power1.out",
       },
-      "-=0",
+      "-=0.3",
     )
 
     // Move robot to position and fade out background
     solutionsStage.to(
       miniRobotRef.current,
       {
-        top: "calc(50% - 15vh)",
+        top: "calc(50% + 5vh)",
         left: "calc(50% - 15vw)",
         duration: 0.8,
         ease: "power2.inOut",
@@ -418,7 +427,7 @@ export default function Component() {
     
     shrinkTextStage.to(".solutions-text-container", {
       scale: 0.4,
-      top: "5%",
+      top: "25%",
       left: "45%",
       xPercent: -50,
       duration: 0.8,
