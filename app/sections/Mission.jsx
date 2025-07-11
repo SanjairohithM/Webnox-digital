@@ -445,7 +445,7 @@ export default function Component() {
     
     shrinkTextStage.to(".solutions-text-container", {
       scale: 0.4,
-      top: "31%",
+      top: "28%",
       left: "45%",
       xPercent: -50,
       duration: 0.8,
