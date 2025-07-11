@@ -3,10 +3,11 @@
 import React, { useRef, useEffect, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 }
 
 
@@ -71,6 +72,11 @@ const WhyChooseSection = () => {
   const descRef = useRef(null)
   const buttonRef = useRef(null)
   const featuresRef = useRef([])
+  const dotsRef = useRef([])
+  const svgPathRef = useRef(null)
+  const svgRef = useRef(null)
+  const animatedDotRef = useRef(null)
+  const pathTrackerRef = useRef(null)
 
   const features = [
     {
@@ -97,24 +103,117 @@ const WhyChooseSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Initial setup - hide everything
       gsap.set([
         subtitleRef.current,
         titleRef.current,
         descRef.current,
         buttonRef.current,
-        ...featuresRef.current
+        ...featuresRef.current,
+        ...dotsRef.current,
+        svgRef.current,
+        animatedDotRef.current
       ], { opacity: 0, y: 30 })
-      gsap.timeline({
+
+      // Set initial scale for animated dot
+      gsap.set(animatedDotRef.current, { scale: 0 })
+
+      // Set up SVG path for drawing animation
+      if (svgPathRef.current) {
+        const pathLength = svgPathRef.current.getTotalLength()
+        gsap.set(svgPathRef.current, {
+          strokeDasharray: pathLength,
+          strokeDashoffset: pathLength
+        })
+      }
+
+      // Main timeline for content animation
+      const mainTl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
         }
       })
+
+      mainTl
         .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" })
         .to(titleRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2")
         .to(descRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, "-=0.2")
         .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, "-=0.2")
         .to(featuresRef.current, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }, "-=0.3")
+
+      // Connection animation timeline - triggers automatically when section comes into view
+      const connectionTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 60%",
+          toggleActions: "play none none reverse",
+        }
+      })
+
+      // Automatic slow animation sequence
+      connectionTl
+        // First show the SVG container
+        .to(svgRef.current, { opacity: 1, duration: 0.3 })
+        // Show and animate the traveling dot
+        .to(animatedDotRef.current, { 
+          opacity: 1, 
+          scale: 1,
+          duration: 0.4,
+          ease: "back.out(1.7)" 
+        })
+        // Animate dot along the path using MotionPath - slow and smooth
+        .to(animatedDotRef.current, {
+          motionPath: {
+            path: svgPathRef.current,
+            align: svgPathRef.current,
+            alignOrigin: "0.5 0.5",
+            autoRotate: false,
+          },
+          duration: 4, // Slower animation - 4 seconds
+          ease: "power1.inOut", // Smoother easing
+          onUpdate: function() {
+            // Draw the path as the dot moves
+            const progress = this.progress()
+            const pathLength = svgPathRef.current.getTotalLength()
+            gsap.set(svgPathRef.current, {
+              strokeDashoffset: pathLength * (1 - progress)
+            })
+          }
+        }, "-=0.2")
+        // Show static dots progressively as the animated dot passes near them
+        .to(dotsRef.current[0], { 
+          opacity: 1, 
+          scale: 1,
+          duration: 0.4, 
+          ease: "back.out(1.7)" 
+        }, "-=3.2") // Show first dot early in the animation
+        .to(dotsRef.current[1], { 
+          opacity: 1, 
+          scale: 1,
+          duration: 0.4, 
+          ease: "back.out(1.7)" 
+        }, "-=2.4") // Show second dot
+        .to(dotsRef.current[2], { 
+          opacity: 1, 
+          scale: 1,
+          duration: 0.4, 
+          ease: "back.out(1.7)" 
+        }, "-=1.6") // Show third dot
+        .to(dotsRef.current[3], { 
+          opacity: 1, 
+          scale: 1,
+          duration: 0.4, 
+          ease: "back.out(1.7)" 
+        }, "-=0.8") // Show fourth dot
+        // Hide the animated dot at the end
+        .to(animatedDotRef.current, { 
+          opacity: 0, 
+          scale: 0.5,
+          duration: 0.5,
+          ease: "power2.in" 
+        }, "-=0.3")
+
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -137,7 +236,7 @@ const WhyChooseSection = () => {
           {/* First Feature - Below Button */}
           <div
             ref={el => featuresRef.current[0] = el}
-            className="relative flex flex-col items-start justify-start max-w-sm"
+            className="relative flex flex-col items-start justify-start max-w-sm mt-20"
           >
             {/* Large faint number */}
             <span className="absolute right-0 top-[-120px] text-[190px] font-black text-[#e5e7eb] opacity-40 select-none pointer-events-none z-0">
@@ -155,7 +254,7 @@ const WhyChooseSection = () => {
           {/* Second Feature - Higher and more right of 1 */}
           <div
             ref={el => featuresRef.current[1] = el}
-            className="absolute left-[380px] top-[250px] flex flex-col items-start justify-start w-[320px]"
+            className="absolute left-[380px] top-[350px] flex flex-col items-start justify-start w-[320px]"
           >
             {/* Large faint number */}
             <span className="absolute right-0 top-[-120px] text-[190px] font-black text-[#e5e7eb] opacity-40 select-none pointer-events-none z-0">
@@ -173,7 +272,7 @@ const WhyChooseSection = () => {
         {/* Third Feature - Time-Zone Advantage */}
         <div
           ref={el => featuresRef.current[2] = el}
-          className="absolute left-[820px] top-[150px] flex flex-col items-start justify-start w-[320px]"
+          className="absolute left-[720px] top-[150px] flex flex-col items-start justify-start w-[320px]"
         >
           {/* Large faint number */}
           <span className="absolute right-0 top-[-120px] text-[190px] font-black text-[#e5e7eb] opacity-40 select-none pointer-events-none z-0">
@@ -191,7 +290,7 @@ const WhyChooseSection = () => {
         {/* Fourth Feature - Reliable Communication */}
         <div
           ref={el => featuresRef.current[3] = el}
-          className="absolute left-[1120px] top-[10px] flex flex-col items-start justify-start w-[320px]"
+          className="absolute left-[1120px] top-[70px] flex flex-col items-start justify-start w-[320px]"
         >
           {/* Large faint number */}
           <span className="absolute right-0 top-[-120px] text-[190px] font-black text-[#e5e7eb] opacity-40 select-none pointer-events-none z-0">
@@ -208,33 +307,51 @@ const WhyChooseSection = () => {
         </div>
 
         {/* Connection Points and SVG Curve */}
-        <div className="absolute inset-0 pointer-events-none z-5">
-          {/* Connection Dots */}
-          {/* Dot 1 - Above Feature 1 (Skilled Professionals) */}
-          <div className="absolute left-[80px] top-[320px] w-6 h-6 bg-white border-3 border-[#13b4ee] rounded-full"></div>
+        <div className="absolute inset-0 pointer-events-none z-5 -translate-y-32">
+          {/* Animated Dot that travels along the path */}
+
+
+          {/* Static Connection Dots - Positioned on the SVG path */}
+          {/* Dot 1 - On path at 250,529 position */}
+          <div 
+            ref={el => dotsRef.current[0] = el}
+            className="absolute left-[230px] top-[450px] w-6 h-6 bg-[#13b4ee] border-3 border-[#13b4ee] rounded-full opacity-0 scale-0 transform -translate-x-3 -translate-y-3"
+          ></div>
           
-          {/* Dot 2 - Above Feature 2 (Scalable Solutions) */}
-          <div className="absolute left-[460px] top-[220px] w-6 h-6 bg-white border-3 border-[#13b4ee] rounded-full"></div>
+          {/* Dot 2 - On path at 470,382 position */}
+          <div 
+            ref={el => dotsRef.current[1] = el}
+            className="absolute left-[540px] top-[330px] w-6 h-6 bg-[#13b4ee] border-3 border-[#13b4ee] rounded-full opacity-0 scale-0 transform -translate-x-3 -translate-y-3"
+          ></div>
           
-          {/* Dot 3 - Above Feature 3 (Time-Zone Advantage) */}
-          <div className="absolute left-[900px] top-[120px] w-6 h-6 bg-white border-3 border-[#13b4ee] rounded-full"></div>
+          {/* Dot 3 - On path at 776,321 position */}
+          <div 
+            ref={el => dotsRef.current[2] = el}
+            className="absolute left-[790px] top-[131px] w-6 h-6 bg-[#13b4ee] border-3 border-[#13b4ee] rounded-full opacity-0 scale-0 transform -translate-x-3 -translate-y-3"
+          ></div>
           
-          {/* Dot 4 - Above Feature 4 (Reliable Communication) */}
-          <div className="absolute left-[1200px] top-[-20px] w-6 h-6 bg-white border-3 border-[#13b4ee] rounded-full"></div>
+          {/* Dot 4 - On path at 1044,138 position */}
+          <div 
+            ref={el => dotsRef.current[3] = el}
+            className="absolute left-[1144px] top-[98px] w-6 h-6 bg-[#13b4ee] border-3 border-[#white] rounded-full opacity-0 scale-0 transform -translate-x-3 -translate-y-3"
+          ></div>
           
-          {/* SVG Curve connecting all 4 dots */}
+          {/* SVG Curve connecting all 4 dots - Using outsourcing1.svg */}
           <svg
-            viewBox="0 0 1400 400"
+            ref={svgRef}
+            viewBox="0 0 1619 582"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute left-0 top-0 w-full h-full pointer-events-none"
+            className="absolute left-0 top-0 w-full h-full pointer-events-none opacity-0"
           >
             <path
-              d="M88 328 Q 250 270 468 228 Q 650 170 908 128 Q 1050 50 1208 -12"
+              ref={svgPathRef}
+              d="M27 444C75 479 186.8 545 250 529C329 509 348.5 406 470.5 382C592.5 358 682 441.5 776.5 321C871 200.5 860 132.5 1044 138.5C1228 144.501 1558.8 103.4 1592 3"
               stroke="#13b4ee"
-              strokeWidth="3"
+              strokeWidth="5"
               fill="none"
-              strokeDasharray="0"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
