@@ -275,17 +275,35 @@ export default function Component() {
     const solutionsGridContainer = document.createElement("div")
     solutionsGridContainer.className = "solutions-grid-container absolute w-full h-full"
     solutionsGridContainer.innerHTML = `
-      <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-17 pb-8 px-8 overflow-y-auto">
-        <div class="w-full">
-          <div class="grid grid-cols-3 gap-x-10 gap-y-24  w-[95vw] ">
+      <style>
+        .solutions-container {
+          max-width: 1200px;
+        }
+        @media (min-width: 1280px) and (max-width: 1535px) {
+          .solutions-container {
+            max-width: 1100px;
+          }
+          .solutions-grid-container {
+            background: transparent !important;
+          }
+        }
+        @media (min-width: 1536px) {
+          .solutions-container {
+            max-width: 1600px;
+          }
+        }
+      </style>
+              <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-28 pb-16 px-8 overflow-y-auto flex items-center justify-center 2xl:pt-32">
+        <div class="w-full mx-auto solutions-container px-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-16 md:gap-x-14 lg:gap-x-16 xl:gap-x-24 2xl:gap-x-12 gap-y-20 md:gap-y-22 lg:gap-y-24 xl:gap-y-32 2xl:gap-y-28 w-full px-6 ml-[-15rem]">
             ${solutions.map((solution, index) => `
-              <div class="solution-card flex items-start gap-15 group opacity-0" data-index="${index}">
-                <div class="w-[140px] h-[140px] relative flex-shrink-0 transition-all duration-300">
+              <div class="solution-card flex items-center gap-1 md:gap-2 lg:gap-2 xl:gap-3 2xl:gap-6 group opacity-0 w-full min-w-[280px] md:min-w-[320px] lg:min-w-[360px] xl:min-w-[380px] 2xl:min-w-[500px] max-w-[600px]" data-index="${index}">
+                <div class="w-[80px] h-[80px] md:w-[90px] md:h-[90px] lg:w-[100px] lg:h-[100px] xl:w-[110px] xl:h-[110px] 2xl:w-[140px] 2xl:h-[140px] relative flex-shrink-0 transition-all duration-300 flex items-center justify-center">
                   <img src="${solution.image}" alt="${solution.title}" class="w-full h-full object-contain" />
                 </div>
-                <div class="flex-1 pt-6">
-                  <h3 class="text-xl font-semibold text-gray-800 mb-3 leading-tight">${solution.title}</h3>
-                  <p class="text-gray-600 text-[15px] leading-relaxed">${solution.description}</p>
+                <div class="flex-1 min-w-0 w-full text-center">
+                  <h3 class="text-base md:text-lg lg:text-lg xl:text-lg 2xl:text-2xl font-bold text-gray-800 mb-1 md:mb-2 lg:mb-2 xl:mb-3 2xl:mb-4 leading-tight">${solution.title}</h3>
+                  <p class="hidden 2xl:block text-gray-600 text-base leading-relaxed">${solution.description}</p>
                 </div>
               </div>
             `).join('')}
@@ -314,7 +332,7 @@ export default function Component() {
     gsap.set(solutionsContainer, {
       opacity: 0,
       position: "absolute",
-      top: "55%",
+      top: "45%",
       left: "50%",
       xPercent: -50,
       yPercent: -50,
@@ -365,8 +383,8 @@ export default function Component() {
 
     // First fade out the text as it moves up
     solutionsStage.to(finalTextContainer, {
-      y: -100,
-      top: "15%",
+      y: -50,
+      top: "25%",
       left: "45%",
       xPercent: -50,
       duration: 0.8,
@@ -387,7 +405,7 @@ export default function Component() {
     solutionsStage.to(
       miniRobotRef.current,
       {
-        top: "calc(50% + 5vh)",
+        top: "calc(50% - 5vh)",
         left: "calc(50% - 15vw)",
         duration: 0.8,
         ease: "power2.inOut",
@@ -420,14 +438,14 @@ export default function Component() {
     )
 
     // Add a pause duration
-    solutionsStage.to({}, { duration: 0.4 })
+    solutionsStage.to({}, { duration: 0.6 })
 
     // Add new stage: Shrink and move "OUR SOLUTIONS" text to top as title
     const shrinkTextStage = gsap.timeline()
     
     shrinkTextStage.to(".solutions-text-container", {
       scale: 0.4,
-      top: "25%",
+      top: "31%",
       left: "45%",
       xPercent: -50,
       duration: 0.8,
@@ -471,7 +489,7 @@ export default function Component() {
     }, "-=0.1")
 
     // Add another pause to show the final state
-    shrinkTextStage.to({}, { duration: 0.5 })
+    shrinkTextStage.to({}, { duration: 1.0 })
 
     // Add stages to main timeline
     timeline.add(solutionsStage)
