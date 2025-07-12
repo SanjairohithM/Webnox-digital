@@ -538,7 +538,7 @@ export default function Component() {
                 {/* Main Headline */}
                 <div ref={contentRefs.headlines} className="space-y-4">
                   <div className="flex items-center gap-4 flex-wrap mb-5 pt-2">
-                    <h1 className="text-5xl md:text-5xl lg:text-8xl font-[511] text-gray-800 tracking-tight">
+                    <h1 className="text-5xl md:text-5xl lg:text-8xl font-sans font-semibold text-gray-800 tracking-tight">
                       AI-Driven Innovation for a
                     </h1>
                   </div>
@@ -562,7 +562,7 @@ export default function Component() {
                       />
                     </div>
 
-                    <h1 className="smarter-text text-5xl md:text-6xl lg:text-8xl font-[511] text-gray-800 tracking-tight">
+                    <h1 className="smarter-text text-5xl md:text-6xl lg:text-8xl font-sans font-semibold text-gray-800 tracking-tight">
                       Digitally Connected World
                     </h1>
                   </div>

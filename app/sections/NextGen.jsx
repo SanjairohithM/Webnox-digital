@@ -1006,7 +1006,7 @@ function NextGen() {
           className="absolute text-center text-black w-full"
           style={{ transform: 'translateX(7%) translateY(-10%)', zIndex: 25 }}
         >
-          <h2 ref={centerHeadingRef} className="text-[72px] font-urbanist leading-[1.3] mb-8" style={{ fontFamily: 'var(--font-urbanist)' }}>
+          <h2 ref={centerHeadingRef} className="text-[72px] font-sans leading-[1.3] mb-8" style={{ fontFamily: 'var(--font-urbanist)' }}>
             If you wait....
           </h2>
 
@@ -1016,19 +1016,19 @@ function NextGen() {
           <div className="space-y-6 max-w-xl mx-auto px-8" style={{ zIndex: 10 }}>
             <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-medium">Revenue stays stagnant</span>
+              <span className="text-lg font-sans">Revenue stays stagnant</span>
             </div>
             <div ref={el => warningRefs.current[1] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-medium">Competitors overtake your space</span>
+              <span className="text-lg font-sans">Competitors overtake your space</span>
             </div>
             <div ref={el => warningRefs.current[2] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-medium">AI replaces inefficiency</span>
+              <span className="text-lg font-sans">AI replaces inefficiency</span>
             </div>
             <div ref={el => warningRefs.current[3] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-medium">Your brand fades into obscurity</span>
+              <span className="text-lg font-sans">Your brand fades into obscurity</span>
             </div>
           </div>
 
@@ -1036,19 +1036,19 @@ function NextGen() {
           <div className="space-y-6 max-w-xl mx-auto px-8 absolute inset-0 top-16" style={{ zIndex: 10 }}>
             <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-medium">Smart AI Integration</span>
+              <span className="text-lg font-sans">Smart AI Integration</span>
             </div>
             <div ref={el => successRefs.current[1] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-medium">Marketing Automation</span>
+              <span className="text-lg font-sans">Marketing Automation</span>
             </div>
             <div ref={el => successRefs.current[2] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-medium">Websites that Sell</span>
+              <span className="text-lg font-sans">Websites that Sell</span>
             </div>
             <div ref={el => successRefs.current[3] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
               <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-medium">Higher Profit Margins</span>
+              <span className="text-lg font-sans">Higher Profit Margins</span>
             </div>
           </div>
 
