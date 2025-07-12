@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -88,6 +88,9 @@ function NextGen() {
   const journey3StepsRef = useRef([]);
   const journey3PathRef = useRef(null);
   const path3CircleRefs = useRef([]);
+
+  const flipTitleRef = useRef(null);
+  const flipTextRef = useRef(null);
 
   useGSAP(() => {
     // Set initial states
@@ -370,6 +373,8 @@ function NextGen() {
         duration: 5, // Slower fade out
         ease: "power1.inOut"
       })
+      // Flip to front (warning phase)
+      .to([flipTitleRef.current, flipTextRef.current], { rotateY: 0, duration: 0.6, ease: "power2.inOut" })
       .to(finalText2Ref.current, {
         opacity: 1,
         y: 0,
@@ -404,7 +409,7 @@ function NextGen() {
         left: (i) => {
           // LEFT GRID: 0-33% | RIGHT GRID: 67-100% | CENTER GRID: 33-67% (TEXT ONLY)
           if (i < 6) {
-            return ["5%", "15%", "25%", "10%", "20%", "30%"][i]; // LEFT GRID ONLY
+            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID ONLY - moved slightly right
           } else {
             return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID ONLY
           }
@@ -451,7 +456,7 @@ function NextGen() {
         left: (i) => {
           // SURROUND text with BIG GAPS - stay in grids
           if (i < 6) {
-            return ["5%", "15%", "25%", "10%", "20%", "30%"][i]; // LEFT GRID with gaps
+            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID with gaps - moved slightly right
           } else {
             return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID with gaps
           }
@@ -473,13 +478,14 @@ function NextGen() {
 
       // SECOND SCROLL: SUCCESS PHASE - MUCH SLOWER
 
-      // Step 6: Change heading to "If you act now..."
+      // Step 6: Flip to back (success phase)
       .to(centerHeadingRef.current, {
-        opacity: 0,
+        opacity: 0, // Hide old text (not needed, but keep for smoothness)
         x: -100,
-        duration: 5, // Slower heading fade out
+        duration: 0.1,
         ease: "power2.in"
-      }, "+=4") // Longer delay before phase transition
+      }, "+=4")
+      .to([flipTitleRef.current, flipTextRef.current], { rotateY: 180, duration: 0.6, ease: "power2.inOut" })
       .set(centerHeadingRef.current, {
         innerHTML: "If you act now..."
       })
@@ -487,7 +493,7 @@ function NextGen() {
         opacity: 1,
         x: 0,
         y: -20,
-        duration: 5, // Slower heading appearance
+        duration: 0.1,
         ease: "power2.out"
       })
 
@@ -509,12 +515,12 @@ function NextGen() {
         opacity: 1,
         left: (i) => {
           // STEP 1: Only top step (1 image each side), others stay in original grids
-          if (i === 0) return "16%"; // Left top center
+          if (i === 0) return "15%"; // Left top center - moved slightly right
           if (i === 6) return "84%"; // Right top center
 
           // Keep other images in their grid positions but visible
           if (i < 6) {
-            return ["5%", "15%", "25%", "10%", "20%", "30%"][i]; // LEFT GRID
+            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID - moved slightly right
           } else {
             return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
           }
@@ -553,18 +559,18 @@ function NextGen() {
       .to(waitImagesRef.current, {
         left: (i) => {
           // STEP 2: Top step + Middle step
-          if (i === 0) return "16%"; // Left top
+          if (i === 0) return "15%"; // Left top - moved slightly right
           if (i === 6) return "84%"; // Right top
 
           // MIDDLE STEP: Add 2 images each side
-          if (i === 1) return "12%"; // Left middle left
-          if (i === 2) return "20%"; // Left middle right
+          if (i === 1) return "11%"; // Left middle left - moved slightly right
+          if (i === 2) return "19%"; // Left middle right - moved slightly right
           if (i === 7) return "80%"; // Right middle left  
           if (i === 8) return "88%"; // Right middle right
 
           // Keep remaining images in grid positions
           if (i < 6) {
-            return ["5%", "15%", "25%", "10%", "20%", "30%"][i]; // LEFT GRID
+            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID - moved slightly right
           } else {
             return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
           }
@@ -604,24 +610,24 @@ function NextGen() {
       .to(waitImagesRef.current, {
         left: (i) => {
           // STEP 3: Top + Middle + Partial Bottom
-          if (i === 0) return "16%"; // Left top
+          if (i === 0) return "15%"; // Left top - moved slightly right
           if (i === 6) return "84%"; // Right top
 
           // MIDDLE STEP
-          if (i === 1) return "12%"; // Left middle left
-          if (i === 2) return "20%"; // Left middle right
+          if (i === 1) return "11%"; // Left middle left - moved slightly right
+          if (i === 2) return "19%"; // Left middle right - moved slightly right
           if (i === 7) return "80%"; // Right middle left  
           if (i === 8) return "88%"; // Right middle right
 
           // BOTTOM STEP: Add 2 more images each side
-          if (i === 3) return "8%";  // Left bottom left
-          if (i === 4) return "16%"; // Left bottom center
+          if (i === 3) return "7%";  // Left bottom left - moved slightly right
+          if (i === 4) return "15%"; // Left bottom center - moved slightly right
           if (i === 9) return "84%"; // Right bottom left
           if (i === 10) return "92%"; // Right bottom right
 
           // Keep remaining in grid
           if (i < 6) {
-            return ["5%", "15%", "25%", "10%", "20%", "30%"][i]; // LEFT GRID
+            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID - moved slightly right
           } else {
             return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
           }
@@ -665,12 +671,12 @@ function NextGen() {
           // FINAL STEP: COMPLETE PYRAMID FORMATION (original perfect positions)
 
           // LEFT SIDE PYRAMID
-          if (i === 0) return "19%"; // Top (1 image)
-          if (i === 1) return "10%"; // Middle left (2 images)
-          if (i === 2) return "19%"; // Middle right
-          if (i === 3) return "2%";  // Bottom left (3 images)
-          if (i === 4) return "10%"; // Bottom center
-          if (i === 5) return "19%"; // Bottom right
+          if (i === 0) return "18%"; // Top (1 image) - moved slightly right
+          if (i === 1) return "9%";  // Middle left (2 images) - moved slightly right
+          if (i === 2) return "18%"; // Middle right - moved slightly right
+          if (i === 3) return "1%";  // Bottom left (3 images) - moved slightly right
+          if (i === 4) return "9%";  // Bottom center - moved slightly right
+          if (i === 5) return "18%"; // Bottom right - moved slightly right
 
           // RIGHT SIDE PYRAMID  
           if (i === 6) return "74%"; // Top (1 image)
@@ -974,6 +980,40 @@ function NextGen() {
 
   }, []);
 
+  // Determine phase by rotateY (0 = warning, 180 = success)
+  // We'll use a state to track the current rotateY for border color
+  const [rotateY, setRotateY] = React.useState(0);
+  React.useEffect(() => {
+    const update = () => {
+      if (flipTitleRef.current) {
+        const style = window.getComputedStyle(flipTitleRef.current);
+        const matrix = style.transform;
+        // Parse matrix to get rotateY
+        let angle = 0;
+        if (matrix && matrix !== 'none') {
+          const values = matrix.split('(')[1].split(')')[0].split(',');
+          // 3D matrix: matrix3d(a1, a2, ..., a16)
+          if (values.length === 16) {
+            // https://stackoverflow.com/a/20552344
+            const m11 = parseFloat(values[0]);
+            const m13 = parseFloat(values[2]);
+            angle = Math.round(Math.atan2(m13, m11) * (180 / Math.PI));
+            if (angle < 0) angle += 360;
+          }
+        }
+        setRotateY(angle);
+      }
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
+  const isWarningPhase = rotateY < 90 || rotateY > 270;
+
   return (
     <div ref={sectionRef} className="w-full min-h-screen bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff]">
       <div className="max-w-[1600px] mx-auto px-8 relative min-h-screen flex items-center justify-center">
@@ -1003,57 +1043,117 @@ function NextGen() {
 
         <div
           ref={finalText2Ref}
-          className="absolute text-center text-black w-full"
-          style={{ transform: 'translateX(7%) translateY(-10%)', zIndex: 25 }}
+          className="absolute w-full flex justify-center items-center"
+          style={{ top: '20%', left: '50%', transform: 'translate(-50%, -10%)', zIndex: 25 }}
         >
-          <h2 ref={centerHeadingRef} className="text-[72px] font-sans leading-[1.3] mb-8" style={{ fontFamily: 'var(--font-urbanist)' }}>
-            If you wait....
-          </h2>
-
-
-
-          {/* Warning texts */}
-          <div className="space-y-6 max-w-xl mx-auto px-8" style={{ zIndex: 10 }}>
-            <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
-              <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-sans">Revenue stays stagnant</span>
+          {/* Success/Warning Card Container */}
+          <div className={`w-full max-w-2xl bg-white/60 rounded-2xl shadow-lg p-10 relative transition-colors duration-500 ${isWarningPhase ? 'border-2 border-red-200' : 'border-2 border-green-200'}`}>
+            {/* Flip Title */}
+            <div className="flip-title-wrapper perspective-1000 w-full flex justify-center mb-8">
+              <div
+                ref={flipTitleRef}
+                className="flip-title-inner w-full"
+                style={{
+                  width: '100%',
+                  height: '90px',
+                  position: 'relative',
+                  transformStyle: 'preserve-3d',
+                  transition: 'transform 0.6s cubic-bezier(.4,2,.6,1)'
+                }}
+              >
+                <div
+                  className="flip-title-front absolute w-full h-full flex items-center justify-center"
+                  style={{
+                    backfaceVisibility: 'hidden'
+                  }}
+                >
+                  <span className="text-[72px] font-sans text-black text-center" style={{ fontFamily: 'var(--font-urbanist)' }}>
+                    If you wait...
+                  </span>
+                </div>
+                <div
+                  className="flip-title-back absolute w-full h-full flex items-center justify-center"
+                  style={{
+                    backfaceVisibility: 'hidden',
+                    transform: 'rotateY(180deg)'
+                  }}
+                >
+                  <span className="text-[72px] font-sans text-black text-center" style={{ fontFamily: 'var(--font-urbanist)' }}>
+                    If you act now...
+                  </span>
+                </div>
+              </div>
             </div>
-            <div ref={el => warningRefs.current[1] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
-              <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-sans">Competitors overtake your space</span>
-            </div>
-            <div ref={el => warningRefs.current[2] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
-              <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-sans">AI replaces inefficiency</span>
-            </div>
-            <div ref={el => warningRefs.current[3] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
-              <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-sans">Your brand fades into obscurity</span>
+            {/* Flip Texts */}
+            <div className="flip-text-wrapper perspective-1000 w-full flex justify-center">
+              <div
+                ref={flipTextRef}
+                className="flip-text-inner w-full"
+                style={{
+                  width: '100%',
+                  minHeight: '320px',
+                  position: 'relative',
+                  transformStyle: 'preserve-3d',
+                  transition: 'transform 0.6s cubic-bezier(.4,2,.6,1)'
+                }}
+              >
+                {/* Warning Texts (Front) */}
+                <div
+                  className="flip-text-front absolute w-full h-full flex flex-col justify-center"
+                  style={{
+                    backfaceVisibility: 'hidden'
+                  }}
+                >
+                  <div className="space-y-6 max-w-xl mx-auto px-8" style={{ zIndex: 10 }}>
+                    <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
+                      <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
+                      <span className="text-lg font-sans">Revenue stays stagnant</span>
+                    </div>
+                    <div ref={el => warningRefs.current[1] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
+                      <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
+                      <span className="text-lg font-sans">Competitors overtake your space</span>
+                    </div>
+                    <div ref={el => warningRefs.current[2] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
+                      <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
+                      <span className="text-lg font-sans">AI replaces inefficiency</span>
+                    </div>
+                    <div ref={el => warningRefs.current[3] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
+                      <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
+                      <span className="text-lg font-sans">Your brand fades into obscurity</span>
+                    </div>
+                  </div>
+                </div>
+                {/* Success Texts (Back) */}
+                <div
+                  className="flip-text-back absolute w-full h-full flex flex-col justify-center"
+                  style={{
+                    backfaceVisibility: 'hidden',
+                    transform: 'rotateY(180deg)'
+                  }}
+                >
+                  <div className="space-y-6 max-w-xl mx-auto px-8" style={{ zIndex: 10 }}>
+                    <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
+                      <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
+                      <span className="text-lg font-sans">Smart AI Integration</span>
+                    </div>
+                    <div ref={el => successRefs.current[1] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
+                      <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
+                      <span className="text-lg font-sans">Marketing Automation</span>
+                    </div>
+                    <div ref={el => successRefs.current[2] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
+                      <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
+                      <span className="text-lg font-sans">Websites that Sell</span>
+                    </div>
+                    <div ref={el => successRefs.current[3] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
+                      <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
+                      <span className="text-lg font-sans">Higher Profit Margins</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* Success texts (hidden initially, same position as warnings) */}
-          <div className="space-y-6 max-w-xl mx-auto px-8 absolute inset-0 top-16" style={{ zIndex: 10 }}>
-            <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
-              <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-sans">Smart AI Integration</span>
-            </div>
-            <div ref={el => successRefs.current[1] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
-              <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-sans">Marketing Automation</span>
-            </div>
-            <div ref={el => successRefs.current[2] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
-              <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-sans">Websites that Sell</span>
-            </div>
-            <div ref={el => successRefs.current[3] = el} className="flex items-center justify-start opacity-0  backdrop-blur-sm rounded-lg py-3 px-4">
-              <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-              <span className="text-lg font-sans">Higher Profit Margins</span>
-            </div>
-          </div>
-
         </div>
-
 
         <div
           ref={newbeforeFinalTextRef}
@@ -1637,7 +1737,7 @@ function NextGen() {
                   {/* Text Content */}
                   <div className="text-content mr-32 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Support & Sustain</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Post-launch isn’t the end. It’s where we scale,
+                    <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Post-launch isn't the end. It's where we scale,
                       monitor, support, and evolve your digital assets
                       for long-term success.</p>
                   </div>
