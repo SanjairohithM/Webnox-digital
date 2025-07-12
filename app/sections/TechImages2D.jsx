@@ -8,38 +8,38 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 gsap.registerPlugin(ScrollTrigger)
 
 const TECH_IMAGES = [
-  { country: "Technology 1", flag: "/ShpereTextures/Group.png", size: "w-12 h-12" },
-  { country: "Technology 2", flag: "/ShpereTextures/Group-1.png", size: "w-14 h-14" },
-  { country: "Technology 3", flag: "/ShpereTextures/Group-2.png", size: "w-12 h-12" },
-  { country: "Technology 4", flag: "/ShpereTextures/Group-3.png", size: "w-14 h-14" },
-  { country: "Technology 5", flag: "/ShpereTextures/Group-4.png", size: "w-12 h-12" },
-  { country: "Technology 6", flag: "/ShpereTextures/Group-5.png", size: "w-14 h-14" },
-  { country: "Technology 7", flag: "/ShpereTextures/Group-6.png", size: "w-12 h-12" },
-  { country: "Technology 8", flag: "/ShpereTextures/Group-7.png", size: "w-14 h-14" },
-  { country: "Technology 9", flag: "/ShpereTextures/Group-8.png", size: "w-12 h-12" },
-  { country: "Technology 10", flag: "/ShpereTextures/Group-9.png", size: "w-14 h-14" },
-  { country: "Technology 11", flag: "/ShpereTextures/Group-10.png", size: "w-12 h-12" },
-  { country: "Technology 12", flag: "/ShpereTextures/Group-11.png", size: "w-14 h-14" },
-  { country: "Technology 13", flag: "/ShpereTextures/Group-12.png", size: "w-12 h-12" },
-  { country: "Technology 14", flag: "/ShpereTextures/Group-13.png", size: "w-14 h-14" },
-  { country: "Technology 15", flag: "/ShpereTextures/Group-14.png", size: "w-12 h-12" },
-  { country: "Technology 16", flag: "/ShpereTextures/Group15.png", size: "w-14 h-14" },
-  { country: "Technology 17", flag: "/ShpereTextures/Group16.png", size: "w-12 h-12" },
-  { country: "Technology 18", flag: "/ShpereTextures/Group17.png", size: "w-14 h-14" },
-  { country: "Technology 19", flag: "/ShpereTextures/Group18.png", size: "w-12 h-12" },
-  { country: "Technology 20", flag: "/ShpereTextures/Group19.png", size: "w-14 h-14" },
-  { country: "Technology 21", flag: "/ShpereTextures/Group20.png", size: "w-12 h-12" },
-  { country: "Technology 22", flag: "/ShpereTextures/Group21.png", size: "w-14 h-14" },
-  { country: "Technology 23", flag: "/ShpereTextures/Group22.png", size: "w-12 h-12" },
-  { country: "Technology 24", flag: "/ShpereTextures/Group23.png", size: "w-14 h-14" },
-  { country: "Technology 25", flag: "/ShpereTextures/Rectangle.png", size: "w-12 h-12" },
-  { country: "Technology 26", flag: "/ShpereTextures/Rectangle-1.png", size: "w-14 h-14" },
-  { country: "Technology 27", flag: "/ShpereTextures/Rectangle-2.png", size: "w-12 h-12" },
-  { country: "Technology 28", flag: "/ShpereTextures/Rectangle-3.png", size: "w-14 h-14" },
-  { country: "Technology 29", flag: "/ShpereTextures/Rectangle-4.png", size: "w-12 h-12" },
-  { country: "Technology 30", flag: "/ShpereTextures/Rectangle-5.png", size: "w-14 h-14" },
-  { country: "Technology 31", flag: "/ShpereTextures/Rectangle-6.png", size: "w-12 h-12" },
-  { country: "Technology 32", flag: "/ShpereTextures/Clip path group.png", size: "w-14 h-14" },
+  { country: "Technology 1", flag: "/ShpereTextures/Group.webp", size: "w-12 h-12" },
+  { country: "Technology 2", flag: "/ShpereTextures/Group-1.webp", size: "w-14 h-14" },
+  { country: "Technology 3", flag: "/ShpereTextures/Group-2.webp", size: "w-12 h-12" },
+  { country: "Technology 4", flag: "/ShpereTextures/Group-3.webp", size: "w-14 h-14" },
+  { country: "Technology 5", flag: "/ShpereTextures/Group-4.webp", size: "w-12 h-12" },
+  { country: "Technology 6", flag: "/ShpereTextures/Group-5.webp", size: "w-14 h-14" },
+  { country: "Technology 7", flag: "/ShpereTextures/Group-6.webp", size: "w-12 h-12" },
+  { country: "Technology 8", flag: "/ShpereTextures/Group-7.webp", size: "w-14 h-14" },
+  { country: "Technology 9", flag: "/ShpereTextures/Group-8.webp", size: "w-12 h-12" },
+  { country: "Technology 10", flag: "/ShpereTextures/Group-9.webp", size: "w-14 h-14" },
+  { country: "Technology 11", flag: "/ShpereTextures/Group-10.webp", size: "w-12 h-12" },
+  { country: "Technology 12", flag: "/ShpereTextures/Group-11.webp", size: "w-14 h-14" },
+  { country: "Technology 13", flag: "/ShpereTextures/Group-12.webp", size: "w-12 h-12" },
+  { country: "Technology 14", flag: "/ShpereTextures/Group-13.webp", size: "w-14 h-14" },
+  { country: "Technology 15", flag: "/ShpereTextures/Group-14.webp", size: "w-12 h-12" },
+  { country: "Technology 16", flag: "/ShpereTextures/Group15.webp", size: "w-14 h-14" },
+  { country: "Technology 17", flag: "/ShpereTextures/Group16.webp", size: "w-12 h-12" },
+  { country: "Technology 18", flag: "/ShpereTextures/Group17.webp", size: "w-14 h-14" },
+  { country: "Technology 19", flag: "/ShpereTextures/Group18.webp", size: "w-12 h-12" },
+  { country: "Technology 20", flag: "/ShpereTextures/Group19.webp", size: "w-14 h-14" },
+  { country: "Technology 21", flag: "/ShpereTextures/Group20.webp", size: "w-12 h-12" },
+  { country: "Technology 22", flag: "/ShpereTextures/Group21.webp", size: "w-14 h-14" },
+  { country: "Technology 23", flag: "/ShpereTextures/Group22.webp", size: "w-12 h-12" },
+  { country: "Technology 24", flag: "/ShpereTextures/Group23.webp", size: "w-14 h-14" },
+  { country: "Technology 25", flag: "/ShpereTextures/Rectangle.webp", size: "w-12 h-12" },
+  { country: "Technology 26", flag: "/ShpereTextures/Rectangle-1.webp", size: "w-14 h-14" },
+  { country: "Technology 27", flag: "/ShpereTextures/Rectangle-2.webp", size: "w-12 h-12" },
+  { country: "Technology 28", flag: "/ShpereTextures/Rectangle-3.webp", size: "w-14 h-14" },
+  { country: "Technology 29", flag: "/ShpereTextures/Rectangle-4.webp", size: "w-12 h-12" },
+  { country: "Technology 30", flag: "/ShpereTextures/Rectangle-5.webp", size: "w-14 h-14" },
+  { country: "Technology 31", flag: "/ShpereTextures/Rectangle-6.webp", size: "w-12 h-12" },
+  { country: "Technology 32", flag: "/ShpereTextures/Clip path group.webp", size: "w-14 h-14" },
 ]
 
 function TechImage({ 
@@ -90,7 +90,7 @@ function TechImage({
     offsetY: 0
   })
 
-  // Animation loop for physics-like movement with gravity (only during dropping)
+  // Animation loop for physics-like movement with gravity
   useEffect(() => {
     if (!isActive || isDragging || isSettled || isBouncing) return
 
@@ -103,16 +103,8 @@ function TechImage({
         const containerWidth = window.innerWidth
         const containerHeight = window.innerHeight
         
-        // Dynamic gravity - fast start, slow middle, fast end
-        const progress = (newY + 500) / (containerHeight + 500) // Calculate drop progress
-        let gravity = 0.3 // Base gravity for fast initial drop
-        
-        // Slow down in middle (30%-70% of drop)
-        if (progress > 0.3 && progress < 0.7) {
-          gravity = 0.08 // Much slower in middle
-        } else if (progress >= 0.7) {
-          gravity = 0.25 // Speed up again near bottom
-        }
+        // Normal gravity for natural falling
+        let gravity = 0.3 // Standard gravity for natural fall
         const flagSize = 56 // Approximate flag size for images
         
         let newVelX = velocity.x
@@ -141,35 +133,13 @@ function TechImage({
           newY = 0;
         }
 
-        // Bottom wall collision - only trigger once
-        if (newY >= containerHeight - flagSize && !isSettled && !isBouncing) {
-          setIsBouncing(true);
+        // Bottom wall collision - settle immediately without bouncing
+        if (newY >= containerHeight - flagSize) {
+          setIsSettled(true);
           setVelocity({ x: 0, y: 0 });
-
-          // Animate bounce with GSAP
-          if (flagRef.current) {
-            gsap.to(flagRef.current, {
-              y: "-=60", // bounce up 60px
-              duration: 2,
-              ease: "bounce.out",
-              onComplete: () => {
-                // After bounce, snap to bottom and settle
-                gsap.set(flagRef.current, { y: 0 });
-                setIsSettled(true);
-                setIsBouncing(false);
-                setVelocity({ x: 0, y: 0 });
-                setPosition({
-                  x: Math.max(0, Math.min(containerWidth - flagSize, newX)),
-                  y: containerHeight - flagSize
-                });
-              }
-            });
-          }
-
-          // Prevent further physics updates during bounce
           return {
             x: Math.max(0, Math.min(containerWidth - flagSize, newX)),
-            y: containerHeight - flagSize // Snap to bottom
+            y: containerHeight - flagSize
           };
         }
 
@@ -266,9 +236,9 @@ function TechImage({
           })
         }
         
-        // Apply air resistance during drop - less resistance for faster movement
-        newVelX *= 0.98
-        newVelY *= 0.995 // Very light air resistance on vertical movement
+        // Apply air resistance during drop
+        newVelX *= 0.99
+        newVelY *= 0.99 // Standard air resistance
         
         setVelocity({ x: newVelX, y: newVelY })
         
@@ -283,11 +253,11 @@ function TechImage({
     return () => clearInterval(intervalId)
   }, [velocity, isActive, isDragging, isSettled, isBouncing])
 
-  // Give initial horizontal velocity when becoming active
+  // Give initial boom velocity when becoming active
   useEffect(() => {
     if (isActive && !hasStarted) {
-      const randomHorizontalVel = (Math.random() - 0.5) * 3 // Faster horizontal spread
-      const initialDownwardVel = Math.random() * 2 + 1 // Faster initial downward velocity
+      const randomHorizontalVel = (Math.random() - 0.5) * 4 // Explosive horizontal spread
+      const initialDownwardVel = Math.random() * 1 + 0.5 // Gentle downward start
       setVelocity({ x: randomHorizontalVel, y: initialDownwardVel })
       setHasStarted(true)
       setIsSettled(false) // Reset settled state
@@ -440,22 +410,22 @@ export default function TechImages2D() {
     allBallsRef.current = new Array(TECH_IMAGES.length).fill(null)
   }, [])
 
-  // Generate initial positions at the top for dropping effect
+  // Generate initial positions at the top for booming effect
   const initialPositions = useMemo(() => {
-    const getDropPosition = (index) => {
+    const getBoomPosition = (index) => {
       const maxWidth = (typeof window !== 'undefined' ? window.innerWidth : 1200) - 100
-      // Distribute across entire width at the top
-      const sections = TECH_IMAGES.length
-      const sectionWidth = maxWidth / sections
-      const baseX = (index * sectionWidth) + (sectionWidth / 2)
-      const randomOffset = (Math.random() - 0.5) * (sectionWidth * 0.8)
       
-              return {
-          x: Math.max(50, Math.min(maxWidth - 50, baseX + randomOffset)),
-          y: -500 - (index * 60) // Start much higher up and hidden, with more staggering
-        }
+      // Start all balls from the top center with slight spread
+      const centerX = maxWidth / 2
+      const spread = 200 // How much to spread the balls horizontally
+      const randomOffset = (Math.random() - 0.5) * spread
+      
+      return {
+        x: Math.max(50, Math.min(maxWidth - 50, centerX + randomOffset)),
+        y: -100 - (index * 20) // Start above viewport with slight staggering
+      }
     }
-    return TECH_IMAGES.map((_, index) => getDropPosition(index))
+    return TECH_IMAGES.map((_, index) => getBoomPosition(index))
   }, [])
 
   // Activate physics when component comes into view
@@ -466,12 +436,13 @@ export default function TechImages2D() {
       end: "bottom center-=200",
       onEnter: () => {
         setIsActive(true)
+        // Boom effect - all balls appear at once with scale animation
         gsap.to(flagsRef.current, {
           opacity: 1,
           scale: 1,
-          duration: 0.6,
-          stagger: 0.12, // Faster staggered appearance
-          ease: "power2.out"
+          duration: 0.3,
+          stagger: 0.02, // Very fast stagger for boom effect
+          ease: "back.out(1.7)"
         })
       },
       onLeave: () => {
