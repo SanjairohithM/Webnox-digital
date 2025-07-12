@@ -368,12 +368,36 @@ const ApproachSection = () => {
   const cardsRef = useRef([])
 
   const approaches = [
-    { title: "Agility", desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster." },
-    { title: "Transparency", desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster." },
-    { title: "Cost Efficiency", desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster." },
-    { title: "Expertise Access", desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster." },
-    { title: "Data Security", desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster." },
-    { title: "Agility", desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster." }
+    { 
+      title: "Agility", 
+      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      image: "/images/fi_2.webp"
+    },
+    { 
+      title: "Transparency", 
+      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      image: "/images/fi_1.webp"
+    },
+    { 
+      title: "Cost Efficiency", 
+      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      image: "/images/fi_4.webp"
+    },
+    { 
+      title: "Expertise Access", 
+      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      image: "/images/fi_3.webp"
+    },
+    { 
+      title: "Data Security", 
+      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      image: "/images/fi_5.webp"
+    },
+    { 
+      title: "Quality Assurance", 
+      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      image: "/images/fi_2.webp"
+    }
   ]
 
   useEffect(() => {
@@ -400,7 +424,7 @@ const ApproachSection = () => {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="mb-16">
-          <p ref={subtitleRef} className="text-cyan-500 font-medium text-lg mb-4">What we offer</p>
+          <p ref={subtitleRef} className="text-cyan-500 font-sans text-xl mb-4">What we offer</p>
           <h2 ref={titleRef} className="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
             Our outsourcing approach <br />focuses on
           </h2>
@@ -414,7 +438,15 @@ const ApproachSection = () => {
               ref={el => cardsRef.current[index] = el}
               className="bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-xl transition-shadow"
             >
-              <div className="w-12 h-12 bg-gray-100 rounded-lg mb-6"></div>
+              <div className="w-16 h-16 mb-6">
+                <Image
+                  src={approach.image}
+                  alt={approach.title}
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-contain"
+                />
+              </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">{approach.title}</h3>
               <p className="text-gray-600 leading-relaxed">{approach.desc}</p>
             </div>
@@ -425,129 +457,136 @@ const ApproachSection = () => {
   )
 }
 
-// Ticker Component
+// Dual-line Ticker/Marquee Section
 const TickerSection = () => {
-  const tickerRef = useRef(null)
+  // You can customize these arrays for your content
+  const topLine = [
+    { text: "Proven Results Across 15+ Industries", bold: false },
+    { text: "Transparent Communication & Reporting", bold: false },
+    { text: "Global Delivery Model", bold: false },
+    { text: "24/7 Support", bold: false },
+  ];
+  const bottomLine = [
+    { text: "15+ Years Of Industry Experience", bold: true },
+    { text: "98% Client Retention Rate", bold: true },
+    { text: "Proven Results", bold: true },
+    { text: "Global Delivery", bold: true },
+  ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(tickerRef.current,
-        { opacity: 0, y: 20 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.8, 
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: tickerRef.current,
-            start: "top 90%",
-          }
-        }
-      )
-    }, tickerRef)
-    return () => ctx.revert()
-  }, [])
+  // Helper to render a line with dots
+  const renderLine = (items) => (
+    <>
+      {items.map((item, idx) => (
+        <span key={idx} className={item.bold ? "font-bold text-gray-700" : "font-normal text-gray-500"}>
+          {item.text}
+          {idx !== items.length - 1 && <span className="mx-4">&bull;</span>}
+        </span>
+      ))}
+    </>
+  );
 
   return (
-    <section ref={tickerRef} className="bg-blue-50 py-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center">
-          <p className="text-5xl font-bold text-gray-700 leading-tight">
-            14+ Years of Industry Experience • 98% Client Retention Rate • Proven Results Across 15+ Industries • Transparent Communication & Reporting
-          </p>
+    <div className="bg-[#f3fbfe] py-10 overflow-hidden border-b border-gray-100">
+      {/* Top ticker: right to left */}
+      <div className="relative w-full h-20 flex items-center">
+        <div className="whitespace-nowrap animate-ticker-left text-2xl font-sans flex items-center">
+          {renderLine(topLine)}
+          {/* Repeat for infinite effect */}
+          <span className="mx-8" />
+          {renderLine(topLine)}
         </div>
       </div>
-    </section>
-  )
-}
+      {/* Bottom ticker: left to right */}
+      <div className="relative w-full h-20 flex items-center mt-2">
+        <div className="whitespace-nowrap animate-ticker-right text-2xl font-sans flex items-center">
+          {renderLine(bottomLine)}
+          {/* Repeat for infinite effect */}
+          <span className="mx-8" />
+          {renderLine(bottomLine)}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-// FAQ Section Component
+// Modern FAQ Section (matches screenshot)
 const FAQSection = () => {
-  const sectionRef = useRef(null)
-  const titleRef = useRef(null)
-  const [openFAQ, setOpenFAQ] = useState(0)
-
   const faqs = [
     {
       question: "The expense windows adapted sir. Wrong widen drawn.",
-      answer: "Offending belonging promotion provision an be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her."
+      answer: "Offending belonging promotion provision can be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her."
     },
-    { question: "Six curiosity day assurance bed necessary?", answer: "" },
-    { question: "Produce say the ten moments parties?", answer: "" },
-    { question: "Simple innate summer fat appear basket his desire joy?", answer: "" },
-    { question: "Outward clothes promise at gravity do excited?", answer: "" }
-  ]
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(titleRef.current,
-        { opacity: 0, y: 30 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.8, 
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          }
-        }
-      )
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
+    {
+      question: "Six curiosity day assurance bed necessary?",
+      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      question: "Produce say the ten moments parties?",
+      answer: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      question: "Simple innate summer fat appear basket his desire joy?",
+      answer: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip."
+    },
+    {
+      question: "Outward clothes promise at gravity do excited?",
+      answer: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
+    },
+  ];
+  const [openIdx, setOpenIdx] = React.useState(0);
 
   return (
-    <section ref={sectionRef} className="bg-white py-20">
+    <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* Left - Title */}
-          <div>
-            <h2 ref={titleRef} className="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-              Frequently<br />asked questions
-            </h2>
-          </div>
-
-          {/* Middle - FAQ List */}
-          <div className="lg:col-span-2">
-            <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <div 
-                  key={index}
-                  className="border border-gray-200 rounded-xl p-6 bg-white"
-                >
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-gray-900">{faq.question}</h3>
-                    <button className="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
-                      <span className="text-gray-600">+</span>
-                    </button>
-                  </div>
-                  {index === 0 && (
-                    <p className="mt-4 text-gray-600 leading-relaxed">{faq.answer}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Heading */}
+        <div className="mb-10">
+          <h2 className="text-4xl font-extrabold text-black mb-2">Frequently</h2>
+          <span className="text-4xl font-bold text-sky-500">asked questions</span>
         </div>
-
-        {/* Contact Card */}
-        <div className="mt-12 lg:ml-auto lg:max-w-md">
-          <div className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Do you have more questions?</h3>
-            <p className="text-gray-600 mb-8 leading-relaxed">
-              End-to-end payments and financial management in a single solution. 
-              Meet the right platform to help realize.
-            </p>
-            <button className="w-full bg-cyan-500 text-white py-4 rounded-lg font-semibold hover:bg-cyan-600 transition-colors">
-              Shoot a Direct Mail
-            </button>
+        {/* Two-column layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+          {/* FAQ Accordion */}
+          <div className="md:col-span-2 flex flex-col gap-4">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className={`rounded-xl border border-gray-200 bg-white transition-shadow ${openIdx === idx ? 'shadow-md' : 'hover:shadow'} `}
+              >
+                <button
+                  className="w-full flex justify-between items-center px-6 py-5 text-left focus:outline-none"
+                  onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
+                >
+                  <span className="text-lg font-medium text-gray-900">{faq.question}</span>
+                  <span className="text-3xl text-gray-400 font-light">{openIdx === idx ? '-' : '+'}</span>
+                </button>
+                {openIdx === idx && (
+                  <div className="px-6 pb-5 text-gray-600 text-sm leading-relaxed">
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          {/* Right Card */}
+          <div className="rounded-xl border border-gray-200 bg-white p-8 flex flex-col items-center text-center min-h-[320px]">
+            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6 overflow-hidden">
+              <Image
+                src="/images/fi_7.webp"
+                alt="FAQ Icon"
+                width={48}
+                height={48}
+                className="object-contain w-10 h-10"
+              />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
+            <p className="text-gray-500 text-sm mb-6">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
+            <button className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-6 py-3 transition-colors shadow-sm">Shoot a Direct Mail</button>
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 
 
