@@ -133,14 +133,36 @@ function TechImage({
           newY = 0;
         }
 
-        // Bottom wall collision - settle immediately without bouncing
+        // Bottom wall collision - bounce once then settle
         if (newY >= containerHeight - flagSize) {
-          setIsSettled(true);
-          setVelocity({ x: 0, y: 0 });
-          return {
-            x: Math.max(0, Math.min(containerWidth - flagSize, newX)),
-            y: containerHeight - flagSize
-          };
+          // Check if this is the first bounce
+          if (!isSettled) {
+            // First bounce - bounce back up with reduced velocity
+            newVelY = -Math.abs(newVelY) * 0.6; // Bounce up with 60% of original velocity
+            newVelX = newVelX * 0.8; // Reduce horizontal velocity slightly
+            newY = containerHeight - flagSize;
+            
+            // Visual bounce effect
+            if (flagRef.current) {
+              gsap.to(flagRef.current, {
+                scale: 1.2,
+                duration: 0.15,
+                ease: "elastic.out(1.2, 0.4)",
+                yoyo: true,
+                repeat: 1
+              });
+            }
+            
+            // Mark as settled after first bounce
+            setIsSettled(true);
+          } else {
+            // Already bounced once, settle permanently
+            setVelocity({ x: 0, y: 0 });
+            return {
+              x: Math.max(0, Math.min(containerWidth - flagSize, newX)),
+              y: containerHeight - flagSize
+            };
+          }
         }
 
         // GSAP bounce scale effect on any wall collision (throttled)
@@ -352,8 +374,13 @@ function TechImage({
     const containerHeight = window.innerHeight
     const flagSize = 56
     if (position.y >= containerHeight - flagSize - 10) {
-      setIsSettled(true)
-      setVelocity({ x: 0, y: 0 })
+      // If not already settled, give it a small bounce
+      if (!isSettled) {
+        setVelocity({ x: velocity.x * 0.5, y: -Math.abs(velocity.y) * 0.4 })
+        setIsSettled(true)
+      } else {
+        setVelocity({ x: 0, y: 0 })
+      }
     }
   }, [isDragging, onDragEnd, position.y])
 

@@ -7,10 +7,10 @@ import WebnoxLogoScene from "@/Three/Scenes/WebnoxLogo";
 export default function WebnoxLogoLoader({ onComplete }) {
 
   useEffect(() => {
-    // Animation duration: 2.5s (letter b) + 2.5s (zoom) + 2.5s (enter) = 7.5s
+    // Animation duration: 2s (zoom) + 2s (enter) = 4s
     const timer = setTimeout(() => {
       onComplete(); // Immediate completion - no fade
-    }, 6500); // Updated timing for slower animation
+    }, 4000); // Updated timing for faster animation
 
     return () => clearTimeout(timer);
   }, [onComplete]);

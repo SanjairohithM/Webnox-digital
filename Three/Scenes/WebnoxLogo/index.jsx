@@ -15,57 +15,30 @@ const WebnoxLogoScene = () => {
   useEffect(() => {
     if (!logoRef.current) return;
 
-    // Wait for mesh references to be ready
-    const checkRefsAndAnimate = () => {
-      if (!logoRef.current?.curve || !logoRef.current?.curve001 || 
-          !logoRef.current?.curve002 || !logoRef.current?.curve004 || 
-          !logoRef.current?.curve005) {
-        setTimeout(checkRefsAndAnimate, 100);
-        return;
-      }
+    // GSAP Timeline for camera animation only
+    const tl = gsap.timeline();
 
-      // GSAP Timeline for staged animation
-      const tl = gsap.timeline();
-
-      // Stage 1: Show only Curve003 (letter "b") for 2.5 seconds
-      tl.to({}, { duration: 2.5 }) // Slower wait time
-      
-      // Stage 2: Show all other meshes
-      .call(() => {
-        if (logoRef.current?.curve) logoRef.current.curve.visible = true;
-        if (logoRef.current?.curve001) logoRef.current.curve001.visible = true;
-        if (logoRef.current?.curve002) logoRef.current.curve002.visible = true;
-        if (logoRef.current?.curve004) logoRef.current.curve004.visible = true;
-        if (logoRef.current?.curve005) logoRef.current.curve005.visible = true;
-      })
-      
-      // Stage 3: Zoom into the "b" letter
-      .to(camera.position, {
-        z: 1,   // Get close to the model
-        duration: 2.5, // Slower zoom
-        ease: "power2.inOut"
-      })
-      
-      // Enter the "b" 
-      .to(camera.position, {
-        z: 0.2, // Just enter the model
-        duration: 2.5, // Slower entry
-        ease: "power2.inOut"
-      })
-      
-      // Immediate completion - no waiting
-      .call(() => {
-        // Animation complete, ready to transition
-        console.log("Logo animation complete");
-      });
-
-      return tl;
-    };
-
-    const timeline = checkRefsAndAnimate();
+    // Zoom into the logo
+    tl.to(camera.position, {
+      z: 1,   // Get close to the model
+      duration: 2, // Faster zoom
+      ease: "power2.inOut"
+    })
+    
+    // Enter the logo 
+    .to(camera.position, {
+      z: 0.2, // Just enter the model
+      duration: 2, // Faster entry
+      ease: "power2.inOut"
+    })
+    
+    // Animation complete
+    .call(() => {
+      console.log("Logo animation complete");
+    });
 
     return () => {
-      if (timeline) timeline.kill();
+      if (tl) tl.kill();
     };
   }, [camera]);
 

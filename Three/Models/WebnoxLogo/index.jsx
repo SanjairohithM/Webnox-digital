@@ -8,14 +8,14 @@ export const WebnoxLogo = forwardRef((props, ref) => {
   
   return (
     <group {...props} ref={ref} dispose={null}>
-      {/* Other meshes - initially hidden */}
+      {/* All meshes - all visible by default */}
       <mesh
         ref={(el) => { if (ref?.current) ref.current.curve = el }}
         castShadow
         receiveShadow
         geometry={nodes.Curve.geometry}
         material={materials.Material}
-        visible={false}
+        visible={true}
       />
       <mesh
         ref={(el) => { if (ref?.current) ref.current.curve001 = el }}
@@ -23,7 +23,7 @@ export const WebnoxLogo = forwardRef((props, ref) => {
         receiveShadow
         geometry={nodes.Curve001.geometry}
         material={materials.Material}
-        visible={false}
+        visible={true}
       />
       <mesh
         ref={(el) => { if (ref?.current) ref.current.curve002 = el }}
@@ -31,9 +31,9 @@ export const WebnoxLogo = forwardRef((props, ref) => {
         receiveShadow
         geometry={nodes.Curve002.geometry}
         material={materials.Material}
-        visible={false}
+        visible={true}
       />
-      {/* Curve003 - letter "b" - initially visible */}
+      {/* Curve003 - letter "b" - visible */}
       <mesh
         ref={(el) => { 
           curve003Ref.current = el;
@@ -51,7 +51,7 @@ export const WebnoxLogo = forwardRef((props, ref) => {
         receiveShadow
         geometry={nodes.Curve004.geometry}
         material={materials.Material}
-        visible={false}
+        visible={true}
       />
       <mesh
         ref={(el) => { if (ref?.current) ref.current.curve005 = el }}
@@ -59,7 +59,7 @@ export const WebnoxLogo = forwardRef((props, ref) => {
         receiveShadow
         geometry={nodes.Curve005.geometry}
         material={materials.Material}
-        visible={false}
+        visible={true}
       />
     </group>
   )
