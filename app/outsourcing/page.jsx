@@ -429,9 +429,8 @@ const ApproachSection = () => {
             Our outsourcing approach <br />focuses on
           </h2>
         </div>
-
         {/* Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {approaches.map((approach, index) => (
             <div 
               key={index}
@@ -539,12 +538,12 @@ const FAQSection = () => {
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
-        <div className="mb-10">
+        <div className="mb-16">
           <h2 className="text-4xl font-extrabold text-black mb-2">Frequently</h2>
           <span className="text-4xl font-bold text-sky-500">asked questions</span>
         </div>
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
           {/* FAQ Accordion */}
           <div className="md:col-span-2 flex flex-col gap-4">
             {faqs.map((faq, idx) => (
@@ -557,7 +556,7 @@ const FAQSection = () => {
                   onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
                 >
                   <span className="text-lg font-medium text-gray-900">{faq.question}</span>
-                  <span className="text-3xl text-gray-400 font-light">{openIdx === idx ? '-' : '+'}</span>
+                  <span className="text-4xl  font-semibold">{openIdx === idx ? '-' : '+'}</span>
                 </button>
                 {openIdx === idx && (
                   <div className="px-6 pb-5 text-gray-600 text-sm leading-relaxed">
