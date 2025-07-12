@@ -1067,7 +1067,7 @@ function NextGen() {
                     backfaceVisibility: 'hidden'
                   }}
                 >
-                  <span className="text-[72px] font-sans text-black text-center" style={{ fontFamily: 'var(--font-urbanist)' }}>
+                  <span className="text-[72px] font-sans text-black text-center" style={{ fontFamily: '"Permanent Marker", cursive' }}>
                     If you wait...
                   </span>
                 </div>
@@ -1078,7 +1078,7 @@ function NextGen() {
                     transform: 'rotateY(180deg)'
                   }}
                 >
-                  <span className="text-[72px] font-sans text-black text-center" style={{ fontFamily: 'var(--font-urbanist)' }}>
+                  <span className="text-[72px] text-black text-center" style={{ fontFamily: '"Permanent Marker", cursive' }}>
                     If you act now...
                   </span>
                 </div>
@@ -1107,19 +1107,19 @@ function NextGen() {
                   <div className="space-y-6 max-w-xl mx-auto px-8" style={{ zIndex: 10 }}>
                     <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
                       <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg font-sans">Revenue stays stagnant</span>
+                      <span className="text-lg warning-success-text">Revenue stays stagnant</span>
                     </div>
                     <div ref={el => warningRefs.current[1] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
                       <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg font-sans">Competitors overtake your space</span>
+                      <span className="text-lg warning-success-text">Competitors overtake your space</span>
                     </div>
                     <div ref={el => warningRefs.current[2] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
                       <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg font-sans">AI replaces inefficiency</span>
+                      <span className="text-lg warning-success-text">AI replaces inefficiency</span>
                     </div>
                     <div ref={el => warningRefs.current[3] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
                       <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg font-sans">Your brand fades into obscurity</span>
+                      <span className="text-lg warning-success-text">Your brand fades into obscurity</span>
                     </div>
                   </div>
                 </div>
@@ -1134,19 +1134,19 @@ function NextGen() {
                   <div className="space-y-6 max-w-xl mx-auto px-8" style={{ zIndex: 10 }}>
                     <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
                       <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg font-sans">Smart AI Integration</span>
+                      <span className="text-lg warning-success-text">Smart AI Integration</span>
                     </div>
                     <div ref={el => successRefs.current[1] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
                       <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg font-sans">Marketing Automation</span>
+                      <span className="text-lg warning-success-text">Marketing Automation</span>
                     </div>
                     <div ref={el => successRefs.current[2] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
                       <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg font-sans">Websites that Sell</span>
+                      <span className="text-lg warning-success-text">Websites that Sell</span>
                     </div>
                     <div ref={el => successRefs.current[3] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
                       <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg font-sans">Higher Profit Margins</span>
+                      <span className="text-lg warning-success-text">Higher Profit Margins</span>
                     </div>
                   </div>
                 </div>
