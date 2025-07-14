@@ -135,13 +135,30 @@ export default function OurApproachSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content - Image */}
           <div ref={leftContentRef} className="order-2 lg:order-1">
-            <div ref={imageRef} className="relative">
+            <div ref={imageRef} className="relative w-full h-auto min-h-[400px]">
               <Image
                 src="/aiauto1.svg"
                 alt="Our Approach - Built Around You"
                 width={600}
                 height={400}
                 className="w-full h-auto drop-shadow-2xl"
+                priority
+              />
+              {/* Overlayed SVGs */}
+              <Image
+                src="/aiauto3.svg"
+                alt="AI Automation Layer 2"
+                width={220}
+                height={220}
+                className="absolute left-[60%] top-[10%] w-[36%] h-auto pointer-events-none"
+                priority
+              />
+              <Image
+                src="/aiauto2.svg"
+                alt="AI Automation Layer 3"
+                width={180}
+                height={180}
+                className="absolute left-[10%] top-[60%] w-[28%] h-auto pointer-events-none"
                 priority
               />
             </div>
