@@ -5,6 +5,10 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
+import FAQSection from "../components/FAQSection";
+import TickerSection from "../components/TickerSection";
+
+
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
@@ -457,144 +461,144 @@ const ApproachSection = () => {
 }
 
 // Dual-line Ticker/Marquee Section
-const TickerSection = () => {
-  // You can customize these arrays for your content
-  const topLine = [
-    { text: "Proven Results Across 15+ Industries", bold: false },
-    { text: "Transparent Communication & Reporting", bold: false },
-    { text: "Global Delivery Model", bold: false },
-    { text: "24/7 Support", bold: false },
-  ];
-  const bottomLine = [
-    { text: "15+ Years Of Industry Experience", bold: true },
-    { text: "98% Client Retention Rate", bold: true },
-    { text: "Proven Results", bold: true },
-    { text: "Global Delivery", bold: true },
-  ];
+// const TickerSection = () => {
+//   // You can customize these arrays for your content
+//   const topLine = [
+//     { text: "Proven Results Across 15+ Industries", bold: false },
+//     { text: "Transparent Communication & Reporting", bold: false },
+//     { text: "Global Delivery Model", bold: false },
+//     { text: "24/7 Support", bold: false },
+//   ];
+//   const bottomLine = [
+//     { text: "15+ Years Of Industry Experience", bold: true },
+//     { text: "98% Client Retention Rate", bold: true },
+//     { text: "Proven Results", bold: true },
+//     { text: "Global Delivery", bold: true },
+//   ];
 
-  // Helper to render a line with dots
-  const renderLine = (items, outline = false) => (
-    <>
-      {items.map((item, idx) => (
-        <span
-          key={idx}
-          className={
-            outline
-              ? "outline-text text-4xl font-bold mx-2"
-              : item.bold
-              ? "font-bold text-gray-700"
-              : "font-normal text-gray-500"
-          }
-        >
-          {item.text}
-          {idx !== items.length - 1 && <span className="mx-4">&bull;</span>}
-        </span>
-      ))}
-    </>
-  );
+//   // Helper to render a line with dots
+//   const renderLine = (items, outline = false) => (
+//     <>
+//       {items.map((item, idx) => (
+//         <span
+//           key={idx}
+//           className={
+//             outline
+//               ? "outline-text text-4xl font-bold mx-2"
+//               : item.bold
+//               ? "font-bold text-gray-700"
+//               : "font-normal text-gray-500"
+//           }
+//         >
+//           {item.text}
+//           {idx !== items.length - 1 && <span className="mx-4">&bull;</span>}
+//         </span>
+//       ))}
+//     </>
+//   );
 
-  return (
-    <div className="bg-[#f3fbfe] py-10 overflow-hidden border-b border-gray-100">
-      {/* Top ticker: right to left */}
-      <div className="relative w-full h-20 flex items-center">
-        <div className="whitespace-nowrap animate-ticker-left text-2xl font-sans flex items-center">
-          {renderLine(topLine, true)}
-          {/* Repeat for infinite effect */}
-          <span className="mx-8" />
-          {renderLine(topLine, true)}
-        </div>
-      </div>
-      {/* Bottom ticker: left to right */}
-      <div className="relative w-full h-20 flex items-center mt-2">
-        <div className="whitespace-nowrap animate-ticker-right text-2xl font-sans flex items-center">
-          {renderLine(bottomLine)}
-          {/* Repeat for infinite effect */}
-          <span className="mx-8" />
-          {renderLine(bottomLine)}
-        </div>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="bg-[#f3fbfe] py-10 overflow-hidden border-b border-gray-100">
+//       {/* Top ticker: right to left */}
+//       <div className="relative w-full h-20 flex items-center">
+//         <div className="whitespace-nowrap animate-ticker-left text-2xl font-sans flex items-center">
+//           {renderLine(topLine, true)}
+//           {/* Repeat for infinite effect */}
+//           <span className="mx-8" />
+//           {renderLine(topLine, true)}
+//         </div>
+//       </div>
+//       {/* Bottom ticker: left to right */}
+//       <div className="relative w-full h-20 flex items-center mt-2">
+//         <div className="whitespace-nowrap animate-ticker-right text-2xl font-sans flex items-center">
+//           {renderLine(bottomLine)}
+//           {/* Repeat for infinite effect */}
+//           <span className="mx-8" />
+//           {renderLine(bottomLine)}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
 // Modern FAQ Section (matches screenshot)
-const FAQSection = () => {
-  const faqs = [
-    {
-      question: "The expense windows adapted sir. Wrong widen drawn.",
-      answer: "Offending belonging promotion provision can be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her."
-    },
-    {
-      question: "Six curiosity day assurance bed necessary?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    },
-    {
-      question: "Produce say the ten moments parties?",
-      answer: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      question: "Simple innate summer fat appear basket his desire joy?",
-      answer: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip."
-    },
-    {
-      question: "Outward clothes promise at gravity do excited?",
-      answer: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
-    },
-  ];
-  const [openIdx, setOpenIdx] = React.useState(0);
+// const FAQSection = () => {
+//   const faqs = [
+//     {
+//       question: "The expense windows adapted sir. Wrong widen drawn.",
+//       answer: "Offending belonging promotion provision can be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her."
+//     },
+//     {
+//       question: "Six curiosity day assurance bed necessary?",
+//       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+//     },
+//     {
+//       question: "Produce say the ten moments parties?",
+//       answer: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+//     },
+//     {
+//       question: "Simple innate summer fat appear basket his desire joy?",
+//       answer: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip."
+//     },
+//     {
+//       question: "Outward clothes promise at gravity do excited?",
+//       answer: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
+//     },
+//   ];
+//   const [openIdx, setOpenIdx] = React.useState(0);
 
-  return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Heading */}
-        <div className="mb-16">
-          <h2 className="text-4xl font-extrabold text-black mb-2">Frequently</h2>
-          <span className="text-4xl font-bold text-sky-500">asked questions</span>
-        </div>
-        {/* Two-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-          {/* FAQ Accordion */}
-          <div className="md:col-span-2 flex flex-col gap-4">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className={`rounded-xl border border-gray-200 bg-white transition-shadow ${openIdx === idx ? 'shadow-md' : 'hover:shadow'} `}
-              >
-                <button
-                  className="w-full flex justify-between items-center px-6 py-5 text-left focus:outline-none"
-                  onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
-                >
-                  <span className="text-lg font-medium text-gray-900">{faq.question}</span>
-                  <span className="text-4xl  font-semibold">{openIdx === idx ? '-' : '+'}</span>
-                </button>
-                {openIdx === idx && (
-                  <div className="px-6 pb-5 text-gray-600 text-sm leading-relaxed">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-          {/* Right Card */}
-          <div className="rounded-xl border border-gray-200 bg-white p-8 flex flex-col items-center text-center min-h-[320px]">
-            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6 overflow-hidden">
-              <Image
-                src="/images/fi_7.webp"
-                alt="FAQ Icon"
-                width={48}
-                height={48}
-                className="object-contain w-10 h-10"
-              />
-            </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
-            <p className="text-gray-500 text-sm mb-6">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
-            <button className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-6 py-3 transition-colors shadow-sm">Shoot a Direct Mail</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+//   return (
+//     <section className="py-20 bg-white">
+//       <div className="max-w-7xl mx-auto px-4">
+//         {/* Heading */}
+//         <div className="mb-16">
+//           <h2 className="text-4xl font-extrabold text-black mb-2">Frequently</h2>
+//           <span className="text-4xl font-bold text-sky-500">asked questions</span>
+//         </div>
+//         {/* Two-column layout */}
+//         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+//           {/* FAQ Accordion */}
+//           <div className="md:col-span-2 flex flex-col gap-4">
+//             {faqs.map((faq, idx) => (
+//               <div
+//                 key={idx}
+//                 className={`rounded-xl border border-gray-200 bg-white transition-shadow ${openIdx === idx ? 'shadow-md' : 'hover:shadow'} `}
+//               >
+//                 <button
+//                   className="w-full flex justify-between items-center px-6 py-5 text-left focus:outline-none"
+//                   onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
+//                 >
+//                   <span className="text-lg font-medium text-gray-900">{faq.question}</span>
+//                   <span className="text-4xl  font-semibold">{openIdx === idx ? '-' : '+'}</span>
+//                 </button>
+//                 {openIdx === idx && (
+//                   <div className="px-6 pb-5 text-gray-600 text-sm leading-relaxed">
+//                     {faq.answer}
+//                   </div>
+//                 )}
+//               </div>
+//             ))}
+//           </div>
+//           {/* Right Card */}
+//           <div className="rounded-xl border border-gray-200 bg-white p-8 flex flex-col items-center text-center min-h-[320px]">
+//             <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6 overflow-hidden">
+//               <Image
+//                 src="/images/fi_7.webp"
+//                 alt="FAQ Icon"
+//                 width={48}
+//                 height={48}
+//                 className="object-contain w-10 h-10"
+//               />
+//             </div>
+//             <h3 className="text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
+//             <p className="text-gray-500 text-sm mb-6">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
+//             <button className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-6 py-3 transition-colors shadow-sm">Shoot a Direct Mail</button>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
 
 
 

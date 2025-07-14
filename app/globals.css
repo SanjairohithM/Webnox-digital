@@ -172,8 +172,15 @@ body {
 /* Outlined text for ticker topline */
 .outline-text {
   color: transparent;
-  -webkit-text-stroke: 2px #bfcad1;
-  text-stroke: 2px #bfcad1;
+  -webkit-text-stroke: 1.5px #888;
+  text-stroke: 1.5px #888;
+}
+
+.hovered-outline-text {
+  color: #111;
+  -webkit-text-stroke: 0px;
+  text-stroke: 0px;
+  transition: color 0.3s, -webkit-text-stroke 0.3s;
 }
 
 @keyframes ticker-left {
@@ -189,4 +196,12 @@ body {
 }
 .animate-ticker-right {
   animation: ticker-right 30s linear infinite;
+}
+
+.clip-triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.clip-diamond {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }
