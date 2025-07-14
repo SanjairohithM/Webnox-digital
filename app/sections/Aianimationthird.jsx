@@ -18,7 +18,6 @@ export default function OurApproachSection() {
   const descriptionRef = useRef(null)
   const buttonRef = useRef(null)
   const imageRef = useRef(null)
-  const gearRef = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -125,25 +124,6 @@ export default function OurApproachSection() {
           }, "-=0.8")
         }
       }, 500)
-
-      // Animate gear (aiauto2.svg) scaling on scroll
-      if (gearRef.current) {
-        gsap.fromTo(
-          gearRef.current,
-          { scale: 1 },
-          {
-            scale: 1.4,
-            duration: 1.5,
-            ease: 'power3.inOut',
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: 'top 80%',
-              end: 'bottom 20%',
-              toggleActions: 'play none none reverse',
-            },
-          }
-        )
-      }
     }, sectionRef)
 
     return () => ctx.revert()
@@ -167,16 +147,15 @@ export default function OurApproachSection() {
               {/* Overlayed SVGs */}
               <Image
                 src="/aiauto3.svg"
-                alt="AI Automation Layer 3"
+                alt="AI Automation Layer 2"
                 width={220}
                 height={220}
                 className="absolute left-[60%] top-[10%] w-[36%] h-auto pointer-events-none"
                 priority
               />
               <Image
-                ref={gearRef}
                 src="/aiauto2.svg"
-                alt="AI Automation Layer 2 (Gear)"
+                alt="AI Automation Layer 3"
                 width={180}
                 height={180}
                 className="absolute left-[12%] top-[17%] w-[28%] h-auto pointer-events-none"
