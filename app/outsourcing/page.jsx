@@ -473,10 +473,19 @@ const TickerSection = () => {
   ];
 
   // Helper to render a line with dots
-  const renderLine = (items) => (
+  const renderLine = (items, outline = false) => (
     <>
       {items.map((item, idx) => (
-        <span key={idx} className={item.bold ? "font-bold text-gray-700" : "font-normal text-gray-500"}>
+        <span
+          key={idx}
+          className={
+            outline
+              ? "outline-text text-4xl font-bold mx-2"
+              : item.bold
+              ? "font-bold text-gray-700"
+              : "font-normal text-gray-500"
+          }
+        >
           {item.text}
           {idx !== items.length - 1 && <span className="mx-4">&bull;</span>}
         </span>
@@ -489,10 +498,10 @@ const TickerSection = () => {
       {/* Top ticker: right to left */}
       <div className="relative w-full h-20 flex items-center">
         <div className="whitespace-nowrap animate-ticker-left text-2xl font-sans flex items-center">
-          {renderLine(topLine)}
+          {renderLine(topLine, true)}
           {/* Repeat for infinite effect */}
           <span className="mx-8" />
-          {renderLine(topLine)}
+          {renderLine(topLine, true)}
         </div>
       </div>
       {/* Bottom ticker: left to right */}

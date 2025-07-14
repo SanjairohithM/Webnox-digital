@@ -169,6 +169,13 @@ body {
   font-style: normal;
 }
 
+/* Outlined text for ticker topline */
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 2px #bfcad1;
+  text-stroke: 2px #bfcad1;
+}
+
 @keyframes ticker-left {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
