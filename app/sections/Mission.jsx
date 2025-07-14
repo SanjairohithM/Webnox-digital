@@ -39,7 +39,7 @@ const solutions = [
   {
     title: "DATA & ANALYSIS",
     description: "We turn your raw data into actionable insights, helping you make smarter business decisions backed by real-time analytics.",
-    image: "/images/DATA & ANALYSIS.webp"
+    image: "/images/dataana.webp"
   },
   {
     title: "UI UX DESIGN",
