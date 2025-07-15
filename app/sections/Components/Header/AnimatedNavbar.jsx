@@ -7,6 +7,8 @@ import Image from "next/image"
 import { FloatingNav } from "@/components/ui/floating-navbar"
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import ServicesOverlay from "./ServicesOverlay"
+import SolutionsOverlay from "./SolutionsOverlay"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -18,7 +20,12 @@ const navItems = [
     icon: <Info className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
-    name: "Solutions", 
+    name: "Services", 
+    link: "#services",
+    icon: <Lightbulb className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  },
+  {
+    name: "Solutions",
     link: "#solutions",
     icon: <Lightbulb className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
@@ -52,12 +59,17 @@ const AnimatedNavbar = ({
       IconComponent: Info,
     },
     {
+      name: "Services",
+      href: "#services",
+      IconComponent: Lightbulb,
+    },
+    {
       name: "Solutions",
       href: "#solutions",
       IconComponent: Lightbulb,
     },
     {
-      name: "Industries",
+        name: "Industries",
       href: "#industries",
       IconComponent: Building2,
     },
@@ -99,6 +111,8 @@ const AnimatedNavbar = ({
   })
   const heroVisibleRef = useRef(isHeroVisible)
   const [currentHoveredIcon, setCurrentHoveredIcon] = useState(null)
+  const [showServicesOverlay, setShowServicesOverlay] = useState(false)
+  const [showSolutionsOverlay, setShowSolutionsOverlay] = useState(false)
   
   // Check if device is mobile
   useEffect(() => {
@@ -590,6 +604,16 @@ const AnimatedNavbar = ({
     }
   }
 
+  const handleServicesClick = (e) => {
+    e.preventDefault()
+    setShowServicesOverlay(true)
+  }
+
+  const handleSolutionsClick = (e) => {
+    e.preventDefault()
+    setShowSolutionsOverlay(true)
+  }
+
   const handleMenuItemHover = (item, isEntering) => {
     const cursor = customCursorRef.current
     const cursorIcon = cursorIconRef.current
@@ -622,11 +646,23 @@ const AnimatedNavbar = ({
 
   return (
     <>
+      {/* Services Overlay */}
+      {showServicesOverlay && (
+        <ServicesOverlay onClose={() => setShowServicesOverlay(false)} />
+      )}
+
+      {/* Solutions Overlay */}
+      {showSolutionsOverlay && (
+        <SolutionsOverlay onClose={() => setShowSolutionsOverlay(false)} />
+      )}
+
       {/* FloatingNav for Desktop - Shows in non-hero sections */}
       <div className="hidden md:block">
         <FloatingNav
           navItems={navItems}
           className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl"
+          onServicesClick={() => setShowServicesOverlay(true)}
+          onSolutionsClick={() => setShowSolutionsOverlay(true)}
         />
       </div>
 
@@ -644,6 +680,7 @@ const AnimatedNavbar = ({
         <div ref={cursorIconRef} className="absolute inset-0 flex items-center justify-center">
           <div className="bg-[#2acbec]/20 backdrop-blur-sm rounded-full p-3 border border-[#2acbec]/40 shadow-lg">
             {currentHoveredIcon === "About" && <Info size={32} color="#ffffff" strokeWidth={2} />}
+            {currentHoveredIcon === "Services" && <Lightbulb size={32} color="#ffffff" strokeWidth={2} />}
             {currentHoveredIcon === "Solutions" && <Lightbulb size={32} color="#ffffff" strokeWidth={2} />}
             {currentHoveredIcon === "Industries" && <Building2 size={32} color="#ffffff" strokeWidth={2} />}
             {currentHoveredIcon === "Expertise" && <GraduationCap size={32} color="#ffffff" strokeWidth={2} />}
@@ -684,11 +721,15 @@ const AnimatedNavbar = ({
               className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-2 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full"
               onClick={(e) => {
                 e.preventDefault()
-                if (item.href.startsWith('/')) {
+                if (item.name === "Services") {
+                  handleServicesClick(e)
+                } else if (item.name === "Solutions") {
+                  handleSolutionsClick(e)
+                } else if (item.href.startsWith('/')) {
                   // Handle page navigation for routes like /about
                   window.location.href = item.href
                 } else {
-                  // Handle anchor links like #solutions
+                  // Handle anchor links like #services
                   const element = document.querySelector(item.href)
                   if (element) {
                     element.scrollIntoView({ behavior: "smooth" })
@@ -846,11 +887,15 @@ const AnimatedNavbar = ({
 
                     setTimeout(() => {
                       toggleMenu()
-                      if (item.href.startsWith('/')) {
+                      if (item.name === "Services") {
+                        setShowServicesOverlay(true)
+                      } else if (item.name === "Solutions") {
+                        setShowSolutionsOverlay(true)
+                      } else if (item.href.startsWith('/')) {
                         // Handle page navigation for routes like /about
                         window.location.href = item.href
                       } else {
-                        // Handle anchor links like #solutions
+                        // Handle anchor links like #services
                         const element = document.querySelector(item.href)
                         if (element) {
                           element.scrollIntoView({ behavior: "smooth" })

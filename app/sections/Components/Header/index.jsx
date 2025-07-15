@@ -9,6 +9,7 @@ export default function Header() {
   // Custom items for your website
   const navItems = [
     { name: "About", href: "/about", icon: null },
+    { name: "Services", href: "#services", icon: null },
     { name: "Solutions", href: "#solutions", icon: null },
     { name: "Industries", href: "#industries", icon: null },
     { name: "Expertise", href: "#expertise", icon: null },

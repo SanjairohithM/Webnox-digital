@@ -11,7 +11,9 @@ import { cn } from "@/lib/utils";
 
 export const FloatingNav = ({
   navItems,
-  className
+  className,
+  onServicesClick,
+  onSolutionsClick
 }) => {
   const { scrollYProgress } = useScroll();
 
@@ -56,11 +58,20 @@ export const FloatingNav = ({
           <a
             key={`link=${idx}`}
             href={navItem.link}
-                          className={cn(
-                "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
-              )}>
-              <span className="block sm:hidden">{navItem.icon}</span>
-              <span className="hidden sm:block text-base font-medium">{navItem.name}</span>
+            onClick={(e) => {
+              if (navItem.name === "Services") {
+                e.preventDefault()
+                onServicesClick && onServicesClick()
+              } else if (navItem.name === "Solutions") {
+                e.preventDefault()
+                onSolutionsClick && onSolutionsClick()
+              }
+            }}
+            className={cn(
+              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+            )}>
+            <span className="block sm:hidden">{navItem.icon}</span>
+            <span className="hidden sm:block text-base font-medium">{navItem.name}</span>
           </a>
         ))}
       </motion.div>
