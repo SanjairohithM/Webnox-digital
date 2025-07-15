@@ -226,6 +226,11 @@ const FutureProofSection = () => {
   const titleRef = useRef(null)
   const descRef = useRef(null)
   const imageRef = useRef(null)
+  const svg2Ref = useRef(null)
+  const svg3Ref = useRef(null)
+  const svg4Ref = useRef(null)
+  const svg5Ref = useRef(null)
+  const svg6Ref = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -242,21 +247,57 @@ const FutureProofSection = () => {
       tl.to(titleRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" })
         .to(descRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
         .to(imageRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
+
+      // Continuous left-right movement for SVG elements
+      gsap.to(svg2Ref.current, {
+        x: "-20px",
+        duration: 2,
+        ease: "power1.inOut",
+        yoyo: true,
+        repeat: -1
+      })
+
+      gsap.to(svg3Ref.current, {
+        x: "-20px",
+        duration: 2,
+        ease: "power1.inOut",
+        yoyo: true,
+        repeat: -1
+      })
+
+      // Continuous top-bottom movement for drone
+      gsap.to(svg4Ref.current, {
+        y: "60px",
+        duration: 3,
+        ease: "power1.inOut",
+        yoyo: true,
+        repeat: -1
+      })
+
+      // Continuous top-bottom movement for SVG5 and SVG6 (synchronized)
+      gsap.to([svg5Ref.current, svg6Ref.current], {
+        y: "20px",
+        duration: 2.5,
+        ease: "power1.inOut",
+        yoyo: true,
+        repeat: -1,
+        stagger: 0
+      })
     }, sectionRef)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white py-20 px-4">
+    <section ref={sectionRef} className=" py-8 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
           <div className="space-y-6">
-            <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 leading-tight">
+            <h2 ref={titleRef} className="text-3xl md:text-4xl font-sans font-bold text-gray-800 leading-tight">
               Future-Proof Your Business with Strategic{" "}
-              <span className="text-[#00B9FF]">IT Consulting</span>
+              <span className="bg-gradient-to-r from-[#6107AF] to-[#00B9FF] bg-clip-text text-transparent font-sans">IT Consulting</span>
             </h2>
-            <p ref={descRef} className="text-gray-600 text-lg leading-relaxed">
+            <p ref={descRef} className="text-gray-500 text-lg font-sans leading-relaxed">
               At Webnox Digital, our IT consulting services are built for ambitious businesses seeking clarity, speed, and long-term impact. We go beyond traditional advisory, we embed ourselves in your challenges, co-create solutions, and deliver tailored digital strategies that scale with your growth. Whether you're a startup seeking product direction or an enterprise pursuing digital transformation, Webnox delivers IT strategies that work fast, flexibly, and future-ready.
             </p>
           </div>
@@ -273,18 +314,18 @@ const FutureProofSection = () => {
               />
               
               {/* Overlay Elements */}
-              {/* Drone - Upper Right */}
-              <div className="absolute top-50 left-57 w-16 h-20">
+              {/* blueman - Upper Right */}
+              <div ref={svg2Ref} className="absolute top-50 left-57 w-16 h-20">
                 <Image 
                   src="/consultsvg2.svg" 
-                  alt="Drone" 
+                  alt="blueman" 
                   fill
                   className="object-contain"
                 />
               </div>
               
               {/* Person with Laptop - Mid Left */}
-              <div className="absolute top-44 right-72 w-16 h-20">
+              <div ref={svg3Ref} className="absolute top-44 right-72 w-16 h-20">
                 <Image 
                   src="/consultsvg3.svg" 
                   alt="Person with Laptop" 
@@ -293,18 +334,18 @@ const FutureProofSection = () => {
                 />
               </div>
               
-              {/* Person on Books - Bottom Right */}
-              <div className="absolute bottom-90 right-55 w-16 h-20">
+              {/* drone - Top Right */}
+              <div ref={svg4Ref} className="absolute top-20 right-50 w-26 h-30">
                 <Image 
                   src="/consultsvg4.svg" 
-                  alt="Person on Books" 
+                  alt="drone" 
                   fill
                   className="object-contain"
                 />
               </div>
               
               {/* Person with Document - Upper Middle */}
-              <div className="absolute bottom-48 left-67 transform -translate-x-1/2 w-16 h-20">
+              <div ref={svg5Ref} className="absolute bottom-48 left-67 transform -translate-x-1/2 w-16 h-20">
                 <Image 
                   src="/consultsvg5.svg" 
                   alt="Person with Document" 
@@ -314,7 +355,7 @@ const FutureProofSection = () => {
               </div>
               
               {/* Person with Magnifying Glass - Bottom Middle */}
-              <div className="absolute bottom-53 left-64 transform -translate-x-1/2 w-30 h-30">
+              <div ref={svg6Ref} className="absolute bottom-53 left-64 transform -translate-x-1/2 w-30 h-30">
                 <Image 
                   src="/consultsvg6.svg" 
                   alt="Person with Magnifying Glass" 
@@ -326,6 +367,159 @@ const FutureProofSection = () => {
             
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Robot Section Component
+const RobotSection = () => {
+  const sectionRef = useRef(null)
+  const robotRef = useRef(null)
+  const textBlocksRef = useRef([])
+  const bannerRef = useRef(null)
+
+  const textBlocks = [
+    {
+      title: "Business-First Approach",
+      desc: "We understand your business goals and align every IT strategy accordingly."
+    },
+    {
+      title: "Full-Stack Expertise", 
+      desc: "From cloud and software architecture to UX and AI, our diverse team brings deep, cross-functional knowledge to the table."
+    },
+    {
+      title: "Enterprise-Grade Thinking",
+      desc: "We combine the agility of a modern digital studio with the discipline of enterprise IT consulting."
+    },
+    {
+      title: "Execution-Focused",
+      desc: "From cloud and software architecture to UX and AI, our diverse team brings deep, cross-functional knowledge to the table."
+    }
+  ]
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set([robotRef.current, ...textBlocksRef.current, bannerRef.current], { opacity: 0, y: 30 })
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        }
+      })
+      
+      tl.to(robotRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+        .to(textBlocksRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.4")
+        .to(bannerRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="bg-white py-20 px-4 relative">
+      <div className="max-w-7xl mx-auto">
+        {/* Central Robot Illustration with Surrounding Text */}
+        <div className="relative flex items-center justify-center mb-16 min-h-[500px]">
+          {/* Left Side Text Blocks */}
+          <div className="absolute left-0 top-0 w-80 space-y-16">
+            {/* Top Left */}
+            <div 
+              ref={el => textBlocksRef.current[0] = el}
+              className="text-right pr-8"
+            >
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[0].title}</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[0].desc}</p>
+            </div>
+
+            {/* Bottom Left */}
+            <div 
+              ref={el => textBlocksRef.current[2] = el}
+              className="text-right pr-8"
+            >
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[2].title}</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[2].desc}</p>
+            </div>
+          </div>
+
+          {/* Central Robot Illustration */}
+          <div ref={robotRef} className="relative w-96 h-[500px] mx-12">
+            {/* Light blue circular background */}
+            <div className="absolute inset-0 bg-blue-100 rounded-full opacity-60"></div>
+            
+            {/* Robot with data board */}
+            <div className="relative z-10 flex items-center justify-center h-full">
+              <div className="relative">
+                {/* Robot Image */}
+                <Image 
+                  src="/images/robocons.webp" 
+                  alt="Robot Consultant" 
+                  width={300} 
+                  height={400} 
+                  className="w-64 h-auto object-contain"
+                />
+                
+                {/* Data Board */}
+                <div className="absolute top-12 left-20 w-40 h-32 bg-white rounded-lg shadow-lg border border-gray-200 p-3">
+                  {/* Small blue horizontal bar chart at top left */}
+                  <div className="flex items-center space-x-2 mb-3">
+                    <div className="w-10 h-3 bg-blue-400 rounded"></div>
+                    <div className="w-8 h-3 bg-blue-300 rounded"></div>
+                    <div className="w-6 h-3 bg-blue-200 rounded"></div>
+                  </div>
+                  
+                  {/* Circular chart in center */}
+                  <div className="flex justify-center mb-3">
+                    <div className="w-16 h-16 rounded-full border-4 border-blue-400 relative">
+                      <div className="absolute inset-0 rounded-full border-4 border-orange-400 transform rotate-45"></div>
+                      <div className="absolute inset-0 rounded-full border-4 border-gray-300 transform rotate-90"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Horizontal lines at bottom left */}
+                  <div className="space-y-1">
+                    <div className="w-20 h-1 bg-gray-400 rounded"></div>
+                    <div className="w-16 h-1 bg-gray-300 rounded"></div>
+                    <div className="w-18 h-1 bg-gray-400 rounded"></div>
+                  </div>
+                  
+                  {/* Blank rectangular box at bottom right */}
+                  <div className="absolute bottom-3 right-3 w-8 h-6 border border-gray-300 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side Text Blocks */}
+          <div className="absolute right-0 top-0 w-80 space-y-16">
+            {/* Top Right */}
+            <div 
+              ref={el => textBlocksRef.current[1] = el}
+              className="text-left pl-8"
+            >
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[1].title}</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[1].desc}</p>
+            </div>
+
+            {/* Bottom Right */}
+            <div 
+              ref={el => textBlocksRef.current[3] = el}
+              className="text-left pl-8"
+            >
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[3].title}</h3>
+              <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[3].desc}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Banner */}
+        <div 
+          ref={bannerRef}
+          className="relative bg-gradient-to-r from-blue-200 via-blue-100 to-white rounded-t-lg p-10 text-center"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-[#00B9FF] mb-4">What we do</h2>
+          <p className="text-gray-700 text-xl">Webnox takes a leaner, smarter, and more personalized approach.</p>
         </div>
       </div>
     </section>
@@ -346,6 +540,7 @@ const OutsourcingPage = () => {
       <HeroSection />
       <AnimatedTextSection />
       <FutureProofSection />
+      <RobotSection />
       
     </main>
   )
