@@ -136,11 +136,22 @@ export default function WebnoxDigitalSection() {
 
   return (
     <>
-    <section ref={sectionRef} className="py-20 lg:py-32 bg-white relative overflow-hidden">
+    <section ref={sectionRef} className="py-8 bg-white relative overflow-hidden font-sans">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 text-center">
+      {/* Floor Background - Full Section */}
+      <div className="absolute bottom-45 left-[59%] transform -translate-x-1/2 w-1/2 h-1/3 z-0">
+        <Image
+          src="/images/Floor.png"
+          alt="Floor Background"
+          fill
+          className="object-cover opacity-190"
+          priority
+        />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
         {/* Title */}
         <h2 ref={titleRef} className="text-4xl lg:text-5xl xl:text-6xl font-bold mb-8 lg:mb-12">
           <span className="text-gray-900">Webnox </span>
@@ -150,13 +161,10 @@ export default function WebnoxDigitalSection() {
         {/* Description */}
         <p
           ref={descriptionRef}
-          className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto mb-16 lg:mb-20"
+          className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto "
         >
           Once upon a time, businesses were built on long hours, manual processes, and endless spreadsheets. But the
-          world changed. Fast.
-          <br />
-          <br />
-          At Webnox Digital, we help businesses like yours break free from busywork. Whether it's your marketing,
+          world changed. Fast.At Webnox Digital, we help businesses like yours break free from busywork. Whether it's your marketing,
           customer service, operations, or internal tasks.
         </p>
         <br />
@@ -169,18 +177,6 @@ export default function WebnoxDigitalSection() {
           className="flex justify-center mt-20"
         >
           <div className="relative min-h-[400px] w-full max-w-4xl">
-            {/* Floor Decor Background - Large size */}
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-0">
-              <Image
-                src="/images/Floor.png"
-                alt="Floor Decor Background"
-                width={800}
-                height={400}
-                className="opacity-80 w-full h-full object-cover bg-amber-700"
-                priority
-              />
-            </div>
-
             {/* SVG Container - Centered on floor */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/4 z-10">
               {/* Layer 4 - Bottom-most */}

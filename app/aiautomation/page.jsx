@@ -33,6 +33,13 @@ export default function AIAutomationHero() {
         scale: 0.8,
       })
 
+      // Set initial rotation for the image
+      gsap.set(imageRef.current, {
+        rotation: 360,
+        x: 400,
+        transformOrigin: "center center",
+      })
+
       // Create timeline for animations
       const tl = gsap.timeline({ delay: 0.2 })
 
@@ -74,14 +81,16 @@ export default function AIAutomationHero() {
           "-=0.3",
         )
 
-      // Animate right content
+      // Animate right content with rotation
       tl.to(
         imageRef.current,
         {
           opacity: 1,
           scale: 1,
-          duration: 1,
-          ease: "back.out(1.7)",
+          rotation: 0,
+          x: 0,
+          duration: 2.5,
+          ease: "power2.out",
         },
         "-=0.8",
       ).to(
@@ -103,7 +112,7 @@ export default function AIAutomationHero() {
       <>
         <div
           ref={containerRef}
-          className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center px-4 py-12"
+          className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center px-4 py-12 font-sans"
         >
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -114,11 +123,14 @@ export default function AIAutomationHero() {
                 </p>
 
                 <h1 ref={titleRef} className="text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
-                  Work Smarter. <span className="block">Not Harder.</span>
+                  <span className="text-gray-900">Webnox </span>
+                  <span className="text-cyan-500">Digital</span>
                 </h1>
 
                 <p ref={descriptionRef} className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                  Let Webnox build the systems that run your business, while you focus on growing it.
+                  Once upon a time, businesses were built on long hours, manual processes, and endless spreadsheets. But the world changed. Fast.
+                  <br /><br />
+                  At Webnox Digital, we help businesses like yours break free from busywork. Whether it's your marketing, customer service, operations, or internal tasks.
                 </p>
 
                 <div ref={buttonRef}>
@@ -133,22 +145,40 @@ export default function AIAutomationHero() {
               {/* Right Content */}
               <div ref={rightContentRef} className="relative flex justify-center lg:justify-end">
                 <div ref={imageRef} className="relative">
+                  {/* Circular Background Element */}
+                  <div className="absolute inset-0 w-full h-full flex items-start justify-end pr-6 pt-8">
+                    <div className="w-[300px] h-[300px] lg:w-[350px] lg:h-[350px] xl:w-[400px] xl:h-[400px] rounded-full bg-gradient-to-r from-cyan-400 to-blue-600 opacity-90 -z-10"></div>
+                  </div>
+                  
                   <Image
-                    src="/images/ai-robot.png"
+                    src="/images/aiauto1.webp"
                     alt="AI Robot Automation"
                     width={600}
                     height={600}
-                    className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl h-auto"
+                    className="w-full max-w-sm lg:max-w-md xl:max-w-lg h-auto relative z-10"
                     priority
                   />
 
                   {/* AI Automation Badge */}
                   <div
                     ref={badgeRef}
-                    className="absolute bottom-8 left-8 bg-white rounded-2xl px-4 py-3 shadow-lg border border-gray-100 flex items-center gap-3"
+                    className="absolute bottom-8 left-14 rounded-2xl px-6 py-3 shadow-lg border border-gray-100 flex items-center gap-3 z-20
+                      bg-white/30 backdrop-blur-md"
+                    style={{
+                      WebkitBackdropFilter: "blur(12px)",
+                      backdropFilter: "blur(12px)",
+                      background: "rgba(255,255,255,0.30)"
+                    }}
                   >
-                    <div className="bg-cyan-500 p-2 rounded-lg">
-                      <Cpu className="w-5 h-5 text-white" />
+                    <div className="bg-cyan-500 p-4 rounded-lg flex items-center justify-center">
+                      <Image
+                        src="/images/cons10.png"
+                        alt="AI Icon"
+                        width={24}
+                        height={24}
+                        className="w-7 h-7 object-cover"
+                        priority
+                      />
                     </div>
                     <span className="font-semibold text-gray-800">AI Automation</span>
                   </div>
