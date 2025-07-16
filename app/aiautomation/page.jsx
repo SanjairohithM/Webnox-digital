@@ -118,19 +118,17 @@ export default function AIAutomationHero() {
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               {/* Left Content */}
               <div ref={leftContentRef} className="space-y-8">
-                <p ref={subtitleRef} className="text-cyan-500 font-medium text-lg tracking-wide">
+                <p ref={subtitleRef} className="text-cyan-500  text-2xl tracking-wide">
                   AI Automation
                 </p>
 
                 <h1 ref={titleRef} className="text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight">
-                  <span className="text-gray-900">Webnox </span>
-                  <span className="text-cyan-500">Digital</span>
+                  <span className="text-gray-900">Work Smarter. Not Harder </span>
+                  
                 </h1>
 
                 <p ref={descriptionRef} className="text-xl text-gray-600 leading-relaxed max-w-lg">
-                  Once upon a time, businesses were built on long hours, manual processes, and endless spreadsheets. But the world changed. Fast.
-                  <br /><br />
-                  At Webnox Digital, we help businesses like yours break free from busywork. Whether it's your marketing, customer service, operations, or internal tasks.
+                Let Webnox build the systems that run your business, while you focus on growing it.
                 </p>
 
                 <div ref={buttonRef}>

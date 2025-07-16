@@ -124,20 +124,45 @@ export default function OurApproachSection() {
           }, "-=0.8")
         }
       }, 500)
+
+      // Add floating animation for robot and gear images
+      const robotImage = imageRef.current?.querySelector('img[src*="aiautorobo"]')
+      const gearImage = imageRef.current?.querySelector('img[src*="aiautogear"]')
+
+      if (robotImage) {
+        gsap.to(robotImage, {
+          y: -25,
+          duration: 2,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1,
+        })
+      }
+
+      if (gearImage) {
+        gsap.to(gearImage, {
+          y: -20,
+          duration: 2.5,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 0.5, // Offset timing for different movement
+        })
+      }
     }, sectionRef)
 
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-20 lg:py-32 bg-gray-50">
+    <section ref={sectionRef} className="py-4 font-sans ">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content - Image */}
           <div ref={leftContentRef} className="order-2 lg:order-1">
             <div ref={imageRef} className="relative w-full h-auto min-h-[400px]">
               <Image
-                src="/aiauto1.svg"
+                src="/aiautolap.svg"
                 alt="Our Approach - Built Around You"
                 width={600}
                 height={400}
@@ -146,19 +171,19 @@ export default function OurApproachSection() {
               />
               {/* Overlayed SVGs */}
               <Image
-                src="/aiauto3.svg"
+                src="/aiautogear.svg"
                 alt="AI Automation Layer 2"
                 width={220}
                 height={220}
-                className="absolute left-[60%] top-[10%] w-[36%] h-auto pointer-events-none"
+                className="absolute left-[64%] top-[5%] w-[36%] h-auto pointer-events-none"
                 priority
               />
               <Image
-                src="/aiauto2.svg"
+                src="/aiautorobo.svg"
                 alt="AI Automation Layer 3"
                 width={180}
                 height={180}
-                className="absolute left-[12%] top-[17%] w-[28%] h-auto pointer-events-none"
+                className="absolute left-[18%] top-[17%] w-[18%] h-auto pointer-events-none"
                 priority
               />
             </div>
