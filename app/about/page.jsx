@@ -26,28 +26,26 @@ function About() {
     const customerReviews = [
         {
             id: 1,
-            name: "Sarah Johnson",
-            designation: "CEO, TechStart",
-            icon: <User className="w-6 h-6 text-gray-600" />
+            name: "Rathina Kumar",
+            designation: "CMO",
+            icon: <User className="w-6 h-6 text-gray-600" />,
+            image: "/images/rksir.png"
         },
         {
             id: 2,
-            name: "Mike Chen",
-            designation: "CTO, InnovateCorp",
-            icon: <User className="w-6 h-6 text-gray-600" />
+            name: "Raj Kumar",
+            designation: "CTO",
+            icon: <User className="w-6 h-6 text-gray-600" />,
+            
         },
         {
             id: 3,
-            name: "Emma Davis",
-            designation: "Product Manager",
-            icon: <User className="w-6 h-6 text-gray-600" />
+            name: "Asha ",
+            designation: "Business Lead",
+            icon: <User className="w-6 h-6 text-gray-600" />,
+            
         },
-        {
-            id: 4,
-            name: "View More",
-            designation: "Customer Reviews",
-            icon: <Plus className="w-6 h-6 text-[#25C3E5]" />
-        }
+    
     ]
 
     useGSAP(
