@@ -143,10 +143,18 @@ export default function AIAutomationHero() {
 
               {/* Right Content */}
               <div ref={rightContentRef} className="relative flex justify-center lg:justify-end">
-                <div ref={imageRef} className="relative">
+                <div ref={imageRef} className="relative w-full max-w-lg">
                   {/* Circular Background Element */}
-                  <div className="absolute inset-0 w-full h-full flex items-start justify-end pr-6 pt-8">
-                    <div className="w-[300px] h-[300px] lg:w-[350px] lg:h-[350px] xl:w-[400px] xl:h-[400px] rounded-full bg-gradient-to-r from-cyan-400 to-blue-600 opacity-90 -z-10"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-[400px] h-[400px] lg:w-[450px] lg:h-[450px] xl:w-[500px] xl:h-[500px] rounded-full bg-gradient-to-br from-cyan-400 via-blue-500 to-blue-600 opacity-80"></div>
+                  </div>
+                  
+                  {/* Additional translucent circles for depth */}
+                  <div className="absolute inset-0 flex items-start justify-start pt-8 pl-8">
+                    <div className="w-[200px] h-[200px] rounded-full bg-white/20"></div>
+                  </div>
+                  <div className="absolute inset-0 flex items-end justify-end pb-8 pr-8">
+                    <div className="w-[150px] h-[150px] rounded-full bg-white/15"></div>
                   </div>
                   
                   <Image
@@ -154,14 +162,14 @@ export default function AIAutomationHero() {
                     alt="AI Robot Automation"
                     width={600}
                     height={600}
-                    className="w-full max-w-sm lg:max-w-md xl:max-w-lg h-auto relative z-10"
+                    className="w-full max-w-md lg:max-w-lg xl:max-w-xl h-auto relative z-10"
                     priority
                   />
 
                   {/* AI Automation Badge */}
                   <div
                     ref={badgeRef}
-                    className="absolute bottom-8 left-14 rounded-2xl px-6 py-3 shadow-lg border border-gray-100 flex items-center gap-3 z-20
+                    className="absolute bottom-12 left-8 rounded-2xl px-6 py-3 shadow-lg border border-gray-100 flex items-center gap-3 z-20
                       bg-white/30 backdrop-blur-md"
                     style={{
                       WebkitBackdropFilter: "blur(12px)",
@@ -169,15 +177,8 @@ export default function AIAutomationHero() {
                       background: "rgba(255,255,255,0.30)"
                     }}
                   >
-                    <div className="bg-cyan-500 p-4 rounded-lg flex items-center justify-center">
-                      <Image
-                        src="/images/cons10.png"
-                        alt="AI Icon"
-                        width={24}
-                        height={24}
-                        className="w-7 h-7 object-cover"
-                        priority
-                      />
+                    <div className="bg-cyan-500 p-3 rounded-lg flex items-center justify-center">
+                      <Cpu className="w-6 h-6 text-white" />
                     </div>
                     <span className="font-semibold text-gray-800">AI Automation</span>
                   </div>

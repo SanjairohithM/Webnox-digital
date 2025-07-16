@@ -143,7 +143,7 @@ export default function WebnoxDigitalSection() {
       {/* Floor Background - Full Section */}
       <div className="absolute bottom-45 left-[59%] transform -translate-x-1/2 w-1/2 h-1/3 z-0">
         <Image
-          src="/images/Floor.png"
+          src="/Floor.svg"
           alt="Floor Background"
           fill
           className="object-cover opacity-190"
