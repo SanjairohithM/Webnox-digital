@@ -8,6 +8,7 @@ import { Cpu } from "lucide-react"
 import WebnoxDigitalSection from "@/app/sections/Aiautomationsecond"
 import OurApproachSection from "@/app/sections/Aianimationthird"
 import AutomationServicesSection from "@/app/sections/Aianimationfourth"
+import Footer from "../sections/Footer"
 
 export default function AIAutomationHero() {
   const containerRef = useRef(null)
@@ -188,6 +189,7 @@ export default function AIAutomationHero() {
         <WebnoxDigitalSection />
         <OurApproachSection/>
         <AutomationServicesSection/>
+        <Footer/>
         
       </>
     )
