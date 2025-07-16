@@ -7,6 +7,8 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import FAQSection from "../components/FAQSection";
 import TickerSection from "../components/TickerSection";
+import Footer from "../sections/Footer";
+
 
 
 
@@ -377,6 +379,7 @@ const FutureProofSection = () => {
 const RobotSection = () => {
   const sectionRef = useRef(null)
   const robotRef = useRef(null)
+  const circleRef = useRef(null)
   const textBlocksRef = useRef([])
   const bannerRef = useRef(null)
 
@@ -401,25 +404,54 @@ const RobotSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([robotRef.current, ...textBlocksRef.current, bannerRef.current], { opacity: 0, y: 30 })
+      // Set initial states with more pronounced positions
+      gsap.set([robotRef.current, ...textBlocksRef.current, bannerRef.current], { opacity: 0, y: 50 })
+      gsap.set(circleRef.current, { opacity: 0, y: -80 })
       
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
         }
       })
       
-      tl.to(robotRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .to(textBlocksRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.4")
-        .to(bannerRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+      // Circle animation from top to bottom
+      tl.to(circleRef.current, { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1.2, 
+        ease: "power2.out",
+        delay: 0.2
+      })
+        // Robot animation from bottom to top
+        .to(robotRef.current, { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1.2, 
+          ease: "power2.out" 
+        }, "-=0.8")
+        .to(textBlocksRef.current, { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.8, 
+          stagger: 0.15, 
+          ease: "power2.out" 
+        }, "-=0.6")
+        .to(bannerRef.current, { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.8, 
+          ease: "power2.out" 
+        }, "-=0.4")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white py-20 px-4 relative">
-      <div className="max-w-7xl mx-auto">
+    <section ref={sectionRef} className="bg-white py-20 px-4 relative font-sans">
+      <div className="max-w-7xl mx-auto relative">
         {/* Central Robot Illustration with Surrounding Text */}
         <div className="relative flex items-center justify-center mb-16 min-h-[500px]">
           {/* Left Side Text Blocks */}
@@ -427,7 +459,7 @@ const RobotSection = () => {
             {/* Top Left */}
             <div 
               ref={el => textBlocksRef.current[0] = el}
-              className="text-right pr-8"
+              className="text-left pr-8"
             >
               <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[0].title}</h3>
               <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[0].desc}</p>
@@ -436,7 +468,7 @@ const RobotSection = () => {
             {/* Bottom Left */}
             <div 
               ref={el => textBlocksRef.current[2] = el}
-              className="text-right pr-8"
+              className="text-left pr-8"
             >
               <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[2].title}</h3>
               <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[2].desc}</p>
@@ -445,8 +477,8 @@ const RobotSection = () => {
 
           {/* Central Robot Illustration */}
           <div ref={robotRef} className="relative w-96 h-[500px] mx-12">
-            {/* Light blue circular background */}
-            <div className="absolute inset-0 bg-blue-100 rounded-full opacity-60"></div>
+            {/* Small blue circle behind robot */}
+            <div ref={circleRef} className="absolute top-30 left-45 transform -translate-x-1/2 -translate-y-1/2 w-65 h-65 bg-[#E2F7FF] rounded-full opacity-60 z-0"></div>
             
             {/* Robot with data board */}
             <div className="relative z-10 flex items-center justify-center h-full">
@@ -457,36 +489,10 @@ const RobotSection = () => {
                   alt="Robot Consultant" 
                   width={300} 
                   height={400} 
-                  className="w-64 h-auto object-contain"
+                  className="w-90 h-90 object-contain"
                 />
                 
-                {/* Data Board */}
-                <div className="absolute top-12 left-20 w-40 h-32 bg-white rounded-lg shadow-lg border border-gray-200 p-3">
-                  {/* Small blue horizontal bar chart at top left */}
-                  <div className="flex items-center space-x-2 mb-3">
-                    <div className="w-10 h-3 bg-blue-400 rounded"></div>
-                    <div className="w-8 h-3 bg-blue-300 rounded"></div>
-                    <div className="w-6 h-3 bg-blue-200 rounded"></div>
-                  </div>
-                  
-                  {/* Circular chart in center */}
-                  <div className="flex justify-center mb-3">
-                    <div className="w-16 h-16 rounded-full border-4 border-blue-400 relative">
-                      <div className="absolute inset-0 rounded-full border-4 border-orange-400 transform rotate-45"></div>
-                      <div className="absolute inset-0 rounded-full border-4 border-gray-300 transform rotate-90"></div>
-                    </div>
-                  </div>
-                  
-                  {/* Horizontal lines at bottom left */}
-                  <div className="space-y-1">
-                    <div className="w-20 h-1 bg-gray-400 rounded"></div>
-                    <div className="w-16 h-1 bg-gray-300 rounded"></div>
-                    <div className="w-18 h-1 bg-gray-400 rounded"></div>
-                  </div>
-                  
-                  {/* Blank rectangular box at bottom right */}
-                  <div className="absolute bottom-3 right-3 w-8 h-6 border border-gray-300 rounded"></div>
-                </div>
+               
               </div>
             </div>
           </div>
@@ -513,13 +519,134 @@ const RobotSection = () => {
           </div>
         </div>
 
-        {/* Bottom Banner */}
+        {/* Bottom Banner Overlay */}
         <div 
           ref={bannerRef}
-          className="relative bg-gradient-to-r from-blue-200 via-blue-100 to-white rounded-t-lg p-10 text-center"
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#EFF7FF] to-[#B8DDFF] rounded-t-lg p-7 text-center w-1/2 max-w-xl"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#00B9FF] mb-4">What we do</h2>
-          <p className="text-gray-700 text-xl">Webnox takes a leaner, smarter, and more personalized approach.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#00B9FF] mb-3">What we do</h2>
+          <p className="text-gray-700 text-lg">Webnox takes a leaner, smarter, and more personalized approach.</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Core Services Section Component
+const CoreServicesSection = () => {
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const descRef = useRef(null)
+  const servicesRef = useRef([])
+
+  const services = [
+    {
+      title: "AI & Automation Advisory",
+      icon: "/images/cons1.png",
+      hoverIcon: "/images/cons10.png",
+      description: "Strategic guidance for AI implementation and process automation"
+    },
+    {
+      title: "Cloud & DevOps Consulting", 
+      icon: "/images/cons2.png",
+      hoverIcon: "/images/cons8.png",
+      description: "Cloud infrastructure and DevOps best practices"
+    },
+    {
+      title: "Custom Software Advisory",
+      icon: "/images/cons3.png",
+      hoverIcon: "/images/cons11.png",
+      description: "Tailored software solutions and architecture guidance"
+    },
+    {
+      title: "Digital Transformation Strategy",
+      icon: "/images/cons4.png",
+      hoverIcon: "/images/cons7.png",
+      description: "End-to-end digital transformation planning"
+    },
+    {
+      title: "Technology Roadmapping",
+      icon: "/images/cons5.png",
+      hoverIcon: "/images/cons9.png",
+      description: "Strategic technology planning and roadmap development"
+    },
+    {
+      title: "Security & Compliance",
+      icon: "/images/cons6.png",
+      hoverIcon: "/images/cons12.png",
+      description: "Security frameworks and compliance strategies"
+    }
+  ]
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set([titleRef.current, descRef.current], { opacity: 0, y: 30 })
+      gsap.set(servicesRef.current, { opacity: 0, y: 50 })
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        }
+      })
+      
+      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+        .to(descRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
+        .to(servicesRef.current, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" }, "-=0.4")
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="bg-white py-20 px-4 font-sans">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+            Our Core{" "}
+            <span className="bg-gradient-to-r from-[#6107AF] to-[#00B9FF] bg-clip-text text-transparent">IT Consulting Services</span>
+          </h2>
+          <p ref={descRef} className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+            At Webnox, our consulting services go beyond advice; we deliver frameworks that seamlessly connect your technology investments with your business vision.
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              ref={el => servicesRef.current[index] = el}
+              className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:bg-[#00B9FF] group cursor-pointer"
+            >
+              <div className="flex items-center space-x-4">
+                <div className="w-16 h-16 rounded-lg flex items-center justify-center transition-all duration-300">
+                  <Image 
+                    src={service.icon} 
+                    alt={service.title} 
+                    width={32} 
+                    height={32} 
+                    className="w-8 h-8 object-contain group-hover:hidden"
+                  />
+                  <Image 
+                    src={service.hoverIcon} 
+                    alt={service.title} 
+                    width={32} 
+                    height={32} 
+                    className="w-8 h-8 object-contain hidden group-hover:block"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-gray-800 group-hover:text-white mb-2 transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 group-hover:text-white/80 text-sm transition-colors duration-300 hidden group-hover:block">
+                    {service.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -541,7 +668,8 @@ const OutsourcingPage = () => {
       <AnimatedTextSection />
       <FutureProofSection />
       <RobotSection />
-      
+      <CoreServicesSection />
+      <Footer />
     </main>
   )
 }

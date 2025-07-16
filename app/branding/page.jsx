@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 gsap.registerPlugin(ScrollTrigger)
 import FAQSection from "../components/FAQSection";
 import TickerSection from "../components/TickerSection";
+import Footer from "../sections/Footer";
 
 
 // Hero Section
@@ -347,6 +348,7 @@ const BrandingPage = () => (
     <IndustriesSection />
     <TickerSection />
     <FAQSection />
+    <Footer />
   </main>
 )
 

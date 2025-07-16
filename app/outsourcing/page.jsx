@@ -7,6 +7,7 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import FAQSection from "../components/FAQSection";
 import TickerSection from "../components/TickerSection";
+import Footer from "../sections/Footer";
 
 
 
@@ -168,21 +169,23 @@ const WhyChooseSection = () => {
         })
         // Animate dot along the path using MotionPath - slow and smooth
         .to(animatedDotRef.current, {
-          motionPath: {
+          motionPath: svgPathRef.current ? {
             path: svgPathRef.current,
             align: svgPathRef.current,
             alignOrigin: "0.5 0.5",
             autoRotate: false,
-          },
+          } : null,
           duration: 4, // Slower animation - 4 seconds
           ease: "power1.inOut", // Smoother easing
           onUpdate: function() {
             // Draw the path as the dot moves
-            const progress = this.progress()
-            const pathLength = svgPathRef.current.getTotalLength()
-            gsap.set(svgPathRef.current, {
-              strokeDashoffset: pathLength * (1 - progress)
-            })
+            if (svgPathRef.current) {
+              const progress = this.progress()
+              const pathLength = svgPathRef.current.getTotalLength()
+              gsap.set(svgPathRef.current, {
+                strokeDashoffset: pathLength * (1 - progress)
+              })
+            }
           }
         }, "-=0.2")
         // Show static dots progressively as the animated dot passes near them
@@ -611,6 +614,7 @@ const OutsourcingPage = () => {
       <ApproachSection />
       <TickerSection />
       <FAQSection />
+      <Footer />
     </main>
   )
 }

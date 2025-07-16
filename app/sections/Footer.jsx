@@ -56,7 +56,7 @@ export default function Footer() {
   }
 
   return (
-    <footer ref={footerRef} className="bg-white px-8 py-24 lg:px-16">
+    <footer ref={footerRef} className="bg-white px-8 py-8 lg:px-16 font-sans">
       <div className="mx-auto max-w-8xl">
         {/* Main Content Section */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-24">

@@ -7,7 +7,7 @@ const services = [
     title: "IT Consulting",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/service7.webp",
-    href: "/services"
+    href: "/consulting"
   },
   {
     title: "AI Automation",
@@ -19,7 +19,7 @@ const services = [
     title: "Data Analytics",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/service6.webp",
-    href: "/services"
+    href: "/analysis"
   },
   {
     title: "Next gen marketing",
