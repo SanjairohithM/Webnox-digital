@@ -295,13 +295,13 @@ export default function Component() {
       </style>
               <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-28 pb-16 px-8 overflow-y-auto flex items-center justify-center 2xl:pt-32">
         <div class="w-full mx-auto solutions-container px-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-16 md:gap-x-14 lg:gap-x-16 xl:gap-x-24 2xl:gap-x-12 gap-y-20 md:gap-y-22 lg:gap-y-24 xl:gap-y-32 2xl:gap-y-28 w-full px-6 ml-[-15rem]">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-8 md:gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-6 gap-y-12 md:gap-y-14 lg:gap-y-16 xl:gap-y-20 2xl:gap-y-16 w-full px-6 ml-[-14rem]">
             ${solutions.map((solution, index) => `
-              <div class="solution-card flex items-center gap-1 md:gap-2 lg:gap-2 xl:gap-3 2xl:gap-6 group opacity-0 w-full min-w-[280px] md:min-w-[320px] lg:min-w-[360px] xl:min-w-[380px] 2xl:min-w-[500px] max-w-[600px]" data-index="${index}">
-                <div class="w-[80px] h-[80px] md:w-[90px] md:h-[90px] lg:w-[100px] lg:h-[100px] xl:w-[110px] xl:h-[110px] 2xl:w-[140px] 2xl:h-[140px] relative flex-shrink-0 transition-all duration-300 flex items-center justify-center">
+              <div class="solution-card flex items-center gap-1 md:gap-2 lg:gap-2 xl:gap-3 2xl:gap-6 group opacity-0 w-full min-w-[280px] md:min-w-[320px] lg:min-w-[360px] xl:min-w-[380px] 2xl:min-w-[500px] max-w-[600px] pl-6" data-index="${index}">
+                <div class="w-[60px] h-[60px] md:w-[70px] md:h-[70px] lg:w-[80px] lg:h-[80px] xl:w-[90px] xl:h-[90px] 2xl:w-[110px] 2xl:h-[110px] relative flex-shrink-0 transition-all duration-300 flex items-center justify-center">
                   <img src="${solution.image}" alt="${solution.title}" class="w-full h-full object-contain" />
                 </div>
-                <div class="flex-1 min-w-0 w-full text-center">
+                <div class="flex-1 min-w-0 w-full text-left">
                   <h3 class="text-base md:text-lg lg:text-lg xl:text-lg 2xl:text-2xl font-bold text-gray-800 mb-1 md:mb-2 lg:mb-2 xl:mb-3 2xl:mb-4 leading-tight">${solution.title}</h3>
                   <p class="hidden 2xl:block text-gray-600 text-base leading-relaxed">${solution.description}</p>
                 </div>
@@ -574,7 +574,7 @@ export default function Component() {
 
                 {/* Content Sections */}
                 <div className="grid md:grid-cols-2 gap-8 mt-16">
-                  {/* Strategy Section */}
+                 
                   <div
                     ref={contentRefs.strategy}
                     className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[24rem] rounded-4xl flex flex-col justify-center p-8"
@@ -597,7 +597,6 @@ export default function Component() {
                     </div>
                   </div>
 
-                  {/* Mission Section */}
                   <div
                     ref={contentRefs.mission}
                     className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[24rem] rounded-4xl flex flex-col justify-center p-8 overflow-hidden"
