@@ -207,7 +207,12 @@ const AnimatedNavbar = ({
     if (!navbar || !hamburger || !fullscreenMenu || !menuItems) return
 
     // Initial animations for hero elements
-    gsap.fromTo(navbar, { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" })
+    if (isMobile) {
+      // Hide mobile navbar initially
+      gsap.set(navbar, { opacity: 0, y: -20 })
+    } else {
+      gsap.fromTo(navbar, { y: -100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: "power3.out" })
+    }
 
     // Check if we're initially in hero section
     const initiallyInHero = window.scrollY < (window.innerHeight * 0.8)
@@ -279,66 +284,20 @@ const AnimatedNavbar = ({
           setIsScrolled(scrolled)
 
           if (scrolled) {
-            // Transform to hamburger positioned on the right - MOBILE ONLY
+            // Show mobile navbar with burger icon
             gsap.to(navbar, {
-              width: "70px",
-              height: "70px",
-              borderRadius: "50%",
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              backdropFilter: "blur(20px)",
-              padding: "0",
-              left: "calc(100% - 100px)",
-              transform: "translateX(0)",
+              opacity: 1,
+              y: 0,
               duration: 0.6,
               ease: "power3.out",
-            })
-
-            gsap.to(navbar.querySelector(".nav-content"), {
-              opacity: 0,
-              scale: 0.8,
-              duration: 0.3,
-              ease: "power2.out",
-            })
-
-            gsap.to(hamburger, {
-              opacity: 1,
-              scale: 1,
-              right: "50%",
-              transform: "translate(50%, -50%)",
-              duration: 0.4,
-              delay: 0.2,
-              ease: "back.out(1.7)",
             })
           } else {
-            // Transform back to full navbar - MOBILE ONLY
+            // Hide mobile navbar when at top
             gsap.to(navbar, {
-              width: "auto",
-              height: "auto",
-              borderRadius: "50px",
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              backdropFilter: "blur(20px)",
-              padding: "1rem 2rem",
-              left: "50%",
-              transform: "translateX(-50%)",
+              opacity: 0,
+              y: -20,
               duration: 0.6,
               ease: "power3.out",
-            })
-
-            gsap.to(hamburger, {
-              opacity: 0,
-              scale: 0.8,
-              right: "1rem",
-              transform: "translateY(-50%)",
-              duration: 0.3,
-              ease: "power2.out",
-            })
-
-            gsap.to(navbar.querySelector(".nav-content"), {
-              opacity: 1,
-              scale: 1,
-              duration: 0.4,
-              delay: 0.2,
-              ease: "back.out(1.7)",
             })
           }
         }
@@ -766,18 +725,14 @@ const AnimatedNavbar = ({
           backdropFilter: "blur(20px)",
           border: "1px solid rgba(255, 255, 255, 0.2)",
           borderRadius: "50px",
-          padding: "1rem 2rem",
+          padding: "1rem",
           boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
         }}
       >
-        <div className="nav-content flex items-center justify-center">
-          <span className="text-gray-800 font-semibold">Menu</span>
-        </div>
-
-        {/* Hamburger Menu (Hidden Initially) - Shows on scroll */}
+        {/* Hamburger Menu - Always visible on mobile */}
         <div
           ref={hamburgerRef}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer opacity-0 scale-75 z-50"
+          className="cursor-pointer z-50"
           onClick={toggleMenu}
         >
           <div className="flex flex-col gap-1.5">
