@@ -347,8 +347,8 @@ export default function CallbackPopup({ isOpen, onClose }) {
           </p>
           <p className="text-sm text-gray-600">
             In a hurry?{' '}
-            <a href="tel:08042783325" className="text-blue-600 hover:underline">
-              Call us now 08042783325
+            <a href="tel:+91 97865 57739" className="text-blue-600 hover:underline">
+              Call us now +91 97865 57739
             </a>
           </p>
         </div>

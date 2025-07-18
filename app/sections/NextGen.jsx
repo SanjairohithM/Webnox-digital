@@ -1237,7 +1237,7 @@ function NextGen() {
               className="absolute "
               style={{ right: '45%', top: '25%', transform: 'translateY(-50%)' }}
             >
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center font-sans ">
                 {/* Hexagon */}
                 <div className="relative">
                   <div
@@ -1285,7 +1285,7 @@ function NextGen() {
               className="absolute"
               style={{ left: '2%', top: '50%', transform: 'translateY(-50%)' }}
             >
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center font-sans">
                 {/* Text Content */}
                 <div className="text-content mr-32 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Experience-Led Design</h3>
@@ -1333,7 +1333,7 @@ function NextGen() {
               className="absolute"
               style={{ right: '45%', bottom: '15%', transform: 'translateY(50%)' }}
             >
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center font-sans">
                 {/* Hexagon */}
                 <div className="relative">
                   <div
@@ -1452,7 +1452,7 @@ function NextGen() {
               className="absolute"
               style={{ left: '20%', top: '15%', transform: 'translateY(-50%)' }}
             >
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center font-sans">
                 {/* Text Content */}
                 <div className="text-content mr-32 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Intelligent Integration</h3>
@@ -1502,7 +1502,7 @@ function NextGen() {
               className="absolute"
               style={{ right: '25%', top: '50%', transform: 'translateY(-50%)' }}
             >
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center font-sans ">
                 {/* Hexagon */}
                 <div className="relative">
                   <div
@@ -1552,7 +1552,7 @@ function NextGen() {
               className="absolute"
               style={{ left: '20%', bottom: '20%', transform: 'translateY(50%)' }}
             >
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center font-sans">
                 {/* Text Content */}
                 <div className="text-content mr-32 flex-shrink-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Scale with Digital Marketing</h3>
@@ -1683,7 +1683,7 @@ function NextGen() {
                 className="absolute"
                 style={{ right: '40%', top: '25%', transform: 'translateY(-50%)' }}
               >
-                <div className="relative flex items-center justify-center">
+                <div className="relative flex items-center justify-center font-sans ">
                   {/* Hexagon */}
                   <div className="relative">
                     <div
@@ -1733,7 +1733,7 @@ function NextGen() {
                 className="absolute"
                 style={{ left: '-5%', top: '50%', transform: 'translateY(-50%)' }}
               >
-                <div className="relative flex items-center justify-center">
+                <div className="relative flex items-center justify-center font-sans ">
                   {/* Text Content */}
                   <div className="text-content mr-32 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Support & Sustain</h3>
@@ -1783,7 +1783,7 @@ function NextGen() {
                 className="absolute"
                 style={{ right: '40%', bottom: '15%', transform: 'translateY(50%)' }}
               >
-                <div className="relative flex items-center justify-center">
+                <div className="relative flex items-center justify-center font-sans ">
                   {/* Hexagon */}
                   <div className="relative">
                     <div
@@ -1893,10 +1893,10 @@ function NextGen() {
                     className="drop-shadow-lg"
                   />
                 </div>
-                <div className="text-4xl font-bold mb-2">
+                <div className="text-4xl font-bold mb-2 font-sans">
                   {stat.number}
                 </div>
-                <p className="text-center text-sm font-medium opacity-90">
+                <p className="text-center text-sm font-medium opacity-90 font-sans">
                   {stat.text}
                 </p>
               </div>

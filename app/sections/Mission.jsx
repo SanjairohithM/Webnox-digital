@@ -273,7 +273,7 @@ export default function Component() {
 
     // Add the solutions grid container
     const solutionsGridContainer = document.createElement("div")
-    solutionsGridContainer.className = "solutions-grid-container absolute w-full h-full"
+    solutionsGridContainer.className = "solutions-grid-container absolute w-full h-full font-sans"
     solutionsGridContainer.innerHTML = `
       <style>
         .solutions-container {
