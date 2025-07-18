@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -75,6 +75,23 @@ function NextGen() {
   const successRefs = useRef([]);
   const waitImagesRef = useRef([]);
   const centerHeadingRef = useRef(null);
+  
+  // Mobile detection state
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  
+  // Check for mobile on mount and resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width <= 768);
+      setIsTablet(width > 768 && width <= 1024);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   // Second journey refs
   const journey2Ref = useRef(null);
@@ -297,14 +314,32 @@ function NextGen() {
     // Cards appear and move to their positions one by one
     cardsRef.current.forEach((card, index) => {
       const position = stats[index].position;
-      timeline.to(card, {
-        opacity: 1,
-        scale: 1,
-        x: position.left || position.right || "0%",
-        y: position.top || position.bottom || "0%",
-        duration: 1.2,
-        ease: "power3.out"
-      }, `+=${index === 0 ? 0 : 0.8}`); // 0.8 second delay between each card
+      
+      if (isMobile) {
+        // Mobile: 3-top, 3-bottom layout
+        timeline.to(card, {
+          opacity: 1,
+          scale: 1,
+          left: index < 3 ? `${20 + (index * 25)}%` : `${20 + ((index - 3) * 25)}%`,
+          top: index < 3 ? '25%' : '75%',
+          right: 'auto',
+          bottom: 'auto',
+          x: 0,
+          y: 0,
+          duration: 1.2,
+          ease: "power3.out"
+        }, `+=${index === 0 ? 0 : 0.8}`); // 0.8 second delay between each card
+      } else {
+        // Desktop: original positioning
+        timeline.to(card, {
+          opacity: 1,
+          scale: 1,
+          x: position.left || position.right || "0%",
+          y: position.top || position.bottom || "0%",
+          duration: 1.2,
+          ease: "power3.out"
+        }, `+=${index === 0 ? 0 : 0.8}`); // 0.8 second delay between each card
+      }
     });
 
     // Stage 3: All cards stack in center (third scroll) - MUCH SLOWER
@@ -1047,15 +1082,15 @@ function NextGen() {
           style={{ top: '20%', left: '50%', transform: 'translate(-50%, -10%)', zIndex: 25 }}
         >
           {/* Success/Warning Card Container */}
-          <div className={`w-full max-w-2xl bg-white/60 rounded-2xl shadow-lg p-10 relative transition-colors duration-500 ${isWarningPhase ? 'border-2 border-red-200' : 'border-2 border-green-200'}`}>
+          <div className={`w-full max-w-2xl sm:max-w-2xl max-w-sm bg-white/60 rounded-2xl shadow-lg p-4 sm:p-10 relative transition-colors duration-500 ${isWarningPhase ? 'border-2 border-red-200' : 'border-2 border-green-200'}`}>
             {/* Flip Title */}
-            <div className="flip-title-wrapper perspective-1000 w-full flex justify-center mb-8">
+            <div className="flip-title-wrapper perspective-1000 w-full flex justify-center mb-4 sm:mb-8">
               <div
                 ref={flipTitleRef}
                 className="flip-title-inner w-full"
                 style={{
                   width: '100%',
-                  height: '90px',
+                  height: isMobile ? '60px' : '90px',
                   position: 'relative',
                   transformStyle: 'preserve-3d',
                   transition: 'transform 0.6s cubic-bezier(.4,2,.6,1)'
@@ -1067,7 +1102,7 @@ function NextGen() {
                     backfaceVisibility: 'hidden'
                   }}
                 >
-                  <span className="text-[72px] font-sans text-black text-center" style={{ fontFamily: '"Permanent Marker", cursive' }}>
+                  <span className={`${isMobile ? 'text-[32px]' : 'text-[72px]'} font-sans text-black text-center`} style={{ fontFamily: '"Permanent Marker", cursive' }}>
                     If you wait...
                   </span>
                 </div>
@@ -1078,7 +1113,7 @@ function NextGen() {
                     transform: 'rotateY(180deg)'
                   }}
                 >
-                  <span className="text-[72px] text-black text-center" style={{ fontFamily: '"Permanent Marker", cursive' }}>
+                  <span className={`${isMobile ? 'text-[32px]' : 'text-[72px]'} text-black text-center`} style={{ fontFamily: '"Permanent Marker", cursive' }}>
                     If you act now...
                   </span>
                 </div>
@@ -1091,7 +1126,7 @@ function NextGen() {
                 className="flip-text-inner w-full"
                 style={{
                   width: '100%',
-                  minHeight: '320px',
+                  minHeight: isMobile ? '200px' : '320px',
                   position: 'relative',
                   transformStyle: 'preserve-3d',
                   transition: 'transform 0.6s cubic-bezier(.4,2,.6,1)'
@@ -1104,22 +1139,22 @@ function NextGen() {
                     backfaceVisibility: 'hidden'
                   }}
                 >
-                  <div className="space-y-6 max-w-xl mx-auto px-8" style={{ zIndex: 10 }}>
-                    <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
-                      <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg warning-success-text">Revenue stays stagnant</span>
+                  <div className={`space-y-3 sm:space-y-6 max-w-xl mx-auto px-4 sm:px-8`} style={{ zIndex: 10 }}>
+                    <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-red-200 bg-white/20 shadow-sm">
+                      <CircleX className={`text-red-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
+                      <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>Revenue stays stagnant</span>
                     </div>
-                    <div ref={el => warningRefs.current[1] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
-                      <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg warning-success-text">Competitors overtake your space</span>
+                    <div ref={el => warningRefs.current[1] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-red-200 bg-white/20 shadow-sm">
+                      <CircleX className={`text-red-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
+                      <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>Competitors overtake your space</span>
                     </div>
-                    <div ref={el => warningRefs.current[2] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
-                      <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg warning-success-text">AI replaces inefficiency</span>
+                    <div ref={el => warningRefs.current[2] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-red-200 bg-white/20 shadow-sm">
+                      <CircleX className={`text-red-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
+                      <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>AI replaces inefficiency</span>
                     </div>
-                    <div ref={el => warningRefs.current[3] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-red-200 bg-white/20 shadow-sm">
-                      <CircleX className="text-red-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg warning-success-text">Your brand fades into obscurity</span>
+                    <div ref={el => warningRefs.current[3] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-red-200 bg-white/20 shadow-sm">
+                      <CircleX className={`text-red-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
+                      <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>Your brand fades into obscurity</span>
                     </div>
                   </div>
                 </div>
@@ -1131,22 +1166,22 @@ function NextGen() {
                     transform: 'rotateY(180deg)'
                   }}
                 >
-                  <div className="space-y-6 max-w-xl mx-auto px-8" style={{ zIndex: 10 }}>
-                    <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
-                      <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg warning-success-text">Smart AI Integration</span>
+                  <div className={`space-y-3 sm:space-y-6 max-w-xl mx-auto px-4 sm:px-8`} style={{ zIndex: 10 }}>
+                    <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-green-200 bg-white/20 shadow-sm">
+                      <CircleCheck className={`text-green-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
+                      <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>Smart AI Integration</span>
                     </div>
-                    <div ref={el => successRefs.current[1] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
-                      <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg warning-success-text">Marketing Automation</span>
+                    <div ref={el => successRefs.current[1] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-green-200 bg-white/20 shadow-sm">
+                      <CircleCheck className={`text-green-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
+                      <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>Marketing Automation</span>
                     </div>
-                    <div ref={el => successRefs.current[2] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
-                      <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg warning-success-text">Websites that Sell</span>
+                    <div ref={el => successRefs.current[2] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-green-200 bg-white/20 shadow-sm">
+                      <CircleCheck className={`text-green-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
+                      <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>Websites that Sell</span>
                     </div>
-                    <div ref={el => successRefs.current[3] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-3 px-4 border-2 border-green-200 bg-white/20 shadow-sm">
-                      <CircleCheck className="text-green-500 w-7 h-7 mr-4" strokeWidth={2.5} />
-                      <span className="text-lg warning-success-text">Higher Profit Margins</span>
+                    <div ref={el => successRefs.current[3] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-green-200 bg-white/20 shadow-sm">
+                      <CircleCheck className={`text-green-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
+                      <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>Higher Profit Margins</span>
                     </div>
                   </div>
                 </div>
@@ -1183,10 +1218,10 @@ function NextGen() {
                 xmlns="http://www.w3.org/2000/svg"
                 className="absolute opacity-0"
                 style={{
-                  top: '40%',
-                  left: '-1%',
-                  width: '70%',
-                  height: '35%'
+                  top: isMobile ? '35%' : '40%',
+                  left: isMobile ? '-5%' : '-1%',
+                  width: isMobile ? '85%' : '70%',
+                  height: isMobile ? '45%' : '35%'
                 }}
               >
                 <defs>
@@ -1210,10 +1245,10 @@ function NextGen() {
               {/* Static Start Point Circle (Hexagon 2) */}
               <div
                 ref={el => pathCircleRefs.current[0] = el}
-                className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
                 style={{
-                  top: 'calc(30% + 12%)',
-                  left: 'calc(3% + 48%)',
+                  top: isMobile ? 'calc(25% + 12%)' : 'calc(30% + 12%)',
+                  left: isMobile ? 'calc(3% + 48%)' : 'calc(3% + 48%)',
                   transform: 'translate(-50%, -50%)'
                 }}
               />
@@ -1221,10 +1256,10 @@ function NextGen() {
               {/* Static End Point Circle (Hexagon 3) */}
               <div
                 ref={el => pathCircleRefs.current[1] = el}
-                className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
                 style={{
-                  top: 'calc(30% + 41%)',
-                  left: 'calc(3% + 16%)',
+                  top: isMobile ? 'calc(25% + 41%)' : 'calc(30% + 41%)',
+                  left: isMobile ? 'calc(3% + 16%)' : 'calc(3% + 16%)',
                   transform: 'translate(-50%, -50%)'
                 }}
               />
@@ -1234,26 +1269,30 @@ function NextGen() {
             {/* Step 1: Discover & Define - hexagon-line-circle-text (RIGHT LAYOUT) */}
             <div
               ref={el => journeyStepsRef.current[0] = el}
-              className="absolute "
-              style={{ right: '45%', top: '25%', transform: 'translateY(-50%)' }}
+              className="absolute"
+              style={{ 
+                right: isMobile ? '15%' : '45%', 
+                top: isMobile ? '15%' : '25%', 
+                transform: 'translateY(-50%)' 
+              }}
             >
-              <div className="relative flex items-center justify-center font-sans ">
+              <div className="relative flex items-center justify-center font-sans">
                 {/* Hexagon */}
                 <div className="relative">
                   <div
-                    className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
                     style={{
                       clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                     }}
                   >
                     {/* Inner hexagon for content */}
                     <div
-                      className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
-                      <span className="text-4xl font-bold text-[#0ea5e9] z-10">1</span>
+                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>1</span>
                     </div>
                   </div>
 
@@ -1261,20 +1300,20 @@ function NextGen() {
                   <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
                     <div
                       className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                      style={{ width: '250px' }}
+                      style={{ width: isMobile ? '120px' : '250px' }}
                     ></div>
                   </div>
                 </div>
 
                 {/* Blue Circle */}
-                <div className="relative ml-[246px]">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
                 </div>
 
                 {/* Text Content */}
-                <div className="text-content ml-8 flex-shrink-0">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Discover & Define</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed w-80">We don't offer solutions until we understand the problem</p>
+                <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
+                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Discover & Define</h3>
+                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We don't offer solutions until we understand the problem</p>
                 </div>
               </div>
             </div>
@@ -1283,36 +1322,40 @@ function NextGen() {
             <div
               ref={el => journeyStepsRef.current[1] = el}
               className="absolute"
-              style={{ left: '2%', top: '50%', transform: 'translateY(-50%)' }}
+              style={{ 
+                left: isMobile ? '5%' : '2%', 
+                top: isMobile ? '45%' : '50%', 
+                transform: 'translateY(-50%)' 
+              }}
             >
               <div className="relative flex items-center justify-center font-sans">
                 {/* Text Content */}
-                <div className="text-content mr-32 flex-shrink-0">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Experience-Led Design</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed w-80">Smart tech meets meaningful design</p>
+                <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
+                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Experience-Led Design</h3>
+                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>Smart tech meets meaningful design</p>
                 </div>
 
                 {/* Blue Circle */}
-                <div className="relative ml-8">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
+                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
                 </div>
 
                 {/* Hexagon */}
-                <div className="relative ml-[246px]">
+                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
                   <div
-                    className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
                     style={{
                       clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                     }}
                   >
                     {/* Inner hexagon for content */}
                     <div
-                      className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
-                      <span className="text-4xl font-bold text-[#0ea5e9] z-10">2</span>
+                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>2</span>
                     </div>
                   </div>
 
@@ -1320,7 +1363,7 @@ function NextGen() {
                   <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
                     <div
                       className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
-                      style={{ width: '250px' }}
+                      style={{ width: isMobile ? '120px' : '250px' }}
                     ></div>
                   </div>
                 </div>
@@ -1331,25 +1374,29 @@ function NextGen() {
             <div
               ref={el => journeyStepsRef.current[2] = el}
               className="absolute"
-              style={{ right: '45%', bottom: '15%', transform: 'translateY(50%)' }}
+              style={{ 
+                right: isMobile ? '15%' : '45%', 
+                bottom: isMobile ? '25%' : '15%', 
+                transform: 'translateY(50%)' 
+              }}
             >
               <div className="relative flex items-center justify-center font-sans">
                 {/* Hexagon */}
                 <div className="relative">
                   <div
-                    className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
                     style={{
                       clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                     }}
                   >
                     {/* Inner hexagon for content */}
                     <div
-                      className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
-                      <span className="text-4xl font-bold text-[#0ea5e9] z-10">3</span>
+                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>3</span>
                     </div>
                   </div>
 
@@ -1357,20 +1404,20 @@ function NextGen() {
                   <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
                     <div
                       className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                      style={{ width: '250px' }}
+                      style={{ width: isMobile ? '120px' : '250px' }}
                     ></div>
                   </div>
                 </div>
 
                 {/* Blue Circle */}
-                <div className="relative ml-[246px]">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
                 </div>
 
                 {/* Text Content */}
-                <div className="text-content ml-8 flex-shrink-0">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Agile Development</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed w-80">Progress without chaos. Speed with stability</p>
+                <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
+                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Agile Development</h3>
+                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>Progress without chaos. Speed with stability</p>
                 </div>
               </div>
             </div>
@@ -1389,10 +1436,10 @@ function NextGen() {
             ref={journey2PathRef}
             className="absolute"
             style={{
-              top: '30%',
-              left: '10%',
-              width: '60%',
-              height: '60%',
+              top: isMobile ? '25%' : '30%',
+              left: isMobile ? '5%' : '10%',
+              width: isMobile ? '75%' : '60%',
+              height: isMobile ? '70%' : '60%',
               zIndex: 1
             }}
           >
@@ -1425,20 +1472,20 @@ function NextGen() {
               {/* Start point circle (positioned at path start) */}
               <div
                 ref={el => path2CircleRefs.current[0] = el}
-                className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
                 style={{
-                  top: 'calc(30% + -27%)',
-                  left: 'calc(10% + 16%)'
+                  top: isMobile ? 'calc(25% + -27%)' : 'calc(30% + -27%)',
+                  left: isMobile ? 'calc(5% + 16%)' : 'calc(10% + 16%)'
                 }}
               ></div>
 
               {/* End point circle (positioned at path end) */}
               <div
                 ref={el => path2CircleRefs.current[1] = el}
-                className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
                 style={{
-                  top: 'calc(30% + 60%)',
-                  left: 'calc(10% + 57%)'
+                  top: isMobile ? 'calc(25% + 60%)' : 'calc(30% + 60%)',
+                  left: isMobile ? 'calc(5% + 57%)' : 'calc(10% + 57%)'
                 }}
               ></div>
             </div>
@@ -1450,38 +1497,42 @@ function NextGen() {
             <div
               ref={el => journey2StepsRef.current[0] = el}
               className="absolute"
-              style={{ left: '20%', top: '15%', transform: 'translateY(-50%)' }}
+              style={{ 
+                left: isMobile ? '10%' : '20%', 
+                top: isMobile ? '10%' : '15%', 
+                transform: 'translateY(-50%)' 
+              }}
             >
               <div className="relative flex items-center justify-center font-sans">
                 {/* Text Content */}
-                <div className="text-content mr-32 flex-shrink-0">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Intelligent Integration</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed w-80">AI tools to create a streamlined digital backbone
+                <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
+                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Intelligent Integration</h3>
+                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>AI tools to create a streamlined digital backbone
                     for your busine We unify your ecosystem seamlessly
                     connecting CRMs, ERPs, APIs, cloud services, ss.</p>
                 </div>
 
                 {/* Blue Circle */}
-                <div className="relative ml-8">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
+                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
                 </div>
 
                 {/* Hexagon */}
-                <div className="relative ml-[246px]">
+                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
                   <div
-                    className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
                     style={{
                       clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                     }}
                   >
                     {/* Inner hexagon for content */}
                     <div
-                      className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
-                      <span className="text-4xl font-bold text-[#0ea5e9] z-10">4</span>
+                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>4</span>
                     </div>
                   </div>
 
@@ -1489,7 +1540,7 @@ function NextGen() {
                   <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
                     <div
                       className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
-                      style={{ width: '250px' }}
+                      style={{ width: isMobile ? '120px' : '250px' }}
                     ></div>
                   </div>
                 </div>
@@ -1500,25 +1551,29 @@ function NextGen() {
             <div
               ref={el => journey2StepsRef.current[1] = el}
               className="absolute"
-              style={{ right: '25%', top: '50%', transform: 'translateY(-50%)' }}
+              style={{ 
+                right: isMobile ? '10%' : '25%', 
+                top: isMobile ? '45%' : '50%', 
+                transform: 'translateY(-50%)' 
+              }}
             >
-              <div className="relative flex items-center justify-center font-sans ">
+              <div className="relative flex items-center justify-center font-sans">
                 {/* Hexagon */}
                 <div className="relative">
                   <div
-                    className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
                     style={{
                       clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                     }}
                   >
                     {/* Inner hexagon for content */}
                     <div
-                      className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
-                      <span className="text-4xl font-bold text-[#0ea5e9] z-10">5</span>
+                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>5</span>
                     </div>
                   </div>
 
@@ -1526,20 +1581,20 @@ function NextGen() {
                   <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
                     <div
                       className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                      style={{ width: '250px' }}
+                      style={{ width: isMobile ? '120px' : '250px' }}
                     ></div>
                   </div>
                 </div>
 
                 {/* Blue Circle */}
-                <div className="relative ml-[246px]">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
                 </div>
 
                 {/* Text Content */}
-                <div className="text-content ml-8 flex-shrink-0">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Launch & Learn</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed w-80">We monitor real-world performance, gather insights,
+                <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
+                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Launch & Learn</h3>
+                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We monitor real-world performance, gather insights,
                     and iterate quickly to ensure sustained growth and
                     continuous improvement.</p>
                 </div>
@@ -1550,38 +1605,42 @@ function NextGen() {
             <div
               ref={el => journey2StepsRef.current[2] = el}
               className="absolute"
-              style={{ left: '20%', bottom: '20%', transform: 'translateY(50%)' }}
+              style={{ 
+                left: isMobile ? '10%' : '20%', 
+                bottom: isMobile ? '30%' : '20%', 
+                transform: 'translateY(50%)' 
+              }}
             >
               <div className="relative flex items-center justify-center font-sans">
                 {/* Text Content */}
-                <div className="text-content mr-32 flex-shrink-0">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Scale with Digital Marketing</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed w-80">From visibility to virality, we help your brand grow
+                <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
+                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Scale with Digital Marketing</h3>
+                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>From visibility to virality, we help your brand grow
                     through strategic marketing, SEO, content, and
                     campaigns that convert.</p>
                 </div>
 
                 {/* Blue Circle */}
-                <div className="relative ml-8">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
+                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
                 </div>
 
                 {/* Hexagon */}
-                <div className="relative ml-[246px]">
+                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
                   <div
-                    className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
                     style={{
                       clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                     }}
                   >
                     {/* Inner hexagon for content */}
                     <div
-                      className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
-                      <span className="text-4xl font-bold text-[#0ea5e9] z-10">6</span>
+                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>6</span>
                     </div>
                   </div>
 
@@ -1589,7 +1648,7 @@ function NextGen() {
                   <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
                     <div
                       className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
-                      style={{ width: '250px' }}
+                      style={{ width: isMobile ? '120px' : '250px' }}
                     ></div>
                   </div>
                 </div>
@@ -1610,10 +1669,10 @@ function NextGen() {
               ref={journey3PathRef}
               className="absolute"
               style={{ 
-                top: '25%', 
-                left: '1%', 
-                width: '55%', 
-                height: '65%',
+                top: isMobile ? '20%' : '25%', 
+                left: isMobile ? '-2%' : '1%', 
+                width: isMobile ? '70%' : '55%', 
+                height: isMobile ? '75%' : '65%',
                 zIndex: 1
               }}
             >
@@ -1646,29 +1705,29 @@ function NextGen() {
                 {/* Start point circle (positioned at path start) */}
                 <div 
                   ref={el => path3CircleRefs.current[0] = el}
-                  className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                  className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
                   style={{
-                    top: 'calc(25% + -22%)',
-                    left: 'calc(5% + 8%)'
+                    top: isMobile ? 'calc(20% + -22%)' : 'calc(25% + -22%)',
+                    left: isMobile ? 'calc(-2% + 8%)' : 'calc(5% + 8%)'
                   }}
                 ></div>
                 
                 {/* End point circle (positioned at path end) */}
                 <div 
                   ref={el => path3CircleRefs.current[1] = el}
-                  className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                  className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
                   style={{
-                    top: 'calc(25% + 62%)',
-                    left: 'calc(5% + 13%)'
+                    top: isMobile ? 'calc(20% + 62%)' : 'calc(25% + 62%)',
+                    left: isMobile ? 'calc(-2% + 13%)' : 'calc(5% + 13%)'
                   }}
                 ></div>
 {/* //middle circle */}
                 <div 
                   ref={el => path3CircleRefs.current[2] = el}
-                  className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                  className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
                   style={{
-                    top: 'calc(25% + 20%)',
-                    left: 'calc(5% + 73%)'
+                    top: isMobile ? 'calc(20% + 20%)' : 'calc(25% + 20%)',
+                    left: isMobile ? 'calc(-2% + 73%)' : 'calc(5% + 73%)'
                   }}
                 ></div>
 
@@ -1681,25 +1740,29 @@ function NextGen() {
               <div
                 ref={el => journey3StepsRef.current[0] = el}
                 className="absolute"
-                style={{ right: '40%', top: '25%', transform: 'translateY(-50%)' }}
+                style={{ 
+                  right: isMobile ? '15%' : '40%', 
+                  top: isMobile ? '15%' : '25%', 
+                  transform: 'translateY(-50%)' 
+                }}
               >
-                <div className="relative flex items-center justify-center font-sans ">
+                <div className="relative flex items-center justify-center font-sans">
                   {/* Hexagon */}
                   <div className="relative">
                     <div
-                      className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                      className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
                       {/* Inner hexagon for content */}
                       <div
-                        className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                        className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
                         style={{
                           clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                         }}
                       >
-                        <span className="text-4xl font-bold text-[#0ea5e9] z-10">7</span>
+                        <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>7</span>
                       </div>
                     </div>
 
@@ -1707,20 +1770,20 @@ function NextGen() {
                     <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
                       <div
                         className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                        style={{ width: '250px' }}
+                        style={{ width: isMobile ? '120px' : '250px' }}
                       ></div>
                     </div>
                   </div>
 
                   {/* Blue Circle */}
-                  <div className="relative ml-[246px]">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                  <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                    <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
                   </div>
 
                   {/* Text Content */}
-                  <div className="text-content ml-8 flex-shrink-0">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Optimize Across Touchpoints</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed w-80">We refine user journeys with UX audits, mobile app
+                  <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
+                    <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Optimize Across Touchpoints</h3>
+                    <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We refine user journeys with UX audits, mobile app
                       enhancements, eCommerce upgrades, and
                       performance tuning.</p>
                   </div>
@@ -1731,38 +1794,42 @@ function NextGen() {
               <div
                 ref={el => journey3StepsRef.current[1] = el}
                 className="absolute"
-                style={{ left: '-5%', top: '50%', transform: 'translateY(-50%)' }}
+                style={{ 
+                  left: isMobile ? '5%' : '-5%', 
+                  top: isMobile ? '45%' : '50%', 
+                  transform: 'translateY(-50%)' 
+                }}
               >
-                <div className="relative flex items-center justify-center font-sans ">
+                <div className="relative flex items-center justify-center font-sans">
                   {/* Text Content */}
-                  <div className="text-content mr-32 flex-shrink-0">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Support & Sustain</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed max-w-sm">Post-launch isn't the end. It's where we scale,
+                  <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
+                    <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Support & Sustain</h3>
+                    <p className={`${isMobile ? 'text-xs w-48' : 'text-sm max-w-sm'} text-gray-600 leading-relaxed`}>Post-launch isn't the end. It's where we scale,
                       monitor, support, and evolve your digital assets
                       for long-term success.</p>
                   </div>
 
                   {/* Blue Circle */}
-                  <div className="relative ml-8">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                  <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
+                    <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
                   </div>
 
                   {/* Hexagon */}
-                  <div className="relative ml-[246px]">
+                  <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
                     <div
-                      className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                      className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
                       {/* Inner hexagon for content */}
                       <div
-                        className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                        className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
                         style={{
                           clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                         }}
                       >
-                        <span className="text-4xl font-bold text-[#0ea5e9] z-10">8</span>
+                        <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>8</span>
                       </div>
                     </div>
 
@@ -1770,7 +1837,7 @@ function NextGen() {
                     <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
                       <div
                         className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
-                        style={{ width: '250px' }}
+                        style={{ width: isMobile ? '120px' : '250px' }}
                       ></div>
                     </div>
                   </div>
@@ -1781,25 +1848,29 @@ function NextGen() {
               <div
                 ref={el => journey3StepsRef.current[2] = el}
                 className="absolute"
-                style={{ right: '40%', bottom: '15%', transform: 'translateY(50%)' }}
+                style={{ 
+                  right: isMobile ? '15%' : '40%', 
+                  bottom: isMobile ? '25%' : '15%', 
+                  transform: 'translateY(50%)' 
+                }}
               >
-                <div className="relative flex items-center justify-center font-sans ">
+                <div className="relative flex items-center justify-center font-sans">
                   {/* Hexagon */}
                   <div className="relative">
                     <div
-                      className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                      className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
                       {/* Inner hexagon for content */}
                       <div
-                        className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                        className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
                         style={{
                           clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                         }}
                       >
-                        <span className="text-4xl font-bold text-[#0ea5e9] z-10">9</span>
+                        <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>9</span>
                       </div>
                     </div>
 
@@ -1807,20 +1878,20 @@ function NextGen() {
                     <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
                       <div
                         className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                        style={{ width: '250px' }}
+                        style={{ width: isMobile ? '120px' : '250px' }}
                       ></div>
                     </div>
                   </div>
 
                   {/* Blue Circle */}
-                  <div className="relative ml-[246px]">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                  <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                    <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
                   </div>
 
                   {/* Text Content */}
-                  <div className="text-content ml-8 flex-shrink-0">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Scale & Evolve</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed w-80">Tech grows. You grow. And we grow with you.</p>
+                  <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
+                    <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Scale & Evolve</h3>
+                    <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>Tech grows. You grow. And we grow with you.</p>
                   </div>
                 </div>
               </div>
@@ -1834,7 +1905,7 @@ function NextGen() {
           className="absolute text-center text-black"
           style={{ zIndex: 25 }}
         >
-          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3] mb-4" style={{ fontFamily: 'var(--font-urbanist)' }}>
+          <h2 className={`${isMobile ? 'text-[28px]' : 'text-[42px]'} font-normal font-urbanist leading-[1.3] mb-4 px-4`} style={{ fontFamily: 'var(--font-urbanist)' }}>
             Step into the AI era with strategies designed to lead, not catch up.
           </h2>
         </div>
@@ -1845,7 +1916,7 @@ function NextGen() {
             <div
               key={i}
               ref={el => waitImagesRef.current[i] = el}
-              className="absolute w-32 h-32 opacity-20"
+              className={`absolute ${isMobile ? 'w-16 h-16' : 'w-32 h-32'} opacity-20`}
               style={{
                 left: i < 6 ? `${5 + (i * 12)}%` : `${50 + ((i - 6) * 8)}%`,
                 bottom: '-100px',
@@ -1855,8 +1926,8 @@ function NextGen() {
               <Image
                 src={`/images/wait${i + 1}.webp`}
                 alt={`Wait icon ${i + 1}`}
-                width={170}
-                height={170}
+                width={isMobile ? 64 : 170}
+                height={isMobile ? 64 : 170}
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
@@ -1869,17 +1940,23 @@ function NextGen() {
             <div
               key={index}
               ref={el => cardsRef.current[index] = el}
-              className="absolute rounded-[32px] w-[220px] aspect-square flex flex-col items-center justify-center shadow-lg backface-visible overflow-hidden"
+              className="absolute rounded-[16px] sm:rounded-[24px] md:rounded-[32px] w-[140px] sm:w-[180px] md:w-[220px] aspect-square flex flex-col items-center justify-center shadow-lg backface-visible overflow-hidden"
               style={{
-                position: 'absolute',
                 ...stat.position,
                 transform: 'translate(-50%, -50%)',
                 transformStyle: 'preserve-3d',
-                backgroundColor: stat.color
+                backgroundColor: stat.color,
+                // Mobile-specific positioning for 3-top, 3-bottom layout
+                ...(isMobile && {
+                  left: index < 3 ? `${20 + (index * 25)}%` : `${20 + ((index - 3) * 25)}%`,
+                  top: index < 3 ? '25%' : '75%',
+                  right: 'auto',
+                  bottom: 'auto'
+                })
               }}
             >
-              <div className="relative w-full h-full flex flex-col items-center justify-center text-white p-10">
-                <div className={`${stat.imageSize} relative mb-6`}>
+              <div className="relative w-full h-full flex flex-col items-center justify-center text-white p-4 sm:p-6 md:p-10">
+                <div className="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] md:w-[100px] md:h-[100px] relative mb-3 sm:mb-4 md:mb-6">
                   <Image
                     src={stat.image}
                     alt={stat.text}
@@ -1893,10 +1970,10 @@ function NextGen() {
                     className="drop-shadow-lg"
                   />
                 </div>
-                <div className="text-4xl font-bold mb-2 font-sans">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2 font-sans">
                   {stat.number}
                 </div>
-                <p className="text-center text-sm font-medium opacity-90 font-sans">
+                <p className="text-center text-xs sm:text-sm font-medium opacity-90 font-sans px-1 sm:px-2">
                   {stat.text}
                 </p>
               </div>
