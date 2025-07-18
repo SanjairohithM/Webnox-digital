@@ -15,6 +15,7 @@ import NextGen from "./sections/NextGen";
 import LetsConnect from "./sections/LetsConnect";
 import WebnoxLogoLoader from "./sections/WebnoxLogoIntro";
 import Demoballsection from "./sections/Demoballsection";
+import CallbackPopup from "./components/CallbackPopup";
  // import AnimatedNavbar from "./sections/Components/Header/AnimatedNavbar";
 // import Footer from "./sections/Footer"; 
 
@@ -22,11 +23,27 @@ import Demoballsection from "./sections/Demoballsection";
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  const [showCallbackPopup, setShowCallbackPopup] = useState(false);
 
   const handleLoaderComplete = () => {
     setIsLoading(false);
     // No delay - show content immediately to prevent empty screen
     setShowContent(true);
+  };
+
+  // Timer for callback popup (10 seconds after content loads)
+  useEffect(() => {
+    if (showContent) {
+      const timer = setTimeout(() => {
+        setShowCallbackPopup(true);
+      }, 10000); // 10 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [showContent]);
+
+  const handleCloseCallbackPopup = () => {
+    setShowCallbackPopup(false);
   };
 
   return (
@@ -55,6 +72,12 @@ export default function Home() {
           {/* <Footer/> */}
         </>
       )}
+
+      {/* Callback Popup */}
+      <CallbackPopup 
+        isOpen={showCallbackPopup} 
+        onClose={handleCloseCallbackPopup} 
+      />
     </div>
   );
 }

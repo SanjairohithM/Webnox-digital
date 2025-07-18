@@ -29,7 +29,7 @@ function About() {
             name: "Rathina Kumar",
             designation: "CMO",
             icon: <User className="w-6 h-6 text-gray-600" />,
-            image: "/images/rksir.png"
+            // image: "/images/rksir.png"
         },
         {
             id: 2,
