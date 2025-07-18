@@ -226,7 +226,7 @@ const WhyChooseSection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative bg-white py-20 px-4 md:px-8 overflow-hidden">
+    <section ref={sectionRef} className="relative bg-white py-20 px-4 md:px-8 overflow-hidden font-sans">
       <div className="max-w-[1400px] mx-auto relative min-h-[500px]">
         
         {/* Left Column Content */}
@@ -427,7 +427,7 @@ const ApproachSection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white py-20">
+    <section ref={sectionRef} className="bg-white py-20 font-sans">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="mb-16">
@@ -612,8 +612,8 @@ const OutsourcingPage = () => {
       <HeroSection />
       <WhyChooseSection />
       <ApproachSection />
-      <TickerSection />
-      <FAQSection />
+      {/* <TickerSection />
+      <FAQSection /> */}
       <Footer />
     </main>
   )

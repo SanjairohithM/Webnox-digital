@@ -4,30 +4,23 @@ import Image from "next/image";
 const FAQSection = () => {
   const faqs = [
     {
-      question: "The expense windows adapted sir. Wrong widen drawn.",
-      answer: "Offending belonging promotion provision can be oh consulted ourselves it. Blessing welcomed ladyship she met humoured sir breeding her."
+      question: "What industries do you offer branding for?",
+      answer: "We work across industries from e-commerce, healthcare, real estate, education, SaaS, to professional services. We tailor the brand to suit your market and goals."
     },
     {
-      question: "Six curiosity day assurance bed necessary?",
-      answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      question: "Can you help launch the new brand, too?",
+      answer: "Yes. We can help you roll out your new brand across your website, social media, stationery, packaging, and digital campaigns."
     },
     {
-      question: "Produce say the ten moments parties?",
-      answer: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      question: "What makes Webnox Digital different from other branding agencies?",
+      answer: "We combine strategy, creativity, and tech.  We're branding experts who understand business, target markets, and long-term brand scalability. "
     },
-    {
-      question: "Simple innate summer fat appear basket his desire joy?",
-      answer: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip."
-    },
-    {
-      question: "Outward clothes promise at gravity do excited?",
-      answer: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore."
-    },
+
   ];
   const [openIdx, setOpenIdx] = React.useState(0);
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white font-sans">
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
         <div className="mb-16">
