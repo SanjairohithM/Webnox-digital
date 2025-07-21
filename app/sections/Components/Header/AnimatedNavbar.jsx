@@ -651,7 +651,7 @@ const AnimatedNavbar = ({
 
       {/* Hero Logo - Top Left - Separate Element */}
       <div ref={heroLogoRef} className="fixed top-12 left-12 z-50 transition-all duration-300">
-        <div className="flex items-center">
+        <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
           <Image
             src={logo || "/placeholder.svg"}
             alt="Logo"
@@ -659,7 +659,7 @@ const AnimatedNavbar = ({
             height={160}
             className="object-contain drop-shadow-2xl"
           />
-        </div>
+        </Link>
       </div>
 
       {/* Hero Menu Items - Top Center - Separate Element */}
