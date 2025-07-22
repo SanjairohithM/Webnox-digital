@@ -214,10 +214,8 @@ const ContactPage = () => {
                                 </div>
                             </div>
                             <div className="space-y-2 text-gray-600 underline">
-                                <p>contact@webnox.in</p>
-                                <p>techsupport@webnox.in</p>
-                                <p>sales@webnox.in</p>
-                                <p>hr@webnox.in</p>
+                                <p>info@webnoxdigital.com</p>
+                           
                             </div>
                         </div>
 
