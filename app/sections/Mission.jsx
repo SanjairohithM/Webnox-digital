@@ -252,7 +252,7 @@ export default function Component() {
     expandTimeline.to(
       miniRobotRef.current,
       {
-        scale: isMobile ? 2.5 : 4.5,
+        scale: isMobile ? 8 : 4.5, // Make these numbers bigger for a larger robot
         rotation: 0,
         position: "absolute",
         left: isMobile ? "calc(50%)" : "calc(50% - 10vw)",
@@ -706,7 +706,7 @@ export default function Component() {
                       <MisssionRobot
                         rotation={[0, -Math.PI / 2 + 0.8, 0]}
                         targetRotation={robotRotation}
-                        scale={typeof window !== 'undefined' && window.innerWidth < 768 ? 1.45 : 1.3}
+                        scale={typeof window !== 'undefined' && window.innerWidth < 768 ? 1.60 : 1.3}
                         position={typeof window !== 'undefined' && window.innerWidth < 768 ? [-0.3, -0.3, 0] : [-0.3, -0.5, 0]}
                       />
                       <ambientLight intensity={1} />
