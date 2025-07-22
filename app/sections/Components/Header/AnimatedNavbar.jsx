@@ -649,72 +649,108 @@ const AnimatedNavbar = ({
         </div>
       </div>
 
-      {/* Hero Logo - Top Left - Separate Element */}
-      <div ref={heroLogoRef} className="fixed top-12 left-12 z-50 transition-all duration-300">
-        <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
-          <Image
-            src={logo || "/placeholder.svg"}
-            alt="Logo"
-            width={160}
-            height={160}
-            className="object-contain drop-shadow-2xl"
-          />
-        </Link>
-      </div>
-
-      {/* Hero Menu Items - Top Center - Separate Element */}
-      <div ref={heroMenuRef} className="hidden md:block fixed top-12 z-50 transition-all duration-300" style={{ left: "50%", transform: "translateX(-50%)" }}>
-        <div 
-          className="flex items-center gap-8 py-4 px-8 rounded-full"
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.1)",
-            backdropFilter: "blur(20px)",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
-          }}
-        >
-          {items.map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-2 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full"
-              onClick={(e) => {
-                e.preventDefault()
-                if (item.name === "Services") {
-                  handleServicesClick(e)
-                } else if (item.name === "Solutions") {
-                  handleSolutionsClick(e)
-                } else if (item.href.startsWith('/')) {
-                  // Handle page navigation for routes like /about
-                  window.location.href = item.href
-                } else {
-                  // Handle anchor links like #services
-                  const element = document.querySelector(item.href)
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" })
-                  }
-                }
-              }}
-            >
-              {item.name}
-              <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#2acbec] group-hover:w-full transition-all duration-300"></div>
-            </a>
-          ))}
+      {/* Hero Logo - Top Left - Separate Element (Desktop Only) */}
+      {!isMobile && (
+        <div ref={heroLogoRef} className="fixed top-12 left-12 z-50 transition-all duration-300">
+          <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
+            <Image
+              src={logo || "/placeholder.svg"}
+              alt="Logo"
+              width={160}
+              height={160}
+              className="object-contain drop-shadow-2xl"
+            />
+          </Link>
         </div>
-      </div>
+      )}
 
-      {/* Let's Talk Button - Top Right - Separate Element */}
-      <div ref={letsTalkRef} className="fixed top-12 right-12 z-30 transition-all duration-300">
-        <Link href="/contact">
-          <button
-            className="bg-[#2acbec] hover:bg-[#1fb8d9] text-white font-bold p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl cursor-pointer"
+      {/* Mobile Logo - Top Left - Only on Mobile */}
+      {isMobile && (
+        <div className="fixed top-6 left-6 z-50 transition-all duration-300">
+          <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
+            <Image
+              src={logo || "/placeholder.svg"}
+              alt="Logo"
+              width={90}
+              height={90}
+              className="object-contain drop-shadow-2xl"
+            />
+          </Link>
+        </div>
+      )}
+
+      {/* Hero Menu Items - Top Center - Separate Element (Desktop Only) */}
+      {!isMobile && (
+        <div ref={heroMenuRef} className="hidden md:block fixed top-12 z-50 transition-all duration-300" style={{ left: "50%", transform: "translateX(-50%)" }}>
+          <div 
+            className="flex items-center gap-8 py-4 px-8 rounded-full"
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              backdropFilter: "blur(20px)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+            }}
           >
-            Let's Talk
-          </button>
-        </Link>
-      </div>
+            {items.map((item, index) => (
+              <a
+                key={index}
+                href={item.href}
+                className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-2 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full"
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (item.name === "Services") {
+                    handleServicesClick(e)
+                  } else if (item.name === "Solutions") {
+                    handleSolutionsClick(e)
+                  } else if (item.href.startsWith('/')) {
+                    // Handle page navigation for routes like /about
+                    window.location.href = item.href
+                  } else {
+                    // Handle anchor links like #services
+                    const element = document.querySelector(item.href)
+                    if (element) {
+                      element.scrollIntoView({ behavior: "smooth" })
+                    }
+                  }
+                }}
+              >
+                {item.name}
+                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#2acbec] group-hover:w-full transition-all duration-300"></div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
-      {/* Mobile Scroll Navbar - Only shows on scroll for mobile */}
+      {/* Let's Talk Button - Top Right - Separate Element (Desktop Only) */}
+      {!isMobile && (
+        <div ref={letsTalkRef} className="fixed top-12 right-12 z-30 transition-all duration-300">
+          <Link href="/contact">
+            <button
+              className="bg-[#2acbec] hover:bg-[#1fb8d9] text-white font-bold p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl cursor-pointer"
+            >
+              Let's Talk
+            </button>
+          </Link>
+        </div>
+      )}
+
+      {/* Mobile Burger Menu - Top Right - Only on Mobile */}
+      {isMobile && (
+        <div
+          ref={hamburgerRef}
+          className="fixed top-6 right-6 z-50 cursor-pointer"
+          onClick={toggleMenu}
+        >
+          <div className="flex flex-col gap-1.5">
+            <div className="hamburger-line-1 w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
+            <div className="hamburger-line-2 w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
+            <div className="hamburger-line-3 w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Scroll Navbar - Only shows on scroll for mobile (remove hamburger from here) */}
       <nav
         ref={navRef}
         className="fixed top-6 z-40 transition-all duration-300 md:hidden"
@@ -729,18 +765,7 @@ const AnimatedNavbar = ({
           boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
         }}
       >
-        {/* Hamburger Menu - Always visible on mobile */}
-        <div
-          ref={hamburgerRef}
-          className="cursor-pointer z-50"
-          onClick={toggleMenu}
-        >
-          <div className="flex flex-col gap-1.5">
-            <div className="hamburger-line-1 w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
-            <div className="hamburger-line-2 w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
-            <div className="hamburger-line-3 w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
-          </div>
-        </div>
+        {/* Empty for now, could add scroll nav items if needed */}
       </nav>
 
       {/* Fullscreen Menu */}
