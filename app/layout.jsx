@@ -18,6 +18,11 @@ const urbanist = Urbanist({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+      <meta name="google-site-verification" content="dPoW0wzIi2VpSOg4ew-Ov7FLsv21XKLexjM8WpR6nlA" />
+
+
+      </Head>
       <body className={`${urbanist.variable} antialiased`}>
         <Header />
         <SmoothScrollProvider>
