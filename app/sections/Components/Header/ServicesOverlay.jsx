@@ -5,49 +5,49 @@ import Link from "next/link";
 const services = [
   {
     title: "IT Consulting",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Empowering your digital growth with tailored IT strategies, systems integration, and scalable solutions. Drive innovation through secure, future-ready tech infrastructure.",
     image: "/images/service7.webp",
     href: "/consulting"
   },
   {
     title: "AI Automation",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Streamline operations and improve decision-making with advanced AI workflows and intelligent process automation—built for real-time performance and ROI-driven outcomes.         ",
     image: "/images/service6.webp",
     href: "/aiautomation"
   },
   {
     title: "Data Analytics",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Unlock actionable insights using predictive analytics, business intelligence dashboards, and real-time data pipelines that support faster, smarter decisions.",
     image: "/images/service6.webp",
     href: "/analysis"
   },
   {
     title: "Next gen marketing",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Leverage AI-powered targeting, automation, and omnichannel strategies to elevate customer engagement and scale brand visibility in a competitive digital space.",
     image: "/images/service5.webp",
     href: "/services"
   },
   {
     title: "Emerging Tech",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Stay ahead of the curve with cutting-edge technologies including Web3, blockchain, AR/VR, and IoT—developed with scalability and real-world impact in mind.",
     image: "/images/service4.webp",
     href: "/services"
   },
   {
     title: "Out Sourcing",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Accelerate growth with flexible, cost-efficient outsourcing models across development, customer support, and back-office operations—powered by global delivery expertise.",
     image: "/images/service3.webp",
     href: "/outsourcing"
   },
   {
     title: "N8N workflow",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Boost productivity with no-code automation using N8N—seamlessly connect APIs, databases, and cloud tools to optimize internal workflows and integrations.",
     image: "/images/service2.webp",
     href: "/services"
   },
   {
     title: "customer experience",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: "Deliver consistent, intelligent, and personalized user experiences powered by AI, analytics, and design thinking—built to boost retention and brand loyalty.",
     image: "/images/service1.webp",
     href: "/services"
   }
@@ -55,8 +55,8 @@ const services = [
 
 export default function ServicesOverlay({ onClose }) {
   return (
-    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
-      <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-6xl w-full mx-4 relative" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center " onClick={onClose}>
+      <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-[90vw] w-full md:max-w-7xl xl:max-w-[1200px] mx-auto relative" onClick={e => e.stopPropagation()}>
         {/* Close Button */}
         <button 
           className="absolute top-4 right-4 text-2xl font-bold text-gray-400 hover:text-gray-700 transition-colors duration-300 z-10" 
@@ -66,7 +66,7 @@ export default function ServicesOverlay({ onClose }) {
         </button>
 
         {/* Services Grid - Horizontal Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-18">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {services.map((service, idx) => (
             <Link 
               key={idx} 
