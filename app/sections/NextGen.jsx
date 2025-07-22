@@ -1911,28 +1911,30 @@ function NextGen() {
         </div>
 
         {/* Background Wait Images */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 30 }}>
-          {Array.from({ length: 12 }, (_, i) => (
-            <div
-              key={i}
-              ref={el => waitImagesRef.current[i] = el}
-              className={`absolute ${isMobile ? 'w-16 h-16' : 'w-32 h-32'} opacity-20`}
-              style={{
-                left: i < 6 ? `${5 + (i * 12)}%` : `${50 + ((i - 6) * 8)}%`,
-                bottom: '-100px',
-                zIndex: 30
-              }}
-            >
-              <Image
-                src={`/images/wait${i + 1}.webp`}
-                alt={`Wait icon ${i + 1}`}
-                width={isMobile ? 64 : 170}
-                height={isMobile ? 64 : 170}
-                className="w-full h-full object-cover rounded-lg"
-              />
-            </div>
-          ))}
-        </div>
+        {!isMobile && (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 30 }}>
+            {Array.from({ length: 12 }, (_, i) => (
+              <div
+                key={i}
+                ref={el => waitImagesRef.current[i] = el}
+                className="absolute w-32 h-32 opacity-20"
+                style={{
+                  left: i < 6 ? `${5 + (i * 12)}%` : `${50 + ((i - 6) * 8)}%`,
+                  bottom: '-100px',
+                  zIndex: 30
+                }}
+              >
+                <Image
+                  src={`/images/wait${i + 1}.webp`}
+                  alt={`Wait icon ${i + 1}`}
+                  width={170}
+                  height={170}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Stats Container */}
         <div ref={containerRef} className="absolute inset-0 flex items-center justify-center perspective-[2000px]">
