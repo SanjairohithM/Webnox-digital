@@ -1102,7 +1102,7 @@ function NextGen() {
                     backfaceVisibility: 'hidden'
                   }}
                 >
-                  <span className={`${isMobile ? 'text-[32px]' : 'text-[72px]'} font-sans text-black text-center`} style={{ fontFamily: '"Permanent Marker", cursive' }}>
+                  <span className={`${isMobile ? 'text-[32px]' : 'text-[72px]'} font-sans font-bold text-black text-center`} >
                     If you wait...
                   </span>
                 </div>
@@ -1113,7 +1113,7 @@ function NextGen() {
                     transform: 'rotateY(180deg)'
                   }}
                 >
-                  <span className={`${isMobile ? 'text-[32px]' : 'text-[72px]'} text-black text-center`} style={{ fontFamily: '"Permanent Marker", cursive' }}>
+                  <span className={`${isMobile ? 'text-[32px]' : 'text-[72px]'} font-sans font-bold text-black text-center`} >
                     If you act now...
                   </span>
                 </div>
@@ -1940,28 +1940,40 @@ function NextGen() {
             <div
               key={index}
               ref={el => cardsRef.current[index] = el}
-              className="absolute rounded-[16px] sm:rounded-[24px] md:rounded-[32px] w-[140px] sm:w-[180px] md:w-[220px] aspect-square flex flex-col items-center justify-center shadow-lg backface-visible overflow-hidden"
+              className={`absolute rounded-[10px] sm:rounded-[24px] md:rounded-[32px] flex flex-col items-center justify-center shadow-lg backface-visible overflow-hidden ${isMobile ? 'w-[80px] aspect-square' : 'w-[140px] sm:w-[180px] md:w-[220px] aspect-square'}`}
               style={{
                 ...stat.position,
                 transform: 'translate(-50%, -50%)',
                 transformStyle: 'preserve-3d',
                 backgroundColor: stat.color,
                 // Mobile-specific positioning for 3-top, 3-bottom layout
-                ...(isMobile && {
-                  left: index < 3 ? `${20 + (index * 25)}%` : `${20 + ((index - 3) * 25)}%`,
-                  top: index < 3 ? '25%' : '75%',
-                  right: 'auto',
-                  bottom: 'auto'
-                })
+                ...(isMobile && (() => {
+                  const row = Math.floor(index / 3);
+                  const col = index % 3;
+                  let top;
+                  if (row === 0) {
+                    // Stagger the first row: middle card higher
+                    top = col === 1 ? '14%' : '30%';
+                  } else {
+                    // Stagger the second row: middle card higher
+                    top = col === 1 ? '70%' : '82%';
+                  }
+                  return {
+                    left: `${22 + col * 28}%`,
+                    top,
+                    right: 'auto',
+                    bottom: 'auto'
+                  };
+                })())
               }}
             >
-              <div className="relative w-full h-full flex flex-col items-center justify-center text-white p-4 sm:p-6 md:p-10">
-                <div className="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] md:w-[100px] md:h-[100px] relative mb-3 sm:mb-4 md:mb-6">
+              <div className={`relative w-full h-full flex flex-col items-center justify-center text-white ${isMobile ? 'p-1' : 'p-2 sm:p-6 md:p-10'}`}>
+                <div className={`${isMobile ? 'w-[24px] h-[24px]' : 'w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] md:w-[100px] md:h-[100px]'} relative mb-0.5 sm:mb-4 md:mb-6`}>
                   <Image
                     src={stat.image}
                     alt={stat.text}
-                    width={100}
-                    height={100}
+                    width={isMobile ? 24 : 100}
+                    height={isMobile ? 24 : 100}
                     style={{
                       width: '100%',
                       height: '100%',
@@ -1970,10 +1982,10 @@ function NextGen() {
                     className="drop-shadow-lg"
                   />
                 </div>
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2 font-sans">
+                <div className={`${isMobile ? 'text-[10px]' : 'text-lg'} font-bold mb-0.5 sm:mb-2 font-sans`}>
                   {stat.number}
                 </div>
-                <p className="text-center text-xs sm:text-sm font-medium opacity-90 font-sans px-1 sm:px-2">
+                <p className={`text-center ${isMobile ? 'text-[7px]' : 'text-xs sm:text-sm'} font-medium opacity-90 font-sans px-0.5 sm:px-2`}>
                   {stat.text}
                 </p>
               </div>
