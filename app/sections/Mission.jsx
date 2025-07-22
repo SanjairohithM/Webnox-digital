@@ -275,7 +275,7 @@ export default function Component() {
     finalTextContainer.className = "final-text-container absolute w-full text-center flex items-center justify-center font-sans"
     finalTextContainer.innerHTML = `
       <div class="w-full max-w-6xl mx-auto px-4">
-        <h1 class="text-sm sm:text-base md:text-lg lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold text-white mb-2 md:mb-4 lg:mb-6 text-center leading-tight px-2">
+        <h1 class="text-2xl sm:text-base md:text-lg lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold text-white mb-2 md:mb-4 lg:mb-6 text-center leading-tight px-2">
           <span class="block sm:inline">Transforming Businesses Through</span>
           <span class="block sm:inline">&nbsp;Intelligent Automation</span>
         </h1>

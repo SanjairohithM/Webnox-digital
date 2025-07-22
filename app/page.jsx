@@ -36,7 +36,7 @@ export default function Home() {
     if (showContent) {
       const timer = setTimeout(() => {
         setShowCallbackPopup(true);
-      }, 10000); // 10 seconds
+      }, 30000); // 10 seconds
 
       return () => clearTimeout(timer);
     }
