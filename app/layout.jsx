@@ -1,5 +1,6 @@
 "use client"
 import { Urbanist } from "next/font/google"
+import Head from "next/head"
 import "./globals.css"
 import Header from "./sections/Components/Header"
 import SmoothScrollProvider from "@/components/SmoothScrollProvider"
