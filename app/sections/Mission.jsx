@@ -580,7 +580,7 @@ export default function Component() {
                 {/* Main Headline */}
                 <div ref={contentRefs.headlines} className="space-y-2 sm:space-y-4">
                   <div className="flex items-center gap-2 sm:gap-4 flex-wrap mb-3 sm:mb-5 pt-2">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-sans font-semibold text-gray-800 tracking-tight leading-tight">
+                    <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-sans font-semibold text-gray-800 tracking-tight leading-tight">
                       AI-Driven Innovation for a
                     </h1>
                   </div>
@@ -588,7 +588,10 @@ export default function Component() {
                   <div className="flex items-center gap-2 sm:gap-4 flex-wrap mb-3 sm:mb-5">
                     <div
                       ref={miniRobotContainerRef}
-                      className="mini-robot_container bg-gradient-to-b from-[#3FD7F1] to-[#1B80D5] overflow-hidden"
+                      className={
+                        "mini-robot_container bg-gradient-to-b from-[#3FD7F1] to-[#1B80D5] overflow-hidden" +
+                        (typeof window !== 'undefined' && window.innerWidth < 768 ? ' mb-4' : '')
+                      }
                       style={{ borderRadius: "9999px" }}
                     >
                       <Image
@@ -601,7 +604,7 @@ export default function Component() {
                       />
                     </div>
 
-                    <h1 className="smarter-text text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-sans font-semibold text-gray-800 tracking-tight leading-tight">
+                    <h1 className="smarter-text text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-sans font-semibold text-gray-800 tracking-tight leading-tight">
                       Digitally Connected World
                     </h1>
                   </div>
@@ -703,8 +706,8 @@ export default function Component() {
                       <MisssionRobot
                         rotation={[0, -Math.PI / 2 + 0.8, 0]}
                         targetRotation={robotRotation}
-                        scale={window.innerWidth < 768 ? 1.2 : 1.3}
-                        position={[-0.3, -0.5, 0]}
+                        scale={typeof window !== 'undefined' && window.innerWidth < 768 ? 1.45 : 1.3}
+                        position={typeof window !== 'undefined' && window.innerWidth < 768 ? [-0.3, -0.3, 0] : [-0.3, -0.5, 0]}
                       />
                       <ambientLight intensity={1} />
                       <directionalLight position={[10, 10, 10]} intensity={1} />
