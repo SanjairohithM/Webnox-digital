@@ -791,7 +791,7 @@ function NextGen() {
         ease: "power1.inOut"
       })
 
-      // Journey Section - EXTREMELY SLOW
+      // Journey Section - EXTREMELY SLOW (Hidden on mobile)
       .to(journeyRef.current, {
         opacity: 1,
         y: 0,
@@ -1200,249 +1200,342 @@ function NextGen() {
           </h2>
         </div>
 
-        {/* Journey Section */}
+        {/* First Journey Section - Desktop: Journey Layout, Mobile: Cards */}
         <div
           ref={journeyRef}
-          className="absolute z-20 w-full h-full flex items-center justify-center left-50 "
+          className="absolute z-20 w-full h-full flex items-center justify-center left-50"
         >
-          <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+          {isMobile ? (
+            /* Mobile Card Layout */
+            <div className="relative w-full h-full flex flex-col items-start justify-center pl-2 pr-16 space-y-16">
+              {/* Step 1 Card */}
+              <div
+                ref={el => journeyStepsRef.current[0] = el}
+                className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 -ml-40"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
+                    <span className="text-white font-bold text-lg">1</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800">Discover & Define</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">We don't offer solutions until we understand the problem</p>
+              </div>
 
-            {/* Curved Path SVG from firstline.svg */}
-            <div className="absolute inset-0 w-full h-full">
-              <svg
-                ref={journeyPathRef}
-                width="638"
-                height="497"
-                viewBox="0 0 638 497"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="absolute opacity-0"
-                style={{
-                  top: isMobile ? '35%' : '40%',
-                  left: isMobile ? '-5%' : '-1%',
-                  width: isMobile ? '85%' : '70%',
-                  height: isMobile ? '45%' : '35%'
+              {/* Step 2 Card */}
+              <div
+                ref={el => journeyStepsRef.current[1] = el}
+                className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 -ml-40 mt-13"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
+                    <span className="text-white font-bold text-lg">2</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800">Experience-Led Design</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">Smart tech meets meaningful design</p>
+              </div>
+
+              {/* Step 3 Card */}
+              <div
+                ref={el => journeyStepsRef.current[2] = el}
+                className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 -ml-40 -mt-3"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
+                    <span className="text-white font-bold text-lg">3</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800">Agile Development</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">Progress without chaos. Speed with stability</p>
+              </div>
+            </div>
+          ) : (
+            /* Desktop Journey Layout */
+            <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+
+              {/* Curved Path SVG from firstline.svg */}
+              <div className="absolute inset-0 w-full h-full">
+                <svg
+                  ref={journeyPathRef}
+                  width="638"
+                  height="497"
+                  viewBox="0 0 638 497"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="absolute opacity-0"
+                  style={{
+                    top: '40%',
+                    left: '-1%',
+                    width: '70%',
+                    height: '35%'
+                  }}
+                >
+                  <defs>
+                    <linearGradient id="paint0_linear_1249_18918" x1="658.312" y1="-12.0066" x2="-124.122" y2="556.832" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="#00B9FF" />
+                      <stop offset="0.813119" stopColor="#0076D9" />
+                      <stop offset="1" stopColor="white" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    id="motionPath"
+                    d="M612 33.8559C514.828 15.4465 331.172 10.1014 325.235 245.861C322.454 356.318 256.839 505.612 26 463.805"
+                    stroke="url(#paint0_linear_1249_18918)"
+                    strokeWidth="51"
+                    strokeLinecap="round"
+                    strokeDasharray="1000"
+                    strokeDashoffset="1000"
+                  />
+                </svg>
+
+                {/* Static Start Point Circle (Hexagon 2) */}
+                <div
+                  ref={el => pathCircleRefs.current[0] = el}
+                  className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                  style={{
+                    top: 'calc(30% + 12%)',
+                    left: 'calc(3% + 48%)',
+                    transform: 'translate(-50%, -50%)'
+                  }}
+                />
+
+                {/* Static End Point Circle (Hexagon 3) */}
+                <div
+                  ref={el => pathCircleRefs.current[1] = el}
+                  className="absolute w-14 h-14 bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white"
+                  style={{
+                    top: 'calc(30% + 41%)',
+                    left: 'calc(3% + 16%)',
+                    transform: 'translate(-50%, -50%)'
+                  }}
+                />
+              </div>
+
+              {/* Step 1: Discover & Define - hexagon-line-circle-text (RIGHT LAYOUT) */}
+              <div
+                ref={el => journeyStepsRef.current[0] = el}
+                className="absolute"
+                style={{ 
+                  right: '45%', 
+                  top: '25%', 
+                  transform: 'translateY(-50%)' 
                 }}
               >
-                <defs>
-                  <linearGradient id="paint0_linear_1249_18918" x1="658.312" y1="-12.0066" x2="-124.122" y2="556.832" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#00B9FF" />
-                    <stop offset="0.813119" stopColor="#0076D9" />
-                    <stop offset="1" stopColor="white" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <path
-                  id="motionPath"
-                  d="M612 33.8559C514.828 15.4465 331.172 10.1014 325.235 245.861C322.454 356.318 256.839 505.612 26 463.805"
-                  stroke="url(#paint0_linear_1249_18918)"
-                  strokeWidth="51"
-                  strokeLinecap="round"
-                  strokeDasharray="1000"
-                  strokeDashoffset="1000"
-                />
-              </svg>
+                <div className="relative flex items-center justify-center font-sans">
+                  {/* Hexagon */}
+                  <div className="relative">
+                    <div
+                      className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                      style={{
+                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                      }}
+                    >
+                      {/* Inner hexagon for content */}
+                      <div
+                        className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        <span className="text-4xl font-bold text-[#0ea5e9] z-10">1</span>
+                      </div>
+                    </div>
 
-              {/* Static Start Point Circle (Hexagon 2) */}
+                    {/* Line starting from hexagon right edge */}
+                    <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
+                      <div
+                        className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
+                        style={{ width: '250px' }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Blue Circle */}
+                  <div className="relative ml-[246px]">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="text-content ml-8 flex-shrink-0">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Discover & Define</h3>
+                    <p className="text-sm w-80 text-gray-600 leading-relaxed">We don't offer solutions until we understand the problem</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 2: Experience-Led Design - text-circle-line-hexagon (LEFT LAYOUT) */}
               <div
-                ref={el => pathCircleRefs.current[0] = el}
-                className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
-                style={{
-                  top: isMobile ? 'calc(25% + 12%)' : 'calc(30% + 12%)',
-                  left: isMobile ? 'calc(3% + 48%)' : 'calc(3% + 48%)',
-                  transform: 'translate(-50%, -50%)'
+                ref={el => journeyStepsRef.current[1] = el}
+                className="absolute"
+                style={{ 
+                  left: '2%', 
+                  top: '50%', 
+                  transform: 'translateY(-50%)' 
                 }}
-              />
+              >
+                <div className="relative flex items-center justify-center font-sans">
+                  {/* Text Content */}
+                  <div className="text-content mr-32 flex-shrink-0">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Experience-Led Design</h3>
+                    <p className="text-sm w-80 text-gray-600 leading-relaxed">Smart tech meets meaningful design</p>
+                  </div>
 
-              {/* Static End Point Circle (Hexagon 3) */}
+                  {/* Blue Circle */}
+                  <div className="relative ml-8">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
+                  </div>
+
+                  {/* Hexagon */}
+                  <div className="relative ml-[246px]">
+                    <div
+                      className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
+                      style={{
+                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                      }}
+                    >
+                      {/* Inner hexagon for content */}
+                      <div
+                        className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        <span className="text-4xl font-bold text-[#0ea5e9] z-10">2</span>
+                      </div>
+                    </div>
+
+                    {/* Line starting from hexagon left edge */}
+                    <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
+                      <div
+                        className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
+                        style={{ width: '250px' }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 3: Agile Development - hexagon-line-circle-text (RIGHT LAYOUT) */}
               <div
-                ref={el => pathCircleRefs.current[1] = el}
-                className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
-                style={{
-                  top: isMobile ? 'calc(25% + 41%)' : 'calc(30% + 41%)',
-                  left: isMobile ? 'calc(3% + 16%)' : 'calc(3% + 16%)',
-                  transform: 'translate(-50%, -50%)'
+                ref={el => journeyStepsRef.current[2] = el}
+                className="absolute"
+                style={{ 
+                  right: '45%', 
+                  bottom: '15%', 
+                  transform: 'translateY(50%)' 
                 }}
-              />
-
-            </div>
-
-            {/* Step 1: Discover & Define - hexagon-line-circle-text (RIGHT LAYOUT) */}
-            <div
-              ref={el => journeyStepsRef.current[0] = el}
-              className="absolute"
-              style={{ 
-                right: isMobile ? '15%' : '45%', 
-                top: isMobile ? '15%' : '25%', 
-                transform: 'translateY(-50%)' 
-              }}
-            >
-              <div className="relative flex items-center justify-center font-sans">
-                {/* Hexagon */}
-                <div className="relative">
-                  <div
-                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
-                    style={{
-                      clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                    }}
-                  >
-                    {/* Inner hexagon for content */}
+              >
+                <div className="relative flex items-center justify-center font-sans">
+                  {/* Hexagon */}
+                  <div className="relative">
                     <div
-                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
+                      className="w-32 h-32 bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm"
                       style={{
                         clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
                       }}
                     >
-                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>1</span>
+                      {/* Inner hexagon for content */}
+                      <div
+                        className="w-28 h-28 bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm"
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        <span className="text-4xl font-bold text-[#0ea5e9] z-10">3</span>
+                      </div>
+                    </div>
+
+                    {/* Line starting from hexagon right edge */}
+                    <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
+                      <div
+                        className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
+                        style={{ width: '250px' }}
+                      ></div>
                     </div>
                   </div>
 
-                  {/* Line starting from hexagon right edge */}
-                  <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
-                    <div
-                      className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                      style={{ width: isMobile ? '120px' : '250px' }}
-                    ></div>
-                  </div>
-                </div>
-
-                {/* Blue Circle */}
-                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
-                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
-                </div>
-
-                {/* Text Content */}
-                <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
-                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Discover & Define</h3>
-                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We don't offer solutions until we understand the problem</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 2: Experience-Led Design - text-circle-line-hexagon (LEFT LAYOUT) */}
-            <div
-              ref={el => journeyStepsRef.current[1] = el}
-              className="absolute"
-              style={{ 
-                left: isMobile ? '5%' : '2%', 
-                top: isMobile ? '45%' : '50%', 
-                transform: 'translateY(-50%)' 
-              }}
-            >
-              <div className="relative flex items-center justify-center font-sans">
-                {/* Text Content */}
-                <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
-                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Experience-Led Design</h3>
-                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>Smart tech meets meaningful design</p>
-                </div>
-
-                {/* Blue Circle */}
-                <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
-                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
-                </div>
-
-                {/* Hexagon */}
-                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
-                  <div
-                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
-                    style={{
-                      clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                    }}
-                  >
-                    {/* Inner hexagon for content */}
-                    <div
-                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
-                      style={{
-                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                      }}
-                    >
-                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>2</span>
-                    </div>
+                  {/* Blue Circle */}
+                  <div className="relative ml-[246px]">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm"></div>
                   </div>
 
-                  {/* Line starting from hexagon left edge */}
-                  <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
-                    <div
-                      className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
-                      style={{ width: isMobile ? '120px' : '250px' }}
-                    ></div>
+                  {/* Text Content */}
+                  <div className="text-content ml-8 flex-shrink-0">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Agile Development</h3>
+                    <p className="text-sm w-80 text-gray-600 leading-relaxed">Progress without chaos. Speed with stability</p>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Step 3: Agile Development - hexagon-line-circle-text (RIGHT LAYOUT) */}
-            <div
-              ref={el => journeyStepsRef.current[2] = el}
-              className="absolute"
-              style={{ 
-                right: isMobile ? '15%' : '45%', 
-                bottom: isMobile ? '25%' : '15%', 
-                transform: 'translateY(50%)' 
-              }}
-            >
-              <div className="relative flex items-center justify-center font-sans">
-                {/* Hexagon */}
-                <div className="relative">
-                  <div
-                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
-                    style={{
-                      clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                    }}
-                  >
-                    {/* Inner hexagon for content */}
-                    <div
-                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
-                      style={{
-                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                      }}
-                    >
-                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>3</span>
-                    </div>
-                  </div>
-
-                  {/* Line starting from hexagon right edge */}
-                  <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
-                    <div
-                      className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                      style={{ width: isMobile ? '120px' : '250px' }}
-                    ></div>
-                  </div>
-                </div>
-
-                {/* Blue Circle */}
-                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
-                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
-                </div>
-
-                {/* Text Content */}
-                <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
-                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Agile Development</h3>
-                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>Progress without chaos. Speed with stability</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
 
-
-
-        {/* Second Journey Section */}
+        {/* Second Journey Section - Desktop: Journey Layout, Mobile: Cards */}
         <div
           ref={journey2Ref}
           className="absolute z-20 w-full h-full pointer-events-none pt-2"
         >
-          {/* SVG Curved Path for Second Journey */}
-          <div
-            ref={journey2PathRef}
-            className="absolute"
-            style={{
-              top: isMobile ? '25%' : '30%',
-              left: isMobile ? '5%' : '10%',
-              width: isMobile ? '75%' : '60%',
-              height: isMobile ? '70%' : '60%',
-              zIndex: 1
-            }}
-          >
+          {isMobile ? (
+            /* Mobile Card Layout */
+            <div className="relative w-full h-full flex flex-col items-start justify-center pl-2 pr-16 space-y-16 pointer-events-auto">
+              {/* Step 4 Card */}
+              <div
+                ref={el => journey2StepsRef.current[0] = el}
+                className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 ml-10"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
+                    <span className="text-white font-bold text-lg">4</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800">Intelligent Integration</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">AI tools to create a streamlined digital backbone for your business. We unify your ecosystem seamlessly connecting CRMs, ERPs, APIs, cloud services.</p>
+              </div>
+
+              {/* Step 5 Card */}
+              <div
+                ref={el => journey2StepsRef.current[1] = el}
+                className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 ml-10"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
+                    <span className="text-white font-bold text-lg">5</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800">Launch & Learn</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">We monitor real-world performance, gather insights, and iterate quickly to ensure sustained growth and continuous improvement.</p>
+              </div>
+
+              {/* Step 6 Card */}
+              <div
+                ref={el => journey2StepsRef.current[2] = el}
+                className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 ml-10"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
+                    <span className="text-white font-bold text-lg">6</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800">Scale with Digital Marketing</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">From visibility to virality, we help your brand grow through strategic marketing, SEO, content, and campaigns that convert.</p>
+              </div>
+            </div>
+          ) : (
+            /* Desktop Journey Layout */
+            <>
+              {/* SVG Curved Path for Second Journey */}
+              <div
+                ref={journey2PathRef}
+                className="absolute"
+                style={{
+                  top: '30%',
+                  left: '10%',
+                  width: '60%',
+                  height: '60%',
+                  zIndex: 1
+                }}
+              >
             <svg
               viewBox="0 0 448 498"
               className="w-full h-full"
@@ -1655,14 +1748,63 @@ function NextGen() {
               </div>
             </div>
           </div>
+          </>
+          )}
         </div>
 
-        {/* Third Journey Section */}
+        {/* Third Journey Section - Desktop: Journey Layout, Mobile: Cards */}
         <div
           ref={journey3Ref}
           className="absolute z-20 w-full h-full flex items-center justify-center left-50"
         >
-          <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+          {isMobile ? (
+            /* Mobile Card Layout */
+            <div className="relative w-full h-full flex flex-col items-start justify-center space-y-16">
+              {/* Step 7 Card */}
+              <div
+                ref={el => journey3StepsRef.current[0] = el}
+                className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 -ml-40"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
+                    <span className="text-white font-bold text-lg">7</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800">Optimize Across Touchpoints</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">We refine user journeys with UX audits, mobile app enhancements, eCommerce upgrades, and performance tuning.</p>
+              </div>
+
+              {/* Step 8 Card */}
+              <div
+                ref={el => journey3StepsRef.current[1] = el}
+                className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 -ml-40"
+              >
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
+                    <span className="text-white font-bold text-lg">8</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800">Support & Sustain</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">Post-launch isn't the end. It's where we scale, monitor, support, and evolve your digital assets for long-term success.</p>
+              </div>
+
+              {/* Step 9 Card */}
+              <div
+                ref={el => journey3StepsRef.current[2] = el}
+                className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 -ml-40 -mt-3"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
+                    <span className="text-white font-bold text-lg">9</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800">Scale & Evolve</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">Tech grows. You grow. And we grow with you.</p>
+              </div>
+            </div>
+          ) : (
+            /* Desktop Journey Layout */
+            <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
 
             {/* Curved Path SVG from thirdline.svg */}
             <div 
@@ -1897,6 +2039,7 @@ function NextGen() {
               </div>
             </div>
           </div>
+          )}
         </div>
 
         {/* New Final Text */}
