@@ -58,7 +58,7 @@ const stats = [
   }
 ];
 
-function NextGen() {
+const NextGen = React.memo(function NextGen() {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const cardsRef = useRef([]);
@@ -110,6 +110,11 @@ function NextGen() {
   const flipTextRef = useRef(null);
 
   useGSAP(() => {
+    // Mobile Performance Optimization: Simplify animations on mobile
+    const isMobileDevice = isMobile;
+    const animationSpeed = isMobileDevice ? 0.3 : 1; // 3x faster on mobile
+    const reducedDuration = (duration) => isMobileDevice ? duration * 0.3 : duration;
+
     // Set initial states
     gsap.set(cardsRef.current, {
       opacity: 0,
@@ -120,203 +125,203 @@ function NextGen() {
 
     gsap.set(finalTextRef.current, {
       opacity: 0,
-      y: 50
+      y: isMobileDevice ? 20 : 50
     });
 
     gsap.set(finalText2Ref.current, {
       opacity: 0,
-      y: 50
+      y: isMobileDevice ? 20 : 50
     });
 
     gsap.set(newFinalTextRef.current, {
       opacity: 0,
-      y: 50
+      y: isMobileDevice ? 20 : 50
     });
 
     gsap.set(newbeforeFinalTextRef.current, {
       opacity: 0,
-      y: 50
+      y: isMobileDevice ? 20 : 50
     });
 
-    gsap.set(journeyRef.current, {
-      opacity: 0,
-      y: 50
-    });
+    // Only set complex journey states on desktop
+    if (!isMobileDevice) {
+      gsap.set(journeyRef.current, {
+        opacity: 0,
+        y: 50
+      });
 
-    gsap.set(journeyStepsRef.current, {
-      opacity: 0,
-      y: 50,
-      scale: 0.8
-    });
+      gsap.set(journeyStepsRef.current, {
+        opacity: 0,
+        y: 50,
+        scale: 0.8
+      });
 
-    // Set initial states for path and circles
-    gsap.set(journeyPathRef.current, {
-      opacity: 0
-    });
+      // Set initial states for path and circles
+      gsap.set(journeyPathRef.current, {
+        opacity: 0
+      });
 
-    // Set initial state for the path stroke
-    const pathElement = journeyPathRef.current?.querySelector('#motionPath');
-    if (pathElement) {
-      gsap.set(pathElement, {
-        strokeDasharray: 1000,
-        strokeDashoffset: 1000
+      // Set initial state for the path stroke
+      const pathElement = journeyPathRef.current?.querySelector('#motionPath');
+      if (pathElement) {
+        gsap.set(pathElement, {
+          strokeDasharray: 1000,
+          strokeDashoffset: 1000
+        });
+      }
+    } else {
+      // Mobile: Simple card animations
+      gsap.set(journeyRef.current, {
+        opacity: 0,
+        y: 20
+      });
+
+      gsap.set(journeyStepsRef.current, {
+        opacity: 0,
+        y: 30,
+        scale: 0.95
       });
     }
 
-    // Set initial states for all text elements
+    // Set initial states for text elements
     gsap.set(centerHeadingRef.current, {
       opacity: 0,
-      x: 100
+      x: isMobileDevice ? 50 : 100
     });
 
     gsap.set(warningRefs.current, {
       opacity: 0,
-      x: -50
+      x: isMobileDevice ? -20 : -50
     });
 
     gsap.set(successRefs.current, {
       opacity: 0,
-      x: -50
+      x: isMobileDevice ? -20 : -50
     });
 
-    // Set initial positions with VARIETY - spread around screen edges naturally
-    gsap.set(waitImagesRef.current, {
-      opacity: 0,
-      left: (i) => {
-        // More natural spread from different directions
-        const leftStartPositions = [
-          "-20%", "-15%", "-25%", // Far left with variety
-          "-10%", "-18%", "-22%"  // Different distances from left edge
-        ];
-        const rightStartPositions = [
-          "120%", "115%", "125%", // Far right with variety  
-          "110%", "118%", "122%"  // Different distances from right edge
-        ];
+    // Mobile Performance: Reduce wait images complexity
+    if (!isMobileDevice && waitImagesRef.current.length > 0) {
+      // Set initial positions with VARIETY - spread around screen edges naturally
+      gsap.set(waitImagesRef.current, {
+        opacity: 0,
+        left: (i) => {
+          const leftStartPositions = [
+            "-20%", "-15%", "-25%", "-10%", "-18%", "-22%"
+          ];
+          const rightStartPositions = [
+            "120%", "115%", "125%", "110%", "118%", "122%"
+          ];
 
-        if (i < 6) {
-          return leftStartPositions[i];
-        } else {
-          return rightStartPositions[i - 6];
-        }
-      },
-      top: (i) => {
-        // More variety in vertical positioning - some from corners, some from edges
-        const leftSidePositions = [
-          "5%",   // Top-left corner
-          "30%",  // Upper-left 
-          "15%",  // Top-left area
-          "60%",  // Lower-left
-          "80%",  // Bottom-left
-          "45%"   // Middle-left
-        ];
-        const rightSidePositions = [
-          "10%",  // Top-right corner
-          "35%",  // Upper-right
-          "20%",  // Top-right area  
-          "65%",  // Lower-right
-          "85%",  // Bottom-right
-          "50%"   // Middle-right
-        ];
+          if (i < 6) {
+            return leftStartPositions[i];
+          } else {
+            return rightStartPositions[i - 6];
+          }
+        },
+        top: (i) => {
+          const leftSidePositions = [
+            "5%", "30%", "15%", "60%", "80%", "45%"
+          ];
+          const rightSidePositions = [
+            "10%", "35%", "20%", "65%", "85%", "50%"
+          ];
 
-        if (i < 6) {
-          return leftSidePositions[i];
-        } else {
-          return rightSidePositions[i - 6];
-        }
-      },
-      right: 'auto',
-      bottom: 'auto'
-    });
+          if (i < 6) {
+            return leftSidePositions[i];
+          } else {
+            return rightSidePositions[i - 6];
+          }
+        },
+        right: 'auto',
+        bottom: 'auto'
+      });
+    }
 
-    // Second journey initial states
-    gsap.set(newbeforeJourney2TextRef.current, {
-      opacity: 0,
-      y: 50
-    });
-
+    // Journey initial states - optimized for mobile
     gsap.set(journey2Ref.current, {
       opacity: 0,
-      y: 50
+      y: isMobileDevice ? 20 : 50
     });
 
     gsap.set(journey2StepsRef.current, {
       opacity: 0,
-      y: 50,
-      scale: 0.8
+      y: isMobileDevice ? 20 : 50,
+      scale: isMobileDevice ? 0.95 : 0.8
     });
 
-    // Set initial states for second journey path and circles
-    gsap.set(journey2PathRef.current, {
-      opacity: 0
-    });
-
-    // Set initial state for the second path stroke
-    const path2Element = journey2PathRef.current?.querySelector('#motionPath2');
-    if (path2Element) {
-      gsap.set(path2Element, {
-        strokeDasharray: 1000,
-        strokeDashoffset: 1000
-      });
-    }
-
-    // Third journey initial states
     gsap.set(journey3Ref.current, {
       opacity: 0,
-      y: 50
+      y: isMobileDevice ? 20 : 50
     });
 
     gsap.set(journey3StepsRef.current, {
       opacity: 0,
-      y: 50,
-      scale: 0.8
+      y: isMobileDevice ? 20 : 50,
+      scale: isMobileDevice ? 0.95 : 0.8
     });
 
-    // Set initial states for third journey path and circles
-    gsap.set(journey3PathRef.current, {
-      opacity: 0
-    });
-
-    // Set initial state for the third path stroke
-    const path3Element = journey3PathRef.current?.querySelector('#motionPath3');
-    if (path3Element) {
-      gsap.set(path3Element, {
-        strokeDasharray: 1000,
-        strokeDashoffset: 1000
+    // Desktop-only complex SVG animations
+    if (!isMobileDevice) {
+      // Set initial states for second journey path and circles
+      gsap.set(journey2PathRef.current, {
+        opacity: 0
       });
+
+      const path2Element = journey2PathRef.current?.querySelector('#motionPath2');
+      if (path2Element) {
+        gsap.set(path2Element, {
+          strokeDasharray: 1000,
+          strokeDashoffset: 1000
+        });
+      }
+
+      // Set initial states for third journey path and circles
+      gsap.set(journey3PathRef.current, {
+        opacity: 0
+      });
+
+      const path3Element = journey3PathRef.current?.querySelector('#motionPath3');
+      if (path3Element) {
+        gsap.set(path3Element, {
+          strokeDasharray: 1000,
+          strokeDashoffset: 1000
+        });
+      }
     }
 
+    // Mobile Performance: Shorter scroll distance and faster scrub
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=800%",
+        end: isMobileDevice ? "+=300%" : "+=800%", // Much shorter on mobile
         pin: true,
-        scrub: 3,
+        scrub: isMobileDevice ? 1 : 3, // Faster scrub on mobile
         // markers: true
       }
     });
 
-    // Stage 1: Head text appears (first scroll)
+    // Stage 1: Head text appears (first scroll) - Mobile Optimized
     timeline.from(headingRef.current, {
       opacity: 0,
-      y: 50,
+      y: isMobileDevice ? 20 : 50,
       scale: 1,
-      duration: 1.5
+      duration: reducedDuration(1.5)
     });
 
-    // Stage 2: All 6 stats cards appear slowly one by one (second scroll)
+    // Stage 2: All 6 stats cards appear - Mobile Optimized
     timeline.to(headingRef.current, {
       scale: 0.85,
-      duration: 1,
+      duration: reducedDuration(1),
       ease: "power2.inOut"
     });
 
-    // Cards appear and move to their positions one by one
+    // Cards appear - Mobile: Much faster, Desktop: original speed
     cardsRef.current.forEach((card, index) => {
       const position = stats[index].position;
       
-      if (isMobile) {
-        // Mobile: 3-top, 3-bottom layout
+      if (isMobileDevice) {
+        // Mobile: Faster, simpler animation
         timeline.to(card, {
           opacity: 1,
           scale: 1,
@@ -326,9 +331,9 @@ function NextGen() {
           bottom: 'auto',
           x: 0,
           y: 0,
-          duration: 1.2,
-          ease: "power3.out"
-        }, `+=${index === 0 ? 0 : 0.8}`); // 0.8 second delay between each card
+          duration: 0.3, // Much faster on mobile
+          ease: "power2.out"
+        }, `+=${index === 0 ? 0 : 0.1}`); // Faster stagger on mobile
       } else {
         // Desktop: original positioning
         timeline.to(card, {
@@ -338,17 +343,17 @@ function NextGen() {
           y: position.top || position.bottom || "0%",
           duration: 1.2,
           ease: "power3.out"
-        }, `+=${index === 0 ? 0 : 0.8}`); // 0.8 second delay between each card
+        }, `+=${index === 0 ? 0 : 0.8}`);
       }
     });
 
-    // Stage 3: All cards stack in center (third scroll) - MUCH SLOWER
+    // Stage 3: Cards stack in center - Mobile Optimized
     timeline
-      .to({}, { duration: 5 }) // Hold cards in position longer
+      .to({}, { duration: reducedDuration(5) }) // Hold cards - shorter on mobile
       .to(headingRef.current, {
         opacity: 0,
         scale: 0.7,
-        duration: 8,
+        duration: reducedDuration(8),
         ease: "power3.inOut"
       })
       .to(cardsRef.current, {
@@ -361,7 +366,7 @@ function NextGen() {
         x: 0,
         y: 0,
         scale: 1,
-        duration: 12, // Much slower movement to center
+        duration: reducedDuration(12), // Much faster on mobile
         ease: "power2.inOut"
       })
       .to(cardsRef.current, {
@@ -370,67 +375,113 @@ function NextGen() {
         rotateY: 0,
         rotateZ: 0,
         scale: 1,
-        duration: 8, // Slower stacking
+        duration: reducedDuration(8),
         stagger: {
-          each: 1.2, // Longer delay between each card
+          each: reducedDuration(1.2), // Faster stagger on mobile
           from: "end"
         },
         ease: "power2.inOut"
       });
 
-    // Stage 4: Move cards up and fade out, bring in final text - MUCH SLOWER
+    // Stage 4: Cards fade out, final text appears - Mobile Optimized
     timeline
-      .to({}, { duration: 8 }) // Hold stacked cards much longer
+      .to({}, { duration: reducedDuration(8) }) // Shorter hold on mobile
       .to(cardsRef.current, {
         y: "-100%",
         opacity: 0,
         scale: 0.8,
-        duration: 10, // Much slower cards exit
+        duration: reducedDuration(10), // Much faster on mobile
         stagger: {
-          each: 1.5, // Longer delay between each card exit
+          each: reducedDuration(1.5), // Faster stagger on mobile
           from: "end"
         },
-        ease: "power1.inOut" // Gentler easing
+        ease: "power1.inOut"
       })
       .to(finalTextRef.current, {
         opacity: 1,
         y: 0,
-        duration: 6, // Slower final text appearance
+        duration: reducedDuration(6), // Faster text appearance on mobile
         ease: "power1.out"
-      }, "-=4"); // Start text animation earlier in the sequence
+      }, "-=4");
 
-    // Stage 5: Transition to "if you wait" text and warning sequence - MUCH SLOWER
+    // Stage 5: Warning/Success phase - Mobile Optimized
     timeline
-      .to({}, { duration: 6 }) // Hold much longer
+      .to({}, { duration: reducedDuration(6) }) // Shorter hold on mobile
       .to(finalTextRef.current, {
         opacity: 0,
-        y: -50,
-        duration: 5, // Slower fade out
+        y: isMobileDevice ? -20 : -50,
+        duration: reducedDuration(5), // Much faster on mobile
         ease: "power1.inOut"
       })
-      // Flip to front (warning phase)
-      .to([flipTitleRef.current, flipTextRef.current], { rotateY: 0, duration: 0.6, ease: "power2.inOut" })
+      // Flip animation - faster on mobile
+      .to([flipTitleRef.current, flipTextRef.current], { 
+        rotateY: 0, 
+        duration: isMobileDevice ? 0.3 : 0.6, 
+        ease: "power2.inOut" 
+      })
       .to(finalText2Ref.current, {
         opacity: 1,
         y: 0,
-        duration: 6, // Slower appearance
+        duration: reducedDuration(6), // Faster on mobile
         ease: "power1.out"
-      }, "-=3") // Better overlap
+              }, "-=3");
 
-      // FIRST SCROLL: WARNING PHASE - MUCH SLOWER
-
-      // Step 1: Heading appears from right, images fade in
-      .to(centerHeadingRef.current, {
-        opacity: 1,
-        x: 0,
-        duration: 5, // Much slower heading appearance
-        ease: "power2.out"
-      }, "+=3") // Longer delay
-      .to(waitImagesRef.current, {
-        opacity: 0.6,
-        duration: 6, // Slower image fade in
-        ease: "power2.out"
-      }, "<")
+    // Mobile vs Desktop: Different animation complexity
+    if (isMobileDevice) {
+      // Mobile: Simple warning/success text transitions only
+      timeline
+        .to(centerHeadingRef.current, {
+          opacity: 1,
+          x: 0,
+          duration: 0.5, // Very fast on mobile
+          ease: "power2.out"
+        }, "+=0.5")
+        // Quick warning text animations
+        .to(warningRefs.current, {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power2.out"
+        }, "+=0.2")
+        // Quick success transition
+        .to(centerHeadingRef.current, {
+          innerHTML: "If you act now...",
+          duration: 0.1
+        }, "+=1")
+        .to([flipTitleRef.current, flipTextRef.current], { 
+          rotateY: 180, 
+          duration: 0.3, 
+          ease: "power2.inOut" 
+        })
+        .to(warningRefs.current, {
+          opacity: 0,
+          x: -20,
+          duration: 0.4,
+          stagger: 0.1
+        })
+        .to(successRefs.current, {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power2.out"
+        });
+    } else {
+      // Desktop: Full complex animations
+      timeline
+        // Step 1: Heading appears from right, images fade in
+        .to(centerHeadingRef.current, {
+          opacity: 1,
+          x: 0,
+          duration: 5, // Much slower heading appearance  
+          ease: "power2.out"
+        }, "+=3") // Longer delay
+        .to(waitImagesRef.current, {
+          opacity: 0.6,
+          duration: 6, // Slower image fade in
+          ease: "power2.out"
+        }, "<")
 
       // Step 2: Warning text 1 appears, images STAY IN LEFT/RIGHT GRIDS
       .to(warningRefs.current[0], {
@@ -1009,6 +1060,7 @@ function NextGen() {
         duration: 12, // Extremely slow final text appearance
         ease: "power1.out"
       }, "-=3"); // Better overlap timing
+    }
 
     // Remove timeScale since we're using scrub now
     // timeline.timeScale(0.05);
@@ -1759,7 +1811,7 @@ function NextGen() {
         >
           {isMobile ? (
             /* Mobile Card Layout */
-            <div className="relative w-full h-full flex flex-col items-start justify-center space-y-16">
+            <div className="relative w-full h-full flex flex-col items-start justify-center pl-2 pr-16 space-y-16">
               {/* Step 7 Card */}
               <div
                 ref={el => journey3StepsRef.current[0] = el}
@@ -1779,7 +1831,7 @@ function NextGen() {
                 ref={el => journey3StepsRef.current[1] = el}
                 className="w-full max-w-sm bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-[#0ea5e9]/20 -ml-40"
               >
-                <div className="flex items-center">
+                <div className="flex items-center mb-4">
                   <div className="w-12 h-12 bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] rounded-full flex items-center justify-center shadow-lg mr-4">
                     <span className="text-white font-bold text-lg">8</span>
                   </div>
@@ -2053,7 +2105,7 @@ function NextGen() {
           </h2>
         </div>
 
-        {/* Background Wait Images */}
+        {/* Background Wait Images - Desktop Only for Performance */}
         {!isMobile && (
           <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 30 }}>
             {Array.from({ length: 12 }, (_, i) => (
@@ -2073,6 +2125,8 @@ function NextGen() {
                   width={170}
                   height={170}
                   className="w-full h-full object-cover rounded-lg"
+                  loading="lazy"
+                  priority={false}
                 />
               </div>
             ))}
@@ -2140,6 +2194,6 @@ function NextGen() {
       </div>
     </div>
   );
-}
+});
 
 export default NextGen;
