@@ -616,14 +616,14 @@ const AnimatedNavbar = ({
       )}
 
       {/* FloatingNav for Desktop - Shows in non-hero sections */}
-      <div className="hidden md:block">
+      {/* <div className="hidden md:block">
         <FloatingNav
           navItems={navItems}
           className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl"
           onServicesClick={() => setShowServicesOverlay(true)}
           onSolutionsClick={() => setShowSolutionsOverlay(true)}
         />
-      </div>
+      </div> */}
 
       {/* Custom Cursor - Only shows when hovering menu items */}
       <div
@@ -751,7 +751,7 @@ const AnimatedNavbar = ({
       )}
 
       {/* Mobile Scroll Navbar - Only shows on scroll for mobile (remove hamburger from here) */}
-      <nav
+      {/* <nav
         ref={navRef}
         className="fixed top-6 z-40 transition-all duration-300 md:hidden"
         style={{
@@ -765,8 +765,8 @@ const AnimatedNavbar = ({
           boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
         }}
       >
-        {/* Empty for now, could add scroll nav items if needed */}
-      </nav>
+        Empty for now, could add scroll nav items if needed
+      </nav> */}
 
       {/* Fullscreen Menu */}
       <div
