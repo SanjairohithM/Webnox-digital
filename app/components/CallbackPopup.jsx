@@ -1,45 +1,53 @@
 "use client"
 
-import React, { useState, useEffect, useRef } from 'react'
-import { X, Phone, Mail, CheckCircle, AlertCircle } from 'lucide-react'
-import { gsap } from 'gsap'
+import { useState, useEffect, useRef } from "react"
+import { X, Phone, Mail, CheckCircle, AlertCircle, Sparkles } from "lucide-react"
+import { gsap } from "gsap"
 
-// Professional Poppers component using GSAP
-const ProfessionalPoppers = ({ show, onComplete }) => {
+// Enhanced Professional Poppers with more effects
+const EnhancedPoppers = ({ show, onComplete }) => {
   const containerRef = useRef(null)
   const leftPopperRef = useRef(null)
   const rightPopperRef = useRef(null)
+  const sparklesRef = useRef(null)
 
   const colors = [
-    "#FF6B6B", // Red
-    "#4ECDC4", // Teal
-    "#45B7D1", // Blue
-    "#96CEB4", // Green
-    "#FFEAA7", // Yellow
-    "#DDA0DD", // Plum
-    "#FF8A80", // Light Red
-    "#80CBC4", // Light Teal
-    "#90CAF9", // Light Blue
-    "#C8E6C9", // Light Green
-    "#FFF59D", // Light Yellow
-    "#F8BBD9", // Pink
-    "#D1C4E9", // Lavender
-    "#FFCC80", // Orange
-    "#B39DDB", // Purple
-    "#A5D6A7", // Mint
+    "#FF6B6B",
+    "#4ECDC4",
+    "#45B7D1",
+    "#96CEB4",
+    "#FFEAA7",
+    "#DDA0DD",
+    "#FF8A80",
+    "#80CBC4",
+    "#90CAF9",
+    "#C8E6C9",
+    "#FFF59D",
+    "#F8BBD9",
+    "#D1C4E9",
+    "#FFCC80",
+    "#B39DDB",
+    "#A5D6A7",
+    "#FFD700",
+    "#FF69B4",
+    "#00CED1",
+    "#98FB98",
+    "#F0E68C",
+    "#DDA0DD",
+    "#87CEEB",
+    "#F5DEB3",
   ]
 
   const createConfetti = (container, side) => {
-    const confettiCount = 150
+    const confettiCount = 200
     const confettiElements = []
 
     for (let i = 0; i < confettiCount; i++) {
       const confetti = document.createElement("div")
       confetti.className = "confetti-piece"
 
-      // Create torn paper-like shapes
-      const width = Math.random() * 12 + 6
-      const height = Math.random() * 16 + 8
+      const width = Math.random() * 15 + 8
+      const height = Math.random() * 20 + 10
 
       confetti.style.position = "absolute"
       confetti.style.width = width + "px"
@@ -48,25 +56,20 @@ const ProfessionalPoppers = ({ show, onComplete }) => {
       confetti.style.bottom = "0px"
       confetti.style[side] = "20px"
       confetti.style.zIndex = "1000"
+      confetti.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px"
 
-      // Create irregular torn paper shapes using clip-path
+      // Enhanced clip paths for more variety
       const clipPaths = [
         "polygon(0% 0%, 85% 5%, 90% 35%, 95% 70%, 80% 90%, 25% 95%, 10% 60%, 5% 25%)",
         "polygon(5% 0%, 95% 10%, 85% 40%, 100% 75%, 70% 90%, 20% 85%, 0% 50%, 15% 20%)",
         "polygon(10% 5%, 80% 0%, 100% 30%, 90% 65%, 75% 95%, 30% 90%, 5% 70%, 0% 35%)",
-        "polygon(0% 15%, 70% 0%, 95% 25%, 85% 55%, 100% 85%, 40% 95%, 15% 80%, 5% 45%)",
-        "polygon(15% 0%, 90% 15%, 100% 45%, 80% 75%, 85% 100%, 25% 85%, 0% 60%, 10% 25%)",
-        "polygon(5% 10%, 75% 5%, 90% 40%, 95% 70%, 70% 95%, 35% 90%, 10% 65%, 0% 30%)",
-        "polygon(20% 0%, 85% 10%, 100% 35%, 75% 65%, 90% 95%, 30% 85%, 5% 55%, 15% 25%)",
-        "polygon(0% 20%, 65% 0%, 95% 30%, 85% 60%, 100% 90%, 45% 95%, 20% 75%, 10% 40%)",
+        "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
+        "circle(50%)",
+        "polygon(20% 0%, 80% 0%, 100% 60%, 80% 100%, 20% 100%, 0% 60%)",
       ]
 
       confetti.style.clipPath = clipPaths[Math.floor(Math.random() * clipPaths.length)]
-
-      // Add some texture and depth
-      confetti.style.boxShadow = `0 1px 3px rgba(0,0,0,0.2)`
-
-      // Random slight rotation for more natural look
+      confetti.style.boxShadow = `0 2px 8px rgba(0,0,0,0.15)`
       confetti.style.transform = `rotate(${Math.random() * 45 - 22.5}deg)`
 
       container.appendChild(confetti)
@@ -76,61 +79,106 @@ const ProfessionalPoppers = ({ show, onComplete }) => {
     return confettiElements
   }
 
-  const animatePoppers = () => {
-    if (!leftPopperRef.current || !rightPopperRef.current) return
+  const createSparkles = () => {
+    if (!sparklesRef.current) return []
 
-    // Clear previous confetti
+    const sparkleCount = 50
+    const sparkleElements = []
+
+    for (let i = 0; i < sparkleCount; i++) {
+      const sparkle = document.createElement("div")
+      sparkle.innerHTML = "✨"
+      sparkle.style.position = "absolute"
+      sparkle.style.fontSize = Math.random() * 20 + 10 + "px"
+      sparkle.style.left = Math.random() * 100 + "%"
+      sparkle.style.top = Math.random() * 100 + "%"
+      sparkle.style.zIndex = "1001"
+      sparkle.style.pointerEvents = "none"
+
+      sparklesRef.current.appendChild(sparkle)
+      sparkleElements.push(sparkle)
+    }
+
+    return sparkleElements
+  }
+
+  const animatePoppers = () => {
+    if (!leftPopperRef.current || !rightPopperRef.current || !sparklesRef.current) return
+
+    // Clear previous effects
     leftPopperRef.current.innerHTML = ""
     rightPopperRef.current.innerHTML = ""
+    sparklesRef.current.innerHTML = ""
 
-    // Create confetti for both sides
+    // Create confetti and sparkles
     const leftConfetti = createConfetti(leftPopperRef.current, "left")
     const rightConfetti = createConfetti(rightPopperRef.current, "right")
+    const sparkles = createSparkles()
 
-    // Create timeline for left popper
-    const leftTl = gsap.timeline()
+    // Master timeline
+    const masterTl = gsap.timeline()
+
+    // Animate left confetti
     leftConfetti.forEach((confetti, index) => {
-      leftTl.to(
+      masterTl.to(
         confetti,
         {
-          x: Math.random() * 400 + 100,
-          y: -(Math.random() * 500 + 300),
-          rotation: Math.random() * 720 - 360,
-          scale: Math.random() * 0.8 + 0.2,
+          x: Math.random() * 500 + 150,
+          y: -(Math.random() * 600 + 400),
+          rotation: Math.random() * 1080 - 540,
+          scale: Math.random() * 1.2 + 0.3,
           opacity: 0,
-          duration: Math.random() * 2 + 1,
-          ease: "power2.out",
-          delay: Math.random() * 0.3,
+          duration: Math.random() * 3 + 2,
+          ease: "power3.out",
+          delay: Math.random() * 0.5,
         },
-        index * 0.005,
+        index * 0.003,
       )
     })
 
-    // Create timeline for right popper
-    const rightTl = gsap.timeline()
+    // Animate right confetti
     rightConfetti.forEach((confetti, index) => {
-      rightTl.to(
+      masterTl.to(
         confetti,
         {
-          x: -(Math.random() * 400 + 100),
-          y: -(Math.random() * 500 + 300),
-          rotation: Math.random() * 720 - 360,
-          scale: Math.random() * 0.8 + 0.2,
+          x: -(Math.random() * 500 + 150),
+          y: -(Math.random() * 600 + 400),
+          rotation: Math.random() * 1080 - 540,
+          scale: Math.random() * 1.2 + 0.3,
           opacity: 0,
-          duration: Math.random() * 2 + 1,
-          ease: "power2.out",
-          delay: Math.random() * 0.3,
+          duration: Math.random() * 3 + 2,
+          ease: "power3.out",
+          delay: Math.random() * 0.5,
         },
-        index * 0.005,
+        index * 0.003,
       )
     })
 
-    // Cleanup after animation
+    // Animate sparkles
+    sparkles.forEach((sparkle, index) => {
+      masterTl.to(
+        sparkle,
+        {
+          y: -Math.random() * 300 - 100,
+          x: (Math.random() - 0.5) * 200,
+          rotation: Math.random() * 360,
+          scale: 0,
+          opacity: 0,
+          duration: Math.random() * 2 + 1.5,
+          ease: "power2.out",
+          delay: Math.random() * 0.8,
+        },
+        index * 0.02,
+      )
+    })
+
+    // Cleanup
     setTimeout(() => {
       leftConfetti.forEach((confetti) => confetti.remove())
       rightConfetti.forEach((confetti) => confetti.remove())
+      sparkles.forEach((sparkle) => sparkle.remove())
       onComplete()
-    }, 3000)
+    }, 4000)
   }
 
   useEffect(() => {
@@ -143,54 +191,105 @@ const ProfessionalPoppers = ({ show, onComplete }) => {
 
   return (
     <div ref={containerRef} className="fixed inset-0 pointer-events-none overflow-hidden z-[120]">
-      {/* Left Popper */}
       <div ref={leftPopperRef} className="absolute bottom-0 left-0 w-20 h-20" />
-      
-      {/* Right Popper */}
       <div ref={rightPopperRef} className="absolute bottom-0 right-0 w-20 h-20" />
+      <div ref={sparklesRef} className="absolute inset-0" />
     </div>
   )
 }
 
-// Toast Component
-const Toast = ({ show, message, type = 'success', onClose }) => {
+// Enhanced Toast Component
+const EnhancedToast = ({ show, message, type = "success", onClose }) => {
+  const toastRef = useRef(null)
+
   useEffect(() => {
-    if (show) {
+    if (show && toastRef.current) {
+      gsap.fromTo(
+        toastRef.current,
+        {
+          y: -100,
+          opacity: 0,
+          scale: 0.8,
+          rotationX: -90,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          rotationX: 0,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+        },
+      )
+
       const timer = setTimeout(() => {
-        onClose()
-      }, 4000) // Auto dismiss after 4 seconds
+        if (toastRef.current) {
+          gsap.to(toastRef.current, {
+            y: -100,
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.4,
+            ease: "power2.in",
+            onComplete: onClose,
+          })
+        }
+      }, 4000)
+
       return () => clearTimeout(timer)
     }
   }, [show, onClose])
 
   if (!show) return null
 
-  const isSuccess = type === 'success'
+  const isSuccess = type === "success"
 
   return (
-    <div className="fixed top-4 right-4 z-[130] animate-in slide-in-from-top-2 duration-300">
-      <div className={`bg-white border rounded-lg shadow-lg p-4 max-w-sm ${
-        isSuccess ? 'border-green-200' : 'border-red-200'
-      }`}>
-        <div className="flex items-start gap-3">
-          {isSuccess ? (
-            <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-          ) : (
-            <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-          )}
-          <div className="flex-1">
-            <p className="text-sm font-medium text-gray-900 mb-1">
-              {isSuccess ? 'Success! 🎉' : 'Error'}
-            </p>
-            <p className="text-xs text-gray-600 leading-relaxed">
-              {message}
-            </p>
+    <div className="fixed top-6 right-6 z-[130]">
+      <div
+        ref={toastRef}
+        className={`relative overflow-hidden rounded-2xl shadow-2xl p-6 max-w-sm backdrop-blur-xl ${
+          isSuccess
+            ? "bg-gradient-to-r from-green-50/90 to-emerald-50/90 border border-green-200/50"
+            : "bg-gradient-to-r from-red-50/90 to-rose-50/90 border border-red-200/50"
+        }`}
+      >
+        {/* Animated background gradient */}
+        <div
+          className={`absolute inset-0 opacity-20 ${
+            isSuccess ? "bg-gradient-to-br from-green-400 to-emerald-600" : "bg-gradient-to-br from-red-400 to-rose-600"
+          }`}
+        />
+
+        <div className="relative flex items-start gap-4">
+          <div className={`p-2 rounded-full ${isSuccess ? "bg-green-100" : "bg-red-100"}`}>
+            {isSuccess ? (
+              <CheckCircle className="w-6 h-6 text-green-600" />
+            ) : (
+              <AlertCircle className="w-6 h-6 text-red-600" />
+            )}
           </div>
+
+          <div className="flex-1">
+            <p className="text-lg font-bold text-gray-900 mb-2">
+              {isSuccess ? "Success! 🎉" : "Oops! Something went wrong"}
+            </p>
+            <p className="text-sm text-gray-700 leading-relaxed">{message}</p>
+          </div>
+
           <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            onClick={() => {
+              gsap.to(toastRef.current, {
+                y: -100,
+                opacity: 0,
+                scale: 0.8,
+                duration: 0.3,
+                ease: "power2.in",
+                onComplete: onClose,
+              })
+            }}
+            className="text-gray-500 hover:text-gray-700 transition-colors p-1 rounded-full hover:bg-white/50"
           >
-            <X size={16} />
+            <X size={18} />
           </button>
         </div>
       </div>
@@ -198,69 +297,174 @@ const Toast = ({ show, message, type = 'success', onClose }) => {
   )
 }
 
-export default function CallbackPopup({ isOpen, onClose }) {
-  const [email, setEmail] = useState('')
+export default function AdvancedCallbackPopup({ isOpen, onClose }) {
+  const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
   const [showToast, setShowToast] = useState(false)
-  const [toastMessage, setToastMessage] = useState('')
-  const [toastType, setToastType] = useState('success')
+  const [toastMessage, setToastMessage] = useState("")
+  const [toastType, setToastType] = useState("success")
+
+  const popupRef = useRef(null)
+  const overlayRef = useRef(null)
+  const headerRef = useRef(null)
+  const formRef = useRef(null)
+  const buttonRef = useRef(null)
+
+  // Enhanced popup animations
+  useEffect(() => {
+    if (isOpen && popupRef.current && overlayRef.current) {
+      // Animate overlay
+      gsap.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" })
+
+      // Animate popup with more sophisticated entrance
+      gsap.fromTo(
+        popupRef.current,
+        {
+          scale: 0.7,
+          opacity: 0,
+          y: 50,
+          rotationX: -15,
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+        },
+      )
+
+      // Stagger animate content
+      const tl = gsap.timeline({ delay: 0.2 })
+      tl.fromTo(
+        headerRef.current?.children || [],
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" },
+      ).fromTo(
+        formRef.current?.children || [],
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.4, stagger: 0.05, ease: "power2.out" },
+        "-=0.2",
+      )
+    }
+  }, [isOpen])
+
+  // Button hover animations
+  useEffect(() => {
+    if (buttonRef.current) {
+      const button = buttonRef.current
+
+      const handleMouseEnter = () => {
+        gsap.to(button, {
+          scale: 1.02,
+          y: -2,
+          duration: 0.2,
+          ease: "power2.out",
+        })
+      }
+
+      const handleMouseLeave = () => {
+        gsap.to(button, {
+          scale: 1,
+          y: 0,
+          duration: 0.2,
+          ease: "power2.out",
+        })
+      }
+
+      button.addEventListener("mouseenter", handleMouseEnter)
+      button.addEventListener("mouseleave", handleMouseLeave)
+
+      return () => {
+        button.removeEventListener("mouseenter", handleMouseEnter)
+        button.removeEventListener("mouseleave", handleMouseLeave)
+      }
+    }
+  }, [isOpen])
+
+  const handleClose = () => {
+    if (popupRef.current && overlayRef.current) {
+      gsap.to(popupRef.current, {
+        scale: 0.8,
+        opacity: 0,
+        y: 30,
+        duration: 0.3,
+        ease: "power2.in",
+      })
+
+      gsap.to(overlayRef.current, {
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: onClose,
+      })
+    } else {
+      onClose()
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!email.trim()) return
-    
-    // Basic email validation
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
-      setToastMessage('Please enter a valid email address.')
-      setToastType('error')
+      setToastMessage("Please enter a valid email address.")
+      setToastType("error")
       setShowToast(true)
       return
     }
-    
+
     setIsSubmitting(true)
-    
+
+    // Animate button during submission
+    if (buttonRef.current) {
+      gsap.to(buttonRef.current, {
+        scale: 0.98,
+        duration: 0.1,
+        yoyo: true,
+        repeat: 1,
+      })
+    }
+
     try {
-      // You can integrate with your existing contact API
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: 'Email Callback Request',
-          contactNumber: 'N/A',
-          enquiry: 'Requested a callback via email',
-          email: email
+          name: "Email Callback Request",
+          contactNumber: "N/A",
+          enquiry: "Requested a callback via email",
+          email: email,
         }),
       })
 
       if (response.ok) {
-        // Trigger confetti effect
         setShowConfetti(true)
-        
-        // Show toast after confetti completes
+
         setTimeout(() => {
-          setToastMessage('Callback request submitted! We\'ll contact you shortly.')
-          setToastType('success')
+          setToastMessage("Callback request submitted! We'll contact you shortly.")
+          setToastType("success")
           setShowToast(true)
-          setEmail('')
-          
-          // Close popup after showing toast
+          setEmail("")
+
           setTimeout(() => {
-            onClose()
-          }, 1000)
-        }, 2000) // Wait for confetti to be visible
+            handleClose()
+          }, 1500)
+        }, 2000)
       } else {
-        setToastMessage('Failed to submit request. Please try again.')
-        setToastType('error')
+        setToastMessage("Failed to submit request. Please try again.")
+        setToastType("error")
         setShowToast(true)
       }
     } catch (error) {
-      console.error('Error submitting callback request:', error)
-      setToastMessage('Network error. Please check your connection and try again.')
-      setToastType('error')
+      console.error("Error submitting callback request:", error)
+      setToastMessage("Network error. Please check your connection and try again.")
+      setToastType("error")
       setShowToast(true)
     } finally {
       setIsSubmitting(false)
@@ -271,102 +475,124 @@ export default function CallbackPopup({ isOpen, onClose }) {
 
   return (
     <>
-      {/* Professional Poppers Effect */}
-      <ProfessionalPoppers 
-        show={showConfetti} 
-        onComplete={() => setShowConfetti(false)} 
-      />
-      
-      <div 
-        className="fixed inset-0 z-[110] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
-        onClick={onClose}
+      <EnhancedPoppers show={showConfetti} onComplete={() => setShowConfetti(false)} />
+
+      <div
+        ref={overlayRef}
+        className="fixed inset-0 z-[110] bg-gradient-to-br from-black/60 via-purple-900/20 to-black/60 backdrop-blur-md flex items-center justify-center p-4"
+        onClick={handleClose}
       >
-      <div 
-        className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative animate-in zoom-in-95 duration-300"
-        onClick={e => e.stopPropagation()}
-      >
-        {/* Close Button */}
-        <button 
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-200" 
-          onClick={onClose}
+        <div
+          ref={popupRef}
+          className="relative bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl max-w-lg w-full p-8 border border-white/20 overflow-hidden"
+          onClick={(e) => e.stopPropagation()}
         >
-          <X size={20} />
-        </button>
+          {/* Animated background elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-pink-400/20 to-orange-600/20 rounded-full blur-2xl" />
 
-        {/* Header */}
-        <div className="mb-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-2">
-            Looking for something specific?
-          </h2>
-          <p className="text-lg font-semibold text-blue-600">
-            We're just a call away.
-          </p>
-        </div>
+          {/* Close Button */}
+          <button
+            className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-all duration-200 p-2 rounded-full hover:bg-gray-100/50 hover:scale-110"
+            onClick={handleClose}
+          >
+            <X size={22} />
+          </button>
 
-        {/* Subtitle */}
-        <p className="text-gray-600 text-sm mb-6">
-          Share your Email to get a call-back.
-        </p>
-
-        {/* Form */}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email address"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-              required
-            />
+          {/* Header */}
+          <div ref={headerRef} className="mb-8 relative">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-lg">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                  Looking for something specific?
+                </h2>
+                <p className="text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  We're just a call away.
+                </p>
+              </div>
+            </div>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Share your email to get a personalized callback from our experts.
+            </p>
           </div>
 
-          {/* Call Back Button */}
-          <button
-            type="submit"
-            disabled={!email.trim() || isSubmitting}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 mb-4"
-          >
-            <Mail size={16} />
-            {isSubmitting ? 'Submitting...' : 'Contact me back'}
-          </button>
-        </form>
+          {/* Form */}
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Mail className="h-5 w-5 text-gray-400" />
+              </div>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm text-sm font-medium"
+                required
+              />
+            </div>
 
-        {/* Security Text */}
-        <p className="text-xs text-gray-500 text-center mb-4">
-          Rest assured your details are secure with us
-        </p>
+            <button
+              ref={buttonRef}
+              type="submit"
+              disabled={!email.trim() || isSubmitting}
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl disabled:cursor-not-allowed relative overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+              <Mail size={18} />
+              {isSubmitting ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Submitting...
+                </div>
+              ) : (
+                "Contact me back"
+              )}
+            </button>
 
-        {/* Additional Options */}
-        <div className="space-y-2 text-center">
-          <p className="text-sm text-gray-600">
-            Have a custom requirement?{' '}
-            <a href="/contact" className="text-blue-600 hover:underline">
-              Write to us
-            </a>
-          </p>
-          <p className="text-sm text-gray-600">
-            In a hurry?{' '}
-            <a href="tel:+91 97865 57739" className="text-blue-600 hover:underline">
-              Call us now +91 97865 57739
-            </a>
-          </p>
+            {/* Security Badge */}
+            <div className="flex items-center justify-center gap-2 text-xs text-gray-500 bg-gray-50/50 rounded-xl p-3">
+              <div className="w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                <div className="w-2 h-2 bg-white rounded-full" />
+              </div>
+              Rest assured your details are secure with us
+            </div>
+
+            {/* Additional Options */}
+            <div className="space-y-3 pt-4 border-t border-gray-100">
+              <div className="text-center">
+                <p className="text-sm text-gray-600 mb-3">
+                  Have a custom requirement?{" "}
+                  <a
+                    href="/contact"
+                    className="text-blue-600 hover:text-blue-700 font-medium hover:underline transition-colors"
+                  >
+                    Write to us
+                  </a>
+                </p>
+                <p className="text-sm text-gray-600">
+                  In a hurry?{" "}
+                  <a
+                    href="tel:+919786557739"
+                    className="text-blue-600 hover:text-blue-700 font-medium hover:underline transition-colors inline-flex items-center gap-1"
+                  >
+                    <Phone size={14} />
+                    Call us now +91 97865 57739
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            {/* Disclaimer */}
+            <p className="text-xs text-gray-400 text-center pt-2">*We'll respond to your email within 24 hours</p>
+          </form>
         </div>
-
-        {/* Disclaimer */}
-        <p className="text-xs text-gray-400 text-center mt-4">
-          *We'll respond to your email within 24 hours
-        </p>
       </div>
-    </div>
 
-    {/* Toast Notification */}
-    <Toast 
-      show={showToast} 
-      message={toastMessage}
-      type={toastType}
-      onClose={() => setShowToast(false)} 
-    />
+      <EnhancedToast show={showToast} message={toastMessage} type={toastType} onClose={() => setShowToast(false)} />
     </>
   )
-} 
+}
