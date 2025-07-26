@@ -114,7 +114,10 @@ const ApproachSection = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set([titleRef.current], { opacity: 0, y: 30 })
-      gsap.set(cardsRef.current, { opacity: 0, y: 40 })
+      
+      // Set initial positions for cards - first 3 from right, last 3 from left
+      gsap.set(cardsRef.current.slice(0, 3), { opacity: 0, x: 100 }) // First 3 from right
+      gsap.set(cardsRef.current.slice(3, 6), { opacity: 0, x: -100 }) // Last 3 from left
       
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -124,8 +127,9 @@ const ApproachSection = () => {
       })
       
       tl
-        .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .to(cardsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.4")
+        .to(titleRef.current, { opacity: 1, y: 0, duration: 2.5, ease: "power2.out" })
+        .to(cardsRef.current.slice(0, 3), { opacity: 1, x: 0, duration: 2.0, stagger: 0.6, ease: "power2.out" }, "-=1.5")
+        .to(cardsRef.current.slice(3, 6), { opacity: 1, x: 0, duration: 2.0, stagger: 0.6, ease: "power2.out" }, "-=1.0")
     }, sectionRef)
     return () => ctx.revert()
   }, [])

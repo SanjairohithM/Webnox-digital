@@ -409,8 +409,16 @@ const ApproachSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Initial setup - hide everything
       gsap.set([subtitleRef.current, titleRef.current], { opacity: 0, y: 30 })
-      gsap.set(cardsRef.current, { opacity: 0, y: 40 })
+      
+      // Set initial positions for cards based on their grid position
+      gsap.set(cardsRef.current[0], { opacity: 0, x: -200 }) // Card 1 (first column) - from left
+      gsap.set(cardsRef.current[1], { opacity: 0, y: 100 })  // Card 2 (second column) - from bottom
+      gsap.set(cardsRef.current[2], { opacity: 0, x: 200 })  // Card 3 (third column) - from right
+      gsap.set(cardsRef.current[3], { opacity: 0, x: -200 }) // Card 4 (first column) - from left
+      gsap.set(cardsRef.current[4], { opacity: 0, y: 100 })  // Card 5 (second column) - from bottom
+      gsap.set(cardsRef.current[5], { opacity: 0, x: 200 })  // Card 6 (third column) - from right
       
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -421,7 +429,27 @@ const ApproachSection = () => {
       
       tl.to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
         .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
-        .to(cardsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.4")
+        // Animate first column cards (1 & 4) together from left
+        .to([cardsRef.current[0], cardsRef.current[3]], { 
+          opacity: 1, 
+          x: 0, 
+          duration: 1, 
+          ease: "power2.out" 
+        }, "-=0.4") // Cards 1 & 4 from left
+        // Animate second column cards (2 & 5) together from bottom
+        .to([cardsRef.current[1], cardsRef.current[4]], { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.8, 
+          ease: "power2.out" 
+        }, "-=0.3") // Cards 2 & 5 from bottom
+        // Animate third column cards (3 & 6) together from right
+        .to([cardsRef.current[2], cardsRef.current[5]], { 
+          opacity: 1, 
+          x: 0, 
+          duration: 1, 
+          ease: "power2.out" 
+        }, "-=0.3") // Cards 3 & 6 from right
     }, sectionRef)
     return () => ctx.revert()
   }, [])
