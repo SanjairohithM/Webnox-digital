@@ -385,24 +385,8 @@ export default function AdvancedCallbackPopup({ isOpen, onClose }) {
   }, [isOpen])
 
   const handleClose = () => {
-    if (popupRef.current && overlayRef.current) {
-      gsap.to(popupRef.current, {
-        scale: 0.8,
-        opacity: 0,
-        y: 30,
-        duration: 0.3,
-        ease: "power2.in",
-      })
-
-      gsap.to(overlayRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in",
-        onComplete: onClose,
-      })
-    } else {
-      onClose()
-    }
+    console.log("Close button clicked") // Debug log
+    onClose() // Direct close without animation for testing
   }
 
   const handleSubmit = async (e) => {
@@ -493,8 +477,13 @@ export default function AdvancedCallbackPopup({ isOpen, onClose }) {
 
           {/* Close Button */}
           <button
-            className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-all duration-200 p-2 rounded-full hover:bg-gray-100/50 hover:scale-110"
-            onClick={handleClose}
+            className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-all duration-200 p-2 rounded-full hover:bg-gray-100/50 hover:scale-110 z-50"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              console.log("X button clicked")
+              handleClose()
+            }}
           >
             <X size={22} />
           </button>

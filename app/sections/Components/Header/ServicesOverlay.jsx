@@ -5,49 +5,49 @@ import Link from "next/link";
 const services = [
   {
     title: "IT Consulting",
-    description: "Empowering your digital growth with tailored IT strategies, systems integration, and scalable solutions. Drive innovation through secure, future-ready tech infrastructure.",
+    description: "Empowering your digital growth with tailored IT strategies, systems integration, and scalable solutions. ",
     image: "/images/service7.webp",
     href: "/consulting"
   },
   {
     title: "AI Automation",
-    description: "Streamline operations and improve decision-making with advanced AI workflows and intelligent process automation—built for real-time performance and ROI-driven outcomes.         ",
+    description: "Streamline operations and improve decision-making with advanced AI workflows . ",
     image: "/images/service6.webp",
     href: "/aiautomation"
   },
   {
     title: "Data Analytics",
-    description: "Unlock actionable insights using predictive analytics, business intelligence dashboards, and real-time data pipelines that support faster, smarter decisions.",
+    description: "Unlock actionable insights using predictive analytics, business intelligence dashboards",
     image: "/images/service6.webp",
     href: "/analysis"
   },
   {
     title: "Next gen marketing",
-    description: "Leverage AI-powered targeting, automation, and omnichannel strategies to elevate customer engagement and scale brand visibility in a competitive digital space.",
+    description: "Leverage AI-powered targeting, automation, and omnichannel strategies to elevate customer engagement .",
     image: "/images/service5.webp",
     href: "/services"
   },
   {
     title: "Emerging Tech",
-    description: "Stay ahead of the curve with cutting-edge technologies including Web3, blockchain, AR/VR, and IoT—developed with scalability and real-world impact in mind.",
+    description: "Web3, blockchain, AR/VR, and IoT for real-world impact.",
     image: "/images/service4.webp",
     href: "/services"
   },
   {
     title: "Out Sourcing",
-    description: "Accelerate growth with flexible, cost-efficient outsourcing models across development, customer support, and back-office operations—powered by global delivery expertise.",
+    description: "Flexible, cost-effective outsourcing for dev, support, and ops.",
     image: "/images/service3.webp",
     href: "/outsourcing"
   },
   {
     title: "N8N workflow",
-    description: "Boost productivity with no-code automation using N8N—seamlessly connect APIs, databases, and cloud tools to optimize internal workflows and integrations.",
+    description: "No-code automation with N8N for seamless integrations.",
     image: "/images/service2.webp",
     href: "/services"
   },
   {
     title: "customer experience",
-    description: "Deliver consistent, intelligent, and personalized user experiences powered by AI, analytics, and design thinking—built to boost retention and brand loyalty.",
+    description: "AI-powered, personalized user experiences to boost loyalty.",
     image: "/images/service1.webp",
     href: "/services"
   }
@@ -55,7 +55,7 @@ const services = [
 
 export default function ServicesOverlay({ onClose }) {
   return (
-    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center " onClick={onClose}>
+    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center font-sans" onClick={onClose}>
       <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-[90vw] w-full md:max-w-7xl xl:max-w-[1200px] mx-auto relative" onClick={e => e.stopPropagation()}>
         {/* Close Button */}
         <button 

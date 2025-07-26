@@ -206,7 +206,7 @@ function LetsConnect() {
       </div>
 
       <div className="relative z-30 flex flex-col items-center text-center space-y-8 max-w-xl w-full">
-        <p ref={subtitleRef} className="text-lg text-gray-700 opacity-0">
+        <p ref={subtitleRef} className="text-lg text-gray-700 opacity-0 font-sans">
           Tell About Yourself
         </p>
         
@@ -222,7 +222,7 @@ function LetsConnect() {
           ))}
         </div>
 
-        <h1 ref={titleRef} className="text-4xl sm:text-5xl font-bold text-gray-900 opacity-0">
+        <h1 ref={titleRef} className="text-4xl sm:text-5xl font-bold text-gray-900 opacity-0 font-sans">
           {currentStepData.title}
         </h1>
         
@@ -232,7 +232,7 @@ function LetsConnect() {
               <textarea
                 placeholder={currentStepData.placeholder}
                 rows="4"
-                className="w-full p-4 text-lg rounded-2xl border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400 resize-none"
+                className="w-full p-4 text-lg rounded-2xl border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400 resize-none font-sans"
                 name={currentStepData.field}
                 value={formData[currentStepData.field]}
                 onChange={handleInputChange}
@@ -242,7 +242,7 @@ function LetsConnect() {
           <input
                 type={currentStepData.type}
                 placeholder={currentStepData.placeholder}
-            className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400"
+            className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400 font-sans"
                 name={currentStepData.field}
                 value={formData[currentStepData.field]}
                 onChange={handleInputChange}

@@ -616,14 +616,14 @@ const AnimatedNavbar = ({
       )}
 
       {/* FloatingNav for Desktop - Shows in non-hero sections */}
-      {/* <div className="hidden md:block">
+      <div className="hidden md:block">
         <FloatingNav
           navItems={navItems}
           className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl"
           onServicesClick={() => setShowServicesOverlay(true)}
           onSolutionsClick={() => setShowSolutionsOverlay(true)}
         />
-      </div> */}
+      </div>
 
       {/* Custom Cursor - Only shows when hovering menu items */}
       <div

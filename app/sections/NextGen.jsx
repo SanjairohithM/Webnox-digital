@@ -1191,7 +1191,7 @@ const NextGen = React.memo(function NextGen() {
                     backfaceVisibility: 'hidden'
                   }}
                 >
-                  <div className={`space-y-3 sm:space-y-6 max-w-xl mx-auto px-4 sm:px-8`} style={{ zIndex: 10 }}>
+                  <div className={`space-y-3 sm:space-y-6 max-w-xl mx-auto px-4 sm:px-8 font-sans font-bold`} style={{ zIndex: 10 }}>
                     <div ref={el => warningRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-red-200 bg-white/20 shadow-sm">
                       <CircleX className={`text-red-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
                       <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>Revenue stays stagnant</span>
@@ -1218,7 +1218,7 @@ const NextGen = React.memo(function NextGen() {
                     transform: 'rotateY(180deg)'
                   }}
                 >
-                  <div className={`space-y-3 sm:space-y-6 max-w-xl mx-auto px-4 sm:px-8`} style={{ zIndex: 10 }}>
+                  <div className={`space-y-3 sm:space-y-6 max-w-xl mx-auto px-4 sm:px-8 font-sans font-bold`} style={{ zIndex: 10 }}>
                     <div ref={el => successRefs.current[0] = el} className="flex items-center justify-start opacity-0 backdrop-blur-sm rounded-lg py-2 sm:py-3 px-3 sm:px-4 border-2 border-green-200 bg-white/20 shadow-sm">
                       <CircleCheck className={`text-green-500 ${isMobile ? 'w-5 h-5 mr-2' : 'w-7 h-7 mr-4'}`} strokeWidth={2.5} />
                       <span className={`${isMobile ? 'text-sm' : 'text-lg'} warning-success-text`}>Smart AI Integration</span>
@@ -1247,7 +1247,7 @@ const NextGen = React.memo(function NextGen() {
           className="absolute text-center text-black"
           style={{ zIndex: 25 }}
         >
-          <h2 className="text-[52px] font-bold font-urbanist leading-[1.3] mb-4" style={{ fontFamily: 'var(--font-urbanist)' }}>
+          <h2 className="text-[52px] font-bold font-sans leading-[1.3] mb-4" >
             Your digital journey with <span className="text-[#2acbec]">webnox</span>
           </h2>
         </div>

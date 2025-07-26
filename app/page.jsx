@@ -43,6 +43,7 @@ export default function Home() {
   }, [showContent]);
 
   const handleCloseCallbackPopup = () => {
+    console.log("handleCloseCallbackPopup called") // Debug log
     setShowCallbackPopup(false);
   };
 
