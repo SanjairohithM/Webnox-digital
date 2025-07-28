@@ -69,67 +69,139 @@ export default function AutomationServicesSection() {
     }
 
     const ctx = gsap.context(() => {
-      // Set initial states
-      gsap.set([titleRef.current, descriptionRef.current, buttonRef.current], {
-        opacity: 0,
-        y: 30,
-      })
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Complex animations for desktop
+        // Filter out undefined refs before setting
+        const desktopElements = [titleRef.current, descriptionRef.current, buttonRef.current].filter(Boolean)
+        const desktopCards = cardsRef.current ? cardsRef.current.filter(Boolean) : []
+        
+        gsap.set(desktopElements, {
+          opacity: 0,
+          y: 30,
+        })
 
-      gsap.set(cardsRef.current, {
-        opacity: 0,
-        y: 50,
-      })
+        gsap.set(desktopCards, {
+          opacity: 0,
+          y: 50,
+        })
 
-      // Create scroll-triggered timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      })
+        // Create scroll-triggered timeline
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        })
 
-      // Animate header content
-      tl.to(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      })
-        .to(
-          descriptionRef.current,
-          {
+        // Animate header content
+        if (titleRef.current) {
+          tl.to(titleRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          })
+        }
+        if (descriptionRef.current) {
+          tl.to(
+            descriptionRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.4",
+          )
+        }
+        if (buttonRef.current) {
+          tl.to(
+            buttonRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          )
+        }
+
+        // Animate cards with stagger
+        if (desktopCards.length > 0) {
+          tl.to(
+            desktopCards,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+              stagger: 0.1,
+            },
+            "-=0.4",
+          )
+        }
+      } else {
+        // Simple fade animations for mobile
+        // Filter out undefined refs before setting
+        const mobileElements = [titleRef.current, descriptionRef.current, buttonRef.current].filter(Boolean)
+        const mobileCards = cardsRef.current ? cardsRef.current.filter(Boolean) : []
+        
+        gsap.set([...mobileElements, ...mobileCards], {
+          opacity: 0,
+          y: 30,
+        })
+
+        // Create scroll-triggered timeline
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        })
+
+        // Simple fade-in animations for mobile
+        if (titleRef.current) {
+          tl.to(titleRef.current, {
             opacity: 1,
             y: 0,
             duration: 0.6,
             ease: "power2.out",
-          },
-          "-=0.4",
-        )
-        .to(
-          buttonRef.current,
-          {
+          })
+        }
+        if (descriptionRef.current) {
+          tl.to(descriptionRef.current, {
             opacity: 1,
             y: 0,
             duration: 0.6,
             ease: "power2.out",
-          },
-          "-=0.3",
-        )
-
-      // Animate cards with stagger
-      tl.to(
-        cardsRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power2.out",
-          stagger: 0.1,
-        },
-        "-=0.4",
-      )
+          }, "-=0.3")
+        }
+        if (buttonRef.current) {
+          tl.to(buttonRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          }, "-=0.3")
+        }
+        if (mobileCards.length > 0) {
+          tl.to(mobileCards, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: 0.1,
+          }, "-=0.3")
+        }
+      }
     }, sectionRef)
 
     return () => ctx.revert()

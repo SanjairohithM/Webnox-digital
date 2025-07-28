@@ -23,87 +23,141 @@ export default function AIAutomationHero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial states
-      gsap.set([subtitleRef.current, titleRef.current, descriptionRef.current, buttonRef.current], {
-        opacity: 0,
-        y: 30,
-      })
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Complex animations for desktop
+        gsap.set([subtitleRef.current, titleRef.current, descriptionRef.current, buttonRef.current], {
+          opacity: 0,
+          y: 30,
+        })
 
-      gsap.set([imageRef.current, badgeRef.current], {
-        opacity: 0,
-        scale: 0.8,
-      })
+        gsap.set([imageRef.current, badgeRef.current], {
+          opacity: 0,
+          scale: 0.8,
+        })
 
-      // Set initial rotation for the image
-      gsap.set(imageRef.current, {
-        rotation: 360,
-        x: 400,
-        transformOrigin: "center center",
-      })
+        // Set initial rotation for the image
+        gsap.set(imageRef.current, {
+          rotation: 360,
+          x: 400,
+          transformOrigin: "center center",
+        })
 
-      // Create timeline for animations
-      const tl = gsap.timeline({ delay: 0.2 })
+        // Create timeline for animations
+        const tl = gsap.timeline({ delay: 0.2 })
 
-      // Animate left content
-      tl.to(subtitleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      })
-        .to(
-          titleRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.4",
-        )
-        .to(
-          descriptionRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.4",
-        )
-        .to(
-          buttonRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          "-=0.3",
-        )
-
-      // Animate right content with rotation
-      tl.to(
-        imageRef.current,
-        {
+        // Animate left content
+        tl.to(subtitleRef.current, {
           opacity: 1,
-          scale: 1,
-          rotation: 0,
-          x: 0,
-          duration: 2.5,
+          y: 0,
+          duration: 0.6,
           ease: "power2.out",
-        },
-        "-=0.8",
-      ).to(
-        badgeRef.current,
-        {
+        })
+          .to(
+            titleRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.4",
+          )
+          .to(
+            descriptionRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.4",
+          )
+          .to(
+            buttonRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          )
+
+        // Animate right content with rotation
+        tl.to(
+          imageRef.current,
+          {
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            x: 0,
+            duration: 2.5,
+            ease: "power2.out",
+          },
+          "-=0.8",
+        ).to(
+          badgeRef.current,
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.4",
+        )
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([subtitleRef.current, titleRef.current, descriptionRef.current, buttonRef.current, imageRef.current, badgeRef.current], {
+          opacity: 0,
+          y: 30,
+        })
+
+        // Create timeline for animations
+        const tl = gsap.timeline({ delay: 0.2 })
+
+        // Simple fade-in animations for mobile
+        tl.to(subtitleRef.current, {
           opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        })
+        .to(titleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        }, "-=0.3")
+        .to(descriptionRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        }, "-=0.3")
+        .to(buttonRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        }, "-=0.3")
+        .to(imageRef.current, {
+          opacity: 1,
+          y: 0,
           scale: 1,
           duration: 0.6,
-          ease: "back.out(1.7)",
-        },
-        "-=0.4",
-      )
+          ease: "power2.out",
+        }, "-=0.3")
+        .to(badgeRef.current, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: "power2.out",
+        }, "-=0.3")
+      }
     }, containerRef)
 
     return () => ctx.revert()

@@ -21,133 +21,204 @@ export default function OurApproachSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial states
-      gsap.set([titleRef.current, descriptionRef.current, buttonRef.current], {
-        opacity: 0,
-        x: 50,
-      })
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Complex animations for desktop
+        // Filter out undefined refs before setting
+        const desktopElements = [titleRef.current, descriptionRef.current, buttonRef.current].filter(Boolean)
+        
+        gsap.set(desktopElements, {
+          opacity: 0,
+          x: 50,
+        })
 
-      gsap.set(imageRef.current, {
-        opacity: 0,
-        x: -50,
-      })
+        if (imageRef.current) {
+          gsap.set(imageRef.current, {
+            opacity: 0,
+            x: -50,
+          })
+        }
 
-      // Create scroll-triggered timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      })
-
-      // Animate left content (image)
-      tl.to(imageRef.current, {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        ease: "power2.out",
-      })
-
-      // Animate right content
-      tl.to(
-        titleRef.current,
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        "-=0.6",
-      )
-        .to(
-          descriptionRef.current,
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            ease: "power2.out",
+        // Create scroll-triggered timeline
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
           },
-          "-=0.4",
-        )
-        .to(
-          buttonRef.current,
-          {
+        })
+
+        // Animate left content (image)
+        if (imageRef.current) {
+          tl.to(imageRef.current, {
             opacity: 1,
             x: 0,
+            duration: 1,
+            ease: "power2.out",
+          })
+        }
+
+        // Animate right content
+        if (titleRef.current) {
+          tl.to(
+            titleRef.current,
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.6",
+          )
+        }
+        if (descriptionRef.current) {
+          tl.to(
+            descriptionRef.current,
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.4",
+          )
+        }
+        if (buttonRef.current) {
+          tl.to(
+            buttonRef.current,
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.3",
+          )
+        }
+
+        // Animate SVG elements (robot and gear) after image is visible
+        const svgTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: imageRef.current,
+            start: "top 70%",
+            end: "bottom 30%",
+            toggleActions: "play none none reverse",
+          },
+        })
+
+        // Wait for image to load, then animate SVG elements
+        setTimeout(() => {
+          const svgElement = imageRef.current?.querySelector('svg')
+          if (svgElement) {
+            // Target robot elements (common SVG element selectors)
+            const robotElements = svgElement.querySelectorAll('[id*="robot"], [class*="robot"], [id*="bot"], [class*="bot"]')
+            const gearElements = svgElement.querySelectorAll('[id*="gear"], [class*="gear"], [id*="cog"], [class*="cog"]')
+            
+            // Set initial scale for robot and gear elements
+            gsap.set([...robotElements, ...gearElements], {
+              scale: 0.8,
+              transformOrigin: "center center",
+            })
+
+            // Animate robot elements
+            svgTimeline.to(robotElements, {
+              scale: 1.3,
+              duration: 1.2,
+              ease: "elastic.out(1, 0.5)",
+              stagger: 0.1,
+            })
+
+            // Animate gear elements with rotation
+            svgTimeline.to(gearElements, {
+              scale: 1.4,
+              rotation: 360,
+              duration: 1.5,
+              ease: "back.out(1.7)",
+              stagger: 0.15,
+            }, "-=0.8")
+          }
+        }, 500)
+
+        // Add floating animation for robot and gear images
+        const robotImage = imageRef.current?.querySelector('img[src*="aiautorobo"]')
+        const gearImage = imageRef.current?.querySelector('img[src*="aiautogear"]')
+
+        if (robotImage) {
+          gsap.to(robotImage, {
+            y: -25,
+            duration: 2,
+            ease: "power1.inOut",
+            yoyo: true,
+            repeat: -1,
+          })
+        }
+
+        if (gearImage) {
+          gsap.to(gearImage, {
+            y: -20,
+            duration: 2.5,
+            ease: "power1.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 0.5, // Offset timing for different movement
+          })
+        }
+      } else {
+        // Simple fade animations for mobile
+        // Filter out undefined refs before setting
+        const mobileElements = [titleRef.current, descriptionRef.current, buttonRef.current, imageRef.current].filter(Boolean)
+        
+        gsap.set(mobileElements, {
+          opacity: 0,
+          y: 30,
+        })
+
+        // Create scroll-triggered timeline
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        })
+
+        // Simple fade-in animations for mobile
+        if (imageRef.current) {
+          tl.to(imageRef.current, {
+            opacity: 1,
+            y: 0,
             duration: 0.6,
             ease: "power2.out",
-          },
-          "-=0.3",
-        )
-
-      // Animate SVG elements (robot and gear) after image is visible
-      const svgTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: imageRef.current,
-          start: "top 70%",
-          end: "bottom 30%",
-          toggleActions: "play none none reverse",
-        },
-      })
-
-      // Wait for image to load, then animate SVG elements
-      setTimeout(() => {
-        const svgElement = imageRef.current?.querySelector('svg')
-        if (svgElement) {
-          // Target robot elements (common SVG element selectors)
-          const robotElements = svgElement.querySelectorAll('[id*="robot"], [class*="robot"], [id*="bot"], [class*="bot"]')
-          const gearElements = svgElement.querySelectorAll('[id*="gear"], [class*="gear"], [id*="cog"], [class*="cog"]')
-          
-          // Set initial scale for robot and gear elements
-          gsap.set([...robotElements, ...gearElements], {
-            scale: 0.8,
-            transformOrigin: "center center",
           })
-
-          // Animate robot elements
-          svgTimeline.to(robotElements, {
-            scale: 1.3,
-            duration: 1.2,
-            ease: "elastic.out(1, 0.5)",
-            stagger: 0.1,
-          })
-
-          // Animate gear elements with rotation
-          svgTimeline.to(gearElements, {
-            scale: 1.4,
-            rotation: 360,
-            duration: 1.5,
-            ease: "back.out(1.7)",
-            stagger: 0.15,
-          }, "-=0.8")
         }
-      }, 500)
-
-      // Add floating animation for robot and gear images
-      const robotImage = imageRef.current?.querySelector('img[src*="aiautorobo"]')
-      const gearImage = imageRef.current?.querySelector('img[src*="aiautogear"]')
-
-      if (robotImage) {
-        gsap.to(robotImage, {
-          y: -25,
-          duration: 2,
-          ease: "power1.inOut",
-          yoyo: true,
-          repeat: -1,
-        })
-      }
-
-      if (gearImage) {
-        gsap.to(gearImage, {
-          y: -20,
-          duration: 2.5,
-          ease: "power1.inOut",
-          yoyo: true,
-          repeat: -1,
-          delay: 0.5, // Offset timing for different movement
-        })
+        if (titleRef.current) {
+          tl.to(titleRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          }, "-=0.3")
+        }
+        if (descriptionRef.current) {
+          tl.to(descriptionRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          }, "-=0.3")
+        }
+        if (buttonRef.current) {
+          tl.to(buttonRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          }, "-=0.3")
+        }
       }
     }, sectionRef)
 

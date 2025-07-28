@@ -23,129 +23,171 @@ export default function WebnoxDigitalSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial states
-      gsap.set([titleRef.current, descriptionRef.current, imageRef.current], {
-        opacity: 0,
-        y: 50,
-      })
-
-      // Set initial states for layers (show bottom 2 layers, hide top 2)
-      gsap.set(layer4Ref.current, {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        transformOrigin: "center center",
-      })
-
-      gsap.set(layer3Ref.current, {
-        y: -15,
-        opacity: 1,
-        scale: 1,
-        visibility: "visible",
-        transformOrigin: "center center",
-      })
-
-      // Set layer2 (middle) to start from layer4 position (bottom)
-      gsap.set(layer2Ref.current, {
-        y: 0, // Same position as layer4 (bottom)
-        opacity: 0,
-        scale: 0.8,
-        visibility: "hidden",
-        transformOrigin: "center center",
-      })
-
-      // Set layer1 (top) to start from layer2 position (which will be layer4 initially)
-      gsap.set(layer1Ref.current, {
-        y: 0, // Same position as layer4 (bottom) initially
-        opacity: 0,
-        scale: 0.8,
-        visibility: "hidden",
-        transformOrigin: "center center",
-      })
-
-      // Create scroll-triggered timeline for main content
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 60%",
-          end: "bottom 10%",
-          toggleActions: "play none none reverse",
-        },
-      })
-
-      // Animate elements in sequence
-      tl.to(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      })
-        .to(
-          descriptionRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.4",
-        )
-        .to(
-          imageRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power2.out",
-          },
-          "-=0.6",
-        )
-
-      // Create scroll-triggered timeline for layered effect
-      const layerTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 50%",
-          end: "+=30%", // Animation completes in 30% of scroll distance
-          scrub: 1, // Smoother scrubbing
-          toggleActions: "play none none reverse",
-        },
-      })
-
-      // Animate layers to create stacked effect (2 bottom stay together, middle and top have gaps)
-      layerTl
-        .to(layer2Ref.current, {
-          visibility: "visible",
-          opacity: 1,
-          scale: 1,
-          duration: 2,
-          ease: "power3.out",
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Complex animations for desktop
+        // Set initial states
+        gsap.set([titleRef.current, descriptionRef.current, imageRef.current], {
+          opacity: 0,
+          y: 50,
         })
-        .to(
-          layer2Ref.current,
-          {
-            y: -90,
-            duration: 3,
-            ease: "power2.inOut",
-          },
-          "-=1.5"
-        )
-        .to(layer1Ref.current, {
-          visibility: "visible",
+
+        // Set initial states for layers (show bottom 2 layers, hide top 2)
+        gsap.set(layer4Ref.current, {
+          y: 0,
           opacity: 1,
           scale: 1,
-          duration: 2,
-          ease: "power3.out",
-        }, "-=1")
-        .to(
-          layer1Ref.current,
-          {
-            y: -180,
-            duration: 3,
-            ease: "power2.inOut",
+          transformOrigin: "center center",
+        })
+
+        gsap.set(layer3Ref.current, {
+          y: -15,
+          opacity: 1,
+          scale: 1,
+          visibility: "visible",
+          transformOrigin: "center center",
+        })
+
+        // Set layer2 (middle) to start from layer4 position (bottom)
+        gsap.set(layer2Ref.current, {
+          y: 0, // Same position as layer4 (bottom)
+          opacity: 0,
+          scale: 0.8,
+          visibility: "hidden",
+          transformOrigin: "center center",
+        })
+
+        // Set layer1 (top) to start from layer2 position (which will be layer4 initially)
+        gsap.set(layer1Ref.current, {
+          y: 0, // Same position as layer4 (bottom) initially
+          opacity: 0,
+          scale: 0.8,
+          visibility: "hidden",
+          transformOrigin: "center center",
+        })
+
+        // Create scroll-triggered timeline for main content
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+            end: "bottom 10%",
+            toggleActions: "play none none reverse",
           },
-          "-=1.5",
-        )
+        })
+
+        // Animate elements in sequence
+        tl.to(titleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        })
+          .to(
+            descriptionRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.4",
+          )
+          .to(
+            imageRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              ease: "power2.out",
+            },
+            "-=0.6",
+          )
+
+        // Create scroll-triggered timeline for layered effect
+        const layerTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 50%",
+            end: "+=30%", // Animation completes in 30% of scroll distance
+            scrub: 1, // Smoother scrubbing
+            toggleActions: "play none none reverse",
+          },
+        })
+
+        // Animate layers to create stacked effect (2 bottom stay together, middle and top have gaps)
+        layerTl
+          .to(layer2Ref.current, {
+            visibility: "visible",
+            opacity: 1,
+            scale: 1,
+            duration: 2,
+            ease: "power3.out",
+          })
+          .to(
+            layer2Ref.current,
+            {
+              y: -90,
+              duration: 3,
+              ease: "power2.inOut",
+            },
+            "-=1.5"
+          )
+          .to(layer1Ref.current, {
+            visibility: "visible",
+            opacity: 1,
+            scale: 1,
+            duration: 2,
+            ease: "power3.out",
+          }, "-=1")
+          .to(
+            layer1Ref.current,
+            {
+              y: -180,
+              duration: 3,
+              ease: "power2.inOut",
+            },
+            "-=1.5",
+          )
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([titleRef.current, descriptionRef.current, imageRef.current], {
+          opacity: 0,
+          y: 30,
+        })
+
+        // Create scroll-triggered timeline for main content
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        })
+
+        // Simple fade-in animations for mobile
+        tl.to(titleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        })
+        .to(descriptionRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        }, "-=0.3")
+        .to(imageRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        }, "-=0.3")
+      }
     }, sectionRef)
 
     return () => ctx.revert()
