@@ -147,24 +147,24 @@ export default function Component() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="relative z-10 container mx-auto px-8 py-16 lg:py-20">
-        <div className="mb-8"> 
-          <p ref={digitalTextRef} className="text-8xl font-urbanist text-gray-200 font-bold mb-3">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 xl:py-20">
+        <div className="mb-6 sm:mb-8"> 
+          <p ref={digitalTextRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-urbanist text-gray-200 font-bold mb-3">
             <span className="digital-letter">D</span>
-            <span className="digital-letter ml-4">I</span>
-            <span className="digital-letter ml-4">G</span>
-            <span className="digital-letter ml-4">I</span>
-            <span className="digital-letter ml-4">T</span>
-            <span className="digital-letter ml-4">A</span>
-            <span className="digital-letter ml-4">L</span>
+            <span className="digital-letter ml-1 sm:ml-2 md:ml-3 lg:ml-4">I</span>
+            <span className="digital-letter ml-1 sm:ml-2 md:ml-3 lg:ml-4">G</span>
+            <span className="digital-letter ml-1 sm:ml-2 md:ml-3 lg:ml-4">I</span>
+            <span className="digital-letter ml-1 sm:ml-2 md:ml-3 lg:ml-4">T</span>
+            <span className="digital-letter ml-1 sm:ml-2 md:ml-3 lg:ml-4">A</span>
+            <span className="digital-letter ml-1 sm:ml-2 md:ml-3 lg:ml-4">L</span>
           </p>
 
           {/* Header Section - Left Aligned */}
-          <div className="text-left mb-16">
-            <p ref={subtitleRef} className="text-2xl font-urbanist text-gray-600 mb-5">
+          <div className="text-left mb-8 sm:mb-12 lg:mb-16">
+            <p ref={subtitleRef} className="text-lg sm:text-xl lg:text-2xl font-urbanist text-gray-600 mb-3 sm:mb-5">
               Innovative Software Solutions for the
             </p>
-            <h1 ref={titleRef} className="text-6xl font-urbanist font-bold text-[#25C3E5] leading-tight mb-5">
+            <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-urbanist font-bold text-[#25C3E5] leading-tight mb-3 sm:mb-5">
               Next-Gen Digital Transformation
             </h1>
           </div>
@@ -174,63 +174,63 @@ export default function Component() {
 
 
                   {/* 3-Column Grid Layout with Staggered Image Positioning */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 mb-16 min-h-[800px] -mt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 mb-8 sm:mb-12 lg:mb-16 lg:min-h-[800px]">
 
           {/* Left Image with Text - Positioned in CENTER */}
-          <div className="flex flex-col justify-center -mt-40">
-            <div ref={imageText1Ref} className="mb-8">
-              <p className=" text-gray-400 font-urbanist leading-relaxed">
+          <div className="flex flex-col justify-center lg:-mt-40">
+            <div ref={imageText1Ref} className="mb-6 sm:mb-8 order-2 lg:order-1">
+              <p className="text-sm sm:text-base text-gray-400 font-urbanist leading-relaxed">
                 At Webnox Digital, we architect intelligent, scalable, and future-ready digital platforms that enable businesses to thrive in a rapidly evolving digital world. Our approach is rooted in innovation, agility, and deep technological expertise.
               </p>
             </div>
-            <div ref={image1Ref} className="flex justify-center">
-              <div className="relative overflow-hidden rounded-lg shadow-xl w-full max-w-md">
+            <div ref={image1Ref} className="flex justify-center order-1 lg:order-2">
+              <div className="relative overflow-hidden rounded-lg shadow-xl w-full max-w-sm sm:max-w-md">
                 <Image
                   src="/images/aboutimg1.webp"
                   alt="Team collaboration with digital interfaces"
                   width={400}
                   height={300}
-                  className="w-full h-80 object-cover"
+                  className="w-full h-48 sm:h-64 lg:h-80 object-cover"
                 />
               </div>
             </div>
           </div>
 
           {/* Center Image with Text - Positioned at END (BOTTOM) */}
-          <div className="flex flex-col justify-end">
-            <div ref={imageText2Ref} className="mb-8">
-              <p className="text-base text-gray-400 font-urbanist leading-relaxed">
+          <div className="flex flex-col justify-center lg:justify-end">
+            <div ref={imageText2Ref} className="mb-6 sm:mb-8 order-2 lg:order-1">
+              <p className="text-sm sm:text-base text-gray-400 font-urbanist leading-relaxed">
                 We specialize in delivering transformative digital solutions that not only solve complex problems but also create seamless and impactful user experiences.
               </p>
             </div>
-            <div ref={image2Ref} className="flex justify-center">
-              <div className="relative overflow-hidden rounded-lg shadow-xl w-full max-w-md">
+            <div ref={image2Ref} className="flex justify-center order-1 lg:order-2">
+              <div className="relative overflow-hidden rounded-lg shadow-xl w-full max-w-sm sm:max-w-md">
                 <Image
                   src="/images/aboutimg2.webp"
                   alt="Cloud computing visualization"
                   width={400}
                   height={300}
-                  className="w-full h-80 object-cover"
+                  className="w-full h-48 sm:h-64 lg:h-80 object-cover"
                 />
               </div>
             </div>
           </div>
 
           {/* Right Image with Text - Positioned at START (TOP) */}
-          <div className="flex flex-col justify-start -mt-20">
-            <div ref={imageText3Ref} className="mb-8">
-              <p className="text-base text-gray-400 font-urbanist leading-relaxed">
+          <div className="flex flex-col justify-center lg:justify-start lg:-mt-20">
+            <div ref={imageText3Ref} className="mb-6 sm:mb-8 order-2 lg:order-1">
+              <p className="text-sm sm:text-base text-gray-400 font-urbanist leading-relaxed">
                 From custom software and mobile apps to SaaS products and cloud-based platforms, we focus on building solutions that drive efficiency, growth, and competitive advantage.
               </p>
             </div>
-            <div ref={image3Ref} className="flex justify-center">
-              <div className="relative overflow-hidden rounded-lg shadow-xl w-full max-w-md">
+            <div ref={image3Ref} className="flex justify-center order-1 lg:order-2">
+              <div className="relative overflow-hidden rounded-lg shadow-xl w-full max-w-sm sm:max-w-md">
                 <Image
                   src="/images/aboutimg3.webp"
                   alt="Diverse team working together"
                   width={400}
                   height={300}
-                  className="w-full h-80 object-cover"
+                  className="w-full h-48 sm:h-64 lg:h-80 object-cover"
                 />
               </div>
             </div>

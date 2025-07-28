@@ -83,10 +83,10 @@ export default function Component() {
       scrollTrigger: {
         trigger: stickyRef.current,
         start: "top top",
-        end: isMobile ? "+=150%" : "+=400%",
+        end: isMobile ? "+=100%" : "+=400%",
         pin: true,
         pinSpacing: true,
-        scrub: isMobile ? 0.5 : 1,
+        scrub: isMobile ? 0.2 : 1,
         markers: false,
       },
     })
@@ -239,7 +239,7 @@ export default function Component() {
       margin: 0,
       padding: 0,
       borderRadius: 0,
-      duration: isMobile ? 0.6 : 0.8,
+      duration: isMobile ? 0.3 : 0.8,
       ease: "power2.inOut",
       onStart: () => {
         gsap.set(miniRobotContainerRef.current, {
@@ -259,7 +259,7 @@ export default function Component() {
         top: isMobile ? "calc(50% + 10vh)" : "calc(50% + 15vh)",
         xPercent: -50,
         yPercent: -50,
-        duration: isMobile ? 0.6 : 0.8,
+        duration: isMobile ? 0.05 : 0.8,
         ease: "power2.inOut",
       },
       "<",
@@ -394,7 +394,7 @@ export default function Component() {
     // Move robot up and fade in text
     finalStage.to(miniRobotRef.current, {
       top: isMobile ? "calc(40%)" : "calc(35%)",
-      duration: isMobile ? 0.5 : 0.8,
+      duration: isMobile ? 0.2 : 0.8,
       ease: "power2.inOut",
     })
 
@@ -406,10 +406,10 @@ export default function Component() {
         top: isMobile ? "55%" : "50%",
         left: isMobile ? "50%" : "45%",
         xPercent: -50,
-        duration: isMobile ? 0.4 : 0.6,
+        duration: isMobile ? 0.2 : 0.6,
         ease: "power2.out",
       },
-      "-=0.4",
+      "-=0.1",
     )
 
     timeline.add(finalStage)
@@ -534,7 +534,7 @@ export default function Component() {
       timeline.add(shrinkTextStage)
     } else {
       // On mobile, add a shorter pause after the final text
-      timeline.to({}, { duration: 0.5 })
+      timeline.to({}, { duration: 0.1 })
     }
 
     return () => {

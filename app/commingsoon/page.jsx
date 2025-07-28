@@ -250,21 +250,24 @@ export default function ComingSoonPage() {
 
       {/* Theater Curtains - Enhanced */}
       <div ref={curtainTopRef} className="absolute top-0 left-0 w-full h-1/2 z-10">
-        <div className="w-full h-full bg-gradient-to-b from-red-800 via-red-900 to-red-950 relative overflow-hidden">
+        <div className="w-full h-full relative overflow-hidden" style={{background: `linear-gradient(to bottom, #2acbec, #20a8c7, #1a8ba3)`}}>
           {/* Enhanced Curtain Texture */}
           <div className="absolute inset-0 opacity-40">
             {[...Array(25)].map((_, i) => (
               <div
                 key={i}
-                className="absolute w-full h-1 bg-gradient-to-r from-transparent via-red-400/60 to-transparent"
-                style={{ top: `${i * 4}%` }}
+                className="absolute w-full h-1"
+                style={{ 
+                  top: `${i * 4}%`,
+                  background: `linear-gradient(to right, transparent, rgba(42, 203, 236, 0.6), transparent)`
+                }}
               ></div>
             ))}
           </div>
           {/* Velvet Texture */}
-          <div className="absolute inset-0 bg-gradient-to-br from-red-700/30 to-red-950/30"></div>
+          <div className="absolute inset-0" style={{background: `linear-gradient(to bottom right, rgba(42, 203, 236, 0.3), rgba(26, 139, 163, 0.3))`}}></div>
           {/* Curtain Bottom Edge */}
-          <div className="absolute bottom-0 w-full h-6 bg-gradient-to-b from-red-900 to-red-950 shadow-2xl"></div>
+          <div className="absolute bottom-0 w-full h-6 shadow-2xl" style={{background: `linear-gradient(to bottom, #1a8ba3, #156b7a)`}}></div>
           {/* Enhanced Decorative Elements */}
           <div className="absolute bottom-0 left-1/4 w-3 h-12 bg-gradient-to-b from-yellow-500 to-yellow-700 rounded-b-full shadow-lg"></div>
           <div className="absolute bottom-0 right-1/4 w-3 h-12 bg-gradient-to-b from-yellow-500 to-yellow-700 rounded-b-full shadow-lg"></div>
@@ -273,21 +276,24 @@ export default function ComingSoonPage() {
       </div>
 
       <div ref={curtainBottomRef} className="absolute bottom-0 left-0 w-full h-1/2 z-10">
-        <div className="w-full h-full bg-gradient-to-t from-red-800 via-red-900 to-red-950 relative overflow-hidden">
+        <div className="w-full h-full relative overflow-hidden" style={{background: `linear-gradient(to top, #2acbec, #20a8c7, #1a8ba3)`}}>
           {/* Enhanced Curtain Texture */}
           <div className="absolute inset-0 opacity-40">
             {[...Array(25)].map((_, i) => (
               <div
                 key={i}
-                className="absolute w-full h-1 bg-gradient-to-r from-transparent via-red-400/60 to-transparent"
-                style={{ top: `${i * 4}%` }}
+                className="absolute w-full h-1"
+                style={{ 
+                  top: `${i * 4}%`,
+                  background: `linear-gradient(to right, transparent, rgba(42, 203, 236, 0.6), transparent)`
+                }}
               ></div>
             ))}
           </div>
           {/* Velvet Texture */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-red-700/30 to-red-950/30"></div>
+          <div className="absolute inset-0" style={{background: `linear-gradient(to top right, rgba(42, 203, 236, 0.3), rgba(26, 139, 163, 0.3))`}}></div>
           {/* Curtain Top Edge */}
-          <div className="absolute top-0 w-full h-6 bg-gradient-to-t from-red-900 to-red-950 shadow-2xl"></div>
+          <div className="absolute top-0 w-full h-6 shadow-2xl" style={{background: `linear-gradient(to top, #1a8ba3, #156b7a)`}}></div>
           {/* Enhanced Decorative Elements */}
           <div className="absolute top-0 left-1/4 w-3 h-12 bg-gradient-to-t from-yellow-500 to-yellow-700 rounded-t-full shadow-lg"></div>
           <div className="absolute top-0 right-1/4 w-3 h-12 bg-gradient-to-t from-yellow-500 to-yellow-700 rounded-t-full shadow-lg"></div>
