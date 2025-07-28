@@ -34,88 +34,119 @@ const HeroSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 40 })
-      gsap.set([icon1Ref.current, icon2Ref.current, icon3Ref.current, icon4Ref.current, icon5Ref.current, icon6Ref.current, icon7Ref.current, icon8Ref.current], { 
-        opacity: 0, 
-        scale: 0,
-        x: 0,
-        y: 0
-      })
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
       
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top 80%",
-        }
-      })
-      
-      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
-        .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-        .to(icon1Ref.current, { 
-          opacity: 1, 
-          scale: 1, 
-          x: "calc(17rem - 50%)", 
-          y: "calc(9rem - 50%)", 
-          duration: 1.2, 
-          ease: "power2.out" 
-        }, "-=0.2")
-        .to(icon2Ref.current, { 
-          opacity: 1, 
-          scale: 1, 
-          x: "calc(1rem - 50%)", 
-          y: "calc(15rem - 50%)", 
-          duration: 1.2, 
-          ease: "power2.out" 
-        }, "-=1.0")
-        .to(icon3Ref.current, { 
-          opacity: 1, 
-          scale: 1, 
-          x: "calc(17rem - 50%)", 
-          y: "calc(10rem - 50%)", 
-          duration: 1.2, 
-          ease: "power2.out" 
-        }, "-=1.0")
-        .to(icon4Ref.current, { 
-          opacity: 1, 
-          scale: 1, 
-          x: "calc(17rem - 50%)", 
-          y: "calc(7rem - 50%)", 
-          duration: 1.2, 
-          ease: "power2.out" 
-        }, "-=1.0")
-        .to(icon5Ref.current, { 
-          opacity: 1, 
-          scale: 1, 
-          x: "calc(1rem - 50%)", 
-          y: "calc(15rem - 50%)", 
-          duration: 1.2, 
-          ease: "power2.out" 
-        }, "-=1.0")
-        .to(icon6Ref.current, { 
-          opacity: 1, 
-          scale: 1, 
-          x: "calc(32rem - 50%)", 
-          y: "calc(5rem - 50%)", 
-          duration: 1.2, 
-          ease: "power2.out" 
-        }, "-=1.0")
-        .to(icon7Ref.current, { 
-          opacity: 1, 
-          scale: 1, 
-          x: "calc(9.5rem - 50%)", 
-          y: "calc(5rem - 50%)", 
-          duration: 1.2, 
-          ease: "power2.out" 
-        }, "-=1.0")
-        .to(icon8Ref.current, { 
-          opacity: 1, 
-          scale: 1, 
-          x: "calc(1rem - 50%)", 
-          y: "calc(5rem - 50%)", 
-          duration: 1.2, 
-          ease: "power2.out" 
-        }, "-=1.0")
+      if (isDesktop) {
+        // Complex animations for desktop
+        gsap.set([titleRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 40 })
+        gsap.set([icon1Ref.current, icon2Ref.current, icon3Ref.current, icon4Ref.current, icon5Ref.current, icon6Ref.current, icon7Ref.current, icon8Ref.current], { 
+          opacity: 0, 
+          scale: 0,
+          x: 0,
+          y: 0
+        })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+          .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(icon1Ref.current, { 
+            opacity: 1, 
+            scale: 1, 
+            x: "calc(17rem - 50%)", 
+            y: "calc(9rem - 50%)", 
+            duration: 1.2, 
+            ease: "power2.out" 
+          }, "-=0.2")
+          .to(icon2Ref.current, { 
+            opacity: 1, 
+            scale: 1, 
+            x: "calc(1rem - 50%)", 
+            y: "calc(15rem - 50%)", 
+            duration: 1.2, 
+            ease: "power2.out" 
+          }, "-=1.0")
+          .to(icon3Ref.current, { 
+            opacity: 1, 
+            scale: 1, 
+            x: "calc(17rem - 50%)", 
+            y: "calc(10rem - 50%)", 
+            duration: 1.2, 
+            ease: "power2.out" 
+          }, "-=1.0")
+          .to(icon4Ref.current, { 
+            opacity: 1, 
+            scale: 1, 
+            x: "calc(17rem - 50%)", 
+            y: "calc(7rem - 50%)", 
+            duration: 1.2, 
+            ease: "power2.out" 
+          }, "-=1.0")
+          .to(icon5Ref.current, { 
+            opacity: 1, 
+            scale: 1, 
+            x: "calc(1rem - 50%)", 
+            y: "calc(15rem - 50%)", 
+            duration: 1.2, 
+            ease: "power2.out" 
+          }, "-=1.0")
+          .to(icon6Ref.current, { 
+            opacity: 1, 
+            scale: 1, 
+            x: "calc(32rem - 50%)", 
+            y: "calc(5rem - 50%)", 
+            duration: 1.2, 
+            ease: "power2.out" 
+          }, "-=1.0")
+          .to(icon7Ref.current, { 
+            opacity: 1, 
+            scale: 1, 
+            x: "calc(9.5rem - 50%)", 
+            y: "calc(5rem - 50%)", 
+            duration: 1.2, 
+            ease: "power2.out" 
+          }, "-=1.0")
+          .to(icon8Ref.current, { 
+            opacity: 1, 
+            scale: 1, 
+            x: "calc(1rem - 50%)", 
+            y: "calc(5rem - 50%)", 
+            duration: 1.2, 
+            ease: "power2.out" 
+          }, "-=1.0")
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([titleRef.current, descRef.current, buttonRef.current, icon1Ref.current, icon2Ref.current, icon3Ref.current, icon4Ref.current, icon5Ref.current, icon6Ref.current, icon7Ref.current, icon8Ref.current], { 
+          opacity: 0, 
+          y: 30 
+        })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to([icon1Ref.current, icon2Ref.current, icon3Ref.current, icon4Ref.current, icon5Ref.current, icon6Ref.current, icon7Ref.current, icon8Ref.current], { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            duration: 0.6, 
+            stagger: 0.1,
+            ease: "power2.out" 
+          }, "-=0.2")
+      }
     }, heroRef)
     return () => ctx.revert()
   }, [])
@@ -235,55 +266,75 @@ const FutureProofSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, descRef.current], { opacity: 0, x: -50 })
-      gsap.set(imageRef.current, { opacity: 0, x: 50 })
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
       
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        }
-      })
-      
-      tl.to(titleRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" })
-        .to(descRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
-        .to(imageRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
+      if (isDesktop) {
+        // Complex animations for desktop
+        gsap.set([titleRef.current, descRef.current], { opacity: 0, x: -50 })
+        gsap.set(imageRef.current, { opacity: 0, x: 50 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" })
+          .to(descRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
+          .to(imageRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
 
-      // Continuous left-right movement for SVG elements
-      gsap.to(svg2Ref.current, {
-        x: "-20px",
-        duration: 2,
-        ease: "power1.inOut",
-        yoyo: true,
-        repeat: -1
-      })
+        // Continuous left-right movement for SVG elements (desktop only)
+        gsap.to(svg2Ref.current, {
+          x: "-20px",
+          duration: 2,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1
+        })
 
-      gsap.to(svg3Ref.current, {
-        x: "-20px",
-        duration: 2,
-        ease: "power1.inOut",
-        yoyo: true,
-        repeat: -1
-      })
+        gsap.to(svg3Ref.current, {
+          x: "-20px",
+          duration: 2,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1
+        })
 
-      // Continuous top-bottom movement for drone
-      gsap.to(svg4Ref.current, {
-        y: "60px",
-        duration: 3,
-        ease: "power1.inOut",
-        yoyo: true,
-        repeat: -1
-      })
+        // Continuous top-bottom movement for drone
+        gsap.to(svg4Ref.current, {
+          y: "60px",
+          duration: 3,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1
+        })
 
-      // Continuous top-bottom movement for SVG5 and SVG6 (synchronized)
-      gsap.to([svg5Ref.current, svg6Ref.current], {
-        y: "20px",
-        duration: 2.5,
-        ease: "power1.inOut",
-        yoyo: true,
-        repeat: -1,
-        stagger: 0
-      })
+        // Continuous top-bottom movement for SVG5 and SVG6 (synchronized)
+        gsap.to([svg5Ref.current, svg6Ref.current], {
+          y: "20px",
+          duration: 2.5,
+          ease: "power1.inOut",
+          yoyo: true,
+          repeat: -1,
+          stagger: 0
+        })
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([titleRef.current, descRef.current, imageRef.current], { opacity: 0, y: 30 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(imageRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+      }
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -413,47 +464,92 @@ const RobotSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial states with more pronounced positions
-      gsap.set([robotRef.current, ...textBlocksRef.current, bannerRef.current], { opacity: 0, y: 50 })
-      gsap.set(circleRef.current, { opacity: 0, y: -80 })
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
       
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
-      })
-      
-      // Circle animation from top to bottom
-      tl.to(circleRef.current, { 
-        opacity: 1, 
-        y: 0, 
-        duration: 1.2, 
-        ease: "power2.out",
-        delay: 0.2
-      })
-        // Robot animation from bottom to top
-        .to(robotRef.current, { 
+      if (isDesktop) {
+        // Complex animations for desktop
+        // Set initial states with more pronounced positions
+        gsap.set([robotRef.current, ...textBlocksRef.current, bannerRef.current], { opacity: 0, y: 50 })
+        gsap.set(circleRef.current, { opacity: 0, y: -80 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        })
+        
+        // Circle animation from top to bottom
+        tl.to(circleRef.current, { 
           opacity: 1, 
           y: 0, 
           duration: 1.2, 
+          ease: "power2.out",
+          delay: 0.2
+        })
+          // Robot animation from bottom to top
+          .to(robotRef.current, { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1.2, 
+            ease: "power2.out" 
+          }, "-=0.8")
+          .to(textBlocksRef.current, { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8, 
+            stagger: 0.15, 
+            ease: "power2.out" 
+          }, "-=0.6")
+          .to(bannerRef.current, { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8, 
+            ease: "power2.out" 
+          }, "-=0.4")
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([robotRef.current, ...textBlocksRef.current, bannerRef.current, circleRef.current], { opacity: 0, y: 30 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        })
+        
+        // Simple fade-in animations for mobile
+        tl.to(circleRef.current, { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.6, 
+          ease: "power2.out"
+        })
+        .to(robotRef.current, { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.6, 
           ease: "power2.out" 
-        }, "-=0.8")
+        }, "-=0.3")
         .to(textBlocksRef.current, { 
           opacity: 1, 
           y: 0, 
-          duration: 0.8, 
-          stagger: 0.15, 
+          duration: 0.6, 
+          stagger: 0.1, 
           ease: "power2.out" 
-        }, "-=0.6")
+        }, "-=0.3")
         .to(bannerRef.current, { 
           opacity: 1, 
           y: 0, 
-          duration: 0.8, 
+          duration: 0.6, 
           ease: "power2.out" 
-        }, "-=0.4")
+        }, "-=0.3")
+      }
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -633,19 +729,39 @@ const CoreServicesSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, descRef.current], { opacity: 0, y: 30 })
-      gsap.set(servicesRef.current, { opacity: 0, y: 50 })
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
       
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        }
-      })
-      
-      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .to(descRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
-        .to(servicesRef.current, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" }, "-=0.4")
+      if (isDesktop) {
+        // Complex animations for desktop
+        gsap.set([titleRef.current, descRef.current], { opacity: 0, y: 30 })
+        gsap.set(servicesRef.current, { opacity: 0, y: 50 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+          .to(descRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
+          .to(servicesRef.current, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" }, "-=0.4")
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([titleRef.current, descRef.current, servicesRef.current], { opacity: 0, y: 30 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(servicesRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.3")
+      }
     }, sectionRef)
     return () => ctx.revert()
   }, [])
