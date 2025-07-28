@@ -50,102 +50,175 @@ function About() {
 
     useGSAP(
         () => {
-            // Set initial states with different directions
-            // Text elements come from left
-            gsap.set([titleRef.current, subtitleRef.current, descriptionRef.current], { 
-                opacity: 0, 
-                x: -100 
-            })
+            // Check if we're on desktop (lg breakpoint and above)
+            const isDesktop = window.innerWidth >= 1024
             
-            // Robot comes from bottom
-            gsap.set(robotRef.current, { 
-                opacity: 0, 
-                y: 150 
-            })
-            
-            // Stats card comes from left
-            gsap.set(statsRef.current, { 
-                opacity: 0, 
-                x: -80 
-            })
-            
-            // Right side statistics come from right
-            gsap.set(".right-stats > div", { 
-                opacity: 0, 
-                x: 100 
-            })
-            
-            // Redefining section comes from left
-            gsap.set(".redefining-section", { 
-                opacity: 0, 
-                x: -80 
-            })
+            if (isDesktop) {
+                // Complex animations for desktop - elements come from different directions
+                // Text elements come from left
+                gsap.set([titleRef.current, subtitleRef.current, descriptionRef.current], { 
+                    opacity: 0, 
+                    x: -100 
+                })
+                
+                // Robot comes from bottom
+                gsap.set(robotRef.current, { 
+                    opacity: 0, 
+                    y: 150 
+                })
+                
+                // Stats card comes from left
+                gsap.set(statsRef.current, { 
+                    opacity: 0, 
+                    x: -80 
+                })
+                
+                // Right side statistics come from right
+                gsap.set(".right-stats > div", { 
+                    opacity: 0, 
+                    x: 100 
+                })
+                
+                // Redefining section comes from left
+                gsap.set(".redefining-section", { 
+                    opacity: 0, 
+                    x: -80 
+                })
 
-            ScrollTrigger.create({
-                trigger: sectionRef.current,
-                start: "top center+=100",
-                once: true,
-                onEnter: () => {
-                    // Text elements from left
-                    gsap.to(titleRef.current, {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        ease: "power3.out",
-                    })
-                    gsap.to(subtitleRef.current, {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        ease: "power3.out",
-                        delay: 0.2
-                    })
-                    gsap.to(descriptionRef.current, {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        ease: "power3.out",
-                        delay: 0.4
-                    })
-                    
-                    // Robot from bottom
-                    gsap.to(robotRef.current, {
-                        opacity: 1,
-                        y: 0,
-                        duration: 1.2,
-                        ease: "power3.out",
-                        delay: 0.3
-                    })
-                    
-                    // Stats card from left
-                    gsap.to(statsRef.current, {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        ease: "power3.out",
-                        delay: 0.6
-                    })
-                    
-                    // Right side statistics from right
-                    gsap.to(".right-stats > div", {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        stagger: 0.2,
-                        ease: "power3.out",
-                        delay: 0.7
-                    })
-                    
-                    // Redefining section from left
-                    gsap.to(".redefining-section", {
-                        opacity: 1,
-                        x: 0,
-                        duration: 0.8,
-                        ease: "power3.out",
-                        delay: 0.8
-                    })
-                },
-            })
+                ScrollTrigger.create({
+                    trigger: sectionRef.current,
+                    start: "top center+=100",
+                    once: true,
+                    onEnter: () => {
+                        // Text elements from left
+                        gsap.to(titleRef.current, {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.8,
+                            ease: "power3.out",
+                        })
+                        gsap.to(subtitleRef.current, {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.8,
+                            ease: "power3.out",
+                            delay: 0.2
+                        })
+                        gsap.to(descriptionRef.current, {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.8,
+                            ease: "power3.out",
+                            delay: 0.4
+                        })
+                        
+                        // Robot from bottom
+                        gsap.to(robotRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1.2,
+                            ease: "power3.out",
+                            delay: 0.3
+                        })
+                        
+                        // Stats card from left
+                        gsap.to(statsRef.current, {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.8,
+                            ease: "power3.out",
+                            delay: 0.6
+                        })
+                        
+                        // Right side statistics from right
+                        gsap.to(".right-stats > div", {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.8,
+                            stagger: 0.2,
+                            ease: "power3.out",
+                            delay: 0.7
+                        })
+                        
+                        // Redefining section from left
+                        gsap.to(".redefining-section", {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.8,
+                            ease: "power3.out",
+                            delay: 0.8
+                        })
+                    },
+                })
+            } else {
+                // Simple fade animations for mobile - all elements fade in from bottom
+                gsap.set([titleRef.current, subtitleRef.current, descriptionRef.current, robotRef.current, statsRef.current, ".right-stats > div", ".redefining-section"], { 
+                    opacity: 0, 
+                    y: 30 
+                })
+
+                ScrollTrigger.create({
+                    trigger: sectionRef.current,
+                    start: "top center+=100",
+                    once: true,
+                    onEnter: () => {
+                        // Simple fade-in animations for mobile
+                        gsap.to(titleRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                        })
+                        gsap.to(subtitleRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                            delay: 0.1
+                        })
+                        gsap.to(descriptionRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                            delay: 0.2
+                        })
+                        
+                        gsap.to(robotRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                            delay: 0.3
+                        })
+                        
+                        gsap.to(statsRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                            delay: 0.4
+                        })
+                        
+                        gsap.to(".right-stats > div", {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            stagger: 0.1,
+                            ease: "power2.out",
+                            delay: 0.5
+                        })
+                        
+                        gsap.to(".redefining-section", {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.6,
+                            ease: "power2.out",
+                            delay: 0.6
+                        })
+                    },
+                })
+            }
         },
         { scope: sectionRef },
     )

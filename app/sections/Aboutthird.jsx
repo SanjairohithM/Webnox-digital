@@ -18,76 +18,139 @@ export const Aboutthird = () => {
 
   useGSAP(() => {
     const ctx = gsap.context(() => {
-      // Set initial states for left-coming elements (image + odd items)
-      gsap.set([
-        headerRef.current,
-        titleRef.current,
-        descriptionRef.current,
-        imageRef.current,
-        '.value-item-odd',
-        '.value-description-odd'
-      ], {
-        opacity: 0,
-        x: -100
-      })
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Complex animations for desktop
+        // Set initial states for left-coming elements (image + odd items)
+        gsap.set([
+          headerRef.current,
+          titleRef.current,
+          descriptionRef.current,
+          imageRef.current,
+          '.value-item-odd',
+          '.value-description-odd'
+        ], {
+          opacity: 0,
+          x: -100
+        })
 
-      // Set initial states for right-coming elements (even items)
-      gsap.set([
-        '.value-item-even',
-        '.value-description-even'
-      ], {
-        opacity: 0,
-        x: 100
-      })
+        // Set initial states for right-coming elements (even items)
+        gsap.set([
+          '.value-item-even',
+          '.value-description-even'
+        ], {
+          opacity: 0,
+          x: 100
+        })
 
-      // Create timeline with scroll trigger
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        }
-      })
+        // Create timeline with scroll trigger
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          }
+        })
 
-      tl.to(headerRef.current, {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      })
-      .to(titleRef.current, {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.4")
-      .to(descriptionRef.current, {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.4")
-      .to(imageRef.current, {
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        ease: "power2.out"
-      }, "-=0.6")
-      .to(['.value-item-odd', '.value-description-odd'], {
-        opacity: 1,
-        x: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power2.out"
-      }, "-=0.8")
-      .to(['.value-item-even', '.value-description-even'], {
-        opacity: 1,
-        x: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power2.out"
-      }, "-=0.6")
+        tl.to(headerRef.current, {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        })
+        .to(titleRef.current, {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        }, "-=0.4")
+        .to(descriptionRef.current, {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        }, "-=0.4")
+        .to(imageRef.current, {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          ease: "power2.out"
+        }, "-=0.6")
+        .to(['.value-item-odd', '.value-description-odd'], {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.8")
+        .to(['.value-item-even', '.value-description-even'], {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.6")
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([
+          headerRef.current,
+          titleRef.current,
+          descriptionRef.current,
+          imageRef.current,
+          '.value-item-odd',
+          '.value-description-odd',
+          '.value-item-even',
+          '.value-description-even'
+        ], {
+          opacity: 0,
+          y: 30
+        })
+
+        // Create timeline with scroll trigger
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          }
+        })
+
+        tl.to(headerRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        })
+        .to(titleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        }, "-=0.3")
+        .to(descriptionRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        }, "-=0.3")
+        .to(imageRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        }, "-=0.4")
+        .to(['.value-item-odd', '.value-description-odd', '.value-item-even', '.value-description-even'], {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.4")
+      }
 
     }, containerRef)
 

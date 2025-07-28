@@ -24,113 +24,183 @@ export default function Component() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial states for header elements (come from top)
-      gsap.set([titleRef.current, subtitleRef.current], {
-        opacity: 0,
-        y: -50,
-      })
-
-      // Set initial state for DIGITAL letters
-      gsap.set(".digital-letter", {
-        opacity: 0,
-        y: 30,
-        scale: 0.8,
-      })
-
-      // Set initial states for cards with different directions
-      // First card - from left
-      gsap.set([image1Ref.current, imageText1Ref.current], {
-        opacity: 0,
-        x: -100,
-      })
-
-      // Second card - from bottom
-      gsap.set([image2Ref.current, imageText2Ref.current], {
-        opacity: 0,
-        y: 100,
-      })
-
-      // Third card - from right
-      gsap.set([image3Ref.current, imageText3Ref.current], {
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Complex animations for desktop
+        // Set initial states for header elements (come from top)
+        gsap.set([titleRef.current, subtitleRef.current], {
           opacity: 0,
-        x: 100,
-      })
+          y: -50,
+        })
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      })
+        // Set initial state for DIGITAL letters
+        gsap.set(".digital-letter", {
+          opacity: 0,
+          y: 30,
+          scale: 0.8,
+        })
 
-      // DIGITAL letters animation - letter by letter
-      tl.to(".digital-letter", {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-        stagger: 0.2,
-      })
-        
-      // Header animations
+        // Set initial states for cards with different directions
+        // First card - from left
+        gsap.set([image1Ref.current, imageText1Ref.current], {
+          opacity: 0,
+          x: -100,
+        })
+
+        // Second card - from bottom
+        gsap.set([image2Ref.current, imageText2Ref.current], {
+          opacity: 0,
+          y: 100,
+        })
+
+        // Third card - from right
+        gsap.set([image3Ref.current, imageText3Ref.current], {
+            opacity: 0,
+          x: 100,
+        })
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        })
+
+        // DIGITAL letters animation - letter by letter
+        tl.to(".digital-letter", {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: "back.out(1.7)",
+          stagger: 0.2,
+        })
+          
+        // Header animations
+          .to(titleRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+          }, "-=0.5")
+          .to(
+            subtitleRef.current,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            "-=0.5",
+          )
+          
+          // First card - from left
+          .to(
+            [imageText1Ref.current, image1Ref.current],
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              stagger: 0.1,
+            },
+            "-=0.3",
+          )
+          
+          // Second card - from bottom
+          .to(
+            [imageText2Ref.current, image2Ref.current],
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              stagger: 0.1,
+            },
+            "-=0.6",
+          )
+          
+          // Third card - from right
+          .to(
+            [imageText3Ref.current, image3Ref.current],
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              stagger: 0.1,
+            },
+            "-=0.6",
+          )
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([titleRef.current, subtitleRef.current, image1Ref.current, imageText1Ref.current, image2Ref.current, imageText2Ref.current, image3Ref.current, imageText3Ref.current], {
+          opacity: 0,
+          y: 30,
+        })
+
+        gsap.set(".digital-letter", {
+          opacity: 0,
+          y: 20,
+          scale: 0.9,
+        })
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        })
+
+        // Simple fade-in animations for mobile
+        tl.to(".digital-letter", {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1,
+        })
         .to(titleRef.current, {
           opacity: 1,
           y: 0,
-          duration: 1,
+          duration: 0.6,
           ease: "power2.out",
-        }, "-=0.5")
-        .to(
-          subtitleRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.5",
-        )
-        
-        // First card - from left
-        .to(
-          [imageText1Ref.current, image1Ref.current],
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            stagger: 0.1,
-          },
-          "-=0.3",
-        )
-        
-        // Second card - from bottom
-        .to(
-          [imageText2Ref.current, image2Ref.current],
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            stagger: 0.1,
-          },
-          "-=0.6",
-        )
-        
-        // Third card - from right
-        .to(
-          [imageText3Ref.current, image3Ref.current],
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            stagger: 0.1,
-          },
-          "-=0.6",
-        )
+        }, "-=0.3")
+        .to(subtitleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        }, "-=0.3")
+        .to([imageText1Ref.current, image1Ref.current], {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1,
+        }, "-=0.2")
+        .to([imageText2Ref.current, image2Ref.current], {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1,
+        }, "-=0.3")
+        .to([imageText3Ref.current, image3Ref.current], {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1,
+        }, "-=0.3")
+      }
     }, containerRef)
 
     return () => ctx.revert()

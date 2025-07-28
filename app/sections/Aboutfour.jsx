@@ -59,108 +59,181 @@ export default function ExpertiseSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial states
-      gsap.set(subtitleRef.current, {
-        opacity: 0,
-        y: -50, // Come from top
-      })
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Complex animations for desktop
+        // Set initial states
+        gsap.set(subtitleRef.current, {
+          opacity: 0,
+          y: -50, // Come from top
+        })
 
-      gsap.set(mainTitleRef.current, {
-        opacity: 0,
-        y: 50, // Come from bottom
-      })
+        gsap.set(mainTitleRef.current, {
+          opacity: 0,
+          y: 50, // Come from bottom
+        })
 
-      // Title animations timeline
-      const headerTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      })
+        // Title animations timeline
+        const headerTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        })
 
-      // "Our Expertise" from top
-      headerTl.to(subtitleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      })
-      // Main title from bottom
-      .to(mainTitleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      }, "-=0.4") // Start 0.4s before the previous animation ends
+        // "Our Expertise" from top
+        headerTl.to(subtitleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        })
+        // Main title from bottom
+        .to(mainTitleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        }, "-=0.4") // Start 0.4s before the previous animation ends
 
-      // Set initial states for directional animations
-      gsap.set(".left-card", {
-        opacity: 0,
-        x: -200,
-        scale: 0.8
-      })
+        // Set initial states for directional animations
+        gsap.set(".left-card", {
+          opacity: 0,
+          x: -200,
+          scale: 0.8
+        })
 
-      gsap.set(".right-card", {
-        opacity: 0,
-        x: 200,
-        scale: 0.8
-      })
+        gsap.set(".right-card", {
+          opacity: 0,
+          x: 200,
+          scale: 0.8
+        })
 
-      // Row-by-row timeline animations with more spacing
-      const rows = [
-        { left: ".card-1", right: ".card-2", trigger: "top 80%" },   // First row
-        { left: ".card-3", right: ".card-4", trigger: "top 50%" },   // Second row (more scroll needed)
-        { left: ".card-5", right: ".card-6", trigger: "top 20%" }    // Third row (even more scroll)
-      ]
+        // Row-by-row timeline animations with more spacing
+        const rows = [
+          { left: ".card-1", right: ".card-2", trigger: "top 80%" },   // First row
+          { left: ".card-3", right: ".card-4", trigger: "top 50%" },   // Second row (more scroll needed)
+          { left: ".card-5", right: ".card-6", trigger: "top 20%" }    // Third row (even more scroll)
+        ]
 
-      rows.forEach((row, index) => {
+        rows.forEach((row, index) => {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: row.trigger,
+              end: "bottom 20%",
+              toggleActions: "play none none reverse",
+              // markers: true, // Uncomment to see trigger points during development
+            }
+          })
+
+          // Animate left card from left
+          tl.to(row.left, {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out"
+          })
+          // Animate right card from right (with slight overlap)
+          .to(row.right, {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out"
+          }, "-=0.7")
+        })
+
+        // Hover animations for cards
+        document.querySelectorAll(".expertise-card").forEach((card) => {
+          const icon = card.querySelector(".card-icon")
+          const button = card.querySelector(".card-button")
+
+          card.addEventListener("mouseenter", () => {
+            gsap.to(card, { scale: 1.02, duration: 0.3, ease: "power2.out" })
+            gsap.to(icon, { scale: 1.1, rotation: 5, duration: 0.3, ease: "power2.out" })
+            gsap.to(button, { x: 5, duration: 0.3, ease: "power2.out" })
+          })
+
+          card.addEventListener("mouseleave", () => {
+            gsap.to(card, { scale: 1, duration: 0.3, ease: "power2.out" })
+            gsap.to(icon, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.out" })
+            gsap.to(button, { x: 0, duration: 0.3, ease: "power2.out" })
+          })
+        })
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([subtitleRef.current, mainTitleRef.current, ".left-card", ".right-card"], {
+          opacity: 0,
+          y: 30
+        })
+
+        // Title animations timeline
+        const headerTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse",
+          },
+        })
+
+        // Simple fade-in animations for mobile
+        headerTl.to(subtitleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        })
+        .to(mainTitleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        }, "-=0.3")
+
+        // Simple card animations for mobile
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: cardsRef.current,
-            start: row.trigger,
+            start: "top 80%",
             end: "bottom 20%",
             toggleActions: "play none none reverse",
-            // markers: true, // Uncomment to see trigger points during development
           }
         })
 
-        // Animate left card from left
-        tl.to(row.left, {
+        tl.to([".left-card", ".right-card"], {
           opacity: 1,
-          x: 0,
+          y: 0,
           scale: 1,
-          duration: 1,
-          ease: "power3.out"
-        })
-        // Animate right card from right (with slight overlap)
-        .to(row.right, {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          duration: 1,
-          ease: "power3.out"
-        }, "-=0.7")
-      })
-
-      // Hover animations for cards
-      document.querySelectorAll(".expertise-card").forEach((card) => {
-        const icon = card.querySelector(".card-icon")
-        const button = card.querySelector(".card-button")
-
-        card.addEventListener("mouseenter", () => {
-          gsap.to(card, { scale: 1.02, duration: 0.3, ease: "power2.out" })
-          gsap.to(icon, { scale: 1.1, rotation: 5, duration: 0.3, ease: "power2.out" })
-          gsap.to(button, { x: 5, duration: 0.3, ease: "power2.out" })
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out"
         })
 
-        card.addEventListener("mouseleave", () => {
-          gsap.to(card, { scale: 1, duration: 0.3, ease: "power2.out" })
-          gsap.to(icon, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.out" })
-          gsap.to(button, { x: 0, duration: 0.3, ease: "power2.out" })
+        // Hover animations for cards (keep for mobile too)
+        document.querySelectorAll(".expertise-card").forEach((card) => {
+          const icon = card.querySelector(".card-icon")
+          const button = card.querySelector(".card-button")
+
+          card.addEventListener("mouseenter", () => {
+            gsap.to(card, { scale: 1.02, duration: 0.3, ease: "power2.out" })
+            gsap.to(icon, { scale: 1.1, rotation: 5, duration: 0.3, ease: "power2.out" })
+            gsap.to(button, { x: 5, duration: 0.3, ease: "power2.out" })
+          })
+
+          card.addEventListener("mouseleave", () => {
+            gsap.to(card, { scale: 1, duration: 0.3, ease: "power2.out" })
+            gsap.to(icon, { scale: 1, rotation: 0, duration: 0.3, ease: "power2.out" })
+            gsap.to(button, { x: 0, duration: 0.3, ease: "power2.out" })
+          })
         })
-      })
+      }
     }, sectionRef)
 
     return () => ctx.revert()
