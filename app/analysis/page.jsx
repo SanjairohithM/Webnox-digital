@@ -113,23 +113,42 @@ const ApproachSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
       gsap.set([titleRef.current], { opacity: 0, y: 30 })
       
-      // Set initial positions for cards - first 3 from right, last 3 from left
-      gsap.set(cardsRef.current.slice(0, 3), { opacity: 0, x: 100 }) // First 3 from right
-      gsap.set(cardsRef.current.slice(3, 6), { opacity: 0, x: -100 }) // Last 3 from left
-      
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        }
-      })
-      
-      tl
-        .to(titleRef.current, { opacity: 1, y: 0, duration: 2.5, ease: "power2.out" })
-        .to(cardsRef.current.slice(0, 3), { opacity: 1, x: 0, duration: 2.0, stagger: 0.6, ease: "power2.out" }, "-=1.5")
-        .to(cardsRef.current.slice(3, 6), { opacity: 1, x: 0, duration: 2.0, stagger: 0.6, ease: "power2.out" }, "-=1.0")
+      if (isDesktop) {
+        // Complex animations for desktop - first 3 from right, last 3 from left
+        gsap.set(cardsRef.current.slice(0, 3), { opacity: 0, x: 100 }) // First 3 from right
+        gsap.set(cardsRef.current.slice(3, 6), { opacity: 0, x: -100 }) // Last 3 from left
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl
+          .to(titleRef.current, { opacity: 1, y: 0, duration: 2.5, ease: "power2.out" })
+          .to(cardsRef.current.slice(0, 3), { opacity: 1, x: 0, duration: 2.0, stagger: 0.6, ease: "power2.out" }, "-=1.5")
+          .to(cardsRef.current.slice(3, 6), { opacity: 1, x: 0, duration: 2.0, stagger: 0.6, ease: "power2.out" }, "-=1.0")
+      } else {
+        // Simple fade animations for mobile
+        gsap.set(cardsRef.current, { opacity: 0, y: 20 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl
+          .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+          .to(cardsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.2, ease: "power2.out" }, "-=0.4")
+      }
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -210,139 +229,177 @@ const WhyWebnoxSection = () => {
   ]
 
   return (
-    <section ref={sectionRef} className="bg-white py-10 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Title */}
-        <h2 ref={titleRef} className="text-3xl md:text-4xl font-bold text-gray-700 text-center mb-16 font-sans">
-          Why Webnox Is the Right Analytics Partner
-        </h2>
-        
-        {/* Mind Map Container */}
-        <div className="relative flex items-center justify-center min-h-[400px] md:min-h-[500px]">
-          {/* Central Webnox Box */}
-          <div 
-            ref={centralBoxRef}
-            className="relative z-20 bg-[#00BFFF] px-8 py-6 rounded-2xl shadow-lg flex items-center justify-center"
-          >
-            <Image
-              src="/images/marketsvgcenter.webp"
-              alt="Webnox Analytics"
-              width={120}
-              height={60}
-              className="w-auto h-12 md:h-16 object-contain"
-            />
-          </div>
+    <>
+      {/* Desktop Version */}
+      <section ref={sectionRef} className="hidden lg:block bg-white py-10 px-4">
+        <div className="max-w-6xl mx-auto">
+          {/* Title */}
+          <h2 ref={titleRef} className="text-3xl md:text-4xl font-bold text-gray-700 text-center mb-16 font-sans">
+            Why Webnox Is the Right Analytics Partner
+          </h2>
           
-          {/* Connection Lines and Boxes */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            {/* Top Left */}
-            <div className="absolute top-0 -left-8 md:-left-16 lg:-left-24 w-64 md:w-72" style={{transform: 'translateY(20px)'}}>
-              <div className="relative">
-              
-                {/* SVG Icon */}
-                <div className="absolute top-25 left-104 w-62 h-62 -translate-x-1/2 -translate-y-1/2 z-10">
-                  <Image
-                    src="/marketsvg3.svg"
-                    alt="Analytics Icon"
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                {/* Content Box */}
-                <div 
-                  ref={el => boxesRef.current[0] = el}
-                  className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm mt-18"
-                >
-                  <p className="text-gray-700 text-sm md:text-base font-sans leading-relaxed">
-                    {reasons[0]}
-                  </p>
-                </div>
-              </div>
+          {/* Mind Map Container */}
+          <div className="relative flex items-center justify-center min-h-[400px] md:min-h-[500px]">
+            {/* Central Webnox Box */}
+            <div 
+              ref={centralBoxRef}
+              className="relative z-20 bg-[#00BFFF] px-8 py-6 rounded-2xl shadow-lg flex items-center justify-center"
+            >
+              <Image
+                src="/images/marketsvgcenter.webp"
+                alt="Webnox Analytics"
+                width={120}
+                height={60}
+                className="w-auto h-12 md:h-16 object-contain"
+              />
             </div>
             
-            {/* Bottom Left */}
-            <div className="absolute bottom-0 -left-8 md:-left-16 lg:-left-24 w-64 md:w-72" style={{transform: 'translateY(-20px)'}}>
-              <div className="relative">
-              
-              
-                {/* SVG Icon */}
-                <div className="absolute -top-10 left-103 w-62 h-62 -translate-x-1/2 -translate-y-1/2 z-10">
-                  <Image
-                    src="/marketsvg4.svg"
-                    alt="Analytics Icon"
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                {/* Content Box */}
-                <div 
-                  ref={el => boxesRef.current[1] = el}
-                  className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm mb-4"
-                >
-                  <p className="text-gray-700 text-sm md:text-base font-sans leading-relaxed">
-                    {reasons[1]}
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            {/* Top Right */}
-            <div className="absolute top-0 -right-8 md:-right-16 lg:-right-24 w-64 md:w-72" style={{transform: 'translateY(20px)'}}>
-              <div className="relative">
-              
-                {/* SVG Icon */}
-                <div className="absolute top-28 right-41 w-62 h-62 -translate-x-1/2 -translate-y-1/2 z-10">
-                  <Image
-                    src="/marketsvg1.svg"
-                    alt="Analytics Icon"
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                {/* Content Box */}
-                <div 
-                  ref={el => boxesRef.current[2] = el}
-                  className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm mt-14"
-                >
-                  <p className="text-gray-700 text-sm md:text-base font-sans leading-relaxed">
-                    {reasons[2]}
-                  </p>
+            {/* Connection Lines and Boxes */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              {/* Top Left */}
+              <div className="absolute top-0 -left-8 md:-left-16 lg:-left-24 w-64 md:w-72" style={{transform: 'translateY(20px)'}}>
+                <div className="relative">
+                
+                  {/* SVG Icon */}
+                  <div className="absolute top-25 left-104 w-62 h-62 -translate-x-1/2 -translate-y-1/2 z-10">
+                    <Image
+                      src="/marketsvg3.svg"
+                      alt="Analytics Icon"
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  {/* Content Box */}
+                  <div 
+                    ref={el => boxesRef.current[0] = el}
+                    className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm mt-18"
+                  >
+                    <p className="text-gray-700 text-sm md:text-base font-sans leading-relaxed">
+                      {reasons[0]}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Bottom Right */}
-            <div className="absolute bottom-0 -right-8 md:-right-16 lg:-right-24 w-64 md:w-72" style={{transform: 'translateY(-20px)'}}>
-              <div className="relative">
               
-                {/* SVG Icon */}
-                <div className="absolute -top-2 right-41 w-62 h-62 -translate-x-1/2 -translate-y-1/2 z-10">
-                  <Image
-                    src="/marketsvg2.svg"
-                    alt="Analytics Icon"
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-contain"
-                  />
+              {/* Bottom Left */}
+              <div className="absolute bottom-0 -left-8 md:-left-16 lg:-left-24 w-64 md:w-72" style={{transform: 'translateY(-20px)'}}>
+                <div className="relative">
+                
+                
+                  {/* SVG Icon */}
+                  <div className="absolute -top-10 left-103 w-62 h-62 -translate-x-1/2 -translate-y-1/2 z-10">
+                    <Image
+                      src="/marketsvg4.svg"
+                      alt="Analytics Icon"
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  {/* Content Box */}
+                  <div 
+                    ref={el => boxesRef.current[1] = el}
+                    className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm mb-4"
+                  >
+                    <p className="text-gray-700 text-sm md:text-base font-sans leading-relaxed">
+                      {reasons[1]}
+                    </p>
+                  </div>
                 </div>
-                {/* Content Box */}
-                <div 
-                  ref={el => boxesRef.current[3] = el}
-                  className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm mb-4"
-                >
-                  <p className="text-gray-700 text-sm md:text-base font-sans leading-relaxed">
-                    {reasons[3]}
-                  </p>
+              </div>
+              
+              {/* Top Right */}
+              <div className="absolute top-0 -right-8 md:-right-16 lg:-right-24 w-64 md:w-72" style={{transform: 'translateY(20px)'}}>
+                <div className="relative">
+                
+                  {/* SVG Icon */}
+                  <div className="absolute top-28 right-41 w-62 h-62 -translate-x-1/2 -translate-y-1/2 z-10">
+                    <Image
+                      src="/marketsvg1.svg"
+                      alt="Analytics Icon"
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  {/* Content Box */}
+                  <div 
+                    ref={el => boxesRef.current[2] = el}
+                    className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm mt-14"
+                  >
+                    <p className="text-gray-700 text-sm md:text-base font-sans leading-relaxed">
+                      {reasons[2]}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Bottom Right */}
+              <div className="absolute bottom-0 -right-8 md:-right-16 lg:-right-24 w-64 md:w-72" style={{transform: 'translateY(-20px)'}}>
+                <div className="relative">
+                
+                  {/* SVG Icon */}
+                  <div className="absolute -top-2 right-41 w-62 h-62 -translate-x-1/2 -translate-y-1/2 z-10">
+                    <Image
+                      src="/marketsvg2.svg"
+                      alt="Analytics Icon"
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  {/* Content Box */}
+                  <div 
+                    ref={el => boxesRef.current[3] = el}
+                    className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm mb-4"
+                  >
+                    <p className="text-gray-700 text-sm md:text-base font-sans leading-relaxed">
+                      {reasons[3]}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Mobile Version */}
+      <section className="lg:hidden bg-white py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Title */}
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-700 text-center mb-12 font-sans">
+            Why Webnox Is the Right Analytics Partner
+          </h2>
+          
+          {/* Simple Cards Layout */}
+          <div className="space-y-6">
+            {reasons.map((reason, index) => (
+              <div 
+                key={index}
+                className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-[#00BFFF] rounded-lg flex items-center justify-center">
+                    <Image
+                      src={`/marketsvg${index + 1}.svg`}
+                      alt="Icon"
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 object-contain"
+                    />
+                  </div>
+                  <p className="text-gray-700 text-base font-sans leading-relaxed flex-1">
+                    {reason}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   )
 }
 
@@ -386,25 +443,51 @@ const industries = [
   
     useEffect(() => {
       const ctx = gsap.context(() => {
+        // Check if we're on desktop (lg breakpoint and above)
+        const isDesktop = window.innerWidth >= 1024
+        
         industryRefs.current.forEach((ref, i) => {
           if (!ref) return
-          gsap.fromTo(ref,
-            {
-              opacity: 0,
-              x: i % 2 === 0 ? 120 : -120
-            },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 1.4,
-              ease: "power3.inOut",
-              scrollTrigger: {
-                trigger: ref,
-                start: "top 80%",
-                toggleActions: "play none none none"
+          
+          if (isDesktop) {
+            // Complex animations for desktop - alternating left/right
+            gsap.fromTo(ref,
+              {
+                opacity: 0,
+                x: i % 2 === 0 ? 120 : -120
+              },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 1.4,
+                ease: "power3.inOut",
+                scrollTrigger: {
+                  trigger: ref,
+                  start: "top 80%",
+                  toggleActions: "play none none none"
+                }
               }
-            }
-          )
+            )
+          } else {
+            // Simple fade animations for mobile
+            gsap.fromTo(ref,
+              {
+                opacity: 0,
+                y: 30
+              },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: ref,
+                  start: "top 80%",
+                  toggleActions: "play none none none"
+                }
+              }
+            )
+          }
         })
       }, sectionRef)
       return () => ctx.revert()
