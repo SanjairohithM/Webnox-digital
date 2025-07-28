@@ -19,21 +19,42 @@ const BrandingHero = () => {
   const headingRef = useRef(null)
 
   useGSAP(() => {
-    if (hovered) {
-      // Animate images and heading left
-      imageRefs.current.forEach(ref => {
-        if (ref) gsap.to(ref, { x: -30, duration: 1.2, ease: 'power3.inOut' })
-      })
-      if (headingRef.current) gsap.to(headingRef.current, { x: -30, duration: 1.2, ease: 'power3.inOut' })
-      // Animate branding text right
-      if (brandingTextRef.current) gsap.to(brandingTextRef.current, { x: 30, duration: 1.2, ease: 'power3.inOut' })
+    // Check if we're on desktop (lg breakpoint and above)
+    const isDesktop = window.innerWidth >= 1024
+    
+    if (isDesktop) {
+      // Complex hover animations for desktop
+      if (hovered) {
+        // Animate images and heading left
+        imageRefs.current.forEach(ref => {
+          if (ref) gsap.to(ref, { x: -30, duration: 1.2, ease: 'power3.inOut' })
+        })
+        if (headingRef.current) gsap.to(headingRef.current, { x: -30, duration: 1.2, ease: 'power3.inOut' })
+        // Animate branding text right
+        if (brandingTextRef.current) gsap.to(brandingTextRef.current, { x: 30, duration: 1.2, ease: 'power3.inOut' })
+      } else {
+        // Reset all
+        imageRefs.current.forEach(ref => {
+          if (ref) gsap.to(ref, { x: 0, duration: 1.2, ease: 'power3.inOut' })
+        })
+        if (headingRef.current) gsap.to(headingRef.current, { x: 0, duration: 1.2, ease: 'power3.inOut' })
+        if (brandingTextRef.current) gsap.to(brandingTextRef.current, { x: 0, duration: 1.2, ease: 'power3.inOut' })
+      }
     } else {
-      // Reset all
-      imageRefs.current.forEach(ref => {
-        if (ref) gsap.to(ref, { x: 0, duration: 1.2, ease: 'power3.inOut' })
+      // Simple fade animations for mobile
+      // Set initial states for mobile
+      gsap.set([brandingTextRef.current, headingRef.current], { opacity: 0 })
+      
+      // Create scroll-triggered timeline for mobile
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: brandingTextRef.current,
+          start: "top 80%",
+        }
       })
-      if (headingRef.current) gsap.to(headingRef.current, { x: 0, duration: 1.2, ease: 'power3.inOut' })
-      if (brandingTextRef.current) gsap.to(brandingTextRef.current, { x: 0, duration: 1.2, ease: 'power3.inOut' })
+      
+      tl.to(brandingTextRef.current, { opacity: 1, duration: 0.6, ease: "power2.out" })
+        .to(headingRef.current, { opacity: 1, duration: 0.6, ease: "power2.out" }, "-=0.3")
     }
   }, [hovered])
 
@@ -44,13 +65,13 @@ const BrandingHero = () => {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Floating Brand Images */}
-      <Image ref={el => imageRefs.current[0] = el} src="/images/brand4.webp" alt="brand1" width={140} height={140} className="absolute left-4 top-4 md:left-16 md:top-10 animate-float-slow" />
-      <Image ref={el => imageRefs.current[1] = el} src="/images/brand5.webp" alt="brand5" width={90} height={90} className="absolute right-8 top-8 md:right-24 md:top-35 animate-float" />
-      <Image ref={el => imageRefs.current[2] = el} src="/images/brand6.webp" alt="brand6" width={40} height={40} className="absolute left-1/4 top-1/2 md:left-1/5 md:top-1/3 animate-float-reverse" />
-      <Image ref={el => imageRefs.current[3] = el} src="/images/brand1.webp" alt="brand1" width={150} height={150} className="absolute right-1/4 top-1/2 md:right-30 md:top-70 animate-float" />
-      <Image ref={el => imageRefs.current[4] = el} src="/images/brand3.webp" alt="brand3" width={150} height={150} className="absolute left-10 bottom-8 md:left-24 md:bottom-16 animate-float-slow" />
-      <Image ref={el => imageRefs.current[5] = el} src="/images/brand2.webp" alt="brand2" width={90} height={90} className="absolute right-10 bottom-8 md:right-64 md:top-16 animate-float-reverse" />
-      <Image ref={el => imageRefs.current[6] = el} src="/images/brand7.webp" alt="brand7" width={40} height={40} className="absolute right-1/2 bottom-4 md:right-125 md:bottom-20 animate-float" />
+      <Image ref={el => imageRefs.current[0] = el} src="/images/brand4.webp" alt="brand1" width={140} height={140} className="absolute left-4 top-4 md:left-16 md:top-10 animate-float-slow w-16 h-16 md:w-[140px] md:h-[140px]" />
+      <Image ref={el => imageRefs.current[1] = el} src="/images/brand5.webp" alt="brand5" width={90} height={90} className="absolute right-8 top-8 md:right-24 md:top-35 animate-float w-12 h-12 md:w-[90px] md:h-[90px]" />
+      <Image ref={el => imageRefs.current[2] = el} src="/images/brand6.webp" alt="brand6" width={40} height={40} className="absolute left-1/4 top-1/2 md:left-1/5 md:top-1/3 animate-float-reverse w-8 h-8 md:w-[40px] md:h-[40px]" />
+      <Image ref={el => imageRefs.current[3] = el} src="/images/brand1.webp" alt="brand1" width={150} height={150} className="absolute right-1/4 top-1/2 md:right-30 md:top-70 animate-float w-16 h-16 md:w-[150px] md:h-[150px]" />
+      <Image ref={el => imageRefs.current[4] = el} src="/images/brand3.webp" alt="brand3" width={150} height={150} className="absolute left-10 bottom-8 md:left-24 md:bottom-16 animate-float-slow w-16 h-16 md:w-[150px] md:h-[150px]" />
+      <Image ref={el => imageRefs.current[5] = el} src="/images/brand2.webp" alt="brand2" width={90} height={90} className="absolute right-10 bottom-8 md:right-64 md:top-16 animate-float-reverse w-12 h-12 md:w-[90px] md:h-[90px]" />
+      <Image ref={el => imageRefs.current[6] = el} src="/images/brand7.webp" alt="brand7" width={40} height={40} className="absolute right-1/2 bottom-4 md:right-125 md:bottom-20 animate-float w-8 h-8 md:w-[40px] md:h-[40px]" />
       {/* Centered Content */}
       <div className="relative w-full flex flex-col items-center justify-center text-center px-4 py-8 z-10">
         <span ref={brandingTextRef} className="text-[#03afd4] text-xl md:text-2xl font-semibold tracking-[0.3em] mb-4">Branding</span>
@@ -76,43 +97,80 @@ const BrandingPlan = () => {
   const descRefs = useRef([])
 
   useGSAP(() => {
-    gsap.set([...imageRefs.current, ...descRefs.current], {
-      opacity: 0,
-      y: -20
-    })
+    // Check if we're on desktop (lg breakpoint and above)
+    const isDesktop = window.innerWidth >= 1024
+    
+    if (isDesktop) {
+      // Complex hover animations for desktop
+      gsap.set([...imageRefs.current, ...descRefs.current], {
+        opacity: 0,
+        y: -20
+      })
+    } else {
+      // Simple fade animations for mobile
+      // Filter out undefined refs before setting
+      const mobileElements = [...imageRefs.current, ...descRefs.current].filter(Boolean)
+      
+      gsap.set(mobileElements, { opacity: 0 })
+      
+      // Create scroll-triggered timeline for mobile
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: imageRefs.current[0],
+          start: "top 80%",
+        }
+      })
+      
+      // Simple fade-in animations for mobile
+      mobileElements.forEach((element, index) => {
+        if (element) {
+          tl.to(element, { 
+            opacity: 1, 
+            duration: 0.6, 
+            ease: "power2.out" 
+          }, index * 0.1)
+        }
+      })
+    }
   }, [])
 
   const handleMouseEnter = (index) => {
-    setHovered(index)
-    gsap.to(imageRefs.current[index], {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: "power2.out"
-    })
-    gsap.to(descRefs.current[index], {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      delay: 0.1,
-      ease: "power2.out"
-    })
+    // Only apply hover effects on desktop
+    if (window.innerWidth >= 1024) {
+      setHovered(index)
+      gsap.to(imageRefs.current[index], {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      })
+      gsap.to(descRefs.current[index], {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        delay: 0.1,
+        ease: "power2.out"
+      })
+    }
   }
 
   const handleMouseLeave = (index) => {
-    setHovered(null)
-    gsap.to(imageRefs.current[index], {
-      opacity: 0,
-      y: -20,
-      duration: 0.4,
-      ease: "power2.in"
-    })
-    gsap.to(descRefs.current[index], {
-      opacity: 0,
-      y: -20,
-      duration: 0.4,
-      ease: "power2.in"
-    })
+    // Only apply hover effects on desktop
+    if (window.innerWidth >= 1024) {
+      setHovered(null)
+      gsap.to(imageRefs.current[index], {
+        opacity: 0,
+        y: -20,
+        duration: 0.4,
+        ease: "power2.in"
+      })
+      gsap.to(descRefs.current[index], {
+        opacity: 0,
+        y: -20,
+        duration: 0.4,
+        ease: "power2.in"
+      })
+    }
   }
 
   return (
@@ -285,26 +343,54 @@ const IndustriesSection = () => {
   const industryRefs = useRef([])
 
   useGSAP(() => {
-    industryRefs.current.forEach((ref, i) => {
-      if (!ref) return
-      gsap.fromTo(ref,
-        {
-          opacity: 0,
-          x: i % 2 === 0 ? 120 : -120
-        },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 1.4,
-          ease: "power3.inOut",
-          scrollTrigger: {
-            trigger: ref,
-            start: "top 80%",
-            toggleActions: "play none none none"
+    // Check if we're on desktop (lg breakpoint and above)
+    const isDesktop = window.innerWidth >= 1024
+    
+    if (isDesktop) {
+      // Complex animations for desktop
+      industryRefs.current.forEach((ref, i) => {
+        if (!ref) return
+        gsap.fromTo(ref,
+          {
+            opacity: 0,
+            x: i % 2 === 0 ? 120 : -120
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 1.4,
+            ease: "power3.inOut",
+            scrollTrigger: {
+              trigger: ref,
+              start: "top 80%",
+              toggleActions: "play none none none"
+            }
           }
+        )
+      })
+    } else {
+      // Individual scroll-triggered fade animations for mobile
+      const validRefs = industryRefs.current.filter(Boolean)
+      
+      gsap.set(validRefs, { opacity: 0 })
+      
+      // Animate each card individually when it comes into view
+      validRefs.forEach((ref, index) => {
+        if (ref) {
+          gsap.to(ref, {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ref,
+              start: "top 85%",
+              end: "bottom 15%",
+              toggleActions: "play none none reverse"
+            }
+          })
         }
-      )
-    })
+      })
+    }
   }, [])
 
   return (
