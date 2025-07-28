@@ -139,6 +139,11 @@ export default function AutomationServicesSection() {
     setHoveredCard(isHovering ? cardId : null)
   }
 
+  const handleCardClick = (cardId) => {
+    // For mobile devices - toggle the hover state on click
+    setHoveredCard(hoveredCard === cardId ? null : cardId)
+  }
+
 
 
   return (
@@ -180,19 +185,20 @@ export default function AutomationServicesSection() {
                 className="relative group"
                 onMouseEnter={() => handleCardHover(service.id, true)}
                 onMouseLeave={() => handleCardHover(service.id, false)}
+                onClick={() => handleCardClick(service.id)}
               >
                 {/* Hover Image */}
                 <div
-                  className={` left-25 absolute inset-x-0 z-10 transition-all duration-500 ease-out ${
+                  className={`absolute left-1/2 transform -translate-x-1/2 z-20 transition-all duration-500 ease-out ${
                     hoveredCard === service.id ? "opacity-100" : "opacity-0 pointer-events-none"
-                  } bottom-full mb-4 ${hoveredCard === service.id ? "translate-y-0 rotate-0" : "translate-y-4 rotate-45"}`}
+                  } bottom-full mb-4 lg:mb-6 ${hoveredCard === service.id ? "translate-y-0 rotate-0" : "translate-y-4 rotate-45"}`}
                 >
                   <Image
                     src={service.hoverImage}
                     alt={service.title}
                     width={300}
                     height={200}
-                    className="w-30 h-auto transition-transform duration-500 ease-out"
+                    className="w-24 h-auto sm:w-28 lg:w-30 transition-transform duration-500 ease-out"
                   />
                 </div>
 
@@ -242,19 +248,20 @@ export default function AutomationServicesSection() {
                 className="relative group"
                 onMouseEnter={() => handleCardHover(service.id, true)}
                 onMouseLeave={() => handleCardHover(service.id, false)}
+                onClick={() => handleCardClick(service.id)}
               >
                 {/* Hover Image */}
                 <div
-                  className={` left-25 absolute inset-x-0 z-10 transition-all duration-500 ease-out ${
+                  className={`absolute left-1/2 transform -translate-x-1/2 z-20 transition-all duration-500 ease-out ${
                     hoveredCard === service.id ? "opacity-100" : "opacity-0 pointer-events-none"
-                  } top-full mt-4 ${hoveredCard === service.id ? "translate-y-0 rotate-0" : "-translate-y-4 rotate-45"}`}
+                  } top-full mt-4 lg:mt-6 ${hoveredCard === service.id ? "translate-y-0 rotate-0" : "-translate-y-4 rotate-45"}`}
                 >
                   <Image
                     src={service.hoverImage}
                     alt={service.title}
                     width={300}
                     height={200}
-                    className="w-30 h-auto transition-transform duration-500 ease-out"
+                    className="w-24 h-auto sm:w-28 lg:w-30 transition-transform duration-500 ease-out"
                   />
                 </div>
 

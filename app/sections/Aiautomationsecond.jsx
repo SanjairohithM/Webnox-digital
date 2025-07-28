@@ -189,14 +189,12 @@ export default function WebnoxDigitalSection() {
         
 
         {/* 3D Illustration */}
-        <div
+        {/* <div
           ref={imageRef}
           className="flex justify-center mt-20"
         >
           <div className="relative min-h-[400px] w-full max-w-4xl">
-            {/* SVG Container - Centered on floor */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/4 z-10">
-              {/* Layer 4 - Bottom-most */}
               <div ref={layer4Ref} className="relative w-full z-20">
               <Image
                 src="/bottom.svg"
@@ -210,7 +208,6 @@ export default function WebnoxDigitalSection() {
 
        
 
-              {/* Layer 2 - Middle (will have gap) */}
               <div ref={layer2Ref} className="absolute top-0 left-0 w-full z-40 opacity-0 invisible">
                 <Image
                   src="/middle.svg"
@@ -220,11 +217,9 @@ export default function WebnoxDigitalSection() {
                   className=""
                   priority
                 />
-                {/* Subtle shadow like reference image */}
                 <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-4/5 h-2 bg-gradient-to-r from-transparent via-cyan-300/30 to-transparent rounded-full blur-sm"></div>
               </div>
 
-              {/* Layer 1 - Top (will have gap) */}
               <div ref={layer1Ref} className="absolute top-0 left-0 w-full z-50 opacity-0 invisible">
                 <Image
                   src="/top.svg"
@@ -234,13 +229,12 @@ export default function WebnoxDigitalSection() {
                   className=""
                   priority
                 />
-                {/* Subtle shadow like reference image */}
                 <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-4/5 h-2 bg-gradient-to-r from-transparent via-cyan-200/30 to-transparent rounded-full blur-sm"></div>
               </div>
 
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
     </>
