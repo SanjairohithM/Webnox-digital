@@ -122,53 +122,53 @@ const HeroSection = () => {
 
   return (
     <section ref={heroRef} className="relative flex flex-col items-center justify-center min-h-[420px] md:min-h-[480px] lg:min-h-[520px] xl:min-h-[600px] w-full bg-white overflow-hidden">
-      {/* Floating Icons */}
-      <div ref={icon1Ref} className="absolute top-36 left-68 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
-        <Image src="/images/consult1.png" alt="Consulting Icon 1" width={32} height={32} className="w-8 h-8" />
+      {/* Floating Icons - Now visible on mobile with responsive positioning */}
+      <div ref={icon1Ref} className="absolute top-16 left-4 sm:top-36 sm:left-68 w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 flex items-center justify-center">
+        <Image src="/images/consult1.png" alt="Consulting Icon 1" width={32} height={32} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-white rounded-full shadow-lg" />
       </div>
       
-      <div ref={icon2Ref} className="absolute top-60 left-4 w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center">
-        <Image src="/images/consult2.png" alt="Consulting Icon 2" width={28} height={28} className="w-7 h-7" />
+      <div ref={icon2Ref} className="absolute top-32 left-2 sm:top-60 sm:left-4 w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 justify-center">
+        <Image src="/images/consult2.png" alt="Consulting Icon 2" width={28} height={28} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 bg-white rounded-full shadow-lg" />
       </div>
       
-      <div ref={icon3Ref} className="absolute bottom-20 left-8 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
-        <Image src="/images/consult3.png" alt="Consulting Icon 3" width={32} height={32} className="w-8 h-8" />
+      <div ref={icon3Ref} className="absolute bottom-32 left-2 sm:bottom-20 sm:left-8 w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 justify-center">
+        <Image src="/images/consult3.png" alt="Consulting Icon 3" width={32} height={32} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-white rounded-full shadow-lg" />
       </div>
-      <div ref={icon4Ref} className="absolute bottom-40 left-68 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
-        <Image src="/images/consult5.png" alt="Consulting Icon 3" width={32} height={32} className="w-8 h-8" />
-      </div>
-      
-      <div ref={icon5Ref} className="absolute top-28 right-68 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
-        <Image src="/images/consult4.png" alt="Consulting Icon 4" width={32} height={32} className="w-8 h-8" />
+      <div ref={icon4Ref} className="absolute bottom-40 left-8 sm:bottom-40 sm:left-68 w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 justify-center">
+        <Image src="/images/consult5.png" alt="Consulting Icon 3" width={32} height={32} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-white rounded-full shadow-lg" />
       </div>
       
-      <div ref={icon6Ref} className="absolute top-1/3 right-4 w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center">
-        <Image src="/images/consult5.png" alt="Consulting Icon 5" width={28} height={28} className="w-7 h-7" />
+      <div ref={icon5Ref} className="absolute top-16 right-4 sm:top-28 sm:right-68 w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 justify-center">
+        <Image src="/images/consult4.png" alt="Consulting Icon 4" width={32} height={32} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-white rounded-full shadow-lg" />
       </div>
       
-      <div ref={icon7Ref} className="absolute bottom-20 right-128 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
-        <Image src="/images/consult6.png" alt="Consulting Icon 6" width={32} height={32} className="w-8 h-8" />
+      <div ref={icon6Ref} className="absolute top-1/3 right-2 sm:top-1/3 sm:right-4 w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 justify-center">
+        <Image src="/images/consult5.png" alt="Consulting Icon 5" width={28} height={28} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 bg-white rounded-full shadow-lg" />
       </div>
-      <div ref={icon8Ref} className="absolute bottom-20 right-38 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center">
-        <Image src="/images/consult2.png" alt="Consulting Icon 6" width={32} height={32} className="w-8 h-8" />
+      
+      <div ref={icon7Ref} className="absolute bottom-20 right-16 sm:bottom-20 sm:right-128 w-8 h-8 sm:w-12 sm:h-12 lg:w-16 lg:h-16 justify-center">
+        <Image src="/images/consult6.png" alt="Consulting Icon 6" width={32} height={32} className="w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-white rounded-full shadow-lg" />
+      </div>
+      <div ref={icon8Ref} className="absolute bottom-32 right-2 sm:bottom-20 sm:right-38 w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 justify-center">
+        <Image src="/images/consult2.png" alt="Consulting Icon 6" width={32} height={32} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 bg-white rounded-full shadow-lg" />
       </div>
 
-      <div className="w-full flex flex-col items-center justify-center text-center px-4 relative z-10">
-        <h1 ref={titleRef} className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-sans font-bold text-gray-600 mb-4 leading-tight">
-          Accelerate Growth with<br />
+      <div className="w-full flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 relative z-10">
+        <h1 ref={titleRef} className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-sans font-bold text-gray-600 mb-4 leading-tight">
+          Accelerate Growth with<br className="hidden sm:block" />
           <span className="font-sans font-bold">
             AI Expert-Led <span className="bg-gradient-to-r from-[#6107AF] to-[#00B9FF] bg-clip-text text-transparent">Digital Consulting</span>
           </span>
         </h1>
         <p
           ref={descRef}
-          className="text-gray-600 text-base md:text-lg max-w-2xl font-sans leading-relaxed text-center mx-auto tracking-wide mb-8"
+          className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl font-sans leading-relaxed text-center mx-auto tracking-wide mb-6 sm:mb-8"
         >
           We align technology, people, and processes to future-proof your business.
         </p>
         <button
           ref={buttonRef}
-          className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-full font-semibold text-sm shadow-md transition-colors duration-300"
+          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 sm:px-6 sm:py-2 rounded-full font-semibold text-xs sm:text-sm shadow-md transition-colors duration-300"
         >
           Know More
         </button>
@@ -195,22 +195,22 @@ const AnimatedTextSection = () => {
   const duplicatedBrands = [...brands, ...brands]
 
   return (
-    <section ref={sectionRef} className="bg-white py-16 px-4 overflow-hidden">
+    <section ref={sectionRef} className="bg-white py-8 sm:py-12 lg:py-16 px-4 overflow-hidden">
       <div className="max-w-full mx-auto">
         <div className="flex items-center animate-ticker-left whitespace-nowrap">
           {duplicatedBrands.map((brand, index) => (
             <div 
               key={index}
-              className="flex items-center space-x-2 opacity-60 hover:opacity-100 transition-opacity duration-300 mx-8 md:mx-12 lg:mx-16"
+              className="flex items-center space-x-2 opacity-60 hover:opacity-100 transition-opacity duration-300 mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-16"
             >
               <Image 
                 src={brand.logo} 
                 alt={brand.name} 
                 width={24} 
                 height={24} 
-                className="w-full h-full object-contain"
+                className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 object-contain"
               />
-              <span className="text-gray-700 font-bold  font-sans text-2xl ">
+              <span className="text-gray-700 font-bold font-sans text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
                 {brand.name}
               </span>
             </div>
@@ -289,23 +289,34 @@ const FutureProofSection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className=" py-8 px-4">
+    <section ref={sectionRef} className="py-8 sm:py-12 lg:py-16 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Text Content */}
-          <div className="space-y-6">
-            <h2 ref={titleRef} className="text-3xl md:text-4xl font-sans font-bold text-gray-800 leading-tight">
+          <div className="space-y-4 sm:space-y-6 order-1 lg:order-1">
+            <h2 ref={titleRef} className="text-2xl sm:text-3xl md:text-4xl font-sans font-bold text-gray-800 leading-tight">
               Future-Proof Your Business with Strategic{" "}
               <span className="bg-gradient-to-r from-[#6107AF] to-[#00B9FF] bg-clip-text text-transparent font-sans">IT Consulting</span>
             </h2>
-            <p ref={descRef} className="text-gray-500 text-lg font-sans leading-relaxed">
+            <p ref={descRef} className="text-gray-500 text-sm sm:text-base lg:text-lg font-sans leading-relaxed">
               At Webnox Digital, our IT consulting services are built for ambitious businesses seeking clarity, speed, and long-term impact. We go beyond traditional advisory, we embed ourselves in your challenges, co-create solutions, and deliver tailored digital strategies that scale with your growth. Whether you're a startup seeking product direction or an enterprise pursuing digital transformation, Webnox delivers IT strategies that work fast, flexibly, and future-ready.
             </p>
           </div>
           
           {/* Right Column - Isometric Illustration */}
-          <div ref={imageRef} className="relative">
-            <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] flex items-center justify-center">
+          <div ref={imageRef} className="relative order-2 lg:order-2">
+            {/* Mobile: Single consolidated image replacing entire SVG section */}
+            <div className="md:hidden relative w-full h-[300px] sm:h-[400px] flex items-center justify-center">
+              <Image 
+                src="/images/consultmob.webp" 
+                alt="IT Consulting Mobile Illustration" 
+                fill
+                className="object-contain"
+              />
+            </div>
+
+            {/* Desktop/Tablet: Base SVG + Individual animated elements */}
+            <div className="hidden md:flex relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] items-center justify-center">
               {/* Base Illustration */}
               <Image 
                 src="/consultsvg1.svg" 
@@ -313,10 +324,10 @@ const FutureProofSection = () => {
                 fill
                 className="object-contain"
               />
-              
-              {/* Overlay Elements */}
+
+              {/* Desktop/Tablet: Individual animated SVG elements */}
               {/* blueman - Upper Right */}
-              <div ref={svg2Ref} className="absolute top-50 left-57 w-16 h-20">
+              <div ref={svg2Ref} className="hidden md:block absolute top-50 left-57 w-12 h-16 md:w-16 md:h-20">
                 <Image 
                   src="/consultsvg2.svg" 
                   alt="blueman" 
@@ -326,7 +337,7 @@ const FutureProofSection = () => {
               </div>
               
               {/* Person with Laptop - Mid Left */}
-              <div ref={svg3Ref} className="absolute top-44 right-72 w-16 h-20">
+              <div ref={svg3Ref} className="hidden md:block absolute top-44 right-72 w-12 h-16 md:w-16 md:h-20">
                 <Image 
                   src="/consultsvg3.svg" 
                   alt="Person with Laptop" 
@@ -336,7 +347,7 @@ const FutureProofSection = () => {
               </div>
               
               {/* drone - Top Right */}
-              <div ref={svg4Ref} className="absolute top-20 right-50 w-26 h-30">
+              <div ref={svg4Ref} className="hidden md:block absolute top-20 right-50 w-20 h-24 md:w-26 md:h-30">
                 <Image 
                   src="/consultsvg4.svg" 
                   alt="drone" 
@@ -346,7 +357,7 @@ const FutureProofSection = () => {
               </div>
               
               {/* Person with Document - Upper Middle */}
-              <div ref={svg5Ref} className="absolute bottom-48 left-67 transform -translate-x-1/2 w-16 h-20">
+              <div ref={svg5Ref} className="hidden md:block absolute bottom-48 left-67 transform -translate-x-1/2 w-12 h-16 md:w-16 md:h-20">
                 <Image 
                   src="/consultsvg5.svg" 
                   alt="Person with Document" 
@@ -356,7 +367,7 @@ const FutureProofSection = () => {
               </div>
               
               {/* Person with Magnifying Glass - Bottom Middle */}
-              <div ref={svg6Ref} className="absolute bottom-53 left-64 transform -translate-x-1/2 w-30 h-30">
+              <div ref={svg6Ref} className="hidden md:block absolute bottom-53 left-64 transform -translate-x-1/2 w-24 h-24 md:w-30 md:h-30">
                 <Image 
                   src="/consultsvg6.svg" 
                   alt="Person with Magnifying Glass" 
@@ -364,8 +375,6 @@ const FutureProofSection = () => {
                   className="object-contain"
                 />
               </div>
-              
-            
             </div>
           </div>
         </div>
@@ -381,6 +390,7 @@ const RobotSection = () => {
   const circleRef = useRef(null)
   const textBlocksRef = useRef([])
   const bannerRef = useRef(null)
+  const mobileBannerRef = useRef(null)
 
   const textBlocks = [
     {
@@ -449,10 +459,56 @@ const RobotSection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white py-20 px-4 relative font-sans">
+    <section ref={sectionRef} className="bg-white py-8 sm:py-12 lg:py-16 xl:py-20 px-4 relative font-sans">
       <div className="max-w-7xl mx-auto relative">
-        {/* Central Robot Illustration with Surrounding Text */}
-        <div className="relative flex items-center justify-center mb-16 min-h-[500px]">
+        
+        {/* Mobile Layout - Stacked */}
+        <div className="lg:hidden space-y-8 mb-12">
+          {/* Robot Image - Mobile */}
+          <div ref={robotRef} className="relative flex justify-center mb-8">
+            <div className="relative">
+              {/* Small blue circle behind robot */}
+              <div ref={circleRef} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-56 sm:h-56 bg-[#E2F7FF] rounded-full opacity-60 z-0"></div>
+              
+              {/* Robot Image */}
+              <div className="relative z-10">
+                <Image 
+                  src="/images/robocons.webp" 
+                  alt="Robot Consultant" 
+                  width={300} 
+                  height={400} 
+                  className="w-64 h-64 sm:w-80 sm:h-80 object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Banner - Right after the robot image */}
+          <div 
+            ref={mobileBannerRef}
+            className="bg-gradient-to-r from-[#EFF7FF] to-[#B8DDFF] rounded-lg p-4 sm:p-6 text-center w-full sm:w-3/4 max-w-xl mx-auto mb-8"
+          >
+            <h2 className="text-xl sm:text-2xl font-bold text-[#00B9FF] mb-2 sm:mb-3">What we do</h2>
+            <p className="text-gray-700 text-sm sm:text-base">Webnox takes a leaner, smarter, and more personalized approach.</p>
+          </div>
+
+          {/* Text Blocks - Mobile Stacked */}
+          <div className="space-y-6 sm:space-y-8">
+            {textBlocks.map((block, index) => (
+              <div 
+                key={index}
+                ref={el => textBlocksRef.current[index] = el}
+                className="text-center sm:text-left px-4"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">{block.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-base sm:text-lg">{block.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Layout - Complex Positioning */}
+        <div className="hidden lg:block relative mb-16 min-h-[500px]">
           {/* Left Side Text Blocks */}
           <div className="absolute left-0 top-0 w-80 space-y-16">
             {/* Top Left */}
@@ -460,8 +516,8 @@ const RobotSection = () => {
               ref={el => textBlocksRef.current[0] = el}
               className="text-left pr-8"
             >
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[0].title}</h3>
-              <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[0].desc}</p>
+              <h3 className="text-xl xl:text-2xl font-bold text-gray-800 mb-4">{textBlocks[0].title}</h3>
+              <p className="text-gray-600 leading-relaxed text-base xl:text-lg">{textBlocks[0].desc}</p>
             </div>
 
             {/* Bottom Left */}
@@ -469,13 +525,13 @@ const RobotSection = () => {
               ref={el => textBlocksRef.current[2] = el}
               className="text-left pr-8"
             >
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[2].title}</h3>
-              <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[2].desc}</p>
+              <h3 className="text-xl xl:text-2xl font-bold text-gray-800 mb-4">{textBlocks[2].title}</h3>
+              <p className="text-gray-600 leading-relaxed text-base xl:text-lg">{textBlocks[2].desc}</p>
             </div>
           </div>
 
           {/* Central Robot Illustration */}
-          <div ref={robotRef} className="relative w-96 h-[500px] mx-12">
+          <div ref={robotRef} className="relative w-96 h-[500px] mx-auto">
             {/* Small blue circle behind robot */}
             <div ref={circleRef} className="absolute top-30 left-45 transform -translate-x-1/2 -translate-y-1/2 w-65 h-65 bg-[#E2F7FF] rounded-full opacity-60 z-0"></div>
             
@@ -490,8 +546,6 @@ const RobotSection = () => {
                   height={400} 
                   className="w-90 h-90 object-contain"
                 />
-                
-               
               </div>
             </div>
           </div>
@@ -503,8 +557,8 @@ const RobotSection = () => {
               ref={el => textBlocksRef.current[1] = el}
               className="text-left pl-8"
             >
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[1].title}</h3>
-              <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[1].desc}</p>
+              <h3 className="text-xl xl:text-2xl font-bold text-gray-800 mb-4">{textBlocks[1].title}</h3>
+              <p className="text-gray-600 leading-relaxed text-base xl:text-lg">{textBlocks[1].desc}</p>
             </div>
 
             {/* Bottom Right */}
@@ -512,8 +566,8 @@ const RobotSection = () => {
               ref={el => textBlocksRef.current[3] = el}
               className="text-left pl-8"
             >
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">{textBlocks[3].title}</h3>
-              <p className="text-gray-600 leading-relaxed text-lg">{textBlocks[3].desc}</p>
+              <h3 className="text-xl xl:text-2xl font-bold text-gray-800 mb-4">{textBlocks[3].title}</h3>
+              <p className="text-gray-600 leading-relaxed text-base xl:text-lg">{textBlocks[3].desc}</p>
             </div>
           </div>
         </div>
@@ -521,10 +575,10 @@ const RobotSection = () => {
         {/* Bottom Banner Overlay */}
         <div 
           ref={bannerRef}
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#EFF7FF] to-[#B8DDFF] rounded-t-lg p-7 text-center w-1/2 max-w-xl"
+          className="hidden lg:block bg-gradient-to-r from-[#EFF7FF] to-[#B8DDFF] rounded-lg lg:rounded-t-lg p-4 sm:p-6 lg:p-7 text-center w-full sm:w-3/4 lg:w-1/2 max-w-xl mx-auto lg:absolute lg:bottom-0 lg:left-1/2 lg:transform lg:-translate-x-1/2"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-[#00B9FF] mb-3">What we do</h2>
-          <p className="text-gray-700 text-lg">Webnox takes a leaner, smarter, and more personalized approach.</p>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#00B9FF] mb-2 sm:mb-3">What we do</h2>
+          <p className="text-gray-700 text-sm sm:text-base lg:text-lg">Webnox takes a leaner, smarter, and more personalized approach.</p>
         </div>
       </div>
     </section>
@@ -597,49 +651,49 @@ const CoreServicesSection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white py-20 px-4 font-sans">
+    <section ref={sectionRef} className="bg-white py-8 sm:py-12 lg:py-16 xl:py-20 px-4 font-sans">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 ref={titleRef} className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 ref={titleRef} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 sm:mb-6">
             Our Core{" "}
             <span className="bg-gradient-to-r from-[#6107AF] to-[#00B9FF] bg-clip-text text-transparent">IT Consulting Services</span>
           </h2>
-          <p ref={descRef} className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+          <p ref={descRef} className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
             At Webnox, our consulting services go beyond advice; we deliver frameworks that seamlessly connect your technology investments with your business vision.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {services.map((service, index) => (
             <div
               key={index}
               ref={el => servicesRef.current[index] = el}
-              className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 hover:bg-[#00B9FF] group cursor-pointer"
+              className="bg-gray-50 rounded-xl p-4 sm:p-6 lg:p-8 hover:shadow-lg transition-all duration-300 hover:bg-[#00B9FF] group cursor-pointer"
             >
-              <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 rounded-lg flex items-center justify-center transition-all duration-300">
+              <div className="flex items-start sm:items-center space-x-3 sm:space-x-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-lg flex items-center justify-center transition-all duration-300 flex-shrink-0">
                   <Image 
                     src={service.icon} 
                     alt={service.title} 
                     width={32} 
                     height={32} 
-                    className="w-8 h-8 object-contain group-hover:hidden"
+                    className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 object-contain group-hover:hidden"
                   />
                   <Image 
                     src={service.hoverIcon} 
                     alt={service.title} 
                     width={32} 
                     height={32} 
-                    className="w-8 h-8 object-contain hidden group-hover:block"
+                    className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 object-contain hidden group-hover:block"
                   />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-800 group-hover:text-white mb-2 transition-colors duration-300">
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-800 group-hover:text-white mb-2 transition-colors duration-300 leading-tight">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 group-hover:text-white/80 text-sm transition-colors duration-300 hidden group-hover:block">
+                  <p className="text-gray-600 group-hover:text-white/80 text-xs sm:text-sm transition-colors duration-300 block sm:hidden lg:hidden group-hover:block leading-relaxed">
                     {service.description}
                   </p>
                 </div>
@@ -678,31 +732,31 @@ const FAQSection = () => {
   const [openIdx, setOpenIdx] = React.useState(0);
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-8 sm:py-12 lg:py-16 xl:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
-        <div className="mb-16">
-          <h2 className="text-4xl font-extrabold text-black mb-2">Frequently</h2>
-          <span className="text-4xl font-bold text-sky-500">asked questions</span>
+        <div className="mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black mb-2">Frequently</h2>
+          <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sky-500">asked questions</span>
         </div>
-        {/* Two-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+        {/* Responsive layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
           {/* FAQ Accordion */}
-          <div className="md:col-span-2 flex flex-col gap-4">
+          <div className="lg:col-span-2 flex flex-col gap-3 sm:gap-4">
             {faqs.map((faq, idx) => (
               <div
                 key={idx}
                 className={`rounded-xl border border-gray-200 bg-white transition-shadow ${openIdx === idx ? 'shadow-md' : 'hover:shadow'} `}
               >
                 <button
-                  className="w-full flex justify-between items-center px-6 py-5 text-left focus:outline-none"
+                  className="w-full flex justify-between items-center px-4 sm:px-6 py-4 sm:py-5 text-left focus:outline-none"
                   onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
                 >
-                  <span className="text-lg font-medium text-gray-900">{faq.question}</span>
-                  <span className="text-4xl  font-semibold">{openIdx === idx ? '-' : '+'}</span>
+                  <span className="text-base sm:text-lg font-medium text-gray-900 pr-4">{faq.question}</span>
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold flex-shrink-0">{openIdx === idx ? '-' : '+'}</span>
                 </button>
                 {openIdx === idx && (
-                  <div className="px-6 pb-5 text-gray-600 text-sm leading-relaxed">
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-5 text-gray-600 text-sm leading-relaxed">
                     {faq.answer}
                   </div>
                 )}
@@ -710,19 +764,19 @@ const FAQSection = () => {
             ))}
           </div>
           {/* Right Card */}
-          <div className="rounded-xl border border-gray-200 bg-white p-8 flex flex-col items-center text-center min-h-[320px]">
-            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6 overflow-hidden">
+          <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6 lg:p-8 flex flex-col items-center text-center min-h-[280px] sm:min-h-[320px]">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 sm:mb-6 overflow-hidden">
               <Image
                 src="/images/fi_7.webp"
                 alt="FAQ Icon"
                 width={48}
                 height={48}
-                className="object-contain w-10 h-10"
+                className="object-contain w-8 h-8 sm:w-10 sm:h-10"
               />
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
-            <p className="text-gray-500 text-sm mb-6">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
-            <button className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-6 py-3 transition-colors shadow-sm">Shoot a Direct Mail</button>
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
+            <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
+            <button className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition-colors shadow-sm">Shoot a Direct Mail</button>
           </div>
         </div>
       </div>

@@ -141,7 +141,7 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row gap-12 ">
               <div>
                 <h4 className="text-base font-urbanist text-gray-500 uppercase tracking-wider mb-3">SIGN UP</h4>
-                <p className="text-gray-900 font-urbanist font-semibold text-lg">+000 0000 0000</p>
+                <p className="text-gray-900 font-urbanist font-semibold text-lg">+91 97865 57739</p>
               </div>
 
               <div>
@@ -151,7 +151,7 @@ export default function Footer() {
 
               <div>
                 <h4 className="text-base font-urbanist text-gray-500 uppercase tracking-wider mb-3">EMAIL</h4>
-                <p className="text-gray-900 font-urbanist font-semibold text-lg">youremail@mail.com</p>
+                <p className="text-gray-900 font-urbanist font-semibold text-lg">info@webnoxdigital.com</p>
               </div>
             </div>
 
@@ -162,7 +162,7 @@ export default function Footer() {
                 <br />
                 Solutions
               </p>
-              <p className="text-gray-400 font-urbanist font-semibold text-lg">© 2045-Copyright</p>
+              <p className="text-gray-400 font-urbanist font-semibold text-lg">© 2025-Copyright</p>
             </div>
           </div>
         </div>
