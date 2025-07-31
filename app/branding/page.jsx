@@ -398,6 +398,7 @@ const IndustriesSection = () => {
       <div className="flex flex-col items-center w-full">
         <h2 className="text-3xl md:text-5xl font-sans font-semibold text-center mb-2">
           Industries <span className="text-sky-500">we serve</span>
+          
         </h2>
         <p className="text-gray-500 text-center mb-16 text-xl max-w-3xl font-sans py-4">
           It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
