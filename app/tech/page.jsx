@@ -288,15 +288,15 @@ const CTASection = () => {
               Start Your Project
             </button>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-white pt-25 leading-tight text-left">
+          <h2 className="text-3xl md:text-4xl lg:text-4xl  font-bold text-white pt-25 leading-tight text-left ml-4 md:-ml-28 -mt-10">
             Let's Build the Future Together
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-12 max-w-3xl leading-relaxed text-left">
+          <p className="text-lg md:text-xl  text-white/90 mb-12 max-w-3xl leading-relaxed text-left ml-4 md:-ml-28 ">
             Ready to transform your business with cutting-edge technology? Let's discuss how we can bring your vision to life.
           </p>
           {/* "Get Started" button left-aligned below */}
           <div className="flex">
-            <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-4 ">
+            <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12 ">
               Get Started
             </button>
           </div>
@@ -306,7 +306,7 @@ const CTASection = () => {
         <div className="block lg:hidden">
           <div className="max-w-md mx-auto">
             {/* Card Container */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/30">
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/30 ">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 leading-tight text-center">
                 Let's Build the Future Together
               </h2>
@@ -316,7 +316,7 @@ const CTASection = () => {
               
               {/* Buttons in card */}
               <div className="flex flex-col space-y-3">
-                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
                   Get Started
                 </button>
                 <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#00B9FF] w-full">
