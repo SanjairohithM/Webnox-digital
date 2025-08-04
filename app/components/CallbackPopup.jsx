@@ -3,197 +3,49 @@
 import { useState, useEffect, useRef } from "react"
 import { X, Phone, Mail, CheckCircle, AlertCircle, Sparkles } from "lucide-react"
 import { gsap } from "gsap"
+import Lottie from "lottie-react"
 
-// Enhanced Professional Poppers with more effects
-const EnhancedPoppers = ({ show, onComplete }) => {
-  const containerRef = useRef(null)
-  const leftPopperRef = useRef(null)
-  const rightPopperRef = useRef(null)
-  const sparklesRef = useRef(null)
-
-  const colors = [
-    "#FF6B6B",
-    "#4ECDC4",
-    "#45B7D1",
-    "#96CEB4",
-    "#FFEAA7",
-    "#DDA0DD",
-    "#FF8A80",
-    "#80CBC4",
-    "#90CAF9",
-    "#C8E6C9",
-    "#FFF59D",
-    "#F8BBD9",
-    "#D1C4E9",
-    "#FFCC80",
-    "#B39DDB",
-    "#A5D6A7",
-    "#FFD700",
-    "#FF69B4",
-    "#00CED1",
-    "#98FB98",
-    "#F0E68C",
-    "#DDA0DD",
-    "#87CEEB",
-    "#F5DEB3",
-  ]
-
-  const createConfetti = (container, side) => {
-    const confettiCount = 200
-    const confettiElements = []
-
-    for (let i = 0; i < confettiCount; i++) {
-      const confetti = document.createElement("div")
-      confetti.className = "confetti-piece"
-
-      const width = Math.random() * 15 + 8
-      const height = Math.random() * 20 + 10
-
-      confetti.style.position = "absolute"
-      confetti.style.width = width + "px"
-      confetti.style.height = height + "px"
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]
-      confetti.style.bottom = "0px"
-      confetti.style[side] = "20px"
-      confetti.style.zIndex = "1000"
-      confetti.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px"
-
-      // Enhanced clip paths for more variety
-      const clipPaths = [
-        "polygon(0% 0%, 85% 5%, 90% 35%, 95% 70%, 80% 90%, 25% 95%, 10% 60%, 5% 25%)",
-        "polygon(5% 0%, 95% 10%, 85% 40%, 100% 75%, 70% 90%, 20% 85%, 0% 50%, 15% 20%)",
-        "polygon(10% 5%, 80% 0%, 100% 30%, 90% 65%, 75% 95%, 30% 90%, 5% 70%, 0% 35%)",
-        "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)",
-        "circle(50%)",
-        "polygon(20% 0%, 80% 0%, 100% 60%, 80% 100%, 20% 100%, 0% 60%)",
-      ]
-
-      confetti.style.clipPath = clipPaths[Math.floor(Math.random() * clipPaths.length)]
-      confetti.style.boxShadow = `0 2px 8px rgba(0,0,0,0.15)`
-      confetti.style.transform = `rotate(${Math.random() * 45 - 22.5}deg)`
-
-      container.appendChild(confetti)
-      confettiElements.push(confetti)
-    }
-
-    return confettiElements
-  }
-
-  const createSparkles = () => {
-    if (!sparklesRef.current) return []
-
-    const sparkleCount = 50
-    const sparkleElements = []
-
-    for (let i = 0; i < sparkleCount; i++) {
-      const sparkle = document.createElement("div")
-      sparkle.innerHTML = "✨"
-      sparkle.style.position = "absolute"
-      sparkle.style.fontSize = Math.random() * 20 + 10 + "px"
-      sparkle.style.left = Math.random() * 100 + "%"
-      sparkle.style.top = Math.random() * 100 + "%"
-      sparkle.style.zIndex = "1001"
-      sparkle.style.pointerEvents = "none"
-
-      sparklesRef.current.appendChild(sparkle)
-      sparkleElements.push(sparkle)
-    }
-
-    return sparkleElements
-  }
-
-  const animatePoppers = () => {
-    if (!leftPopperRef.current || !rightPopperRef.current || !sparklesRef.current) return
-
-    // Clear previous effects
-    leftPopperRef.current.innerHTML = ""
-    rightPopperRef.current.innerHTML = ""
-    sparklesRef.current.innerHTML = ""
-
-    // Create confetti and sparkles
-    const leftConfetti = createConfetti(leftPopperRef.current, "left")
-    const rightConfetti = createConfetti(rightPopperRef.current, "right")
-    const sparkles = createSparkles()
-
-    // Master timeline
-    const masterTl = gsap.timeline()
-
-    // Animate left confetti
-    leftConfetti.forEach((confetti, index) => {
-      masterTl.to(
-        confetti,
-        {
-          x: Math.random() * 500 + 150,
-          y: -(Math.random() * 600 + 400),
-          rotation: Math.random() * 1080 - 540,
-          scale: Math.random() * 1.2 + 0.3,
-          opacity: 0,
-          duration: Math.random() * 3 + 2,
-          ease: "power3.out",
-          delay: Math.random() * 0.5,
-        },
-        index * 0.003,
-      )
-    })
-
-    // Animate right confetti
-    rightConfetti.forEach((confetti, index) => {
-      masterTl.to(
-        confetti,
-        {
-          x: -(Math.random() * 500 + 150),
-          y: -(Math.random() * 600 + 400),
-          rotation: Math.random() * 1080 - 540,
-          scale: Math.random() * 1.2 + 0.3,
-          opacity: 0,
-          duration: Math.random() * 3 + 2,
-          ease: "power3.out",
-          delay: Math.random() * 0.5,
-        },
-        index * 0.003,
-      )
-    })
-
-    // Animate sparkles
-    sparkles.forEach((sparkle, index) => {
-      masterTl.to(
-        sparkle,
-        {
-          y: -Math.random() * 300 - 100,
-          x: (Math.random() - 0.5) * 200,
-          rotation: Math.random() * 360,
-          scale: 0,
-          opacity: 0,
-          duration: Math.random() * 2 + 1.5,
-          ease: "power2.out",
-          delay: Math.random() * 0.8,
-        },
-        index * 0.02,
-      )
-    })
-
-    // Cleanup
-    setTimeout(() => {
-      leftConfetti.forEach((confetti) => confetti.remove())
-      rightConfetti.forEach((confetti) => confetti.remove())
-      sparkles.forEach((sparkle) => sparkle.remove())
-      onComplete()
-    }, 4000)
-  }
+// Lottie Confetti Animation
+const LottieConfetti = ({ show, onComplete }) => {
+  const [confettiData, setConfettiData] = useState(null)
+  const lottieRef = useRef(null)
 
   useEffect(() => {
-    if (show) {
-      animatePoppers()
-    }
-  }, [show])
+    // Load the confetti animation data
+    fetch('/Confetti.json')
+      .then(response => response.json())
+      .then(data => setConfettiData(data))
+      .catch(error => console.error('Error loading confetti animation:', error))
+  }, [])
 
-  if (!show) return null
+  useEffect(() => {
+    if (show && lottieRef.current) {
+      // Play the animation
+      lottieRef.current.play()
+      
+      // Complete after animation duration (adjust as needed)
+      const timer = setTimeout(() => {
+        onComplete()
+      }, 5000) // 5 seconds
+
+      return () => clearTimeout(timer)
+    }
+  }, [show, onComplete])
+
+  if (!show || !confettiData) return null
 
   return (
-    <div ref={containerRef} className="fixed inset-0 pointer-events-none overflow-hidden z-[120]">
-      <div ref={leftPopperRef} className="absolute bottom-0 left-0 w-20 h-20" />
-      <div ref={rightPopperRef} className="absolute bottom-0 right-0 w-20 h-20" />
-      <div ref={sparklesRef} className="absolute inset-0" />
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-[120]">
+      <Lottie
+        lottieRef={lottieRef}
+        animationData={confettiData}
+        loop={false}
+        autoplay={false}
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
+      />
     </div>
   )
 }
@@ -459,7 +311,7 @@ export default function AdvancedCallbackPopup({ isOpen, onClose }) {
 
   return (
     <>
-      <EnhancedPoppers show={showConfetti} onComplete={() => setShowConfetti(false)} />
+      <LottieConfetti show={showConfetti} onComplete={() => setShowConfetti(false)} />
 
       <div
         ref={overlayRef}
