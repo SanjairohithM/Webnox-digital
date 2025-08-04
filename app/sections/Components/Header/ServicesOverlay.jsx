@@ -31,7 +31,7 @@ const services = [
     title: "Emerging Tech",
     description: "Web3, blockchain, AR/VR, and IoT for real-world impact.",
     image: "/images/service4.webp",
-    href: "/services"
+    href: "/tech"
   },
   {
     title: "Out Sourcing",
