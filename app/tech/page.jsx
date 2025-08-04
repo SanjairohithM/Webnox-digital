@@ -224,6 +224,113 @@ const TechnologySection = () => {
   )
 }
 
+// Call to Action Section Component
+const CTASection = () => {
+  const sectionRef = useRef(null)
+  const contentRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Set initial state
+      gsap.set(contentRef.current, { opacity: 0, y: 50 })
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        }
+      })
+      
+      tl.to(contentRef.current, { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        ease: "power2.out" 
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+    return (
+    <section ref={sectionRef} className="relative w-full min-h-[500px] overflow-hidden font-sans">
+      {/* Background Image - Desktop Only */}
+      <div className="absolute inset-0 hidden lg:block">
+        <Image
+          src="/images/Clientstech.png"
+          alt="CTA Background"
+          fill
+          className="object-contain w-full h-full"
+          priority
+        />
+      </div>
+      
+      {/* Blue Background - Mobile Only */}
+      <div className="absolute inset-0 lg:hidden bg-gradient-to-br from-[#00B9FF] to-[#0090CC]"></div>
+
+      {/* Content */}
+      <div
+        ref={contentRef}
+        className="relative z-10 flex flex-col justify-center min-h-[500px] px-4"
+      >
+        {/* Desktop Layout - Keep existing perfect design */}
+        <div className="hidden lg:flex flex-col items-start text-left max-w-4xl w-full mx-auto">
+          {/* "Start Your Project" button at right top */}
+          <div className="flex justify-end">
+            <button
+              className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-18 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white"
+              style={{
+                position: "absolute",
+                top: "165px",
+                right: "140px",
+                zIndex: 20,
+              }}
+            >
+              Start Your Project
+            </button>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-white pt-25 leading-tight text-left">
+            Let's Build the Future Together
+          </h2>
+          <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-12 max-w-3xl leading-relaxed text-left">
+            Ready to transform your business with cutting-edge technology? Let's discuss how we can bring your vision to life.
+          </p>
+          {/* "Get Started" button left-aligned below */}
+          <div className="flex">
+            <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-4 ">
+              Get Started
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Card Layout */}
+        <div className="block lg:hidden">
+          <div className="max-w-md mx-auto">
+            {/* Card Container */}
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/30">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 leading-tight text-center">
+                Let's Build the Future Together
+              </h2>
+              <p className="text-sm sm:text-base text-gray-700 mb-6 leading-relaxed text-center">
+                Ready to transform your business with cutting-edge technology? Let's discuss how we can bring your vision to life.
+              </p>
+              
+              {/* Buttons in card */}
+              <div className="flex flex-col space-y-3">
+                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                  Get Started
+                </button>
+                <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#00B9FF] w-full">
+                  Start Your Project
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 
 const TechPage = () => {
   return (
@@ -231,6 +338,8 @@ const TechPage = () => {
       <HeroSection />
   
       <TechnologySection />
+      
+      <CTASection />
    
       <Footer />
     </main>
