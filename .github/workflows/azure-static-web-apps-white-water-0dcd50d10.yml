@@ -18,43 +18,30 @@ jobs:
        id-token: write
        contents: read
     steps:
+      # 1. Checkout repo
       - uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
 
-      # Optional step from your old workflow (not really required for Next.js deployment)
-      - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client
-
-      - name: Get Id Token
-        uses: actions/github-script@v6
-        id: idtoken
-        with:
-           script: |
-               const coredemo = require('@actions/core')
-               return await coredemo.getIDToken()
-           result-encoding: string
-
-      # ✅ Explicitly install and build the Next.js app
+      # 2. Build Next.js manually (inside /app)
       - name: Install and Build Next.js
         run: |
           cd app
           npm install
           npm run build
 
+      # 3. Deploy prebuilt app
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_WATER_0DCD50D10 }}
           action: "upload"
-          ###### Repository/Build Configurations ######
-          app_location: "app"      # points to Next.js project folder
-          api_location: ""         # empty for Next.js API routes
-          output_location: ".next" # Next.js build output folder
+          app_location: "app"   # folder with package.json
+          api_location: ""      # empty for Next.js API routes
+          output_location: ""   # empty because we already built manually
           github_id_token: ${{ steps.idtoken.outputs.result }}
-          ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -66,7 +53,3 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: "close"
-
-
-
-
