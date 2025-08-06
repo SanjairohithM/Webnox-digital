@@ -23,6 +23,7 @@ const HeroSection = () => {
   const titleRef = useRef(null)
   const descRef = useRef(null)
   const buttonRef = useRef(null)
+  const titleLettersRef = useRef([])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -30,8 +31,8 @@ const HeroSection = () => {
       const isDesktop = window.innerWidth >= 1024
       
       if (isDesktop) {
-        // Complex animations for desktop
-        gsap.set([titleRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 40 })
+        // Complex animations for desktop with letter-by-letter title animation
+        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 20 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -40,12 +41,19 @@ const HeroSection = () => {
           }
         })
         
-        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+        // Animate title letters one by one
+        tl.to(titleLettersRef.current, { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.4, 
+          ease: "power2.out",
+          stagger: 0.03 // 30ms delay between each letter
+        })
           .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
           .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
       } else {
-        // Simple fade animations for mobile
-        gsap.set([titleRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 30 })
+        // Simple fade animations for mobile with letter-by-letter title animation
+        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 15 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -54,7 +62,14 @@ const HeroSection = () => {
           }
         })
         
-        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+        // Animate title letters one by one (faster on mobile)
+        tl.to(titleLettersRef.current, { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.3, 
+          ease: "power2.out",
+          stagger: 0.02 // 20ms delay between each letter
+        })
           .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
           .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
       }
@@ -72,7 +87,33 @@ const HeroSection = () => {
     >
       <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-4xl mx-auto mt-20">
         <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-sans font-bold text-[#00B9FF] mb-4 leading-tight">
-          Explore the technologies<br />shaping tomorrow
+          {"Explore the technologies".split("").map((char, index) => (
+            <span
+              key={index}
+              ref={(el) => (titleLettersRef.current[index] = el)}
+              className="inline-block"
+              style={{ 
+                marginRight: char === " " ? "0.75rem" : "0",
+                minWidth: char === " " ? "0.75rem" : "auto"
+              }}
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
+          <br />
+          {"shaping tomorrow".split("").map((char, index) => (
+            <span
+              key={index + "Explore the technologies".length}
+              ref={(el) => (titleLettersRef.current[index + "Explore the technologies".length] = el)}
+              className="inline-block"
+              style={{ 
+                marginRight: char === " " ? "0.75rem" : "0",
+                minWidth: char === " " ? "0.75rem" : "auto"
+              }}
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
         </h1>
         <p
           ref={descRef}
@@ -201,7 +242,7 @@ const TechnologySection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white my-20 font-sans">
+    <section ref={sectionRef} className="bg-white  font-sans">
       <div className="max-w-7xl mx-auto px-4">
         {/* Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

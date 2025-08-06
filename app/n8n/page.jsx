@@ -20,12 +20,19 @@ if (typeof window !== "undefined") {
 // Hero Section Component
 const HeroSection = () => {
   const heroRef = useRef(null)
-  const titleRef = useRef(null)
-  const descRef = useRef(null)
+  const titleBlueRef = useRef(null)
+  const titleBlackRef = useRef(null)
+  const desc1Ref = useRef(null)
+  const desc2Ref = useRef(null)
+  const desc3Ref = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, descRef.current], { opacity: 0, y: 40 })
+      // Set initial state - hide all elements
+      gsap.set([titleBlueRef.current, titleBlackRef.current, desc1Ref.current, desc2Ref.current, desc3Ref.current], { 
+        opacity: 0, 
+        y: 20 
+      })
       
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -34,14 +41,18 @@ const HeroSection = () => {
         }
       })
       
-      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
+      // Animate each element with a quick fade-in
+      tl.to(titleBlueRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" })
+        .to(titleBlackRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" }, "-=0.2")
+        .to(desc1Ref.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" }, "-=0.2")
+        .to(desc2Ref.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" }, "-=0.2")
+        .to(desc3Ref.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" }, "-=0.2")
     }, heroRef)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={heroRef} className="relative flex items-center justify-center min-h-[420px] md:min-h-[480px] lg:min-h-[520px] xl:min-h-[600px] w-full overflow-hidden ">
+    <section ref={heroRef} className="relative flex items-center justify-center min-h-[420px] md:min-h-[480px] lg:min-h-[520px] xl:min-h-[600px] w-full overflow-hidden pt-20 ">
       {/* Background with light blue gradient */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#e1edf0] via-[#f2f4f5] to-white"></div>
       {/* Background Image with reduced opacity */}
@@ -55,19 +66,28 @@ const HeroSection = () => {
         />
       </div>
       <div className="relative w-full flex flex-col items-center justify-center text-center px-4 mt-15">
-        <h1 ref={titleRef} className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold mb-6">
-          <span className="text-[#00BFFF]">Still doing repetitive tasks</span>
+        <h1 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold mb-6">
+          <span ref={titleBlueRef} className="text-[#00BFFF] inline-block">
+            Still doing repetitive tasks
+          </span>
           <br />
-          <span className="text-black">manually?</span>
+          <span ref={titleBlackRef} className="text-black inline-block">
+            manually?
+          </span>
         </h1>
-        <p
-          ref={descRef}
-          className="text-[#333] text-lg md:text-xl max-w-4xl font-sans leading-relaxed text-center mx-auto tracking-wide mt-4 mb-8"
-        >
-          Juggling Google Sheets, CRMs, APIs, and email without sync?<br/>
-          Your business deserves better.<br/><br/>
-          At Webnox Digital, we help startups, agencies, SaaS companies, and enterprises automate daily operations, marketing, and data flows using the open-source power of n8n.
-        </p>
+        <div className="text-[#333] text-lg md:text-xl max-w-4xl font-sans leading-relaxed text-center mx-auto tracking-wide mt-4 mb-8">
+          <p ref={desc1Ref} className="inline-block mb-2">
+            Juggling Google Sheets, CRMs, APIs, and email without sync?
+          </p>
+          <br/>
+          <p ref={desc2Ref} className="inline-block mb-4">
+            Your business deserves better.
+          </p>
+          <br/><br/>
+          <p ref={desc3Ref} className="inline-block">
+            At Webnox Digital, we help startups, agencies, SaaS companies, and enterprises automate daily operations, marketing, and data flows using the open-source power of n8n.
+          </p>
+        </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
           <button className="bg-[#00BFFF] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0099CC] transition-colors duration-300">
             Book Free Automation Audit
@@ -474,6 +494,84 @@ const WhyN8nWebnoxSection = () => {
   )
 }
 
+const FAQSection = () => {
+  const faqs = [
+    {
+      question: "What types of businesses benefit from your consulting services?",
+      answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+    },
+    {
+      question: "How does Webnox approach digital transformation?",
+      answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+    },
+    {
+      question: "What makes your consulting different from traditional firms?",
+      answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+    },
+    {
+      question: "What makes Webnox Digital a reliable IT consulting partner?",
+      answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
+    },
+    {
+      question: "What industries do you specialize in for IT consulting?",
+      answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
+    },
+  ];
+  const [openIdx, setOpenIdx] = React.useState(0);
+
+  return (
+    <section className="py-8 sm:py-12 lg:py-16 xl:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Heading */}
+        <div className="mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black mb-2">Frequently</h2>
+          <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sky-500">asked questions</span>
+        </div>
+        {/* Responsive layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
+          {/* FAQ Accordion */}
+          <div className="lg:col-span-2 flex flex-col gap-3 sm:gap-4">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className={`rounded-xl border border-gray-200 bg-white transition-shadow ${openIdx === idx ? 'shadow-md' : 'hover:shadow'} `}
+              >
+                <button
+                  className="w-full flex justify-between items-center px-4 sm:px-6 py-4 sm:py-5 text-left focus:outline-none"
+                  onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
+                >
+                  <span className="text-base sm:text-lg font-medium text-gray-900 pr-4">{faq.question}</span>
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold flex-shrink-0">{openIdx === idx ? '-' : '+'}</span>
+                </button>
+                {openIdx === idx && (
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-5 text-gray-600 text-sm leading-relaxed">
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          {/* Right Card */}
+          <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6 lg:p-8 flex flex-col items-center text-center min-h-[280px] sm:min-h-[320px]">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 sm:mb-6 overflow-hidden">
+              <Image
+                src="/images/fi_7.webp"
+                alt="FAQ Icon"
+                width={48}
+                height={48}
+                className="object-contain w-8 h-8 sm:w-10 sm:h-10"
+              />
+            </div>
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
+            <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
+            <button className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition-colors shadow-sm">Shoot a Direct Mail</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // Main Outsourcing Page Component
     const n8nPage = () => {
   return (
@@ -485,7 +583,7 @@ const WhyN8nWebnoxSection = () => {
       <AutomationComparisonSection />
       <CTASection />
       <WhyN8nWebnoxSection />
-    
+      <FAQSection />
   
       <Footer />
     </main>
