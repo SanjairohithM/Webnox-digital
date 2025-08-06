@@ -79,29 +79,40 @@ const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      className="relative flex items-center justify-center min-h-[420px] md:min-h-[F480px] lg:min-h-[520px] xl:min-h-[600px] w-full overflow-hidden  "
+      className="relative flex items-center justify-center min-h-[420px] md:min-h-[480px] lg:min-h-[520px] xl:min-h-[600px] w-full overflow-hidden"
       style={{
         background: "linear-gradient(180deg, #E6F7FD 0%, #ffffff 80%)"
       }}
     >
-            <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-35">
-                {/* Introductory text */}
-                <div className="mb-6 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF] inline-flex items-center gap-2">
-                    <Image
-                        src="/images/customer1.png"
-                        alt="Customer Experience Icon"
-                        width={20}
-                        height={20}
-                        className="w-4 h-4 md:w-5 md:h-5 object-contain"
-                    />
-                    <span className="text-[#00B9FF] text-sm md:text-base font-medium">
-                        Next-Generation Customer Experience
-                    </span>
-                </div>
+      {/* Background Image Overlay - Right Side */}
+      <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 w-[35%] h-[50%] lg:w-[50%] lg:h-[65%]">
+        <Image
+          src="/images/software1.webp"
+          alt="Software Development Background"
+          fill
+          className="object-contain opacity-15"
+          priority={false}
+        />
+      </div>
+      
+      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-35 z-20">
+        {/* Introductory text */}
+        <div className="mb-6 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF] inline-flex items-center gap-2">
+          <Image
+            src="/images/customer1.png"
+            alt="Software Development Icon"
+            width={20}
+            height={20}
+            className="w-4 h-4 md:w-5 md:h-5 object-contain"
+          />
+          <span className="text-[#00B9FF] text-sm md:text-base font-medium">
+            Software Development
+          </span>
+        </div>
 
         <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-sans font-semibold mb-4 leading-tight">
           <span className="text-[#00B9FF]">
-            {"Customer Experience at".split("").map((char, index) => (
+            {"You Want to Build Software That's".split("").map((char, index) => (
               <span
                 key={index}
                 ref={(el) => (titleLettersRef.current[index] = el)}
@@ -115,12 +126,57 @@ const HeroSection = () => {
               </span>
             ))}
           </span>
-          <br />
           <span className="text-black">
-            {"Webnox Digital".split("").map((char, index) => (
+            {" Scalable,".split("").map((char, index) => (
               <span
-                key={index + "Customer Experience at".length}
-                ref={(el) => (titleLettersRef.current[index + "Customer Experience at".length] = el)}
+                key={index + "You Want to Build Software That's".length}
+                ref={(el) => (titleLettersRef.current[index + "You Want to Build Software That's".length] = el)}
+                className="inline-block"
+                style={{ 
+                  marginRight: char === " " ? "0.75rem" : "0",
+                  minWidth: char === " " ? "0.75rem" : "auto"
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </span>
+            ))}
+          </span>
+         
+          <span className="text-black">
+            {"Smart, ".split("").map((char, index) => (
+              <span
+                key={index + "You Want to Build Software That's Scalable,".length}
+                ref={(el) => (titleLettersRef.current[index + "You Want to Build Software That's Scalable,".length] = el)}
+                className="inline-block"
+                style={{ 
+                  marginRight: char === " " ? "0.75rem" : "0",
+                  minWidth: char === " " ? "0.75rem" : "auto"
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </span>
+            ))}
+          </span>
+          <span className="text-[#00B9FF]">
+            {"and".split("").map((char, index) => (
+              <span
+                key={index + "You Want to Build Software That's Scalable, Smart, ".length}
+                ref={(el) => (titleLettersRef.current[index + "You Want to Build Software That's Scalable, Smart, ".length] = el)}
+                className="inline-block"
+                style={{ 
+                  marginRight: char === " " ? "0.75rem" : "0",
+                  minWidth: char === " " ? "0.75rem" : "auto"
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </span>
+            ))}
+          </span>
+          <span className="text-black">
+            {" Future-Ready".split("").map((char, index) => (
+              <span
+                key={index + "You Want to Build Software That's Scalable, Smart, and".length}
+                ref={(el) => (titleLettersRef.current[index + "You Want to Build Software That's Scalable, Smart, and".length] = el)}
                 className="inline-block"
                 style={{ 
                   marginRight: char === " " ? "0.75rem" : "0",
@@ -136,29 +192,105 @@ const HeroSection = () => {
           ref={descRef}
           className="text-gray-700 text-lg md:text-xl lg:text-2xl font-sans leading-relaxed text-center mx-auto mb-8 py-4 max-w-4xl"
         >
-          At Webnox Digital, we believe that exceptional customer experience (CX) is the foundation of digital success. Whether it's web development, digital marketing, UI/UX, or SEO, our approach is always customer-first ensuring every interaction is seamless, personalized, and impactful.
+          Webnox Digital is a strategic software development expert that co-builds high-performance digital platforms that drive growth. We've delivered custom software that solves complex challenges with clarity, speed, and precision.
         </p>
         <button
           ref={buttonRef}
           className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
         >
-          Start Your Journey
+          Talk Now!
         </button>
       </div>
     </section>
   )
 }
 
+const WhatDoesWebnoxDigitalDoSection = () => (
+    <section className="bg-white py-16 px-4 font-sans">
+      <div className=" text-center">
+        {/* Title */}
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold mb-12 text-black leading-tight">
+          What does Webnox Digital do?
+        </h2>
+        
+        {/* 2x2 Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* First Image */}
+          <div className="bg-gray-100 rounded-2xl overflow-hidden aspect-[3/2] relative group cursor-pointer">
+            <img 
+              src="/images/software2.webp" 
+              alt="Team Collaboration" 
+              className="w-full h-full object-contain transition-all duration-300 group-hover:opacity-30" 
+            />
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-6">
+              <div className="text-left text-black  backdrop-blur-sm rounded-xl p-4 ">
+                <h3 className="text-xl font-bold mb-3">Web Applications</h3>
+                <p className="text-base">Custom web apps built with modern frameworks and scalable architecture</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Second Image */}
+          <div className="bg-gray-100 rounded-2xl overflow-hidden aspect-[3/2] relative group cursor-pointer">
+            <img 
+              src="/images/software5.webp" 
+              alt="Digital Solutions" 
+              className="w-full h-full object-contain transition-all duration-300 group-hover:opacity-30" 
+            />
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-6">
+              <div className="text-left text-black  backdrop-blur-sm rounded-xl p-4 ">
+                <h3 className="text-xl font-bold mb-3">Enterprise Software</h3>
+                <p className="text-base">Complex business solutions that streamline operations and boost productivity</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Third Image */}
+          <div className="bg-gray-100 rounded-2xl overflow-hidden aspect-[3/2] relative group cursor-pointer">
+            <img 
+              src="/images/software3.webp" 
+              alt="Business Consulting" 
+              className="w-full h-full object-contain transition-all duration-300 group-hover:opacity-30" 
+            />
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-6">
+              <div className="text-left text-black  backdrop-blur-sm rounded-xl p-4 ">
+                <h3 className="text-xl font-bold mb-3">API Development</h3>
+                <p className="text-base">Robust APIs and microservices for seamless system integration</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Fourth Image */}
+          <div className="bg-gray-100 rounded-2xl overflow-hidden aspect-[3/2] relative group cursor-pointer">
+            <img 
+              src="/images/software4.webp" 
+              alt="Business Consulting" 
+              className="w-full h-full object-contain transition-all duration-300 group-hover:opacity-30" 
+            />
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-6">
+              <div className="text-left text-black  backdrop-blur-sm rounded-xl p-4 ">
+                <h3 className="text-xl font-bold mb-3">Cloud Solutions</h3>
+                <p className="text-base">Scalable cloud-native applications with modern DevOps practices</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+
 const OurApproachSection = () => {
     const sectionRef = useRef(null)
     const titleRef = useRef(null)
-    const subtitleRef = useRef(null)
-    const badgeRef = useRef(null)
     const cardsRef = useRef([])
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.set([badgeRef.current, titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
+            gsap.set([titleRef.current], { opacity: 0, y: 30 })
             gsap.set(cardsRef.current, { opacity: 0, y: 40 })
 
             const tl = gsap.timeline({
@@ -169,9 +301,7 @@ const OurApproachSection = () => {
             })
 
             tl
-                .to(badgeRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-                .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.3")
-                .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+                .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
                 .to(cardsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out" }, "-=0.2")
         }, sectionRef)
         return () => ctx.revert()
@@ -179,47 +309,36 @@ const OurApproachSection = () => {
 
     const principles = [
         {
-            icon: "/images/customer3.png",
-            title: "Client-Centric Design Thinking",
-            desc: "We listen closely to your needs and challenges. Our human-centric design thinking helps to create solutions that align with your brand goals and speak directly to your audience."
+            icon: "/images/software6.png",
+            title: "Discover & Define",
+            desc: " We explore your business goals, user needs, and system requirements through collaborative discovery workshops and technical analysis."
         },
         {
-            icon: "/images/customer4.png",
-            title: "Transparent Communication",
-            desc: "We prioritize open, two-way communication. Through agile project management and real-time updates, we keep you informed at every stage, ensuring full transparency."
+            icon: "/images/software7.png",
+            title: "Design & Develop",
+            desc: "We build software that looks great, performs fast and integrates seamlessly. Using the best tech stack and agile methods, we turn specs into scalable products."
         },
         {
-            icon: "/images/customer5.png",
-            title: "Consistent Support & Optimization",
-            desc: "The journey doesn't end at project delivery. We continue to support and improve the digital experience through feedback loops and ongoing optimization strategies."
+            icon: "/images/software8.png",
+            title: "Deploy & Support",
+            desc: "We ensure a smooth go-live with real-time QA, testing, deployment, and post-launch backed by documentation and ongoing optimization."
         }
     ]
 
     return (
         <section ref={sectionRef} className="bg-white py-16 lg:py-24 px-4 font-sans">
             <div className="max-w-7xl mx-auto">
-                {/* Badge */}
-                <div ref={badgeRef} className="text-center mb-6">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF]">
-                        <Image src="/images/customer2.png" alt="Our Methodology" width={16} height={16} className="w-4 h-4 object-contain" />
-                        <span className="text-[#00B9FF] text-sm font-medium">
-                            Our Methodology
-                        </span>
-                    </div>
-                </div>
+                
 
                 {/* Title */}
                 <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-black text-center mb-4 font-sans leading-tight">
-                    Our Approach to Customer Experience
+                Here's Our Proven Software Development Framework
                 </h2>
 
-                {/* Subtitle */}
-                <p ref={subtitleRef} className="text-gray-600 text-center mb-16 max-w-xl mx-auto">
-                    Three core principles that drive everything we do
-                </p>
+          
 
                 {/* Principles Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16 max-w-7xl mx-auto ">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16 max-w-7xl mx-auto mt-20">
                     {principles.map((principle, index) => (
                         <div
                             key={index}
@@ -237,7 +356,7 @@ const OurApproachSection = () => {
                                 />
                             </div>
                             {/* Title */}
-                            <h3 className="text-xl font-semibold text-black mb-3 font-sans">
+                            <h3 className="text-2xl font-semibold text-black mb-3 font-sans">
                                 {principle.title}
                             </h3>
                             {/* Description */}
@@ -258,12 +377,11 @@ const WhyCustomerExperienceMattersSection = () => {
     const sectionRef = useRef(null)
     const titleRef = useRef(null)
     const subtitleRef = useRef(null)
-    const badgeRef = useRef(null)
     const statsRef = useRef([])
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            gsap.set([badgeRef.current, titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
+            gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
             gsap.set(statsRef.current, { opacity: 0, y: 40 })
 
             const tl = gsap.timeline({
@@ -274,8 +392,7 @@ const WhyCustomerExperienceMattersSection = () => {
             })
 
             tl
-                .to(badgeRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-                .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.3")
+                .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
                 .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
                 .to(statsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out" }, "-=0.2")
         }, sectionRef)
@@ -285,25 +402,35 @@ const WhyCustomerExperienceMattersSection = () => {
     const stats = [
         {
             icon: "/images/customer7.png",
-            number: "5x",
-            description: "Increase in Customer Satisfaction"
+            number: "500+",
+            description: "Custom Software Projects Delivered"
         },
         {
             icon: "/images/customer9.png",
-            number: "300%",
-            description: "Growth"
+            number: "14+",
+            description: "Years of Industry Experience"
         },
         {
             icon: "/images/customer10.png",
-            number: "4x",
-            description: "Boost in Engagement"
+            number: "98%",
+            description: "Client Retention Rate"
+        },
+        {
+            icon: "/images/customer7.png",
+            number: "15+",
+            description: "Global Industries Served"
+        },
+        {
+            icon: "/images/customer9.png",
+            number: "100%",
+            description: "Agile Development Process"
         }
     ]
 
          return (
          <section
              ref={sectionRef}
-             className="relative py-16 lg:py-24 px-4 overflow-hidden"
+             className="relative py-16 lg:py-24 px-4 overflow-hidden mt-20"
              style={{
                  background: "linear-gradient(135deg, #00B9FF 0%, #0097D9 50%, #007AC3 100%)"
              }}
@@ -328,44 +455,27 @@ const WhyCustomerExperienceMattersSection = () => {
              ></div>
              
                           <div className="max-w-7xl mx-auto relative z-20">
-                 {/* Badge */}
-                 <div ref={badgeRef} className="text-center mb-6">
-                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 rounded-full border border-white/50 backdrop-blur-sm">
-                         <Image src="/images/customer6.png" alt="Our Methodology" width={16} height={16} className="w-4 h-4 object-contain" />
-                         <span className="text-[#00B9FF] text-sm font-medium">
-                             Proven Results
-                         </span>
-                     </div>
-                 </div> 
+          
 
                 {/* Title */}
                 <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-sans leading-tight">
-                    Why Customer Experience<br />Matters to Us
+                    Trusted by Businesses Worldwide
                 </h2>
 
                 {/* Subtitle */}
                 <p ref={subtitleRef} className="text-white/90 text-center mb-16 max-w-2xl mx-auto text-lg font-sans">
-                    Our commitment to excellence delivers measurable results
+                    Our track record speaks for itself
                 </p>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12 max-w-6xl mx-auto font-sans">
                     {stats.map((stat, index) => (
                         <div
                             key={index}
                             ref={el => statsRef.current[index] = el}
                             className="text-center"
                         >
-                            {/* Icon Circle */}
-                            <div className="w-16 h-16 mx-auto mb-6  flex items-center justify-center">
-                                <Image
-                                    src={stat.icon}
-                                    alt={stat.description}
-                                    width={48}
-                                    height={48}
-                                    className="w-10 h-10 object-contain"
-                                />
-                            </div>
+                            
 
                             {/* Number */}
                             <h3 className="text-4xl md:text-5xl font-bold text-white mb-2 font-sans">
@@ -391,6 +501,54 @@ const WhyCustomerExperienceMattersSection = () => {
     )
 }
 
+
+const BrandingPlanSteps = () => (
+    <section className="bg-white py-20 px-4 md:px-12 lg:px-24 font-sans">
+      <div className="flex flex-col items-center w-full">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Here's Your Branding Plan With Webnox Digital</h2>
+        <p className="text-gray-500 text-lg text-center mb-16 max-w-2xl">
+          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+        </p>
+        <div className="relative w-full flex flex-col items-center">
+          {/* Steps Row */}
+          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-0">
+            {/* Step 1 */}
+            <div className="flex flex-col items-center w-full">
+              <div className="bg-gradient-to-br from-[#f6fafd] to-[#e9f3fa] rounded-xl shadow p-4 mb-2 flex items-center justify-center">
+                <img src="/images/brand4-2.webp" alt="Book A Free Call" className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-[#00b9ff] mb-1 text-center">Book a Free Call</h3>
+              <p className="text-gray-600 text-md text-center">We’ll understand your goals, tech stack, user flows, and current bottlenecks.</p>
+            </div>
+            {/* Arrow 1 */}
+            <div className="hidden md:flex justify-center items-center -mt-12">
+              <img src="/Arc 2.svg" alt="arrow 1" className="w-[40rem] md:w-[56rem] lg:w-[72rem] h-auto" />
+            </div>
+            {/* Step 2 */}
+            <div className="flex flex-col items-center w-full">
+              <div className="bg-gradient-to-br from-[#f6fafd] to-[#e9f3fa] rounded-xl shadow p-4 mb-2 flex items-center justify-center">
+                <img src="/images/brand4-3.webp" alt="Get A Custom Branding Strategy" className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold text-[#00b9ff] mb-1 text-center">Get a Custom Software Blueprint</h3>
+              <p className="text-gray-600 text-md text-center">We’ll create a detailed solution architecture, development roadmap, and timeline tailored to your business needs.</p>
+            </div>
+            {/* Arrow 2 */}
+            <div className="hidden md:flex justify-center items-center mt-22">
+              <img src="/Arc 1.svg" alt="arrow 2" className="w-[40rem] md:w-[56rem] lg:w-[72rem] h-auto" />
+            </div>
+            {/* Step 3 */}
+            <div className="flex flex-col items-center w-full">
+              <div className="bg-gradient-to-br from-[#f6fafd] to-[#e9f3fa] rounded-xl shadow p-4 mb-2 flex items-center justify-center">
+                <img src="/images/brand4-1.webp" alt="Build & Launch A World-Class Brand" className="w-8 h-8" />
+              </div>
+              <h3 className="  text-xl font-semibold text-[#00b9ff] mb-1 text-center">Build, Launch & Scale With Confidence</h3>
+              <p className=" text-md text-gray-600  text-center">From web apps to enterprise tools, we’ll develop, test, deploy, and maintain powerful software solutions that deliver real business impact..</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 
 
 
@@ -475,12 +633,15 @@ const FAQSection = () => {
   
 
   
-const CustomerPage = () => {
+const SoftwarePage = () => {
   return (
-    <main className="@/customer">
+    <main className="@/software">
       <HeroSection />
-            <OurApproachSection />
-            <WhyCustomerExperienceMattersSection />
+      <WhatDoesWebnoxDigitalDoSection />
+      <BrandingPlanSteps />
+      <WhyCustomerExperienceMattersSection />
+      <OurApproachSection />
+      
      
       <FAQSection />
       <Footer />
@@ -488,4 +649,4 @@ const CustomerPage = () => {
   )
 }
 
-export default CustomerPage
+export default SoftwarePage
