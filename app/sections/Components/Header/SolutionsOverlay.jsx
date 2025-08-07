@@ -13,49 +13,49 @@ const solutions = [
     title: "Software Developement",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/solution1.webp",
-    href: "/aiautomation"
+    href: "/software"
   },
   {
     title: "Digital Transformation",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/solution9.webp",
-    href: "/solutions"
+    href: "/digitaltransformation"
   },
   {
     title: "Ecommerce Development",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/solution8.webp",
-    href: "/solutions"
+    href: "/ecommerce"
   },
   {
     title: "Mobile App Development",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/solution7.webp",
-    href: "/solutions"
+    href: "/mobileapp"
   },
   {
     title: "UI/UX",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/solution6.webp",
-    href: "/outsourcing"
+    href: "/uiux"
   },
   {
     title: "SAAS Products",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/solution5.webp",
-    href: "/solutions"
+    href: "/saas"
   },
   {
     title: "Clouds & devOps",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/solution4.webp",
-    href: "/solutions"
+    href: "/cloud"
   },
   {
     title: "3D websites",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
     image: "/images/solution3.webp",
-    href: "/solutions"
+    href: "/3d"
   },
 
 ];

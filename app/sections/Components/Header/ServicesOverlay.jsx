@@ -43,13 +43,13 @@ const services = [
     title: "N8N workflow",
     description: "No-code automation with N8N for seamless integrations.",
     image: "/images/service2.webp",
-    href: "/services"
+    href: "/n8n"
   },
   {
     title: "customer experience",
     description: "AI-powered, personalized user experiences to boost loyalty.",
     image: "/images/service1.webp",
-    href: "/services"
+    href: "/customer"
   }
 ];
 
