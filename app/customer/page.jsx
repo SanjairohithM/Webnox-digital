@@ -260,11 +260,14 @@ const WhyCustomerExperienceMattersSection = () => {
     const subtitleRef = useRef(null)
     const badgeRef = useRef(null)
     const statsRef = useRef([])
+    const svgRef = useRef(null)
 
     useEffect(() => {
         const ctx = gsap.context(() => {
             gsap.set([badgeRef.current, titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
             gsap.set(statsRef.current, { opacity: 0, y: 40 })
+            // SVG is visible from start, no initial animation
+            gsap.set(svgRef.current, { opacity: 0.2 })
 
             const tl = gsap.timeline({
                 scrollTrigger: {
@@ -278,6 +281,26 @@ const WhyCustomerExperienceMattersSection = () => {
                 .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.3")
                 .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
                 .to(statsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out" }, "-=0.2")
+                // Start slow wave animation after content is loaded
+                .to(svgRef.current, {
+                    motionPath: {
+                        path: "M0,0 Q50,-20 100,0 T200,0",
+                        autoRotate: false,
+                    },
+                    duration: 4,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                    delay: 1
+                }, "-=0.5")
+                // Add gentle opacity pulsing
+                .to(svgRef.current, {
+                    opacity: 0.4,
+                    duration: 3,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true
+                }, "-=3")
         }, sectionRef)
         return () => ctx.revert()
     }, [])
@@ -308,16 +331,17 @@ const WhyCustomerExperienceMattersSection = () => {
                  background: "linear-gradient(135deg, #00B9FF 0%, #0097D9 50%, #007AC3 100%)"
              }}
          >
-             {/* Background Image Overlay */}
-             <div className="absolute inset-0 z-40">
-                 <Image
-                     src="/images/customer8.webp"
-                     alt="Customer Experience Background"
-                     fill
-                     className="object-cover opacity-20"
-                     priority={false}
-                 />
-             </div>
+                         {/* Background Image Overlay */}
+            <div className="absolute inset-0 z-40">
+                <Image
+                    ref={svgRef}
+                    src="/customersvg.svg"
+                    alt="Customer Experience Background"
+                    fill
+                    className="object-cover opacity-20"
+                    priority={false}
+                />
+            </div>
              
              {/* Blue Gradient Overlay */}
              <div 

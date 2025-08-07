@@ -472,19 +472,18 @@ const NextGenMarketingSection = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         {/* Title Section */}
-        <div className="text-center mb-8">
+        <div className="text-center ">
           <h2 
             ref={titleRef}
             className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-6 leading-tight"
           >
-            What is Next-Gen Marketing?
+           Why WEBNOX DIGITAL? We've Done This Before 100+ Times.
           </h2>
           <p 
             ref={subtitleRef}
             className="text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed"
           >
-            It's about building systems that learn, optimize, and evolve<br />
-            with your audience.
+            We are digital transformation specialists with a strong team of developers, marketers, automation experts, and data consultants. Our clients trust us because we bring results.
           </p>
         </div>
 
@@ -617,6 +616,287 @@ const NextGenMarketingSection = () => {
 
 
 
+// Don't Let Outdated Tools Section Component
+const OutdatedToolsSection = () => {
+  const sectionRef = useRef(null)
+  const contentRef = useRef(null)
+  const imageRef = useRef(null)
+  const titleRef = useRef(null)
+  const listRef = useRef(null)
+  const buttonRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Desktop animations
+        gsap.set([titleRef.current, listRef.current, buttonRef.current, imageRef.current], { 
+          opacity: 0, 
+          y: 30 
+        })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" })
+          .to(listRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(imageRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
+      } else {
+        // Mobile animations
+        gsap.set([titleRef.current, listRef.current, buttonRef.current, imageRef.current], { 
+          opacity: 0, 
+          y: 20 
+        })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(listRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2")
+          .to(imageRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+      }
+    }, sectionRef)
+    
+    return () => ctx.revert()
+  }, [])
+
+  const services = [
+    "Inefficient teams",
+    "Poor online presence", 
+    "Wasted ad budgets",
+    "Lost leads and customers"
+  ]
+
+  return (
+    <section 
+      ref={sectionRef}
+      className=" overflow-hidden font-sans  "
+    >
+      <div className="px-12">
+        <div className="relative flex min-h-[400px] lg:min-h-[450px]">
+          {/* Background Image - Full Width */}
+          <div ref={imageRef} className="absolute inset-0 flex -right-55 bottom-3">
+            <img
+              src="/images/digital5.webp"
+              alt="Professional Business Consultant"
+              className="w-3/4 h-3/4 object-cover rounded-lg mx-auto my-auto"
+              loading="lazy"
+            />
+          </div>
+
+          {/* Overlay Content */}
+          <div className="relative z-10 flex items-start w-full">
+            <div ref={contentRef} className="w-full lg:w-1/2 p-8 ">
+              <h2 
+                ref={titleRef}
+                className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900   leading-tight"
+              >
+                Don't Let Outdated Tools & Invisible Marketing{" "}
+                <span className="text-[#00B9FF]">Hold You Back</span>
+              </h2>
+              
+              <div ref={listRef} className="mb-8 lg:mb-10">
+                <p className="text-gray-700 text-lg lg:text-xl  leading-relaxed">
+                Many businesses invest in ads, websites, or CRM tools but still struggle. Why? Because digital success is a system.
+                </p>
+                <br />
+
+                {/* <p className="text-[#00B9FF] text-lg lg:text-xl  leading-relaxed">Without the right tech and strategy, you face:</p> */}
+                <ul className="space-y-3 lg:space-y-4">
+                  {services.map((service, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-[#00B9FF] rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-gray-700 text-base lg:text-lg leading-relaxed">
+                        {service}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+
+
+const WhyCustomerExperienceMattersSection = () => {
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const statsRef = useRef([])
+  const svgRef = useRef(null)
+
+  useEffect(() => {
+      const ctx = gsap.context(() => {
+          gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
+          gsap.set(statsRef.current, { opacity: 0, y: 40 })
+          // SVG is visible from start, no initial animation
+          gsap.set(svgRef.current, { opacity: 0.2 })
+
+          const tl = gsap.timeline({
+              scrollTrigger: {
+                  trigger: sectionRef.current,
+                  start: "top 30%",
+              }
+          })
+
+          tl
+              .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+              .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+              .to(statsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out" }, "-=0.2")
+              // Start slow wave animation after content is loaded
+              .to(svgRef.current, {
+                  motionPath: {
+                      path: "M0,0 Q50,-20 100,0 T200,0",
+                      autoRotate: false,
+                  },
+                  duration: 4,
+                  ease: "sine.inOut",
+                  repeat: -1,
+                  yoyo: true,
+                  delay: 1
+              }, "-=0.5")
+              // Add gentle opacity pulsing
+              .to(svgRef.current, {
+                  opacity: 0.4,
+                  duration: 3,
+                  ease: "sine.inOut",
+                  repeat: -1,
+                  yoyo: true
+              }, "-=3")
+      }, sectionRef)
+      return () => ctx.revert()
+  }, [])
+
+  const stats = [
+      {
+          icon: "/images/customer7.png",
+          number: "500+",
+          description: "Successful Digital Transformation Projects"
+      },
+      {
+          icon: "/images/customer9.png",
+          number: "98%",
+          description: "Client Satisfaction Rate"
+      },
+      {
+          icon: "/images/customer10.png",
+          number: "95%",
+          description: "Project Delivery Rate"
+      },
+      {
+          icon: "/images/customer7.png",
+          number: "5+",
+          description: "Global Operation Hubs"
+      }
+  ]
+
+       return (
+       <section
+           ref={sectionRef}
+           className="relative py-16 lg:py-24 px-4 overflow-hidden mt-20"
+           style={{
+               background: "linear-gradient(135deg, #00B9FF 0%, #0097D9 50%, #007AC3 100%)"
+           }}
+       >
+           {/* Background Image Overlay */}
+           <div className="absolute inset-0 z-40">
+               <Image
+                   ref={svgRef}
+                   src="/customersvg.svg"
+                   alt="Customer Experience Background"
+                   fill
+                   className="object-cover opacity-20"
+                   priority={false}
+               />
+           </div>
+           
+           {/* Blue Gradient Overlay */}
+           <div 
+               className="absolute inset-0 z-10"
+               style={{
+                   background: "linear-gradient(90deg, rgba(0, 185, 255, 0.7) 0%, rgba(0, 118, 217, 0.7) 100%)"
+               }}
+           ></div>
+           
+                        <div className="max-w-7xl mx-auto relative z-20">
+            
+            {/* Main Grid Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                {/* Left Side: Text and Image - spans 2 columns */}
+                <div className="lg:col-span-2 space-y-8">
+                    {/* Title */}
+                    <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-sans leading-tight">
+                        What Success Looks Like With <span className="text-7xl font-semibold font-sans">WEBNOX DIGITAL</span>
+                    </h2>
+
+                    {/* Subtitle */}
+                    <p ref={subtitleRef} className="text-white/90 text-xl font-sans leading-relaxed mb-8">
+                    Our track record speaks for itself.
+                    </p>
+
+                    {/* Image below text */}
+                    <div className="relative w-full max-w-md">
+                       
+                                <div className="text-center">
+                                    <div className="items-center justify-center">
+                                        <Image src="/images/digital6.webp" alt="Success Guaranteed" width={600} height={600} />
+                                    </div>
+                                 
+                                </div>
+                        
+                    </div>
+                </div>
+
+                {/* Right Side: Stats Grid - spans 1 column */}
+                <div className="lg:col-span-1 grid grid-cols-2 gap-6 font-sans ">
+                    {stats.map((stat, index) => (
+                        <div
+                            key={index}
+                            ref={el => statsRef.current[index] = el}
+                            className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300"
+                        >
+                            {/* Number */}
+                            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 font-sans">
+                                {stat.number}
+                            </h3>
+
+                            {/* Description */}
+                            <p className="text-white/90 text-base font-medium">
+                                {stat.description}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full"></div>
+              <div className="absolute bottom-20 left-10 w-24 h-24 bg-white/10 rounded-full"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/5 rounded-full"></div>
+          </div>
+      </section>
+  )
+}
+
 const FAQSection = () => {
     const faqs = [
       {
@@ -703,6 +983,8 @@ const DigitalTransformationPage = () => {
       <HeroSection />
       <TechnologyWorkSection />
       <NextGenMarketingSection />
+      <OutdatedToolsSection />
+      <WhyCustomerExperienceMattersSection />
       <FAQSection />
       <Footer />
     </main>

@@ -374,131 +374,155 @@ const OurApproachSection = () => {
 
 
 const WhyCustomerExperienceMattersSection = () => {
-    const sectionRef = useRef(null)
-    const titleRef = useRef(null)
-    const subtitleRef = useRef(null)
-    const statsRef = useRef([])
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const statsRef = useRef([])
+  const svgRef = useRef(null)
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
-            gsap.set(statsRef.current, { opacity: 0, y: 40 })
+  useEffect(() => {
+      const ctx = gsap.context(() => {
+          gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
+          gsap.set(statsRef.current, { opacity: 0, y: 40 })
+          // SVG is visible from start, no initial animation
+          gsap.set(svgRef.current, { opacity: 0.2 })
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 80%",
-                }
-            })
+          const tl = gsap.timeline({
+              scrollTrigger: {
+                  trigger: sectionRef.current,
+                  start: "top 80%",
+              }
+          })
 
-            tl
-                .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-                .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
-                .to(statsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out" }, "-=0.2")
-        }, sectionRef)
-        return () => ctx.revert()
-    }, [])
+          tl
+              .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+              .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+              .to(statsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out" }, "-=0.2")
+              // Start slow wave animation after content is loaded
+              .to(svgRef.current, {
+                  motionPath: {
+                      path: "M0,0 Q50,-20 100,0 T200,0",
+                      autoRotate: false,
+                  },
+                  duration: 4,
+                  ease: "sine.inOut",
+                  repeat: -1,
+                  yoyo: true,
+                  delay: 1
+              }, "-=0.5")
+              // Add gentle opacity pulsing
+              .to(svgRef.current, {
+                  opacity: 0.4,
+                  duration: 3,
+                  ease: "sine.inOut",
+                  repeat: -1,
+                  yoyo: true
+              }, "-=3")
+      }, sectionRef)
+      return () => ctx.revert()
+  }, [])
 
-    const stats = [
-        {
-            icon: "/images/customer7.png",
-            number: "500+",
-            description: "Custom Software Projects Delivered"
-        },
-        {
-            icon: "/images/customer9.png",
-            number: "14+",
-            description: "Years of Industry Experience"
-        },
-        {
-            icon: "/images/customer10.png",
-            number: "98%",
-            description: "Client Retention Rate"
-        },
-        {
-            icon: "/images/customer7.png",
-            number: "15+",
-            description: "Global Industries Served"
-        },
-        {
-            icon: "/images/customer9.png",
-            number: "100%",
-            description: "Agile Development Process"
-        }
-    ]
+  const stats = [
+      {
+          icon: "/images/customer7.png",
+          number: "500+",
+          description: "Custom Software Projects Delivered"
+      },
+      {
+          icon: "/images/customer9.png",
+          number: "14+",
+          description: "Years of Industry Experience"
+      },
+      {
+          icon: "/images/customer10.png",
+          number: "98%",
+          description: "Client Retention Rate"
+      },
+      {
+          icon: "/images/customer7.png",
+          number: "15+",
+          description: "Global Industries Served"
+      },
+      {
+          icon: "/images/customer9.png",
+          number: "100%",
+          description: "Agile Development Process"
+      }
+  ]
 
-         return (
-         <section
-             ref={sectionRef}
-             className="relative py-16 lg:py-24 px-4 overflow-hidden mt-20"
-             style={{
-                 background: "linear-gradient(135deg, #00B9FF 0%, #0097D9 50%, #007AC3 100%)"
-             }}
-         >
-             {/* Background Image Overlay */}
-             <div className="absolute inset-0 z-40">
-                 <Image
-                     src="/images/customer8.webp"
-                     alt="Customer Experience Background"
-                     fill
-                     className="object-cover opacity-20"
-                     priority={false}
-                 />
-             </div>
-             
-             {/* Blue Gradient Overlay */}
-             <div 
-                 className="absolute inset-0 z-10"
-                 style={{
-                     background: "linear-gradient(90deg, rgba(0, 185, 255, 0.7) 0%, rgba(0, 118, 217, 0.7) 100%)"
-                 }}
-             ></div>
-             
-                          <div className="max-w-7xl mx-auto relative z-20">
-          
+       return (
+       <section
+           ref={sectionRef}
+           className="relative py-16 lg:py-24 px-4 overflow-hidden mt-20"
+           style={{
+               background: "linear-gradient(135deg, #00B9FF 0%, #0097D9 50%, #007AC3 100%)"
+           }}
+       >
+           {/* Background Image Overlay */}
+           <div className="absolute inset-0 z-40">
+               <Image
+                   ref={svgRef}
+                   src="/customersvg.svg"
+                   alt="Customer Experience Background"
+                   fill
+                   className="object-cover opacity-20"
+                   priority={false}
+               />
+           </div>
+           
+           {/* Blue Gradient Overlay */}
+           <div 
+               className="absolute inset-0 z-10"
+               style={{
+                   background: "linear-gradient(90deg, rgba(0, 185, 255, 0.7) 0%, rgba(0, 118, 217, 0.7) 100%)"
+               }}
+           ></div>
+           
+                        <div className="max-w-7xl mx-auto relative z-20">
+        
 
-                {/* Title */}
-                <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-sans leading-tight">
-                    Trusted by Businesses Worldwide
-                </h2>
+              {/* Title */}
+              <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-white text-center mb-4 font-sans leading-tight">
+                  Trusted by Businesses Worldwide
+              </h2>
 
-                {/* Subtitle */}
-                <p ref={subtitleRef} className="text-white/90 text-center mb-16 max-w-2xl mx-auto text-lg font-sans">
-                    Our track record speaks for itself
-                </p>
+              {/* Subtitle */}
+              <p ref={subtitleRef} className="text-white/90 text-center mb-16 max-w-2xl mx-auto text-lg font-sans">
+                  Our track record speaks for itself
+              </p>
 
-                {/* Stats Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12 max-w-6xl mx-auto font-sans">
-                    {stats.map((stat, index) => (
-                        <div
-                            key={index}
-                            ref={el => statsRef.current[index] = el}
-                            className="text-center"
-                        >
-                            
+              {/* Stats Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-12 max-w-6xl mx-auto font-sans">
+                  {stats.map((stat, index) => (
+                      <div
+                          key={index}
+                          ref={el => statsRef.current[index] = el}
+                          className="text-center"
+                      >
+                          
 
-                            {/* Number */}
-                            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2 font-sans">
-                                {stat.number}
-                            </h3>
+                          {/* Number */}
+                          <h3 className="text-4xl md:text-5xl font-bold text-white mb-2 font-sans">
+                              {stat.number}
+                          </h3>
 
-                            {/* Description */}
-                            <p className="text-white/90 text-lg font-medium">
-                                {stat.description}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </div>
+                          {/* Description */}
+                          <p className="text-white/90 text-lg font-medium">
+                              {stat.description}
+                          </p>
+                      </div>
+                  ))}
+              </div>
+          </div>
 
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full"></div>
-                <div className="absolute bottom-20 left-10 w-24 h-24 bg-white/10 rounded-full"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/5 rounded-full"></div>
-            </div>
-        </section>
-    )
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+              <div className="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full"></div>
+              <div className="absolute bottom-20 left-10 w-24 h-24 bg-white/10 rounded-full"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/5 rounded-full"></div>
+          </div>
+      </section>
+  )
 }
 
 
