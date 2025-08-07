@@ -39,7 +39,7 @@ const HeroSection = () => {
           scrollTrigger: {
             trigger: heroRef.current,
             start: "top 80%",
-          }
+          } 
         })
         
         // Animate badge first, then title letters one by one
@@ -170,7 +170,7 @@ const TechnologyWorkSection = () => {
       
       if (isDesktop) {
         // Complex animations for desktop
-        gsap.set([badgeRef.current, titleRef.current, descRef.current, imageRef.current], { opacity: 0, y: 30 })
+        gsap.set([titleRef.current, descRef.current, imageRef.current], { opacity: 0, y: 30 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -179,12 +179,12 @@ const TechnologyWorkSection = () => {
           }
         })
         
-        tl.to([badgeRef.current, imageRef.current], { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+        tl.to([imageRef.current], { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
           .to(titleRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.3")
           .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
       } else {
         // Simple fade animations for mobile
-        gsap.set([badgeRef.current, titleRef.current, descRef.current, imageRef.current], { opacity: 0, y: 20 })
+        gsap.set([titleRef.current, descRef.current, imageRef.current], { opacity: 0, y: 20 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -193,7 +193,7 @@ const TechnologyWorkSection = () => {
           }
         })
         
-        tl.to([badgeRef.current, imageRef.current], { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+        tl.to([imageRef.current], { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
           .to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.2")
           .to(descRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")
       }
@@ -204,10 +204,10 @@ const TechnologyWorkSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[500px] md:min-h-[600px] lg:min-h-[700px] w-full overflow-hidden py-16 lg:py-24"
+      className="relative min-h-[600px] md:min-h-[700px] lg:min-h-[800px] w-full overflow-hidden py-12 lg:py-20"
     >
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 ">
         <Image
           src="/images/digital2.webp"
           alt="Digital Background"
@@ -219,24 +219,24 @@ const TechnologyWorkSection = () => {
       
       {/* No overlay - full background visibility */}
       
-      <div className="relative w-full px-4 lg:px-20 max-w-7xl mx-auto h-full z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center h-full">
-          {/* Left Side - Image */}
-          <div ref={imageRef} className="flex justify-center lg:justify-start order-2 lg:order-1">
-            <div className="w-full max-w-md lg:max-w-lg">
-              <img
-                src="/images/digital3.webp"
-                alt="Technology Working for You"
-                className="w-full h-auto object-contain rounded-lg shadow-lg"
-                loading="lazy"
-              />
-            </div>
-          </div>
+             <div className="relative w-full px-18 z-20 flex items-center py-36">
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-10 items-center w-full">
+           {/* Left Side - Image */}
+           <div ref={imageRef} className="flex justify-center lg:justify-start order-2 lg:order-1">
+             <div className="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+               <img
+                 src="/images/digital3.webp"
+                 alt="Technology Working for You"
+                 className="w-full h-auto object-contain"
+                 loading="lazy"
+               />
+             </div>
+           </div>
 
-          {/* Right Side - Text Content */}
-          <div className="flex flex-col justify-center text-center lg:text-left order-1 lg:order-2">
+           {/* Right Side - Text Content */}
+           <div className="flex flex-col justify-center text-center lg:text-left order-1 lg:order-2 lg:pl-4">
             {/* Badge */}
-            <div ref={badgeRef} className="flex justify-center lg:justify-start mb-6">
+            <div ref={badgeRef} className="flex justify-center lg:justify-start mb-6 lg:mb-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF]">
                 <Image src="/images/customer1.png" alt="Digital Innovation" width={16} height={16} className="w-4 h-4 object-contain" />
                 <span className="text-[#00B9FF] text-sm font-medium">
@@ -245,13 +245,13 @@ const TechnologyWorkSection = () => {
               </div>
             </div>
 
-            <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-sans font-semibold text-gray-900 mb-6 leading-tight">
-              Technology Should Work for You, Not Against You
+            <h2 ref={titleRef} className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-sans font-semibold text-gray-900 mb-6 lg:mb-8 leading-tight lg:leading-tight">
+              Technology Should Work for You,<br className="hidden lg:block" /> Not Against You
             </h2>
             
             <p
               ref={descRef}
-              className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed"
+              className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed lg:leading-relaxed max-w-none lg:max-w-xl xl:max-w-2xl"
             >
               At WEBNOX DIGITAL, we combine digital transformation with smart digital marketing strategies. We help you fix the backend systems, automation, ditch the white-label copy, we improve the frontend branding, SEO, online visibility!
             </p>
@@ -448,19 +448,19 @@ const NextGenMarketingSection = () => {
 
   const marketingFeatures = [
     {
-      text: "Predictive campaigns that adjust in real-time",
+      text: "15+ years of hands-on experience",
       position: "top-left"
     },
     {
-      text: "AI-driven insights that reduce guesswork", 
+      text: "Transparent communication, on-time delivery", 
       position: "middle-left"
     },
+    // {
+    //   text: "Full-service digital marketing team: SEO, PPC, social media & branding",
+    //   position: "top-right"
+    // },
     {
-      text: "Hyper-personalized customer journeys",
-      position: "top-right"
-    },
-    {
-      text: "Data-led storytelling that builds long-term loyalty",
+      text: "Full-service digital marketing team: SEO, PPC, social media & branding",
       position: "bottom-center"
     }
   ]
@@ -472,7 +472,7 @@ const NextGenMarketingSection = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         {/* Title Section */}
-        <div className="text-center mb-16 lg:mb-20">
+        <div className="text-center mb-8">
           <h2 
             ref={titleRef}
             className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-6 leading-tight"
@@ -497,11 +497,11 @@ const NextGenMarketingSection = () => {
               className="relative z-10"
             >
         <Image
-                src="/images/nextgen1.webp"
+                src="/images/digital4.webp"
                 alt="Next-Gen Marketing Arrow"
-                width={500}
-                height={500}
-                className="w-96 h-96 xl:w-[450px] xl:h-[450px] object-contain"
+                width={600}
+                height={600}
+                className="w-full h-full object-cover "
         />
       </div>
       
@@ -509,7 +509,7 @@ const NextGenMarketingSection = () => {
             {/* Top Left */}
             <div 
               ref={el => textBoxesRef.current[0] = el}
-              className="absolute -top-12 left-28 bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30 z-20"
+              className="absolute top-42 left-28 bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30 z-20"
               style={{
                 background: 'rgba(255, 255, 255, 0.25)',
                 backdropFilter: 'blur(20px)',
@@ -526,7 +526,7 @@ const NextGenMarketingSection = () => {
             {/* Middle Left */}
             <div 
               ref={el => textBoxesRef.current[1] = el}
-              className="absolute top-40 left-38 bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30 z-20"
+              className="absolute top-120 left-38 bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30 z-20"
               style={{ 
                 transform: 'translateY(-50%)',
                 background: 'rgba(255, 255, 255, 0.25)',
@@ -544,13 +544,14 @@ const NextGenMarketingSection = () => {
             {/* Top Right */}
             <div 
               ref={el => textBoxesRef.current[2] = el}  
-              className="absolute top-52 right-28 bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30 z-20"
+              className="absolute top-72 right-30 bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30 z-20 w-1/3"
               style={{
                 background: 'rgba(255, 255, 255, 0.25)',
                 backdropFilter: 'blur(20px)',
                 WebkitBackdropFilter: 'blur(20px)',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                maxWidth: '50%'
               }}
             >
               <p className="text-gray-900 font-sans text-xl font-semibold leading-relaxed">
@@ -559,7 +560,7 @@ const NextGenMarketingSection = () => {
           </div>
 
             {/* Bottom Center */}
-            <div 
+            {/* <div 
               ref={el => textBoxesRef.current[3] = el}
               className="absolute -bottom-2 left-1/2 bg-white/20 backdrop-blur-xl rounded-2xl p-8 shadow-2xl border border-white/30 z-20"
               style={{ 
@@ -574,17 +575,17 @@ const NextGenMarketingSection = () => {
               <p className="text-gray-900 font-sans text-xl font-semibold leading-relaxed">
                 {marketingFeatures[3].text}
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Mobile Layout */}
         <div className="block lg:hidden">
           {/* Central Image */}
-          <div className="flex justify-center mb-12">
+          <div className="flex justify-center ">
             <div ref={imageRef}>
               <Image
-                src="/images/nextgen1.webp"
+                src="/images/digital4.webp"
                 alt="Next-Gen Marketing Arrow"
                 width={280}
                 height={280}
@@ -613,369 +614,6 @@ const NextGenMarketingSection = () => {
   )
 }
 
-
-// Is This Right for You Section Component
-const IsThisRightSection = () => {
-    const sectionRef = useRef(null)
-    const titleRef = useRef(null)
-    const subtitleRef = useRef(null)
-    const cardsRef = useRef([])
-  
-    useEffect(() => {
-      const ctx = gsap.context(() => {
-        // Filter valid cards
-        const validCards = cardsRef.current.filter(card => card !== null)
-        
-        gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
-        
-        // Set initial positions - first 2 cards from left, next 2 from right
-        if (validCards.length >= 4) {
-          gsap.set([validCards[0], validCards[1]], { x: -window.innerWidth, y: 0 }) // First 2 from completely off-screen left (no opacity)
-          gsap.set([validCards[2], validCards[3]], { opacity: 0, x: 100, y: 0 })  // Next 2 from right
-        }
-        
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          }
-        })
-        
-        tl
-          .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-          .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
-          
-        // Animate cards from left (first 2) - horizontal scroll as group
-        if (validCards.length >= 2) {
-          tl.to([validCards[0], validCards[1]], { 
-            x: 0, 
-            duration: 1.5, 
-            stagger: 0, 
-            ease: "power2.out" 
-          }, "-=0.3")
-        }
-        
-        // Animate cards from right (next 2)
-        if (validCards.length >= 4) {
-          tl.to([validCards[2], validCards[3]], { 
-            opacity: 1, 
-            x: 0, 
-            duration: 0.8, 
-            stagger: 0.2, 
-            ease: "power2.out" 
-          }, "-=0.6")
-        }
-      }, sectionRef)
-      return () => ctx.revert()
-    }, [])
-  
-    const businessTypes = [
-      {
-        icon: "/images/nextgen2.webp",
-        title: "Ready to scale fast"
-      },
-      {
-        icon: "/images/nextgen3.webp",
-        title: "Tired of old marketing playbooks"
-      },
-      {
-        icon: "/images/nextgen4.webp",
-        title: "Want clarity, performance, and creative edge"
-      },
-      {
-        icon: "/images/nextgen5.webp",
-        title: "Looking for a partner who moves as fast as the market does"
-      }
-    ]
-  
-    return (
-      <section ref={sectionRef} className=" py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          {/* Title */}
-          <h2 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-bold text-black text-center mb-4 font-sans leading-tight">
-            Is This Right for You?
-          </h2>
-          
-          {/* Subtitle */}
-          <p ref={subtitleRef} className="text-xl md:text-2xl text-gray-700 text-center mb-16 font-sans">
-            Next-gen marketing is for businesses that are
-          </p>
-          
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6  ">
-            {businessTypes.map((type, index) => (
-              <div 
-                key={index}
-                ref={el => cardsRef.current[index] = el}
-                className="bg-gray-100 rounded-2xl p-8 text-center shadow-lg hover:shadow-xl transition-all duration-300 relative group hover:-translate-y-1 border border-gray-200 min-h-[280px] flex flex-col justify-center"
-              >
-                {/* Arrow in top right */}
-                <div className="bg-white rounded-xl p-2 absolute top-4 right-4 text-gray-400 group-hover:text-[#00B9FF] transition-colors duration-300 shadow-sm">
-                  <MoveUpRight size={20} />
-                </div>
-                
-                {/* Icon - Centered */}
-                <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                  <Image
-                    src={type.icon}
-                    alt={type.title}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                
-                {/* Title - With wrapping, centered */}
-                <h3 className="text-lg font-semibold text-gray-900 font-sans leading-tight px-2">
-                  {type.title}
-                </h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-
-const NextGenFeatures = () => (
-    <section className="bg-white py-16 px-4 font-sans">
-      <div className="max-w-6xl mx-auto text-center">
-        {/* Title */}
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-sans font-bold mb-12 text-black leading-tight">
-          What does Webnox Digital do?
-        </h2>
-        
-        {/* Asymmetric Grid Layout */}
-        <div className="grid grid-cols-4 grid-rows-3 gap-4 max-w-3xl mx-auto">
-          {/* Column 1 - Row 1: Takes 1 grid space (smaller) */}
-          <div className="bg-gray-100 rounded-2xl overflow-hidden col-span-2 row-span-1 relative group cursor-pointer">
-            <img 
-              src="/images/nextgen8.webp" 
-              alt="Team Collaboration" 
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
-            />
-            {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-4">
-              <div className="text-left text-white">
-                <h3 className="text-lg font-bold mb-2">Smart Campaign Intelligence</h3>
-                <p className="text-sm">Our AI-driven strategy tools help us test, adapt, and scale campaigns based on real-time performance</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Column 2 - Row 1: Takes 2 grid spaces (larger, spans down) */}
-          <div className="bg-gray-100 rounded-2xl overflow-hidden col-span-2 row-span-2 relative group cursor-pointer">
-            <img 
-              src="/images/nextgen9.webp" 
-              alt="Digital Solutions" 
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
-            />
-            {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-6">
-              <div className="text-left text-white">
-                <h3 className="text-xl font-bold mb-3">Buyer Psychology + Data</h3>
-                <p className="text-base">We don’t just know what your audience clicks, we know why. That’s how we design campaigns that connect, convert, and compound</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Column 1 - Row 2: Takes 2 grid spaces (larger, spans down) */}
-          <div className="bg-gray-100 rounded-2xl overflow-hidden col-span-2 row-span-2 relative group cursor-pointer">
-            <img 
-              src="/images/nextgen7.webp" 
-              alt="Business Consulting" 
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
-            />
-            {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-6">
-              <div className="text-left text-white">
-                <h3 className="text-xl font-bold mb-3">Omnichannel Experience</h3>
-                <p className="text-base">From WhatsApp to LinkedIn, YouTube to voice search, we craft unified campaigns across the platforms your audience lives on.</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Column 2 - Row 2: Takes 1 grid space (smaller) */}
-          <div className="bg-gray-100 rounded-2xl overflow-hidden col-span-2 row-span-1 relative group cursor-pointer">
-            <img 
-              src="/images/nextgen6.webp" 
-              alt="Business Consulting" 
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
-            />
-            {/* Hover Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-4">
-              <div className="text-left text-white">
-                <h3 className="text-lg font-bold mb-2"> Conversion, Not Just Reach</h3>
-                <p className="text-sm">Impressions are nice. Revenue is better. Our goal is to turn awareness into acquisition and browsers into brand believers.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-
-const ResultsSection = () => (
-  <section className=" py-16 px-4 font-sans">
-    <div className="max-w-6xl mx-auto text-center">
-      {/* Title */}
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-16 text-gray-800 leading-tight">
-        Results Our Clients See:
-      </h2>
-      
-      {/* Results Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8   ">
-        {/* ROAS Result */}
-        <div className="bg-gray-50 rounded-2xl p-8 text-center shadow-lg">
-          <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center ">
-            <Image src="/images/nextgen11.webp" alt="ROAS" width={80} height={80} className="w-full h-full object-contain" />
-          </div>
-          <h3 className="text-2xl  font-bold text-gray-900 mb-2">
-            5x Return on Ad Spend (ROAS)
-          </h3>
-        </div>
-        
-        {/* Lead Increase Result */}
-        <div className=" rounded-2xl p-8 text-center shadow-lg bg-gray-50">
-          <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center ">
-            <Image src="/images/nextgen10.webp" alt="ROAS" width={80} height={80} className="w-full h-full object-contain" />
-          </div>
-          <h3 className="text-2xl  font-bold text-gray-900 mb-2">
-            300% Increase in lead
-          </h3>
-        </div>
-        
-        {/* Engagement Growth Result */}
-        <div className=" rounded-2xl p-8 text-center shadow-lg bg-gray-50">
-          <div className="w-20 h-20 mx-auto mb-6 flex items-center justify-center ">
-            <Image src="/images/nextgen2.webp" alt="ROAS" width={80} height={80} className="w-full h-full object-contain" />
-          </div>
-          <h3 className="text-2xl  font-bold text-gray-900 mb-2">
-            4x Engagement growth across channels
-          </h3>
-        </div>
-      </div>
-    </div>
-  </section>
-)
-
-const MarketingStackSection = () => {
-  const sectionRef = useRef(null)
-  const titleRef = useRef(null)
-  const cardsRef = useRef([])
-  const cardBackgroundsRef = useRef([])
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Filter valid cards
-      const validCards = cardsRef.current.filter(card => card !== null)
-      const validBackgrounds = cardBackgroundsRef.current.filter(bg => bg !== null)
-      
-      gsap.set(titleRef.current, { opacity: 0, y: 30 })
-      gsap.set(validCards, { opacity: 0, y: 50, scale: 0.9 })
-      
-      // Set initial state for card backgrounds
-      gsap.set(validBackgrounds, { scaleX: 0, transformOrigin: "left center" })
-      
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        }
-      })
-      
-      tl
-        .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .to(validCards, { 
-          opacity: 1, 
-          y: 0, 
-          scale: 1,
-          duration: 0.6, 
-          stagger: 0.1, 
-          ease: "power2.out" 
-        }, "-=0.4")
-
-      // Add hover animations for each card
-      validCards.forEach((card, index) => {
-        const background = validBackgrounds[index]
-        if (background) {
-          card.addEventListener('mouseenter', () => {
-            gsap.to(background, { 
-              scaleX: 1, 
-              duration: 0.4, 
-              ease: "power2.out" 
-            })
-          })
-          
-          card.addEventListener('mouseleave', () => {
-            gsap.to(background, { 
-              scaleX: 0, 
-              duration: 0.3, 
-              ease: "power2.in" 
-            })
-          })
-        }
-      })
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
-
-  const marketingStackItems = [
-    "AI-Powered Ad Campaigns",
-    "Automated Lead Funnels", 
-    "Voice & Search Engine Optimization (VSEO)",
-    "Conversion Rate Optimization (CRO)",
-    "Multilingual Campaigns for Global Markets",
-    "Email + WhatsApp Automation",
-    "Predictive Retargeting",
-    "Video & Interactive Content Strategy",
-    "Influencer and UGC Amplification"
-  ]
-
-  return (
-    <section 
-      ref={sectionRef} 
-      className="py-16 px-4 font-sans"
-    
-    >
-      <div className="max-w-6xl mx-auto">
-        {/* Title */}
-        <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-16 leading-tight">
-          Our Next-Gen Marketing Stack Includes
-        </h2>
-        
-        {/* Marketing Stack Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {marketingStackItems.map((item, index) => (
-            <div 
-              key={index}
-              ref={el => cardsRef.current[index] = el}
-              className="relative rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden group"
-              style={{
-                background: "linear-gradient(90deg, #00B9FF 0%, rgba(0, 185, 255, 0.6) 20%, rgba(0, 185, 255, 0.2) 35%, rgba(255, 255, 255, 0.9) 60%, #ffffff 100%)"
-              }}
-            >
-              {/* Animated full blue background for hover */}
-              <div 
-                ref={el => cardBackgroundsRef.current[index] = el}
-                className="absolute inset-0 bg-[#00B9FF] rounded-2xl"
-                style={{ scaleX: 0, transformOrigin: "left center" }}
-              />
-              
-              {/* Content */}
-              <div className="relative z-10">
-                <h3 className="text-lg font-semibold leading-tight text-gray-800 group-hover:text-white transition-colors duration-300">
-                  {item}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 
 
@@ -1065,10 +703,6 @@ const DigitalTransformationPage = () => {
       <HeroSection />
       <TechnologyWorkSection />
       <NextGenMarketingSection />
-      <IsThisRightSection />
-      <NextGenFeatures />
-      <ResultsSection />
-      <MarketingStackSection />
       <FAQSection />
       <Footer />
     </main>
