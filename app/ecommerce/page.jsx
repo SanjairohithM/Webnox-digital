@@ -848,15 +848,15 @@ const TechnologyWorkSection = () => {
     }, [])
   
     const marketingStackItems = [
-      "B2C & B2B Portals",
-      "Multi-vendor Marketplace", 
-      "Subscription Commerce",
-      "International Stores",
-      "Wholesale Portals",
-      "Product Configurators",
-      "Mobile Commerce Apps",
-      "Progressive Web Apps",
-      "Influencer and UGC Amplification"
+      { text: "B2C & B2B Portals", image: "/images/ecommerce15.png" },
+      { text: "Multi-vendor Marketplace", image: "/images/ecommerce16.png" }, 
+      { text: "Subscription Commerce", image: "/images/ecommerce17.png" },
+      { text: "International Stores", image: "/images/ecommerce18.png" },
+      { text: "Wholesale Portals", image: "/images/ecommerce19.png" },
+      { text: "Product Configurators", image: "/images/ecommerce20.png" },
+      { text: "Mobile Commerce Apps", image: "/images/ecommerce21.png" },
+      { text: "Progressive Web Apps", image: "/images/ecommerce22.png" },
+      { text: "Inventory Management Systems", image: "/images/ecommerce15.png" }
     ]
   
     return (
@@ -867,9 +867,11 @@ const TechnologyWorkSection = () => {
       >
         <div className="max-w-6xl mx-auto">
           {/* Title */}
-          <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-16 leading-tight">
-            Our Next-Gen Marketing Stack Includes
+          <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-4 leading-tight">
+          We Build for Every E-Commerce Model
           </h2>
+
+          <p className="text-gray-600 text-lg md:text-xl text-center max-w-2xl mx-auto mb-16">From simple stores to complex marketplaces</p>
           
           {/* Marketing Stack Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -890,9 +892,14 @@ const TechnologyWorkSection = () => {
                 />
                 
                 {/* Content */}
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col items-center space-y-4">
+                  <img 
+                    src={item.image} 
+                    alt={item.text}
+                    className="w-12 h-12 object-contain group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                  />
                   <h3 className="text-lg font-semibold leading-tight text-gray-800 group-hover:text-white transition-colors duration-300">
-                    {item}
+                    {item.text}
                   </h3>
                 </div>
               </div>
@@ -903,6 +910,145 @@ const TechnologyWorkSection = () => {
     )
   }
 
+
+
+  
+
+// Specialized E-Commerce Solutions Section
+const SpecializedSolutionsSection = () => {
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const cardRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set([titleRef.current, subtitleRef.current, cardRef.current], { opacity: 0, y: 30 })
+      
+      gsap.to([titleRef.current, subtitleRef.current, cardRef.current], {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        }
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+  const industries = [
+    {
+      title: "Fashion & Apparel",
+      description: "Size guides, virtual try-ons, seasonal collections, trend forecasting",
+      image: "/images/ecommerce1.webp",
+      bgColor: "from-blue-100 to-blue-200"
+    },
+    {
+      title: "Electronics & Tech",
+      description: "Product comparisons, technical specs, warranty management, reviews",
+      image: "/images/ecommerce2.webp", 
+      bgColor: "from-purple-100 to-purple-200"
+    },
+    {
+      title: "Health & Beauty",
+      description: "Ingredient tracking, skin analysis, subscription boxes, expert consultations",
+      image: "/images/ecommerce3.png",
+      bgColor: "from-pink-100 to-pink-200"
+    },
+    {
+      title: "Food & Beverage",
+      description: "Fresh delivery tracking, dietary filters, recipe integration, local sourcing",
+      image: "/images/ecommerce4.png",
+      bgColor: "from-green-100 to-green-200"
+    },
+    {
+      title: "Home & Furniture",
+      description: "AR room visualization, space planning, assembly guides, bulk ordering",
+      image: "/images/ecommerce5.png",
+      bgColor: "from-orange-100 to-orange-200"
+    },
+    {
+      title: "Automotive Parts",
+      description: "Vehicle compatibility, installation guides, bulk orders, dealer networks",
+      image: "/images/ecommerce6.webp",
+      bgColor: "from-red-100 to-red-200"
+    }
+  ]
+
+  return (
+    <section ref={sectionRef} className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+            Specialized E-Commerce Solutions
+            <br />
+            <span className="text-blue-600">Across Industries</span>
+          </h2>
+          <p ref={subtitleRef} className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
+            From fashion to automotive, we build tailored e-commerce platforms across diverse markets, understanding the unique challenges and opportunities each industry presents.
+          </p>
+        </div>
+
+        {/* Industries Grid */}
+        <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {industries.map((industry, index) => (
+            <div 
+              key={index}
+              className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+            >
+              {/* Background Gradient */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${industry.bgColor} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
+              
+              {/* Image Container */}
+              <div className="relative h-48 overflow-hidden">
+                <Image
+                  src={industry.image}
+                  alt={industry.title}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
+
+              {/* Content */}
+              <div className="relative p-6">
+                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                  {industry.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {industry.description}
+                </p>
+                
+                {/* Hover Arrow */}
+                <div className="absolute bottom-4 right-4 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-16">
+          <div className="inline-flex items-center gap-4 bg-white rounded-full px-8 py-4 shadow-lg">
+            <span className="text-gray-700 font-medium">Ready to build your industry-specific solution?</span>
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300 font-medium">
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 const EcommercePage = () => {
   return (
     <main className="@/ecommerce">
@@ -911,6 +1057,7 @@ const EcommercePage = () => {
       <TechnologiesSection />
       <TechnologyWorkSection />
       <MarketingStackSection />
+      <SpecializedSolutionsSection />
       <FAQSection />
       <Footer />
     </main>
