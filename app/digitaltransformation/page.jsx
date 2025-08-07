@@ -25,6 +25,8 @@ const HeroSection = () => {
   const buttonRef = useRef(null)
   const badgeRef = useRef(null)
   const titleLettersRef = useRef([])
+  const imageRef = useRef(null)
+  const leftContentRef = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -32,8 +34,9 @@ const HeroSection = () => {
       const isDesktop = window.innerWidth >= 1024
       
       if (isDesktop) {
-        // Complex animations for desktop with letter-by-letter title animation
-        gsap.set([badgeRef.current, ...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 20 })
+        // Set initial positions - left content from left, right image from right
+        gsap.set(leftContentRef.current, { x: "-100%", opacity: 0 })
+        gsap.set(imageRef.current, { x: "70%", opacity: 0 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -42,20 +45,40 @@ const HeroSection = () => {
           } 
         })
         
-        // Animate badge first, then title letters one by one
-        tl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+        // Animate both sides simultaneously
+        tl.to(leftContentRef.current, { 
+            x: "0%", 
+            opacity: 1, 
+            duration: 0.8, 
+            ease: "power2.out" 
+          })
+          .to(imageRef.current, { 
+            x: "0%", 
+            opacity: 1, 
+            duration: 0.8, 
+            ease: "power2.out" 
+          }, 0) // Start at the same time as left content
+          
+        // Then animate the internal content with stagger
+        tl.to(badgeRef.current, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 0.3)
           .to(titleLettersRef.current, { 
             opacity: 1, 
             y: 0, 
             duration: 0.4, 
             ease: "power2.out",
             stagger: 0.03 // 30ms delay between each letter
-          }, "-=0.2")
-          .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
-          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+          }, 0.4)
+          .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.5)
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.6)
+          
+        // Set initial states for internal content
+        gsap.set([badgeRef.current, ...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 20 })
+        gsap.set(badgeRef.current, { scale: 0.8 })
+        
       } else {
-        // Simple fade animations for mobile with letter-by-letter title animation
-        gsap.set([badgeRef.current, ...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 15 })
+        // Mobile animations - simpler slide effect
+        gsap.set(leftContentRef.current, { x: "-50%", opacity: 0 })
+        gsap.set(imageRef.current, { x: "50%", opacity: 0 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -64,17 +87,35 @@ const HeroSection = () => {
           }
         })
         
-        // Animate badge first, then title letters one by one (faster on mobile)
-        tl.to(badgeRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" })
+        // Animate both sides simultaneously
+        tl.to(leftContentRef.current, { 
+            x: "0%", 
+            opacity: 1, 
+            duration: 0.7, 
+            ease: "power2.out" 
+          })
+          .to(imageRef.current, { 
+            x: "0%", 
+            opacity: 1, 
+            duration: 0.7, 
+            ease: "power2.out" 
+          }, 0)
+          
+        // Then animate internal content
+        tl.to(badgeRef.current, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, 0.2)
           .to(titleLettersRef.current, { 
             opacity: 1, 
             y: 0, 
             duration: 0.3, 
             ease: "power2.out",
             stagger: 0.02 // 20ms delay between each letter
-          }, "-=0.2")
-          .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          }, 0.3)
+          .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.4)
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.5)
+          
+        // Set initial states for internal content
+        gsap.set([badgeRef.current, ...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 15 })
+        gsap.set(badgeRef.current, { scale: 0.8 })
       }
     }, heroRef)
     return () => ctx.revert()
@@ -91,7 +132,7 @@ const HeroSection = () => {
       <div className="relative w-full px-20 mt-30">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
           {/* Left Side - Text Content */}
-          <div className="lg:col-span-3 flex flex-col justify-center text-center lg:text-left">
+          <div ref={leftContentRef} className="lg:col-span-3 flex flex-col justify-center text-center lg:text-left">
             {/* Badge */}
             <div ref={badgeRef} className="flex justify-center lg:justify-start mb-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF]">
@@ -135,7 +176,7 @@ const HeroSection = () => {
 
           {/* Right Side - Image */}
           <div className="lg:col-span-2 flex justify-center lg:justify-end">
-            <div className="w-full max-w-md lg:max-w-lg">
+            <div ref={imageRef} className="w-full max-w-md lg:max-w-lg">
               <img
                 src="/images/digital1.webp"
                 alt="Digital Transformation"
@@ -170,32 +211,38 @@ const TechnologyWorkSection = () => {
       
       if (isDesktop) {
         // Complex animations for desktop
-        gsap.set([titleRef.current, descRef.current, imageRef.current], { opacity: 0, y: 30 })
+        // H2 comes from right side, P comes from bottom
+        gsap.set(titleRef.current, { opacity: 0, x: 100 }) // From right
+        gsap.set(descRef.current, { opacity: 0, y: 80 })   // From bottom
+        gsap.set(imageRef.current, { opacity: 0, y: 30 })  // Normal fade
         
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
+            start: "top 60%",
           }
         })
         
         tl.to([imageRef.current], { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-          .to(titleRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.3")
-          .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+          .to(titleRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.3") // Slide from right
+          .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.4")  // Slide from bottom
       } else {
         // Simple fade animations for mobile
-        gsap.set([titleRef.current, descRef.current, imageRef.current], { opacity: 0, y: 20 })
+        // H2 comes from right side, P comes from bottom (reduced distance for mobile)
+        gsap.set(titleRef.current, { opacity: 0, x: 50 })  // From right (less distance)
+        gsap.set(descRef.current, { opacity: 0, y: 40 })   // From bottom (less distance)
+        gsap.set(imageRef.current, { opacity: 0, y: 20 })  // Normal fade
         
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
+            start: "top 60%",
           }
         })
         
         tl.to([imageRef.current], { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
-          .to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.2")
-          .to(descRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")
+          .to(titleRef.current, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }, "-=0.2") // Slide from right
+          .to(descRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")  // Slide from bottom
       }
     }, sectionRef)
     return () => ctx.revert()
@@ -204,7 +251,7 @@ const TechnologyWorkSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[600px] md:min-h-[700px] lg:min-h-[800px] w-full overflow-hidden py-12 lg:py-20"
+      className="relative min-h-[600px] md:min-h-[700px]  w-full overflow-hidden py-12 lg:py-20"
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0 ">
@@ -221,17 +268,47 @@ const TechnologyWorkSection = () => {
       
              <div className="relative w-full px-18 z-20 flex items-center py-36">
          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-10 items-center w-full">
-           {/* Left Side - Image */}
-           <div ref={imageRef} className="flex justify-center lg:justify-start order-2 lg:order-1">
-             <div className="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-               <img
-                 src="/images/digital3.webp"
-                 alt="Technology Working for You"
-                 className="w-full h-auto object-contain"
-                 loading="lazy"
-               />
-             </div>
-           </div>
+                     {/* Left Side - Image */}
+          <div ref={imageRef} className="flex justify-center lg:justify-start order-2 lg:order-1">
+            <div className="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl perspective-1000">
+              <div className="transform-gpu transition-all duration-700 ease-out hover:rotate-x-12 hover:rotate-y-12 hover:scale-105 hover:translate-z-16 cursor-pointer" 
+                   style={{
+                     perspective: '1000px',
+                     transformStyle: 'preserve-3d'
+                   }}
+                   onMouseEnter={(e) => {
+                     const rect = e.currentTarget.getBoundingClientRect();
+                     const x = e.clientX - rect.left;
+                     const y = e.clientY - rect.top;
+                     const centerX = rect.width / 2;
+                     const centerY = rect.height / 2;
+                     const rotateX = (y - centerY) / 10;
+                     const rotateY = (centerX - x) / 10;
+                     e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05) translateZ(20px)`;
+                   }}
+                   onMouseMove={(e) => {
+                     const rect = e.currentTarget.getBoundingClientRect();
+                     const x = e.clientX - rect.left;
+                     const y = e.clientY - rect.top;
+                     const centerX = rect.width / 2;
+                     const centerY = rect.height / 2;
+                     const rotateX = (y - centerY) / 10;
+                     const rotateY = (centerX - x) / 10;
+                     e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05) translateZ(20px)`;
+                   }}
+                   onMouseLeave={(e) => {
+                     e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0px)';
+                   }}>
+                <img
+                  src="/images/digital3.webp"
+                  alt="Technology Working for You"
+                  className="w-full h-auto object-contain transition-all duration-700 ease-out"
+                  loading="lazy"
+                  style={{ backfaceVisibility: 'hidden' }}
+                />
+              </div>
+            </div>
+          </div>
 
            {/* Right Side - Text Content */}
            <div className="flex flex-col justify-center text-center lg:text-left order-1 lg:order-2 lg:pl-4">
@@ -246,7 +323,7 @@ const TechnologyWorkSection = () => {
             </div>
 
             <h2 ref={titleRef} className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-sans font-semibold text-gray-900 mb-6 lg:mb-8 leading-tight lg:leading-tight">
-              Technology Should Work for You,<br className="hidden lg:block" /> Not Against You
+              Technology Should Work for You, Not Against You
             </h2>
             
             <p
@@ -624,6 +701,7 @@ const OutdatedToolsSection = () => {
   const titleRef = useRef(null)
   const listRef = useRef(null)
   const buttonRef = useRef(null)
+  const bulletRefs = useRef([])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -631,9 +709,25 @@ const OutdatedToolsSection = () => {
       
       if (isDesktop) {
         // Desktop animations
-        gsap.set([titleRef.current, listRef.current, buttonRef.current, imageRef.current], { 
+        // Elements coming from left
+        gsap.set([titleRef.current, buttonRef.current, imageRef.current], { 
           opacity: 0, 
+          x: -50,
           y: 30 
+        })
+        
+        // Individual bullet points coming from right
+        gsap.set(bulletRefs.current, { 
+          opacity: 0, 
+          x: 50,
+          y: 30 
+        })
+        
+        // Description paragraph (keep visible)
+        gsap.set(listRef.current.querySelector('p'), { 
+          opacity: 0, 
+          x: -30,
+          y: 20 
         })
         
         const tl = gsap.timeline({
@@ -643,15 +737,44 @@ const OutdatedToolsSection = () => {
           }
         })
         
-        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" })
-          .to(listRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
-          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-          .to(imageRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
+        tl.to(titleRef.current, { opacity: 1, x: 0, y: 0, duration: 0.7, ease: "power2.out" })
+          .to(listRef.current.querySelector('p'), { opacity: 1, x: 0, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+          .to(buttonRef.current, { opacity: 1, x: 0, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(imageRef.current, { opacity: 1, x: 0, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
+        
+        // Animate each bullet point individually with delays
+        bulletRefs.current.forEach((bullet, index) => {
+          if (bullet) {
+            tl.to(bullet, { 
+              opacity: 1, 
+              x: 0, 
+              y: 0, 
+              duration: 0.8, 
+              ease: "power2.out" 
+            }, `-=${0.3 - (index * 0.15)}`) // Stagger each bullet by 0.15s
+          }
+        })
       } else {
         // Mobile animations
-        gsap.set([titleRef.current, listRef.current, buttonRef.current, imageRef.current], { 
+        // Elements coming from left
+        gsap.set([titleRef.current, buttonRef.current, imageRef.current], { 
           opacity: 0, 
+          x: -30,
           y: 20 
+        })
+        
+        // Individual bullet points coming from right
+        gsap.set(bulletRefs.current, { 
+          opacity: 0, 
+          x: 30,
+          y: 20 
+        })
+        
+        // Description paragraph
+        gsap.set(listRef.current.querySelector('p'), { 
+          opacity: 0, 
+          x: -20,
+          y: 15 
         })
         
         const tl = gsap.timeline({
@@ -661,10 +784,23 @@ const OutdatedToolsSection = () => {
           }
         })
         
-        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-          .to(listRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")
-          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2")
-          .to(imageRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+        tl.to(titleRef.current, { opacity: 1, x: 0, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(listRef.current.querySelector('p'), { opacity: 1, x: 0, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")
+          .to(buttonRef.current, { opacity: 1, x: 0, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2")
+          .to(imageRef.current, { opacity: 1, x: 0, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+        
+        // Animate each bullet point individually with delays
+        bulletRefs.current.forEach((bullet, index) => {
+          if (bullet) {
+            tl.to(bullet, { 
+              opacity: 1, 
+              x: 0, 
+              y: 0, 
+              duration: 0.7, 
+              ease: "power2.out" 
+            }, `-=${0.2 - (index * 0.12)}`) // Stagger each bullet by 0.12s
+          }
+        })
       }
     }, sectionRef)
     
@@ -715,7 +851,11 @@ const OutdatedToolsSection = () => {
                 {/* <p className="text-[#00B9FF] text-lg lg:text-xl  leading-relaxed">Without the right tech and strategy, you face:</p> */}
                 <ul className="space-y-3 lg:space-y-4">
                   {services.map((service, index) => (
-                    <li key={index} className="flex items-start gap-3">
+                    <li 
+                      key={index} 
+                      ref={el => bulletRefs.current[index] = el}
+                      className="flex items-start gap-3"
+                    >
                       <div className="w-2 h-2 bg-[#00B9FF] rounded-full mt-2 flex-shrink-0"></div>
                       <span className="text-gray-700 text-base lg:text-lg leading-relaxed">
                         {service}
