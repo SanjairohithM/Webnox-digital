@@ -920,12 +920,16 @@ const SpecializedSolutionsSection = () => {
   const titleRef = useRef(null)
   const subtitleRef = useRef(null)
   const cardRef = useRef(null)
+  const scrollContainerRef = useRef(null)
+  const imageContainerRef = useRef(null)
+  const [currentCardIndex, setCurrentCardIndex] = useState(0)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, subtitleRef.current, cardRef.current], { opacity: 0, y: 30 })
+      // Initial animations for title and subtitle
+      gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
       
-      gsap.to([titleRef.current, subtitleRef.current, cardRef.current], {
+      gsap.to([titleRef.current, subtitleRef.current], {
         opacity: 1,
         y: 0,
         duration: 0.8,
@@ -936,114 +940,210 @@ const SpecializedSolutionsSection = () => {
           start: "top 80%",
         }
       })
+
+      // Pin the image container section and create scroll-through animation
+      const imageContainer = imageContainerRef.current
+      const scrollContainer = scrollContainerRef.current
+      
+      if (imageContainer && scrollContainer) {
+        // Wait for content to load and calculate proper dimensions
+        const setupPinAnimation = () => {
+          const totalScrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight
+          
+          ScrollTrigger.create({
+            id: 'pinnedSection',
+            trigger: imageContainer,
+            start: "top 25%",
+            end: `+=${Math.max(totalScrollHeight * 2, window.innerHeight)}`, // Ensure enough scroll distance
+            pin: true,
+            scrub: 1,
+            onUpdate: (self) => {
+              // Map scroll progress to internal container scroll
+              const scrollProgress = self.progress
+              const scrollPosition = scrollProgress * totalScrollHeight
+              scrollContainer.scrollTop = scrollPosition
+            },
+            invalidateOnRefresh: true,
+            refreshPriority: -1, // Lower priority for refresh
+          })
+        }
+
+        // Setup after a short delay to ensure content is rendered
+        setTimeout(setupPinAnimation, 100)
+        
+        // Also setup on window resize
+        const handleResize = () => {
+          ScrollTrigger.refresh()
+        }
+        window.addEventListener('resize', handleResize)
+        
+        return () => {
+          window.removeEventListener('resize', handleResize)
+        }
+      }
     }, sectionRef)
     return () => ctx.revert()
+  }, [])
+
+  // Handle wheel scrolling for when section is not pinned (fallback)
+  useEffect(() => {
+    const imageContainer = imageContainerRef.current
+    const scrollContainer = scrollContainerRef.current
+    
+    if (!imageContainer || !scrollContainer) return
+
+    const handleWheel = (e) => {
+      // Check if the section is currently pinned by ScrollTrigger
+      const scrollTriggerInstance = ScrollTrigger.getById('pinnedSection')
+      
+      // Only handle wheel events if section is not pinned (fallback behavior)
+      if (!scrollTriggerInstance || !scrollTriggerInstance.isActive) {
+        e.preventDefault()
+        
+        const scrollIncrement = e.deltaY * 0.8
+        
+        scrollContainer.scrollBy({
+          top: scrollIncrement,
+          behavior: 'auto'
+        })
+      }
+    }
+
+    imageContainer.addEventListener('wheel', handleWheel, { passive: false })
+    
+    return () => {
+      imageContainer.removeEventListener('wheel', handleWheel)
+    }
   }, [])
 
   const industries = [
     {
       title: "Fashion & Apparel",
-      description: "Size guides, virtual try-ons, seasonal collections, trend forecasting",
-      image: "/images/ecommerce1.webp",
-      bgColor: "from-blue-100 to-blue-200"
+      description: "Size guides, virtual try-ons, seasonal collections",
+      image: "/images/ecommerce26.webp",
+     
     },
     {
-      title: "Electronics & Tech",
-      description: "Product comparisons, technical specs, warranty management, reviews",
-      image: "/images/ecommerce2.webp", 
-      bgColor: "from-purple-100 to-purple-200"
+      title: "Electronics & Gadgets",
+      description: "Product comparisons, tech specs, warranty management",
+      image: "/images/ecommerce27.webp", 
     },
     {
-      title: "Health & Beauty",
-      description: "Ingredient tracking, skin analysis, subscription boxes, expert consultations",
-      image: "/images/ecommerce3.png",
-      bgColor: "from-pink-100 to-pink-200"
+      title: "Skincare & Wellness",
+      description: "Skin analysis, personalized routines, subscriptions",
+      image: "/images/ecommerce30.webp",
     },
     {
-      title: "Food & Beverage",
-      description: "Fresh delivery tracking, dietary filters, recipe integration, local sourcing",
-      image: "/images/ecommerce4.png",
-      bgColor: "from-green-100 to-green-200"
+      title: "Food & Grocery",
+      description: "Fresh delivery, meal planning, subscription boxes",
+      image: "/images/ecommerce24.webp",      
     },
     {
-      title: "Home & Furniture",
-      description: "AR room visualization, space planning, assembly guides, bulk ordering",
-      image: "/images/ecommerce5.png",
-      bgColor: "from-orange-100 to-orange-200"
+      title: "Furniture & Interiors",
+      description: "AR visualization, room planning, custom orders",
+      image: "/images/ecommerce25.webp",
     },
     {
       title: "Automotive Parts",
-      description: "Vehicle compatibility, installation guides, bulk orders, dealer networks",
-      image: "/images/ecommerce6.webp",
-      bgColor: "from-red-100 to-red-200"
-    }
+      description: "Part compatibility, vehicle lookup, B2B portals",
+      image: "/images/ecommerce31.webp",
+    },
+    {
+      title: "Books & Education",
+      description: "Digital content, course platforms, learning paths",
+      image: "/images/ecommerce28.webp",
+    },
+    {
+      title: "Jewelry & Luxury",
+      description: "Custom designs, authentication, premium experience",
+    image: "/images/ecommerce29.webp",
+    },
+
+    
+
   ]
 
   return (
-    <section ref={sectionRef} className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+    <section ref={sectionRef} className="py-20 px-4 font-sans">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-            Specialized E-Commerce Solutions
+            Specialized E-Commerce Solutions Across Industries
             <br />
-            <span className="text-blue-600">Across Industries</span>
+            <span className="text-gray-800">Across Industries</span>
           </h2>
-          <p ref={subtitleRef} className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
+          <p ref={subtitleRef} className="text-[#00B9FF] text-lg md:text-xl max-w-3xl mx-auto font-semibold">
             From fashion to automotive, we build tailored e-commerce platforms across diverse markets, understanding the unique challenges and opportunities each industry presents.
           </p>
         </div>
 
-        {/* Industries Grid */}
-        <div ref={cardRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {industries.map((industry, index) => (
-            <div 
-              key={index}
-              className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-            >
-              {/* Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${industry.bgColor} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
-              
-              {/* Image Container */}
-              <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={industry.image}
-                  alt={industry.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-              </div>
+        {/* Background Image Section with Scrollable Cards */}
+        <div ref={imageContainerRef} className="relative w-full max-w-6xl mx-auto mb-16 cursor-pointer overflow-hidden">
+          {/* Background Image */}
+          <div className="relative ">
+            <img 
+              src="/images/ecommerce23.webp" 
+              alt="E-commerce Solutions" 
+              className="w-full h-auto object-contain"
+            />
+            
+            {/* Overlay with Parallax Scrollable Cards */}
+            <div className="absolute inset-0 flex items-center justify-center p-8">
+              <div 
+                ref={scrollContainerRef}
+                className="w-full h-full overflow-y-auto p-6 scroll-container"
+                style={{ 
+                  scrollbarWidth: 'none', 
+                  msOverflowStyle: 'none',
+                  scrollBehavior: 'auto' // Ensure smooth internal scrolling
+                }}
+              >
+                <div ref={cardRef} className="space-y-0">
+                  {industries.map((industry, index) => (
+                    <div 
+                      key={index}
+                      className={`group flex flex-col lg:flex-row items-center gap-8  ${
+                        index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                      }   min-h-[500px] flex-shrink-0 mb-8`}
+                    >
+                      {/* Image Side */}
+                      <div className="w-full lg:w-1/2">
+                        <div className="relative overflow-hidden ">
+                          <img
+                            src={industry.image}
+                            alt={industry.title}
+                            className="w-full h-64 lg:h-80 object-contain  rounded-2xl"
+                          />
+                          <div className="absolute inset-0  rounded-2xl"></div>
+                        </div>
+                      </div>
 
-              {/* Content */}
-              <div className="relative p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors duration-300">
-                  {industry.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {industry.description}
-                </p>
-                
-                {/* Hover Arrow */}
-                <div className="absolute bottom-4 right-4 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300">
-                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
+                      {/* Content Side */}
+                      <div className="w-full lg:w-1/2 text-center lg:text-left">
+                        <h3 className="text-2xl lg:text-4xl font-bold text-black mb-4 ">
+                          {industry.title}
+                        </h3>
+                        <p className="text-gray-600 text-xl leading-relaxed">
+                          {industry.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-4 bg-white rounded-full px-8 py-4 shadow-lg">
-            <span className="text-gray-700 font-medium">Ready to build your industry-specific solution?</span>
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors duration-300 font-medium">
-              Get Started
-            </button>
           </div>
         </div>
+
+        {/* Hide Scrollbar Styles */}
+        <style jsx>{`
+          .scroll-container::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
+
+
       </div>
     </section>
   )
