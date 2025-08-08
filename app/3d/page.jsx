@@ -736,15 +736,14 @@ const CTASection = () => {
 
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-4xl  font-bold text-white pt-25 leading-tight text-left ml-4 md:-ml-28 -mt-10">
-            You Deserve a Website That Works as Hard as You Do
+            Let Your Brand Speak in 3D
             </h2>
             <p className="text-lg md:text-xl  text-white/90 mb-12 max-w-3xl leading-relaxed text-left ml-4 md:-ml-28">
-            Your business is unique. Your website should be too. Let's build a platform that shows who you really are—and brings results.           </p>
+            Want to build an unforgettable web experience that drives attention and conversions?          </p>
             {/* "Get Started" button left-aligned below */}
             <div className="flex">
               <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12">
-                Schedule Free Consultation
-              </button>
+               Get a Free 3D Demo Today              </button>
             </div>
           </div>
         </div>
@@ -765,15 +764,14 @@ const CTASection = () => {
             {/* Card Container */}
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/30">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 leading-tight text-center">
-              You Deserve a Website That Works as Hard as You Do
-              </h2>
+              Let Your Brand Speak in 3D              </h2>
               <p className="text-sm sm:text-base text-gray-700 mb-6 leading-relaxed text-center">
-              Your business is unique. Your website should be too. Let's build a platform that shows who you really are—and brings results.                </p>
+              Want to build an unforgettable web experience that drives attention and conversions?                </p>
 
               {/* Buttons in card */}
-              <div className="flex flex-col space-y-3">
+              <div className="flex flex-col space-y-3 -bottom-10">
                 <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
-                  Schedule Free Consultation
+                  Get a Free 3D Demo Today
                 </button>
 
               </div>
