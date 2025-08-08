@@ -5,55 +5,55 @@ import Link from "next/link";
 const solutions = [
   {
     title: "Branding",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: " Crafting meaningful brand stories and visuals that connect with your audience and leave a lasting impact.",
     image: "/images/solution2.webp",
     href: "/branding"
   },
   {
     title: "Software Developement",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: " We build custom software that fits your business needs, boosting efficiency, scale, and user experience.",
     image: "/images/solution1.webp",
     href: "/software"
   },
   {
     title: "Digital Transformation",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: " We help modernize your business using smart digital tools that improve workflow and growth potential.",
     image: "/images/solution9.webp",
     href: "/digitaltransformation"
   },
   {
     title: "Ecommerce Development",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: " Launch seamless, secure online stores that deliver exceptional shopping experiences and drive sales.",
     image: "/images/solution8.webp",
     href: "/ecommerce"
   },
   {
     title: "Mobile App Development",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: " Creating high-performing mobile apps that users love, for both iOS and Android platforms, made simple.",
     image: "/images/solution7.webp",
     href: "/mobileapp"
   },
   {
     title: "UI/UX",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: " Designing smooth, intuitive, and user-first digital experiences that turn visitors into loyal customers.",
     image: "/images/solution6.webp",
     href: "/uiux"
   },
   {
     title: "SAAS Products",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: " We develop scalable, cloud-based SaaS solutions that solve real problems and grow with your users.,",
     image: "/images/solution5.webp",
     href: "/saas"
   },
   {
     title: "Clouds & devOps",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: " Optimizing performance, speed, and reliability with expert DevOps practices and cloud architecture.",
     image: "/images/solution4.webp",
     href: "/cloud"
   },
   {
     title: "3D websites",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,",
+    description: " We bring your brand to life with immersive 3D websites that wow users and boost engagement instantly.",
     image: "/images/solution3.webp",
     href: "/3d"
   },
@@ -62,7 +62,7 @@ const solutions = [
 
 export default function SolutionsOverlay({ onClose }) {
   return (
-    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center" onClick={onClose}>
+    <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex font-sans items-center justify-center" onClick={onClose}>
       <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-6xl w-full mx-4 relative" onClick={e => e.stopPropagation()}>
         {/* Close Button */}
         <button 
