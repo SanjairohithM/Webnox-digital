@@ -546,24 +546,27 @@ const UseCasesSection = () => {
 
 
 
-const industries = [
-  {
-    title: "Retail & E-Commerce",
-    desc: "Digital solutions for customer-focused systems: retail, fashion, and online stores. We help your business optimize, automate, and grow.",
-    img: "/images/custom10.webp"
-  },
-  {
-    title: "Logistics & Transportation",
-    desc: "Smart logistics for your business: optimize routes, track shipments, and streamline operations for maximum efficiency.",
-    img: "/images/custom11.webp"
-  },
-  {
-    title: "Real Estate & Construction",
-    desc: "From virtual tours to project management, we help real estate and construction businesses modernize and scale.",
+ const industries = [
+   {
+     step: "01",
+     title: "Understand Your Business",
+     desc: "We take time to learn your brand, audience, and goals.",
+    
+     img: "/images/custom10.webp"
+   },
+   {
+     step: "02",
+     title: "Design + Build Your Custom Website",
+     desc: "From eCommerce features to portals, dashboards, and integrations—everything built just for you.",
+     img: "/images/custom11.webp"
+   },
+   {
+    step: "03",
+    title: "Launch & Optimize",
+    desc: "We launch your website, set up analytics, and fine-tune for maximum impact.",
     img: "/images/custom12.webp"
-  },
-
-]
+  }
+ ]
 
 const IndustriesSection = () => {
   const industryRefs = useRef([])
@@ -623,25 +626,26 @@ const IndustriesSection = () => {
     <section className="bg-white py-20 px-0">
       <div className="flex flex-col items-center w-full">
         <h2 className="text-3xl md:text-5xl font-sans font-semibold text-center mb-2">
-          Industries <span className="text-sky-500">we serve</span>
+        The Plan Is  <span className="text-sky-500">Simple</span>
           
         </h2>
         <p className="text-gray-500 text-center mb-16 text-xl max-w-3xl font-sans py-4">
-          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-        </p>
-        <div className="flex flex-col gap-y-8 w-full">
+        Real solutions for real business challenges        </p>
+         <div className="flex flex-col gap-y-10 w-full">
           {industries.map((industry, i) => (
             <div
               key={industry.title}
               ref={el => industryRefs.current[i] = el}
-              className={`grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 items-stretch w-full px-4 md:px-16 py-8 md:py-12`}
+               className={`grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 items-stretch w-full px-4 md:px-16 py-8 md:py-12`}
             >
               <div className={`flex justify-center items-center w-full h-full ${i % 2 === 1 ? 'md:order-2' : ''}`}> 
                 <img src={industry.img} alt={industry.title} className="w-full md:w-[32rem] h-56 md:h-79 object-cover rounded-3xl shadow-xl" />
               </div>
-              <div className={`flex flex-col justify-center w-full h-full text-left px-2 md:px-8 items-center md:items-center md:text-left`}>
-                <h3 className="text-2xl md:text-4xl font-sans font-semibold mb-4 text-black">{industry.title}</h3>
-                <p className="font-sans  md:text-xl text-gray-400">{industry.desc}</p>
+               <div className={`flex flex-col justify-center w-full h-full text-left px-2 md:px-8 md:items-start font-sans`}>
+                 <div className="text-[72px] md:text-[180px] font-extrabold text-[#0000004A] leading-none mb-2">{industry.step}</div>
+                 <h3 className="text-2xl md:text-4xl font-sans font-semibold mb-2 text-black">{industry.title}</h3>
+                 <p className="font-sans md:text-lg text-gray-600 mb-2">{industry.desc}</p>
+ 
               </div>
             </div>
           ))}
