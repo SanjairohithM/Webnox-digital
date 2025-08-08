@@ -294,60 +294,100 @@ const CTASection = () => {
 
     return (
     <section ref={sectionRef} className="relative w-full min-h-[500px] overflow-hidden font-sans">
-      {/* Background Image - Desktop Only */}
-      <div className="absolute inset-0 hidden lg:block">
-        <Image
-          src="/images/Clientstech.png"
-          alt="CTA Background"
-          fill
-          className="object-contain w-full h-full"
-          priority
-        />
-      </div>
-      
-      {/* Blue Background - Mobile Only */}
-      <div className="absolute inset-0 lg:hidden bg-gradient-to-br from-[#00B9FF] to-[#0090CC]"></div>
-
-      {/* Content */}
-      <div
-        ref={contentRef}
-        className="relative z-10 flex flex-col justify-center min-h-[500px] px-4"
-      >
-        {/* Desktop Layout - Keep existing perfect design */}
-        <div className="hidden lg:flex flex-col items-start text-left max-w-4xl w-full mx-auto">
-          {/* "Start Your Project" button at right top */}
-          <div className="flex justify-end">
-            <button
-              className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-18 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white"
-              style={{
-                position: "absolute",
-                top: "165px",
-                right: "140px",
-                zIndex: 20,
-              }}
-            >
-              Start Your Project
-            </button>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-4xl  font-bold text-white pt-25 leading-tight text-left ml-4 md:-ml-28 -mt-10">
-            Let's Build the Future Together
-          </h2>
-          <p className="text-lg md:text-xl  text-white/90 mb-12 max-w-3xl leading-relaxed text-left ml-4 md:-ml-28 ">
-            Ready to transform your business with cutting-edge technology? Let's discuss how we can bring your vision to life.
-          </p>
-          {/* "Get Started" button left-aligned below */}
-          <div className="flex">
-            <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12 ">
-              Get Started
-            </button>
-          </div>
+      {/* 3D Container for Desktop - wraps everything */}
+      <div className="hidden lg:block transform-gpu transition-all duration-700 ease-out cursor-pointer w-full h-full" 
+           style={{
+             perspective: '1200px',
+             transformStyle: 'preserve-3d'
+           }}
+           onMouseEnter={(e) => {
+             const rect = e.currentTarget.getBoundingClientRect();
+             const x = e.clientX - rect.left;
+             const y = e.clientY - rect.top;
+             const centerX = rect.width / 2;
+             const centerY = rect.height / 2;
+             const rotateX = (y - centerY) / 25;
+             const rotateY = (centerX - x) / 25;
+             e.currentTarget.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02) translateZ(15px)`;
+           }}
+           onMouseMove={(e) => {
+             const rect = e.currentTarget.getBoundingClientRect();
+             const x = e.clientX - rect.left;
+             const y = e.clientY - rect.top;
+             const centerX = rect.width / 2;
+             const centerY = rect.height / 2;
+             const rotateX = (y - centerY) / 25;
+             const rotateY = (centerX - x) / 25;
+             e.currentTarget.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02) translateZ(15px)`;
+           }}
+           onMouseLeave={(e) => {
+             e.currentTarget.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0px)';
+           }}>
+        
+        {/* Background Image - Desktop */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/Clientstech.png"
+            alt="CTA Background"
+            fill
+            className="object-contain w-full h-full transition-all duration-700 ease-out"
+            priority
+            style={{ backfaceVisibility: 'hidden' }}
+          />
         </div>
 
-        {/* Mobile Card Layout */}
-        <div className="block lg:hidden">
+        {/* Content - Desktop */}
+        <div
+          ref={contentRef}
+          className="relative z-10 flex flex-col justify-center min-h-[500px] px-4"
+          style={{ backfaceVisibility: 'hidden' }}
+        >
+          {/* Desktop Layout - Keep existing perfect design */}
+          <div className="flex flex-col items-start text-left max-w-4xl w-full mx-auto">
+            {/* "Start Your Project" button at right top */}
+            <div className="flex justify-end">
+              <button
+                className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-18 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white"
+                style={{
+                  position: "absolute",
+                  top: "165px",
+                  right: "140px",
+                  zIndex: 20,
+                }}
+              >
+                Start Your Project
+              </button>
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-4xl  font-bold text-white pt-25 leading-tight text-left ml-4 md:-ml-28 -mt-10">
+              Let's Build the Future Together
+            </h2>
+            <p className="text-lg md:text-xl  text-white/90 mb-12 max-w-3xl leading-relaxed text-left ml-4 md:-ml-28">
+              Ready to transform your business with cutting-edge technology? Let's discuss how we can bring your vision to life.
+            </p>
+            {/* "Get Started" button left-aligned below */}
+            <div className="flex">
+              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12">
+                Get Started
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Layout - No 3D animation */}
+      <div className="block lg:hidden">
+        {/* Blue Background - Mobile Only */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF] to-[#0090CC]"></div>
+
+        {/* Content - Mobile */}
+        <div
+          ref={contentRef}
+          className="relative z-10 flex flex-col justify-center min-h-[500px] px-4"
+        >
+          {/* Mobile Card Layout */}
           <div className="max-w-md mx-auto">
             {/* Card Container */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/30 ">
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/30">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 leading-tight text-center">
                 Let's Build the Future Together
               </h2>
