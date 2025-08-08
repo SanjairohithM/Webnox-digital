@@ -742,7 +742,7 @@ const CTASection = () => {
             Want to build an unforgettable web experience that drives attention and conversions?          </p>
             {/* "Get Started" button left-aligned below */}
             <div className="flex">
-              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12">
+              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 ">
                Get a Free 3D Demo Today              </button>
             </div>
           </div>
@@ -769,7 +769,7 @@ const CTASection = () => {
               Want to build an unforgettable web experience that drives attention and conversions?                </p>
 
               {/* Buttons in card */}
-              <div className="flex flex-col space-y-3 -bottom-10">
+              <div className="flex flex-col space-y-3">
                 <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
                   Get a Free 3D Demo Today
                 </button>
