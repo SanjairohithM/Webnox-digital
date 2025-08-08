@@ -1,34 +1,27 @@
-"use client"
 import { Urbanist } from "next/font/google"
-import Head from "next/head"
 import "./globals.css"
 import Header from "./sections/Components/Header"
 import SmoothScrollProvider from "@/components/SmoothScrollProvider"
 import Footer from "./sections/Footer"
 
+export const metadata = {
+  title: "Webnox",
+  description: "Webnox",
+  verification: {
+    google: "dPoW0wzIi2VpSOg4ew-Ov7FLsv21XKLexjM8WpR6nlA",
+  },
+}
+
 const urbanist = Urbanist({
   variable: "--font-urbanist",
   subsets: ["latin"],
+  display: "swap",
 })
-
-// export const metadata = {
-//   title: "Webnox",
-
-
-
-
-//   description: "Webnox",
-// }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-      <meta name="google-site-verification" content="dPoW0wzIi2VpSOg4ew-Ov7FLsv21XKLexjM8WpR6nlA" />
-
-
-      </Head>
-      <body className={`${urbanist.variable} antialiased`}>
+      <body className={`${urbanist.variable} font-sans antialiased`}>
         <Header />
         <SmoothScrollProvider>
           {children}
