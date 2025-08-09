@@ -113,7 +113,7 @@ const HeroSection = () => {
 
         <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-sans font-semibold mb-4 leading-tight">
           <span className="text-[#00B9FF]">
-            {"Your Website Is the First Impression. Make It ".split("").map((char, index) => (
+            {"Your Website Is the First Impression. Make  ".split("").map((char, index) => (
               <span
                 key={index}
                 ref={(el) => (titleLettersRef.current[index] = el)}
@@ -129,7 +129,7 @@ const HeroSection = () => {
           </span>
 
           <span className="text-black">
-            {"Unforgettable.".split("").map((char, index) => (
+            {" It Unforgettable.".split("").map((char, index) => (
               <span
                 key={index + "Your Website Is the First Impression. Make It ".length}
                 ref={(el) => (titleLettersRef.current[index + "Your Website Is the First Impression. Make It ".length] = el)}
