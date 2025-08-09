@@ -198,24 +198,24 @@ const HeroSection = () => {
 const FAQSection = () => {
     const faqs = [
       {
-        question: "What types of businesses benefit from your consulting services?",
-        answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+        question: "What platforms do you specialize in for e-commerce?",
+        answer: " We build on Shopify, WooCommerce, Magento, and headless stacks (like React+Next.js) depending on your needs."
       },
       {
-        question: "How does Webnox approach digital transformation?",
-        answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+        question: " How long does an e-commerce site take to develop?",
+        answer: "A basic store takes 3–4 weeks. Custom builds or marketplaces may take 2–3 months."
       },
       {
-        question: "What makes your consulting different from traditional firms?",
-        answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+        question: "Can you integrate shipping, payment, or warehouse tools?",
+        answer: "Yes. We integrate with leading tools like Shiprocket, Razorpay, Stripe, Shipstation, Zoho Inventory, etc."
       },
       {
-        question: "What makes Webnox Digital a reliable IT consulting partner?",
-        answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
+        question: "Do you provide post-launch marketing and support?",
+        answer: " Absolutely. We offer paid ads, SEO, CRO, and performance-based optimization plans."
       },
       {
-        question: "What industries do you specialize in for IT consulting?",
-        answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
+        question: "Can you help with automation like order alerts or WhatsApp messages?",
+        answer: " Yes. Using tools like N8N and Zapier, we automate your entire sales pipeline and post-purchase journey."
       },
     ];
     const [openIdx, setOpenIdx] = React.useState(0);

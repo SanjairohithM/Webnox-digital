@@ -791,24 +791,24 @@ const CTASection = () => {
 const FAQSection = () => {
   const faqs = [
     {
-      question: "What types of businesses benefit from your consulting services?",
-      answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+      question: " What industries benefit most from 3D website development?",
+      answer: "Sectors like real estate, luxury products, gaming, and tech startups can drive higher engagement and sales through immersive 3D experiences."
     },
     {
-      question: "How does Webnox approach digital transformation?",
-      answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+      question: "Is a 3D website mobile-friendly?",
+      answer: "Yes. Our 3D websites are fully optimized for mobile devices using adaptive rendering techniques and performance tuning."
     },
     {
-      question: "What makes your consulting different from traditional firms?",
-      answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+      question: "What’s the difference between 3D and traditional websites?",
+      answer: "Traditional websites are static or 2D. 3D websites provide interactive experiences with motion graphics, 3D models, and spatial navigation improving retention and brand value."
     },
     {
-      question: "What makes Webnox Digital a reliable IT consulting partner?",
-      answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
+      question: " Will 3D websites affect SEO?",
+      answer: "Not at all. We build 3D websites using SEO-friendly frameworks like Next.js and implement best practices such as SSR, structured data, and performance optimization."
     },
     {
-      question: "What industries do you specialize in for IT consulting?",
-      answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
+      question: "How long does it take to build a 3D website?",
+      answer: "Project timelines vary based on complexity but usually range from 4 to 10 weeks. We provide a detailed roadmap after the initial discovery phase."
     },
   ];
   const [openIdx, setOpenIdx] = React.useState(0);

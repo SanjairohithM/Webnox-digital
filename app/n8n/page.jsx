@@ -536,24 +536,24 @@ const WhyN8nWebnoxSection = () => {
 const FAQSection = () => {
   const faqs = [
     {
-      question: "What types of businesses benefit from your consulting services?",
-      answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+      question: "What is n8n and how does it help my business?",
+      answer: "n8n is a powerful, open-source automation platform that connects your apps, tools, and data flows — without needing heavy coding. It lets you automate repetitive tasks, sync systems, and reduce manual work so your team can focus on what matters."
     },
     {
-      question: "How does Webnox approach digital transformation?",
-      answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+      question: "What can I automate using n8n?",
+      answer: "Almost anything! From lead routing and email workflows to marketing reports, CRM syncs, WhatsApp alerts, blog generation, PDF automation, and payment updates, we can automate it."
     },
     {
-      question: "What makes your consulting different from traditional firms?",
-      answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+      question: " I’m not technical. Can I still use n8n?",
+      answer: "Yes, especially when working with a team like Webnox. We handle the setup, integration, and maintenance, while you just focus on your business. We also build easy-to-understand visual flows and provide full documentation."
     },
     {
-      question: "What makes Webnox Digital a reliable IT consulting partner?",
-      answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
+      question: "How do I get started?",
+      answer: "Just book a free consultation with our automation team. We’ll analyze your current processes, recommend what to automate first, and give you a clear roadmap — with no obligation."
     },
     {
-      question: "What industries do you specialize in for IT consulting?",
-      answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
+      question: " Is this a one-time setup or ongoing support?",
+      answer: " We offer both. You can start with a one-time workflow build. Or, subscribe to our Automation Support Plan for ongoing updates, new flows, performance optimization, and peace of mind."
     },
   ];
   const [openIdx, setOpenIdx] = React.useState(0);

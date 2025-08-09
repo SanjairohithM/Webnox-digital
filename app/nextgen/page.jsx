@@ -855,24 +855,21 @@ const MarketingStackSection = () => {
 const FAQSection = () => {
     const faqs = [
       {
-        question: "What types of businesses benefit from your consulting services?",
-        answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+        question: "What is next-gen marketing?",
+        answer: "Next-gen marketing refers to a modern marketing approach that integrates AI tools, automation, data intelligence, and omnichannel strategies to help businesses connect with audiences more effectively. It goes beyond traditional digital marketing by delivering personalized, real-time, and scalable campaigns that improve ROI and reduce manual effort."
       },
       {
-        question: "How does Webnox approach digital transformation?",
-        answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+        question: "Why should businesses invest in AI-powered marketing?",
+        answer: "Businesses should invest in AI-powered marketing because it helps them automate repetitive tasks, target the right audience, improve personalization, and make data-driven decisions. This leads to higher conversion rates, lower cost per acquisition, and better customer experiences across platforms."
       },
       {
-        question: "What makes your consulting different from traditional firms?",
-        answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+        question: "Which industries can benefit from next-gen marketing?",
+        answer: "Industries like e-commerce, SaaS, logistics, healthcare, education, professional services, and real estate can benefit greatly from next-gen marketing. Webnox Digital customizes strategies to suit your industry, audience, and market geography."
       },
+  
       {
-        question: "What makes Webnox Digital a reliable IT consulting partner?",
-        answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
-      },
-      {
-        question: "What industries do you specialize in for IT consulting?",
-        answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
+        question: "How do I get started with Webnox Digital’s next-gen marketing services?",
+        answer: "Getting started is easy. Simply book a free strategy call with our team. We’ll analyze your current marketing, identify growth opportunities, and propose a next-gen plan customized for your business goals and audience."
       },
     ];
     const [openIdx, setOpenIdx] = React.useState(0);

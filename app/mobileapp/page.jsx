@@ -1049,7 +1049,7 @@ const MobileAppPage = () => {
       <WhyCustomerExperienceMattersSection />
       <UseCasesSection />
       <CTASection />
-      <FAQSection />
+      {/* <FAQSection /> */}
       <Footer />
     </main>
   )

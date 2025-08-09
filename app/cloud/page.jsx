@@ -399,25 +399,22 @@ const WhyChooseCloudSection = () => {
 const FAQSection = () => {
     const faqs = [
         {
-            question: "What types of businesses benefit from your consulting services?",
-            answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+            question: "What is Cloud & DevOps, and why does my business need it?",
+            answer: "Cloud & DevOps is the combination of scalable cloud infrastructure and agile development practices. Together, they enable faster deployments, stronger security, better performance, and reduced operational costs. If you want to innovate and grow efficiently, this is essential.."
         },
         {
-            question: "How does Webnox approach digital transformation?",
-            answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+            question: "Is DevOps only for large enterprises?",
+            answer: "Not at all. Startups, SMEs, and growing businesses benefit from DevOps by speeding up software releases, automating infrastructure, and improving team collaboration. We tailor DevOps strategies to fit your size and maturity."
         },
         {
-            question: "What makes your consulting different from traditional firms?",
-            answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+            question: "Which cloud platforms do you support?",
+            answer: "We work across all major cloud providers — AWS, Microsoft Azure, and Google Cloud Platform (GCP). We help you choose the right one based on your business goals, technical needs, and budget."
         },
         {
-            question: "What makes Webnox Digital a reliable IT consulting partner?",
-            answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
+            question: "How does cloud optimization reduce my monthly costs?",
+            answer: "Through right-sizing, auto-scaling, load balancing, and resource monitoring, we eliminate waste and optimize performance. Most of our clients see a 20–40% reduction in monthly cloud bills after optimization."
         },
-        {
-            question: "What industries do you specialize in for IT consulting?",
-            answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
-        },
+       
     ];
     const [openIdx, setOpenIdx] = React.useState(0);
 

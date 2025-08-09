@@ -422,24 +422,24 @@ const WhyCustomerExperienceMattersSection = () => {
 const FAQSection = () => {
     const faqs = [
       {
-        question: "What types of businesses benefit from your consulting services?",
-        answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+        question: "Why does customer experience matter at Webnox Digital?",
+        answer: "At Webnox Digital, customer experience is at the heart of everything we do. We believe that delivering seamless, transparent, and result-driven services builds long-term partnerships. "
       },
       {
-        question: "How does Webnox approach digital transformation?",
-        answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+        question: "Do you offer post-project support or assistance?",
+        answer: "Yes. We provide continuous support even after the project is completed. Our team is always a call or email away."
       },
       {
-        question: "What makes your consulting different from traditional firms?",
-        answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+        question: " How do you keep up with evolving digital trends to improve your experience?",
+        answer: "Our team undergoes regular training and continuously researches market trends. This proactive approach ensures your project benefits from the latest technologies, tools, and marketing strategies."
       },
       {
-        question: "What makes Webnox Digital a reliable IT consulting partner?",
-        answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
+        question: "What kind of support can I expect after the project is completed?",
+        answer: "We offer post-launch support, including maintenance, performance monitoring, SEO reports, and quick assistance for any updates or changes you require."
       },
       {
-        question: "What industries do you specialize in for IT consulting?",
-        answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
+        question: "What makes your customer experience different from others?",
+        answer: "Our proactive communication, personalized solutions, and focus on building long-term relationships set us apart. We treat your goals as our own and commit to creating experiences that add real value to your business"
       },
     ];
     const [openIdx, setOpenIdx] = React.useState(0);

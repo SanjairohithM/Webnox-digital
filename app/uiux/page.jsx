@@ -651,24 +651,21 @@ const FAQSection = () => {
     const faqs = [
         {
             question: "What types of businesses benefit from your consulting services?",
-            answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+            answer: " UI (User Interface) focuses on the visual design and interactive elements of a product—like buttons, layout, and typography.UX (User Experience) is about the overall journey a user takes—from usability and accessibility to how intuitive and satisfying the experience feels."
         },
         {
-            question: "How does Webnox approach digital transformation?",
-            answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+            question: " Why is UI/UX important for my business?",
+            answer: "A well-designed interface improves user satisfaction, increases conversion rates, reduces bounce rate, and strengthens brand perception. In short, it makes your product easier to use and more effective."
         },
         {
-            question: "What makes your consulting different from traditional firms?",
-            answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+            question: "Do I need UI/UX if I already have a website?",
+            answer: "Yes. Even existing websites can benefit from a redesign to improve usability, performance, and conversions."
         },
         {
-            question: "What makes Webnox Digital a reliable IT consulting partner?",
-            answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
+            question: "Does UI/UX impact business growth?",
+            answer: "Yes. Better user experiences lead to higher retention, better reviews, and increased conversions"
         },
-        {
-            question: "What industries do you specialize in for IT consulting?",
-            answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
-        },
+
     ];
     const [openIdx, setOpenIdx] = React.useState(0);
 

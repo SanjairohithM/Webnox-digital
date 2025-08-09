@@ -889,7 +889,7 @@ const CustomWebPage = () => {
       <UseCasesSection />
       <IndustriesSection />
       <CTASection />
-      <FAQSection />
+      {/* <FAQSection /> */}
       <Footer />
     </main>
   )

@@ -1125,7 +1125,7 @@ const DigitalTransformationPage = () => {
       <NextGenMarketingSection />
       <OutdatedToolsSection />
       <WhyCustomerExperienceMattersSection />
-      <FAQSection />
+      {/* <FAQSection /> */}
       <Footer />
     </main>
   )
