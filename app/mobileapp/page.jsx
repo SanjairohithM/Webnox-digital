@@ -157,7 +157,7 @@ const HeroSection = () => {
               </span>
             ))}
           </span>
-          <span className="text-[#00B9FF]">
+          <span className="text-[#00B9FF] whitespace-nowrap">
             {"Your Digital Vision".split("").map((char, index) => (
               <span
                 key={index + "Mobile App Development Services to Launch, Scale & Future-Proof ".length}

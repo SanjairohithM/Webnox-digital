@@ -129,7 +129,7 @@ const HeroSection = () => {
         background: "linear-gradient(180deg, #E6F7FD 0%, #ffffff 80%)"
       }}
     >
-      <div className="relative w-full px-20 mt-30">
+      <div className="relative px-12 mt-30">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
           {/* Left Side - Text Content */}
           <div ref={leftContentRef} className="lg:col-span-3 flex flex-col justify-center text-center lg:text-left">
