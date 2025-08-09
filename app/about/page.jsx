@@ -11,6 +11,7 @@ import Aboutfour from "@/app/sections/Aboutfour"
 import AnimatedNavbar from "@/app/sections/Components/Header/AnimatedNavbar"
 import { AnimatedTooltip } from "@/app/components/ui/animated-tooltip"
 import { User, Plus } from "lucide-react"
+import Footer from "../sections/Footer"
 gsap.registerPlugin(ScrollTrigger)
 
 function About() {
@@ -29,7 +30,7 @@ function About() {
             name: "Rathina Kumar",
             designation: "CMO",
             icon: <User className="w-6 h-6 text-gray-600" />,
-            // image: "/images/rksir.png"
+           
         },
         {
             id: 2,
@@ -344,7 +345,8 @@ function About() {
             <Aboutsecond />
             <Aboutthird />
             <Aboutfour />
-        </>
+            <Footer />
+            </>
 
     )
 }
