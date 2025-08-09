@@ -25,7 +25,7 @@ const services = [
     title: "Next gen marketing",
     description: "Leverage AI-powered targeting, automation, and omnichannel strategies to elevate customer engagement .",
     image: "/images/service5.webp",
-    href: "/services"
+    href: "/nextgen"
   },
   {
     title: "Emerging Tech",
@@ -56,7 +56,7 @@ const services = [
 export default function ServicesOverlay({ onClose }) {
   return (
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center font-sans" onClick={onClose}>
-      <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-[90vw] w-full md:max-w-7xl xl:max-w-[1200px] mx-auto relative" onClick={e => e.stopPropagation()}>
+      <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-10 max-w-[90vw] w-full md:max-w-7xl xl:max-w-[1200px] mx-auto relative" onClick={e => e.stopPropagation()}>
         {/* Close Button */}
         <button 
           className="absolute top-4 right-4 text-2xl font-bold text-gray-400 hover:text-gray-700 transition-colors duration-300 z-10" 
@@ -65,27 +65,47 @@ export default function ServicesOverlay({ onClose }) {
           &times;
         </button>
 
-        {/* Services Grid - Horizontal Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {/* Mobile: compact tiles (icon + title only) */}
+        <div className="grid grid-cols-2 gap-4 md:hidden">
           {services.map((service, idx) => (
-            <Link 
-              key={idx} 
+            <Link
+              key={idx}
               href={service.href}
-              className="group flex items-start gap-4 hover:scale-105 transition-all duration-300"
+              className="group flex flex-col items-center justify-center gap-2 rounded-xl border border-gray-200 bg-gray-50 p-4 hover:bg-gray-100 active:scale-[0.98] transition-all duration-200"
               onClick={onClose}
             >
-              {/* Icon on the left */}
+              <Image
+                src={service.image}
+                alt={service.title}
+                width={40}
+                height={40}
+                className="object-contain"
+              />
+              <span className="text-center text-sm font-semibold text-gray-800 group-hover:text-[#2acbec] line-clamp-2">
+                {service.title}
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Tablet/Desktop: detailed list with descriptions */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, idx) => (
+            <Link
+              key={idx}
+              href={service.href}
+              className="group flex items-start gap-4 hover:scale-[1.02] transition-all duration-300"
+              onClick={onClose}
+            >
               <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center">
-                <Image 
-                  src={service.image} 
-                  alt={service.title} 
-                  width={48} 
-                  height={48} 
-                  className="object-contain" 
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  width={48}
+                  height={48}
+                  className="object-contain"
                 />
               </div>
-              
-              {/* Title and description on the right */}
               <div className="flex-1 min-w-0">
                 <h3 className="font-bold text-lg mb-1 text-gray-800 group-hover:text-[#2acbec] transition-colors duration-300">
                   {service.title}

@@ -22,17 +22,24 @@ const solutions = [
     href: "/digitaltransformation"
   },
   {
-    title: "Ecommerce Development",
+    title: "Online Store Solutions",
     description: " Launch seamless, secure online stores that deliver exceptional shopping experiences and drive sales.",
     image: "/images/solution8.webp",
     href: "/ecommerce"
   },
   {
-    title: "Mobile App Development",
+    title: "iOS & Android App Development",
     description: " Creating high-performing mobile apps that users love, for both iOS and Android platforms, made simple.",
     image: "/images/solution7.webp",
     href: "/mobileapp"
   },
+  {
+    title: "Custom Web Solutions",
+    description: " Creating high-performing custom websites that users love, for both iOS and Android platforms, made simple.",
+    image: "/images/solution8.webp",
+    href: "/customweb"
+  },
+
   {
     title: "UI/UX",
     description: " Designing smooth, intuitive, and user-first digital experiences that turn visitors into loyal customers.",
@@ -43,7 +50,7 @@ const solutions = [
     title: "SAAS Products",
     description: " We develop scalable, cloud-based SaaS solutions that solve real problems and grow with your users.,",
     image: "/images/solution5.webp",
-    href: "/saas"
+    href: "/commingsoon"
   },
   {
     title: "Clouds & devOps",
@@ -63,7 +70,7 @@ const solutions = [
 export default function SolutionsOverlay({ onClose }) {
   return (
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex font-sans items-center justify-center" onClick={onClose}>
-      <div className="bg-white rounded-2xl shadow-2xl p-10 max-w-6xl w-full mx-4 relative" onClick={e => e.stopPropagation()}>
+      <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-10 max-w-[90vw] w-full md:max-w-7xl xl:max-w-[1200px] mx-auto relative" onClick={e => e.stopPropagation()}>
         {/* Close Button */}
         <button 
           className="absolute top-4 right-4 text-2xl font-bold text-gray-400 hover:text-gray-700 transition-colors duration-300 z-10" 
@@ -72,16 +79,38 @@ export default function SolutionsOverlay({ onClose }) {
           &times;
         </button>
 
-        {/* Solutions Grid - Horizontal Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-18">
+        {/* Mobile: compact tiles (icon + title only) */}
+        <div className="grid grid-cols-2 gap-4 md:hidden">
+          {solutions.map((solution, idx) => (
+            <Link
+              key={idx}
+              href={solution.href}
+              className="group flex flex-col items-center justify-center gap-2 rounded-xl border border-gray-200 bg-gray-50 p-4 hover:bg-gray-100 active:scale-[0.98] transition-all duration-200"
+              onClick={onClose}
+            >
+              <Image
+                src={solution.image}
+                alt={solution.title}
+                width={40}
+                height={40}
+                className="object-contain"
+              />
+              <span className="text-center text-sm font-semibold text-gray-800 group-hover:text-[#2acbec] line-clamp-2">
+                {solution.title}
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Tablet/Desktop: detailed list with descriptions */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
           {solutions.map((solution, idx) => (
             <Link 
               key={idx} 
               href={solution.href}
-              className="group flex items-start gap-4 hover:scale-105 transition-all duration-300"
+              className="group flex items-start gap-4 hover:scale-[1.02] transition-all duration-300"
               onClick={onClose}
             >
-              {/* Icon on the left */}
               <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center">
                 <Image 
                   src={solution.image} 
@@ -91,8 +120,6 @@ export default function SolutionsOverlay({ onClose }) {
                   className="object-contain" 
                 />
               </div>
-              
-              {/* Title and description on the right */}
               <div className="flex-1 min-w-0">
                 <h3 className="font-bold text-lg mb-1 text-gray-800 group-hover:text-[#2acbec] transition-colors duration-300">
                   {solution.title}

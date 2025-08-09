@@ -86,7 +86,7 @@ const HeroSection = () => {
       }}
     >
       <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-20">
-        <h1 ref={titleRef} className="text-6xl  font-sans font-semibold text-[#00B9FF] mb-4 leading-tight">
+        <h1 ref={titleRef} className="md:text-6xl   font-sans font-semibold text-[#00B9FF] mb-4 leading-tight">
           {"Automate Growth. Personalize at".split("").map((char, index) => (
             <span
               key={index}
@@ -498,45 +498,60 @@ const IsThisRightSection = () => {
       const ctx = gsap.context(() => {
         // Filter valid cards
         const validCards = cardsRef.current.filter(card => card !== null)
-        
+
+        const isDesktop = window.innerWidth >= 1024
+
+        // Titles initial
         gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
-        
-        // Set initial positions - first 2 cards from left, next 2 from right
-        if (validCards.length >= 4) {
-          gsap.set([validCards[0], validCards[1]], { x: -window.innerWidth, y: 0 }) // First 2 from completely off-screen left (no opacity)
-          gsap.set([validCards[2], validCards[3]], { opacity: 0, x: 100, y: 0 })  // Next 2 from right
-        }
-        
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 80%",
           }
         })
-        
+
         tl
           .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
           .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
-          
-        // Animate cards from left (first 2) - horizontal scroll as group
-        if (validCards.length >= 2) {
-          tl.to([validCards[0], validCards[1]], { 
-            x: 0, 
-            duration: 1.5, 
-            stagger: 0, 
-            ease: "power2.out" 
-          }, "-=0.3")
-        }
-        
-        // Animate cards from right (next 2)
-        if (validCards.length >= 4) {
-          tl.to([validCards[2], validCards[3]], { 
-            opacity: 1, 
-            x: 0, 
-            duration: 0.8, 
-            stagger: 0.2, 
-            ease: "power2.out" 
-          }, "-=0.6")
+
+        if (isDesktop) {
+          // Desktop: slide in from sides
+          if (validCards.length >= 4) {
+            gsap.set([validCards[0], validCards[1]], { x: -window.innerWidth, y: 0 })
+            gsap.set([validCards[2], validCards[3]], { opacity: 0, x: 100, y: 0 })
+          }
+
+          if (validCards.length >= 2) {
+            tl.to([validCards[0], validCards[1]], {
+              x: 0,
+              duration: 1.5,
+              stagger: 0,
+              ease: "power2.out"
+            }, "-=0.3")
+          }
+
+          if (validCards.length >= 4) {
+            tl.to([validCards[2], validCards[3]], {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              stagger: 0.2,
+              ease: "power2.out"
+            }, "-=0.6")
+          }
+        } else {
+          // Mobile/tablet: simple fade-up, no horizontal motion
+          if (validCards.length > 0) {
+            gsap.set(validCards, { opacity: 0, y: 20 })
+            tl.to(validCards, {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.1,
+              ease: "power2.out"
+            }, "-=0.2")
+          }
         }
       }, sectionRef)
       return () => ctx.revert()
