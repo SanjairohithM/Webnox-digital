@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, Linkedin } from "lucide-react"
 import Robot from "@/Three/Models/Robot"
 import gsap from "gsap"
@@ -85,13 +86,25 @@ export default function Footer() {
           <div>
             <h4 className="text-sm uppercase tracking-wide text-gray-500 mb-4">Quick Link</h4>
             <ul className="space-y-2 text-sm">
-              {quickLinks.map((item) => (
-                <li key={item}>
-                  <a href="/" className="hover:text-black transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
+              {quickLinks.map((item) => {
+                const linkMap = {
+                  About: "/about",
+                  Solutions: "/solutions",
+                  Industries: "/industries",
+                  Expertise: "/expertise",
+                  Resources: "/resources",
+                }
+
+                
+                const href = linkMap[item] || "/"
+                return (
+                  <li key={item}>
+                    <Link href={href} className="hover:text-black transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 

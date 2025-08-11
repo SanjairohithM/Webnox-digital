@@ -83,10 +83,10 @@ export default function Component() {
       scrollTrigger: {
         trigger: stickyRef.current,
         start: "top top",
-        end: isMobile ? "+=100%" : "+=400%",
+        end: isMobile ? "+=120%" : "+=600%",
         pin: true,
         pinSpacing: true,
-        scrub: isMobile ? 0.2 : 1,
+        scrub: isMobile ? 0.35 : 2.5,
         markers: false,
       },
     })
@@ -267,6 +267,9 @@ export default function Component() {
 
     timeline.add(expandTimeline)
 
+    // Speed factor to slow and smooth animations AFTER the robot expands
+    const postExpandFactor = isMobile ? 1.0 : 1.6
+
     // Stage 4: Move robot up and show text
     const finalStage = gsap.timeline()
 
@@ -394,7 +397,7 @@ export default function Component() {
     // Move robot up and fade in text
     finalStage.to(miniRobotRef.current, {
       top: isMobile ? "calc(40%)" : "calc(35%)",
-      duration: isMobile ? 0.2 : 0.8,
+      duration: (isMobile ? 0.2 : 0.8) * postExpandFactor,
       ease: "power2.inOut",
     })
 
@@ -406,7 +409,7 @@ export default function Component() {
         top: isMobile ? "55%" : "50%",
         left: isMobile ? "50%" : "45%",
         xPercent: -50,
-        duration: isMobile ? 0.2 : 0.6,
+      duration: (isMobile ? 0.2 : 0.6) * postExpandFactor,
         ease: "power2.out",
       },
       "-=0.1",
@@ -425,7 +428,7 @@ export default function Component() {
         top: isMobile ? "30%" : "25%",
         left: isMobile ? "50%" : "45%",
         xPercent: -50,
-        duration: 0.8,
+        duration: 0.8 * postExpandFactor,
         ease: "power2.inOut",
       })
 
@@ -433,7 +436,7 @@ export default function Component() {
         finalTextContainer,
         {
           opacity: 0,
-          duration: 0.5,
+          duration: 0.5 * postExpandFactor,
           ease: "power1.out",
         },
         "-=0.3",
@@ -445,7 +448,7 @@ export default function Component() {
         {
           top: isMobile ? "calc(50%)" : "calc(50% - 5vh)",
           left: isMobile ? "calc(50%)" : "calc(50% - 15vw)",
-          duration: 0.8,
+          duration: 0.8 * postExpandFactor,
           ease: "power2.inOut",
         },
         ">",
@@ -456,7 +459,7 @@ export default function Component() {
         {
           backgroundColor: "transparent",
           backgroundImage: "none",
-          duration: 0.6,
+          duration: 0.6 * postExpandFactor,
         },
         "<",
       )
@@ -471,12 +474,12 @@ export default function Component() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.3,
+          duration: 0.3 * postExpandFactor,
         },
       )
 
       // Add a pause duration
-      solutionsStage.to({}, { duration: 0.6 })
+      solutionsStage.to({}, { duration: 0.6 * postExpandFactor })
 
       // Add new stage: Shrink and move "OUR SOLUTIONS" text to top as title
       const shrinkTextStage = gsap.timeline()
@@ -486,7 +489,7 @@ export default function Component() {
         top: isMobile ? "22%" : "28%",
         left: isMobile ? "50%" : "45%",
         xPercent: -50,
-        duration: 0.8,
+        duration: 0.8 * postExpandFactor,
         ease: "power2.out",
       })
       
@@ -494,7 +497,7 @@ export default function Component() {
       shrinkTextStage.to(".solutions-text-container > div", {
         gap: isMobile ? "2vw" : "1vw",
         marginLeft: "0vw",
-        duration: 0.8,
+        duration: 0.8 * postExpandFactor,
         ease: "power2.out",
       }, "<")
 
@@ -502,14 +505,14 @@ export default function Component() {
       shrinkTextStage.to(miniRobotRef.current, {
         opacity: 0,
         scale: 0.5,
-        duration: 0.6,
+        duration: 0.6 * postExpandFactor,
         ease: "power2.out",
       }, "<")
 
       // Fade in solutions grid background
       shrinkTextStage.to(solutionsGridContainer, {
         opacity: 1,
-        duration: 0.15,
+        duration: 0.15 * postExpandFactor,
         ease: "power2.out",
       }, "-=0.2")
 
@@ -517,9 +520,9 @@ export default function Component() {
       shrinkTextStage.to(".solution-card", {
         opacity: 1,
         y: 0,
-        duration: 0.25,
+        duration: 0.25 * postExpandFactor,
         stagger: {
-          each: 0.05,
+          each: 0.08,
           grid: [3, 3],
           from: "start"
         },
@@ -527,7 +530,7 @@ export default function Component() {
       }, "-=0.1")
 
       // Add another pause to show the final state
-      shrinkTextStage.to({}, { duration: 1.0 })
+      shrinkTextStage.to({}, { duration: 1.0 * postExpandFactor })
 
       // Add stages to main timeline
       timeline.add(solutionsStage)

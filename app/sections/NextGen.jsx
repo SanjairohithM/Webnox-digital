@@ -294,9 +294,9 @@ const NextGen = React.memo(function NextGen() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: isMobileDevice ? "+=300%" : "+=800%", // Much shorter on mobile
+        end: isMobileDevice ? "+=450%" : "+=1200%", // Increase scroll distance for slower pacing
         pin: true,
-        scrub: isMobileDevice ? 1 : 3, // Faster scrub on mobile
+        scrub: isMobileDevice ? 1.5 : 4.5, // Higher scrub for smoother, slower response
         // markers: true
       }
     });
