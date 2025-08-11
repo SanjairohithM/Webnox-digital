@@ -69,10 +69,10 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 ">
         {/* Top: Robot centered */}
         <div className="flex items-center justify-center mb-10">
-          <div className="relative -left-4 -top-2 md:-left-68 md:-top-46 z-[80]">
+          <div className="relative -left-60 -top-20 md:-left-68 md:-top-46 z-[80]">
             <div
               ref={robotRef}
-              className="transform-gpu w-[90px] h-[90px] md:w-[140px] md:h-[140px] z-[80]"
+              className="transform-gpu w-[34px] h-[34px] md:w-[140px] md:h-[140px] z-[80]"
               style={{ transform: "scale(0)" }}
             >
               <Robot />
@@ -81,7 +81,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom: 4 columns of links/info under the robot */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 items-start mt-50">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-start mt-120 md:mt-50">
           {/* Quick Link */}
           <div>
             <h4 className="text-sm uppercase tracking-wide text-gray-500 mb-4">Quick Link</h4>
