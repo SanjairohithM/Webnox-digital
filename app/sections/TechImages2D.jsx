@@ -50,7 +50,9 @@ function TechImage({
   initialPosition, 
   isActive, 
   bounds,
-  boundsEl
+  boundsEl,
+  allBalls,
+  ballIndex
 }) {
   const flagRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -61,6 +63,8 @@ function TechImage({
   const propsRef = useRef(null)
   const trackerRef = useRef(null)
   const draggableRef = useRef(null)
+  const collisionCooldownRef = useRef({})
+  const resizeObserverRef = useRef(null)
 
   useEffect(() => {
     vwRef.current = (bounds && bounds.width) || window.innerWidth
@@ -91,6 +95,15 @@ function TechImage({
       radiusRef.current = Math.max(10, rect.width / 2)
     }
     computeRadius()
+
+    // Observe size changes to keep radius accurate after reveal/resizes
+    if ('ResizeObserver' in window) {
+      resizeObserverRef.current = new ResizeObserver(() => computeRadius())
+      resizeObserverRef.current.observe(flagRef.current)
+    } else {
+      // Fallback recalc after reveal animation
+      gsap.delayedCall(0.4, computeRadius)
+    }
 
     const friction = -0.5
 
@@ -144,6 +157,64 @@ function TechImage({
         animateBounce(xPos, yPos, vx, vy)
         gsap.to(flagRef.current, { scale: 1.08, duration: 0.08, yoyo: true, repeat: 1, ease: "power2.out" })
       }
+
+      // Ball-to-ball collisions
+      if (allBalls && Array.isArray(allBalls)) {
+        for (let i = 0; i < allBalls.length; i += 1) {
+          if (i === ballIndex) continue
+          const other = allBalls[i]
+          if (!other || !other.getXY || other.isDragging?.()) continue
+
+          const now = Date.now()
+          const key = String(i)
+          if (collisionCooldownRef.current[key] && now - collisionCooldownRef.current[key] < 100) {
+            continue
+          }
+
+          const { x: ox, y: oy } = other.getXY()
+          const or = other.getRadius ? other.getRadius() : r
+          const dx = xPos - ox
+          const dy = yPos - oy
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          const minDist = r + or
+
+          if (dist > 0 && dist < minDist * 0.98) {
+            const nx = dx / dist
+            const ny = dy / dist
+
+            // separate
+            const overlap = minDist - dist
+            const sepX = nx * (overlap / 2)
+            const sepY = ny * (overlap / 2)
+            const newThisX = xPos + sepX
+            const newThisY = yPos + sepY
+            const newOtherX = ox - sepX
+            const newOtherY = oy - sepY
+
+            // relative velocity
+            const ov = other.getVelocity ? other.getVelocity() : { vx: 0, vy: 0 }
+            const rvx = vx - ov.vx
+            const rvy = vy - ov.vy
+            const rvn = rvx * nx + rvy * ny
+            if (rvn < 0) {
+              const restitution = 0.7
+              const j = (-(1 + restitution) * rvn) / 2 // equal mass
+              const impX = j * nx
+              const impY = j * ny
+              const thisVx = vx + impX
+              const thisVy = vy + impY
+              const otherVx = ov.vx - impX
+              const otherVy = ov.vy - impY
+
+              collisionCooldownRef.current[key] = now
+              animateBounce(newThisX, newThisY, thisVx, thisVy)
+              other.kick?.(newOtherX, newOtherY, otherVx, otherVy)
+
+              gsap.to(flagRef.current, { scale: 1.06, duration: 0.08, yoyo: true, repeat: 1 })
+            }
+          }
+        }
+      }
     }
 
     // Draggable setup
@@ -159,6 +230,17 @@ function TechImage({
         animateBounce()
       }
     })[0]
+
+    // Register this ball for interactions
+    if (allBalls && Array.isArray(allBalls)) {
+      allBalls[ballIndex] = {
+        getXY: () => ({ x: propsRef.current("x"), y: propsRef.current("y") }),
+        getVelocity: () => ({ vx: trackerRef.current.get("x"), vy: trackerRef.current.get("y") }),
+        getRadius: () => radiusRef.current,
+        isDragging: () => isDragging,
+        kick: (x, y, vx, vy) => animateBounce(x, y, vx, vy)
+      }
+    }
 
     // Automatic drop from the top on activate (scroll-driven)
     if (isActive) {
@@ -189,9 +271,15 @@ function TechImage({
       if (draggableRef.current) draggableRef.current.kill()
       try { InertiaPlugin.untrack(flagRef.current, "x,y") } catch (_) {}
       gsap.killTweensOf(flagRef.current)
+      if (allBalls && Array.isArray(allBalls)) {
+        allBalls[ballIndex] = null
+      }
+      if (resizeObserverRef.current) {
+        try { resizeObserverRef.current.disconnect() } catch (_) {}
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive, initialPosition.x, initialPosition.y, bounds?.width, bounds?.height])
+  }, [isActive, initialPosition.x, initialPosition.y, bounds?.width, bounds?.height, allBalls, ballIndex])
 
   return (
     <div
@@ -218,6 +306,7 @@ export default function TechImages2D() {
   const containerRef = useRef(null)
   const [isActive, setIsActive] = useState(false)
   const flagsRef = useRef([])
+  const allBallsRef = useRef([])
   const [bounds, setBounds] = useState({ width: 0, height: 0 })
   
 
@@ -288,6 +377,8 @@ export default function TechImages2D() {
               isActive={isActive}
               bounds={bounds}
               boundsEl={containerRef}
+              allBalls={allBallsRef.current}
+              ballIndex={index}
             />
           </div>
         ))}
