@@ -87,7 +87,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {quickLinks.map((item) => (
                 <li key={item}>
-                  <a href="#" className="hover:text-black transition-colors">
+                  <a href="/" className="hover:text-black transition-colors">
                     {item}
                   </a>
                 </li>

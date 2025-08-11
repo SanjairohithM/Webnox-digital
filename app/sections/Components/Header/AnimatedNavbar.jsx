@@ -727,7 +727,7 @@ const AnimatedNavbar = ({
         <div ref={letsTalkRef} className="fixed top-12 right-12 z-30 transition-all duration-300">
           <Link href="/contact">
             <button
-              className="bg-[#2acbec] hover:bg-[#1fb8d9] text-white font-bold p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl cursor-pointer"
+              className="bg-[#2acbec] hover:bg-[#1fb8d9] text-white font-bold p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl cursor-pointer"
             >
               Let's Talk
             </button>
