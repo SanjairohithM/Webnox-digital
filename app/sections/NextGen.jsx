@@ -114,6 +114,12 @@ const NextGen = React.memo(function NextGen() {
     const isMobileDevice = isMobile;
     const animationSpeed = isMobileDevice ? 0.3 : 1; // 3x faster on mobile
     const reducedDuration = (duration) => isMobileDevice ? duration * 0.3 : duration;
+    // Desktop-only slow/smooth factor for STATS animations
+    const statsFactor = isMobileDevice ? 1.0 : 1.6;
+    const statsEase = "sine.inOut";
+    // Desktop-only slow/smooth factor for WAIT IMAGES
+    const waitImageFactor = isMobileDevice ? 1 : 2.0;
+    const waitEase = "sine.inOut";
 
     // Set initial states
     gsap.set(cardsRef.current, {
@@ -335,21 +341,21 @@ const NextGen = React.memo(function NextGen() {
           ease: "power2.out"
         }, `+=${index === 0 ? 0 : 0.1}`); // Faster stagger on mobile
       } else {
-        // Desktop: original positioning
+        // Desktop: slower, smoother positioning for stats
         timeline.to(card, {
           opacity: 1,
           scale: 1,
           x: position.left || position.right || "0%",
           y: position.top || position.bottom || "0%",
-          duration: 1.2,
-          ease: "power3.out"
-        }, `+=${index === 0 ? 0 : 0.8}`);
+          duration: 1.2 * statsFactor,
+          ease: statsEase
+        }, `+=${index === 0 ? 0 : (0.8 * statsFactor).toFixed(2)}`);
       }
     });
 
     // Stage 3: Cards stack in center - Mobile Optimized
     timeline
-      .to({}, { duration: reducedDuration(5) }) // Hold cards - shorter on mobile
+      .to({}, { duration: reducedDuration(5) * statsFactor }) // Hold cards - slower on desktop
       .to(headingRef.current, {
         opacity: 0,
         scale: 0.7,
@@ -366,8 +372,8 @@ const NextGen = React.memo(function NextGen() {
         x: 0,
         y: 0,
         scale: 1,
-        duration: reducedDuration(12), // Much faster on mobile
-        ease: "power2.inOut"
+        duration: reducedDuration(12) * statsFactor, // Slower on desktop
+        ease: statsEase
       })
       .to(cardsRef.current, {
         z: (i) => -i * 10,
@@ -375,27 +381,27 @@ const NextGen = React.memo(function NextGen() {
         rotateY: 0,
         rotateZ: 0,
         scale: 1,
-        duration: reducedDuration(8),
+        duration: reducedDuration(8) * statsFactor,
         stagger: {
-          each: reducedDuration(1.2), // Faster stagger on mobile
+          each: reducedDuration(1.2) * statsFactor,
           from: "end"
         },
-        ease: "power2.inOut"
+        ease: statsEase
       });
 
     // Stage 4: Cards fade out, final text appears - Mobile Optimized
     timeline
-      .to({}, { duration: reducedDuration(8) }) // Shorter hold on mobile
+      .to({}, { duration: reducedDuration(8) * statsFactor }) // Longer hold on desktop
       .to(cardsRef.current, {
         y: "-100%",
         opacity: 0,
         scale: 0.8,
-        duration: reducedDuration(10), // Much faster on mobile
+        duration: reducedDuration(10) * statsFactor, // Slower on desktop
         stagger: {
-          each: reducedDuration(1.5), // Faster stagger on mobile
+          each: reducedDuration(1.5) * statsFactor,
           from: "end"
         },
-        ease: "power1.inOut"
+        ease: statsEase
       })
       .to(finalTextRef.current, {
         opacity: 1,
@@ -479,8 +485,8 @@ const NextGen = React.memo(function NextGen() {
         }, "+=3") // Longer delay
         .to(waitImagesRef.current, {
           opacity: 0.6,
-          duration: 6, // Slower image fade in
-          ease: "power2.out"
+          duration: 6 * waitImageFactor, // Slower image fade in
+          ease: waitEase
         }, "<")
 
       // Step 2: Warning text 1 appears, images STAY IN LEFT/RIGHT GRIDS
@@ -510,8 +516,8 @@ const NextGen = React.memo(function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 10, // Much slower image movement
-        ease: "power1.inOut"
+        duration: 10 * waitImageFactor, // Much slower image movement
+        ease: waitEase
       }, "<")
 
       // Step 3: Warning text 2 appears, images stay in grids
@@ -558,8 +564,8 @@ const NextGen = React.memo(function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 8, // Much slower image repositioning
-        ease: "power1.inOut"
+        duration: 8 * waitImageFactor, // Much slower image repositioning
+        ease: waitEase
       }, "+=2") // Longer delay before repositioning
 
       // SECOND SCROLL: SUCCESS PHASE - MUCH SLOWER
@@ -624,8 +630,8 @@ const NextGen = React.memo(function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 8, // Much slower pyramid formation start
-        ease: "power1.inOut"
+        duration: 8 * waitImageFactor, // Much slower pyramid formation start
+        ease: waitEase
       }, "+=3") // Longer delay
 
       // Step 7: Success text 2 appears, ADD MIDDLE STEP (2 images each side)
@@ -675,8 +681,8 @@ const NextGen = React.memo(function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 8, // Much slower middle step formation
-        ease: "power1.inOut"
+        duration: 8 * waitImageFactor, // Much slower middle step formation
+        ease: waitEase
       }, "+=3") // Longer delay
 
       // Step 8: Success text 3 appears, ALMOST COMPLETE PYRAMID (add more to bottom)
@@ -734,8 +740,8 @@ const NextGen = React.memo(function NextGen() {
             return rightPositions[i - 6];
           }
         },
-        duration: 8, // Much slower partial bottom formation
-        ease: "power1.inOut"
+        duration: 8 * waitImageFactor, // Much slower partial bottom formation
+        ease: waitEase
       }, "+=3") // Longer delay
 
       // Step 9: Success text 4 appears, COMPLETE PYRAMID (all images in formation)
@@ -781,8 +787,8 @@ const NextGen = React.memo(function NextGen() {
           if (i === 3 || i === 4 || i === 5 || i === 9 || i === 10 || i === 11) return "59%"; // Bottom step - moved down
           return "50%"; // Fallback center
         },
-        duration: 10, // Much slower final pyramid completion
-        ease: "power1.inOut"
+        duration: 10 * waitImageFactor, // Much slower final pyramid completion
+        ease: waitEase
       }, "+=3"); // Longer delay before final formation
 
     // Stage 6: Fade out all elements with custom pyramid animation - MUCH SLOWER
@@ -806,10 +812,10 @@ const NextGen = React.memo(function NextGen() {
         opacity: 0,
         y: "100px",
         scale: 0.5,
-        duration: 15, // Much slower left pyramid fade
-        ease: "power1.inOut",
+        duration: 15 * waitImageFactor, // Much slower left pyramid fade
+        ease: waitEase,
         stagger: {
-          each: 1.0, // Longer stagger between each image
+          each: 1.0 * waitImageFactor, // Longer stagger between each image
           from: "start"
         }
       }, "<")
@@ -819,10 +825,10 @@ const NextGen = React.memo(function NextGen() {
         opacity: 0,
         y: "100px",
         scale: 0.5,
-        duration: 15, // Much slower right pyramid fade
-        ease: "power1.inOut",
+        duration: 15 * waitImageFactor, // Much slower right pyramid fade
+        ease: waitEase,
         stagger: {
-          each: 1.0, // Longer stagger between each image
+          each: 1.0 * waitImageFactor, // Longer stagger between each image
           from: "start"
         }
       }, "<")
