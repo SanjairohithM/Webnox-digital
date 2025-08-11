@@ -31,22 +31,22 @@ const navItems = [
   },
   {
     name: "Industries",
-    link: "#industries", 
+    link: "/commingsoon", 
     icon: <Building2 className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
     name: "Expertise",
-    link: "#expertise",
+    link: "/commingsoon",
     icon: <GraduationCap className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
     name: "AI",
-    link: "#ai",
+    link: "/commingsoon",
     icon: <Bot className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
     name: "Resources", 
-    link: "#resources",
+    link: "/commingsoon",
     icon: <BookOpen className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
 ]
@@ -70,22 +70,22 @@ const AnimatedNavbar = ({
     },
     {
         name: "Industries",
-      href: "#industries",
+      href: "/commingsoon",
       IconComponent: Building2,
     },
     {
       name: "Expertise",
-      href: "#expertise",
+      href: "/commingsoon",
       IconComponent: GraduationCap,
     },
     {
       name: "AI",
-      href: "#ai",
+      href: "/commingsoon",
       IconComponent: Bot,
     },
     {
       name: "Resources",
-      href: "#resources",
+      href: "/commingsoon",
       IconComponent: BookOpen,
     },
   ],
