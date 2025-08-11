@@ -200,7 +200,7 @@ function LetsConnect() {
     >
       <div
         ref={r3fContainerRef}
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 hidden md:block"
       >
         <TechImages2D />
       </div>

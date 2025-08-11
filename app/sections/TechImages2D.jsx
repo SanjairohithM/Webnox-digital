@@ -1,3 +1,6 @@
+//balls
+
+
 "use client"
 
 import { useState, useRef, useEffect, useCallback, useMemo } from "react"
@@ -65,16 +68,13 @@ function TechImage({
   const draggableRef = useRef(null)
   const collisionCooldownRef = useRef({})
   const resizeObserverRef = useRef(null)
+  const collisionFrameSkipRef = useRef(0)
+  const currentTweenRef = useRef(null)
 
+  // Keep viewport/bounds in refs without adding many window listeners per ball
   useEffect(() => {
-    vwRef.current = (bounds && bounds.width) || window.innerWidth
-    vhRef.current = (bounds && bounds.height) || window.innerHeight
-    const onResize = () => {
-      vwRef.current = (bounds && bounds.width) || window.innerWidth
-      vhRef.current = (bounds && bounds.height) || window.innerHeight
-    }
-    window.addEventListener("resize", onResize)
-    return () => window.removeEventListener("resize", onResize)
+    vwRef.current = (bounds && bounds.width) || (typeof window !== 'undefined' ? window.innerWidth : 0)
+    vhRef.current = (bounds && bounds.height) || (typeof window !== 'undefined' ? window.innerHeight : 0)
   }, [bounds?.width, bounds?.height])
 
   useEffect(() => {
@@ -108,7 +108,9 @@ function TechImage({
     const friction = -0.5
 
     function animateBounce(x = "+=0", y = "+=0", vx = "auto", vy = "auto") {
-      gsap.fromTo(
+      if (!flagRef.current) return
+      if (currentTweenRef.current) currentTweenRef.current.kill()
+      currentTweenRef.current = gsap.fromTo(
         flagRef.current,
         { x, y },
         {
@@ -158,16 +160,29 @@ function TechImage({
         gsap.to(flagRef.current, { scale: 1.08, duration: 0.08, yoyo: true, repeat: 1, ease: "power2.out" })
       }
 
-      // Ball-to-ball collisions
+      // Stop inertial tween early if nearly at rest to avoid long-running updates
+      const speed = Math.abs(vx) + Math.abs(vy)
+      if (speed < 0.06) {
+        if (currentTweenRef.current) {
+          try { currentTweenRef.current.kill() } catch (_) {}
+          currentTweenRef.current = null
+        }
+        return
+      }
+
+      // Ball-to-ball collisions (throttled and de-duplicated)
       if (allBalls && Array.isArray(allBalls)) {
+        // throttle collision checks to every other tick
+        collisionFrameSkipRef.current = (collisionFrameSkipRef.current + 1) % 2
+        if (collisionFrameSkipRef.current !== 0) return
         for (let i = 0; i < allBalls.length; i += 1) {
-          if (i === ballIndex) continue
+          if (i <= ballIndex) continue // avoid duplicate pair checks
           const other = allBalls[i]
           if (!other || !other.getXY || other.isDragging?.()) continue
 
-          const now = Date.now()
+          const now = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now()
           const key = String(i)
-          if (collisionCooldownRef.current[key] && now - collisionCooldownRef.current[key] < 100) {
+          if (collisionCooldownRef.current[key] && now - collisionCooldownRef.current[key] < 120) {
             continue
           }
 
@@ -175,10 +190,12 @@ function TechImage({
           const or = other.getRadius ? other.getRadius() : r
           const dx = xPos - ox
           const dy = yPos - oy
-          const dist = Math.sqrt(dx * dx + dy * dy)
           const minDist = r + or
+          const minDistSq = minDist * minDist
+          const distSq = dx * dx + dy * dy
 
-          if (dist > 0 && dist < minDist * 0.98) {
+          if (distSq > 0 && distSq < (minDistSq * 0.96)) {
+            const dist = Math.sqrt(distSq)
             const nx = dx / dist
             const ny = dy / dist
 
@@ -269,6 +286,10 @@ function TechImage({
     return () => {
       if (img) img.removeEventListener("load", computeRadius)
       if (draggableRef.current) draggableRef.current.kill()
+      if (currentTweenRef.current) {
+        try { currentTweenRef.current.kill() } catch (_) {}
+        currentTweenRef.current = null
+      }
       try { InertiaPlugin.untrack(flagRef.current, "x,y") } catch (_) {}
       gsap.killTweensOf(flagRef.current)
       if (allBalls && Array.isArray(allBalls)) {
