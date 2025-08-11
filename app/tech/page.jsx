@@ -242,7 +242,7 @@ const TechnologySection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white  font-sans">
+    <section ref={sectionRef} className="  font-sans">
       <div className="max-w-7xl mx-auto px-4">
         {/* Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -413,15 +413,89 @@ const CTASection = () => {
 }
 
 
+// Scroll-driven 3D crossfade wrapper for sections
+const Scroll3DSections = ({ children }) => {
+  const containerRef = useRef(null)
+  const sectionsRef = useRef([])
+
+  useEffect(() => {
+    const mm = ScrollTrigger.matchMedia()
+
+    mm.add("(min-width: 1024px)", () => {
+      const ctx = gsap.context(() => {
+        const sections = sectionsRef.current.filter(Boolean)
+        sections.forEach((sectionEl) => {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionEl,
+              start: "top 80%",
+              end: "bottom 20%",
+              scrub: true,
+            }
+          })
+
+          tl.fromTo(
+            sectionEl,
+            {
+              opacity: 0,
+              y: 60,
+              rotationX: 8,
+              z: -80,
+              transformPerspective: 1000,
+              transformOrigin: "50% 50%",
+            },
+            {
+              opacity: 1,
+              y: 0,
+              rotationX: 0,
+              z: 0,
+              ease: "power2.out",
+              duration: 1,
+            }
+          ).to(sectionEl, {
+            opacity: 0,
+            y: -60,
+            rotationX: -6,
+            z: -80,
+            ease: "power2.in",
+            duration: 1,
+          })
+        })
+      }, containerRef)
+
+      return () => ctx.revert()
+    })
+
+    return () => mm.revert()
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative space-y-8 md:space-y-12 lg:space-y-24"
+      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
+    >
+      {React.Children.map(children, (child, idx) => (
+        <div
+          ref={(el) => (sectionsRef.current[idx] = el)}
+          className="will-change-transform"
+        >
+          {child}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+
 const TechPage = () => {
   return (
     <main className="@/tech">
-      <HeroSection />
-  
-      <TechnologySection />
-      
-      <CTASection />
-   
+      <Scroll3DSections>
+        <HeroSection />
+        <TechnologySection />
+        <CTASection />
+      </Scroll3DSections>
       <Footer />
     </main>
   )
