@@ -689,7 +689,7 @@ const Scroll3DSections = ({ children }) => {
     const n8nPage = () => {
   return (
     <main className="@/n8n">
-      <Scroll3DSections>
+      {/* <Scroll3DSections> */}
       <HeroSection />
       
       <WhyWebnoxSection />
@@ -697,7 +697,7 @@ const Scroll3DSections = ({ children }) => {
       <AutomationComparisonSection />
       <CTASection />
       <WhyN8nWebnoxSection />
-      </Scroll3DSections>
+      {/* </Scroll3DSections> */}
       <FAQSection />
   
       <Footer />

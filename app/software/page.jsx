@@ -95,7 +95,7 @@ const HeroSection = () => {
         />
       </div>
       
-      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-35 z-20">
+      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-50 z-20">
         {/* Introductory text */}
         <div className="mb-6 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF] inline-flex items-center gap-2">
           <Image
@@ -647,18 +647,93 @@ const FAQSection = () => {
       </section>
     );
   };
+
+
+  const Scroll3DSections = ({ children }) => {
+    const containerRef = useRef(null)
+    const sectionsRef = useRef([])
+  
+    useEffect(() => {
+      const mm = ScrollTrigger.matchMedia()
+  
+      mm.add("(min-width: 1024px)", () => {
+        const ctx = gsap.context(() => {
+          const sections = sectionsRef.current.filter(Boolean)
+          sections.forEach((sectionEl) => {
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: sectionEl,
+                start: "top 80%",
+                end: "bottom 20%",
+                scrub: true,
+              }
+            })
+  
+            tl.fromTo(
+              sectionEl,
+              {
+                opacity: 0,
+                y: 60,
+                rotationX: 8,
+                z: -80,
+                transformPerspective: 1000,
+                transformOrigin: "50% 50%",
+              },
+              {
+                opacity: 1,
+                y: 0,
+                rotationX: 0,
+                z: 0,
+                ease: "power2.out",
+                duration: 1,
+              }
+            ).to(sectionEl, {
+              opacity: 0,
+              y: -60,
+              rotationX: -6,
+              z: -80,
+              ease: "power2.in",
+              duration: 1,
+            })
+          })
+        }, containerRef)
+  
+        return () => ctx.revert()
+      })
+  
+      return () => mm.revert()
+    }, [])
+  
+    return (
+      <div
+        ref={containerRef}
+        className="relative space-y-8 md:space-y-12 "
+        style={{ perspective: 1200, transformStyle: "preserve-3d" }}
+      >
+        {React.Children.map(children, (child, idx) => (
+          <div
+            ref={(el) => (sectionsRef.current[idx] = el)}
+            className="will-change-transform"
+          >
+            {child}
+          </div>
+        ))}
+      </div>
+    )
+  }
   
 
   
 const SoftwarePage = () => {
   return (
     <main className="@/software">
+      <Scroll3DSections>
       <HeroSection />
       <WhatDoesWebnoxDigitalDoSection />
       <BrandingPlanSteps />
       <WhyCustomerExperienceMattersSection />
       <OurApproachSection />
-      
+      </Scroll3DSections>
      
       <FAQSection />
       <Footer />

@@ -95,7 +95,7 @@ const HeroSection = () => {
         />
       </div>
       
-      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-35 z-20">
+      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-50 z-20">
         {/* Introductory text */}
         <div className="mb-6 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF] inline-flex items-center gap-2">
           <Image
@@ -332,7 +332,7 @@ const FAQSection = () => {
     return (
       <div
         ref={containerRef}
-        className="relative space-y-8 md:space-y-12 lg:space-y-24"
+        className="relative space-y-8 md:space-y-12 "
         style={{ perspective: 1200, transformStyle: "preserve-3d" }}
       >
         {React.Children.map(children, (child, idx) => (
@@ -428,7 +428,9 @@ const FrameworkSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-16 md:py-20 lg:py-24 relative overflow-hidden"
+      className="py-16 
+      
+      relative overflow-hidden "
     >
       {/* Background Image - Center Only */}
       <div ref={bgImageRef} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] z-0">
@@ -638,7 +640,7 @@ const TechnologiesSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-16 md:py-20 lg:py-24 font-sans "
+      className="py-16  font-sans "
     >
       <div className="max-w-7xl mx-auto px-4">
         {/* Title */}

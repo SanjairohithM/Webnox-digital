@@ -844,7 +844,7 @@ const CTASection = () => {
     }, [])
   
       return (
-      <section ref={sectionRef} className="relative w-full min-h-[500px] overflow-hidden font-sans">
+      <section ref={sectionRef} className="relative w-full min-h-[500px] overflow-hidden font-sans ">
         {/* 3D Container for Desktop - wraps everything */}
         <div className="hidden lg:block transform-gpu transition-all duration-700 ease-out cursor-pointer w-full h-full" 
              style={{

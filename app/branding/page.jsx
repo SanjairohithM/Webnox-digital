@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import Image from "next/image"
-import { useState, useRef } from "react"
+import { useState, useRef,useEffect} from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -425,14 +425,95 @@ const IndustriesSection = () => {
   )
 }
 
+
+const Scroll3DSections = ({ children }) => {
+  const containerRef = useRef(null)
+  const sectionsRef = useRef([])
+
+  useEffect(() => {
+    const mm = ScrollTrigger.matchMedia()
+
+    mm.add("(min-width: 1024px)", () => {
+      const ctx = gsap.context(() => {
+        const sections = sectionsRef.current.filter(Boolean)
+        sections.forEach((sectionEl) => {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionEl,
+              start: "top 80%",
+              end: "bottom 20%",
+              scrub: true,
+            }
+          })
+
+          tl.fromTo(
+            sectionEl,
+            {
+              opacity: 0,
+              y: 60,
+              rotationX: 8,
+              z: -80,
+              transformPerspective: 1000,
+              transformOrigin: "50% 50%",
+            },
+            {
+              opacity: 1,
+              y: 0,
+              rotationX: 0,
+              z: 0,
+              ease: "power2.out",
+              duration: 1,
+            }
+          ).to(sectionEl, {
+            opacity: 0,
+            y: -60,
+            rotationX: -6,
+            z: -80,
+            ease: "power2.in",
+            duration: 1,
+          })
+        })
+      }, containerRef)
+
+      return () => ctx.revert()
+    })
+
+    return () => mm.revert()
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative space-y-8 md:space-y-12 lg:space-y-24"
+      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
+    >
+      {React.Children.map(children, (child, idx) => (
+        <div
+          ref={(el) => (sectionsRef.current[idx] = el)}
+          className="will-change-transform"
+        >
+          {child}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+
 // Main Branding Page
 const BrandingPage = () => (
   <main className="bg-white w-full mt-20">
+   
     <BrandingHero />
     <BrandingPlan />
+    <Scroll3DSections>
+    
+
     <BrandingFeatures />
     <BrandingPlanSteps />
+
     <IndustriesSection />
+    </Scroll3DSections>
     <TickerSection />
     <FAQSection />
     <Footer />
