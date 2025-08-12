@@ -9,6 +9,7 @@ import WebnoxDigitalSection from "@/app/sections/Aiautomationsecond"
 import OurApproachSection from "@/app/sections/Aianimationthird"
 import AutomationServicesSection from "@/app/sections/Aianimationfourth"
 import Footer from "../sections/Footer"
+import Scroll3DSections from "../sections/Components/scrollanimation"
 
 export default function AIAutomationHero() {
   const containerRef = useRef(null)
@@ -167,7 +168,7 @@ export default function AIAutomationHero() {
       <>
         <div
           ref={containerRef}
-          className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center px-4 py-12 font-sans"
+          className="min-h-screen bg-white flex items-center justify-center px-4 py-12 font-sans"
         >
           <div className="max-w-7xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -241,9 +242,11 @@ export default function AIAutomationHero() {
             </div>
           </div>
         </div>
+        <Scroll3DSections>
         <WebnoxDigitalSection />
         <OurApproachSection/>
         <AutomationServicesSection/>
+        </Scroll3DSections>
         <Footer/>
         
       </>

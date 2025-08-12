@@ -8,6 +8,7 @@ import Image from "next/image"
 import FAQSection from "../components/FAQSection";
 import TickerSection from "../components/TickerSection";
 import Footer from "../sections/Footer";
+import Scroll3DSections from "../sections/Components/scrollanimation";
 
 
 
@@ -73,7 +74,7 @@ const HeroSection = () => {
         {/* Strong white fade at bottom */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/60 to-white"></div>
       </div>
-      <div className="relative w-full flex flex-col items-center justify-center text-center px-4">
+      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 mt-30">
         <h1 ref={titleRef} className="text-2xl md:text-4xl lg:text-5xl  font-sans font-bold text-black mb-6">
           Outsourcing Services by <span className="text-[#13b4ee]">Webnox Digital</span>
         </h1>
@@ -838,9 +839,12 @@ const ApproachSection = () => {
 const OutsourcingPage = () => {
   return (
     <main className="@/outsourcing">
+      <Scroll3DSections>
       <HeroSection />
       <WhyChooseSection />
       <ApproachSection />
+      </Scroll3DSections>
+ 
       {/* <TickerSection />
       <FAQSection /> */}
       <Footer />

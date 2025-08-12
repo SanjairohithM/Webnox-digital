@@ -85,7 +85,7 @@ const HeroSection = () => {
         background: "linear-gradient(180deg, #E6F7FD 0%, #ffffff 80%)"
       }}
     >
-      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-4xl mx-auto mt-20">
+      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-4xl mx-auto mt-50">
         <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-sans font-bold text-[#00B9FF] mb-4 leading-tight">
           {"Explore the technologies".split("").map((char, index) => (
             <span

@@ -197,7 +197,7 @@ export default function WebnoxDigitalSection() {
     <>
     <section ref={sectionRef} className="py-8 bg-white relative overflow-hidden font-sans">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 " />
 
       {/* Floor Background - Full Section */}
       {/* <div className="absolute bottom-25 left-234 transform -translate-x-1/2 w-full h-full z-0 opacity-250 ">

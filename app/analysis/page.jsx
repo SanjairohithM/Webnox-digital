@@ -5,6 +5,7 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
+import Scroll3DSections from "../sections/Components/scrollanimation";
 import Footer from "../sections/Footer";
 // import FAQSection from "../components/FAQSection";
 // import TickerSection from "../components/TickerSection";
@@ -528,9 +529,12 @@ const industries = [
 const OutsourcingPage = () => {
   return (
     <main className="@/outsourcing">
+      <Scroll3DSections>
       <HeroSection />
       <ApproachSection />
       <WhyWebnoxSection />
+     
+      </Scroll3DSections>
       <IndustriesSection />
       {/* <TickerSection />
       <FAQSection /> */}

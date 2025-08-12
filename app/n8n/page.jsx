@@ -65,7 +65,7 @@ const HeroSection = () => {
           priority
         />
       </div>
-      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 mt-35">
+      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 mt-50">
         <h1 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold mb-6">
           <span ref={titleBlueRef} className="text-[#00BFFF] inline-block">
             Still doing repetitive tasks
@@ -689,7 +689,7 @@ const Scroll3DSections = ({ children }) => {
     const n8nPage = () => {
   return (
     <main className="@/n8n">
-      {/* <Scroll3DSections> */}
+      <Scroll3DSections>
       <HeroSection />
       
       <WhyWebnoxSection />
@@ -697,7 +697,7 @@ const Scroll3DSections = ({ children }) => {
       <AutomationComparisonSection />
       <CTASection />
       <WhyN8nWebnoxSection />
-      {/* </Scroll3DSections> */}
+      </Scroll3DSections>
       <FAQSection />
   
       <Footer />

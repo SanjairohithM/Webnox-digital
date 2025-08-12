@@ -232,9 +232,9 @@ export default function AutomationServicesSection() {
                 <span className="text-cyan-500">Automate Together</span>
               </h2>
 
-              <p ref={descriptionRef} className="text-lg text-gray-600 leading-relaxed mb-8">
+              {/* <p ref={descriptionRef} className="text-lg text-gray-600 leading-relaxed mb-8">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.
-              </p>
+              </p> */}
 
               <div ref={buttonRef}>
                 <button

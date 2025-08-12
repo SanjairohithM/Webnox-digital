@@ -226,7 +226,7 @@ export default function OurApproachSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-4 font-sans ">
+    <section ref={sectionRef} className=" font-sans bg-white ">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content - Image */}

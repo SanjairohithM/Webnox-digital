@@ -5,7 +5,7 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
-
+import Scroll3DSections from "../sections/Components/scrollanimation";
 import Footer from "../sections/Footer";
 
 
@@ -84,7 +84,7 @@ const HeroSection = () => {
         background: "linear-gradient(180deg, #E6F7FD 0%, #ffffff 80%)"
       }}
     >
-            <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-35">
+            <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-50">
                 {/* Introductory text */}
                 <div className="mb-6 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF] inline-flex items-center gap-2">
                     <Image
@@ -502,10 +502,11 @@ const FAQSection = () => {
 const CustomerPage = () => {
   return (
     <main className="@/customer">
+      <Scroll3DSections>
       <HeroSection />
             <OurApproachSection />
             <WhyCustomerExperienceMattersSection />
-     
+      </Scroll3DSections>
       <FAQSection />
       <Footer />
     </main>

@@ -8,6 +8,7 @@ import Image from "next/image"
 import { MoveUpRight } from "lucide-react"
 import TickerSection from "../components/TickerSection";
 import Footer from "../sections/Footer";
+import Scroll3DSections from "../sections/Components/scrollanimation";
 
 
 
@@ -85,7 +86,7 @@ const HeroSection = () => {
         background: "linear-gradient(180deg, #E6F7FD 0%, #ffffff 80%)"
       }}
     >
-      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-20">
+      <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-50">
         <h1 ref={titleRef} className="md:text-6xl   font-sans font-semibold text-[#00B9FF] mb-4 leading-tight">
           {"Automate Growth. Personalize at".split("").map((char, index) => (
             <span
@@ -945,12 +946,14 @@ const FAQSection = () => {
 const NextgenPage = () => {
   return (
     <main className="@/nextgen">
+      <Scroll3DSections>
       <HeroSection />
       <NextGenMarketingSection />
       <IsThisRightSection />
       <NextGenFeatures />
       <ResultsSection />
       <MarketingStackSection />
+      </Scroll3DSections>
       <FAQSection />
       <Footer />
     </main>
