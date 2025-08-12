@@ -227,7 +227,7 @@ function About() {
     return (
         <>
             {/* Navbar Component */}
-            <AnimatedNavbar />
+            {/* <AnimatedNavbar /> */}
 
             <main
                 ref={sectionRef}

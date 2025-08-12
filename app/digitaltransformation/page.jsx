@@ -8,7 +8,7 @@ import Image from "next/image"
 import { MoveUpRight } from "lucide-react"
 import TickerSection from "../components/TickerSection";
 import Footer from "../sections/Footer";
-
+import Scroll3DSections from "../sections/Components/scrollanimation";
 
 
 if (typeof window !== "undefined") {
@@ -129,7 +129,7 @@ const HeroSection = () => {
         background: "linear-gradient(180deg, #E6F7FD 0%, #ffffff 80%)"
       }}
     >
-      <div className="relative px-12 mt-30">
+      <div className="relative px-12 mt-50">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
           {/* Left Side - Text Content */}
           <div ref={leftContentRef} className="lg:col-span-3 flex flex-col justify-center text-center lg:text-left">
@@ -1120,11 +1120,13 @@ const FAQSection = () => {
 const DigitalTransformationPage = () => {
   return (
     <main className="@/digitaltransformation">
+      <Scroll3DSections>
       <HeroSection />
       <TechnologyWorkSection />
       <NextGenMarketingSection />
       <OutdatedToolsSection />
       <WhyCustomerExperienceMattersSection />
+      </Scroll3DSections>
       {/* <FAQSection /> */}
       <Footer />
     </main>
