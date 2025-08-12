@@ -81,7 +81,7 @@ const HeroSection = () => {
           ref={descRef}
           className="text-[#222] text-lg md:text-xl max-w-2xl font-sans leading-relaxed text-center mx-auto tracking-wide mt-4"
         >
-          At Webnox Digital, we understand that managing everything in-house can slow down your business growth. That’s why we offer smart, efficient, and affordable outsourcing solutions to help you stay focused on what matters most: growing your business.
+          At Webnox Digital, we understand that managing everything in-house can slow down your business growth. That’s why we offer smart, efficient, affordable outsourcing solutions to help you stay focused on what matters most—growing your business.
         </p>
       </div>
     </section>
@@ -116,12 +116,12 @@ const WhyChooseSection = () => {
     {
       number: "3",
       title: "Time-Zone Advantage",
-      desc: "With our offshore team, your work progresses even after your office closes."
+      desc: " With our offshore team, your projects keep moving forward even after your office closes."
     },
     {
       number: "4",
       title: "Reliable Communication",
-      desc: "Daily updates, clear reporting, and direct communication channels to keep you in the loop."
+      desc: " We provide daily updates, clear reporting, and direct communication channels to keep you fully informed."
     }
   ]
 
@@ -336,7 +336,7 @@ const WhyChooseSection = () => {
             <span ref={subtitleRef} className="text-[#13b4ee] text-sm font-semibold uppercase mb-2 tracking-wide">Why Choose</span>
             <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-black font-sans text-black mb-4 leading-tight text-left">Webnox for Outsourcing</h2>
             <p ref={descRef} className="text-[#6b6b6b] text-base md:text-lg font-sans font-normal leading-relaxed mb-6 text-left max-w-md">
-              At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster, operate efficiently, and focus on their core strengths.
+            At Webnox, we redefine outsourcing by combining innovation, reliability, and performance. Our tailored services help businesses scale faster, operate more efficiently, and focus on their core strengths.
             </p>
             <button ref={buttonRef} className="bg-[#13b4ee] text-white px-7 py-3 rounded-full font-semibold text-base shadow-md hover:bg-[#0ea5e9] transition mb-8">
               Get Started

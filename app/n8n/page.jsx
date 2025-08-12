@@ -77,7 +77,7 @@ const HeroSection = () => {
         </h1>
         <div className="text-[#333] text-lg md:text-xl max-w-4xl font-sans leading-relaxed text-center mx-auto tracking-wide mt-4 mb-8">
           <p ref={desc1Ref} className="inline-block mb-2">
-            Juggling Google Sheets, CRMs, APIs, and email without sync?
+          Juggling Google Sheets, CRMs, APIs, and <span className=" font-black">emails</span> without sync?
           </p>
           <br/>
           <p ref={desc2Ref} className="inline-block mb-4">
@@ -526,7 +526,7 @@ const WhyN8nWebnoxSection = () => {
           Why n8n + Webnox Is the Smartest Automation Decision
         </h2>
         <p className="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-          At Webnox Digital, we build intelligent systems that scale with you using n8n + A1 + your business logic.
+        At Webnox Digital, we build intelligent systems that scale with you using n8n + AI + your business logic.
         </p>
       </div>
     </section>

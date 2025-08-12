@@ -28,23 +28,23 @@ const HeroSection = () => {
     const ctx = gsap.context(() => {
       // Check if we're on desktop (lg breakpoint and above)
       const isDesktop = window.innerWidth >= 1024
-      
+
       if (isDesktop) {
         // Complex animations for desktop with letter-by-letter title animation
         gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 20 })
-        
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: heroRef.current,
             start: "top 80%",
           }
         })
-        
+
         // Animate title letters one by one
-        tl.to(titleLettersRef.current, { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.4, 
+        tl.to(titleLettersRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
           ease: "power2.out",
           stagger: 0.03 // 30ms delay between each letter
         })
@@ -53,19 +53,19 @@ const HeroSection = () => {
       } else {
         // Simple fade animations for mobile with letter-by-letter title animation
         gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 15 })
-        
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: heroRef.current,
             start: "top 80%",
           }
         })
-        
+
         // Animate title letters one by one (faster on mobile)
-        tl.to(titleLettersRef.current, { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.3, 
+        tl.to(titleLettersRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
           ease: "power2.out",
           stagger: 0.02 // 20ms delay between each letter
         })
@@ -94,7 +94,7 @@ const HeroSection = () => {
           priority={false}
         />
       </div>
-      
+
       <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-50 z-20">
         {/* Introductory text */}
         <div className="mb-6 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF] inline-flex items-center gap-2">
@@ -117,7 +117,7 @@ const HeroSection = () => {
                 key={index}
                 ref={(el) => (titleLettersRef.current[index] = el)}
                 className="inline-block"
-                style={{ 
+                style={{
                   marginRight: char === " " ? "0.75rem" : "0",
                   minWidth: char === " " ? "0.75rem" : "auto"
                 }}
@@ -133,7 +133,7 @@ const HeroSection = () => {
                 key={index + "Powering E-Commerce That Performs,".length}
                 ref={(el) => (titleLettersRef.current[index + "Powering E-Commerce That Performs,".length] = el)}
                 className="inline-block"
-                style={{ 
+                style={{
                   marginRight: char === " " ? "0.75rem" : "0",
                   minWidth: char === " " ? "0.75rem" : "auto"
                 }}
@@ -148,7 +148,7 @@ const HeroSection = () => {
                 key={index + "Powering E-Commerce That Performs, Converts ".length}
                 ref={(el) => (titleLettersRef.current[index + "Powering E-Commerce That Performs, Converts ".length] = el)}
                 className="inline-block"
-                style={{ 
+                style={{
                   marginRight: char === " " ? "0.75rem" : "0",
                   minWidth: char === " " ? "0.75rem" : "auto"
                 }}
@@ -163,7 +163,7 @@ const HeroSection = () => {
                 key={index + "Powering E-Commerce That Performs, Converts & ".length}
                 ref={(el) => (titleLettersRef.current[index + "Powering E-Commerce That Performs, Converts & ".length] = el)}
                 className="inline-block"
-                style={{ 
+                style={{
                   marginRight: char === " " ? "0.75rem" : "0",
                   minWidth: char === " " ? "0.75rem" : "auto"
                 }}
@@ -196,159 +196,159 @@ const HeroSection = () => {
 
 
 const FAQSection = () => {
-    const faqs = [
-      {
-        question: "What platforms do you specialize in for e-commerce?",
-        answer: " We build on Shopify, WooCommerce, Magento, and headless stacks (like React+Next.js) depending on your needs."
-      },
-      {
-        question: " How long does an e-commerce site take to develop?",
-        answer: "A basic store takes 3–4 weeks. Custom builds or marketplaces may take 2–3 months."
-      },
-      {
-        question: "Can you integrate shipping, payment, or warehouse tools?",
-        answer: "Yes. We integrate with leading tools like Shiprocket, Razorpay, Stripe, Shipstation, Zoho Inventory, etc."
-      },
-      {
-        question: "Do you provide post-launch marketing and support?",
-        answer: " Absolutely. We offer paid ads, SEO, CRO, and performance-based optimization plans."
-      },
-      {
-        question: "Can you help with automation like order alerts or WhatsApp messages?",
-        answer: " Yes. Using tools like N8N and Zapier, we automate your entire sales pipeline and post-purchase journey."
-      },
-    ];
-    const [openIdx, setOpenIdx] = React.useState(0);
-  
-    return (
-      <section className="py-8 sm:py-12 lg:py-16 xl:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          {/* Heading */}
-          <div className="mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black mb-2">Frequently</h2>
-            <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sky-500">asked questions</span>
-          </div>
-          {/* Responsive layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
-            {/* FAQ Accordion */}
-            <div className="lg:col-span-2 flex flex-col gap-3 sm:gap-4">
-              {faqs.map((faq, idx) => (
-                <div
-                  key={idx}
-                  className={`rounded-xl border border-gray-200 bg-white transition-shadow ${openIdx === idx ? 'shadow-md' : 'hover:shadow'} `}
+  const faqs = [
+    {
+      question: "What platforms do you specialize in for e-commerce?",
+      answer: " We build on Shopify, WooCommerce, Magento, and headless stacks (like React+Next.js) depending on your needs."
+    },
+    {
+      question: " How long does an e-commerce site take to develop?",
+      answer: "A basic store takes 3–4 weeks. Custom builds or marketplaces may take 2–3 months."
+    },
+    {
+      question: "Can you integrate shipping, payment, or warehouse tools?",
+      answer: "Yes. We integrate with leading tools like Shiprocket, Razorpay, Stripe, Shipstation, Zoho Inventory, etc."
+    },
+    {
+      question: "Do you provide post-launch marketing and support?",
+      answer: " Absolutely. We offer paid ads, SEO, CRO, and performance-based optimization plans."
+    },
+    {
+      question: "Can you help with automation like order alerts or WhatsApp messages?",
+      answer: " Yes. Using tools like N8N and Zapier, we automate your entire sales pipeline and post-purchase journey."
+    },
+  ];
+  const [openIdx, setOpenIdx] = React.useState(0);
+
+  return (
+    <section className="py-8 sm:py-12 lg:py-16 xl:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Heading */}
+        <div className="mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black mb-2">Frequently</h2>
+          <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sky-500">asked questions</span>
+        </div>
+        {/* Responsive layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
+          {/* FAQ Accordion */}
+          <div className="lg:col-span-2 flex flex-col gap-3 sm:gap-4">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className={`rounded-xl border border-gray-200 bg-white transition-shadow ${openIdx === idx ? 'shadow-md' : 'hover:shadow'} `}
+              >
+                <button
+                  className="w-full flex justify-between items-center px-4 sm:px-6 py-4 sm:py-5 text-left focus:outline-none"
+                  onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
                 >
-                  <button
-                    className="w-full flex justify-between items-center px-4 sm:px-6 py-4 sm:py-5 text-left focus:outline-none"
-                    onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
-                  >
-                    <span className="text-base sm:text-lg font-medium text-gray-900 pr-4">{faq.question}</span>
-                    <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold flex-shrink-0">{openIdx === idx ? '-' : '+'}</span>
-                  </button>
-                  {openIdx === idx && (
-                    <div className="px-4 sm:px-6 pb-4 sm:pb-5 text-gray-600 text-sm leading-relaxed">
-                      {faq.answer}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            {/* Right Card */}
-            <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6 lg:p-8 flex flex-col items-center text-center min-h-[280px] sm:min-h-[320px]">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 sm:mb-6 overflow-hidden">
-                <Image
-                  src="/images/fi_7.webp"
-                  alt="FAQ Icon"
-                  width={48}
-                  height={48}
-                  className="object-contain w-8 h-8 sm:w-10 sm:h-10"
-                />
+                  <span className="text-base sm:text-lg font-medium text-gray-900 pr-4">{faq.question}</span>
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold flex-shrink-0">{openIdx === idx ? '-' : '+'}</span>
+                </button>
+                {openIdx === idx && (
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-5 text-gray-600 text-sm leading-relaxed">
+                    {faq.answer}
+                  </div>
+                )}
               </div>
-              <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
-              <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
-              <button className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition-colors shadow-sm">Shoot a Direct Mail</button>
+            ))}
+          </div>
+          {/* Right Card */}
+          <div className="rounded-xl border border-gray-200 bg-white p-4 sm:p-6 lg:p-8 flex flex-col items-center text-center min-h-[280px] sm:min-h-[320px]">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4 sm:mb-6 overflow-hidden">
+              <Image
+                src="/images/fi_7.webp"
+                alt="FAQ Icon"
+                width={48}
+                height={48}
+                className="object-contain w-8 h-8 sm:w-10 sm:h-10"
+              />
             </div>
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
+            <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
+            <button className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition-colors shadow-sm">Shoot a Direct Mail</button>
           </div>
         </div>
-      </section>
-    );
-  };
-
-
-  const Scroll3DSections = ({ children }) => {
-    const containerRef = useRef(null)
-    const sectionsRef = useRef([])
-  
-    useEffect(() => {
-      const mm = ScrollTrigger.matchMedia()
-  
-      mm.add("(min-width: 1024px)", () => {
-        const ctx = gsap.context(() => {
-          const sections = sectionsRef.current.filter(Boolean)
-          sections.forEach((sectionEl) => {
-            const tl = gsap.timeline({
-              scrollTrigger: {
-                trigger: sectionEl,
-                start: "top 80%",
-                end: "bottom 20%",
-                scrub: true,
-              }
-            })
-  
-            tl.fromTo(
-              sectionEl,
-              {
-                opacity: 0,
-                y: 60,
-                rotationX: 8,
-                z: -80,
-                transformPerspective: 1000,
-                transformOrigin: "50% 50%",
-              },
-              {
-                opacity: 1,
-                y: 0,
-                rotationX: 0,
-                z: 0,
-                ease: "power2.out",
-                duration: 1,
-              }
-            ).to(sectionEl, {
-              opacity: 0,
-              y: -60,
-              rotationX: -6,
-              z: -80,
-              ease: "power2.in",
-              duration: 1,
-            })
-          })
-        }, containerRef)
-  
-        return () => ctx.revert()
-      })
-  
-      return () => mm.revert()
-    }, [])
-  
-    return (
-      <div
-        ref={containerRef}
-        className="relative space-y-8 md:space-y-12 "
-        style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-      >
-        {React.Children.map(children, (child, idx) => (
-          <div
-            ref={(el) => (sectionsRef.current[idx] = el)}
-            className="will-change-transform"
-          >
-            {child}
-          </div>
-        ))}
       </div>
-    )
-  }
-  
+    </section>
+  );
+};
 
-  
+
+const Scroll3DSections = ({ children }) => {
+  const containerRef = useRef(null)
+  const sectionsRef = useRef([])
+
+  useEffect(() => {
+    const mm = ScrollTrigger.matchMedia()
+
+    mm.add("(min-width: 1024px)", () => {
+      const ctx = gsap.context(() => {
+        const sections = sectionsRef.current.filter(Boolean)
+        sections.forEach((sectionEl) => {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionEl,
+              start: "top 80%",
+              end: "bottom 20%",
+              scrub: true,
+            }
+          })
+
+          tl.fromTo(
+            sectionEl,
+            {
+              opacity: 0,
+              y: 60,
+              rotationX: 8,
+              z: -80,
+              transformPerspective: 1000,
+              transformOrigin: "50% 50%",
+            },
+            {
+              opacity: 1,
+              y: 0,
+              rotationX: 0,
+              z: 0,
+              ease: "power2.out",
+              duration: 1,
+            }
+          ).to(sectionEl, {
+            opacity: 0,
+            y: -60,
+            rotationX: -6,
+            z: -80,
+            ease: "power2.in",
+            duration: 1,
+          })
+        })
+      }, containerRef)
+
+      return () => ctx.revert()
+    })
+
+    return () => mm.revert()
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative space-y-8 md:space-y-12 "
+      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
+    >
+      {React.Children.map(children, (child, idx) => (
+        <div
+          ref={(el) => (sectionsRef.current[idx] = el)}
+          className="will-change-transform"
+        >
+          {child}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+
+
 // Top 3 Framework Section Component
 const FrameworkSection = () => {
   const sectionRef = useRef(null)
@@ -360,37 +360,37 @@ const FrameworkSection = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Animation timeline for content
-      gsap.set([titleRef.current, subtitleRef.current, ...cardsRef.current], { 
-        opacity: 0, 
-        y: 30 
+      gsap.set([titleRef.current, subtitleRef.current, ...cardsRef.current], {
+        opacity: 0,
+        y: 30
       })
-      
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
         }
       })
-      
-      tl.to(titleRef.current, { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        ease: "power2.out" 
+
+      tl.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
       })
-      .to(subtitleRef.current, { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        ease: "power2.out" 
-      }, "-=0.3")
-      .to(cardsRef.current, { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        ease: "power2.out",
-        stagger: 0.2 
-      }, "-=0.3")
+        .to(subtitleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        }, "-=0.3")
+        .to(cardsRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.2
+        }, "-=0.3")
 
       // Continuous rotation animation for background image
       gsap.to(bgImageRef.current, {
@@ -400,33 +400,33 @@ const FrameworkSection = () => {
         repeat: -1
       })
     }, sectionRef)
-    
+
     return () => ctx.revert()
   }, [])
 
   const frameworks = [
     {
       icon: "/images/ecommerce3.png",
-     
+
       title: "Understand & Strategize",
       description: "We start with a deep discovery phase. We study your business model, target audience, and competitors to identify the best growth opportunities aligned with your goals."
     },
     {
       icon: "/images/ecommerce4.png",
-     
+
       title: "Build, Integrate & Optimize",
       description: "From storefront to checkout, every pixel is designed for performance. Our developers build robust, responsive and scalable e-commerce solutions using leading platforms and automation tools."
     },
     {
-        icon: "/images/ecommerce5.png",
-      
+      icon: "/images/ecommerce5.png",
+
       title: "Launch, Market & Scale",
       description: "We don't just go live-off your site. We monitor, optimize and launch it from varying ROI-based, SEO optimization, so driving paid campaigns, we make sure your store becomes a revenue engine."
     }
   ]
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-16 
       
@@ -448,21 +448,21 @@ const FrameworkSection = () => {
         {/* Header Badge */}
         <div className="flex justify-center mb-6">
           <div className="px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF] inline-flex items-center gap-2">
-          <Image
-            src="/images/customer1.png"
-            alt="E-commerce Icon"
-            width={20}
-            height={20}
-            className="w-4 h-4 md:w-5 md:h-5 object-contain "
-          />
-          <span className="text-[#00B9FF] text-sm md:text-base font-medium">
-          Our Development Story
-          </span>
+            <Image
+              src="/images/customer1.png"
+              alt="E-commerce Icon"
+              width={20}
+              height={20}
+              className="w-4 h-4 md:w-5 md:h-5 object-contain "
+            />
+            <span className="text-[#00B9FF] text-sm md:text-base font-medium">
+              Our Development Story
+            </span>
           </div>
         </div>
 
         {/* Title */}
-        <h2 
+        <h2
           ref={titleRef}
           className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6 text-gray-900"
         >
@@ -472,19 +472,17 @@ const FrameworkSection = () => {
         </h2>
 
         {/* Subtitle */}
-        <p 
+        <p
           ref={subtitleRef}
           className="text-gray-600 text-lg md:text-xl text-center max-w-4xl mx-auto mb-16 leading-relaxed"
         >
-          Whether you're a startup aiming to launch your first store or an enterprise brand 
-          platforming to scale globally, our e-commerce experts walk you through a 
-          complete transformation journey.
+          Whether you're a startup aiming to launch your first store or an enterprise brand planning to scale globally, our e-commerce experts walk you through a complete transformation journey.
         </p>
 
         {/* Framework Cards */}
         <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Card 1 - Understand & Strategize */}
-          <div 
+          <div
             ref={(el) => (cardsRef.current[0] = el)}
             className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 w-full md:w-70% md:mt-50"
           >
@@ -503,7 +501,7 @@ const FrameworkSection = () => {
           </div>
 
           {/* Card 2 - Build, Integrate & Optimize */}
-          <div 
+          <div
             ref={(el) => (cardsRef.current[1] = el)}
             className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 w-full md:w-70% "
           >
@@ -522,7 +520,7 @@ const FrameworkSection = () => {
           </div>
 
           {/* Card 3 - Launch, Market & Scale */}
-          <div 
+          <div
             ref={(el) => (cardsRef.current[2] = el)}
             className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 w-full md:w-70% md:mt-50"
           >
@@ -558,39 +556,39 @@ const TechnologiesSection = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Animation timeline for content
-      gsap.set([titleRef.current, subtitleRef.current, ...techCardsRef.current], { 
-        opacity: 0, 
-        y: 30 
+      gsap.set([titleRef.current, subtitleRef.current, ...techCardsRef.current], {
+        opacity: 0,
+        y: 30
       })
-      
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
         }
       })
-      
-      tl.to(titleRef.current, { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        ease: "power2.out" 
+
+      tl.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power2.out"
       })
-      .to(subtitleRef.current, { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        ease: "power2.out" 
-      }, "-=0.3")
-      .to(techCardsRef.current, { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.6, 
-        ease: "power2.out",
-        stagger: 0.1 
-      }, "-=0.3")
+        .to(subtitleRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        }, "-=0.3")
+        .to(techCardsRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.1
+        }, "-=0.3")
     }, sectionRef)
-    
+
     return () => ctx.revert()
   }, [])
 
@@ -601,7 +599,7 @@ const TechnologiesSection = () => {
       subtitle: "E-commerce Platform"
     },
     {
-      image: "/images/ecommerce10.webp", 
+      image: "/images/ecommerce10.webp",
       title: "WooCommerce",
       subtitle: "WordPress E-commerce"
     },
@@ -638,13 +636,13 @@ const TechnologiesSection = () => {
   ]
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-16  font-sans "
     >
       <div className="max-w-7xl mx-auto px-4">
         {/* Title */}
-        <h2 
+        <h2
           ref={titleRef}
           className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 text-gray-900"
         >
@@ -652,7 +650,7 @@ const TechnologiesSection = () => {
         </h2>
 
         {/* Subtitle */}
-        <p 
+        <p
           ref={subtitleRef}
           className="text-gray-600 text-lg md:text-xl text-center max-w-2xl mx-auto mb-16"
         >
@@ -662,7 +660,7 @@ const TechnologiesSection = () => {
         {/* Technology Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
           {technologies.map((tech, index) => (
-            <div 
+            <div
               key={index}
               ref={(el) => (techCardsRef.current[index] = el)}
               className="relative rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 group hover:scale-105 h-48 bg-white"
@@ -702,293 +700,293 @@ const TechnologiesSection = () => {
 
 // Technology Should Work for You Section Component
 const TechnologyWorkSection = () => {
-    const sectionRef = useRef(null)
-    const badgeRef = useRef(null)
-    const titleRef = useRef(null)
-    const descRefsArray = useRef([])
-    const imageRef = useRef(null)
+  const sectionRef = useRef(null)
+  const badgeRef = useRef(null)
+  const titleRef = useRef(null)
+  const descRefsArray = useRef([])
+  const imageRef = useRef(null)
 
-    useEffect(() => {
-      const ctx = gsap.context(() => {
-        // Check if we're on desktop (lg breakpoint and above)
-        const isDesktop = window.innerWidth >= 1024
-        
-        if (isDesktop) {
-          // Complex animations for desktop
-          gsap.set(badgeRef.current, { opacity: 0, y: 30 })
-          gsap.set(titleRef.current, { opacity: 0, x: 100 }) // From right
-          gsap.set(descRefsArray.current, { opacity: 0, y: 80 })   // From bottom
-          gsap.set(imageRef.current, { opacity: 0, y: 30 })  // Normal fade
-          
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 60%",
-            }
-          })
-          
-          tl.to(imageRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-            .to(badgeRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-            .to(titleRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.3") // Slide from right
-            .to(descRefsArray.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", stagger: 0.1 }, "-=0.4")  // Slide from bottom with stagger
-        } else {
-          // Simple fade animations for mobile
-          gsap.set(badgeRef.current, { opacity: 0, y: 20 })
-          gsap.set(titleRef.current, { opacity: 0, x: 50 })  // From right (less distance)
-          gsap.set(descRefsArray.current, { opacity: 0, y: 40 })   // From bottom (less distance)
-          gsap.set(imageRef.current, { opacity: 0, y: 20 })  // Normal fade
-          
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 60%",
-            }
-          })
-          
-          tl.to(imageRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
-            .to(badgeRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2")
-            .to(titleRef.current, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }, "-=0.2") // Slide from right
-            .to(descRefsArray.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.08 }, "-=0.3")  // Slide from bottom with stagger
-        }
-      }, sectionRef)
-      return () => ctx.revert()
-    }, [])
-  
-    return (
-      <section
-        ref={sectionRef}
-        className="relative min-h-[600px] md:min-h-[700px]  w-full overflow-hidden py-12 lg:py-20"
-      >
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
 
-        
-        {/* No overlay - full background visibility */}
-        
-                       <div className="w-full px-24 relative z-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Side - Image */}
-            <div ref={imageRef} className="flex justify-center lg:justify-start order-2 lg:order-1">
-              <div className="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-                <div className="transform-gpu transition-all duration-700 ease-out hover:rotate-x-12 hover:rotate-y-12 hover:scale-105 hover:translate-z-16 cursor-pointer" 
-                     style={{
-                       perspective: '1000px',
-                       transformStyle: 'preserve-3d'
-                     }}
-                     onMouseEnter={(e) => {
-                       const rect = e.currentTarget.getBoundingClientRect();
-                       const x = e.clientX - rect.left;
-                       const y = e.clientY - rect.top;
-                       const centerX = rect.width / 2;
-                       const centerY = rect.height / 2;
-                       const rotateX = (y - centerY) / 10;
-                       const rotateY = (centerX - x) / 10;
-                       e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05) translateZ(20px)`;
-                     }}
-                     onMouseMove={(e) => {
-                       const rect = e.currentTarget.getBoundingClientRect();
-                       const x = e.clientX - rect.left;
-                       const y = e.clientY - rect.top;
-                       const centerX = rect.width / 2;
-                       const centerY = rect.height / 2;
-                       const rotateX = (y - centerY) / 10;
-                       const rotateY = (centerX - x) / 10;
-                       e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05) translateZ(20px)`;
-                     }}
-                     onMouseLeave={(e) => {
-                       e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0px)';
-                     }}>
-                  <img
-                    src="/images/ecommerce14.webp"
-                    alt="Technology Working for You"
-                    className="w-full h-auto object-contain transition-all duration-700 ease-out"
-                    loading="lazy"
-                    style={{ backfaceVisibility: 'hidden' }}
-                  />
-                </div>
-              </div>
-            </div>
+      if (isDesktop) {
+        // Complex animations for desktop
+        gsap.set(badgeRef.current, { opacity: 0, y: 30 })
+        gsap.set(titleRef.current, { opacity: 0, x: 100 }) // From right
+        gsap.set(descRefsArray.current, { opacity: 0, y: 80 })   // From bottom
+        gsap.set(imageRef.current, { opacity: 0, y: 30 })  // Normal fade
 
-            {/* Right Side - Text Content */}
-            <div className="flex flex-col justify-center text-center lg:text-left order-1 lg:order-2">
-              {/* Badge */}
-              <div ref={badgeRef} className="flex justify-center lg:justify-start mb-6 lg:mb-8">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF]">
-                  <Image src="/images/customer1.png" alt="Digital Innovation" width={16} height={16} className="w-4 h-4 object-contain" />
-                  <span className="text-[#00B9FF] text-sm font-medium">
-                    Why Choose Webnox
-                  </span>
-                </div>
-              </div>
-
-              <h2 ref={titleRef} className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-sans font-semibold text-gray-900 mb-8 lg:mb-10 leading-tight whitespace-nowrap lg:whitespace-normal w-full lg:w-auto">
-                Why Brands Choose Webnox as Their E-Commerce Development Partner
-              </h2>
-              
-              {/* Feature Points */}
-              <div className="space-y-4 lg:space-y-6">
-                <p
-                  ref={(el) => (descRefsArray.current[0] = el)}
-                  className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed flex items-center justify-center lg:justify-start"
-                >
-                  <span className="w-2 h-2 bg-[#00B9FF] rounded-full mr-3 flex-shrink-0"></span>
-                  Certified developers & UX specialists
-                </p>
-                <p
-                  ref={(el) => (descRefsArray.current[1] = el)}
-                  className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed flex items-center justify-center lg:justify-start"
-                >
-                  <span className="w-2 h-2 bg-[#00B9FF] rounded-full mr-3 flex-shrink-0"></span>
-                  AI-driven automation and analytics
-                </p>
-                <p
-                  ref={(el) => (descRefsArray.current[2] = el)}
-                  className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed flex items-center justify-center lg:justify-start"
-                >
-                  <span className="w-2 h-2 bg-[#00B9FF] rounded-full mr-3 flex-shrink-0"></span>
-                  10+ years building e-commerce across 12+ countries
-                </p>
-                <p
-                  ref={(el) => (descRefsArray.current[3] = el)}
-                  className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed flex items-center justify-center lg:justify-start"
-                >
-                  <span className="w-2 h-2 bg-[#00B9FF] rounded-full mr-3 flex-shrink-0"></span>
-                  Strong portfolio in Retail, Food, Fashion, SaaS, and Wholesale
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-
-  const MarketingStackSection = () => {
-    const sectionRef = useRef(null)
-    const titleRef = useRef(null)
-    const cardsRef = useRef([])
-    const cardBackgroundsRef = useRef([])
-  
-    useEffect(() => {
-      const ctx = gsap.context(() => {
-        // Filter valid cards
-        const validCards = cardsRef.current.filter(card => card !== null)
-        const validBackgrounds = cardBackgroundsRef.current.filter(bg => bg !== null)
-        
-        gsap.set(titleRef.current, { opacity: 0, y: 30 })
-        gsap.set(validCards, { opacity: 0, y: 50, scale: 0.9 })
-        
-        // Set initial state for card backgrounds
-        gsap.set(validBackgrounds, { scaleX: 0, transformOrigin: "left center" })
-        
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
+            start: "top 60%",
           }
         })
-        
-        tl
-          .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-          .to(validCards, { 
-            opacity: 1, 
-            y: 0, 
-            scale: 1,
-            duration: 0.6, 
-            stagger: 0.1, 
-            ease: "power2.out" 
-          }, "-=0.4")
-  
-        // Add hover animations for each card
-        validCards.forEach((card, index) => {
-          const background = validBackgrounds[index]
-          if (background) {
-            card.addEventListener('mouseenter', () => {
-              gsap.to(background, { 
-                scaleX: 1, 
-                duration: 0.4, 
-                ease: "power2.out" 
-              })
-            })
-            
-            card.addEventListener('mouseleave', () => {
-              gsap.to(background, { 
-                scaleX: 0, 
-                duration: 0.3, 
-                ease: "power2.in" 
-              })
-            })
-          }
-        })
-      }, sectionRef)
-      return () => ctx.revert()
-    }, [])
-  
-    const marketingStackItems = [
-      { text: "B2C & B2B Portals", image: "/images/ecommerce15.png" },
-      { text: "Multi-vendor Marketplace", image: "/images/ecommerce16.png" }, 
-      { text: "Subscription Commerce", image: "/images/ecommerce17.png" },
-      { text: "International Stores", image: "/images/ecommerce18.png" },
-      { text: "Wholesale Portals", image: "/images/ecommerce19.png" },
-      { text: "Product Configurators", image: "/images/ecommerce20.png" },
-      { text: "Mobile Commerce Apps", image: "/images/ecommerce21.png" },
-      { text: "Progressive Web Apps", image: "/images/ecommerce22.png" },
-      { text: "Inventory Management Systems", image: "/images/ecommerce15.png" }
-    ]
-  
-    return (
-      <section 
-        ref={sectionRef} 
-        className="py-16 px-4 font-sans"
-      
-      >
-        <div className="max-w-6xl mx-auto">
-          {/* Title */}
-          <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-4 leading-tight">
-          We Build for Every E-Commerce Model
-          </h2>
 
-          <p className="text-gray-600 text-lg md:text-xl text-center max-w-2xl mx-auto mb-16">From simple stores to complex marketplaces</p>
-          
-          {/* Marketing Stack Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {marketingStackItems.map((item, index) => (
-              <div 
-                key={index}
-                ref={el => cardsRef.current[index] = el}
-                className="relative rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden group"
+        tl.to(imageRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(badgeRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(titleRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.3") // Slide from right
+          .to(descRefsArray.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", stagger: 0.1 }, "-=0.4")  // Slide from bottom with stagger
+      } else {
+        // Simple fade animations for mobile
+        gsap.set(badgeRef.current, { opacity: 0, y: 20 })
+        gsap.set(titleRef.current, { opacity: 0, x: 50 })  // From right (less distance)
+        gsap.set(descRefsArray.current, { opacity: 0, y: 40 })   // From bottom (less distance)
+        gsap.set(imageRef.current, { opacity: 0, y: 20 })  // Normal fade
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+          }
+        })
+
+        tl.to(imageRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+          .to(badgeRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.2")
+          .to(titleRef.current, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }, "-=0.2") // Slide from right
+          .to(descRefsArray.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.08 }, "-=0.3")  // Slide from bottom with stagger
+      }
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative min-h-[600px] md:min-h-[700px]  w-full overflow-hidden py-12 lg:py-20"
+    >
+
+
+      {/* No overlay - full background visibility */}
+
+      <div className="w-full px-24 relative z-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Side - Image */}
+          <div ref={imageRef} className="flex justify-center lg:justify-start order-2 lg:order-1">
+            <div className="w-full max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+              <div className="transform-gpu transition-all duration-700 ease-out hover:rotate-x-12 hover:rotate-y-12 hover:scale-105 hover:translate-z-16 cursor-pointer"
                 style={{
-                  background: "linear-gradient(90deg, #00B9FF 0%, rgba(0, 185, 255, 0.6) 20%, rgba(0, 185, 255, 0.2) 35%, rgba(255, 255, 255, 0.9) 60%, #ffffff 100%)"
+                  perspective: '1000px',
+                  transformStyle: 'preserve-3d'
                 }}
-              >
-                {/* Animated full blue background for hover */}
-                <div 
-                  ref={el => cardBackgroundsRef.current[index] = el}
-                  className="absolute inset-0 bg-[#00B9FF] rounded-2xl"
-                  style={{ scaleX: 0, transformOrigin: "left center" }}
+                onMouseEnter={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05) translateZ(20px)`;
+                }}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+                  const rotateX = (y - centerY) / 10;
+                  const rotateY = (centerX - x) / 10;
+                  e.currentTarget.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05) translateZ(20px)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0px)';
+                }}>
+                <img
+                  src="/images/ecommerce14.webp"
+                  alt="Technology Working for You"
+                  className="w-full h-auto object-contain transition-all duration-700 ease-out"
+                  loading="lazy"
+                  style={{ backfaceVisibility: 'hidden' }}
                 />
-                
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center space-y-4">
-                  <img 
-                    src={item.image} 
-                    alt={item.text}
-                    className="w-12 h-12 object-contain group-hover:brightness-0 group-hover:invert transition-all duration-300"
-                  />
-                  <h3 className="text-lg font-semibold leading-tight text-gray-800 group-hover:text-white transition-colors duration-300">
-                    {item.text}
-                  </h3>
-                </div>
               </div>
-            ))}
+            </div>
+          </div>
+
+          {/* Right Side - Text Content */}
+          <div className="flex flex-col justify-center text-center lg:text-left order-1 lg:order-2">
+            {/* Badge */}
+            <div ref={badgeRef} className="flex justify-center lg:justify-start mb-6 lg:mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF]">
+                <Image src="/images/customer1.png" alt="Digital Innovation" width={16} height={16} className="w-4 h-4 object-contain" />
+                <span className="text-[#00B9FF] text-sm font-medium">
+                  Why Choose Webnox
+                </span>
+              </div>
+            </div>
+
+            <h2 ref={titleRef} className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-sans font-semibold text-gray-900 mb-8 lg:mb-10 leading-tight whitespace-nowrap lg:whitespace-normal w-full lg:w-auto">
+              Why Brands Choose Webnox as Their E-Commerce Development Partner
+            </h2>
+
+            {/* Feature Points */}
+            <div className="space-y-4 lg:space-y-6">
+              <p
+                ref={(el) => (descRefsArray.current[0] = el)}
+                className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed flex items-center justify-center lg:justify-start"
+              >
+                <span className="w-2 h-2 bg-[#00B9FF] rounded-full mr-3 flex-shrink-0"></span>
+                Certified developers & UX specialists
+              </p>
+              <p
+                ref={(el) => (descRefsArray.current[1] = el)}
+                className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed flex items-center justify-center lg:justify-start"
+              >
+                <span className="w-2 h-2 bg-[#00B9FF] rounded-full mr-3 flex-shrink-0"></span>
+                AI-driven automation and analytics
+              </p>
+              <p
+                ref={(el) => (descRefsArray.current[2] = el)}
+                className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed flex items-center justify-center lg:justify-start"
+              >
+                <span className="w-2 h-2 bg-[#00B9FF] rounded-full mr-3 flex-shrink-0"></span>
+                10+ years building e-commerce across 12+ countries
+              </p>
+              <p
+                ref={(el) => (descRefsArray.current[3] = el)}
+                className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed flex items-center justify-center lg:justify-start"
+              >
+                <span className="w-2 h-2 bg-[#00B9FF] rounded-full mr-3 flex-shrink-0"></span>
+                Strong portfolio in Retail, Food, Fashion, SaaS, and Wholesale
+              </p>
+            </div>
           </div>
         </div>
-      </section>
-    )
-  }
+      </div>
+    </section>
+  )
+}
+
+
+const MarketingStackSection = () => {
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const cardsRef = useRef([])
+  const cardBackgroundsRef = useRef([])
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Filter valid cards
+      const validCards = cardsRef.current.filter(card => card !== null)
+      const validBackgrounds = cardBackgroundsRef.current.filter(bg => bg !== null)
+
+      gsap.set(titleRef.current, { opacity: 0, y: 30 })
+      gsap.set(validCards, { opacity: 0, y: 50, scale: 0.9 })
+
+      // Set initial state for card backgrounds
+      gsap.set(validBackgrounds, { scaleX: 0, transformOrigin: "left center" })
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        }
+      })
+
+      tl
+        .to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+        .to(validCards, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.4")
+
+      // Add hover animations for each card
+      validCards.forEach((card, index) => {
+        const background = validBackgrounds[index]
+        if (background) {
+          card.addEventListener('mouseenter', () => {
+            gsap.to(background, {
+              scaleX: 1,
+              duration: 0.4,
+              ease: "power2.out"
+            })
+          })
+
+          card.addEventListener('mouseleave', () => {
+            gsap.to(background, {
+              scaleX: 0,
+              duration: 0.3,
+              ease: "power2.in"
+            })
+          })
+        }
+      })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+  const marketingStackItems = [
+    { text: "B2C & B2B Portals", image: "/images/ecommerce15.png" },
+    { text: "Multi-vendor Marketplace", image: "/images/ecommerce16.png" },
+    { text: "Subscription Commerce", image: "/images/ecommerce17.png" },
+    { text: "International Stores", image: "/images/ecommerce18.png" },
+    { text: "Wholesale Portals", image: "/images/ecommerce19.png" },
+    { text: "Product Configurators", image: "/images/ecommerce20.png" },
+    { text: "Mobile Commerce Apps", image: "/images/ecommerce21.png" },
+    { text: "Progressive Web Apps", image: "/images/ecommerce22.png" },
+    { text: "Inventory Management Systems", image: "/images/ecommerce15.png" }
+  ]
+
+  return (
+    <section
+      ref={sectionRef}
+      className="py-16 px-4 font-sans"
+
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Title */}
+        <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 text-center mb-4 leading-tight">
+          We Build for Every E-Commerce Model
+        </h2>
+
+        <p className="text-gray-600 text-lg md:text-xl text-center max-w-2xl mx-auto mb-16">From simple stores to complex marketplaces</p>
+
+        {/* Marketing Stack Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {marketingStackItems.map((item, index) => (
+            <div
+              key={index}
+              ref={el => cardsRef.current[index] = el}
+              className="relative rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden group"
+              style={{
+                background: "linear-gradient(90deg, #00B9FF 0%, rgba(0, 185, 255, 0.6) 20%, rgba(0, 185, 255, 0.2) 35%, rgba(255, 255, 255, 0.9) 60%, #ffffff 100%)"
+              }}
+            >
+              {/* Animated full blue background for hover */}
+              <div
+                ref={el => cardBackgroundsRef.current[index] = el}
+                className="absolute inset-0 bg-[#00B9FF] rounded-2xl"
+                style={{ scaleX: 0, transformOrigin: "left center" }}
+              />
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col items-center space-y-4">
+                <img
+                  src={item.image}
+                  alt={item.text}
+                  className="w-12 h-12 object-contain group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                />
+                <h3 className="text-lg font-semibold leading-tight text-gray-800 group-hover:text-white transition-colors duration-300">
+                  {item.text}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 
 
-  
+
 
 // Specialized E-Commerce Solutions Section
 const SpecializedSolutionsSection = () => {
@@ -1004,7 +1002,7 @@ const SpecializedSolutionsSection = () => {
     const ctx = gsap.context(() => {
       // Initial animations for title and subtitle
       gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
-      
+
       gsap.to([titleRef.current, subtitleRef.current], {
         opacity: 1,
         y: 0,
@@ -1020,12 +1018,12 @@ const SpecializedSolutionsSection = () => {
       // Pin the image container section and create scroll-through animation
       const imageContainer = imageContainerRef.current
       const scrollContainer = scrollContainerRef.current
-      
+
       if (imageContainer && scrollContainer) {
         // Wait for content to load and calculate proper dimensions
         const setupPinAnimation = () => {
           const totalScrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight
-          
+
           ScrollTrigger.create({
             id: 'pinnedSection',
             trigger: imageContainer,
@@ -1046,13 +1044,13 @@ const SpecializedSolutionsSection = () => {
 
         // Setup after a short delay to ensure content is rendered
         setTimeout(setupPinAnimation, 100)
-        
+
         // Also setup on window resize
         const handleResize = () => {
           ScrollTrigger.refresh()
         }
         window.addEventListener('resize', handleResize)
-        
+
         return () => {
           window.removeEventListener('resize', handleResize)
         }
@@ -1065,19 +1063,19 @@ const SpecializedSolutionsSection = () => {
   useEffect(() => {
     const imageContainer = imageContainerRef.current
     const scrollContainer = scrollContainerRef.current
-    
+
     if (!imageContainer || !scrollContainer) return
 
     const handleWheel = (e) => {
       // Check if the section is currently pinned by ScrollTrigger
       const scrollTriggerInstance = ScrollTrigger.getById('pinnedSection')
-      
+
       // Only handle wheel events if section is not pinned (fallback behavior)
       if (!scrollTriggerInstance || !scrollTriggerInstance.isActive) {
         e.preventDefault()
-        
+
         const scrollIncrement = e.deltaY * 0.8
-        
+
         scrollContainer.scrollBy({
           top: scrollIncrement,
           behavior: 'auto'
@@ -1086,7 +1084,7 @@ const SpecializedSolutionsSection = () => {
     }
 
     imageContainer.addEventListener('wheel', handleWheel, { passive: false })
-    
+
     return () => {
       imageContainer.removeEventListener('wheel', handleWheel)
     }
@@ -1097,12 +1095,12 @@ const SpecializedSolutionsSection = () => {
       title: "Fashion & Apparel",
       description: "Size guides, virtual try-ons, seasonal collections",
       image: "/images/ecommerce26.webp",
-     
+
     },
     {
       title: "Electronics & Gadgets",
       description: "Product comparisons, tech specs, warranty management",
-      image: "/images/ecommerce27.webp", 
+      image: "/images/ecommerce27.webp",
     },
     {
       title: "Skincare & Wellness",
@@ -1112,7 +1110,7 @@ const SpecializedSolutionsSection = () => {
     {
       title: "Food & Grocery",
       description: "Fresh delivery, meal planning, subscription boxes",
-      image: "/images/ecommerce24.webp",      
+      image: "/images/ecommerce24.webp",
     },
     {
       title: "Furniture & Interiors",
@@ -1132,10 +1130,10 @@ const SpecializedSolutionsSection = () => {
     {
       title: "Jewelry & Luxury",
       description: "Custom designs, authentication, premium experience",
-    image: "/images/ecommerce29.webp",
+      image: "/images/ecommerce29.webp",
     },
 
-    
+
 
   ]
 
@@ -1158,30 +1156,29 @@ const SpecializedSolutionsSection = () => {
         <div ref={imageContainerRef} className="relative w-full max-w-6xl mx-auto mb-16 cursor-pointer overflow-hidden">
           {/* Background Image */}
           <div className="relative ">
-            <img 
-              src="/images/ecommerce23.webp" 
-              alt="E-commerce Solutions" 
+            <img
+              src="/images/ecommerce23.webp"
+              alt="E-commerce Solutions"
               className="w-full h-auto object-contain"
             />
-            
+
             {/* Overlay with Parallax Scrollable Cards */}
             <div className="absolute inset-0 flex items-center justify-center p-8">
-              <div 
+              <div
                 ref={scrollContainerRef}
                 className="w-full h-full overflow-y-auto p-6 scroll-container"
-                style={{ 
-                  scrollbarWidth: 'none', 
+                style={{
+                  scrollbarWidth: 'none',
                   msOverflowStyle: 'none',
                   scrollBehavior: 'auto' // Ensure smooth internal scrolling
                 }}
               >
                 <div ref={cardRef} className="space-y-0">
                   {industries.map((industry, index) => (
-                    <div 
+                    <div
                       key={index}
-                      className={`group flex flex-col lg:flex-row items-center gap-8  ${
-                        index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                      }   min-h-[500px] flex-shrink-0 mb-8`}
+                      className={`group flex flex-col lg:flex-row items-center gap-8  ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                        }   min-h-[500px] flex-shrink-0 mb-8`}
                     >
                       {/* Image Side */}
                       <div className="w-full lg:w-1/2">
@@ -1229,14 +1226,14 @@ const EcommercePage = () => {
   return (
     <main className="@/ecommerce">
       <Scroll3DSections>
-      <HeroSection />
-      <FrameworkSection />
-      <TechnologiesSection />
-      <TechnologyWorkSection />
-      <MarketingStackSection />
+        <HeroSection />
+        <FrameworkSection />
+        <TechnologiesSection />
+        <TechnologyWorkSection />
+        <MarketingStackSection />
       </Scroll3DSections>
       <SpecializedSolutionsSection />
-     
+
       <FAQSection />
       <Footer />
     </main>

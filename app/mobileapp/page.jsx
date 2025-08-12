@@ -201,33 +201,33 @@ const TechnologySection = () => {
       {
         title: "15+ Years Experience",
         desc: "Hands-on experience in iOS, Android & Cross-platform development",
-        image: "/images/fi_1.webp"
+        image: "/images/mob1.png"
       },
       {
         title: "Battle-Tested Tech",
         desc: "Flutter, Swift, Kotlin, Java and Node.js expertise",
-        image: "/images/fi_2.webp"
+        image: "/images/custom7.png"
       },
       {
         title: "Product Thinking",
         desc: "Driven by product thinking not just programming",
-        image: "/images/fi_3.webp"
+        image: "/images/mob2.png"
       },
       {
         title: "Secure Architecture",
         desc: "Built on OAuth 2.0, JWT and Cloud-based Firewalls",
-        image: "/images/fi_4.webp"
+        image: "/images/mob3.png"
       },
       {
         title: "ASO Optimized",
         desc: "Optimized for App Store Optimization and long-term scalability",
-        image: "/images/fi_5.webp"
+        image: "/images/ecommerce5.png"
       },
       {
         title: "Future-Ready",
         desc: "Built for scale, performance, and emerging technologies",
-        image: "/images/fi_7.webp"
-      }
+          image: "/images/mob4.png"
+        }
     ]
   
     useEffect(() => {
@@ -328,9 +328,9 @@ const TechnologySection = () => {
                 className="bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:border-gray-300"
               >
                 <div className="w-12 h-12 mb-6 flex items-center justify-center  rounded-2xl">
-                  <Image src={tech.image} alt={tech.title} width={64} height={64} className="w-full h-full object-contain" />
+                  <Image src={tech.image} alt={tech.title} width={40} height={40} className="w-[80%] h-[80%] object-contain" />
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-[#00B9FF] mb-4 leading-tight">{tech.title}</h3>
+                <h3 className="text-xl lg:text-2xl font-bold text-black mb-4 leading-tight">{tech.title}</h3>
                 <p className="text-gray-800 leading-relaxed text-sm lg:text-md font-semibold">{tech.desc}</p>
               </div>
             ))}

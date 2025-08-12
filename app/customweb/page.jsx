@@ -552,7 +552,7 @@ const UseCasesSection = () => {
      title: "Understand Your Business",
      desc: "We take time to learn your brand, audience, and goals.",
     
-     img: "/images/custom10.webp"
+     img: "/images/custom12.webp"
    },
    {
      step: "02",
@@ -564,7 +564,7 @@ const UseCasesSection = () => {
     step: "03",
     title: "Launch & Optimize",
     desc: "We launch your website, set up analytics, and fine-tune for maximum impact.",
-    img: "/images/custom12.webp"
+    img: "/images/custom10.webp"
   }
  ]
 

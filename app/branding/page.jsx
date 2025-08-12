@@ -225,8 +225,7 @@ const BrandingFeatures = () => (
           We Understand. And We’ve<br />
           Helped Dozens of <span className="text-[#00b9ff]">Global Brands Fix This.</span>
         </h2>
-        <p className="text-[#595959] text-lg mb-8 font-sans font-normal max-w-2xl">
-          Webnox Digital is a branding experts who partner with you to craft your story, voice, visuals, and identity with purpose. We’ve worked with businesses across the world, helping them stand out in competitive markets, not with trends, but with timeless, meaningful branding.
+        <p className="text-[#595959] text-lg mb-8 font-sans font-normal max-w-2xl">Webnox Digital is a team of branding experts who partner with you to craft your story, voice, visuals, and identity with purpose. We’ve worked with businesses across the world, helping them stand out in competitive markets — not with trends, but with timeless, meaningful branding.
         </p>
         <ul className="space-y-4 font-sans font-normal">
           <li className="flex items-start gap-3 text-[#222] text-base md:text-lg">
