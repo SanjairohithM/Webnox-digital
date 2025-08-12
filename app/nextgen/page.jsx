@@ -119,9 +119,7 @@ const HeroSection = () => {
           ref={descRef}
           className="text-gray-700 text-lg md:text-xl lg:text-2xl font-sans leading-relaxed text-center mx-auto mb-8 py-4"
         >
-          Your Next-Gen Marketing Partner Starts Here.
-You need marketing that adapts faster, connects deeper, and scales smarter.
-At Webnox Digital, we blend human insight with data intelligence, using the latest tools in AI, automation, and consumer behavior to take your brand from seen to sought-after.
+         Your Next-Gen Marketing Partner Starts Here. You need marketing that adapts faster, connects more deeply, and scales more intelligently. At Webnox Digital, we blend human insight with data intelligence, using the latest tools in AI, automation, and consumer behavior to take your brand from being seen to being sought-after.
         </p>
         <button
           ref={buttonRef}

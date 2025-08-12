@@ -466,7 +466,7 @@ const FrameworkSection = () => {
           ref={titleRef}
           className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6 text-gray-900"
         >
-          Top 3 Framework to Take You from{" "}
+          Top 3 Frameworks to Take You from{" "}
           <br className="hidden md:block" />
           <span className="text-[#00B9FF]">Idea to Revenue</span>
         </h2>

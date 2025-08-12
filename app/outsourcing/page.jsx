@@ -540,32 +540,32 @@ const ApproachSection = () => {
   const approaches = [
     { 
       title: "Agility", 
-      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      desc: " Rapid team deployment and flexible engagement models",
       image: "/images/fi_2.webp"
     },
     { 
       title: "Transparency", 
-      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      desc: " Regular reporting, project tracking, and clear communication",
       image: "/images/fi_1.webp"
     },
     { 
       title: "Cost Efficiency", 
-      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      desc: "50–70% savings on operational and development costs",
       image: "/images/fi_4.webp"
     },
     { 
       title: "Expertise Access", 
-      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      desc: "Hire experienced developers, designers, marketers, and QA experts",
       image: "/images/fi_3.webp"
     },
     { 
       title: "Data Security", 
-      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      desc: " Strict compliance with international data protection standards (GDPR-ready)",
       image: "/images/fi_5.webp"
     },
     { 
       title: "Quality Assurance", 
-      desc: "At Webnox, we redefine outsourcing by blending innovation, reliability, and performance. Our tailored services are designed to help businesses scale faster.",
+      desc: " Rigorous testing, bug fixes, and continuous improvement",
       image: "/images/fi_2.webp"
     }
   ]

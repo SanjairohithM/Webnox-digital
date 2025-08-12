@@ -268,8 +268,7 @@ export default function OurApproachSection() {
             </h2>
 
             <p ref={descriptionRef} className="text-xl text-gray-600 leading-relaxed">
-              We listen. Understand your workflow. Learn how your team operates. And then build automation. It's not
-              about replacing people, it's about empowering them.
+            We listen, understand your workflow, learn how your team operates and then build automation. It’s not about replacing people -it’s about empowering them.
             </p>
 
             <div ref={buttonRef}>

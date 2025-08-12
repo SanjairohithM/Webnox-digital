@@ -510,9 +510,9 @@ const BrandingPage = () => (
 
     <BrandingFeatures />
     <BrandingPlanSteps />
-
-    <IndustriesSection />
     </Scroll3DSections>
+    <IndustriesSection />
+   
     <TickerSection />
     <FAQSection />
     <Footer />

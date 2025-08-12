@@ -63,7 +63,7 @@ const HeroSection = () => {
           className="text-[#333] text-lg md:text-xl max-w-3xl font-sans leading-relaxed text-center mx-auto tracking-wide mt-4"
         >
           We help you uncover what your business is really saying and what it needs to do next.<br/>
-          At Webnox Digital, we help you turn scattered information into sharp insight. We help you find trends, identify patterns, predict outcomes, and make decisions backed by solid numbers.
+          At Webnox Digital, we help you turn scattered information into sharp insights. We help you find trends, identify patterns, predict outcomes, and make decisions backed by solid numbers.
         </p>
       </div>
     </section>
