@@ -223,7 +223,7 @@ export default function WebnoxDigitalSection() {
           className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto "
         >
           Once upon a time, businesses were built on long hours, manual processes, and endless spreadsheets. But the
-          world changed. Fast.At Webnox Digital, we help businesses like yours break free from busywork. Whether it's your marketing,
+          world changed Fast.At Webnox Digital, we help businesses like yours break free from busywork. Whether it's your marketing,
           customer service, operations, or internal tasks.
         </p>
         <br />
