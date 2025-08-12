@@ -822,7 +822,7 @@ const OutdatedToolsSection = () => {
       <div className="px-12">
         <div className="relative flex min-h-[400px] lg:min-h-[450px]">
           {/* Background Image - Full Width */}
-          <div ref={imageRef} className="absolute inset-0 flex -right-55 bottom-3">
+          <div ref={imageRef} className="absolute inset-0 flex -right-55 bottom-3 hidden lg:block">
             <img
               src="/images/digital5.webp"
               alt="Professional Business Consultant"
@@ -1124,9 +1124,10 @@ const DigitalTransformationPage = () => {
       <HeroSection />
       <TechnologyWorkSection />
       <NextGenMarketingSection />
+      </Scroll3DSections>
       <OutdatedToolsSection />
       <WhyCustomerExperienceMattersSection />
-      </Scroll3DSections>
+      
       {/* <FAQSection /> */}
       <Footer />
     </main>
