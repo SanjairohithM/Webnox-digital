@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { MoveUpRight } from 'lucide-react'
+import { MoveUpRight, User, Mail, Phone, MessageSquare, Loader2, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react'
 import Robot from "@/Three/Models/Robot"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -284,18 +284,8 @@ const ContactPage = () => {
             <section ref={contactInfoRef} className="py-20 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Address */}
-                        {/* <div className="bg-gray-100 rounded-xl p-8 shadow-sm ">
-                            <div className="flex items-center justify-between mb-6">
-                                <h3 className="text-2xl font-semibold text-gray-900">Address</h3>
-                                <div className="w-12 h-12 bg-[#00b9ff] rounded-full flex items-center justify-center">
-                                    <span className="text-black text-xl"><MoveUpRight /></span>
-                                </div>
-                            </div>
-                            <p className="text-gray-600 leading-relaxed">
-                                Webnox Technologies No 721/2, Venky complex, Second floor, cross cut road, Seth Narang Das Layout, Coimbatore – 641 012.
-                            </p>
-                        </div> */}
+                        
+                      
 
                         {/* Email */}
                         <div className="bg-gray-100 rounded-xl p-6 md:p-8 shadow-sm">
@@ -330,11 +320,11 @@ const ContactPage = () => {
             </section>
 
             {/* Contact Form */}
-            <section ref={formRef} className="py-5">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center">
+            <section ref={formRef} className="py-5 bg-gradient-to-t from-[#00b9ff] via-[#bfefff] to-white">
+                <div className=" px-4  ">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8  items-center">
                         {/* Left: Robot Model (spans two columns on desktop, full width on mobile) */}
-                        <div className="lg:col-span-2 flex items-center justify-center w-full h-[400px] md:h-[500px] lg:h-[700px] lg:w-[700px] relative">
+                        <div className="lg:col-span-2 flex items-center justify-center w-full h-[400px] md:h-[500px] lg:h-[700px]  relative ">
                             {/* Robot Container with ref for animations */}
                             <div 
                                 ref={robotRef} 
@@ -344,72 +334,98 @@ const ContactPage = () => {
                                 <Robot />
                             </div>
                         </div>
-                        {/* Right: Contact Form (spans one column) */}
-                        <div className="max-w-md w-full mx-auto">
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        className="w-full px-3 md:px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm md:text-base"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="w-full px-3 md:px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm md:text-base"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <input
-                                        type="tel"
-                                        name="contactNumber"
-                                        placeholder="Contact Number"
-                                        value={formData.contactNumber}
-                                        onChange={handleChange}
-                                        className="w-full px-3 md:px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm md:text-base"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <textarea
-                                        name="enquiry"
-                                        placeholder="Message"
-                                        value={formData.enquiry}
-                                        onChange={handleChange}
-                                        rows={6}
-                                        className="w-full px-3 md:px-4 py-3 md:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none text-sm md:text-base"
-                                        required
-                                    />
-                                </div>
-                                <button
-                                    type="submit"
-                                    className="w-full bg-[#00b9ff] text-white px-4 md:px-6 py-3 md:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-blue-600 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
-                                    disabled={isSubmitting}
-                                >
-                                    {isSubmitting ? 'Sending...' : 'Submit'}
-                                </button>
-                                {submitStatus && (
-                                    <div className={`mt-4 p-4 text-center text-sm rounded-lg ${
-                                        submitStatus.includes('successfully') 
-                                            ? 'bg-green-100 text-green-800 border border-green-200' 
-                                            : 'bg-red-100 text-red-800 border border-red-200'
-                                    }`}>
-                                        {submitStatus}
-                                    </div>
-                                )}
-                            </form>
-                        </div>
+					{/* Right: Contact Form (spans one column) */}
+					<div className="max-w-md w-full mx-auto">
+						<div className="relative overflow-hidden rounded-2xl p-8 md:p-10 shadow-2xl bg-gradient-to-t from-[#00b9ff]/40 via-white/40 to-white/60 backdrop-blur-xl border border-white/40">
+							<div className="pointer-events-none absolute -top-16 -right-10 h-48 w-48 rounded-full bg-white/25 blur-3xl" />
+							<div className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
+							<div className="pointer-events-none absolute -top-20 left-1/4 h-24 w-96 rotate-12 bg-white/40 blur-2xl opacity-60" />
+							<div className="relative">
+								<div className="mb-6">
+									<h3 className="text-black text-2xl md:text-3xl font-semibold">Let’s connect</h3>
+									<p className="text-black/80 text-sm md:text-base">Tell us about your project and we’ll reach out.</p>
+								</div>
+								<form onSubmit={handleSubmit} className="space-y-5">
+									<div className="relative">
+										<User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-black/70" />
+										<input
+											type="text"
+											name="name"
+											placeholder="Your name"
+											value={formData.name}
+											onChange={handleChange}
+											className="w-full pl-10 pr-3 md:pr-4 py-3 md:py-4 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base"
+											required
+										/>
+									</div>
+									<div className="relative">
+										<Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-black/70" />
+										<input
+											type="email"
+											name="email"
+											placeholder="Work email"
+											value={formData.email}
+											onChange={handleChange}
+											className="w-full pl-10 pr-3 md:pr-4 py-3 md:py-4 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base"
+											required
+										/>
+									</div>
+									<div className="relative">
+										<Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-black/70" />
+										<input
+											type="tel"
+											name="contactNumber"
+											placeholder="Phone number"
+											value={formData.contactNumber}
+											onChange={handleChange}
+											className="w-full pl-10 pr-3 md:pr-4 py-3 md:py-4 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base"
+											required
+										/>
+									</div>
+									<div className="relative">
+										<MessageSquare className="absolute left-3 top-4 h-5 w-5 text-black/70" />
+										<textarea
+											name="enquiry"
+											placeholder="How can we help?"
+											value={formData.enquiry}
+											onChange={handleChange}
+											rows={6}
+											className="w-full pl-10 pr-3 md:pr-4 py-3 md:py-4 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none resize-none text-sm md:text-base"
+											required
+										/>
+									</div>
+									<button
+										type="submit"
+										className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 md:px-6 py-3 md:py-4 font-semibold text-slate-900 transition-transform [box-shadow:0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-0.5 active:translate-y-0 disabled:bg-white/70 disabled:text-slate-700"
+										disabled={isSubmitting}
+									>
+										{isSubmitting ? (
+											<>
+												<Loader2 className="h-5 w-5 animate-spin" />
+												<span>Sending...</span>
+											</>
+										) : (
+											<>
+												<span>Send message</span>
+												<ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+											</>
+										)}
+									</button>
+									{submitStatus && (
+										<div className={`mt-3 flex items-center gap-2 rounded-lg px-4 py-3 text-sm ${submitStatus.includes('successfully') ? 'bg-emerald-500/10 text-emerald-100 ring-1 ring-emerald-400/30' : 'bg-red-500/10 text-red-100 ring-1 ring-red-400/30'}`}>
+											{submitStatus.includes('successfully') ? (
+												<CheckCircle2 className="h-5 w-5" />
+											) : (
+												<AlertCircle className="h-5 w-5" />
+											)}
+											<span>{submitStatus}</span>
+										</div>
+									)}
+								</form>
+							</div>
+						</div>
                     </div>
+                </div>
                 </div>
             </section>
         </div>
