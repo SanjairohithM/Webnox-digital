@@ -384,37 +384,37 @@ const SecondUseCasesSection = () => {
 
   const useCases = [
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d6.png",
       title: "Three.js",
       description: "Real-time 3D rendering",
   
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d7.png",
       title: "GSAP + ScrollTrigger",
       description: "Smooth transitions and scroll-based animation",
      
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d10.png",
       title: " React Three Fiber",
       description: " React-based 3D component rendering",
      
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d8.png",
       title: "WebGL + WebGPU",
       description: "For pixel-perfect, hardware-accelerated graphics",
      
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d9.png",
       title: " Blender + Cinema4D",
       description: "Custom 3D model creation and animation",
      
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/mobile3.png",
       title: " Next.js",
       description: "Blazing fast frontend frameworks for SEO-friendly delivery",
      
@@ -555,42 +555,42 @@ const ThirdUseCasesSection = () => {
 
   const useCases = [
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d11.png",
       title: "3D Web Design & UI/UX Strategy",
   
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d12.png",
       title: "Custom 3D Modeling & Animation",
      
      
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d13.png",
       title: " Interactive Scroll & Parallax Animation",
      
      
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d14.png",
       title: "Cross-Platform Optimization (Mobile & Desktop)",
      
      
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d15.png",
       title: "WebAR/VR Integration (Optional Add-on)",
      
      
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d16.png",
       title: " Hosting & Performance Optimization",
      
      
     },
     {
-      icon: "/images/3d1.png",
+      icon: "/images/3d17.png",
       title: " Ongoing Maintenance & Feature Enhancements",
      
      
@@ -730,19 +730,19 @@ const CTASection = () => {
           style={{ backfaceVisibility: 'hidden' }}
         >
           {/* Desktop Layout - Keep existing perfect design */}
-          <div className="flex flex-col items-start text-left max-w-4xl w-full mx-auto">
+          <div className="flex flex-col items-center text-center max-w-4xl w-full mx-auto">
             {/* "Start Your Project" button at right top */}
             <div className="flex justify-end">
 
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-4xl  font-bold text-white pt-25 leading-tight text-left ml-4 md:-ml-28 -mt-10">
+            <h2 className="text-3xl md:text-4xl lg:text-4xl  font-bold text-white pt-25 leading-tight text-center mt-10">
             Let Your Brand Speak in 3D
             </h2>
-            <p className="text-lg md:text-xl  text-white/90 mb-12 max-w-3xl leading-relaxed text-left ml-4 md:-ml-28">
+            <p className="text-lg md:text-xl  text-white/90 mb-12 max-w-3xl leading-relaxed text-center">
             Want to build an unforgettable web experience that drives attention and conversions?          </p>
             {/* "Get Started" button left-aligned below */}
-            <div className="flex">
-              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 ">
+            <div className="flex justify-center">
+              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl  ">
                Get a Free 3D Demo Today              </button>
             </div>
           </div>
