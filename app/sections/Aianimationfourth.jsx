@@ -219,7 +219,7 @@ export default function AutomationServicesSection() {
 
 
   return (
-    <section ref={sectionRef} className="py-20 lg:py-32 font-sans">
+    <section ref={sectionRef} className="py-20 lg:py-36 font-sans">
       <div className="max-w-7xl mx-auto px-4">
         {/* Services Grid - Custom Layout */}
         <div className="space-y-12">

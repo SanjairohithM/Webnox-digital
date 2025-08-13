@@ -178,8 +178,8 @@ const WhyWebnoxSection = () => {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4 font-sans">{feature.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed font-sans">{feature.desc}</p>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4 font-sans">{feature.title}</h3>
+              <p className="text-gray-600 text-lg leading-relaxed font-sans">{feature.desc}</p>
             </div>
           ))}
         </div>
@@ -264,10 +264,14 @@ const AutomationComparisonSection = () => {
   const sectionRef = useRef(null)
   const leftRef = useRef(null)
   const rightRef = useRef(null)
+  const itemsLeftRef = useRef([])
+  const itemsRightRef = useRef([])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.set([leftRef.current, rightRef.current], { opacity: 0, y: 40 })
+      const allItems = [...itemsLeftRef.current, ...itemsRightRef.current].filter(Boolean)
+      gsap.set(allItems, { opacity: 0, y: 16 })
       
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -278,7 +282,9 @@ const AutomationComparisonSection = () => {
       
       tl
         .to(leftRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
-        .to(rightRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
+        .to(itemsLeftRef.current.filter(Boolean), { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", stagger: 0.22 }, "-=0.4")
+        .to(rightRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.2")
+        .to(itemsRightRef.current.filter(Boolean), { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", stagger: 0.22 }, "-=0.4")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -296,23 +302,23 @@ const AutomationComparisonSection = () => {
               With Webnox Automation
             </h3>
             <ul className="space-y-4">
-              <li className="flex items-start">
+              <li ref={(el) => (itemsLeftRef.current[0] = el)} className="flex items-start">
                 <span className="text-blue-600 mr-3 text-lg">•</span>
                 <span className="text-blue-800 font-medium">Save 100+ hours/month</span>
               </li>
-              <li className="flex items-start">
+              <li ref={(el) => (itemsLeftRef.current[1] = el)} className="flex items-start">
                 <span className="text-blue-600 mr-3 text-lg">•</span>
                 <span className="text-blue-800 font-medium">Reduce human error by 90%</span>
               </li>
-              <li className="flex items-start">
+              <li ref={(el) => (itemsLeftRef.current[2] = el)} className="flex items-start">
                 <span className="text-blue-600 mr-3 text-lg">•</span>
                 <span className="text-blue-800 font-medium">Cut costs on SaaS subscriptions</span>
               </li>
-              <li className="flex items-start">
+              <li ref={(el) => (itemsLeftRef.current[3] = el)} className="flex items-start">
                 <span className="text-blue-600 mr-3 text-lg">•</span>
                 <span className="text-blue-800 font-medium">Get real-time data & alerts</span>
               </li>
-              <li className="flex items-start">
+              <li ref={(el) => (itemsLeftRef.current[4] = el)} className="flex items-start">
                 <span className="text-blue-600 mr-3 text-lg">•</span>
                 <span className="text-blue-800 font-medium">Focus your team on what matters</span>
               </li>
@@ -328,23 +334,23 @@ const AutomationComparisonSection = () => {
               Without Automation
             </h3>
             <ul className="space-y-4">
-              <li className="flex items-start">
+              <li ref={(el) => (itemsRightRef.current[0] = el)} className="flex items-start">
                 <span className="text-cyan-600 mr-3 text-lg">•</span>
                 <span className="text-cyan-800 font-medium">Repetitive Work Drains Productivity</span>
               </li>
-              <li className="flex items-start">
+              <li ref={(el) => (itemsRightRef.current[1] = el)} className="flex items-start">
                 <span className="text-cyan-600 mr-3 text-lg">•</span>
                 <span className="text-cyan-800 font-medium">Data Scattered Everywhere</span>
               </li>
-              <li className="flex items-start">
+              <li ref={(el) => (itemsRightRef.current[2] = el)} className="flex items-start">
                 <span className="text-cyan-600 mr-3 text-lg">•</span>
                 <span className="text-cyan-800 font-medium">No Alerts, No Action</span>
               </li>
-              <li className="flex items-start">
+              <li ref={(el) => (itemsRightRef.current[3] = el)} className="flex items-start">
                 <span className="text-cyan-600 mr-3 text-lg">•</span>
                 <span className="text-cyan-800 font-medium">Zero Scalability</span>
               </li>
-              <li className="flex items-start">
+              <li ref={(el) => (itemsRightRef.current[4] = el)} className="flex items-start">
                 <span className="text-cyan-600 mr-3 text-lg">•</span>
                 <span className="text-cyan-800 font-medium">More Tools = More Confusion</span>
               </li>

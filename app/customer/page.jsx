@@ -214,7 +214,7 @@ const OurApproachSection = () => {
                 </h2>
 
                 {/* Subtitle */}
-                <p ref={subtitleRef} className="text-gray-600 text-center mb-16 max-w-xl mx-auto">
+                <p ref={subtitleRef} className="text-gray-600 text-center mb-16 max-w-xl mx-auto text-lg font-sans">
                     Three core principles that drive everything we do
                 </p>
 
@@ -326,7 +326,7 @@ const WhyCustomerExperienceMattersSection = () => {
          return (
          <section
              ref={sectionRef}
-             className="relative py-16 lg:py-24 px-4 overflow-hidden"
+             className="relative py-8 px-4 overflow-hidden"
              style={{
                  background: "linear-gradient(135deg, #00B9FF 0%, #0097D9 50%, #007AC3 100%)"
              }}

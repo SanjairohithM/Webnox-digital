@@ -496,8 +496,14 @@ const ShowcaseUseCasesPanel = () => {
       const tl = gsap.timeline({
         scrollTrigger: { trigger: sectionRef.current, start: "top 80%" }
       })
-      tl.to(panelRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-        .to(itemsRef.current.filter(Boolean), { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.08 }, "-=0.2")
+      tl.to(panelRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" })
+        .to(itemsRef.current.filter(Boolean), {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.35
+        }, "-=0.1")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
