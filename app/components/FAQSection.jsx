@@ -25,7 +25,7 @@ const FAQSection = () => {
         {/* Heading */}
         <div className="mb-16">
           <h2 className="text-4xl font-extrabold text-black mb-2">Frequently</h2>
-          <span className="text-4xl font-bold text-sky-500">asked questions</span>
+          <span className="text-4xl font-bold text-sky-500">Asked Questions</span>
         </div>
         {/* Two-column layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">

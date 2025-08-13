@@ -854,7 +854,7 @@ const FAQSection = () => {
         {/* Heading */}
         <div className="mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black mb-2">Frequently</h2>
-          <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sky-500">asked questions</span>
+          <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sky-500">Asked Questions</span>
         </div>
         {/* Responsive layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">

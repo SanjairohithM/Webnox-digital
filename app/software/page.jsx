@@ -326,7 +326,7 @@ const OurApproachSection = () => {
     ]
 
     return (
-        <section ref={sectionRef} className="bg-white py-16 lg:py-24 px-4 font-sans">
+        <section ref={sectionRef} className="bg-white py-16  px-4 font-sans">
             <div className="max-w-7xl mx-auto">
                 
 
@@ -529,10 +529,10 @@ const WhyCustomerExperienceMattersSection = () => {
 const BrandingPlanSteps = () => (
     <section className="bg-white py-20 px-4 md:px-12 lg:px-24 font-sans">
       <div className="flex flex-col items-center w-full">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Here's Your Branding Plan With Webnox Digital</h2>
-        <p className="text-gray-500 text-lg text-center mb-16 max-w-2xl">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Here's Your Software Development Plan With Webnox Digital</h2>
+        {/* <p className="text-gray-500 text-lg text-center mb-16 max-w-2xl">
           It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-        </p>
+        </p> */}
         <div className="relative w-full flex flex-col items-center">
           {/* Steps Row */}
           <div className="w-full flex flex-col md:flex-row items-center justify-between gap-12 md:gap-0">
@@ -601,7 +601,7 @@ const FAQSection = () => {
           {/* Heading */}
           <div className="mb-8 sm:mb-12 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black mb-2">Frequently</h2>
-            <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sky-500">asked questions</span>
+            <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-sky-500">Asked Questions</span>
           </div>
           {/* Responsive layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
@@ -647,6 +647,138 @@ const FAQSection = () => {
       </section>
     );
   };
+
+  // Call to Action Section Component
+const CTASection = () => {
+  const sectionRef = useRef(null)
+  const contentDesktopRef = useRef(null)
+  const contentMobileRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const targets = [contentDesktopRef.current, contentMobileRef.current].filter(Boolean)
+      if (targets.length === 0) return
+
+      gsap.set(targets, { opacity: 0, y: 50 })
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        }
+      })
+
+      tl.to(targets, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.05 })
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="relative w-full min-h-[500px] overflow-hidden font-sans">
+      {/* 3D Container for Desktop - wraps everything */}
+      <div className="hidden lg:block transform-gpu transition-all duration-700 ease-out cursor-pointer w-full h-full"
+        style={{
+          perspective: '1200px',
+          transformStyle: 'preserve-3d'
+        }}
+        onMouseEnter={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 25;
+          const rotateY = (centerX - x) / 25;
+          e.currentTarget.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02) translateZ(15px)`;
+        }}
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 25;
+          const rotateY = (centerX - x) / 25;
+          e.currentTarget.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02) translateZ(15px)`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0px)';
+        }}>
+
+        {/* Background Image - Desktop */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/Clientstech.png"
+            alt="CTA Background"
+            fill
+            className="object-contain w-full h-full transition-all duration-700 ease-out"
+            priority
+            style={{ backfaceVisibility: 'hidden' }}
+          />
+        </div>
+
+        {/* Content - Desktop */}
+        <div
+          ref={contentDesktopRef}
+          className="relative z-10 flex flex-col justify-center min-h-[500px] px-4"
+          style={{ backfaceVisibility: 'hidden' }}
+        >
+          {/* Desktop Layout - Keep existing perfect design */}
+          <div className="flex flex-col items-center text-center max-w-4xl w-full mx-auto">
+            {/* "Start Your Project" button at right top */}
+            <div className="flex justify-end">
+
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-4xl  font-bold text-white pt-25 leading-tight text-center mt-10">
+            Don’t Just Build Software. Build Solutions That Matter
+
+            </h2>
+            <p className="text-lg md:text-xl  text-white/90 mb-12 max-w-3xl leading-relaxed text-center">
+            Talk to the software experts at Webnox Digital, your trusted software 
+            development agency.  </p>
+            {/* "Get Started" button left-aligned below */}
+            <div className="flex justify-center">
+              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl  ">
+               Talk Now!              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Layout - No 3D animation */}
+      <div className="block lg:hidden">
+        {/* Blue Background - Mobile Only */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF] to-[#0090CC]"></div>
+
+        {/* Content - Mobile */}
+        <div
+          ref={contentMobileRef}
+          className="relative z-10 flex flex-col justify-center min-h-[500px] px-4"
+        >
+          {/* Mobile Card Layout */}
+          <div className="max-w-md mx-auto">
+            {/* Card Container */}
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/30">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 leading-tight text-center">
+              Don’t Just Build Software. Build Solutions That Matter              </h2>
+              <p className="text-sm sm:text-base text-gray-700 mb-6 leading-relaxed text-center">
+              Talk to the software experts at Webnox Digital, your trusted software 
+            development agency.                </p>
+
+              {/* Buttons in card */}
+              <div className="flex flex-col space-y-3">
+                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                  Talk Now!
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 
   const Scroll3DSections = ({ children }) => {
@@ -707,7 +839,7 @@ const FAQSection = () => {
     return (
       <div
         ref={containerRef}
-        className="relative space-y-8 md:space-y-12 "
+        className="relative space-y-8  "
         style={{ perspective: 1200, transformStyle: "preserve-3d" }}
       >
         {React.Children.map(children, (child, idx) => (
@@ -733,6 +865,7 @@ const SoftwarePage = () => {
       <BrandingPlanSteps />
       <WhyCustomerExperienceMattersSection />
       <OurApproachSection />
+      <CTASection />
       </Scroll3DSections>
      
       <FAQSection />
