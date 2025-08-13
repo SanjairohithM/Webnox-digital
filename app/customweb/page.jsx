@@ -805,25 +805,22 @@ const CTASection = () => {
 const FAQSection = () => {
   const faqs = [
     {
-      question: "What types of businesses benefit from your consulting services?",
-      answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+      question: " What is custom web development and how is it different from using templates?",
+      answer: "Custom web development means building a site from scratch to fit your business goals, features, and branding—unlike templates, which are pre-built and limit flexibility."
     },
     {
-      question: "How does Webnox approach digital transformation?",
-      answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+      question: "What security measures do you include?",
+      answer: "Security-first coding, SSL setup, server hardening, regular backups, and protection against common vulnerabilities like SQL injection or XSS."
     },
     {
-      question: "What makes your consulting different from traditional firms?",
-      answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+      question: "What industries do you provide custom web solutions for?",
+      answer: "We deliver solutions for various industries including e-commerce, healthcare, education, finance, hospitality, logistics, and more. Our team adapts to the unique needs of every sector."
     },
     {
-      question: "What makes Webnox Digital a reliable IT consulting partner?",
-      answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
+      question: " Will my website be mobile-friendly?",
+      answer: "Absolutely. Every custom web solution we build is fully responsive, ensuring optimal performance and usability across all devices and screen sizes."
     },
-    {
-      question: "What industries do you specialize in for IT consulting?",
-      answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
-    },
+
   ];
   const [openIdx, setOpenIdx] = React.useState(0);
 
@@ -973,7 +970,7 @@ const CustomWebPage = () => {
       <IndustriesSection />
       <CTASection />
       </Scroll3DSections>
-      {/* <FAQSection /> */}
+      <FAQSection />
       <Footer />
     </main>
   )

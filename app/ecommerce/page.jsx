@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useEffect, useLayoutEffect, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
@@ -998,9 +998,8 @@ const SpecializedSolutionsSection = () => {
   const imageContainerRef = useRef(null)
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Initial animations for title and subtitle
       gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
 
       gsap.to([titleRef.current, subtitleRef.current], {
@@ -1015,48 +1014,84 @@ const SpecializedSolutionsSection = () => {
         }
       })
 
-      // Pin the image container section and create scroll-through animation
       const imageContainer = imageContainerRef.current
       const scrollContainer = scrollContainerRef.current
 
-      if (imageContainer && scrollContainer) {
-        // Wait for content to load and calculate proper dimensions
-        const setupPinAnimation = () => {
-          const totalScrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight
+      if (!imageContainer || !scrollContainer) return
 
-          ScrollTrigger.create({
-            id: 'pinnedSection',
-            trigger: imageContainer,
-            start: "top 25%",
-            end: `+=${Math.max(totalScrollHeight * 2, window.innerHeight)}`, // Ensure enough scroll distance
-            pin: true,
-            scrub: 1,
-            onUpdate: (self) => {
-              // Map scroll progress to internal container scroll
-              const scrollProgress = self.progress
-              const scrollPosition = scrollProgress * totalScrollHeight
-              scrollContainer.scrollTop = scrollPosition
-            },
-            invalidateOnRefresh: true,
-            refreshPriority: -1, // Lower priority for refresh
-          })
+      const ensureImagesLoaded = () => new Promise((resolve) => {
+        const imgs = imageContainer.querySelectorAll('img')
+        let remaining = 0
+        const done = () => {
+          remaining -= 1
+          if (remaining <= 0) resolve()
         }
+        imgs.forEach((img) => {
+          if (img.complete) return
+          remaining += 1
+          img.addEventListener('load', done, { once: true })
+          img.addEventListener('error', done, { once: true })
+        })
+        if (remaining === 0) resolve()
+      })
 
-        // Setup after a short delay to ensure content is rendered
-        setTimeout(setupPinAnimation, 100)
+      let resizeHandler
+      let loadHandler
 
-        // Also setup on window resize
-        const handleResize = () => {
-          ScrollTrigger.refresh()
-        }
-        window.addEventListener('resize', handleResize)
+      const createOrRefreshPin = () => {
+        const existing = ScrollTrigger.getById('pinnedSection')
+        if (existing) existing.kill()
 
-        return () => {
-          window.removeEventListener('resize', handleResize)
-        }
+        // Reset internal scroll before measuring
+        scrollContainer.scrollTop = 0
+
+        const totalScrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight
+
+        ScrollTrigger.create({
+          id: 'pinnedSection',
+          trigger: imageContainer,
+          start: "top 25%",
+          end: `+=${Math.max(totalScrollHeight * 2, window.innerHeight)}`,
+          pin: true,
+          scrub: 1,
+          onUpdate: (self) => {
+            const scrollProgress = self.progress
+            const scrollPosition = scrollProgress * totalScrollHeight
+            scrollContainer.scrollTop = scrollPosition
+          },
+          invalidateOnRefresh: true,
+          refreshPriority: -1,
+        })
+
+        ScrollTrigger.refresh()
+      }
+
+      const init = async () => {
+        await ensureImagesLoaded()
+        requestAnimationFrame(() => {
+          createOrRefreshPin()
+        })
+      }
+
+      init()
+
+      resizeHandler = () => ScrollTrigger.refresh()
+      window.addEventListener('resize', resizeHandler)
+
+      loadHandler = () => ScrollTrigger.refresh()
+      window.addEventListener('load', loadHandler)
+
+      return () => {
+        window.removeEventListener('resize', resizeHandler)
+        window.removeEventListener('load', loadHandler)
       }
     }, sectionRef)
-    return () => ctx.revert()
+
+    return () => {
+      const existing = ScrollTrigger.getById('pinnedSection')
+      if (existing) existing.kill()
+      ctx.revert()
+    }
   }, [])
 
   // Handle wheel scrolling for when section is not pinned (fallback)

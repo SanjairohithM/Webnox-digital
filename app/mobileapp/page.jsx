@@ -957,25 +957,22 @@ const CTASection = () => {
 const FAQSection = () => {
     const faqs = [
       {
-        question: "What types of businesses benefit from your consulting services?",
-        answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+        question: "How does Webnox Digital approach app development?",
+        answer: "It’s a transformation journey—from identifying user problems to crafting scalable, engaging solutions that drive conversions. Their mindset emphasizes product thinking, not just coding."
       },
       {
-        question: "How does Webnox approach digital transformation?",
-        answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+        question: "Can Webnox Digital handle both design and development?",
+        answer: "Yes—our team includes UX/UI designers, developers, and QA engineers so you get a complete, end-to-end solution without outsourcing to multiple vendors."
       },
       {
-        question: "What makes your consulting different from traditional firms?",
-        answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+        question: "Can you integrate AI or emerging technologies into apps?",
+        answer: "Yes—we integrate AI, chatbots, machine learning, AR/VR, and IoT connectivity when needed to create innovative, future-ready apps."
       },
       {
-        question: "What makes Webnox Digital a reliable IT consulting partner?",
-        answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
+        question: "How does Webnox handle testing and quality assurance?",
+        answer: "We run functional, performance, usability, and security tests before launch to ensure a flawless user experience."
       },
-      {
-        question: "What industries do you specialize in for IT consulting?",
-        answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
-      },
+   
     ];
     const [openIdx, setOpenIdx] = React.useState(0);
   
@@ -1125,7 +1122,7 @@ const MobileAppPage = () => {
       <UseCasesSection />
       <CTASection />
       </Scroll3DSections>
-      {/* <FAQSection /> */}
+      <FAQSection />
       <Footer />
     </main>
   )

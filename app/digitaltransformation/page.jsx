@@ -1041,25 +1041,18 @@ const WhyCustomerExperienceMattersSection = () => {
 const FAQSection = () => {
     const faqs = [
       {
-        question: "What types of businesses benefit from your consulting services?",
-        answer: " We work with startups, SMEs, and large enterprises across industries to solve complex digital challenges and enable growth."
+        question: "Why is digital transformation important for my business?",
+        answer: "It helps businesses stay competitive, improve operational efficiency, enhance customer experiences, and adapt quickly to market trends and disruptions."
       },
       {
-        question: "How does Webnox approach digital transformation?",
-        answer: "We begin with deep discovery and deliver a customized, phased roadmap that balances strategy, tech, and people."
+        question: "How long does digital transformation take?",
+        answer: "It depends on your goals and scope—some projects take a few months (e.g., website revamp or CRM integration), while larger transformations may take 1–3 years."
       },
       {
-        question: "What makes your consulting different from traditional firms?",
-        answer: "We execute. Our tech-first, agile-led approach ensures transformation is actionable and scalable."
+        question: "What is branding in digital marketing?",
+        answer: "Branding ensures your business has a consistent identity—logo, colors, voice, and messaging—across all channels, making you instantly recognizable and memorable."
       },
-      {
-        question: "What makes Webnox Digital a reliable IT consulting partner?",
-        answer: "We combine deep technical knowledge, strategic insight, and industry-specific experience with a business-first approach, delivering technology solutions that solve real-world problems and fuel growth."
-      },
-      {
-        question: "What industries do you specialize in for IT consulting?",
-        answer: "We serve a wide range of industries, including finance, healthcare, e-commerce, logistics, real estate, and manufacturing. Our domain experts tailor strategies based on sector-specific challenges and regulatory requirements."
-      },
+
     ];
     const [openIdx, setOpenIdx] = React.useState(0);
   
@@ -1115,6 +1108,9 @@ const FAQSection = () => {
       </section>
     );
   };
+
+
+ 
   
 
   
@@ -1129,7 +1125,7 @@ const DigitalTransformationPage = () => {
       <OutdatedToolsSection />
       <WhyCustomerExperienceMattersSection />
       
-      {/* <FAQSection /> */}
+      <FAQSection />
       <Footer />
     </main>
   )
