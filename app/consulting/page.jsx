@@ -8,6 +8,8 @@ import Image from "next/image"
 import TickerSection from "../components/TickerSection";
 import Footer from "../sections/Footer";
 import Scroll3DSections from "../sections/Components/scrollanimation";
+import Link from "next/link";
+
 
 
 
@@ -893,7 +895,7 @@ const FAQSection = () => {
             </div>
             <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
             <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
-            <button className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition-colors shadow-sm">Shoot a Direct Mail</button>
+            <Link href="/contact" className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition-colors shadow-sm cursor-pointer">Shoot a Direct Mail</Link>
           </div>
         </div>
       </div>
