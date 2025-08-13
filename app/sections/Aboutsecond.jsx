@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
@@ -21,6 +21,8 @@ export default function Component() {
   const imageText1Ref = useRef(null)
   const imageText2Ref = useRef(null)
   const imageText3Ref = useRef(null)
+  const middleColumnRef = useRef(null)
+  const [bgHeight, setBgHeight] = useState(0)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -206,18 +208,45 @@ export default function Component() {
     return () => ctx.revert()
   }, [])
 
+  // Measure middle column height and cap background to its bottom
+  useEffect(() => {
+    const updateBgHeight = () => {
+      if (!containerRef.current || !middleColumnRef.current) return
+      const containerRect = containerRef.current.getBoundingClientRect()
+      const middleRect = middleColumnRef.current.getBoundingClientRect()
+      const height = Math.max(0, middleRect.bottom - containerRect.top)
+      setBgHeight(height)
+    }
+
+    // Run on next frame to ensure layout/images are rendered
+    const raf = requestAnimationFrame(updateBgHeight)
+    window.addEventListener("resize", updateBgHeight)
+    window.addEventListener("load", updateBgHeight)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener("resize", updateBgHeight)
+      window.removeEventListener("load", updateBgHeight)
+    }
+  }, [])
+
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen w-full overflow-hidden"
-      style={{
-        backgroundImage: "url('/images/bgimgabout.webp')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="relative w-full overflow-hidden"
     >
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 xl:py-20">
+      {/* Background overlay that ends at middle card height */}
+      <div
+        className="absolute inset-x-0 top-0 z-0"
+        style={{
+          height: bgHeight ? `${bgHeight}px` : undefined,
+          backgroundImage: "url('/images/bgimgabout.webp')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+        aria-hidden
+      />
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 sm:mb-8"> 
           <p ref={digitalTextRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-urbanist text-gray-200 font-bold mb-3">
             <span className="digital-letter">D</span>
@@ -244,12 +273,12 @@ export default function Component() {
 
 
                   {/* 3-Column Grid Layout with Staggered Image Positioning */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 mb-8 sm:mb-12 lg:mb-16 lg:min-h-[800px]">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 mb-8  lg:min-h-[800px]">
 
           {/* Left Image with Text - Positioned in CENTER */}
-          <div className="flex flex-col justify-center lg:-mt-40">
+          <div className="flex flex-col justify-center lg:-mt-80">
             <div ref={imageText1Ref} className="mb-6 sm:mb-8 order-2 lg:order-1">
-              <p className="text-sm sm:text-base text-gray-400 font-urbanist leading-relaxed">
+              <p className="text-2xl sm:text-2xl md:text-3xl lg:text-lg text-gray-800 font-sans font-medium leading-relaxed">
                 At Webnox Digital, we architect intelligent, scalable, and future-ready digital platforms that enable businesses to thrive in a rapidly evolving digital world. Our approach is rooted in innovation, agility, and deep technological expertise.
               </p>
             </div>
@@ -267,9 +296,9 @@ export default function Component() {
           </div>
 
           {/* Center Image with Text - Positioned at END (BOTTOM) */}
-          <div className="flex flex-col justify-center lg:justify-end">
+          <div ref={middleColumnRef} className="flex flex-col justify-center">
             <div ref={imageText2Ref} className="mb-6 sm:mb-8 order-2 lg:order-1">
-              <p className="text-sm sm:text-base text-gray-400 font-urbanist leading-relaxed">
+              <p className="text-2xl sm:text-2xl md:text-3xl lg:text-lg text-gray-800 font-sans font-medium leading-relaxed ">
                 We specialize in delivering transformative digital solutions that not only solve complex problems but also create seamless and impactful user experiences.
               </p>
             </div>
@@ -289,7 +318,7 @@ export default function Component() {
           {/* Right Image with Text - Positioned at START (TOP) */}
           <div className="flex flex-col justify-center lg:justify-start lg:-mt-20">
             <div ref={imageText3Ref} className="mb-6 sm:mb-8 order-2 lg:order-1">
-              <p className="text-sm sm:text-base text-gray-400 font-urbanist leading-relaxed">
+              <p className="text-2xl sm:text-2xl md:text-3xl lg:text-lg text-gray-800 font-sans font-medium leading-relaxed">
                 From custom software and mobile apps to SaaS products and cloud-based platforms, we focus on building solutions that drive efficiency, growth, and competitive advantage.
               </p>
             </div>

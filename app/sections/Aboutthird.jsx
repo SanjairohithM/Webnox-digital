@@ -191,7 +191,7 @@ export const Aboutthird = () => {
   ]
 
   return (
-    <section ref={containerRef} className="relative w-full min-h-screen bg-white py-8 sm:py-12 lg:py-16 xl:py-24">
+    <section ref={containerRef} className="relative w-full min-h-screen bg-white py-8 ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Header Section - Above Everything */}

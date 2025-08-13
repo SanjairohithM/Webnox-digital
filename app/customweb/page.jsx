@@ -481,7 +481,14 @@ const UseCasesSection = () => {
       title: "Speed Optimization + Core Web Vitals",
       description: "Hit Lighthouse 90+ with advanced performance tuning.",
       chips: ["LCP/CLS", "Lazy Loading", "Caching"]
-    }
+    },
+    {
+      icon: "/images/custom6.png",
+      title: "Admin-friendly CMS and backend",
+      description: "Built for ease of use, with intuitive admin panels and powerful backend systems.",
+      chips: ["Admin Panel", "Backend", "CMS"]
+    },
+
   ]
 
   useEffect(() => {
@@ -505,7 +512,7 @@ const UseCasesSection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-16 font-sans">
+    <section ref={sectionRef} className=" font-sans">
       <div className="max-w-7xl mx-auto px-4">
         <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-black leading-tight">
           Custom Web Development Services

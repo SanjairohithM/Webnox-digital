@@ -358,7 +358,7 @@ const WhyChooseCloudSection = () => {
     { num: '02', title: 'Certified Multi-Cloud Specialists', desc: 'Skilled professionals in AWS, Azure, and Google Cloud Platform (GCP).' },
     { num: '03', title: 'Strategy-Aligned Infrastructure', desc: 'We align your cloud and DevOps roadmap with business.' },
     { num: '04', title: 'Scalable Solutions for Startups & Enterprises', desc: 'Built for performance, security, and growth at every stage.' },
-    { num: '05', title: 'Secure, Reliable, and Cost Optimized Architecture', desc: 'Well-architected, compliant, and optimized for spend and resilience.' },
+    { num: '05', title: 'Secure, Reliable, and Cost Optimized Architecture', desc: 'We prioritize uptime, performance, and cloud efficiency.' },
     { num: '06', title: 'Transparent, Measurable Delivery', desc: 'Clear communication, outcome-based metrics, and zero guesswork.' }
   ]
 
