@@ -12,6 +12,7 @@ import Footer from "../sections/Footer"
 import Scroll3DSections from "../sections/Components/scrollanimation"
 import Aianimationfive from "../sections/Aianimationfive"
 import AianimationSix from "../sections/AianimationSix"
+import Aianimationfaq from "../sections/Aianimationfaq"
 
 export default function AIAutomationHero() {
   const containerRef = useRef(null)
@@ -250,6 +251,7 @@ export default function AIAutomationHero() {
         <AutomationServicesSection/>
         <Aianimationfive/>
         <AianimationSix/>
+        <Aianimationfaq/> 
           </Scroll3DSections>
         <Footer/>
         
