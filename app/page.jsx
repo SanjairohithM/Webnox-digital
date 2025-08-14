@@ -19,7 +19,9 @@ import CallbackPopup from "./components/CallbackPopup";
  // import AnimatedNavbar from "./sections/Components/Header/AnimatedNavbar";
 // import Footer from "./sections/Footer"; 
 
-  
+
+
+
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
