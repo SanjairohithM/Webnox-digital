@@ -10,6 +10,8 @@ import OurApproachSection from "@/app/sections/Aianimationthird"
 import AutomationServicesSection from "@/app/sections/Aianimationfourth"
 import Footer from "../sections/Footer"
 import Scroll3DSections from "../sections/Components/scrollanimation"
+import Aianimationfive from "../sections/Aianimationfive"
+import AianimationSix from "../sections/AianimationSix"
 
 export default function AIAutomationHero() {
   const containerRef = useRef(null)
@@ -246,7 +248,9 @@ export default function AIAutomationHero() {
         <WebnoxDigitalSection />
         <OurApproachSection/>
         <AutomationServicesSection/>
-        </Scroll3DSections>
+        <Aianimationfive/>
+        <AianimationSix/>
+          </Scroll3DSections>
         <Footer/>
         
       </>
