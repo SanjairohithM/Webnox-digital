@@ -7,31 +7,31 @@ const services = [
     title: "IT Consulting",
     description: "Empowering your digital growth with tailored IT strategies, systems integration, and scalable solutions. ",
     image: "/images/service7.webp",
-    href: "/consulting"
+    href: "/IT-consulting"
   },
   {
     title: "AI Automation",
     description: "Streamline operations and improve decision-making with advanced AI workflows . ",
     image: "/images/service6.webp",
-    href: "/aiautomation"
+    href: "/AI-automation"
   },
   {
     title: "Data Analytics",
     description: "Unlock actionable insights using predictive analytics, business intelligence dashboards",
     image: "/images/service6.webp",
-    href: "/analysis"
+    href: "/Data-analytics"
   },
   {
     title: "Next gen marketing",
     description: "Leverage AI-powered targeting, automation, and omnichannel strategies to elevate customer engagement .",
     image: "/images/service5.webp",
-    href: "/nextgen"
+    href: "/Next-gen-marketing"
   },
   {
     title: "Emerging Tech",
     description: "Web3, blockchain, AR/VR, and IoT for real-world impact.",
     image: "/images/service4.webp",
-    href: "/tech"
+    href: "/Emerging-tech"
   },
   {
     title: "Out Sourcing",
@@ -43,13 +43,13 @@ const services = [
     title: "N8N workflow",
     description: "No-code automation with N8N for seamless integrations.",
     image: "/images/service2.webp",
-    href: "/n8n"
+    href: "/N8N-automation-workflow"
   },
   {
     title: "customer experience",
     description: "AI-powered, personalized user experiences to boost loyalty.",
     image: "/images/service1.webp",
-    href: "/customer"
+    href: "/customer-experience"
   }
 ];
 

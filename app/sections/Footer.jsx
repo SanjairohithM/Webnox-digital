@@ -88,7 +88,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {quickLinks.map((item) => {
                 const linkMap = {
-                  About: "/about",
+                  About: "/about-us",
                   Solutions: "/solutions",
                   Industries: "/industries",
                   Expertise: "/expertise",

@@ -266,7 +266,7 @@ export default function AdvancedCallbackPopup({ isOpen, onClose }) {
     }
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/contact-us", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -408,7 +408,7 @@ export default function AdvancedCallbackPopup({ isOpen, onClose }) {
                 <p className="text-sm text-gray-600 mb-3">
                   Have a custom requirement?{" "}
                   <a
-                    href="/contact"
+                    href="/contact-us"
                     className="text-blue-600 hover:text-blue-700 font-medium hover:underline transition-colors"
                   >
                     Write to us

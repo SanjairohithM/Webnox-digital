@@ -7,44 +7,44 @@ const solutions = [
     title: "Branding",
     description: " Crafting meaningful brand stories and visuals that connect with your audience and leave a lasting impact.",
     image: "/images/solution2.webp",
-    href: "/branding"
+    href: "/branding-agency"
   },
   {
     title: "Software Developement",
     description: " We build custom software that fits your business needs, boosting efficiency, scale, and user experience.",
     image: "/images/solution1.webp",
-    href: "/software"
+    href: "/software-development"
   },
   {
     title: "Digital Transformation",
     description: " We help modernize your business using smart digital tools that improve workflow and growth potential.",
     image: "/images/solution9.webp",
-    href: "/digitaltransformation"
+    href: "/digital-transformation-services"
   },
   {
     title: "Online Store Solutions",
     description: " Launch seamless, secure online stores that deliver exceptional shopping experiences and drive sales.",
     image: "/images/solution8.webp",
-    href: "/ecommerce"
+    href: "/e-commerce-services"
   },
   {
     title: "iOS & Android App Development",
     description: " Creating high-performing mobile apps that users love, for both iOS and Android platforms, made simple.",
     image: "/images/solution7.webp",
-    href: "/mobileapp"
+    href: "/app-development-services"
   },
   {
     title: "Custom Web Solutions",
     description: " Creating high-performing custom websites that users love, for both iOS and Android platforms, made simple.",
     image: "/images/solution8.webp",
-    href: "/customweb"
+    href: "/custom-web-solutions"
   },
 
   {
     title: "UI/UX",
     description: " Designing smooth, intuitive, and user-first digital experiences that turn visitors into loyal customers.",
     image: "/images/solution6.webp",
-    href: "/uiux"
+    href: "/ui-ux design-services"
   },
   {
     title: "SAAS Products",
@@ -56,13 +56,13 @@ const solutions = [
     title: "Clouds & devOps",
     description: " Optimizing performance, speed, and reliability with expert DevOps practices and cloud architecture.",
     image: "/images/solution4.webp",
-    href: "/cloud"
+    href: "/cloud-devops-services"
   },
   {
     title: "3D websites",
     description: " We bring your brand to life with immersive 3D websites that wow users and boost engagement instantly.",
     image: "/images/solution3.webp",
-    href: "/3d"
+    href: "/3d-web-design-services"
   },
 
 ];
