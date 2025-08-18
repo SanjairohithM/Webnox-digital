@@ -239,7 +239,7 @@ export default function Component() {
       margin: 0,
       padding: 0,
       borderRadius: 0,
-      duration: isMobile ? 0.3 : 2.8,
+      duration: isMobile ? 5.3 : 2.8,
       ease: "power2.inOut",
       onStart: () => {
         gsap.set(miniRobotContainerRef.current, {
@@ -259,7 +259,7 @@ export default function Component() {
         top: isMobile ? "calc(50% + 10vh)" : "calc(50% + 15vh)",
         xPercent: -50,
         yPercent: -50,
-        duration: isMobile ? 0.05 : 0.8,
+        duration: isMobile ? 0.5 : 0.8,
         ease: "power2.inOut",
       },
       "<",
