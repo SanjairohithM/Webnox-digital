@@ -1113,8 +1113,8 @@ const NextGen = React.memo(function NextGen() {
         {/* Initial Heading */}
         <h1
           ref={headingRef}
-          className="text-[42px] font-normal font-urbanist text-center leading-[1.3] max-w-[800px] text-black absolute z-10"
-          style={{ fontFamily: 'var(--font-urbanist)' }}
+          className="text-[42px] font-normal font-sans text-center leading-[1.3] max-w-[800px] text-black absolute z-10"
+          
         >
           Next-gen software solutions that elevate your business to stay ahead of change!
 
@@ -1126,10 +1126,10 @@ const NextGen = React.memo(function NextGen() {
           className="absolute text-center text-black"
           style={{ zIndex: 25 }}
         >
-          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3] mb-4" style={{ fontFamily: 'var(--font-urbanist)' }}>
+          <h2 className="text-[42px] font-normal font-sans leading-[1.3] mb-4" >
             Don't be the business that ignores AI.
           </h2>
-          <h2 className="text-[42px] font-normal font-urbanist leading-[1.3]" style={{ fontFamily: 'var(--font-urbanist)' }}>
+          <h2 className="text-[42px] font-normal font-sans leading-[1.3]" >
             Be the brand that leads the industry.
           </h2>
         </div>
@@ -2106,7 +2106,7 @@ const NextGen = React.memo(function NextGen() {
           className="absolute text-center text-black"
           style={{ zIndex: 25 }}
         >
-          <h2 className={`${isMobile ? 'text-[28px]' : 'text-[42px]'} font-normal font-urbanist leading-[1.3] mb-4 px-4`} style={{ fontFamily: 'var(--font-urbanist)' }}>
+          <h2 className={`${isMobile ? 'text-[28px]' : 'text-[42px]'} font-normal font-sans leading-[1.3] mb-4 px-4`} >
             Step into the AI era with strategies designed to lead, not catch up.
           </h2>
         </div>

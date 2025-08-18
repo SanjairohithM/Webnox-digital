@@ -231,7 +231,7 @@ function About() {
 
             <main
                 ref={sectionRef}
-                className="relative w-full min-h-screen flex items-center pt-20 md:pt-42 pb-10 md:pb-20 px-4 sm:px-6 lg:px-20 bg-white overflow-hidden font-urbanist"
+                className="relative w-full min-h-screen flex items-center pt-20 md:pt-42 pb-10 md:pb-20 px-4 sm:px-6 lg:px-20 bg-white overflow-hidden font-sans"
             >
                 <div className="mx-auto w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8">
@@ -258,7 +258,7 @@ function About() {
                             {/* Description */}
                             <p
                                 ref={descriptionRef}
-                                className="text-base md:text-lg lg:text-xl text-gray-400 leading-relaxed opacity-0 font-urbanist"
+                                className="text-base md:text-lg lg:text-xl text-gray-400 leading-relaxed opacity-0 font-sans"
                             >
                                 We are a digital transformation partner committed to empowering
                                 businesses with cutting-edge technology, strategic insight, and measurable
@@ -272,7 +272,7 @@ function About() {
                                     <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#25C3E5] mb-1 md:mb-2">
                                         14+
                                     </div>
-                                    <div className="text-sm md:text-base lg:text-lg text-gray-600 font-urbanist text-center leading-tight">
+                                    <div className="text-sm md:text-base lg:text-lg text-gray-600 font-sans text-center leading-tight">
                                         Years of
                                         <br />
                                         Experiences
@@ -323,17 +323,17 @@ function About() {
                             {/* Right Side Statistics - Mobile Responsive */}
                             <div className="mt-8 lg:mt-0 lg:absolute lg:top-16 lg:right-0 space-y-6 lg:space-y-8 pointer-events-none right-stats flex flex-row justify-around lg:flex-col lg:justify-start">
                                 <div className="text-center lg:text-left">
-                                    <div className="text-[#25C3E5] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-urbanist">
+                                    <div className="text-[#25C3E5] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans">
                                         1000+
                                     </div>
-                                    <div className="text-gray-400 mt-1 lg:mt-2 text-sm md:text-base lg:text-lg font-urbanist">Projects Delivered</div>
+                                    <div className="text-gray-400 mt-1 lg:mt-2 text-sm md:text-base lg:text-lg font-sans">Projects Delivered</div>
                                 </div>
 
                                 <div className="text-center lg:text-left lg:pt-5">
-                                    <div className="text-[#25C3E5] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-urbanist">
+                                    <div className="text-[#25C3E5] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans">
                                         15+
                                     </div>
-                                    <div className="text-gray-400 mt-1 lg:mt-2 text-sm md:text-base lg:text-lg font-urbanist">Clients Across Countries</div>
+                                    <div className="text-gray-400 mt-1 lg:mt-2 text-sm md:text-base lg:text-lg font-sans">Clients Across Countries</div>
                                 </div>
                             </div>
 

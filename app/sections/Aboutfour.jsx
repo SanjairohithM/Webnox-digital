@@ -245,8 +245,8 @@ export default function ExpertiseSection() {
       <div className="relative z-10 w-full max-w-8xl mx-auto">
         {/* Header */}
         <div ref={titleRef} className="text-center mb-32">
-          <p ref={subtitleRef} className="text-gray-500 text-3xl mb-8 font-urbanist tracking-wide opacity-0">Our Expertise</p>
-          <h2 ref={mainTitleRef} className="text-5xl font-urbanist font-semibold text-gray-800 leading-tight max-w-6xl mx-auto opacity-0">
+          <p ref={subtitleRef} className="text-gray-500 text-3xl mb-8 font-sans tracking-wide opacity-0">Our Expertise</p>
+          <h2 ref={mainTitleRef} className="text-5xl font-sans font-semibold text-gray-800 leading-tight max-w-6xl mx-auto opacity-0">
             AI That Listens, Learns, and Delivers Precision for{" "}
             <br />
             <span className="text-gray-800">Every Unique Project</span>
@@ -279,10 +279,10 @@ export default function ExpertiseSection() {
                   </div>
 
                   {/* Content */}
-                  <p className="text-gray-400 mb-12 font-medium font-urbanist leading-relaxed text-xl">{item.description}</p>
+                  <p className="text-gray-400 mb-12 font-medium font-sans leading-relaxed text-xl">{item.description}</p>
 
                   {/* Button */}
-                  <button className="card-button group flex items-center text-[#00B9FF] hover:text-[#00B9FF] font-urbanist transition-colors duration-300 text-xl rounded-full px-8 py-4 border-2 border-[#00B9FF] hover:border-[#00B9FF] hover:bg-[#00B9FF] hover:text-white">
+                  <button className="card-button group flex items-center text-[#00B9FF] hover:text-[#00B9FF] font-sans transition-colors duration-300 text-xl rounded-full px-8 py-4 border-2 border-[#00B9FF] hover:border-[#00B9FF] hover:bg-[#00B9FF] hover:text-white">
                     Learn more
                     <ArrowRight className="ml-4 h-6 w-6 transition-transform group-hover:translate-x-1" />
                   </button>

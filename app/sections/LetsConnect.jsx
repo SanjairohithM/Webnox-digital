@@ -196,7 +196,7 @@ function LetsConnect() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full min-h-screen flex flex-col items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white overflow-hidden font-urbanist"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white overflow-hidden font-sans"
     >
       <div
         ref={r3fContainerRef}

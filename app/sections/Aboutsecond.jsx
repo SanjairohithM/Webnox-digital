@@ -248,7 +248,7 @@ export default function Component() {
       />
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 sm:mb-8"> 
-          <p ref={digitalTextRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-urbanist text-gray-200 font-bold mb-3">
+          <p ref={digitalTextRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-sans text-gray-200 font-bold mb-3">
             <span className="digital-letter">D</span>
             <span className="digital-letter ml-1 sm:ml-2 md:ml-3 lg:ml-4">I</span>
             <span className="digital-letter ml-1 sm:ml-2 md:ml-3 lg:ml-4">G</span>
@@ -260,10 +260,10 @@ export default function Component() {
 
           {/* Header Section - Left Aligned */}
           <div className="text-left mb-8 sm:mb-12 lg:mb-16">
-            <p ref={subtitleRef} className="text-lg sm:text-xl lg:text-2xl font-urbanist text-gray-600 mb-3 sm:mb-5">
+            <p ref={subtitleRef} className="text-lg sm:text-xl lg:text-2xl font-sans text-gray-600 mb-3 sm:mb-5">
               Innovative Software Solutions for the
             </p>
-            <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-urbanist font-bold text-[#25C3E5] leading-tight mb-3 sm:mb-5">
+            <h1 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-[#25C3E5] leading-tight mb-3 sm:mb-5">
               Next-Gen Digital Transformation
             </h1>
           </div>

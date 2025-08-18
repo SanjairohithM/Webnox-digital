@@ -357,7 +357,7 @@ export default function Hero() {
 
         <p 
           ref={paragraphRef}
-          className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10 relative z-5 font-urbanist opacity-0"
+          className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10 relative z-5 font-sans opacity-0"
         >
         Webnox Digital is a leading software development company specializing in AI-powered solutions and business automation, and end-to-end digital transformation. We help organisations to streamline operations, improve efficiency, and scale faster through intelligent 
         </p>

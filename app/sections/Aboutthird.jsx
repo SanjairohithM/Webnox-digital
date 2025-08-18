@@ -198,14 +198,14 @@ export const Aboutthird = () => {
         <div className="mb-8 sm:mb-12 lg:mb-16">
           {/* Header */}
           <div ref={headerRef} className="mb-4 sm:mb-6">
-            <p className="text-[#25C3E5] font-urbanist text-lg sm:text-xl font-medium tracking-wider uppercase">
+            <p className="text-[#25C3E5] font-sans text-lg sm:text-xl font-medium tracking-wider uppercase">
               OUR VALUES
             </p>
           </div>
 
           {/* Main Title */}
           <div ref={titleRef} className="mb-6 sm:mb-8">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-urbanist text-gray-600 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-sans text-gray-600 leading-tight">
               <span className="text-[#25C3E5]">Boost Efficiency,</span> Maximize Profits with <br className="hidden sm:block" />
               Smart AI Solutions.
             </h2>
@@ -213,7 +213,7 @@ export const Aboutthird = () => {
 
           {/* Description */}
           <div ref={descriptionRef}>
-            <p className="text-base sm:text-lg text-gray-600 font-urbanist leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-lg text-gray-600 font-sans leading-relaxed max-w-3xl">
               We help businesses harness AI's potential. Our tailored solutions transform ideas into outcomes that redefine success.
             </p>
           </div>
@@ -245,13 +245,13 @@ export const Aboutthird = () => {
                   <div className="flex-shrink-0 mt-1">
                     <ChevronRightCircle className="w-5 h-5 sm:w-6 sm:h-6 text-[#25C3E5]" />
                   </div>
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-urbanist font-bold text-[#25C3E5] leading-tight">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-sans font-bold text-[#25C3E5] leading-tight">
                     {value.title}
                   </h3>
                 </div>
                 {/* Value Description */}
                 <div className="ml-8 sm:ml-9">
-                  <p className="text-sm sm:text-base text-gray-600 font-urbanist leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-600 font-sans leading-relaxed">
                     {value.description}
                   </p>
                 </div>
@@ -272,7 +272,7 @@ export const Aboutthird = () => {
                   </div>
                   
                   {/* Blue Title */}
-                  <h3 className="text-xl lg:text-2xl xl:text-3xl font-urbanist font-bold text-[#25C3E5] leading-tight">
+                  <h3 className="text-xl lg:text-2xl xl:text-3xl font-sans font-bold text-[#25C3E5] leading-tight">
                     {value.title}
                   </h3>
                 </div>
@@ -285,7 +285,7 @@ export const Aboutthird = () => {
             <div ref={valuesRef} className="space-y-8 lg:space-y-12 pt-4 lg:h-[600px] flex flex-col justify-between">
               {values.map((value, index) => (
                 <div key={`desc-${value.id}`} className={`value-description ${value.isOdd ? 'value-description-odd' : 'value-description-even'}`}>
-                  <p className="text-base lg:text-lg xl:text-xl text-gray-600 font-urbanist leading-relaxed font-medium">
+                  <p className="text-base lg:text-lg xl:text-xl text-gray-600 font-sans leading-relaxed font-medium">
                     {value.description}
                   </p>
                 </div>
