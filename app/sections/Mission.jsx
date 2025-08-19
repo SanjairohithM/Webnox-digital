@@ -13,47 +13,47 @@ gsap.registerPlugin(ScrollTrigger)
 const solutions = [
   {
     title: "BRANDING",
-    description: "We build unique brand identities that are bold, memorable, and aligned with your business vision to leave a lasting impression.",
+    description: "We build unique brand identities that are bold, memorable, and aligned with your business vision to boost brand awareness and leave a lasting impression.",
     image: "/images/BRANDING.webp"
   },
   {
     title: "SOFTWARE DEVELOPMENT",
-    description: "From MVPs to enterprise-grade systems, we build scalable, secure, and efficient software tailored to your goals and growth.",
+    description: " From MVPs to enterprise-grade systems, our software development company builds scalable, secure, and efficient software tailored to your goals and growth.",
     image: "/images/Software Development.webp"
   },
   {
     title: "DIGITAL MARKETING",
-    description: "We create data-driven marketing strategies to reach, engage, and convert your ideal audience across all digital touchpoints.",
+    description: " As a data-driven digital marketing agency, we create strategies to reach, engage, and convert your ideal audience across all digital touchpoints.",
     image: "/images/Digital Marketing.webp"
   },
   {
     title: "IOS & ANDROID APP DEVELOPMENT",
-    description: "We develop high-performance mobile apps with seamless UI, built to grow with your business across Android, iOS, and hybrid platforms.",
+    description: " We offer mobile app development services with seamless UI, built to grow your business across Android, iOS, and hybrid platforms as a trusted app development company.",
     image: "/images/ECommerce Store Development.webp"
   },
   {
     title: "CUSTOM WEB SOLUTIONS",
-    description: "We craft fast, scalable, and visually stunning websites that reflect your brand identity, drive results, and work seamlessly across all devices.",
+    description: "As a creative web development company, we craft fast, scalable, and visually stunning websites that reflect your brand identity, drive results, and work seamlessly.",
     image: "/images/Web Development.webp"
   },
   {
     title: "DATA & ANALYSIS",
-    description: "We turn your raw data into actionable insights, helping you make smarter business decisions backed by real-time analytics.",
+    description: " We turn your raw data into actionable insights, helping you make smarter business decisions backed by real-time analytics.",
     image: "/images/dataana.webp"
   },
   {
     title: "UI UX DESIGN",
-    description: "We create intuitive and delightful interfaces that engage users, simplify navigation, and enhance user retention for your product..",
+    description: " We create intuitive and delightful interfaces that engage users, simplify navigation, and enhance retention including professional logo designing services.",
     image: "/images/ui ux design.webp"
   },
   {
     title: "IT SUPPORT",
-    description: "We provide proactive, 24/7 support that ensures your systems run smoothly, stay secure, and perform at peak efficiency.",
+    description: " We provide proactive, 24/7 IT consulting services that ensure your systems run smoothly, stay secure, and perform at peak efficiency.",
     image: "/images/IT SUPPORT.webp"
   },
   {
     title: "WEB-BASED 3D VISUALIZATION",
-    description: "Captivate your audience with stunning 3D web experiences. Sleek, interactive designs that set your brand apart",
+    description: " Captivate your audience with our web 3D visualization services sleek, interactive designs that set your brand apart.",
     image: "/images/3dimagesolution.webp"
   },
   

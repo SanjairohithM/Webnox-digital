@@ -1277,7 +1277,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Discover & Define</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">We don't offer solutions until we understand the problem</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Our IT consulting approach ensures clear business goals, effective digital strategy, and transformation roadmaps.</p>
               </div>
 
               {/* Step 2 Card */}
@@ -1291,7 +1291,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Experience-Led Design</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">Smart tech meets meaningful design</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Our UI/UX design services create user-friendly experiences while our web and app development expertise ensures scalability and performance.</p>
               </div>
 
               {/* Step 3 Card */}
@@ -1305,7 +1305,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Agile Development</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">Progress without chaos. Speed with stability</p>
+                <p className="text-sm text-gray-600 leading-relaxed">As a software development company, we follow agile methodologies to deliver custom web and app solutions with speed and stability.</p>
               </div>
             </div>
           ) : (
@@ -1375,7 +1375,7 @@ const NextGen = React.memo(function NextGen() {
                 ref={el => journeyStepsRef.current[0] = el}
                 className="absolute"
                 style={{ 
-                  right: '45%', 
+                  right: '40%', 
                   top: '25%', 
                   transform: 'translateY(-50%)' 
                 }}
@@ -1417,7 +1417,7 @@ const NextGen = React.memo(function NextGen() {
                   {/* Text Content */}
                   <div className="text-content ml-8 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Discover & Define</h3>
-                    <p className="text-sm w-80 text-gray-600 leading-relaxed">We don't offer solutions until we understand the problem</p>
+                    <p className="text-sm w-80 text-gray-600 leading-relaxed">Our IT consulting approach ensures clear business goals, effective digital strategy, and transformation roadmaps.</p>
                   </div>
                 </div>
               </div>
@@ -1436,7 +1436,7 @@ const NextGen = React.memo(function NextGen() {
                   {/* Text Content */}
                   <div className="text-content mr-32 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Experience-Led Design</h3>
-                    <p className="text-sm w-80 text-gray-600 leading-relaxed">Smart tech meets meaningful design</p>
+                    <p className="text-sm w-80 text-gray-600 leading-relaxed">Our UI/UX design services create user-friendly experiences while our web and app development expertise ensures scalability and performance.</p>
                   </div>
 
                   {/* Blue Circle */}
@@ -1479,7 +1479,7 @@ const NextGen = React.memo(function NextGen() {
                 ref={el => journeyStepsRef.current[2] = el}
                 className="absolute"
                 style={{ 
-                  right: '45%', 
+                  right: '40%', 
                   bottom: '15%', 
                   transform: 'translateY(50%)' 
                 }}
@@ -1521,7 +1521,7 @@ const NextGen = React.memo(function NextGen() {
                   {/* Text Content */}
                   <div className="text-content ml-8 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Agile Development</h3>
-                    <p className="text-sm w-80 text-gray-600 leading-relaxed">Progress without chaos. Speed with stability</p>
+                    <p className="text-sm w-80 text-gray-600 leading-relaxed">As a software development company, we follow agile methodologies to deliver custom web and app solutions with speed and stability.</p>
                   </div>
                 </div>
               </div>
@@ -1548,7 +1548,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Intelligent Integration</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">AI tools to create a streamlined digital backbone for your business. We unify your ecosystem seamlessly connecting CRMs, ERPs, APIs, cloud services.</p>
+                <p className="text-sm text-gray-600 leading-relaxed">We use AI consulting services and automation solutions to create a streamlined digital backbone.</p>
               </div>
 
               {/* Step 5 Card */}
@@ -1562,7 +1562,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Launch & Learn</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">We monitor real-world performance, gather insights, and iterate quickly to ensure sustained growth and continuous improvement.</p>
+                <p className="text-sm text-gray-600 leading-relaxed">We launch with confidence and learn from real-world data. Our app development services and digital product testing ensure performance, scalability, and continuous growth.</p>
               </div>
 
               {/* Step 6 Card */}
@@ -1576,7 +1576,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Scale with Digital Marketing</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">From visibility to virality, we help your brand grow through strategic marketing, SEO, content, and campaigns that convert.</p>
+                <p className="text-sm text-gray-600 leading-relaxed">From visibility to virality, our digital marketing agency helps you scale with SEO services, content marketing, and social media campaigns designed to convert and grow your brand.</p>
               </div>
             </div>
           ) : (
@@ -1658,9 +1658,7 @@ const NextGen = React.memo(function NextGen() {
                 {/* Text Content */}
                 <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
                   <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Intelligent Integration</h3>
-                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>AI tools to create a streamlined digital backbone
-                    for your busine We unify your ecosystem seamlessly
-                    connecting CRMs, ERPs, APIs, cloud services, ss.</p>
+                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We use AI consulting services and automation solutions to create a streamlined digital backbone.</p>
                 </div>
 
                 {/* Blue Circle */}
@@ -1745,9 +1743,7 @@ const NextGen = React.memo(function NextGen() {
                 {/* Text Content */}
                 <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
                   <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Launch & Learn</h3>
-                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We monitor real-world performance, gather insights,
-                    and iterate quickly to ensure sustained growth and
-                    continuous improvement.</p>
+                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We launch with confidence and learn from real-world data. Our app development services and digital product testing ensure performance, scalability, and continuous growth.</p>
                 </div>
               </div>
             </div>
@@ -1766,9 +1762,7 @@ const NextGen = React.memo(function NextGen() {
                 {/* Text Content */}
                 <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
                   <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Scale with Digital Marketing</h3>
-                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>From visibility to virality, we help your brand grow
-                    through strategic marketing, SEO, content, and
-                    campaigns that convert.</p>
+                    <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>From visibility to virality, our digital marketing agency helps you scale with SEO services, content marketing, and social media campaigns designed to convert and grow your brand.</p>
                 </div>
 
                 {/* Blue Circle */}

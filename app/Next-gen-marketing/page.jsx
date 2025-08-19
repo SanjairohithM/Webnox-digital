@@ -89,7 +89,7 @@ const HeroSection = () => {
       }}
     >
       <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-50">
-        <h1 ref={titleRef} className="md:text-6xl   font-sans font-semibold text-[#00B9FF] mb-4 leading-tight">
+        <h1 ref={titleRef} className="md:text-6xl text-3xl  font-sans font-semibold text-[#00B9FF] mb-4 leading-tight">
           {"Automate Growth. Personalize at".split("").map((char, index) => (
             <span
               key={index}
