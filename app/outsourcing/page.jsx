@@ -541,32 +541,32 @@ const ApproachSection = () => {
     { 
       title: "Agility", 
       desc: " Rapid team deployment and flexible engagement models",
-      image: "/images/fi_2.webp"
+      image: "/images/rohi 3.webp"
     },
     { 
       title: "Transparency", 
       desc: " Regular reporting, project tracking, and clear communication",
-      image: "/images/fi_1.webp"
+      image: "/images/rohi 1.webp"
     },
     { 
       title: "Cost Efficiency", 
       desc: "50–70% savings on operational and development costs",
-      image: "/images/fi_4.webp"
+      image: "/images/rohi 2.webp"
     },
     { 
       title: "Expertise Access", 
       desc: "Hire experienced developers, designers, marketers, and QA experts",
-      image: "/images/fi_3.webp"
+      image: "/images/rohi 5.webp"
     },
     { 
       title: "Data Security", 
       desc: " Strict compliance with international data protection standards (GDPR-ready)",
-      image: "/images/fi_5.webp"
+      image: "/images/rohi 4.webp"
     },
     { 
       title: "Quality Assurance", 
       desc: " Rigorous testing, bug fixes, and continuous improvement",
-      image: "/images/fi_2.webp"
+      image: "/images/roh 6.webp"
     }
   ]
 
