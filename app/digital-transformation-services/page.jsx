@@ -166,12 +166,14 @@ const HeroSection = () => {
               Outdated systems and slow marketing shouldn't stop your growth. Let WEBNOX DIGITAL power your next stage with smart tech and proven digital strategies.
             </p>
             <div className="flex justify-center lg:justify-start">
+              <Link href="/contact-us"> 
               <button
                 ref={buttonRef}
-                className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+                className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
               >
                 Get Your Free Digital Growth Plan
               </button>
+              </Link>
             </div>
           </div>
 
@@ -823,11 +825,11 @@ const OutdatedToolsSection = () => {
       <div className="px-12">
         <div className="relative flex min-h-[400px] lg:min-h-[450px]">
           {/* Background Image - Full Width */}
-          <div ref={imageRef} className="absolute inset-0 flex -right-55 bottom-3 hidden lg:block">
+          <div ref={imageRef} className="absolute inset-0 flex -right-55 bottom-3  lg:block">
             <img
               src="/images/digital5.webp"
               alt="Professional Business Consultant"
-              className="w-3/4 h-3/4 object-cover rounded-lg mx-auto my-auto"
+              className="w-[75%] h-[90%] object-cover rounded-lg mx-auto my-auto"
               loading="lazy"
             />
           </div>

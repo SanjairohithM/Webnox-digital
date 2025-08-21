@@ -157,12 +157,14 @@ const HeroSection = () => {
             At WEBNOX DIGITAL, we build custom websites from scratch—designed for your business, your audience, and your goals.
           </div>
         </div>
+          <Link href="/contact-us">
         <button
           ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
         >
           Start Your Project
         </button>
+        </Link>
       </div>
     </section>
   )
@@ -754,9 +756,11 @@ const CTASection = () => {
             Your business is unique. Your website should be too. Let's build a platform that shows who you really are—and brings results.           </p>
             {/* "Get Started" button left-aligned below */}
             <div className="flex">
-              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12">
+              <Link href="/contact-us">
+              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12 cursor-pointer">
                 Schedule Free Consultation
               </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -784,9 +788,11 @@ const CTASection = () => {
 
               {/* Buttons in card */}
               <div className="flex flex-col space-y-3">
-                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Link href="/contact-us">
+                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full cursor-pointer">
                   Schedule Free Consultation
                 </button>
+                </Link>
 
               </div>
             </div>

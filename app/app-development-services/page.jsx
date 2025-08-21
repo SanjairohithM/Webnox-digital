@@ -179,12 +179,14 @@ const HeroSection = () => {
         >
           At Webnox Digital, mobile app development is a transformation journey. It begins with a user problem and ends with a digital solution that scales, engages, and converts.
         </p>
+          <Link href="/contact-us"> 
         <button
           ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
         >
           Start Your Project
         </button>
+        </Link>
       </div>
     </section>
   )
@@ -905,10 +907,12 @@ const CTASection = () => {
               <p className="text-lg md:text-xl  text-white/90 mb-12 max-w-3xl leading-relaxed text-left ml-4 md:-ml-28">
               Don't settle for generic apps. Let Webnox Digital engineer your product with performance, UX, and scale in mind.              </p>
               {/* "Get Started" button left-aligned below */}
-              <div className="flex">
-                <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12">
+                <div className="flex">
+                <Link href="/contact-us">
+                <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12 cursor-pointer">
                 Schedule Free Consultation
                 </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -936,9 +940,11 @@ const CTASection = () => {
                 
                 {/* Buttons in card */}
                 <div className="flex flex-col space-y-3">
-                  <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                  <Link href="/contact-us">
+                  <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full cursor-pointer">
                   Schedule Free Consultation
                   </button>
+                  </Link>
               
                 </div>
               </div>

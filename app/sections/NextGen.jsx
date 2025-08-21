@@ -75,11 +75,11 @@ const NextGen = React.memo(function NextGen() {
   const successRefs = useRef([]);
   const waitImagesRef = useRef([]);
   const centerHeadingRef = useRef(null);
-  
+
   // Mobile detection state
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
-  
+
   // Check for mobile on mount and resize
   useEffect(() => {
     const checkScreenSize = () => {
@@ -87,7 +87,7 @@ const NextGen = React.memo(function NextGen() {
       setIsMobile(width <= 768);
       setIsTablet(width > 768 && width <= 1024);
     };
-    
+
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
     return () => window.removeEventListener('resize', checkScreenSize);
@@ -325,7 +325,7 @@ const NextGen = React.memo(function NextGen() {
     // Cards appear - Mobile: Much faster, Desktop: original speed
     cardsRef.current.forEach((card, index) => {
       const position = stats[index].position;
-      
+
       if (isMobileDevice) {
         // Mobile: Faster, simpler animation
         timeline.to(card, {
@@ -420,17 +420,17 @@ const NextGen = React.memo(function NextGen() {
         ease: "power1.inOut"
       })
       // Flip animation - faster on mobile
-      .to([flipTitleRef.current, flipTextRef.current], { 
-        rotateY: 0, 
-        duration: isMobileDevice ? 0.3 : 0.6, 
-        ease: "power2.inOut" 
+      .to([flipTitleRef.current, flipTextRef.current], {
+        rotateY: 0,
+        duration: isMobileDevice ? 0.3 : 0.6,
+        ease: "power2.inOut"
       })
       .to(finalText2Ref.current, {
         opacity: 1,
         y: 0,
         duration: reducedDuration(6), // Faster on mobile
         ease: "power1.out"
-              }, "-=3");
+      }, "-=3");
 
     // Mobile vs Desktop: Different animation complexity
     if (isMobileDevice) {
@@ -455,10 +455,10 @@ const NextGen = React.memo(function NextGen() {
           innerHTML: "If you act now...",
           duration: 0.1
         }, "+=1")
-        .to([flipTitleRef.current, flipTextRef.current], { 
-          rotateY: 180, 
-          duration: 0.3, 
-          ease: "power2.inOut" 
+        .to([flipTitleRef.current, flipTextRef.current], {
+          rotateY: 180,
+          duration: 0.3,
+          ease: "power2.inOut"
         })
         .to(warningRefs.current, {
           opacity: 0,
@@ -489,583 +489,583 @@ const NextGen = React.memo(function NextGen() {
           ease: waitEase
         }, "<")
 
-      // Step 2: Warning text 1 appears, images STAY IN LEFT/RIGHT GRIDS
-      .to(warningRefs.current[0], {
-        opacity: 1,
-        x: 0,
-        duration: 4, // Slower warning text appearance
-        ease: "power2.out"
-      }, "+=3") // Longer delay between steps
-      // Smooth movement to grid positions in one step
-      .to(waitImagesRef.current, {
-        left: (i) => {
-          // LEFT GRID: 0-33% | RIGHT GRID: 67-100% | CENTER GRID: 33-67% (TEXT ONLY)
-          if (i < 6) {
-            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID ONLY - moved slightly right
-          } else {
-            return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID ONLY
+        // Step 2: Warning text 1 appears, images STAY IN LEFT/RIGHT GRIDS
+        .to(warningRefs.current[0], {
+          opacity: 1,
+          x: 0,
+          duration: 4, // Slower warning text appearance
+          ease: "power2.out"
+        }, "+=3") // Longer delay between steps
+        // Smooth movement to grid positions in one step
+        .to(waitImagesRef.current, {
+          left: (i) => {
+            // LEFT GRID: 0-33% | RIGHT GRID: 67-100% | CENTER GRID: 33-67% (TEXT ONLY)
+            if (i < 6) {
+              return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID ONLY - moved slightly right
+            } else {
+              return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID ONLY
+            }
+          },
+          top: (i) => {
+            const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+            const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+
+            if (i < 6) {
+              return leftPositions[i];
+            } else {
+              return rightPositions[i - 6];
+            }
+          },
+          duration: 10 * waitImageFactor, // Much slower image movement
+          ease: waitEase
+        }, "<")
+
+        // Step 3: Warning text 2 appears, images stay in grids
+        .to(warningRefs.current[1], {
+          opacity: 1,
+          x: 0,
+          duration: 4, // Slower warning text 2
+          ease: "power2.out"
+        }, "+=3") // Longer delay
+
+        // Step 4: Warning text 3 appears, images stay in grids
+        .to(warningRefs.current[2], {
+          opacity: 1,
+          x: 0,
+          duration: 4, // Slower warning text 3
+          ease: "power2.out"
+        }, "+=3") // Longer delay
+
+        // Step 5: Warning text 4 appears, images SURROUND TEXT with BIG GAPS
+        .to(warningRefs.current[3], {
+          opacity: 1,
+          x: 0,
+          duration: 4, // Slower warning text 4
+          ease: "power2.out"
+        }, "+=3") // Longer delay
+        // Move images to surround text with gradual positioning
+        .to(waitImagesRef.current, {
+          left: (i) => {
+            // SURROUND text with BIG GAPS - stay in grids
+            if (i < 6) {
+              return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID with gaps - moved slightly right
+            } else {
+              return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID with gaps
+            }
+          },
+          top: (i) => {
+            // Spread around text with BIG GAPS
+            const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+            const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+
+            if (i < 6) {
+              return leftPositions[i];
+            } else {
+              return rightPositions[i - 6];
+            }
+          },
+          duration: 8 * waitImageFactor, // Much slower image repositioning
+          ease: waitEase
+        }, "+=2") // Longer delay before repositioning
+
+        // SECOND SCROLL: SUCCESS PHASE - MUCH SLOWER
+
+        // Step 6: Flip to back (success phase)
+        .to(centerHeadingRef.current, {
+          opacity: 0, // Hide old text (not needed, but keep for smoothness)
+          x: -100,
+          duration: 0.1,
+          ease: "power2.in"
+        }, "+=4")
+        .to([flipTitleRef.current, flipTextRef.current], { rotateY: 180, duration: 0.6, ease: "power2.inOut" })
+        .set(centerHeadingRef.current, {
+          innerHTML: "If you act now..."
+        })
+        .to(centerHeadingRef.current, {
+          opacity: 1,
+          x: 0,
+          y: -20,
+          duration: 0.1,
+          ease: "power2.out"
+        })
+
+        // Success animations with slower pyramid formation
+        .to(warningRefs.current[0], {
+          opacity: 0,
+          x: -50,
+          duration: 4, // Slower warning fade out
+          ease: "power2.in"
+        }, "+=3") // Longer delay
+        .to(successRefs.current[0], {
+          opacity: 1,
+          x: 0,
+          duration: 4, // Slower success text appearance
+          ease: "power2.out"
+        }, "<1")
+        // Start pyramid formation - move top images first
+        .to(waitImagesRef.current, {
+          opacity: 1,
+          left: (i) => {
+            // STEP 1: Only top step (1 image each side), others stay in original grids
+            if (i === 0) return "15%"; // Left top center - moved slightly right
+            if (i === 6) return "84%"; // Right top center
+
+            // Keep other images in their grid positions but visible
+            if (i < 6) {
+              return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID - moved slightly right
+            } else {
+              return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
+            }
+          },
+          top: (i) => {
+            if (i === 0 || i === 6) return "30%"; // Top step level
+
+            // Keep others in their original positions
+            const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+            const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+
+            if (i < 6) {
+              return leftPositions[i];
+            } else {
+              return rightPositions[i - 6];
+            }
+          },
+          duration: 8 * waitImageFactor, // Much slower pyramid formation start
+          ease: waitEase
+        }, "+=3") // Longer delay
+
+        // Step 7: Success text 2 appears, ADD MIDDLE STEP (2 images each side)
+        .to(warningRefs.current[1], {
+          opacity: 0,
+          x: -50,
+          duration: 4, // Slower warning fade
+          ease: "power2.in"
+        }, "+=3") // Longer delay
+        .to(successRefs.current[1], {
+          opacity: 1,
+          x: 0,
+          duration: 4, // Slower success text
+          ease: "power2.out"
+        }, "<1")
+        // Add middle step to pyramid
+        .to(waitImagesRef.current, {
+          left: (i) => {
+            // STEP 2: Top step + Middle step
+            if (i === 0) return "15%"; // Left top - moved slightly right
+            if (i === 6) return "84%"; // Right top
+
+            // MIDDLE STEP: Add 2 images each side
+            if (i === 1) return "11%"; // Left middle left - moved slightly right
+            if (i === 2) return "19%"; // Left middle right - moved slightly right
+            if (i === 7) return "80%"; // Right middle left  
+            if (i === 8) return "88%"; // Right middle right
+
+            // Keep remaining images in grid positions
+            if (i < 6) {
+              return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID - moved slightly right
+            } else {
+              return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
+            }
+          },
+          top: (i) => {
+            if (i === 0 || i === 6) return "30%"; // Top step
+            if (i === 1 || i === 2 || i === 7 || i === 8) return "45%"; // Middle step
+
+            // Keep others in original positions
+            const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+            const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+
+            if (i < 6) {
+              return leftPositions[i];
+            } else {
+              return rightPositions[i - 6];
+            }
+          },
+          duration: 8 * waitImageFactor, // Much slower middle step formation
+          ease: waitEase
+        }, "+=3") // Longer delay
+
+        // Step 8: Success text 3 appears, ALMOST COMPLETE PYRAMID (add more to bottom)
+        .to(warningRefs.current[2], {
+          opacity: 0,
+          x: -50,
+          duration: 4, // Slower warning fade
+          ease: "power2.in"
+        }, "+=3") // Longer delay
+        .to(successRefs.current[2], {
+          opacity: 1,
+          x: 0,
+          duration: 4, // Slower success text
+          ease: "power2.out"
+        }, "<1")
+        // Add partial bottom step to pyramid
+        .to(waitImagesRef.current, {
+          left: (i) => {
+            // STEP 3: Top + Middle + Partial Bottom
+            if (i === 0) return "15%"; // Left top - moved slightly right
+            if (i === 6) return "84%"; // Right top
+
+            // MIDDLE STEP
+            if (i === 1) return "11%"; // Left middle left - moved slightly right
+            if (i === 2) return "19%"; // Left middle right - moved slightly right
+            if (i === 7) return "80%"; // Right middle left  
+            if (i === 8) return "88%"; // Right middle right
+
+            // BOTTOM STEP: Add 2 more images each side
+            if (i === 3) return "7%";  // Left bottom left - moved slightly right
+            if (i === 4) return "15%"; // Left bottom center - moved slightly right
+            if (i === 9) return "84%"; // Right bottom left
+            if (i === 10) return "92%"; // Right bottom right
+
+            // Keep remaining in grid
+            if (i < 6) {
+              return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID - moved slightly right
+            } else {
+              return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
+            }
+          },
+          top: (i) => {
+            if (i === 0 || i === 6) return "30%"; // Top step
+            if (i === 1 || i === 2 || i === 7 || i === 8) return "45%"; // Middle step
+            if (i === 3 || i === 4 || i === 9 || i === 10) return "60%"; // Bottom step
+
+            // Keep others in original positions
+            const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+            const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+
+            if (i < 6) {
+              return leftPositions[i];
+
+            } else {
+              return rightPositions[i - 6];
+            }
+          },
+          duration: 8 * waitImageFactor, // Much slower partial bottom formation
+          ease: waitEase
+        }, "+=3") // Longer delay
+
+        // Step 9: Success text 4 appears, COMPLETE PYRAMID (all images in formation)
+        .to(warningRefs.current[3], {
+          opacity: 0,
+          x: -50,
+          duration: 4, // Slower final warning fade
+          ease: "power2.in"
+        }, "+=3") // Longer delay
+        .to(successRefs.current[3], {
+          opacity: 1,
+          x: 0,
+          duration: 4, // Slower final success text
+          ease: "power2.out"
+        }, "<1")
+        // Complete the pyramid formation
+        .to(waitImagesRef.current, {
+          left: (i) => {
+            // FINAL STEP: COMPLETE PYRAMID FORMATION (original perfect positions)
+
+            // LEFT SIDE PYRAMID
+            if (i === 0) return "18%"; // Top (1 image) - moved slightly right
+            if (i === 1) return "9%";  // Middle left (2 images) - moved slightly right
+            if (i === 2) return "18%"; // Middle right - moved slightly right
+            if (i === 3) return "1%";  // Bottom left (3 images) - moved slightly right
+            if (i === 4) return "9%";  // Bottom center - moved slightly right
+            if (i === 5) return "18%"; // Bottom right - moved slightly right
+
+            // RIGHT SIDE PYRAMID  
+            if (i === 6) return "74%"; // Top (1 image)
+            if (i === 7) return "74%"; // Middle left (2 images)
+            if (i === 8) return "83%"; // Middle right
+            if (i === 9) return "74%";  // Bottom left (3 images)
+            if (i === 10) return "83%"; // Bottom center
+            if (i === 11) return "91%"; // Bottom right
+
+            return "50%"; // Fallback center
+          },
+          top: (i) => {
+            // PYRAMID HEIGHTS (3 levels) - adjusted for better spacing
+            if (i === 0 || i === 6) return "25%"; // Top step - moved up
+            if (i === 1 || i === 2 || i === 7 || i === 8) return "42%"; // Middle step - same
+            if (i === 3 || i === 4 || i === 5 || i === 9 || i === 10 || i === 11) return "59%"; // Bottom step - moved down
+            return "50%"; // Fallback center
+          },
+          duration: 10 * waitImageFactor, // Much slower final pyramid completion
+          ease: waitEase
+        }, "+=3"); // Longer delay before final formation
+
+      // Stage 6: Fade out all elements with custom pyramid animation - MUCH SLOWER
+      timeline
+        .to({}, { duration: 8 }) // Hold final pyramid much longer
+
+        // Center texts (warning/success) go up and fade - MUCH SLOWER FADE
+        .to([finalText2Ref.current, ...warningRefs.current, ...successRefs.current, centerHeadingRef.current], {
+          opacity: 0,
+          y: -100,
+          duration: 12, // Much slower text fade out
+          ease: "power1.inOut",
+          stagger: {
+            each: 0.8, // Longer stagger between each text
+            from: "start"
           }
-        },
-        top: (i) => {
-          const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
-          const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+        })
 
-          if (i < 6) {
-            return leftPositions[i];
-          } else {
-            return rightPositions[i - 6];
+        // Left side pyramid (indices 0-5) goes down and fades - MUCH SLOWER FADE
+        .to([waitImagesRef.current[0], waitImagesRef.current[1], waitImagesRef.current[2], waitImagesRef.current[3], waitImagesRef.current[4], waitImagesRef.current[5]], {
+          opacity: 0,
+          y: "100px",
+          scale: 0.5,
+          duration: 15 * waitImageFactor, // Much slower left pyramid fade
+          ease: waitEase,
+          stagger: {
+            each: 1.0 * waitImageFactor, // Longer stagger between each image
+            from: "start"
           }
-        },
-        duration: 10 * waitImageFactor, // Much slower image movement
-        ease: waitEase
-      }, "<")
+        }, "<")
 
-      // Step 3: Warning text 2 appears, images stay in grids
-      .to(warningRefs.current[1], {
-        opacity: 1,
-        x: 0,
-        duration: 4, // Slower warning text 2
-        ease: "power2.out"
-      }, "+=3") // Longer delay
-
-      // Step 4: Warning text 3 appears, images stay in grids
-      .to(warningRefs.current[2], {
-        opacity: 1,
-        x: 0,
-        duration: 4, // Slower warning text 3
-        ease: "power2.out"
-      }, "+=3") // Longer delay
-
-      // Step 5: Warning text 4 appears, images SURROUND TEXT with BIG GAPS
-      .to(warningRefs.current[3], {
-        opacity: 1,
-        x: 0,
-        duration: 4, // Slower warning text 4
-        ease: "power2.out"
-      }, "+=3") // Longer delay
-      // Move images to surround text with gradual positioning
-      .to(waitImagesRef.current, {
-        left: (i) => {
-          // SURROUND text with BIG GAPS - stay in grids
-          if (i < 6) {
-            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID with gaps - moved slightly right
-          } else {
-            return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID with gaps
+        // Right side pyramid (indices 6-11) goes down and fades - MUCH SLOWER FADE
+        .to([waitImagesRef.current[6], waitImagesRef.current[7], waitImagesRef.current[8], waitImagesRef.current[9], waitImagesRef.current[10], waitImagesRef.current[11]], {
+          opacity: 0,
+          y: "100px",
+          scale: 0.5,
+          duration: 15 * waitImageFactor, // Much slower right pyramid fade
+          ease: waitEase,
+          stagger: {
+            each: 1.0 * waitImageFactor, // Longer stagger between each image
+            from: "start"
           }
-        },
-        top: (i) => {
-          // Spread around text with BIG GAPS
-          const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
-          const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+        }, "<")
 
-          if (i < 6) {
-            return leftPositions[i];
-          } else {
-            return rightPositions[i - 6];
-          }
-        },
-        duration: 8 * waitImageFactor, // Much slower image repositioning
-        ease: waitEase
-      }, "+=2") // Longer delay before repositioning
+        // Show "Your digital journey with webnox"
+        .to(newbeforeFinalTextRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 6, // Slower appearance
+          ease: "power1.out"
+        }, "-=3") // Start earlier for smoother transition
+        .to({}, { duration: 6 }) // Hold journey text much longer
+        .to(newbeforeFinalTextRef.current, {
+          opacity: 0,
+          y: -50,
+          duration: 5, // Slower fade out
+          ease: "power1.inOut"
+        })
 
-      // SECOND SCROLL: SUCCESS PHASE - MUCH SLOWER
+        // Journey Section - EXTREMELY SLOW (Hidden on mobile)
+        .to(journeyRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 10, // Much slower journey section appearance
+          ease: "power1.out"
+        }, "+=5") // Much longer delay before journey starts
 
-      // Step 6: Flip to back (success phase)
-      .to(centerHeadingRef.current, {
-        opacity: 0, // Hide old text (not needed, but keep for smoothness)
-        x: -100,
-        duration: 0.1,
-        ease: "power2.in"
-      }, "+=4")
-      .to([flipTitleRef.current, flipTextRef.current], { rotateY: 180, duration: 0.6, ease: "power2.inOut" })
-      .set(centerHeadingRef.current, {
-        innerHTML: "If you act now..."
-      })
-      .to(centerHeadingRef.current, {
-        opacity: 1,
-        x: 0,
-        y: -20,
-        duration: 0.1,
-        ease: "power2.out"
-      })
+        // Animate steps appearing one by one - EXTREMELY SLOW
+        .to(journeyStepsRef.current[0], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 8, // Much slower step 1 appearance
+          ease: "back.out(1.5)"
+        }, "-=3")
+        .to(journeyStepsRef.current[1], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 8, // Much slower step 2 appearance
+          ease: "back.out(1.5)"
+        }, "-=4") // Much longer overlap with previous step
+        .to(journeyStepsRef.current[2], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 8, // Much slower step 3 appearance
+          ease: "back.out(1.5)"
+        }, "-=4") // Much longer overlap with previous step
 
-      // Success animations with slower pyramid formation
-      .to(warningRefs.current[0], {
-        opacity: 0,
-        x: -50,
-        duration: 4, // Slower warning fade out
-        ease: "power2.in"
-      }, "+=3") // Longer delay
-      .to(successRefs.current[0], {
-        opacity: 1,
-        x: 0,
-        duration: 4, // Slower success text appearance
-        ease: "power2.out"
-      }, "<1")
-      // Start pyramid formation - move top images first
-      .to(waitImagesRef.current, {
-        opacity: 1,
-        left: (i) => {
-          // STEP 1: Only top step (1 image each side), others stay in original grids
-          if (i === 0) return "15%"; // Left top center - moved slightly right
-          if (i === 6) return "84%"; // Right top center
+        // Show the SVG container - MUCH SLOWER
+        .to(journeyPathRef.current, {
+          opacity: 1,
+          duration: 4 // Much slower SVG container appearance
+        }, "-=4")
 
-          // Keep other images in their grid positions but visible
-          if (i < 6) {
-            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID - moved slightly right
-          } else {
-            return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
-          }
-        },
-        top: (i) => {
-          if (i === 0 || i === 6) return "30%"; // Top step level
+        // Animate the curved path drawing - EXTREMELY SLOW
+        .to(journeyPathRef.current.querySelector('#motionPath'), {
+          strokeDashoffset: 0,
+          duration: 25, // Extremely slow path drawing
+          ease: "power1.inOut"
+        }, "-=2")
 
-          // Keep others in their original positions
-          const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
-          const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+        // Animate static start point circle (Hexagon 2) - MUCH SLOWER
+        .to(pathCircleRefs.current[0], {
+          opacity: 1,
+          scale: 1,
+          duration: 4, // Much slower circle appearance
+          ease: "back.out(1.5)"
+        }, "-=5")
 
-          if (i < 6) {
-            return leftPositions[i];
-          } else {
-            return rightPositions[i - 6];
-          }
-        },
-        duration: 8 * waitImageFactor, // Much slower pyramid formation start
-        ease: waitEase
-      }, "+=3") // Longer delay
+        // Animate static end point circle (Hexagon 3) - MUCH SLOWER
+        .to(pathCircleRefs.current[1], {
+          opacity: 1,
+          scale: 1,
+          duration: 4, // Much slower circle appearance
+          ease: "back.out(1.5)"
+        }, "-=4")
 
-      // Step 7: Success text 2 appears, ADD MIDDLE STEP (2 images each side)
-      .to(warningRefs.current[1], {
-        opacity: 0,
-        x: -50,
-        duration: 4, // Slower warning fade
-        ease: "power2.in"
-      }, "+=3") // Longer delay
-      .to(successRefs.current[1], {
-        opacity: 1,
-        x: 0,
-        duration: 4, // Slower success text
-        ease: "power2.out"
-      }, "<1")
-      // Add middle step to pyramid
-      .to(waitImagesRef.current, {
-        left: (i) => {
-          // STEP 2: Top step + Middle step
-          if (i === 0) return "15%"; // Left top - moved slightly right
-          if (i === 6) return "84%"; // Right top
+        // Hold the journey for an extremely long time
+        .to({}, { duration: 15 }) // Extremely long hold time
 
-          // MIDDLE STEP: Add 2 images each side
-          if (i === 1) return "11%"; // Left middle left - moved slightly right
-          if (i === 2) return "19%"; // Left middle right - moved slightly right
-          if (i === 7) return "80%"; // Right middle left  
-          if (i === 8) return "88%"; // Right middle right
+        // Fade out journey and show final text - MUCH SLOWER
+        .to(journeyRef.current, {
+          opacity: 0,
+          y: -100,
+          duration: 10, // Much slower journey fade out
+          ease: "power1.in"
+        })
 
-          // Keep remaining images in grid positions
-          if (i < 6) {
-            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID - moved slightly right
-          } else {
-            return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
-          }
-        },
-        top: (i) => {
-          if (i === 0 || i === 6) return "30%"; // Top step
-          if (i === 1 || i === 2 || i === 7 || i === 8) return "45%"; // Middle step
+        // Second Journey Section - EXTREMELY SLOW
+        .to(journey2Ref.current, {
+          opacity: 1,
+          y: 0,
+          duration: 10, // Much slower second journey appearance
+          ease: "power1.out"
+        }, "+=5") // Much longer delay
 
-          // Keep others in original positions
-          const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
-          const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+        // Animate second journey steps appearing one by one - EXTREMELY SLOW
+        .to(journey2StepsRef.current[0], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 8, // Much slower step 4 appearance
+          ease: "back.out(1.5)"
+        }, "-=3")
+        .to(journey2StepsRef.current[1], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 8, // Much slower step 5 appearance
+          ease: "back.out(1.5)"
+        }, "-=4") // Much longer overlap
+        .to(journey2StepsRef.current[2], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 8, // Much slower step 6 appearance
+          ease: "back.out(1.5)"
+        }, "-=4") // Much longer overlap
 
-          if (i < 6) {
-            return leftPositions[i];
-          } else {
-            return rightPositions[i - 6];
-          }
-        },
-        duration: 8 * waitImageFactor, // Much slower middle step formation
-        ease: waitEase
-      }, "+=3") // Longer delay
+        // Show the second SVG container - MUCH SLOWER
+        .to(journey2PathRef.current, {
+          opacity: 1,
+          duration: 4 // Much slower second SVG appearance
+        }, "-=4")
 
-      // Step 8: Success text 3 appears, ALMOST COMPLETE PYRAMID (add more to bottom)
-      .to(warningRefs.current[2], {
-        opacity: 0,
-        x: -50,
-        duration: 4, // Slower warning fade
-        ease: "power2.in"
-      }, "+=3") // Longer delay
-      .to(successRefs.current[2], {
-        opacity: 1,
-        x: 0,
-        duration: 4, // Slower success text
-        ease: "power2.out"
-      }, "<1")
-      // Add partial bottom step to pyramid
-      .to(waitImagesRef.current, {
-        left: (i) => {
-          // STEP 3: Top + Middle + Partial Bottom
-          if (i === 0) return "15%"; // Left top - moved slightly right
-          if (i === 6) return "84%"; // Right top
+        // Animate the second curved path drawing - EXTREMELY SLOW
+        .to(journey2PathRef.current.querySelector('#motionPath2'), {
+          strokeDashoffset: 0,
+          duration: 25, // Extremely slow second path drawing
+          ease: "power1.inOut"
+        }, "-=2")
 
-          // MIDDLE STEP
-          if (i === 1) return "11%"; // Left middle left - moved slightly right
-          if (i === 2) return "19%"; // Left middle right - moved slightly right
-          if (i === 7) return "80%"; // Right middle left  
-          if (i === 8) return "88%"; // Right middle right
+        // Animate static start point circle for second journey - MUCH SLOWER
+        .to(path2CircleRefs.current[0], {
+          opacity: 1,
+          scale: 1,
+          duration: 4, // Much slower circle appearance
+          ease: "back.out(1.5)"
+        }, "-=5")
 
-          // BOTTOM STEP: Add 2 more images each side
-          if (i === 3) return "7%";  // Left bottom left - moved slightly right
-          if (i === 4) return "15%"; // Left bottom center - moved slightly right
-          if (i === 9) return "84%"; // Right bottom left
-          if (i === 10) return "92%"; // Right bottom right
+        // Animate static end point circle for second journey - MUCH SLOWER
+        .to(path2CircleRefs.current[1], {
+          opacity: 1,
+          scale: 1,
+          duration: 4, // Much slower circle appearance
+          ease: "back.out(1.5)"
+        }, "-=4")
 
-          // Keep remaining in grid
-          if (i < 6) {
-            return ["-2%", "8%", "18%", "3%", "13%", "23%"][i]; // LEFT GRID - moved slightly right
-          } else {
-            return ["95%", "85%", "75%", "90%", "80%", "70%"][i - 6]; // RIGHT GRID
-          }
-        },
-        top: (i) => {
-          if (i === 0 || i === 6) return "30%"; // Top step
-          if (i === 1 || i === 2 || i === 7 || i === 8) return "45%"; // Middle step
-          if (i === 3 || i === 4 || i === 9 || i === 10) return "60%"; // Bottom step
+        // Hold the second journey for an extremely long time
+        .to({}, { duration: 15 }) // Extremely long hold time
 
-          // Keep others in original positions
-          const leftPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
-          const rightPositions = ["10%", "30%", "20%", "70%", "50%", "40%"];
+        // Fade out second journey - MUCH SLOWER
+        .to(journey2Ref.current, {
+          opacity: 0,
+          y: -100,
+          duration: 10, // Much slower second journey fade out
+          ease: "power1.in"
+        })
 
-          if (i < 6) {
-            return leftPositions[i];
+        // Third Journey Section - EXTREMELY SLOW
+        .to(journey3Ref.current, {
+          opacity: 1,
+          y: 0,
+          duration: 10, // Much slower third journey appearance
+          ease: "power1.out"
+        }, "+=5") // Much longer delay
 
-          } else {
-            return rightPositions[i - 6];
-          }
-        },
-        duration: 8 * waitImageFactor, // Much slower partial bottom formation
-        ease: waitEase
-      }, "+=3") // Longer delay
+        // Animate third journey steps appearing one by one - EXTREMELY SLOW
+        .to(journey3StepsRef.current[0], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 8, // Much slower step 7 appearance
+          ease: "back.out(1.5)"
+        }, "-=3")
+        .to(journey3StepsRef.current[1], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 8, // Much slower step 8 appearance
+          ease: "back.out(1.5)"
+        }, "-=4") // Much longer overlap
+        .to(journey3StepsRef.current[2], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 8, // Much slower step 9 appearance
+          ease: "back.out(1.5)"
+        }, "-=4") // Much longer overlap
 
-      // Step 9: Success text 4 appears, COMPLETE PYRAMID (all images in formation)
-      .to(warningRefs.current[3], {
-        opacity: 0,
-        x: -50,
-        duration: 4, // Slower final warning fade
-        ease: "power2.in"
-      }, "+=3") // Longer delay
-      .to(successRefs.current[3], {
-        opacity: 1,
-        x: 0,
-        duration: 4, // Slower final success text
-        ease: "power2.out"
-      }, "<1")
-      // Complete the pyramid formation
-      .to(waitImagesRef.current, {
-        left: (i) => {
-          // FINAL STEP: COMPLETE PYRAMID FORMATION (original perfect positions)
+        // Show the third SVG container - MUCH SLOWER
+        .to(journey3PathRef.current, {
+          opacity: 1,
+          duration: 4 // Much slower third SVG appearance
+        }, "-=4")
 
-          // LEFT SIDE PYRAMID
-          if (i === 0) return "18%"; // Top (1 image) - moved slightly right
-          if (i === 1) return "9%";  // Middle left (2 images) - moved slightly right
-          if (i === 2) return "18%"; // Middle right - moved slightly right
-          if (i === 3) return "1%";  // Bottom left (3 images) - moved slightly right
-          if (i === 4) return "9%";  // Bottom center - moved slightly right
-          if (i === 5) return "18%"; // Bottom right - moved slightly right
+        // Animate the third curved path drawing - EXTREMELY SLOW
+        .to(journey3PathRef.current.querySelector('#motionPath3'), {
+          strokeDashoffset: 0,
+          duration: 25, // Extremely slow third path drawing
+          ease: "power1.inOut"
+        }, "-=2")
 
-          // RIGHT SIDE PYRAMID  
-          if (i === 6) return "74%"; // Top (1 image)
-          if (i === 7) return "74%"; // Middle left (2 images)
-          if (i === 8) return "83%"; // Middle right
-          if (i === 9) return "74%";  // Bottom left (3 images)
-          if (i === 10) return "83%"; // Bottom center
-          if (i === 11) return "91%"; // Bottom right
+        // Animate static start point circle for third journey - MUCH SLOWER
+        .to(path3CircleRefs.current[0], {
+          opacity: 1,
+          scale: 1,
+          duration: 4, // Much slower circle appearance
+          ease: "back.out(1.5)"
+        }, "-=5")
 
-          return "50%"; // Fallback center
-        },
-        top: (i) => {
-          // PYRAMID HEIGHTS (3 levels) - adjusted for better spacing
-          if (i === 0 || i === 6) return "25%"; // Top step - moved up
-          if (i === 1 || i === 2 || i === 7 || i === 8) return "42%"; // Middle step - same
-          if (i === 3 || i === 4 || i === 5 || i === 9 || i === 10 || i === 11) return "59%"; // Bottom step - moved down
-          return "50%"; // Fallback center
-        },
-        duration: 10 * waitImageFactor, // Much slower final pyramid completion
-        ease: waitEase
-      }, "+=3"); // Longer delay before final formation
+        // Animate static end point circle for third journey - MUCH SLOWER
+        .to(path3CircleRefs.current[1], {
+          opacity: 1,
+          scale: 1,
+          duration: 4, // Much slower circle appearance
+          ease: "back.out(1.5)"
+        }, "-=4")
 
-    // Stage 6: Fade out all elements with custom pyramid animation - MUCH SLOWER
-    timeline
-      .to({}, { duration: 8 }) // Hold final pyramid much longer
+        // Hold the third journey for an extremely long time
+        .to({}, { duration: 15 }) // Extremely long hold time
 
-      // Center texts (warning/success) go up and fade - MUCH SLOWER FADE
-      .to([finalText2Ref.current, ...warningRefs.current, ...successRefs.current, centerHeadingRef.current], {
-        opacity: 0,
-        y: -100,
-        duration: 12, // Much slower text fade out
-        ease: "power1.inOut",
-        stagger: {
-          each: 0.8, // Longer stagger between each text
-          from: "start"
-        }
-      })
-
-      // Left side pyramid (indices 0-5) goes down and fades - MUCH SLOWER FADE
-      .to([waitImagesRef.current[0], waitImagesRef.current[1], waitImagesRef.current[2], waitImagesRef.current[3], waitImagesRef.current[4], waitImagesRef.current[5]], {
-        opacity: 0,
-        y: "100px",
-        scale: 0.5,
-        duration: 15 * waitImageFactor, // Much slower left pyramid fade
-        ease: waitEase,
-        stagger: {
-          each: 1.0 * waitImageFactor, // Longer stagger between each image
-          from: "start"
-        }
-      }, "<")
-
-      // Right side pyramid (indices 6-11) goes down and fades - MUCH SLOWER FADE
-      .to([waitImagesRef.current[6], waitImagesRef.current[7], waitImagesRef.current[8], waitImagesRef.current[9], waitImagesRef.current[10], waitImagesRef.current[11]], {
-        opacity: 0,
-        y: "100px",
-        scale: 0.5,
-        duration: 15 * waitImageFactor, // Much slower right pyramid fade
-        ease: waitEase,
-        stagger: {
-          each: 1.0 * waitImageFactor, // Longer stagger between each image
-          from: "start"
-        }
-      }, "<")
-
-      // Show "Your digital journey with webnox"
-      .to(newbeforeFinalTextRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 6, // Slower appearance
-        ease: "power1.out"
-      }, "-=3") // Start earlier for smoother transition
-      .to({}, { duration: 6 }) // Hold journey text much longer
-      .to(newbeforeFinalTextRef.current, {
-        opacity: 0,
-        y: -50,
-        duration: 5, // Slower fade out
-        ease: "power1.inOut"
-      })
-
-      // Journey Section - EXTREMELY SLOW (Hidden on mobile)
-      .to(journeyRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 10, // Much slower journey section appearance
-        ease: "power1.out"
-      }, "+=5") // Much longer delay before journey starts
-
-      // Animate steps appearing one by one - EXTREMELY SLOW
-      .to(journeyStepsRef.current[0], {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 8, // Much slower step 1 appearance
-        ease: "back.out(1.5)"
-      }, "-=3")
-      .to(journeyStepsRef.current[1], {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 8, // Much slower step 2 appearance
-        ease: "back.out(1.5)"
-      }, "-=4") // Much longer overlap with previous step
-      .to(journeyStepsRef.current[2], {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 8, // Much slower step 3 appearance
-        ease: "back.out(1.5)"
-      }, "-=4") // Much longer overlap with previous step
-
-      // Show the SVG container - MUCH SLOWER
-      .to(journeyPathRef.current, {
-        opacity: 1,
-        duration: 4 // Much slower SVG container appearance
-      }, "-=4")
-
-      // Animate the curved path drawing - EXTREMELY SLOW
-      .to(journeyPathRef.current.querySelector('#motionPath'), {
-        strokeDashoffset: 0,
-        duration: 25, // Extremely slow path drawing
-        ease: "power1.inOut"
-      }, "-=2")
-
-      // Animate static start point circle (Hexagon 2) - MUCH SLOWER
-      .to(pathCircleRefs.current[0], {
-        opacity: 1,
-        scale: 1,
-        duration: 4, // Much slower circle appearance
-        ease: "back.out(1.5)"
-      }, "-=5")
-
-      // Animate static end point circle (Hexagon 3) - MUCH SLOWER
-      .to(pathCircleRefs.current[1], {
-        opacity: 1,
-        scale: 1,
-        duration: 4, // Much slower circle appearance
-        ease: "back.out(1.5)"
-      }, "-=4")
-
-      // Hold the journey for an extremely long time
-      .to({}, { duration: 15 }) // Extremely long hold time
-
-      // Fade out journey and show final text - MUCH SLOWER
-      .to(journeyRef.current, {
-        opacity: 0,
-        y: -100,
-        duration: 10, // Much slower journey fade out
-        ease: "power1.in"
-      })
-
-      // Second Journey Section - EXTREMELY SLOW
-      .to(journey2Ref.current, {
-        opacity: 1,
-        y: 0,
-        duration: 10, // Much slower second journey appearance
-        ease: "power1.out"
-      }, "+=5") // Much longer delay
-
-      // Animate second journey steps appearing one by one - EXTREMELY SLOW
-      .to(journey2StepsRef.current[0], {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 8, // Much slower step 4 appearance
-        ease: "back.out(1.5)"
-      }, "-=3")
-      .to(journey2StepsRef.current[1], {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 8, // Much slower step 5 appearance
-        ease: "back.out(1.5)"
-      }, "-=4") // Much longer overlap
-      .to(journey2StepsRef.current[2], {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 8, // Much slower step 6 appearance
-        ease: "back.out(1.5)"
-      }, "-=4") // Much longer overlap
-
-      // Show the second SVG container - MUCH SLOWER
-      .to(journey2PathRef.current, {
-        opacity: 1,
-        duration: 4 // Much slower second SVG appearance
-      }, "-=4")
-
-      // Animate the second curved path drawing - EXTREMELY SLOW
-      .to(journey2PathRef.current.querySelector('#motionPath2'), {
-        strokeDashoffset: 0,
-        duration: 25, // Extremely slow second path drawing
-        ease: "power1.inOut"
-      }, "-=2")
-
-      // Animate static start point circle for second journey - MUCH SLOWER
-      .to(path2CircleRefs.current[0], {
-        opacity: 1,
-        scale: 1,
-        duration: 4, // Much slower circle appearance
-        ease: "back.out(1.5)"
-      }, "-=5")
-
-      // Animate static end point circle for second journey - MUCH SLOWER
-      .to(path2CircleRefs.current[1], {
-        opacity: 1,
-        scale: 1,
-        duration: 4, // Much slower circle appearance
-        ease: "back.out(1.5)"
-      }, "-=4")
-
-      // Hold the second journey for an extremely long time
-      .to({}, { duration: 15 }) // Extremely long hold time
-
-      // Fade out second journey - MUCH SLOWER
-      .to(journey2Ref.current, {
-        opacity: 0,
-        y: -100,
-        duration: 10, // Much slower second journey fade out
-        ease: "power1.in"
-      })
-
-      // Third Journey Section - EXTREMELY SLOW
-      .to(journey3Ref.current, {
-        opacity: 1,
-        y: 0,
-        duration: 10, // Much slower third journey appearance
-        ease: "power1.out"
-      }, "+=5") // Much longer delay
-
-      // Animate third journey steps appearing one by one - EXTREMELY SLOW
-      .to(journey3StepsRef.current[0], {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 8, // Much slower step 7 appearance
-        ease: "back.out(1.5)"
-      }, "-=3")
-      .to(journey3StepsRef.current[1], {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 8, // Much slower step 8 appearance
-        ease: "back.out(1.5)"
-      }, "-=4") // Much longer overlap
-      .to(journey3StepsRef.current[2], {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 8, // Much slower step 9 appearance
-        ease: "back.out(1.5)"
-      }, "-=4") // Much longer overlap
-
-      // Show the third SVG container - MUCH SLOWER
-      .to(journey3PathRef.current, {
-        opacity: 1,
-        duration: 4 // Much slower third SVG appearance
-      }, "-=4")
-
-      // Animate the third curved path drawing - EXTREMELY SLOW
-      .to(journey3PathRef.current.querySelector('#motionPath3'), {
-        strokeDashoffset: 0,
-        duration: 25, // Extremely slow third path drawing
-        ease: "power1.inOut"
-      }, "-=2")
-
-      // Animate static start point circle for third journey - MUCH SLOWER
-      .to(path3CircleRefs.current[0], {
-        opacity: 1,
-        scale: 1,
-        duration: 4, // Much slower circle appearance
-        ease: "back.out(1.5)"
-      }, "-=5")
-
-      // Animate static end point circle for third journey - MUCH SLOWER
-      .to(path3CircleRefs.current[1], {
-        opacity: 1,
-        scale: 1,
-        duration: 4, // Much slower circle appearance
-        ease: "back.out(1.5)"
-      }, "-=4")
-
-      // Hold the third journey for an extremely long time
-      .to({}, { duration: 15 }) // Extremely long hold time
-
-      // Fade out third journey and show final text - EXTREMELY SLOW
-      .to(journey3Ref.current, {
-        opacity: 0,
-        y: -100,
-        duration: 10, // Much slower third journey fade out
-        ease: "power1.in"
-      })
-      .to(newFinalTextRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 12, // Extremely slow final text appearance
-        ease: "power1.out"
-      }, "-=3"); // Better overlap timing
+        // Fade out third journey and show final text - EXTREMELY SLOW
+        .to(journey3Ref.current, {
+          opacity: 0,
+          y: -100,
+          duration: 10, // Much slower third journey fade out
+          ease: "power1.in"
+        })
+        .to(newFinalTextRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 12, // Extremely slow final text appearance
+          ease: "power1.out"
+        }, "-=3"); // Better overlap timing
     }
 
     // Remove timeScale since we're using scrub now
@@ -1114,7 +1114,7 @@ const NextGen = React.memo(function NextGen() {
         <h1
           ref={headingRef}
           className="text-[42px] font-normal font-sans text-center leading-[1.3] max-w-[800px] text-black absolute z-10"
-          
+
         >
           Next-gen software solutions that elevate your business to stay ahead of change!
 
@@ -1277,7 +1277,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Discover & Define</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">Our IT consulting approach ensures clear business goals, effective digital strategy, and transformation roadmaps.</p>
+                <p className="text-sm text-gray-800 leading-relaxed">Our IT consulting approach ensures clear business goals, effective digital strategy, and transformation roadmaps.</p>
               </div>
 
               {/* Step 2 Card */}
@@ -1374,10 +1374,10 @@ const NextGen = React.memo(function NextGen() {
               <div
                 ref={el => journeyStepsRef.current[0] = el}
                 className="absolute"
-                style={{ 
-                  right: '40%', 
-                  top: '25%', 
-                  transform: 'translateY(-50%)' 
+                style={{
+                  right: '40%',
+                  top: '25%',
+                  transform: 'translateY(-50%)'
                 }}
               >
                 <div className="relative flex items-center justify-center font-sans">
@@ -1417,7 +1417,7 @@ const NextGen = React.memo(function NextGen() {
                   {/* Text Content */}
                   <div className="text-content ml-8 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Discover & Define</h3>
-                    <p className="text-sm w-80 text-gray-600 leading-relaxed">Our IT consulting approach ensures clear business goals, effective digital strategy, and transformation roadmaps.</p>
+                    <p className="text-sm w-80 text-gray-800 leading-relaxed">Our IT consulting approach ensures clear business goals, effective digital strategy, and transformation roadmaps.</p>
                   </div>
                 </div>
               </div>
@@ -1426,17 +1426,17 @@ const NextGen = React.memo(function NextGen() {
               <div
                 ref={el => journeyStepsRef.current[1] = el}
                 className="absolute"
-                style={{ 
-                  left: '2%', 
-                  top: '50%', 
-                  transform: 'translateY(-50%)' 
+                style={{
+                  left: '2%',
+                  top: '50%',
+                  transform: 'translateY(-50%)'
                 }}
               >
                 <div className="relative flex items-center justify-center font-sans">
                   {/* Text Content */}
                   <div className="text-content mr-32 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Experience-Led Design</h3>
-                    <p className="text-sm w-80 text-gray-600 leading-relaxed">Our UI/UX design services create user-friendly experiences while our web and app development expertise ensures scalability and performance.</p>
+                    <p className="text-sm w-80 text-gray-800 leading-relaxed">Our UI/UX design services create user-friendly experiences while our web and app development expertise ensures scalability and performance.</p>
                   </div>
 
                   {/* Blue Circle */}
@@ -1478,10 +1478,10 @@ const NextGen = React.memo(function NextGen() {
               <div
                 ref={el => journeyStepsRef.current[2] = el}
                 className="absolute"
-                style={{ 
-                  right: '40%', 
-                  bottom: '15%', 
-                  transform: 'translateY(50%)' 
+                style={{
+                  right: '40%',
+                  bottom: '15%',
+                  transform: 'translateY(50%)'
                 }}
               >
                 <div className="relative flex items-center justify-center font-sans">
@@ -1521,7 +1521,7 @@ const NextGen = React.memo(function NextGen() {
                   {/* Text Content */}
                   <div className="text-content ml-8 flex-shrink-0">
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Agile Development</h3>
-                    <p className="text-sm w-80 text-gray-600 leading-relaxed">As a software development company, we follow agile methodologies to deliver custom web and app solutions with speed and stability.</p>
+                    <p className="text-sm w-80 text-gray-800 leading-relaxed">As a software development company, we follow agile methodologies to deliver custom web and app solutions with speed and stability.</p>
                   </div>
                 </div>
               </div>
@@ -1548,7 +1548,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Intelligent Integration</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">We use AI consulting services and automation solutions to create a streamlined digital backbone.</p>
+                <p className="text-sm text-gray-800 leading-relaxed">We use AI consulting services and automation solutions to create a streamlined digital backbone.</p>
               </div>
 
               {/* Step 5 Card */}
@@ -1562,7 +1562,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Launch & Learn</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">We launch with confidence and learn from real-world data. Our app development services and digital product testing ensure performance, scalability, and continuous growth.</p>
+                <p className="text-sm text-gray-800 leading-relaxed">We launch with confidence and learn from real-world data. Our app development services and digital product testing ensure performance, scalability, and continuous growth.</p>
               </div>
 
               {/* Step 6 Card */}
@@ -1576,7 +1576,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Scale with Digital Marketing</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">From visibility to virality, our digital marketing agency helps you scale with SEO services, content marketing, and social media campaigns designed to convert and grow your brand.</p>
+                <p className="text-sm text-gray-800 leading-relaxed">From visibility to virality, our digital marketing agency helps you scale with SEO services, content marketing, and social media campaigns designed to convert and grow your brand.</p>
               </div>
             </div>
           ) : (
@@ -1594,213 +1594,213 @@ const NextGen = React.memo(function NextGen() {
                   zIndex: 1
                 }}
               >
-            <svg
-              viewBox="0 0 448 498"
-              className="w-full h-full"
-              style={{ overflow: 'visible' }}
-            >
-              <defs>
-                <linearGradient id="paint0_linear_1525_37081_journey2" x1="-13.8615" y1="-128.398" x2="491.708" y2="563.316" gradientUnits="userSpaceOnUse">
-                  <stop offset="0.0420851" stopColor="#0076D9" />
-                  <stop offset="0.88859" stopColor="#00B9FF" />
-                  <stop offset="1" stopColor="white" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              <path
-                id="motionPath2"
-                d="M40.0469 39C72.5652 140.139 202.026 312.295 343.214 238.975C387.78 215.831 406.76 207.539 369.84 241.578C292.74 312.66 157.269 429.977 332.818 394.974C353.412 390.868 376.668 386.618 392.15 400.804C403.956 411.622 412.666 429.848 405.139 457.591"
-                stroke="url(#paint0_linear_1525_37081_journey2)"
-                strokeWidth="32"
-                fill="none"
-                strokeLinecap="round"
-                strokeDasharray="1000"
-                strokeDashoffset="1000"
-              />
-            </svg>
+                <svg
+                  viewBox="0 0 448 498"
+                  className="w-full h-full"
+                  style={{ overflow: 'visible' }}
+                >
+                  <defs>
+                    <linearGradient id="paint0_linear_1525_37081_journey2" x1="-13.8615" y1="-128.398" x2="491.708" y2="563.316" gradientUnits="userSpaceOnUse">
+                      <stop offset="0.0420851" stopColor="#0076D9" />
+                      <stop offset="0.88859" stopColor="#00B9FF" />
+                      <stop offset="1" stopColor="white" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    id="motionPath2"
+                    d="M40.0469 39C72.5652 140.139 202.026 312.295 343.214 238.975C387.78 215.831 406.76 207.539 369.84 241.578C292.74 312.66 157.269 429.977 332.818 394.974C353.412 390.868 376.668 386.618 392.15 400.804C403.956 411.622 412.666 429.848 405.139 457.591"
+                    stroke="url(#paint0_linear_1525_37081_journey2)"
+                    strokeWidth="32"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeDasharray="1000"
+                    strokeDashoffset="1000"
+                  />
+                </svg>
 
-            {/* Static circles for second journey path start and end points */}
-            <div className="absolute inset-0">
-              {/* Start point circle (positioned at path start) */}
-              <div
-                ref={el => path2CircleRefs.current[0] = el}
-                className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
-                style={{
-                  top: isMobile ? 'calc(25% + -27%)' : 'calc(30% + -27%)',
-                  left: isMobile ? 'calc(5% + 16%)' : 'calc(10% + 16%)'
-                }}
-              ></div>
-
-              {/* End point circle (positioned at path end) */}
-              <div
-                ref={el => path2CircleRefs.current[1] = el}
-                className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
-                style={{
-                  top: isMobile ? 'calc(25% + 60%)' : 'calc(30% + 60%)',
-                  left: isMobile ? 'calc(5% + 57%)' : 'calc(10% + 57%)'
-                }}
-              ></div>
-            </div>
-          </div>
-
-          {/* Journey Steps for Second Journey */}
-          <div className="relative w-full h-full" style={{ zIndex: 10 }}>
-            {/* Step 4: Plan & Prototype - text-circle-line-hexagon (LEFT LAYOUT) */}
-            <div
-              ref={el => journey2StepsRef.current[0] = el}
-              className="absolute"
-              style={{ 
-                left: isMobile ? '10%' : '20%', 
-                top: isMobile ? '10%' : '15%', 
-                transform: 'translateY(-50%)' 
-              }}
-            >
-              <div className="relative flex items-center justify-center font-sans">
-                {/* Text Content */}
-                <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
-                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Intelligent Integration</h3>
-                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We use AI consulting services and automation solutions to create a streamlined digital backbone.</p>
-                </div>
-
-                {/* Blue Circle */}
-                <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
-                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
-                </div>
-
-                {/* Hexagon */}
-                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                {/* Static circles for second journey path start and end points */}
+                <div className="absolute inset-0">
+                  {/* Start point circle (positioned at path start) */}
                   <div
-                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
+                    ref={el => path2CircleRefs.current[0] = el}
+                    className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
                     style={{
-                      clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                      top: isMobile ? 'calc(25% + -27%)' : 'calc(30% + -27%)',
+                      left: isMobile ? 'calc(5% + 16%)' : 'calc(10% + 16%)'
                     }}
-                  >
-                    {/* Inner hexagon for content */}
-                    <div
-                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
-                      style={{
-                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                      }}
-                    >
-                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>4</span>
+                  ></div>
+
+                  {/* End point circle (positioned at path end) */}
+                  <div
+                    ref={el => path2CircleRefs.current[1] = el}
+                    className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
+                    style={{
+                      top: isMobile ? 'calc(25% + 60%)' : 'calc(30% + 60%)',
+                      left: isMobile ? 'calc(5% + 57%)' : 'calc(10% + 57%)'
+                    }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Journey Steps for Second Journey */}
+              <div className="relative w-full h-full" style={{ zIndex: 10 }}>
+                {/* Step 4: Plan & Prototype - text-circle-line-hexagon (LEFT LAYOUT) */}
+                <div
+                  ref={el => journey2StepsRef.current[0] = el}
+                  className="absolute"
+                  style={{
+                    left: isMobile ? '10%' : '20%',
+                    top: isMobile ? '10%' : '15%',
+                    transform: 'translateY(-50%)'
+                  }}
+                >
+                  <div className="relative flex items-center justify-center font-sans">
+                    {/* Text Content */}
+                    <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
+                      <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Intelligent Integration</h3>
+                      <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We use AI consulting services and automation solutions to create a streamlined digital backbone.</p>
+                    </div>
+
+                    {/* Blue Circle */}
+                    <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
+                      <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
+                    </div>
+
+                    {/* Hexagon */}
+                    <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                      <div
+                        className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        {/* Inner hexagon for content */}
+                        <div
+                          className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
+                          style={{
+                            clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                          }}
+                        >
+                          <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>4</span>
+                        </div>
+                      </div>
+
+                      {/* Line starting from hexagon left edge */}
+                      <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
+                        <div
+                          className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
+                          style={{ width: isMobile ? '120px' : '250px' }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  {/* Line starting from hexagon left edge */}
-                  <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
-                    <div
-                      className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
-                      style={{ width: isMobile ? '120px' : '250px' }}
-                    ></div>
+                {/* Step 5: Build & Iterate - hexagon-line-circle-text (RIGHT LAYOUT) */}
+                <div
+                  ref={el => journey2StepsRef.current[1] = el}
+                  className="absolute"
+                  style={{
+                    right: isMobile ? '10%' : '25%',
+                    top: isMobile ? '45%' : '50%',
+                    transform: 'translateY(-50%)'
+                  }}
+                >
+                  <div className="relative flex items-center justify-center font-sans">
+                    {/* Hexagon */}
+                    <div className="relative">
+                      <div
+                        className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        {/* Inner hexagon for content */}
+                        <div
+                          className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
+                          style={{
+                            clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                          }}
+                        >
+                          <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>5</span>
+                        </div>
+                      </div>
+
+                      {/* Line starting from hexagon right edge */}
+                      <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
+                        <div
+                          className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
+                          style={{ width: isMobile ? '120px' : '250px' }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    {/* Blue Circle */}
+                    <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                      <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
+                    </div>
+
+                    {/* Text Content */}
+                    <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
+                      <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Launch & Learn</h3>
+                      <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-800 leading-relaxed`}>We launch with confidence and learn from real-world data. Our app development services and digital product testing ensure performance, scalability, and continuous growth.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 6: Launch & Scale - text-circle-line-hexagon (LEFT LAYOUT) */}
+                <div
+                  ref={el => journey2StepsRef.current[2] = el}
+                  className="absolute"
+                  style={{
+                    left: isMobile ? '10%' : '20%',
+                    bottom: isMobile ? '30%' : '20%',
+                    transform: 'translateY(50%)'
+                  }}
+                >
+                  <div className="relative flex items-center justify-center font-sans">
+                    {/* Text Content */}
+                    <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
+                      <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Scale with Digital Marketing</h3>
+                      <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-800 leading-relaxed`}>From visibility to virality, our digital marketing agency helps you scale with SEO services, content marketing, and social media campaigns designed to convert and grow your brand.</p>
+                    </div>
+
+                    {/* Blue Circle */}
+                    <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
+                      <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
+                    </div>
+
+                    {/* Hexagon */}
+                    <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                      <div
+                        className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        {/* Inner hexagon for content */}
+                        <div
+                          className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
+                          style={{
+                            clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                          }}
+                        >
+                          <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>6</span>
+                        </div>
+                      </div>
+
+                      {/* Line starting from hexagon left edge */}
+                      <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
+                        <div
+                          className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
+                          style={{ width: isMobile ? '120px' : '250px' }}
+                        ></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Step 5: Build & Iterate - hexagon-line-circle-text (RIGHT LAYOUT) */}
-            <div
-              ref={el => journey2StepsRef.current[1] = el}
-              className="absolute"
-              style={{ 
-                right: isMobile ? '10%' : '25%', 
-                top: isMobile ? '45%' : '50%', 
-                transform: 'translateY(-50%)' 
-              }}
-            >
-              <div className="relative flex items-center justify-center font-sans">
-                {/* Hexagon */}
-                <div className="relative">
-                  <div
-                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
-                    style={{
-                      clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                    }}
-                  >
-                    {/* Inner hexagon for content */}
-                    <div
-                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
-                      style={{
-                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                      }}
-                    >
-                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>5</span>
-                    </div>
-                  </div>
-
-                  {/* Line starting from hexagon right edge */}
-                  <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
-                    <div
-                      className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                      style={{ width: isMobile ? '120px' : '250px' }}
-                    ></div>
-                  </div>
-                </div>
-
-                {/* Blue Circle */}
-                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
-                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
-                </div>
-
-                {/* Text Content */}
-                <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
-                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Launch & Learn</h3>
-                  <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We launch with confidence and learn from real-world data. Our app development services and digital product testing ensure performance, scalability, and continuous growth.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 6: Launch & Scale - text-circle-line-hexagon (LEFT LAYOUT) */}
-            <div
-              ref={el => journey2StepsRef.current[2] = el}
-              className="absolute"
-              style={{ 
-                left: isMobile ? '10%' : '20%', 
-                bottom: isMobile ? '30%' : '20%', 
-                transform: 'translateY(50%)' 
-              }}
-            >
-              <div className="relative flex items-center justify-center font-sans">
-                {/* Text Content */}
-                <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
-                  <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Scale with Digital Marketing</h3>
-                    <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>From visibility to virality, our digital marketing agency helps you scale with SEO services, content marketing, and social media campaigns designed to convert and grow your brand.</p>
-                </div>
-
-                {/* Blue Circle */}
-                <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
-                  <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
-                </div>
-
-                {/* Hexagon */}
-                <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
-                  <div
-                    className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
-                    style={{
-                      clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                    }}
-                  >
-                    {/* Inner hexagon for content */}
-                    <div
-                      className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
-                      style={{
-                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                      }}
-                    >
-                      <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>6</span>
-                    </div>
-                  </div>
-
-                  {/* Line starting from hexagon left edge */}
-                  <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
-                    <div
-                      className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
-                      style={{ width: isMobile ? '120px' : '250px' }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </>
+            </>
           )}
         </div>
 
@@ -1823,7 +1823,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Optimize Across Touchpoints</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">We refine user journeys with UX audits, mobile app enhancements, eCommerce upgrades, and performance tuning.</p>
+                <p className="text-sm text-gray-800 leading-relaxed">We refine user journeys with UX audits, mobile app enhancements, eCommerce upgrades, and performance tuning.</p>
               </div>
 
               {/* Step 8 Card */}
@@ -1837,7 +1837,7 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Support & Sustain</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">Post-launch isn't the end. It's where we scale, monitor, support, and evolve your digital assets for long-term success.</p>
+                <p className="text-sm text-gray-800 leading-relaxed">Post-launch isn't the end. It's where we scale, monitor, support, and evolve your digital assets for long-term success.</p>
               </div>
 
               {/* Step 9 Card */}
@@ -1851,246 +1851,246 @@ const NextGen = React.memo(function NextGen() {
                   </div>
                   <h3 className="text-lg font-bold text-gray-800">Scale & Evolve</h3>
                 </div>
-                <p className="text-sm text-gray-600 leading-relaxed">Tech grows. You grow. And we grow with you.</p>
+                <p className="text-sm text-gray-800 leading-relaxed">Tech grows. You grow. And we grow with you.</p>
               </div>
             </div>
           ) : (
             /* Desktop Journey Layout */
             <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
 
-            {/* Curved Path SVG from thirdline.svg */}
-            <div 
-              ref={journey3PathRef}
-              className="absolute"
-              style={{ 
-                top: isMobile ? '20%' : '25%', 
-                left: isMobile ? '-2%' : '1%', 
-                width: isMobile ? '70%' : '55%', 
-                height: isMobile ? '75%' : '65%',
-                zIndex: 1
-              }}
-            >
-              <svg 
-                viewBox="0 0 460 526" 
-                className="w-full h-full"
-                style={{ overflow: 'visible' }}
+              {/* Curved Path SVG from thirdline.svg */}
+              <div
+                ref={journey3PathRef}
+                className="absolute"
+                style={{
+                  top: isMobile ? '20%' : '25%',
+                  left: isMobile ? '-2%' : '1%',
+                  width: isMobile ? '70%' : '55%',
+                  height: isMobile ? '75%' : '65%',
+                  zIndex: 1
+                }}
               >
-                <defs>
-                  <linearGradient id="paint0_linear_1525_37082_journey3" x1="159.98" y1="-99.3735" x2="473.21" y2="430.425" gradientUnits="userSpaceOnUse">
-                    <stop offset="0.0420851" stopColor="#0076D9"/>
-                    <stop offset="0.88859" stopColor="#00B9FF"/>
-                    <stop offset="1" stopColor="white" stopOpacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path
-                  id="motionPath3"
-                  d="M40.082 39C40.0849 86.8002 128.82 196.581 385.519 249.193C426.378 257.568 432.708 254.547 391.803 262.692C370.899 266.854 347.005 273.569 324.556 283.756C239.646 322.287 221.824 473.889 129.06 483.332C111.844 485.084 91.6807 485.116 67.9926 482.817"
-                  stroke="url(#paint0_linear_1525_37082_journey3)"
-                  strokeWidth="32"
-                  strokeLinecap="round"
-                  fill="none"
-                  strokeDasharray="1000"
-                  strokeDashoffset="1000"
-                />
-              </svg>
+                <svg
+                  viewBox="0 0 460 526"
+                  className="w-full h-full"
+                  style={{ overflow: 'visible' }}
+                >
+                  <defs>
+                    <linearGradient id="paint0_linear_1525_37082_journey3" x1="159.98" y1="-99.3735" x2="473.21" y2="430.425" gradientUnits="userSpaceOnUse">
+                      <stop offset="0.0420851" stopColor="#0076D9" />
+                      <stop offset="0.88859" stopColor="#00B9FF" />
+                      <stop offset="1" stopColor="white" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    id="motionPath3"
+                    d="M40.082 39C40.0849 86.8002 128.82 196.581 385.519 249.193C426.378 257.568 432.708 254.547 391.803 262.692C370.899 266.854 347.005 273.569 324.556 283.756C239.646 322.287 221.824 473.889 129.06 483.332C111.844 485.084 91.6807 485.116 67.9926 482.817"
+                    stroke="url(#paint0_linear_1525_37082_journey3)"
+                    strokeWidth="32"
+                    strokeLinecap="round"
+                    fill="none"
+                    strokeDasharray="1000"
+                    strokeDashoffset="1000"
+                  />
+                </svg>
 
-              {/* Static circles for third journey path start and end points */}
-              <div className="absolute inset-0">
-                {/* Start point circle (positioned at path start) */}
-                <div 
-                  ref={el => path3CircleRefs.current[0] = el}
-                  className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
-                  style={{
-                    top: isMobile ? 'calc(20% + -22%)' : 'calc(25% + -22%)',
-                    left: isMobile ? 'calc(-2% + 8%)' : 'calc(5% + 8%)'
-                  }}
-                ></div>
-                
-                {/* End point circle (positioned at path end) */}
-                <div 
-                  ref={el => path3CircleRefs.current[1] = el}
-                  className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
-                  style={{
-                    top: isMobile ? 'calc(20% + 62%)' : 'calc(25% + 62%)',
-                    left: isMobile ? 'calc(-2% + 13%)' : 'calc(5% + 13%)'
-                  }}
-                ></div>
-{/* //middle circle */}
-                <div 
-                  ref={el => path3CircleRefs.current[2] = el}
-                  className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
-                  style={{
-                    top: isMobile ? 'calc(20% + 20%)' : 'calc(25% + 20%)',
-                    left: isMobile ? 'calc(-2% + 73%)' : 'calc(5% + 73%)'
-                  }}
-                ></div>
+                {/* Static circles for third journey path start and end points */}
+                <div className="absolute inset-0">
+                  {/* Start point circle (positioned at path start) */}
+                  <div
+                    ref={el => path3CircleRefs.current[0] = el}
+                    className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
+                    style={{
+                      top: isMobile ? 'calc(20% + -22%)' : 'calc(25% + -22%)',
+                      left: isMobile ? 'calc(-2% + 8%)' : 'calc(5% + 8%)'
+                    }}
+                  ></div>
 
+                  {/* End point circle (positioned at path end) */}
+                  <div
+                    ref={el => path3CircleRefs.current[1] = el}
+                    className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
+                    style={{
+                      top: isMobile ? 'calc(20% + 62%)' : 'calc(25% + 62%)',
+                      left: isMobile ? 'calc(-2% + 13%)' : 'calc(5% + 13%)'
+                    }}
+                  ></div>
+                  {/* //middle circle */}
+                  <div
+                    ref={el => path3CircleRefs.current[2] = el}
+                    className={`absolute ${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gray-100 rounded-full opacity-100 shadow-lg z-50 border-2 border-white`}
+                    style={{
+                      top: isMobile ? 'calc(20% + 20%)' : 'calc(25% + 20%)',
+                      left: isMobile ? 'calc(-2% + 73%)' : 'calc(5% + 73%)'
+                    }}
+                  ></div>
+
+                </div>
+              </div>
+
+              {/* Journey Steps for Third Journey */}
+              <div className="relative w-full h-full" style={{ zIndex: 10 }}>
+                {/* Step 7: Optimize & Automate - hexagon-line-circle-text (RIGHT LAYOUT) */}
+                <div
+                  ref={el => journey3StepsRef.current[0] = el}
+                  className="absolute"
+                  style={{
+                    right: isMobile ? '15%' : '40%',
+                    top: isMobile ? '15%' : '25%',
+                    transform: 'translateY(-50%)'
+                  }}
+                >
+                  <div className="relative flex items-center justify-center font-sans">
+                    {/* Hexagon */}
+                    <div className="relative">
+                      <div
+                        className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        {/* Inner hexagon for content */}
+                        <div
+                          className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
+                          style={{
+                            clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                          }}
+                        >
+                          <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>7</span>
+                        </div>
+                      </div>
+
+                      {/* Line starting from hexagon right edge */}
+                      <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
+                        <div
+                          className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
+                          style={{ width: isMobile ? '120px' : '250px' }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    {/* Blue Circle */}
+                    <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                      <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
+                    </div>
+
+                    {/* Text Content */}
+                    <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
+                      <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Optimize Across Touchpoints</h3>
+                      <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-800 leading-relaxed`}>We refine user journeys with UX audits, mobile app
+                        enhancements, eCommerce upgrades, and
+                        performance tuning.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 8: Monitor & Enhance - text-circle-line-hexagon (LEFT LAYOUT) */}
+                <div
+                  ref={el => journey3StepsRef.current[1] = el}
+                  className="absolute"
+                  style={{
+                    left: isMobile ? '5%' : '-5%',
+                    top: isMobile ? '45%' : '50%',
+                    transform: 'translateY(-50%)'
+                  }}
+                >
+                  <div className="relative flex items-center justify-center font-sans">
+                    {/* Text Content */}
+                    <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
+                      <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Support & Sustain</h3>
+                      <p className={`${isMobile ? 'text-xs w-48' : 'text-sm max-w-sm'} text-gray-8  00 leading-relaxed`}>Post-launch isn't the end. It's where we scale,
+                        monitor, support, and evolve your digital assets
+                        for long-term success.</p>
+                    </div>
+
+                    {/* Blue Circle */}
+                    <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
+                      <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
+                    </div>
+
+                    {/* Hexagon */}
+                    <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                      <div
+                        className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        {/* Inner hexagon for content */}
+                        <div
+                          className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
+                          style={{
+                            clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                          }}
+                        >
+                          <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>8</span>
+                        </div>
+                      </div>
+
+                      {/* Line starting from hexagon left edge */}
+                      <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
+                        <div
+                          className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
+                          style={{ width: isMobile ? '120px' : '250px' }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 9: Evolve & Lead - hexagon-line-circle-text (RIGHT LAYOUT) */}
+                <div
+                  ref={el => journey3StepsRef.current[2] = el}
+                  className="absolute"
+                  style={{
+                    right: isMobile ? '15%' : '40%',
+                    bottom: isMobile ? '25%' : '15%',
+                    transform: 'translateY(50%)'
+                  }}
+                >
+                  <div className="relative flex items-center justify-center font-sans">
+                    {/* Hexagon */}
+                    <div className="relative">
+                      <div
+                        className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
+                        style={{
+                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                        }}
+                      >
+                        {/* Inner hexagon for content */}
+                        <div
+                          className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
+                          style={{
+                            clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
+                          }}
+                        >
+                          <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>9</span>
+                        </div>
+                      </div>
+
+                      {/* Line starting from hexagon right edge */}
+                      <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
+                        <div
+                          className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
+                          style={{ width: isMobile ? '120px' : '250px' }}
+                        ></div>
+                      </div>
+                    </div>
+
+                    {/* Blue Circle */}
+                    <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
+                      <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
+                    </div>
+
+                    {/* Text Content */}
+                    <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
+                      <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Scale & Evolve</h3>
+                      <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-800 leading-relaxed`}>Tech grows. You grow. And we grow with you.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-
-            {/* Journey Steps for Third Journey */}
-            <div className="relative w-full h-full" style={{ zIndex: 10 }}>
-              {/* Step 7: Optimize & Automate - hexagon-line-circle-text (RIGHT LAYOUT) */}
-              <div
-                ref={el => journey3StepsRef.current[0] = el}
-                className="absolute"
-                style={{ 
-                  right: isMobile ? '15%' : '40%', 
-                  top: isMobile ? '15%' : '25%', 
-                  transform: 'translateY(-50%)' 
-                }}
-              >
-                <div className="relative flex items-center justify-center font-sans">
-                  {/* Hexagon */}
-                  <div className="relative">
-                    <div
-                      className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
-                      style={{
-                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                      }}
-                    >
-                      {/* Inner hexagon for content */}
-                      <div
-                        className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
-                        style={{
-                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                        }}
-                      >
-                        <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>7</span>
-                      </div>
-                    </div>
-
-                    {/* Line starting from hexagon right edge */}
-                    <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
-                      <div
-                        className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                        style={{ width: isMobile ? '120px' : '250px' }}
-                      ></div>
-                    </div>
-                  </div>
-
-                  {/* Blue Circle */}
-                  <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
-                    <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
-                  </div>
-
-                  {/* Text Content */}
-                  <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
-                    <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Optimize Across Touchpoints</h3>
-                    <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>We refine user journeys with UX audits, mobile app
-                      enhancements, eCommerce upgrades, and
-                      performance tuning.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 8: Monitor & Enhance - text-circle-line-hexagon (LEFT LAYOUT) */}
-              <div
-                ref={el => journey3StepsRef.current[1] = el}
-                className="absolute"
-                style={{ 
-                  left: isMobile ? '5%' : '-5%', 
-                  top: isMobile ? '45%' : '50%', 
-                  transform: 'translateY(-50%)' 
-                }}
-              >
-                <div className="relative flex items-center justify-center font-sans">
-                  {/* Text Content */}
-                  <div className={`text-content ${isMobile ? 'mr-20' : 'mr-32'} flex-shrink-0`}>
-                    <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Support & Sustain</h3>
-                    <p className={`${isMobile ? 'text-xs w-48' : 'text-sm max-w-sm'} text-gray-600 leading-relaxed`}>Post-launch isn't the end. It's where we scale,
-                      monitor, support, and evolve your digital assets
-                      for long-term success.</p>
-                  </div>
-
-                  {/* Blue Circle */}
-                  <div className={`relative ${isMobile ? 'ml-4' : 'ml-8'}`}>
-                    <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
-                  </div>
-
-                  {/* Hexagon */}
-                  <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
-                    <div
-                      className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
-                      style={{
-                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                      }}
-                    >
-                      {/* Inner hexagon for content */}
-                      <div
-                        className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
-                        style={{
-                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                        }}
-                      >
-                        <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>8</span>
-                      </div>
-                    </div>
-
-                    {/* Line starting from hexagon left edge */}
-                    <div className="absolute top-1/2 right-full transform -translate-y-1/2 z-0">
-                      <div
-                        className="h-0.5 bg-gradient-to-r from-[#3fd7f1] to-[#1b80d5]"
-                        style={{ width: isMobile ? '120px' : '250px' }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 9: Evolve & Lead - hexagon-line-circle-text (RIGHT LAYOUT) */}
-              <div
-                ref={el => journey3StepsRef.current[2] = el}
-                className="absolute"
-                style={{ 
-                  right: isMobile ? '15%' : '40%', 
-                  bottom: isMobile ? '25%' : '15%', 
-                  transform: 'translateY(50%)' 
-                }}
-              >
-                <div className="relative flex items-center justify-center font-sans">
-                  {/* Hexagon */}
-                  <div className="relative">
-                    <div
-                      className={`${isMobile ? 'w-20 h-20' : 'w-32 h-32'} bg-gradient-to-b from-[#e0f7ff] to-[#aeafaf] flex items-center justify-center shadow-lg relative border border-[#0ea5e9]/20 backdrop-blur-sm`}
-                      style={{
-                        clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                      }}
-                    >
-                      {/* Inner hexagon for content */}
-                      <div
-                        className={`${isMobile ? 'w-16 h-16' : 'w-28 h-28'} bg-gradient-to-b from-white to-[#f8fafc] flex items-center justify-center backdrop-blur-sm`}
-                        style={{
-                          clipPath: 'polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%)'
-                        }}
-                      >
-                        <span className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-[#0ea5e9] z-10`}>9</span>
-                      </div>
-                    </div>
-
-                    {/* Line starting from hexagon right edge */}
-                    <div className="absolute top-1/2 left-full transform -translate-y-1/2 z-0">
-                      <div
-                        className="h-0.5 bg-gradient-to-r from-[#1b80d5] to-[#3fd7f1]"
-                        style={{ width: isMobile ? '120px' : '250px' }}
-                      ></div>
-                    </div>
-                  </div>
-
-                  {/* Blue Circle */}
-                  <div className={`relative ${isMobile ? 'ml-[116px]' : 'ml-[246px]'}`}>
-                    <div className={`${isMobile ? 'w-6 h-6' : 'w-8 h-8'} rounded-full bg-gradient-to-b from-[#3ed7f0] to-[#1b72d1] flex items-center justify-center shadow-lg z-10 backdrop-blur-sm`}></div>
-                  </div>
-
-                  {/* Text Content */}
-                  <div className={`text-content ${isMobile ? 'ml-4' : 'ml-8'} flex-shrink-0`}>
-                    <h3 className={`${isMobile ? 'text-lg' : 'text-2xl'} font-bold text-gray-800 mb-2`}>Scale & Evolve</h3>
-                    <p className={`${isMobile ? 'text-xs w-48' : 'text-sm w-80'} text-gray-600 leading-relaxed`}>Tech grows. You grow. And we grow with you.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           )}
         </div>
 
@@ -2167,7 +2167,7 @@ const NextGen = React.memo(function NextGen() {
               }}
             >
               <div className={`relative w-full h-full flex flex-col items-center justify-center text-white ${isMobile ? 'p-1' : 'p-2 sm:p-6 md:p-10'}`}>
-                <div className={`${isMobile ? 'w-[24px] h-[24px]' : 'w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] md:w-[100px] md:h-[100px]'} relative mb-0.5 sm:mb-4 md:mb-6`}>
+                <div className={`${isMobile ? 'w-[24px] h-[24px]' : 'w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] md:w-[90px] md:h-[90px]'} relative mb-0.5 sm:mb-4 md:mb-6`}>
                   <Image
                     src={stat.image}
                     alt={stat.text}
@@ -2184,7 +2184,7 @@ const NextGen = React.memo(function NextGen() {
                 <div className={`${isMobile ? 'text-[10px]' : 'text-lg'} font-bold mb-0.5 sm:mb-2 font-sans`}>
                   {stat.number}
                 </div>
-                <p className={`text-center ${isMobile ? 'text-[7px]' : 'text-xs sm:text-sm'} font-medium opacity-90 font-sans px-0.5 sm:px-2`}>
+                <p className={`text-center ${isMobile ? 'text-[7px]' : 'md:text-md '} font-medium opacity-90 font-sans px-0.5 sm:px-2`}>
                   {stat.text}
                 </p>
               </div>

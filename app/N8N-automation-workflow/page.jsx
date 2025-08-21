@@ -90,12 +90,16 @@ const HeroSection = () => {
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-          <button className="bg-[#00BFFF] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0099CC] transition-colors duration-300">
+          <Link href="/contact-us">
+          <button className="bg-[#00BFFF] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0099CC] transition-colors duration-300 cursor-pointer">
             Book Free Automation Audit
           </button>
-          <button className="border-2 border-[#00BFFF] text-[#00BFFF] px-8 py-3 rounded-lg font-semibold hover:bg-[#00BFFF] hover:text-white transition-colors duration-300">
+          </Link>
+          <Link href="/contact-us">
+          <button className="border-2 border-[#00BFFF] text-[#00BFFF] px-8 py-3 rounded-lg font-semibold hover:bg-[#00BFFF] hover:text-white transition-colors duration-300 cursor-pointer">
             Get My Workflow Plan
           </button>
+          </Link>
         </div>
       </div>
     </section>
@@ -449,12 +453,16 @@ const CTASection = () => {
                 Let's build your first n8n workflow — or improve what you've started.            </p>
                 {/* Buttons side by side */}
                 <div className="flex gap-8 ml-50  ">
-                  <button className="bg-black hover:bg-gray-800 text-white font-semibold px-6 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                  <Link href="/contact-us">
+                  <button className="bg-black hover:bg-gray-800 text-white font-semibold px-6 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer">
                     Book a Free Automation Audit Today
                   </button>
-                  <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white">
+                  </Link>
+                  <Link href="/contact-us">
+                  <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white cursor-pointer">
                     Get My Workflow Plan Now
                   </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -480,15 +488,19 @@ const CTASection = () => {
                   <p className="text-sm sm:text-base text-gray-700 mb-6 leading-relaxed text-center">
                     Let's build your first n8n workflow — or improve what you've started.
                   </p>
-                  
+
                   {/* Buttons in card */}
                   <div className="flex flex-col space-y-3">
+                    <Link href="/contact-us"> 
                     <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
                       Book a Free Automation Audit Today
                     </button>
+                    </Link>
+                    <Link href="/contact-us">
                     <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#00B9FF] w-full">
                       Get My Workflow Plan Now
                     </button>
+                    </Link>
                   </div>
                 </div>
               </div>

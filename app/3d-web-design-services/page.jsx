@@ -147,12 +147,14 @@ const HeroSection = () => {
          Craft hyper-interactive, visually stunning 3D websites that engage, convert, and stand out in a sea of 2D sameness. At Webnox Digital, we blend creative brilliance with technical mastery to transform traditional browsing into an immersive storytelling experiences.
         </p>
 
+        <Link href="/contact-us">
         <button
           ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
         >
           Start Your Project
         </button>
+        </Link>
       </div>
     </section>
   )
@@ -749,8 +751,10 @@ const CTASection = () => {
             Want to build an unforgettable web experience that drives attention and conversions?          </p>
             {/* "Get Started" button left-aligned below */}
             <div className="flex justify-center">
-              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl  ">
+              <Link href="/contact-us">
+              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl  cursor-pointer">
                Get a Free 3D Demo Today              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -777,9 +781,11 @@ const CTASection = () => {
 
               {/* Buttons in card */}
               <div className="flex flex-col space-y-3">
-                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Link href="/contact-us">
+                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full cursor-pointer">
                   Get a Free 3D Demo Today
                 </button>
+                </Link>
 
               </div>
             </div>

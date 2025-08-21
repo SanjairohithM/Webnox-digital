@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useRef } from "react"
 import Image from "next/image"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { View } from "@react-three/drei"
 import { CarIdelScene } from "@/Three/Scenes/Car"
 import Sphere from "@/Three/Models/Sphere"
@@ -14,6 +14,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
+  const router = useRouter()
   const robotRef = useRef(null)
   const headingRef = useRef(null)
   const paragraphRef = useRef(null)
@@ -253,53 +254,56 @@ export default function Hero() {
       });
     };
 
-    const handleClick = () => {
-      gsap.killTweensOf([buttonRef.current, textRef.current]);
-      
-      const clickTL = gsap.timeline();
-      
-      clickTL.to(buttonRef.current, {
-        scale: 0.95,
-        duration: 0.1,
-        ease: "power2.out"
-      })
-      .to(buttonRef.current, {
-        scale: 1.03,
-        duration: 0.2,
-        ease: "back.out(1.7)"
-      })
-      .to(buttonRef.current, {
-        scale: 1,
-        duration: 0.2,
-        ease: "power2.out"
-      });
+         const handleClick = () => {
+       gsap.killTweensOf([buttonRef.current, textRef.current]);
+       
+       const clickTL = gsap.timeline();
+       
+       clickTL.to(buttonRef.current, {
+         scale: 0.95,
+         duration: 0.1,
+         ease: "power2.out"
+       })
+       .to(buttonRef.current, {
+         scale: 1.03,
+         duration: 0.2,
+         ease: "back.out(1.7)"
+       })
+       .to(buttonRef.current, {
+         scale: 1,
+         duration: 0.2,
+         ease: "power2.out"
+       });
 
-      gsap.set(shimmerRef.current, { x: '-100%', opacity: 1 });
-      gsap.to(shimmerRef.current, {
-        x: '100%',
-        duration: 0.6,
-        ease: "power2.inOut",
-        delay: 0.1
-      });
-      gsap.to(shimmerRef.current, {
-        opacity: 0,
-        duration: 0.2,
-        delay: 0.5
-      });
-    };
+       gsap.set(shimmerRef.current, { x: '-100%', opacity: 1 });
+       gsap.to(shimmerRef.current, {
+         x: '100%',
+         duration: 0.6,
+         ease: "power2.inOut",
+         delay: 0.1
+       });
+       gsap.to(shimmerRef.current, {
+         opacity: 0,
+         duration: 0.2,
+         delay: 0.5
+       });
+
+       // Add navigation after animation
+       setTimeout(() => {
+         router.push('/contact-us');
+       }, 300);
+     };
 
     // Add button event listeners
     if (buttonRef.current) {
       const button = buttonRef.current;
       button.addEventListener('mouseenter', handleMouseEnter);
       button.addEventListener('mouseleave', handleMouseLeave);
-      button.addEventListener('click', handleClick);
 
       // Cleanup function
       return () => {
         button.removeEventListener('mouseenter', handleMouseEnter);
         button.removeEventListener('mouseleave', handleMouseLeave);
-        button.removeEventListener('click', handleClick);
         ScrollTrigger.getById("hero-scroll-trigger")?.kill();
         gsap.killTweensOf([heroSectionRef.current, buttonRef.current, textRef.current, robotRef.current]);
       };
@@ -361,7 +365,7 @@ export default function Hero() {
         >
         Webnox Digital is a leading software development company specializing in AI-powered solutions and business automation, and end-to-end digital transformation. We help organisations to streamline operations, improve efficiency, and scale faster through intelligent 
         </p>
-        <div className="relative inline-block z-5 opacity-0" ref={buttonRef}>
+        <div className="relative inline-block z-50 opacity-0" ref={buttonRef}>
           {/* Shadow element */}
           <div 
             ref={shadowRef}
@@ -369,10 +373,50 @@ export default function Hero() {
             style={{ transform: 'translateY(8px)' }}
           ></div>
           
-          {/* Main button */}
-          <button 
-            className="relative bg-black text-white px-12 py-5 rounded-full font-semibold text-lg md:text-xl overflow-hidden transition-colors duration-300 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-black/20 z-10"
-          >
+                     {/* Main button */}
+           <button 
+             onClick={() => {
+               // Play click animation
+               gsap.killTweensOf([buttonRef.current, textRef.current]);
+               
+               const clickTL = gsap.timeline();
+               
+               clickTL.to(buttonRef.current, {
+                 scale: 0.95,
+                 duration: 0.1,
+                 ease: "power2.out"
+               })
+               .to(buttonRef.current, {
+                 scale: 1.03,
+                 duration: 0.2,
+                 ease: "back.out(1.7)"
+               })
+               .to(buttonRef.current, {
+                 scale: 1,
+                 duration: 0.2,
+                 ease: "power2.out"
+               });
+
+               gsap.set(shimmerRef.current, { x: '-100%', opacity: 1 });
+               gsap.to(shimmerRef.current, {
+                 x: '100%',
+                 duration: 0.6,
+                 ease: "power2.inOut",
+                 delay: 0.1
+               });
+               gsap.to(shimmerRef.current, {
+                 opacity: 0,
+                 duration: 0.2,
+                 delay: 0.5
+               });
+
+               // Navigate after animation
+               setTimeout(() => {
+                 router.push('/contact-us');
+               }, 300);
+             }}
+             className="relative bg-black text-white px-12 py-5 rounded-full font-semibold text-lg md:text-xl overflow-hidden transition-colors duration-300 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-black/20 z-60 cursor-pointer pointer-events-auto"
+           >
             {/* Shimmer overlay */}
             <div 
               ref={shimmerRef}

@@ -29,16 +29,16 @@ const navItems = [
     link: "#solutions",
     icon: <Lightbulb className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
-  {
-    name: "Industries",
-    link: "/commingsoon", 
-    icon: <Building2 className="h-4 w-4 text-neutral-500 dark:text-white" />,
-  },
-  {
-    name: "Expertise",
-    link: "/commingsoon",
-    icon: <GraduationCap className="h-4 w-4 text-neutral-500 dark:text-white" />,
-  },
+  // {
+  //   name: "Industries",
+  //   link: "/commingsoon", 
+  //   icon: <Building2 className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  // },
+  // {
+  //   name: "Expertise",
+  //   link: "/commingsoon",
+  //   icon: <GraduationCap className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  // },
   {
     name: "AI",
     link: "/commingsoon",

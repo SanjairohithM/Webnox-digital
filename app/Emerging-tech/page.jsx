@@ -121,12 +121,14 @@ const HeroSection = () => {
         >
           and let's build with them today.
         </p>
+        <Link href="/contact-us">
         <button
           ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
         >
           Building What's Next, Now
         </button>
+        </Link>
       </div>
     </section>
   )
@@ -346,8 +348,9 @@ const CTASection = () => {
           <div className="flex flex-col items-start text-left max-w-4xl w-full mx-auto">
             {/* "Start Your Project" button at right top */}
             <div className="flex justify-end">
+              <Link href="/contact-us">
               <button
-                className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-18 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white"
+                className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-18 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white cursor-pointer"
                 style={{
                   position: "absolute",
                   top: "165px",
@@ -357,6 +360,7 @@ const CTASection = () => {
               >
                 Start Your Project
               </button>
+              </Link>
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-4xl  font-bold text-white pt-25 leading-tight text-left ml-4 md:-ml-28 -mt-10">
               Let's Build the Future Together
@@ -366,9 +370,11 @@ const CTASection = () => {
             </p>
             {/* "Get Started" button left-aligned below */}
             <div className="flex">
-              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12">
+              <Link href="/contact-us">
+              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-12 cursor-pointer  ">
                 Get Started
               </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -397,12 +403,16 @@ const CTASection = () => {
               
               {/* Buttons in card */}
               <div className="flex flex-col space-y-3">
-                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                <Link href="/contact-us">
+                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full cursor-pointer">
                   Get Started
                 </button>
-                <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#00B9FF] w-full">
+                </Link>
+                <Link href="/contact-us">
+                <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#00B9FF] w-full cursor-pointer">
                   Start Your Project
                 </button>
+                </Link>
               </div>
             </div>
           </div>

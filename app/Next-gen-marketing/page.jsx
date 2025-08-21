@@ -124,12 +124,14 @@ const HeroSection = () => {
         >
          Your Next-Gen Marketing Partner Starts Here. You need marketing that adapts faster, connects more deeply, and scales more intelligently. At Webnox Digital, we blend human insight with data intelligence, using the latest tools in AI, automation, and consumer behavior to take your brand from being seen to being sought-after.
         </p>
+        <Link href="/contact-us">
         <button
           ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
         >
           Talk Now !
         </button>
+        </Link>
       </div>
     </section>
   )

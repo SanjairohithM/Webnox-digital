@@ -44,7 +44,7 @@ const solutions = [
     title: "UI/UX",
     description: " Designing smooth, intuitive, and user-first digital experiences that turn visitors into loyal customers.",
     image: "/images/solution6.webp",
-    href: "/ui-ux design-services"
+    href: "/ui-ux-design-services"
   },
   {
     title: "SAAS Products",

@@ -194,13 +194,15 @@ const HeroSection = () => {
         >
           Webnox Digital is a strategic software development expert that co-builds high-performance digital platforms that drive growth. We've delivered custom software that solves complex challenges with clarity, speed, and precision.
         </p>
+        <Link href="/contact-us">
         <button
           ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
         >
           Talk Now!
         </button>
-      </div>
+        </Link>
+        </div>
     </section>
   )
 }
@@ -738,8 +740,10 @@ const CTASection = () => {
             development agency.  </p>
             {/* "Get Started" button left-aligned below */}
             <div className="flex justify-center">
-              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl  ">
+                    <Link href="/contact-us">
+              <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer">
                Talk Now!              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -767,10 +771,11 @@ const CTASection = () => {
 
               {/* Buttons in card */}
               <div className="flex flex-col space-y-3">
+                <Link href="/contact-us">
                 <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
                   Talk Now!
                 </button>
-
+                </Link> 
               </div>
             </div>
           </div>

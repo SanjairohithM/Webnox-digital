@@ -200,12 +200,14 @@ const HeroSection = () => {
         >
           We align technology, people, and processes to future-proof your business.
         </p>
-        <button
-          ref={buttonRef}
-          className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 sm:px-6 sm:py-2 rounded-full font-semibold text-xs sm:text-sm shadow-md transition-colors duration-300"
-        >
-          Know More
-        </button>
+        <Link href="/contact-us">
+          <button
+            ref={buttonRef}
+            className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 py-2 sm:px-6 sm:py-2 rounded-full font-semibold text-xs sm:text-sm shadow-md transition-colors duration-300 cursor-pointer"
+          >
+            Know More
+          </button>
+        </Link>
       </div>
     </section>
   )

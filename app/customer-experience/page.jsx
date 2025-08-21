@@ -139,12 +139,14 @@ const HeroSection = () => {
         >
           At Webnox Digital, we believe that exceptional customer experience (CX) is the foundation of digital success. Whether it's web development, digital marketing, UI/UX, or SEO, our approach is always customer-first ensuring every interaction is seamless, personalized, and impactful.
         </p>
+          <Link href="/contact-us">
         <button
           ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
         >
           Start Your Journey
         </button>
+        </Link>
       </div>
     </section>
   )

@@ -179,12 +179,14 @@ const HeroSection = () => {
         >
           You have the vision. We build the engine behind it. At Webnox Digital, we craft conversion-driven shopping experiences that scale with your business
         </p>
+        <Link href="/contact-us">
         <button
           ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
         >
           Get Free Store Audit
         </button>
+        </Link>
       </div>
     </section>
   )

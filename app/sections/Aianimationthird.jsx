@@ -5,6 +5,7 @@ import Image from "next/image"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 // import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger)
@@ -272,11 +273,13 @@ export default function OurApproachSection() {
             </p>
 
             <div ref={buttonRef}>
+              <Link href="/contact-us">
               <button
-                className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
               >
                 Switch to AI
               </button>
+              </Link>
             </div>
           </div>
         </div>

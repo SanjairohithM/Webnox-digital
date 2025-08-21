@@ -338,10 +338,11 @@ const WhyChooseSection = () => {
             <p ref={descRef} className="text-[#6b6b6b] text-base md:text-lg font-sans font-normal leading-relaxed mb-6 text-left max-w-md">
             At Webnox, we redefine outsourcing by combining innovation, reliability, and performance. Our tailored services help businesses scale faster, operate more efficiently, and focus on their core strengths.
             </p>
-            <button ref={buttonRef} className="bg-[#13b4ee] text-white px-7 py-3 rounded-full font-semibold text-base shadow-md hover:bg-[#0ea5e9] transition mb-8">
+            <Link href="/contact-us">
+            <button ref={buttonRef} className="bg-[#13b4ee] text-white px-7 py-3 rounded-full font-semibold text-base shadow-md hover:bg-[#0ea5e9] transition mb-8 cursor-pointer">
               Get Started
             </button>
-            
+            </Link>
             {/* First Feature - Below Button */}
             <div
               ref={el => featuresRef.current[0] = el}

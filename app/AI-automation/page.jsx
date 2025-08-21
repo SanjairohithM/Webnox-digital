@@ -13,6 +13,7 @@ import Scroll3DSections from "../sections/Components/scrollanimation"
 import Aianimationfive from "../sections/Aianimationfive"
 import AianimationSix from "../sections/AianimationSix"
 import Aianimationfaq from "../sections/Aianimationfaq"
+import Link from "next/link"
 
 export default function AIAutomationHero() {
   const containerRef = useRef(null)
@@ -191,11 +192,13 @@ export default function AIAutomationHero() {
                 </p>
 
                 <div ref={buttonRef}>
+                  <Link href="/contact-us">
                   <button
-                    className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
                   >
                     Switch to AI
                   </button>
+                  </Link>
                 </div>
               </div>
 

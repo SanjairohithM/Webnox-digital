@@ -148,13 +148,15 @@ const HeroSection = () => {
                     <div className="bg-[#E6F7FD] text-[#00B9FF] text-sm md:text-base rounded-xl px-4 py-3 font-medium">
                         "In today's digital-first world, design is no longer just about aesthetics—it defines how users experience, trust, and connect with your brand at every touchpoint."                    </div>
                 </div>
+                <Link href="/contact-us">
                 <button
                     ref={buttonRef}
-                    className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+                    className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
                 >
                     Start Your Project
                 </button>
-            </div>
+                </Link>
+                    </div>
         </section>
     )
 }
@@ -601,8 +603,10 @@ const CTASection = () => {
                             Whether you're launching a new platform or improving an existing one, our UI/UX experts are ready to help you build digital experiences that look good, feel natural, and drive real results.        </p>
                         {/* "Get Started" button left-aligned below */}
                         <div className="flex">
-                            <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-10">
+                            <Link href="/contact-us">
+                            <button className="bg-black hover:bg-gray-800 text-white font-semibold px-16 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl ml-95 -mt-10 cursor-pointer">
                                 Start Your UI/UX Project             </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -629,9 +633,11 @@ const CTASection = () => {
 
                             {/* Buttons in card */}
                             <div className="flex flex-col space-y-3">
-                                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full">
+                                <Link href="/contact-us">
+                                <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4  rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full cursor-pointer">
                                     Start Your UI/UX Project
                                 </button>
+                                </Link>
 
                             </div>
                         </div>

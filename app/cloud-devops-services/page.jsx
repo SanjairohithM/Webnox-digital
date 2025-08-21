@@ -136,12 +136,14 @@ const HeroSection = () => {
                </p>
 
                
+                <Link href="/contact-us">
                 <button
                     ref={buttonRef}
-                    className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl"
+                    className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
                 >
                    Let's Connect
                 </button>
+                </Link>
             </div>
         </section>
     )
@@ -182,9 +184,11 @@ const DevopsProcessSection = () => {
                             Collaborate with <span className="text-[#00B9FF] font-semibold">WEBNOX DIGITAL</span> to
                             unlock the full potential of your cloud and development operations.
                         </p>
-                        <button className="mt-6 inline-flex items-center justify-center bg-[#00B9FF] hover:bg-[#049dd8] text-white font-semibold rounded-lg px-6 py-3 md:px-7 md:py-3.5 shadow-lg transition-colors">
+                        <Link href="/contact-us">
+                        <button className="mt-6 inline-flex items-center justify-center bg-[#00B9FF] hover:bg-[#049dd8] text-white font-semibold rounded-lg px-6 py-3 md:px-7 md:py-3.5 shadow-lg transition-colors cursor-pointer">
                             Let's Connect
                         </button>
+                        </Link>
                     </div>
 
                     {/* Right: Lottie Illustration */}
