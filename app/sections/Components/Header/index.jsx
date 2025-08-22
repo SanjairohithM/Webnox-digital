@@ -13,7 +13,7 @@ export default function Header() {
     { name: "Solutions", href: "#solutions", icon: null },
       // { name: "Industries", href: "/commingsoon", icon: null },
       // { name: "Expertise", href: "/commingsoon", icon: null },
-    { name: "AI", href: "/commingsoon", icon: null },
+    { name: "AI", href: "/ai-services", icon: null },
     { name: "Resources", href: "/commingsoon", icon: null }
   ]
 

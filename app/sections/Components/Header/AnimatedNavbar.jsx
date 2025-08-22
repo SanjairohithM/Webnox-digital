@@ -41,7 +41,7 @@ const navItems = [
   // },
   {
     name: "AI",
-    link: "/commingsoon",
+    link: "/ai-services",
     icon: <Bot className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
@@ -80,7 +80,7 @@ const AnimatedNavbar = ({
     },
     {
       name: "AI",
-      href: "/commingsoon",
+      href: "/ai-services",
       IconComponent: Bot,
     },
     {
