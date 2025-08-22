@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Link from "next/link"
+import { useLayoutEffect } from "react"
 
 import Footer from "../sections/Footer";
 
@@ -409,120 +410,7 @@ const SecondUseCasesSection = () => {
 
 
 
-const industries = [
-    {
-      title: "Retail & E-Commerce",
-      desc: "AI-powered retail: personalized recommendations, inventory management, and seamless customer experiences.",
-      img: "/images/brand5-4.webp"
-    },
-    {
-      title: "Finance & Banking",
-      desc: "AI-driven financial services: fraud detection, risk management, and personalized banking experiences.",
-      img: "/images/brand5-5.webp"
-    },
-    {
-      title: "Manufacturing & Supply Chain",
-      desc: "AI-driven supply chain: predictive maintenance, inventory optimization, and smart logistics.",
-      img: "/images/brand5-3.webp"
-    },
-    {
-      title: "Healthcare & Wellness",
-      desc: "AI-driven healthcare: personalized treatment plans, predictive analytics, and telemedicine solutions.",
-      img: "/images/brand5-1.webp"
-    },
-    {
-      title: "Education & E-Learning",
-      desc: "AI-powered learning: personalized content, adaptive assessments, and virtual tutors.",
-      img: "/images/brand5-2.webp"
-    },
-  
-  ]
 
-const IndustriesSection = () => {
-    const industryRefs = useRef([])
-  
-    useGSAP(() => {
-      // Check if we're on desktop (lg breakpoint and above)
-      const isDesktop = window.innerWidth >= 1024
-      
-      if (isDesktop) {
-        // Complex animations for desktop
-        industryRefs.current.forEach((ref, i) => {
-          if (!ref) return
-          gsap.fromTo(ref,
-            {
-              opacity: 0,
-              x: i % 2 === 0 ? 120 : -120
-            },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 1.4,
-              ease: "power3.inOut",
-              scrollTrigger: {
-                trigger: ref,
-                start: "top 80%",
-                toggleActions: "play none none none"
-              }
-            }
-          )
-        })
-      } else {
-        // Individual scroll-triggered fade animations for mobile
-        const validRefs = industryRefs.current.filter(Boolean)
-        
-        gsap.set(validRefs, { opacity: 0 })
-        
-        // Animate each card individually when it comes into view
-        validRefs.forEach((ref, index) => {
-          if (ref) {
-            gsap.to(ref, {
-              opacity: 1,
-              duration: 0.6,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: ref,
-                start: "top 85%",
-                end: "bottom 15%",
-                toggleActions: "play none none reverse"
-              }
-            })
-          }
-        })
-      }
-    }, [])
-  
-    return (
-      <section className="bg-white py-20 px-0">
-        <div className="flex flex-col items-center w-full">
-          <h2 className="text-3xl md:text-5xl font-sans font-semibold text-center mb-2">
-            Industries <span className="text-sky-500">we serve</span>
-            
-          </h2>
-          <p className="text-gray-500 text-center mb-16 text-xl max-w-3xl font-sans py-4">
-            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
-          </p>
-          <div className="flex flex-col gap-y-8 w-full">
-            {industries.map((industry, i) => (
-              <div
-                key={industry.title}
-                ref={el => industryRefs.current[i] = el}
-                className={`grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 items-stretch w-full px-4 md:px-16 py-8 md:py-12`}
-              >
-                <div className={`flex justify-center items-center w-full h-full ${i % 2 === 1 ? 'md:order-2' : ''}`}> 
-                  <img src={industry.img} alt={industry.title} className="w-full md:w-[32rem] h-56 md:h-79 object-cover rounded-3xl shadow-xl" />
-                </div>
-                <div className={`flex flex-col justify-center w-full h-full text-left px-2 md:px-8 items-center md:items-center md:text-left`}>
-                  <h3 className="text-2xl md:text-4xl font-sans font-semibold mb-4 text-black">{industry.title}</h3>
-                  <p className="font-sans  md:text-xl text-gray-400">{industry.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    )
-  }
 
 
 
@@ -687,6 +575,252 @@ const Scroll3DSections = ({ children }) => {
 
 
 
+const SpecializedSolutionsSection = () => {
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const cardRef = useRef(null)
+  const scrollContainerRef = useRef(null)
+  const imageContainerRef = useRef(null)
+  const [currentCardIndex, setCurrentCardIndex] = useState(0)
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
+
+      gsap.to([titleRef.current, subtitleRef.current], {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+        }
+      })
+
+      const imageContainer = imageContainerRef.current
+      const scrollContainer = scrollContainerRef.current
+
+      if (!imageContainer || !scrollContainer) return
+
+      const ensureImagesLoaded = () => new Promise((resolve) => {
+        const imgs = imageContainer.querySelectorAll('img')
+        let remaining = 0
+        const done = () => {
+          remaining -= 1
+          if (remaining <= 0) resolve()
+        }
+        imgs.forEach((img) => {
+          if (img.complete) return
+          remaining += 1
+          img.addEventListener('load', done, { once: true })
+          img.addEventListener('error', done, { once: true })
+        })
+        if (remaining === 0) resolve()
+      })
+
+      let resizeHandler
+      let loadHandler
+
+      const createOrRefreshPin = () => {
+        const existing = ScrollTrigger.getById('pinnedSection')
+        if (existing) existing.kill()
+
+        // Reset internal scroll before measuring
+        scrollContainer.scrollTop = 0
+
+        const totalScrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight
+
+        ScrollTrigger.create({
+          id: 'pinnedSection',
+          trigger: imageContainer,
+          start: "top 25%",
+          end: `+=${Math.max(totalScrollHeight * 2, window.innerHeight)}`,
+          pin: true,
+          scrub: 1,
+          onUpdate: (self) => {
+            const scrollProgress = self.progress
+            const scrollPosition = scrollProgress * totalScrollHeight
+            scrollContainer.scrollTop = scrollPosition
+          },
+          invalidateOnRefresh: true,
+          refreshPriority: -1,
+        })
+
+        ScrollTrigger.refresh()
+      }
+
+      const init = async () => {
+        await ensureImagesLoaded()
+        requestAnimationFrame(() => {
+          createOrRefreshPin()
+        })
+      }
+
+      init()
+
+      resizeHandler = () => ScrollTrigger.refresh()
+      window.addEventListener('resize', resizeHandler)
+
+      loadHandler = () => ScrollTrigger.refresh()
+      window.addEventListener('load', loadHandler)
+
+      return () => {
+        window.removeEventListener('resize', resizeHandler)
+        window.removeEventListener('load', loadHandler)
+      }
+    }, sectionRef)
+
+    return () => {
+      const existing = ScrollTrigger.getById('pinnedSection')
+      if (existing) existing.kill()
+      ctx.revert()
+    }
+  }, [])
+
+  // Handle wheel scrolling for when section is not pinned (fallback)
+  useEffect(() => {
+    const imageContainer = imageContainerRef.current
+    const scrollContainer = scrollContainerRef.current
+
+    if (!imageContainer || !scrollContainer) return
+
+    const handleWheel = (e) => {
+      // Check if the section is currently pinned by ScrollTrigger
+      const scrollTriggerInstance = ScrollTrigger.getById('pinnedSection')
+
+      // Only handle wheel events if section is not pinned (fallback behavior)
+      if (!scrollTriggerInstance || !scrollTriggerInstance.isActive) {
+        e.preventDefault()
+
+        const scrollIncrement = e.deltaY * 0.8
+
+        scrollContainer.scrollBy({
+          top: scrollIncrement,
+          behavior: 'auto'
+        })
+      }
+    }
+
+    imageContainer.addEventListener('wheel', handleWheel, { passive: false })
+
+    return () => {
+      imageContainer.removeEventListener('wheel', handleWheel)
+    }
+  }, [])
+
+const industries = [
+    {
+      title: "Retail & E-Commerce",
+      desc: "AI-powered retail: personalized recommendations, inventory management, and seamless customer experiences.",
+      img: "/images/brand5-4.webp"
+    },
+    {
+      title: "Finance & Banking",
+      desc: "AI-driven financial services: fraud detection, risk management, and personalized banking experiences.",
+      img: "/images/brand5-5.webp"
+    },
+    {
+      title: "Manufacturing & Supply Chain",
+      desc: "AI-driven supply chain: predictive maintenance, inventory optimization, and smart logistics.",
+      img: "/images/brand5-3.webp"
+    },
+    {
+      title: "Healthcare & Wellness",
+      desc: "AI-driven healthcare: personalized treatment plans, predictive analytics, and telemedicine solutions.",
+      img: "/images/brand5-1.webp"
+    },
+    {
+      title: "Education & E-Learning",
+      desc: "AI-powered learning: personalized content, adaptive assessments, and virtual tutors.",
+      img: "/images/brand5-2.webp"
+    },
+  
+  ]
+
+  return (
+    <section ref={sectionRef} className="py-20 px-4 font-sans">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+          Industries We Serve
+       </h2>
+        </div>
+
+        {/* Background Image Section with Scrollable Cards */}
+        <div ref={imageContainerRef} className="relative w-full max-w-6xl mx-auto mb-16 cursor-pointer overflow-hidden">
+          {/* Background Image */}
+          <div className="relative ">
+            <img
+              src="/images/ecommerce23.webp"
+              alt="E-commerce Solutions"
+              className="w-full h-auto object-contain"
+            />
+
+            {/* Overlay with Parallax Scrollable Cards */}
+            <div className="absolute inset-0 flex items-center justify-center p-8">
+              <div
+                ref={scrollContainerRef}
+                className="w-full h-full overflow-y-auto p-6 scroll-container"
+                style={{
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none',
+                  scrollBehavior: 'auto' // Ensure smooth internal scrolling
+                }}
+              >
+                <div ref={cardRef} className="space-y-0">
+                  {industries.map((industry, index) => (
+                    <div
+                      key={index}
+                      className={`group flex flex-col lg:flex-row items-center gap-8  ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                        }   min-h-[500px] flex-shrink-0 mb-8`}
+                    >
+                      {/* Image Side */}
+                      <div className="w-full lg:w-1/2">
+                        <div className="relative overflow-hidden rounded-5xl">
+                          <img
+                            src={industry.img}
+                            alt={industry.title}
+                            className="w-full h-64 lg:h-80 object-contain  "
+                          />
+                          <div className="absolute inset-0 rounded-"></div>
+                        </div>
+                      </div>
+
+                      {/* Content Side */}
+                      <div className="w-full lg:w-1/2 text-center lg:text-left">
+                        <h3 className="text-2xl lg:text-4xl font-bold text-black mb-4 ">
+                          {industry.title}
+                        </h3>
+                        <p className="text-gray-600 text-xl leading-relaxed">
+                          {industry.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Hide Scrollbar Styles */}
+        <style jsx>{`
+          .scroll-container::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
+
+
+      </div>
+    </section>
+  )
+}
+
+
 
 const AIServicesPage = () => {
   return (
@@ -699,9 +833,9 @@ const AIServicesPage = () => {
 
       <SecondUseCasesSection />
       </Scroll3DSections>
-      <IndustriesSection />
-    
       
+    
+      <SpecializedSolutionsSection />
       <FAQSection />
       <Footer />
     </main>
