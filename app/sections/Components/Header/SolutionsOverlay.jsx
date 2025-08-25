@@ -46,12 +46,7 @@ const solutions = [
     image: "/images/solution6.webp",
     href: "/ui-ux-design-services"
   },
-  {
-    title: "SAAS Products",
-    description: " We develop scalable, cloud-based SaaS solutions that solve real problems and grow with your users.,",
-    image: "/images/solution5.webp",
-    href: "/commingsoon"
-  },
+
   {
     title: "Clouds & devOps",
     description: " Optimizing performance, speed, and reliability with expert DevOps practices and cloud architecture.",

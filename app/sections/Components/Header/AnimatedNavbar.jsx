@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import ServicesOverlay from "./ServicesOverlay"
 import SolutionsOverlay from "./SolutionsOverlay"
+import ResourcesOverlay from "./ResourcesOverlay"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -46,7 +47,7 @@ const navItems = [
   },
   {
     name: "Resources", 
-    link: "/commingsoon",
+    link: "#resources",
     icon: <BookOpen className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
 ]
@@ -68,16 +69,16 @@ const AnimatedNavbar = ({
       href: "#solutions",
       IconComponent: Lightbulb,
     },
-    {
-        name: "Industries",
-      href: "/commingsoon",
-      IconComponent: Building2,
-    },
-    {
-      name: "Expertise",
-      href: "/commingsoon",
-      IconComponent: GraduationCap,
-    },
+    // {
+    //     name: "Industries",
+    //   href: "/commingsoon",
+    //   IconComponent: Building2,
+    // },
+    // {
+    //   name: "Expertise",
+    //   href: "/commingsoon",
+    //   IconComponent: GraduationCap,
+    // },
     {
       name: "AI",
       href: "/ai-services",
@@ -85,7 +86,7 @@ const AnimatedNavbar = ({
     },
     {
       name: "Resources",
-      href: "/commingsoon",
+      href: "#resources",
       IconComponent: BookOpen,
     },
   ],
@@ -113,6 +114,7 @@ const AnimatedNavbar = ({
   const [currentHoveredIcon, setCurrentHoveredIcon] = useState(null)
   const [showServicesOverlay, setShowServicesOverlay] = useState(false)
   const [showSolutionsOverlay, setShowSolutionsOverlay] = useState(false)
+  const [showResourcesOverlay, setShowResourcesOverlay] = useState(false)
   
   // Check if device is mobile
   useEffect(() => {
@@ -573,6 +575,11 @@ const AnimatedNavbar = ({
     setShowSolutionsOverlay(true)
   }
 
+  const handleResourcesClick = (e) => {
+    e.preventDefault()
+    setShowResourcesOverlay(true)
+  }
+
   const handleMenuItemHover = (item, isEntering) => {
     const cursor = customCursorRef.current
     const cursorIcon = cursorIconRef.current
@@ -615,6 +622,11 @@ const AnimatedNavbar = ({
         <SolutionsOverlay onClose={() => setShowSolutionsOverlay(false)} />
       )}
 
+      {/* Resources Overlay */}
+      {showResourcesOverlay && (
+        <ResourcesOverlay onClose={() => setShowResourcesOverlay(false)} />
+      )}
+
       {/* FloatingNav for Desktop - Shows in non-hero sections */}
       <div className="hidden md:block">
         <FloatingNav
@@ -622,6 +634,7 @@ const AnimatedNavbar = ({
           className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl"
           onServicesClick={() => setShowServicesOverlay(true)}
           onSolutionsClick={() => setShowSolutionsOverlay(true)}
+          onResourcesClick={() => setShowResourcesOverlay(true)}
         />
       </div>
 
@@ -702,6 +715,8 @@ const AnimatedNavbar = ({
                     handleServicesClick(e)
                   } else if (item.name === "Solutions") {
                     handleSolutionsClick(e)
+                  } else if (item.name === "Resources") {
+                    handleResourcesClick(e)
                   } else if (item.href.startsWith('/')) {
                     // Handle page navigation for routes like /about
                     window.location.href = item.href
@@ -871,6 +886,8 @@ const AnimatedNavbar = ({
                         setShowServicesOverlay(true)
                       } else if (item.name === "Solutions") {
                         setShowSolutionsOverlay(true)
+                      } else if (item.name === "Resources") {
+                        setShowResourcesOverlay(true)
                       } else if (item.href.startsWith('/')) {
                         // Handle page navigation for routes like /about
                         window.location.href = item.href

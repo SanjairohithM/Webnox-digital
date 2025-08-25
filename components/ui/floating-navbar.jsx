@@ -13,7 +13,8 @@ export const FloatingNav = ({
   navItems,
   className,
   onServicesClick,
-  onSolutionsClick
+  onSolutionsClick,
+  onResourcesClick
 }) => {
   const { scrollYProgress } = useScroll();
 
@@ -65,6 +66,9 @@ export const FloatingNav = ({
               } else if (navItem.name === "Solutions") {
                 e.preventDefault()
                 onSolutionsClick && onSolutionsClick()
+              } else if (navItem.name === "Resources") {
+                e.preventDefault()
+                onResourcesClick && onResourcesClick()
               }
             }}
             className={cn(
