@@ -218,39 +218,46 @@ const AnimatedTextSection = () => {
   const sectionRef = useRef(null)
 
   const brands = [
-    { name: "Point", logo: "/images/consultlogo1.png" },
-    { name: "Interlock", logo: "/images/consultlogo2.png" },
-    { name: "Spherule", logo: "/images/consultlogo3.png" },
-    { name: "Nietzsche", logo: "/images/consultlogo1.png" },
-    { name: "GlobalBank", logo: "/images/consultlogo2.png" },
-    { name: "FeatherDev", logo: "/images/consultlogo3.png" },
-    { name: "Foca", logo: "/images/consultlogo1.png" }
+    { logo: "/images/brandlogo1.webp" },
+    { logo: "/images/brandlogo2.webp" },
+    { logo: "/images/brandlogo3.webp" },
+    { logo: "/images/brandlogo4.webp" },
+    { logo: "/images/brandlogo5.webp" },
+    { logo: "/images/brandlogo6.webp" },
   ]
 
   // Duplicate brands for seamless infinite scrolling
-  const duplicatedBrands = [...brands, ...brands]
+  const duplicatedBrands = [...brands, ...brands, ...brands]
 
   return (
     <section ref={sectionRef} className="bg-white py-8 sm:py-12 lg:py-16 px-4 overflow-hidden">
       <div className="max-w-full mx-auto">
-        <div className="flex items-center animate-ticker-left whitespace-nowrap">
-          {duplicatedBrands.map((brand, index) => (
-            <div 
-              key={index}
-              className="flex items-center space-x-2 opacity-60 hover:opacity-100 transition-opacity duration-300 mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-16"
-            >
-              <Image 
-                src={brand.logo} 
-                alt={brand.name} 
-                width={24} 
-                height={24} 
-                className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 object-contain"
-              />
-              <span className="text-gray-700 font-bold font-sans text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
-                {brand.name}
-              </span>
-            </div>
-          ))}
+        <div className="relative">
+        
+          
+          <div className="flex items-center animate-brand-ticker whitespace-nowrap">
+            {duplicatedBrands.map((brand, index) => (
+              <div 
+                key={index}
+                className="flex items-center justify-center mx-8 sm:mx-12 md:mx-16 lg:mx-20 xl:mx-24"
+              >
+                <Image 
+                  src={brand.logo} 
+                  alt={`Brand logo ${index + 1}`}
+                  width={120} 
+                  height={120} 
+                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
+                  priority={index < 6}
+                  onError={(e) => {
+                    console.error(`Failed to load image: ${brand.logo}`, e)
+                  }}
+                  onLoad={() => {
+                    console.log(`Successfully loaded: ${brand.logo}`)
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -916,14 +923,15 @@ const FAQSection = () => {
 const OutsourcingPage = () => {
   return (
     <main className="@/outsourcing">
-      <Scroll3DSections>
-      <HeroSection />
-      <AnimatedTextSection />
-      <FutureProofSection />
-      <RobotSection />
-      <CoreServicesSection />
-      </Scroll3DSections>
       
+        <HeroSection />
+        <AnimatedTextSection />
+        <Scroll3DSections>
+        <FutureProofSection /> 
+        <RobotSection />
+        <CoreServicesSection />
+        </Scroll3DSections>
+     
       
       <FAQSection />
       <Footer />

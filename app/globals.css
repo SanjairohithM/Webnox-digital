@@ -193,11 +193,26 @@ body {
   0% { transform: translateX(-50%); }
   100% { transform: translateX(0); }
 }
+@keyframes brand-ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 .animate-ticker-left {
   animation: ticker-left 30s linear infinite;
 }
 .animate-ticker-right {
   animation: ticker-right 30s linear infinite;
+}
+.animate-brand-ticker {
+  animation: brand-ticker 35s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Ensure the container is visible and properly sized */
+  min-width: max-content;
+  /* Force hardware acceleration */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .clip-triangle {
