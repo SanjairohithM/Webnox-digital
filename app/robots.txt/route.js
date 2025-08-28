@@ -16,9 +16,6 @@ Sitemap: https://www.webnoxdigital.com/sitemap.xml`;
 
   return new Response(robotsContent, {
     status: 200,
-    headers: {
-      'Content-Type': 'text/plain; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
-    },
+    // Vercel will handle headers via vercel.json
   });
 }
