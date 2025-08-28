@@ -159,6 +159,11 @@ ${routes.map(route => `  <url>
   return sitemapContent;
 }
 
+// Export the XML generation function for use in API routes
+function generateSitemapXMLContent() {
+  return generateSitemapXML();
+}
+
 // Generate robots.txt
 function generateRobotsTxt() {
   const robotsContent = `# *
@@ -209,4 +214,4 @@ if (require.main === module) {
   generateSitemap();
 }
 
-module.exports = { generateSitemap, routes };
+module.exports = { generateSitemap, routes, generateSitemapXMLContent };
