@@ -1,18 +1,7 @@
 export async function GET() {
-  const robotsContent = `# *
+  const robotsContent = `Sitemap: https://webnoxdigital.com/sitemap.xml
 User-agent: *
-Allow: /
-Disallow: /admin/*
-Disallow: /api/*
-Disallow: /_next/*
-Disallow: /test/*
-Disallow: /demo/*
-
-# Host
-Host: https://www.webnoxdigital.com
-
-# Sitemaps
-Sitemap: https://www.webnoxdigital.com/sitemap.xml`;
+Allow: /`;
 
   return new Response(robotsContent, {
     status: 200,
