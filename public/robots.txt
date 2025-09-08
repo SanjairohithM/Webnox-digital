@@ -1,3 +1,6 @@
+Sitemap: https://webnoxdigital.com/sitemap.xml
+User-agent: *
+Allow: /
 export async function GET() {
   const robotsContent = `Sitemap: https://webnoxdigital.com/sitemap.xml
 User-agent: *
