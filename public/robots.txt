@@ -1,13 +1,7 @@
 Sitemap: https://webnoxdigital.com/sitemap.xml
-User-agent: *
-Allow: /
-export async function GET() {
-  const robotsContent = `Sitemap: https://webnoxdigital.com/sitemap.xml
-User-agent: *
-Allow: /`;
 
-  return new Response(robotsContent, {
-    status: 200,
-    // Vercel will handle headers via vercel.json
-  });
-}
+User-agent: *
+Disallow: /index.php?shopdetail
+Disallow: /index.php?product
+Disallow: /?p=
+Allow: /
