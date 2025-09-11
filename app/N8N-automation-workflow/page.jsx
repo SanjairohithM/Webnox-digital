@@ -10,7 +10,7 @@ import Link from "next/link";
 // import FAQSection from "../components/FAQSection";
 // import TickerSection from "../components/TickerSection";
 
-
+   
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
@@ -41,6 +41,7 @@ const HeroSection = () => {
           start: "top 80%",
         }
       })
+
       
       // Animate each element with a quick fade-in
       tl.to(titleBlueRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" })

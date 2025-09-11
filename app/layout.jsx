@@ -11,6 +11,14 @@ export const metadata = {
   verification: {
     google: "dPoW0wzIi2VpSOg4ew-Ov7FLsv21XKLexjM8WpR6nlA",
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/ico' },
+      { url: '/favicon.ico', sizes: '16x16', type: 'image/ico' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
 }
 
 const urbanist = Urbanist({

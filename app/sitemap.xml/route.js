@@ -22,7 +22,7 @@ export async function GET() {
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-</urlset>`;
+</urlset>`;  
     
     return new Response(fallbackSitemap, {
       status: 200,
