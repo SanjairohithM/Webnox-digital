@@ -4,7 +4,7 @@ import React, { useRef, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, Linkedin } from "lucide-react"
-import Robot from "@/Three/Models/Robot"
+// import Robot from "@/Three/Models/Robot"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -68,7 +68,7 @@ export default function Footer() {
     >
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 ">
         {/* Top: Robot centered */}
-        <div className="flex items-center justify-center mb-10">
+        {/* <div className="flex items-center justify-center mb-10">
           <div className="relative -left-60 -top-20 md:-left-68 md:-top-46 z-[80]">
             <div
               ref={robotRef}
@@ -78,7 +78,7 @@ export default function Footer() {
               <Robot />
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Bottom: 4 columns of links/info under the robot */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-start mt-120 md:mt-50">
