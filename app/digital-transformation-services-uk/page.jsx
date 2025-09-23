@@ -202,28 +202,59 @@ const Floating3DFeaturesSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
       <div
         ref={backgroundRef}
-        className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent"
+        className="absolute inset-0 bg-gradient-to-br from-blue-50/20 to-transparent"
       />
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="space-y-20">
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
+              const isEven = index % 2 === 0;
+              
               return (
                 <div
                   key={index}
                   ref={(el) => (featureRefs.current[index] = el)}
-                  className="flex flex-col items-start border border-[#00B9FF] rounded-3xl p-4"
+                  className={`flex flex-col lg:flex-row items-center gap-16 ${
+                    isEven ? "" : "lg:flex-row-reverse"
+                  }`}
                 >
-                  <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00B9FF] to-[#0097D9] flex items-center justify-center mb-6">
-                    <IconComponent size={28} className="text-white" />
+                  {/* Icon and Visual Element */}
+                  <div className="lg:w-1/2 flex justify-center lg:justify-start">
+                    <div className="relative">
+                      {/* Main icon container */}
+                      <div className="w-32 h-32 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-full flex items-center justify-center shadow-2xl">
+                        <IconComponent size={48} className="text-white" />
+                      </div>
+                      
+                      {/* Decorative rings */}
+                      <div className="absolute -inset-4 border-2 border-[#00B9FF]/20 rounded-full"></div>
+                      <div className="absolute -inset-8 border border-[#0097D9]/10 rounded-full"></div>
+                      
+                      {/* Floating elements */}
+                      <div className="absolute -top-4 -right-4 w-6 h-6 bg-[#00B9FF]/20 rounded-full"></div>
+                      <div className="absolute -bottom-4 -left-4 w-4 h-4 bg-[#0097D9]/20 rounded-full"></div>
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-base">{feature.description}</p>
+                  
+                  {/* Content */}
+                  <div className="lg:w-1/2 text-center lg:text-left">
+                    <div className="max-w-lg mx-auto lg:mx-0">
+                      <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        {feature.title}
+                      </h3>
+                      <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                        {feature.description}
+                      </p>
+                      
+                      {/* Feature highlight line */}
+                      <div className="w-20 h-1 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] mx-auto lg:mx-0 rounded-full"></div>
+                    </div>
+                  </div>
                 </div>
               );
             })}
@@ -305,21 +336,36 @@ const CleanAdvantageSection = () => {
           </h2>
         </div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {advantages.map((advantage, index) => {
               const IconComponent = advantage.icon;
               return (
                 <div
                   key={index}
                   ref={(el) => (advantageRefs.current[index] = el)}
-                  className="flex flex-col items-start"
+                  className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#00B9FF]/20 hover:-translate-y-2"
                 >
-                  <div className="w-14 h-14 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-xl flex items-center justify-center mb-5">
-                    <IconComponent size={22} className="text-white" />
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF]/5 to-[#0097D9]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Icon container with enhanced styling */}
+                  <div className="relative z-10 w-16 h-16 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <IconComponent size={28} className="text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{advantage.title}</h3>
-                  <p className="text-gray-700 leading-relaxed text-base">{advantage.description}</p>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-[#0097D9] transition-colors duration-300">
+                      {advantage.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed text-base group-hover:text-gray-700 transition-colors duration-300">
+                      {advantage.description}
+                    </p>
+                  </div>
+                  
+                  {/* Decorative element */}
+                  <div className="absolute top-6 right-6 w-2 h-2 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               );
             })}
@@ -517,43 +563,177 @@ const CleanUKCoverageSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-blue-50 to-cyan-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+    <section ref={sectionRef} className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+      {/* Geometric Background Elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-20 w-32 h-32 border border-[#00B9FF] rotate-45"></div>
+        <div className="absolute top-40 right-32 w-24 h-24 border border-[#0097D9] rotate-12"></div>
+        <div className="absolute bottom-32 left-40 w-28 h-28 border border-[#007AC3] rotate-45"></div>
+        <div className="absolute bottom-20 right-20 w-20 h-20 border border-[#00B9FF] rotate-12"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center mb-12 md:mb-20">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
             Serving Enterprises{" "}
             <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
               Across the UK
             </span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
             From financial hubs in London to tech startups in Manchester, we partner with 
             businesses nationwide to drive digital transformation success.
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
-            {ukCities.map((city, index) => {
-              const IconComponent = city.icon;
-              return (
-                <div
-                  key={index}
-                  ref={(el) => (cityRefs.current[index] = el)}
-                  className="flex flex-col items-center text-center"
-                >
-                  <div className="w-14 h-14 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-xl flex items-center justify-center mb-4">
-                    <IconComponent size={24} className="text-white" />
+        <div className="max-w-7xl mx-auto">
+          {/* Responsive Grid Layout */}
+          <div className="relative">
+            {/* Central Hub - Hidden on mobile, shown on larger screens */}
+            <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+              <div className="w-24 h-24 xl:w-32 xl:h-32 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-full flex items-center justify-center shadow-2xl">
+                <Globe size={32} className="text-white xl:w-10 xl:h-10" />
+              </div>
+              <div className="absolute -inset-3 xl:-inset-4 border-2 border-[#00B9FF]/30 rounded-full"></div>
+            </div>
+
+            {/* Mobile Layout: Simple Grid */}
+            <div className="lg:hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {ukCities.map((city, index) => {
+                  const IconComponent = city.icon;
+                  return (
+                    <div
+                      key={index}
+                      ref={(el) => (cityRefs.current[index] = el)}
+                      className="group bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-[#00B9FF] transition-all duration-300 hover:shadow-lg"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                          <IconComponent size={20} className="text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-[#0097D9] transition-colors duration-300">
+                            {city.name}
+                          </h3>
+                          <p className="text-sm text-gray-600 leading-relaxed">
+                            {city.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Desktop Layout: Hexagonal Grid with Perfect Alignment */}
+            <div className="hidden lg:block">
+              <div className="relative min-h-[600px] xl:min-h-[500px]">
+                {/* Perfectly Aligned Hexagonal Grid */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="grid grid-cols-5 gap-8 xl:gap-12 w-full max-w-5xl">
+                    {/* Row 1 */}
+                    <div className="col-span-1 flex justify-center">
+                      <CityHexagon city={ukCities[0]} index={0} cityRefs={cityRefs} />
+                    </div>
+                    <div className="col-span-1 flex justify-center">
+                      <CityHexagon city={ukCities[1]} index={1} cityRefs={cityRefs} />
+                    </div>
+                    <div className="col-span-1 flex justify-center">
+                      <CityHexagon city={ukCities[2]} index={2} cityRefs={cityRefs} />
+                    </div>
+                    <div className="col-span-1 flex justify-center">
+                      <CityHexagon city={ukCities[3]} index={3} cityRefs={cityRefs} />
+                    </div>
+                    <div className="col-span-1 flex justify-center">
+                      <CityHexagon city={ukCities[4]} index={4} cityRefs={cityRefs} />
+                    </div>
+                    
+                    {/* Row 2 - Offset for hexagonal effect */}
+                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
+                      <CityHexagon city={ukCities[5]} index={5} cityRefs={cityRefs} />
+                    </div>
+                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
+                      <CityHexagon city={ukCities[6]} index={6} cityRefs={cityRefs} />
+                    </div>
+                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
+                      <CityHexagon city={ukCities[7]} index={7} cityRefs={cityRefs} />
+                    </div>
+                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
+                      <CityHexagon city={ukCities[8]} index={8} cityRefs={cityRefs} />
+                    </div>
+                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
+                      <CityHexagon city={ukCities[9]} index={9} cityRefs={cityRefs} />
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{city.name}</h3>
-                  <p className="text-gray-600 text-sm">{city.description}</p>
                 </div>
-              );
-            })}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Metrics Bar - Responsive */}
+          <div className="mt-16 md:mt-20 lg:mt-24 bg-gradient-to-r from-[#00B9FF]/10 via-[#0097D9]/10 to-[#007AC3]/10 rounded-2xl p-6 md:p-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 text-center">
+              <div className="space-y-2">
+                <div className="text-2xl md:text-3xl font-bold text-[#00B9FF]">10+</div>
+                <div className="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wide">Cities Served</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-2xl md:text-3xl font-bold text-[#0097D9]">500+</div>
+                <div className="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wide">Projects Completed</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-2xl md:text-3xl font-bold text-[#007AC3]">98%</div>
+                <div className="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wide">Success Rate</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
+  );
+};
+
+// Separate component for hexagonal city items
+const CityHexagon = ({ city, index, cityRefs }) => {
+  const IconComponent = city.icon;
+  
+  return (
+    <div
+      ref={(el) => (cityRefs.current[index] = el)}
+      className="relative group"
+    >
+      {/* Hexagonal Container */}
+      <div className="relative w-32 h-32 xl:w-40 xl:h-40">
+        {/* Hexagon Shape */}
+        <div className="absolute inset-0 bg-white border-2 border-gray-200 transform rotate-45 group-hover:border-[#00B9FF] transition-colors duration-300 shadow-lg group-hover:shadow-xl">
+          <div className="absolute inset-0 flex flex-col items-center justify-center transform -rotate-45 p-4 xl:p-6">
+            {/* Icon */}
+            <div className="w-8 h-8 xl:w-12 xl:h-12 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-xl flex items-center justify-center mb-2 xl:mb-3 group-hover:scale-110 transition-transform duration-300">
+              <IconComponent size={16} className="text-white xl:w-5 xl:h-5" />
+            </div>
+            
+            {/* City Name */}
+            <h3 className="text-sm xl:text-lg font-bold text-gray-900 mb-1 xl:mb-2 group-hover:text-[#0097D9] transition-colors duration-300 text-center leading-tight">
+              {city.name}
+            </h3>
+            
+            {/* Description */}
+            <p className="text-xs xl:text-sm text-gray-600 text-center leading-tight group-hover:text-gray-700 transition-colors duration-300">
+              {city.description}
+            </p>
+          </div>
+        </div>
+        
+        {/* Connection Line to Center - Only on desktop */}
+        <div className="absolute top-1/2 left-1/2 w-px h-16 xl:h-20 bg-gradient-to-b from-[#00B9FF]/30 to-transparent transform -translate-x-1/2 -translate-y-full origin-bottom"></div>
+        
+        {/* Corner Accents */}
+        <div className="absolute -top-1 -right-1 xl:-top-2 xl:-right-2 w-3 h-3 xl:w-4 xl:h-4 bg-[#00B9FF] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute -bottom-1 -left-1 xl:-bottom-2 xl:-left-2 w-2 h-2 xl:w-3 xl:h-3 bg-[#0097D9] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      </div>
+    </div>
   );
 };
 
