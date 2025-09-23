@@ -8,6 +8,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Building2, Settings, Rocket, Shield, Handshake, Code, RefreshCw, Database, Zap, ShoppingCart, MapPin, Users, Briefcase, Factory, Star, ArrowRight, Sparkles, Globe, TrendingUp, Palette, Target, FileText, Monitor, RefreshCcw } from "lucide-react"
 import Footer from "../sections/Footer"
+import { useGSAP } from "@gsap/react"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
@@ -211,78 +212,91 @@ const FloatingIntroSection = () => {
   const sectionRef = useRef(null)
   const cardsRef = useRef([])
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      cardsRef.current.forEach((card, index) => {
-        if (card) {
-          // Floating animation
-          gsap.to(card, {
-            y: -20,
-            rotation: 5,
-            duration: 2 + index * 0.5,
-            repeat: -1,
-            yoyo: true,
-            ease: "power2.inOut"
-          })
-
-          // Scroll reveal
-          gsap.fromTo(card, 
-            { 
-              y: 200, 
-              opacity: 0,
-              rotationX: 45,
-              scale: 0.8
-            },
-            { 
-              y: 0, 
-              opacity: 1,
-              rotationX: 0,
-              scale: 1,
-              duration: 1.5, 
-              ease: "power3.out",
-              delay: index * 0.2,
-              scrollTrigger: {
-                trigger: card,
-                start: "top 85%",
-                end: "bottom 15%",
-                toggleActions: "play none none reverse"
-              }
+  useGSAP(() => {
+    cardsRef.current.forEach((card, index) => {
+      if (card) {
+        // Clean scroll reveal only - no floating animation
+        gsap.fromTo(card, 
+          { 
+            y: 60, 
+            opacity: 0,
+            scale: 0.95
+          },
+          { 
+            y: 0, 
+            opacity: 1,
+            scale: 1,
+            duration: 1, 
+            ease: "power3.out",
+            delay: index * 0.15,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse"
             }
-          )
-        }
-      })
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
+          }
+        )
+      }
+    })
+  }, { scope: sectionRef })
 
   return (
     <section 
       ref={sectionRef}
-      className="py-32 relative overflow-hidden bg-white"
+      className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { icon: Target, title: "US Industries", desc: "Tech, finance, retail, healthcare" },
-            { icon: Globe, title: "Research-Driven", desc: "Market insights, competitor benchmarking" },
-            { icon: TrendingUp, title: "Proven Results", desc: "Trusted by US companies with case studies" }
-          ].map((item, index) => (
-            <div
-              key={index}
-              ref={el => cardsRef.current[index] = el}
-              className="group relative bg-gradient-to-br from-white to-blue-50 rounded-3xl p-8 border border-gray-200 hover:border-[#00B9FF] transition-all duration-500 transform hover:scale-105 shadow-lg hover:shadow-2xl"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF]/10 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-2xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300 shadow-lg">
+      {/* Subtle background elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-20 w-32 h-32 border border-[#00B9FF] rotate-45"></div>
+        <div className="absolute top-40 right-32 w-24 h-24 border border-[#0097D9] rotate-12"></div>
+        <div className="absolute bottom-32 left-40 w-28 h-28 border border-[#007AC3] rotate-45"></div>
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Why Choose Our{" "}
+            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
+              US Branding Solutions?
+            </span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Built specifically for the US market with deep understanding of local culture, 
+            business practices, and consumer preferences.
+          </p>
+        </div>
+
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { icon: Target, title: "US Industries", desc: "Tech, finance, retail, healthcare" },
+              { icon: Globe, title: "Research-Driven", desc: "Market insights, competitor benchmarking" },
+              { icon: TrendingUp, title: "Proven Results", desc: "Trusted by US companies with case studies" }
+            ].map((item, index) => (
+              <div
+                key={index}
+                ref={el => cardsRef.current[index] = el}
+                className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#00B9FF]/20 hover:-translate-y-2"
+              >
+                {/* Gradient overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF]/5 to-[#0097D9]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Icon container with enhanced styling */}
+                <div className="relative z-10 w-16 h-16 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <item.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-[#00B9FF] transition-colors duration-300">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-[#0097D9] transition-colors duration-300">{item.title}</h3>
+                  <p className="text-gray-600 leading-relaxed text-base group-hover:text-gray-700 transition-colors duration-300">{item.desc}</p>
+                </div>
+                
+                {/* Decorative element */}
+                <div className="absolute top-6 right-6 w-2 h-2 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -562,9 +576,9 @@ const ParallaxServicesSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-32 relative overflow-hidden bg-white"
+      className="pt-16 pb-32 relative overflow-hidden bg-white"
     >
-      {/* Parallax Background */}
+      {/* Parallax Background */} 
       <div 
         ref={parallaxRef}
         className="absolute inset-0 bg-gradient-to-br from-[#00B9FF]/5 to-[#0097D9]/5"
@@ -713,7 +727,7 @@ const InteractiveUSACoverageSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-32 relative overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50"
+      className="pt-16 pb-32 relative overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
         <h2 
@@ -857,7 +871,7 @@ const MagneticCTASection = () => {
           <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
             <Link href="/contact-us">
               <button
-                ref={el => buttonsRef.current[0] = el}
+                // ref={el => buttonsRef.current[0] = el}
                 className="group relative inline-flex items-center px-12 py-6 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] text-white font-bold text-xl rounded-full shadow-2xl hover:shadow-[#00B9FF]/50 transition-all duration-300 transform hover:scale-110 hover:-translate-y-2"
               >
                 <span className="relative z-10 flex items-center">
