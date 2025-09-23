@@ -590,7 +590,7 @@ const CleanUKCoverageSection = () => {
           {/* Responsive Grid Layout */}
           <div className="relative">
             {/* Central Hub - Hidden on mobile, shown on larger screens */}
-            <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+            <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
               <div className="w-24 h-24 xl:w-32 xl:h-32 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-full flex items-center justify-center shadow-2xl">
                 <Globe size={32} className="text-white xl:w-10 xl:h-10" />
               </div>
@@ -791,7 +791,7 @@ const MagneticCTASection = () => {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="py-32 bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+    <section ref={sectionRef} className="py-32 bg-gradient-to-br from-[#00B9FF] via-[#0097D9] to-[#007AC3] relative overflow-hidden">
       {/* Sparkle elements */}
       {[...Array(6)].map((_, index) => (
         <div
@@ -810,18 +810,18 @@ const MagneticCTASection = () => {
       <div className="container mx-auto px-6 text-center relative z-10">
         <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
           Accelerate Your{" "}
-          <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
+          <span className="text-white/90">
             UK Digital Transformation
           </span>
         </h2>
-        <p className="text-xl text-blue-200 mb-16 max-w-4xl mx-auto leading-relaxed">
+        <p className="text-xl text-white/80 mb-16 max-w-4xl mx-auto leading-relaxed">
           Ready to modernise your enterprise and compete globally? Let's discuss your 
           digital transformation strategy and unlock your business potential.
         </p>
         <Link
           href="/contact"
           ref={buttonRef}
-          className="inline-flex items-center gap-3 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] text-white px-12 py-6 rounded-full text-xl font-semibold hover:from-[#0097D9] hover:to-[#007AC3] transition-all duration-300 shadow-2xl"
+          className="inline-flex items-center gap-3 bg-white text-[#00B9FF] px-12 py-6 rounded-full text-xl font-semibold border-4 border-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] hover:bg-[#00B9FF] hover:text-white hover:border-[#00B9FF] transition-all duration-300 shadow-2xl"
         >
           Request a Free Strategy Call
           <ArrowRight size={24} />
