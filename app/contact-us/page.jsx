@@ -288,31 +288,60 @@ const ContactPage = () => {
                       
 
                         {/* Email */}
-                        <div className="bg-gray-100 rounded-xl p-6 md:p-8 shadow-sm">
-                            <div className="flex items-center justify-between mb-4 md:mb-6">
-                                <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">You can E-mail here</h3>
-                                <div className="w-8 h-8 md:w-12 md:h-12 bg-[#00b9ff] rounded-full flex items-center justify-center">
-                                    <span className="text-black text-sm md:text-xl"><MoveUpRight /></span>
+                        <div className="bg-gray-100 rounded-xl p-4 sm:p-6 md:p-8 shadow-sm transition-shadow duration-300" 
+                             onClick={() => {
+                                // Try Gmail first, fallback to mailto
+                                const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=info@webnoxdigital.com&su=Contact from Website&body=Hello, I would like to get in touch with you.';
+                                const mailtoUrl = 'mailto:info@webnoxdigital.com?subject=Contact from Website&body=Hello, I would like to get in touch with you.';
+                                
+                                // Open Gmail in new tab
+                                window.open(gmailUrl, '_blank');
+                                
+                                // Fallback: also try mailto (for desktop email clients)
+                                setTimeout(() => {
+                                    window.open(mailtoUrl, '_self');
+                                }, 100);
+                             }}>
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 md:mb-6 gap-3 sm:gap-4">
+                                <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">You can E-mail here</h3>
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#00b9ff] rounded-full flex items-center justify-center self-start sm:self-auto">
+                                    <span className="text-black text-sm sm:text-base md:text-xl"><MoveUpRight /></span>
                                 </div>
                             </div>
-                            <div className="space-y-2 text-gray-600 underline text-sm md:text-base">
-                                <p>info@webnoxdigital.com</p>
-                           
+                            <div className="space-y-2 text-gray-600">
+                                <p className="break-all sm:break-normal text-sm sm:text-base md:text-base font-medium underline hover:text-[#00b9ff] hover:no-underline transition-all duration-200 cursor-pointer">
+                                    info@webnoxdigital.com
+                                </p>
+                                <p className="text-xs sm:text-sm text-gray-500">
+                                    Click to open Gmail with pre-filled details
+                                </p>
                             </div>
                         </div>
 
                         {/* Phone */}
-                        <div className="bg-gray-100 rounded-xl p-6 md:p-8 shadow-sm">
-                            <div className="flex items-center justify-between mb-4 md:mb-6">
-                                <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">Call us on</h3>
-                                <div className="w-8 h-8 md:w-12 md:h-12 bg-[#00b9ff] rounded-full flex items-center justify-center">
-                                    <span className="text-black text-sm md:text-xl"><MoveUpRight /></span>
+                        <div className="bg-gray-100 rounded-xl p-4 sm:p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 md:mb-6 gap-3 sm:gap-4">
+                                <div>
+                                    <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">Call us on</h3>
+                                    <p className="text-xs sm:text-sm text-gray-500 mt-1">Tap any number to call directly</p>
+                                </div>
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#00b9ff] rounded-full flex items-center justify-center self-start sm:self-auto">
+                                    <span className="text-black text-sm sm:text-base md:text-xl"><MoveUpRight /></span>
                                 </div>
                             </div>
-                            <div className="space-y-2 text-gray-600 underline text-sm md:text-base">
-                                <p>+91 97865 57739</p>
-                                <p>+91 95851 25566</p>
-                                <p>+91 63800 72252</p>
+                            <div className="space-y-3 text-gray-600 text-sm sm:text-base md:text-base">
+                                <a href="tel:+919786557739" className="block hover:text-[#00b9ff] transition-colors duration-200 cursor-pointer underline hover:no-underline p-2 rounded-lg hover:bg-blue-50 transition-all duration-200">
+                                    <span className="font-medium">+91 97865 57739</span>
+                                    <span className="text-xs text-gray-500 ml-2">(Tap to call)</span>
+                                </a>
+                                <a href="tel:+919585125566" className="block hover:text-[#00b9ff] transition-colors duration-200 cursor-pointer underline hover:no-underline p-2 rounded-lg hover:bg-blue-50 transition-all duration-200">
+                                    <span className="font-medium">+91 95851 25566</span>
+                                    <span className="text-xs text-gray-500 ml-2">(Tap to call)</span>
+                                </a>
+                                <a href="tel:+916380072252" className="block hover:text-[#00b9ff] transition-colors duration-200 cursor-pointer underline hover:no-underline p-2 rounded-lg hover:bg-blue-50 transition-all duration-200">
+                                    <span className="font-medium">+91 63800 72252</span>
+                                    <span className="text-xs text-gray-500 ml-2">(Tap to call)</span>
+                                </a>
                             </div>
                         </div>
                     </div>
