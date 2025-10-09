@@ -10,38 +10,35 @@ const statsData = [
   {
     id: 1,
     number: "500+",
-    label: "Projects Delivered",
-    description: "Successfully completed projects across various industries"
+    label: "Projects Delivered"
   },
   {
     id: 2,
     number: "14+",
-    label: "Years of Industry Experience",
-    description: "Deep expertise in digital transformation and innovation"
+    label: "Years of Industry Experience"
   },
   {
     id: 3,
     number: "98%",
-    label: "Client Retention Rate",
-    description: "Long-term partnerships built on trust and results"
+    label: "Client Retention Rate"
   },
   {
     id: 4,
     number: "15+",
-    label: "Industries Served",
-    description: "Proven results across diverse business sectors"
+    label: "Industries Served"
+    
   },
   {
     id: 5,
-    label: "Transparent Communication & Reporting",
-    description: "Regular updates and clear project visibility"
+    number: "100%",
+    label: "Transparent Communication & Reporting"
+    
   }
 ]
 
 export default function AboutFifth() {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
-  const subtitleRef = useRef(null)
   const statsRef = useRef(null)
 
   useEffect(() => {
@@ -51,7 +48,7 @@ export default function AboutFifth() {
       
       if (isDesktop) {
         // Set initial states
-        gsap.set([subtitleRef.current, titleRef.current], {
+        gsap.set([titleRef.current], {
           opacity: 0,
           y: 50
         })
@@ -72,18 +69,12 @@ export default function AboutFifth() {
           },
         })
 
-        headerTl.to(subtitleRef.current, {
+        headerTl.to(titleRef.current, {
           opacity: 1,
           y: 0,
           duration: 0.8,
           ease: "power3.out",
         })
-        .to(titleRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        }, "-=0.4")
 
         // Stats animation with stagger
         gsap.to(".stat-card", {
@@ -144,7 +135,7 @@ export default function AboutFifth() {
         })
       } else {
         // Simple fade animations for mobile
-        gsap.set([subtitleRef.current, titleRef.current, ".stat-card"], {
+        gsap.set([titleRef.current, ".stat-card"], {
           opacity: 0,
           y: 30
         })
@@ -158,18 +149,12 @@ export default function AboutFifth() {
           },
         })
 
-        headerTl.to(subtitleRef.current, {
+        headerTl.to(titleRef.current, {
           opacity: 1,
           y: 0,
           duration: 0.6,
           ease: "power2.out",
         })
-        .to(titleRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        }, "-=0.3")
 
         gsap.to(".stat-card", {
           opacity: 1,
@@ -203,13 +188,8 @@ export default function AboutFifth() {
       <div className="relative z-10 w-full max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <p ref={subtitleRef} className="text-lg sm:text-xl lg:text-2xl font-sans text-gray-600 mb-4 opacity-0">
-            Why Brands Trust Webnox Digital
-          </p>
           <h2 ref={titleRef} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-sans font-bold text-gray-800 leading-tight opacity-0">
-            Proven Excellence in
-            <br />
-            <span className="text-[#00B9FF]">Digital Innovation</span>
+          Why Brands Trust <span className="text-[#00B9FF]">Webnox Digital</span>
           </h2>
         </div>
 

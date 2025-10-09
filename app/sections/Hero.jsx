@@ -355,7 +355,7 @@ export default function Hero() {
           ref={headingRef}
           className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 max-w-5xl mx-auto text-gray-800 relative z-5 opacity-0 font-sans"
         >
-        We Build. We Scale. We Transform. -<span className="text-[#2acbec]"> Lead the Future
+        We Build. We Scale. We Transform. <span className="text-[#2acbec]"> Lead the Future
         </span>
         </h1>
 
