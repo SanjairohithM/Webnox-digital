@@ -5,6 +5,7 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 // import { Button } from "@/components/ui/button"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -16,12 +17,14 @@ const expertiseData = [
     description:
       "We specialize in crafting unique brand experiences that resonate with your audience and drive long-term growth.",
     image: "/images/expertise1.webp",
+    href: "/branding-agency"
   },
   {
     id: 2,
     title: "Website Development",
     description: "We build websites that not only look great but also perform exceptionally well across all devices.",
     image: "/images/expertise2.webp",
+    href: "/custom-web-solutions"
   },
   {
     id: 3,
@@ -29,24 +32,28 @@ const expertiseData = [
     description:
       "Organic traffic is our forte. We optimize your website to rank higher and attract more qualified leads.",
     image: "/images/expertise3.webp",
+    href: "/digital-transformation-services"
   },
   {
     id: 4,
-    title: "Performance Marketing",
-    description: "Data-driven campaigns that deliver measurable results and maximize your return on investment.",
+    title: "3D Website",
+    description: "Transform your digital presence with innovative 3D website designs. We use cutting-edge 3D technology to deliver engaging, visually rich, and performance-driven web solutions.",
     image: "/images/expertise4.webp",
+    href: "/3d-web-design-services"
   },
   {
     id: 5,
-    title: "Lead Generation",
-    description: "We help you attract, nurture, and convert high-quality leads that drive business growth.",
+    title: "Enterprise web solutions",
+    description: "Delivering powerful enterprise web solutions to help businesses scale and succeed globally.",
     image: "/images/expertise5.webp",
+    href: "/software-development"
   },
   {
     id: 6,
-    title: "Social Media That Sells",
-    description: "Strategic social media campaigns that build brand awareness and drive conversions.",
+    title: "AI Solutions & Automation",
+    description: "Simplifying complex business tasks through AI-powered automation for faster, more efficient results.",
     image: "/images/expertise6.webp",
+    href: "/ai-services"
   },
 ]
 
@@ -56,6 +63,7 @@ export default function ExpertiseSection() {
   const subtitleRef = useRef(null)
   const mainTitleRef = useRef(null)
   const cardsRef = useRef(null)
+  const router = useRouter()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -115,9 +123,9 @@ export default function ExpertiseSection() {
 
         // Row-by-row timeline animations with more spacing
         const rows = [
-          { left: ".card-1", right: ".card-2", trigger: "top 80%" },   // First row
-          { left: ".card-3", right: ".card-4", trigger: "top 50%" },   // Second row (more scroll needed)
-          { left: ".card-5", right: ".card-6", trigger: "top 20%" }    // Third row (even more scroll)
+          { left: ".card-1", right: ".card-2", trigger: "top 85%" },   // First row
+          { left: ".card-3", right: ".card-4", trigger: "top 60%" },   // Second row (more scroll needed)
+          { left: ".card-5", right: ".card-6", trigger: "top 35%" }    // Third row (even more scroll)
         ]
 
         rows.forEach((row, index) => {
@@ -136,17 +144,17 @@ export default function ExpertiseSection() {
             opacity: 1,
             x: 0,
             scale: 1,
-            duration: 1,
-            ease: "power3.out"
+            duration: 1.2,
+            ease: "power2.out"
           })
           // Animate right card from right (with slight overlap)
           .to(row.right, {
             opacity: 1,
             x: 0,
             scale: 1,
-            duration: 1,
-            ease: "power3.out"
-          }, "-=0.7")
+            duration: 1.2,
+            ease: "power2.out"
+          }, "-=0.8")
         })
 
         // Hover animations for cards
@@ -260,10 +268,10 @@ export default function ExpertiseSection() {
             const cardNumber = index + 1
             
             return (
-                              <div
-                  key={item.id}
-                  className={`expertise-card ${isLeftCard ? 'left-card' : 'right-card'} card-${cardNumber}  rounded-3xl p-12  transition-all duration-300 cursor-pointer   w-full`}
-                >
+              <div
+                key={item.id}
+                className={`expertise-card ${isLeftCard ? 'left-card' : 'right-card'} card-${cardNumber} rounded-3xl p-12 transition-all duration-300 cursor-pointer w-full`}
+              >
                   {/* Icon and Title in same line */}
                   <div className="flex items-center mb-8">
                     <div className="card-icon w-20 h-20 rounded-full flex items-center justify-center mr-6">
@@ -282,7 +290,10 @@ export default function ExpertiseSection() {
                   <p className="text-gray-400 mb-12 font-medium font-sans leading-relaxed text-xl">{item.description}</p>
 
                   {/* Button */}
-                  <button className="card-button group flex items-center text-[#00B9FF] hover:text-[#00B9FF] font-sans transition-colors duration-300 text-xl rounded-full px-8 py-4 border-2 border-[#00B9FF] hover:border-[#00B9FF] hover:bg-[#00B9FF] hover:text-white">
+                  <button 
+                    onClick={() => router.push(item.href)}
+                    className="card-button group flex items-center text-[#00B9FF] hover:text-[#00B9FF] font-sans transition-colors duration-300 text-xl rounded-full px-8 py-4 border-2 border-[#00B9FF] hover:border-[#00B9FF] hover:bg-[#00B9FF] hover:text-white"
+                  >
                     Learn more
                     <ArrowRight className="ml-4 h-6 w-6 transition-transform group-hover:translate-x-1" />
                   </button>

@@ -14,27 +14,13 @@ const resources = [
     description: "Real-world examples of how we've transformed businesses with AI and automation.",
     image: "/images/service6.webp",
     href: "/case-studies"
-  },
-  {
-    title: "Whitepapers",
-    description: "Deep-dive insights into AI, automation, and digital transformation.",
-    image: "/images/service6.webp",
-    href: "/whitepapers"
-  },
-  {
-    title: "Webinars",
-    description: "Join our live sessions to learn about the latest trends in AI and automation.",
-    image: "/images/service6.webp",
-    href: "/webinars"
-  },
-  
-
+  }
 ];
 
 export default function ResourcesOverlay({ onClose }) {
   return (
     <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center font-sans" onClick={onClose}>
-      <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-10 max-w-[90vw] w-full md:max-w-7xl xl:max-w-[1200px] mx-auto relative" onClick={e => e.stopPropagation()}>
+      <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-[90vw] w-full md:max-w-2xl xl:max-w-3xl mx-auto relative" onClick={e => e.stopPropagation()}>
         {/* Close Button */}
         <button 
           className="absolute top-4 right-4 text-2xl font-bold text-gray-400 hover:text-gray-700 transition-colors duration-300 z-10" 
@@ -66,8 +52,8 @@ export default function ResourcesOverlay({ onClose }) {
           ))}
         </div>
 
-        {/* Tablet/Desktop: detailed list with descriptions */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Tablet/Desktop: two column layout with descriptions */}
+        <div className="hidden md:grid grid-cols-2 gap-6">
             {resources.map((service, idx) => (
             <Link
               key={idx}

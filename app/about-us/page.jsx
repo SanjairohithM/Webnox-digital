@@ -8,6 +8,7 @@ import Image from "next/image"
 import Aboutsecond from "@/app/sections/Aboutsecond"
 import { Aboutthird } from "@/app/sections/Aboutthird"
 import Aboutfour from "@/app/sections/Aboutfour"
+import Aboutfifth from "@/app/sections/Aboutfifth"
 import AnimatedNavbar from "@/app/sections/Components/Header/AnimatedNavbar"
 import { AnimatedTooltip } from "@/app/components/ui/animated-tooltip"
 import { User, Plus } from "lucide-react"
@@ -345,6 +346,7 @@ function About() {
             <Aboutsecond />
             <Aboutthird />
             <Aboutfour />
+            <Aboutfifth />
             <Footer />
             </>
 
