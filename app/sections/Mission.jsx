@@ -584,7 +584,7 @@ export default function Component() {
                 <div ref={contentRefs.headlines} className="space-y-2 sm:space-y-4">
                   <div className="flex items-center gap-2 sm:gap-4 flex-wrap mb-3 sm:mb-5 pt-2">
                     <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-sans font-semibold text-gray-800 tracking-tight leading-tight">
-                      AI-Driven Innovation for a
+                      AI-Driven Innovation for a Smarter, 
                     </h1>
                   </div>
 
@@ -631,8 +631,7 @@ export default function Component() {
                       <h1 className="text-lg sm:text-xl md:text-2xl font-extrabold text-black text-right pr-2 sm:pr-4 mb-3 sm:mb-4 md:mb-6">Approach</h1>
                       <div className="text-gray-700 text-right pr-2 sm:pr-4">
                         <p className="text-sm sm:text-base md:text-lg">
-                          Innovation meets precision in everything we do. We blend creativity and code to build digital
-                          success stories. Think global
+                        Innovation meets precision in everything we do. We blend creativity and code to build digital success stories. Think globally.
                         </p>
                       </div>
                     </div>

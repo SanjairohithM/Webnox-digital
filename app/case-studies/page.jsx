@@ -154,7 +154,7 @@ const CaseStudyPage = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-6xl font-bold text-white mb-6"
           >
-            Case Studies
+            Real Results. Real Impact.
           </motion.h1>
                      <motion.p
              initial={{ opacity: 0, y: 20 }}
@@ -162,8 +162,8 @@ const CaseStudyPage = () => {
              transition={{ duration: 0.6, delay: 0.2 }}
              className="text-xl text-blue-100 max-w-3xl mx-auto"
            >
-             Real Results. Real Impact. At Webnox Digital, we make it happen. Our case studies showcase how we've helped businesses across industries leverage technology, AI, and digital solutions to solve challenges, boost efficiency, and achieve measurable growth.
-           </motion.p>
+           At Webnox Digital, we make it happen. Our case studies showcase how we’ve helped businesses across industries leverage technology, AI, and digital solutions to solve challenges, boost efficiency, and achieve measurable growth.         
+          </motion.p>
         </div>
       </div>
 
