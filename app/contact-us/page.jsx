@@ -27,6 +27,18 @@ const ContactPage = () => {
     const formRef = useRef(null)
     cardRefs.current = []
 
+    // Handle hash scrolling to form
+    useEffect(() => {
+        if (window.location.hash === '#contact-form') {
+            setTimeout(() => {
+                const formElement = document.getElementById('contact-form')
+                if (formElement) {
+                    formElement.scrollIntoView({ behavior: 'smooth' })
+                }
+            }, 100)
+        }
+    }, [])
+
     useEffect(() => {
         // Check if we're on desktop (lg breakpoint and above)
         const isDesktop = window.innerWidth >= 1024
@@ -349,7 +361,7 @@ const ContactPage = () => {
             </section>
 
             {/* Contact Form */}
-            <section ref={formRef} className="py-5 bg-gradient-to-t from-[#00b9ff] via-[#bfefff] to-white">
+            <section id="contact-form" ref={formRef} className="py-5 bg-gradient-to-t from-[#00b9ff] via-[#bfefff] to-white">
                 <div className=" px-4  ">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8  items-center">
                         {/* Left: Robot Model (spans two columns on desktop, full width on mobile) */}

@@ -148,13 +148,13 @@ const HeroSection = () => {
             At WebnoxDigital, we help businesses harness the power of Artificial Intelligence (AI) to drive smarter decisions, automate processes, and deliver exceptional customer experiences. From AI consulting to building custom AI-powered applications, we partner with enterprises, startups, and SMBs to adopt future-ready solutions.
         </p>
 
-        <Link href="/contact-us">
-        <button
-          ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
-        >
-          Start Your Project
-        </button>
+        <Link href="/contact-us#contact-form">
+          <button
+            ref={buttonRef}
+            className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
+          >
+            Start Your Project
+          </button>
         </Link>
       </div>
     </section>

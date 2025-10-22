@@ -245,6 +245,180 @@ const CaseStudyPage = () => {
         </div>
       </div>
 
+      {/* Featured Case Studies */}
+      <div className="bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-3xl md:text-4xl font-bold text-gray-900 mb-6"
+            >
+              Featured Case Studies
+            </motion.h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Case Study 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                  <TrendingUp className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Scaling E-Commerce with Custom AI Solutions</h3>
+                  <p className="text-blue-600 font-semibold">Industry: E-commerce</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Challenge:</h4>
+                  <p className="text-gray-600">Client struggled with abandoned carts and poor personalization.</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Solution:</h4>
+                  <p className="text-gray-600">Implemented AI-driven recommendation engine + predictive analytics.</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Result:</h4>
+                  <ul className="text-gray-600 space-y-1">
+                    <li>• 32% increase in sales conversions</li>
+                    <li>• 40% reduction in abandoned carts</li>
+                    <li>• Personalized customer journeys across 5+ regions</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Case Study 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-4">
+                  <Globe className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Digital Transformation for a Healthcare Leader</h3>
+                  <p className="text-green-600 font-semibold">Industry: Healthcare</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Challenge:</h4>
+                  <p className="text-gray-600">Legacy systems slowed patient data management and compliance.</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Solution:</h4>
+                  <p className="text-gray-600">Migrated to secure cloud-based infrastructure with AI-driven diagnostics.</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Result:</h4>
+                  <ul className="text-gray-600 space-y-1">
+                    <li>• 50% faster patient data access</li>
+                    <li>• Improved compliance with HIPAA standards</li>
+                    <li>• Enhanced doctor-patient engagement via mobile app</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Case Study 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                  <Target className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Automating Operations in Manufacturing</h3>
+                  <p className="text-purple-600 font-semibold">Industry: Manufacturing</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Challenge:</h4>
+                  <p className="text-gray-600">High operational costs and delayed production cycles.</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Solution:</h4>
+                  <p className="text-gray-600">AI-powered predictive maintenance + IoT integration.</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Result:</h4>
+                  <ul className="text-gray-600 space-y-1">
+                    <li>• 25% reduction in downtime</li>
+                    <li>• 18% cost savings annually</li>
+                    <li>• Real-time insights with custom dashboards</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Case Study 4 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center mr-4">
+                  <Zap className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900">Driving Growth for a FinTech Startup</h3>
+                  <p className="text-orange-600 font-semibold">Industry: Finance / Banking</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Challenge:</h4>
+                  <p className="text-gray-600">Needed a scalable platform to support rapid growth.</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Solution:</h4>
+                  <p className="text-gray-600">Built secure, scalable FinTech application using Next.js + AI fraud detection.</p>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Result:</h4>
+                  <ul className="text-gray-600 space-y-1">
+                    <li>• 99.9% uptime</li>
+                    <li>• 45% user growth in 6 months</li>
+                    <li>• Enhanced fraud detection with 92% accuracy</li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
       {/* Filters and Search */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-12">
