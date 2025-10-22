@@ -22,7 +22,6 @@ if (typeof window !== "undefined") {
 const HeroSection = () => {
   const heroRef = useRef(null)
   const titleBlueRef = useRef(null)
-  const titleBlackRef = useRef(null)
   const desc1Ref = useRef(null)
   const desc2Ref = useRef(null)
   const desc3Ref = useRef(null)
@@ -30,7 +29,7 @@ const HeroSection = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Set initial state - hide all elements
-      gsap.set([titleBlueRef.current, titleBlackRef.current, desc1Ref.current, desc2Ref.current, desc3Ref.current], { 
+      gsap.set([titleBlueRef.current, desc1Ref.current, desc2Ref.current, desc3Ref.current], { 
         opacity: 0, 
         y: 20 
       })
@@ -44,8 +43,7 @@ const HeroSection = () => {
 
       
       // Animate each element with a quick fade-in
-      tl.to(titleBlueRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" })
-        .to(titleBlackRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" }, "-=0.2")
+      tl.to(titleBlueRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power1.out" })
         .to(desc1Ref.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" }, "-=0.2")
         .to(desc2Ref.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" }, "-=0.2")
         .to(desc3Ref.current, { opacity: 1, y: 0, duration: 0.4, ease: "power1.out" }, "-=0.2")
@@ -68,39 +66,31 @@ const HeroSection = () => {
         />
       </div>
       <div className="relative w-full flex flex-col items-center justify-center text-center px-4 mt-50">
-        <h1 className="text-2xl md:text-4xl lg:text-5xl font-sans font-bold mb-6">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-sans font-bold mb-6">
           <span ref={titleBlueRef} className="text-[#00BFFF] inline-block">
-            Still doing repetitive tasks
-          </span>
-          <br />
-          <span ref={titleBlackRef} className="text-black inline-block">
-            manually?
+            Seamless Automation with n8n
           </span>
         </h1>
         <div className="text-[#333] text-lg md:text-xl max-w-4xl font-sans leading-relaxed text-center mx-auto tracking-wide mt-4 mb-8">
-          <p ref={desc1Ref} className="inline-block mb-2">
-          Juggling Google Sheets, CRMs, APIs, and emails without sync?
+          <p ref={desc1Ref} className="inline-block mb-2 font-semibold text-xl md:text-2xl">
+            Still, doing repetitive tasks manually?
           </p>
           <br/>
-          <p ref={desc2Ref} className="inline-block mb-4">
+          <p ref={desc2Ref} className="inline-block mb-2">
+            Juggling Google Sheets, CRMs, APIs, and email without sync?
+          </p>
+          <br/>
+          <p ref={desc3Ref} className="inline-block mb-4 font-medium">
             Your business deserves better.
           </p>
-          <br/><br/>
-          <p ref={desc3Ref} className="inline-block">
-            At Webnox Digital, we help startups, agencies, SaaS companies, and enterprises automate daily operations, marketing, and data flows using the open-source power of n8n.
+          <br/>
+          <p className="inline-block">
+            At Webnox Digital, we help startups, agencies, SaaS companies, and enterprises automate daily operations, marketing, reporting, and data flows using the open-source power of n8n.
           </p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-          <Link href="/contact-us">
-          <button className="bg-[#00BFFF] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#0099CC] transition-colors duration-300 cursor-pointer">
-            Book Free Automation Audit
-          </button>
-          </Link>
-          <Link href="/contact-us">
-          <button className="border-2 border-[#00BFFF] text-[#00BFFF] px-8 py-3 rounded-lg font-semibold hover:bg-[#00BFFF] hover:text-white transition-colors duration-300 cursor-pointer">
-            Get My Workflow Plan
-          </button>
-          </Link>
+          <br/>
+          <p className="inline-block font-semibold text-[#00BFFF] mt-2">
+            No-code. No limits. Just smarter workflows.
+          </p>
         </div>
       </div>
     </section>
@@ -296,71 +286,135 @@ const AutomationComparisonSection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-20 px-4">
+    <section ref={sectionRef} className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* With Webnox Automation */}
+          {/* With Webnox Automation - Green Theme */}
           <div 
             ref={leftRef}
-            className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 shadow-lg"
+            className="relative bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 rounded-3xl p-10 shadow-xl border border-green-200 hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
           >
-            <h3 className="text-2xl font-bold text-blue-900 mb-6 font-sans">
-              With Webnox Automation
-            </h3>
-            <ul className="space-y-4">
-              <li ref={(el) => (itemsLeftRef.current[0] = el)} className="flex items-start">
-                <span className="text-blue-600 mr-3 text-lg">•</span>
-                <span className="text-blue-800 font-medium">Save 100+ hours/month</span>
-              </li>
-              <li ref={(el) => (itemsLeftRef.current[1] = el)} className="flex items-start">
-                <span className="text-blue-600 mr-3 text-lg">•</span>
-                <span className="text-blue-800 font-medium">Reduce human error by 90%</span>
-              </li>
-              <li ref={(el) => (itemsLeftRef.current[2] = el)} className="flex items-start">
-                <span className="text-blue-600 mr-3 text-lg">•</span>
-                <span className="text-blue-800 font-medium">Cut costs on SaaS subscriptions</span>
-              </li>
-              <li ref={(el) => (itemsLeftRef.current[3] = el)} className="flex items-start">
-                <span className="text-blue-600 mr-3 text-lg">•</span>
-                <span className="text-blue-800 font-medium">Get real-time data & alerts</span>
-              </li>
-              <li ref={(el) => (itemsLeftRef.current[4] = el)} className="flex items-start">
-                <span className="text-blue-600 mr-3 text-lg">•</span>
-                <span className="text-blue-800 font-medium">Focus your team on what matters</span>
-              </li>
-            </ul>
+            {/* Background Image - Success Pattern */}
+            <div className="absolute inset-0 opacity-5">
+              <Image
+                src="/images/brandbg.webp"
+                alt="Success background"
+                fill
+                className="object-cover"
+              />
+            </div>
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl md:text-3xl font-bold text-[#065f46] mb-8 font-sans">
+                With Webnox Automation
+              </h3>
+              <ul className="space-y-5">
+                <li ref={(el) => (itemsLeftRef.current[0] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[#047857] font-semibold text-lg">Save 100+ hours/month</span>
+                </li>
+                <li ref={(el) => (itemsLeftRef.current[1] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[#047857] font-semibold text-lg">Reduce human error by 90%</span>
+                </li>
+                <li ref={(el) => (itemsLeftRef.current[2] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[#047857] font-semibold text-lg">Cut costs on SaaS subscriptions</span>
+                </li>
+                <li ref={(el) => (itemsLeftRef.current[3] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[#047857] font-semibold text-lg">Get real-time data & alerts</span>
+                </li>
+                <li ref={(el) => (itemsLeftRef.current[4] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-green-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-[#047857] font-semibold text-lg">Focus your team on what matters</span>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          {/* Without Automation */}
+          {/* Without Automation - Red Theme */}
           <div 
             ref={rightRef}
-            className="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl p-8 shadow-lg"
+            className="relative bg-gradient-to-br from-red-50 via-rose-50 to-red-100 rounded-3xl p-10 shadow-xl border border-red-200 hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
           >
-            <h3 className="text-2xl font-bold text-cyan-900 mb-6 font-sans">
-              Without Automation
-            </h3>
-            <ul className="space-y-4">
-              <li ref={(el) => (itemsRightRef.current[0] = el)} className="flex items-start">
-                <span className="text-cyan-600 mr-3 text-lg">•</span>
-                <span className="text-cyan-800 font-medium">Repetitive Work Drains Productivity</span>
-              </li>
-              <li ref={(el) => (itemsRightRef.current[1] = el)} className="flex items-start">
-                <span className="text-cyan-600 mr-3 text-lg">•</span>
-                <span className="text-cyan-800 font-medium">Data Scattered Everywhere</span>
-              </li>
-              <li ref={(el) => (itemsRightRef.current[2] = el)} className="flex items-start">
-                <span className="text-cyan-600 mr-3 text-lg">•</span>
-                <span className="text-cyan-800 font-medium">No Alerts, No Action</span>
-              </li>
-              <li ref={(el) => (itemsRightRef.current[3] = el)} className="flex items-start">
-                <span className="text-cyan-600 mr-3 text-lg">•</span>
-                <span className="text-cyan-800 font-medium">Zero Scalability</span>
-              </li>
-              <li ref={(el) => (itemsRightRef.current[4] = el)} className="flex items-start">
-                <span className="text-cyan-600 mr-3 text-lg">•</span>
-                <span className="text-cyan-800 font-medium">More Tools = More Confusion</span>
-              </li>
-            </ul>
+            {/* Background Image - Warning Pattern */}
+            <div className="absolute inset-0 opacity-5">
+              <Image
+                src="/images/brandbg.webp"
+                alt="Warning background"
+                fill
+                className="object-cover"
+              />
+            </div>
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl md:text-3xl font-bold text-[#991b1b] mb-8 font-sans">
+                Without Automation
+              </h3>
+              <ul className="space-y-5">
+                <li ref={(el) => (itemsRightRef.current[0] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-red-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <span className="text-[#b91c1c] font-semibold text-lg">Repetitive Work Drains Productivity</span>
+                </li>
+                <li ref={(el) => (itemsRightRef.current[1] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-red-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <span className="text-[#b91c1c] font-semibold text-lg">Data Scattered Everywhere</span>
+                </li>
+                <li ref={(el) => (itemsRightRef.current[2] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-red-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <span className="text-[#b91c1c] font-semibold text-lg">No Alerts, No Action</span>
+                </li>
+                <li ref={(el) => (itemsRightRef.current[3] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-red-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <span className="text-[#b91c1c] font-semibold text-lg">Zero Scalability</span>
+                </li>
+                <li ref={(el) => (itemsRightRef.current[4] = el)} className="flex items-start">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-full bg-red-500 flex items-center justify-center mr-4 mt-0.5">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </div>
+                  <span className="text-[#b91c1c] font-semibold text-lg">More Tools = More Confusion</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -459,11 +513,7 @@ const CTASection = () => {
                     Book a Free Automation Audit Today
                   </button>
                   </Link>
-                  <Link href="/contact-us">
-                  <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-white cursor-pointer">
-                    Get My Workflow Plan Now
-                  </button>
-                  </Link>
+                  
                 </div>
               </div>
             </div>
@@ -497,11 +547,7 @@ const CTASection = () => {
                       Book a Free Automation Audit Today
                     </button>
                     </Link>
-                    <Link href="/contact-us">
-                    <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#00B9FF] w-full">
-                      Get My Workflow Plan Now
-                    </button>
-                    </Link>
+                    
                   </div>
                 </div>
               </div>
@@ -549,6 +595,11 @@ const WhyN8nWebnoxSection = () => {
         At Webnox Digital, we build intelligent systems that scale with you using n8n + AI + your business logic.
         </p>
       </div>
+      <Link href="/contact-us">
+        <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#00B9FF] w-full">
+             Get My Workflow Plan Now
+         </button>
+       </Link>
     </section>
   )
 }

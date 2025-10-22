@@ -90,24 +90,10 @@ const HeroSection = () => {
     >
       <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-50">
         <h1 ref={titleRef} className="md:text-6xl text-3xl  font-sans font-semibold text-[#00B9FF] mb-4 leading-tight">
-          {"Automate Growth. Personalize at".split("").map((char, index) => (
+          {"Automate Growth. Personalize at Scale.".split("").map((char, index) => (
             <span
               key={index}
               ref={(el) => (titleLettersRef.current[index] = el)}
-              className="inline-block"
-              style={{ 
-                marginRight: char === " " ? "0.75rem" : "0",
-                minWidth: char === " " ? "0.75rem" : "auto"
-              }}
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-          <br />
-          {"Scale.".split("").map((char, index) => (
-            <span
-              key={index + "Automate Growth. Personalize at".length}
-              ref={(el) => (titleLettersRef.current[index + "Automate Growth. Personalize at".length] = el)}
               className="inline-block"
               style={{ 
                 marginRight: char === " " ? "0.75rem" : "0",

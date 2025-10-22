@@ -34,19 +34,19 @@ const services = [
     href: "/Emerging-tech"
   },
   {
-    title: "Out Sourcing",
+    title: "OutSourcing",
     description: "Flexible, cost-effective outsourcing for dev, support, and ops.",
     image: "/images/service3.webp",
     href: "/outsourcing"
   },
   {
-    title: "N8N workflow",
+    title: "N8N Workflow",
     description: "No-code automation with N8N for seamless integrations.",
     image: "/images/service2.webp",
     href: "/N8N-automation-workflow"
   },
   {
-    title: "customer experience",
+    title: "Customer Experience",
     description: "AI-powered, personalized user experiences to boost loyalty.",
     image: "/images/service1.webp",
     href: "/customer-experience"

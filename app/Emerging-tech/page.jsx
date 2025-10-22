@@ -22,7 +22,6 @@ const HeroSection = () => {
   const heroRef = useRef(null)
   const titleRef = useRef(null)
   const descRef = useRef(null)
-  const buttonRef = useRef(null)
   const titleLettersRef = useRef([])
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const HeroSection = () => {
       
       if (isDesktop) {
         // Complex animations for desktop with letter-by-letter title animation
-        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 20 })
+        gsap.set([...titleLettersRef.current, descRef.current], { opacity: 0, y: 20 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -50,10 +49,9 @@ const HeroSection = () => {
           stagger: 0.03 // 30ms delay between each letter
         })
           .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
-          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
       } else {
         // Simple fade animations for mobile with letter-by-letter title animation
-        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 15 })
+        gsap.set([...titleLettersRef.current, descRef.current], { opacity: 0, y: 15 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -71,7 +69,6 @@ const HeroSection = () => {
           stagger: 0.02 // 20ms delay between each letter
         })
           .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
       }
     }, heroRef)
     return () => ctx.revert()
@@ -121,14 +118,12 @@ const HeroSection = () => {
         >
           and let's build with them today.
         </p>
-        <Link href="/contact-us">
         <button
-          ref={buttonRef}
-          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer"
+          className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer hover:scale-105 transform"
+          onClick={() => window.location.href = '/contact-us'}
         >
           Building What's Next, Now
         </button>
-        </Link>
       </div>
     </section>
   )
@@ -581,8 +576,8 @@ const TechPage = () => {
       <Scroll3DSections>
         <HeroSection />
         <TechnologySection />
-        <CTASection />
       </Scroll3DSections>
+      <CTASection />
       <FAQSection />
       <Footer />
     </main>
