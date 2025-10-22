@@ -237,15 +237,7 @@ export default function AutomationServicesSection() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus.
               </p> */}
 
-              <div ref={buttonRef}>
-                <Link href="/contact-us">
-                <button
-                  className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
-                >
-                  Switch to AI
-                </button>
-                </Link>
-              </div>
+             
             </div>
 
             {/* First 2 Service Cards */}

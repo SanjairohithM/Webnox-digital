@@ -419,82 +419,6 @@ const CaseStudyPage = () => {
         </div>
       </div>
 
-      {/* Filters and Search */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-            {/* Search */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search case studies..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            {/* Industry Filter */}
-            <select
-              value={selectedIndustry}
-              onChange={(e) => setSelectedIndustry(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              {industries.map((industry) => (
-                <option key={industry} value={industry}>{industry}</option>
-              ))}
-            </select>
-
-            {/* Category Filter */}
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              {categories.map((category) => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-
-            {/* Status Filter */}
-            <select
-              value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              {statuses.map((status) => (
-                <option key={status} value={status}>{status}</option>
-              ))}
-            </select>
-
-            {/* Results Count */}
-            <div className="flex items-center justify-center lg:justify-end">
-              <span className="text-gray-600">
-                {filteredCaseStudies.length} case study{filteredCaseStudies.length !== 1 ? 'ies' : ''} found
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Case Studies Grid */}
-        {filteredCaseStudies.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCaseStudies.map((study, index) => (
-              <CaseStudyCard key={study.id} study={study} index={index} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20">
-            <div className="text-gray-400 mb-4">
-              <Search className="w-16 h-16 mx-auto" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">No case studies found</h3>
-            <p className="text-gray-500">Try adjusting your search or filter criteria</p>
-          </div>
-        )}
-      </div>
-
       {/* CTA Section */}
       <div className="bg-gradient-to-r from-[#62d0d8] via-[#60a5fa] to-[#2982b6] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -526,12 +450,6 @@ const CaseStudyPage = () => {
             >
               Let's Talk
               <ArrowRight className="w-5 h-5" />
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors duration-300"
-            >
-              View Services
             </Link>
           </motion.div>
         </div>

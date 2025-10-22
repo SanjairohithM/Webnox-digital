@@ -4,6 +4,8 @@
     import { ScrollTrigger } from "gsap/ScrollTrigger"
     import React from "react"
 
+    gsap.registerPlugin(ScrollTrigger)
+
     const Scroll3DSections = ({ children }) => {
     const containerRef = useRef(null)
     const sectionsRef = useRef([])

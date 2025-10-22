@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-    const Aianimationfaq = () => {
+const Aianimationfaq = () => {
     const faqs = [
       {
         question: "Does Webnox Digital provide AI automation for both small and large businesses?",
@@ -24,7 +24,7 @@ import Link from "next/link";
         answer: "If your business deals with repetitive tasks, large amounts of data, or complex workflows, AI automation can significantly improve efficiency and decision-making."
       },
     ];
-    const [openIdx, setOpenIdx] = React.useState(0);
+    const [openIdx, setOpenIdx] = React.useState(-1);
   
     return (
       <section className="py-8 sm:py-12 lg:py-16 xl:py-20 bg-white">
@@ -45,7 +45,13 @@ import Link from "next/link";
                 >
                   <button
                     className="w-full flex justify-between items-center px-4 sm:px-6 py-4 sm:py-5 text-left focus:outline-none"
-                    onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
+                    onClick={() => {
+                      if (openIdx === idx) {
+                        setOpenIdx(-1); // Close if already open
+                      } else {
+                        setOpenIdx(idx); // Open this one
+                      }
+                    }}
                   >
                     <span className="text-base sm:text-lg font-medium text-gray-900 pr-4">{faq.question}</span>
                     <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold flex-shrink-0">{openIdx === idx ? '-' : '+'}</span>
@@ -72,11 +78,11 @@ import Link from "next/link";
               <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">Do you have more questions?</h3>
               <p className="text-gray-500 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed">End-to-end payments and financial management in a single solution. Meet the right platform to help realize.</p>
               <Link href="/contact-us" className="mt-auto bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base transition-colors shadow-sm cursor-pointer">Shoot a Direct Mail</Link>
-              </div>
+            </div>
           </div>
         </div>
       </section>
     );
-  };
-  
+};
+
 export default Aianimationfaq;

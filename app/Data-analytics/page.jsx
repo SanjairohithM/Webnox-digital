@@ -528,7 +528,112 @@ const industries = [
 
 
 
-  const FAQSection = () => {
+// CTA Section Component
+const CTASection = () => {
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const buttonRef = useRef(null)
+  const imageRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Complex animations for desktop
+        gsap.set([titleRef.current, subtitleRef.current, buttonRef.current], { opacity: 0, y: 30 })
+        gsap.set(imageRef.current, { opacity: 0, scale: 0.8 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+          .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(imageRef.current, { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }, "-=0.4")
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([titleRef.current, subtitleRef.current, buttonRef.current, imageRef.current], { opacity: 0, y: 30 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(imageRef.current, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power2.out" }, "-=0.3")
+      }
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="bg-gradient-to-br from-[#00BFFF] via-[#0099CC] to-[#0077AA] py-16 sm:py-20 lg:py-24 px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Content */}
+          <div className="text-white space-y-6">
+            <h2 ref={titleRef} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+              Let's turn your data into your smartest business advisor.
+            </h2>
+            <p ref={subtitleRef} className="text-xl sm:text-2xl text-white/90 leading-relaxed">
+              Talk to the analytics team at Webnox Digital
+            </p>
+            <div ref={buttonRef}>
+              <Link href="/contact-us">
+                <button className="bg-white text-[#00BFFF] hover:bg-gray-100 text-lg font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                  Get Started Today
+                </button>
+              </Link>
+            </div>
+          </div>
+          
+          {/* Right Content - Analytics Visualization */}
+          <div ref={imageRef} className="relative flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-md lg:max-w-lg">
+              {/* Background Elements */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-full bg-white/10 backdrop-blur-sm"></div>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-48 h-48 lg:w-60 lg:h-60 rounded-full bg-white/20 backdrop-blur-sm"></div>
+              </div>
+              
+              {/* Main Analytics Image */}
+              <div className="relative z-10">
+                <Image
+                  src="/images/data analytics.png"
+                  alt="Data Analytics Visualization"
+                  width={400}
+                  height={400}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              
+              {/* Floating Data Points */}
+              <div className="absolute top-8 left-8 w-4 h-4 bg-white rounded-full animate-pulse"></div>
+              <div className="absolute top-16 right-12 w-3 h-3 bg-white/80 rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
+              <div className="absolute bottom-20 left-12 w-5 h-5 bg-white/60 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+              <div className="absolute bottom-8 right-8 w-3 h-3 bg-white/90 rounded-full animate-pulse" style={{animationDelay: '1.5s'}}></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+const FAQSection = () => {
     const faqs = [
       {
         question: "How does Webnox Digital approach business analysis?",
@@ -615,6 +720,7 @@ const OutsourcingPage = () => {
       </Scroll3DSections>
       <IndustriesSection />
      
+      <CTASection />
       <FAQSection /> 
       <Footer />
     </main>

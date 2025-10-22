@@ -255,7 +255,7 @@ export default function AIAutomationHero() {
         <Aianimationfive/>
         <AianimationSix/>
         <Aianimationfaq/> 
-          </Scroll3DSections>
+        </Scroll3DSections>
         <Footer/>
         
       </>

@@ -18,7 +18,7 @@ const services = [
   {
     title: "Data Analytics",
     description: "Unlock actionable insights using predictive analytics, business intelligence dashboards",
-    image: "/images/service6.webp",
+    image: "/images/data analytics.png",
     href: "/Data-analytics"
   },
   {

@@ -39,7 +39,7 @@ const HeroSection = () => {
     const ctx = gsap.context(() => {
       // Check if we're on desktop (lg breakpoint and above)
       const isDesktop = window.innerWidth >= 1024
-      
+
       if (isDesktop) {
         // Complex animations for desktop
         gsap.set([titleRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 40 })
@@ -834,6 +834,163 @@ const CoreServicesSection = () => {
   )
 }
 
+// What You Gain Section Component
+const WhatYouGainSection = () => {
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const cardsRef = useRef([])
+
+  const benefits = [
+    {
+      title: "Strategic Vision",
+      description: "A clear digital roadmap tailored to your growth trajectory",
+      icon: "/images/cons1.png"
+    },
+    {
+      title: "Tech Clarity", 
+      description: "Choose the right stack, avoid costly missteps",
+      icon: "/images/cons2.png"
+    },
+    {
+      title: "Faster Go-to-Market",
+      description: "Build lean, launch faster, iterate smarter",
+      icon: "/images/cons3.png"
+    },
+    {
+      title: "Risk Reduction",
+      description: "Avoid technical debt and mitigate compliance issues",
+      icon: "/images/cons4.png"
+    },
+    {
+      title: "Scalable Solutions",
+      description: "Architect for today and tomorrow",
+      icon: "/images/cons5.png"
+    }
+  ]
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Check if we're on desktop (lg breakpoint and above)
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Complex animations for desktop
+        gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
+        gsap.set(cardsRef.current, { opacity: 0, y: 50 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+          .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.4")
+          .to(cardsRef.current, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power2.out" }, "-=0.4")
+      } else {
+        // Simple fade animations for mobile
+        gsap.set([titleRef.current, subtitleRef.current, cardsRef.current], { opacity: 0, y: 30 })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(cardsRef.current, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.3")
+      }
+    }, sectionRef)
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="bg-gradient-to-b from-white to-[#F8FCFF] py-8 sm:py-12 lg:py-16 xl:py-20 px-4 font-sans">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 ref={titleRef} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 sm:mb-6">
+            What You Gain from{" "}
+            <span className="bg-gradient-to-r from-[#6107AF] to-[#00B9FF] bg-clip-text text-transparent">Partnering with Webnox</span>
+          </h2>
+          <p ref={subtitleRef} className="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
+            Transform your business with strategic IT consulting that delivers measurable results and sustainable growth.
+          </p>
+        </div>
+
+        {/* Benefits Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          {/* First row - 3 cards */}
+          {benefits.slice(0, 3).map((benefit, index) => (
+            <div
+              key={index}
+              ref={el => cardsRef.current[index] = el}
+              className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 hover:shadow-xl transition-all duration-300 hover:bg-gradient-to-br hover:from-[#00B9FF]/5 hover:to-[#6107AF]/5 border border-gray-100 hover:border-[#00B9FF]/20 group cursor-pointer"
+            >
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-[#00B9FF]/10 to-[#6107AF]/10 rounded-full flex items-center justify-center group-hover:from-[#00B9FF]/20 group-hover:to-[#6107AF]/20 transition-all duration-300">
+                  <Image 
+                    src={benefit.icon} 
+                    alt={benefit.title} 
+                    width={32} 
+                    height={32} 
+                    className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 group-hover:text-[#00B9FF] transition-colors duration-300">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-600 group-hover:text-gray-700 text-sm sm:text-base lg:text-lg leading-relaxed transition-colors duration-300">
+                    {benefit.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+          
+          {/* Second row - 2 cards centered */}
+          <div className="lg:col-span-3 flex justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-2xl">
+              {benefits.slice(3, 5).map((benefit, index) => (
+                <div
+                  key={index + 3}
+                  ref={el => cardsRef.current[index + 3] = el}
+                  className="bg-white rounded-xl p-4 sm:p-6 lg:p-8 hover:shadow-xl transition-all duration-300 hover:bg-gradient-to-br hover:from-[#00B9FF]/5 hover:to-[#6107AF]/5 border border-gray-100 hover:border-[#00B9FF]/20 group cursor-pointer"
+                >
+                  <div className="flex flex-col items-center text-center space-y-4">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-[#00B9FF]/10 to-[#6107AF]/10 rounded-full flex items-center justify-center group-hover:from-[#00B9FF]/20 group-hover:to-[#6107AF]/20 transition-all duration-300">
+                      <Image 
+                        src={benefit.icon} 
+                        alt={benefit.title} 
+                        width={32} 
+                        height={32} 
+                        className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 group-hover:text-[#00B9FF] transition-colors duration-300">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-gray-600 group-hover:text-gray-700 text-sm sm:text-base lg:text-lg leading-relaxed transition-colors duration-300">
+                        {benefit.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 const FAQSection = () => {
   const faqs = [
     {
@@ -932,7 +1089,7 @@ const OutsourcingPage = () => {
         <CoreServicesSection />
         </Scroll3DSections>
      
-      
+      <WhatYouGainSection />
       <FAQSection />
       <Footer />
     </main>

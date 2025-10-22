@@ -376,68 +376,68 @@ const ContactPage = () => {
                             </div>
                         </div>
 					{/* Right: Contact Form (spans one column) */}
-					<div className="max-w-md w-full mx-auto">
-						<div className="relative overflow-hidden rounded-2xl p-8 md:p-10 shadow-2xl bg-gradient-to-t from-[#00b9ff]/40 via-white/40 to-white/60 backdrop-blur-xl border border-white/40">
+					<div className="max-w-md lg:max-w-lg xl:max-w-xl w-full mx-auto">
+						<div className="relative overflow-hidden rounded-2xl p-8 md:p-10 lg:p-12 xl:p-16 shadow-2xl bg-gradient-to-t from-[#00b9ff]/40 via-white/40 to-white/60 backdrop-blur-xl border border-white/40">
 							<div className="pointer-events-none absolute -top-16 -right-10 h-48 w-48 rounded-full bg-white/25 blur-3xl" />
 							<div className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
 							<div className="pointer-events-none absolute -top-20 left-1/4 h-24 w-96 rotate-12 bg-white/40 blur-2xl opacity-60" />
 							<div className="relative">
-								<div className="mb-6">
-									<h3 className="text-black text-2xl md:text-3xl font-semibold">Let’s connect</h3>
-									<p className="text-black/80 text-sm md:text-base">Tell us about your project and we’ll reach out.</p>
+								<div className="mb-6 lg:mb-8 xl:mb-10">
+									<h3 className="text-black text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">Let's connect</h3>
+									<p className="text-black/80 text-sm md:text-base lg:text-lg xl:text-xl">Tell us about your project and we'll reach out.</p>
 								</div>
-								<form onSubmit={handleSubmit} className="space-y-5">
+								<form onSubmit={handleSubmit} className="space-y-5 lg:space-y-6 xl:space-y-8">
 									<div className="relative">
-										<User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-black/70" />
+										<User className="absolute left-3 lg:left-4 xl:left-5 top-1/2 -translate-y-1/2 h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-black/70" />
 										<input
 											type="text"
 											name="name"
 											placeholder="Your name"
 											value={formData.name}
 											onChange={handleChange}
-											className="w-full pl-10 pr-3 md:pr-4 py-3 md:py-4 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base"
+											className="w-full pl-10 lg:pl-12 xl:pl-14 pr-3 md:pr-4 lg:pr-5 xl:pr-6 py-3 md:py-4 lg:py-5 xl:py-6 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base lg:text-lg xl:text-xl"
 											required
 										/>
 									</div>
 									<div className="relative">
-										<Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-black/70" />
+										<Mail className="absolute left-3 lg:left-4 xl:left-5 top-1/2 -translate-y-1/2 h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-black/70" />
 										<input
 											type="email"
 											name="email"
 											placeholder="Work email"
 											value={formData.email}
 											onChange={handleChange}
-											className="w-full pl-10 pr-3 md:pr-4 py-3 md:py-4 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base"
+											className="w-full pl-10 lg:pl-12 xl:pl-14 pr-3 md:pr-4 lg:pr-5 xl:pr-6 py-3 md:py-4 lg:py-5 xl:py-6 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base lg:text-lg xl:text-xl"
 											required
 										/>
 									</div>
 									<div className="relative">
-										<Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-black/70" />
+										<Phone className="absolute left-3 lg:left-4 xl:left-5 top-1/2 -translate-y-1/2 h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-black/70" />
 										<input
 											type="tel"
 											name="contactNumber"
 											placeholder="Phone number"
 											value={formData.contactNumber}
 											onChange={handleChange}
-											className="w-full pl-10 pr-3 md:pr-4 py-3 md:py-4 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base"
+											className="w-full pl-10 lg:pl-12 xl:pl-14 pr-3 md:pr-4 lg:pr-5 xl:pr-6 py-3 md:py-4 lg:py-5 xl:py-6 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base lg:text-lg xl:text-xl"
 											required
 										/>
 									</div>
 									<div className="relative">
-										<MessageSquare className="absolute left-3 top-4 h-5 w-5 text-black/70" />
+										<MessageSquare className="absolute left-3 lg:left-4 xl:left-5 top-4 lg:top-5 xl:top-6 h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-black/70" />
 										<textarea
 											name="enquiry"
 											placeholder="How can we help?"
 											value={formData.enquiry}
 											onChange={handleChange}
 											rows={6}
-											className="w-full pl-10 pr-3 md:pr-4 py-3 md:py-4 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none resize-none text-sm md:text-base"
+											className="w-full pl-10 lg:pl-12 xl:pl-14 pr-3 md:pr-4 lg:pr-5 xl:pr-6 py-3 md:py-4 lg:py-5 xl:py-6 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none resize-none text-sm md:text-base lg:text-lg xl:text-xl"
 											required
 										/>
 									</div>
 									<button
 										type="submit"
-										className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 md:px-6 py-3 md:py-4 font-semibold text-slate-900 transition-transform [box-shadow:0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-0.5 active:translate-y-0 disabled:bg-white/70 disabled:text-slate-700"
+										className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 md:px-6 lg:px-8 xl:px-10 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-slate-900 transition-transform [box-shadow:0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-0.5 active:translate-y-0 disabled:bg-white/70 disabled:text-slate-700 text-sm md:text-base lg:text-lg xl:text-xl"
 										disabled={isSubmitting}
 									>
 										{isSubmitting ? (
@@ -453,11 +453,11 @@ const ContactPage = () => {
 										)}
 									</button>
 									{submitStatus && (
-										<div className={`mt-3 flex items-center gap-2 rounded-lg px-4 py-3 text-sm ${submitStatus.includes('successfully') ? 'bg-emerald-500/10 text-emerald-100 ring-1 ring-emerald-400/30' : 'bg-red-500/10 text-red-100 ring-1 ring-red-400/30'}`}>
+										<div className={`mt-3 lg:mt-4 xl:mt-5 flex items-center gap-2 rounded-lg px-4 lg:px-5 xl:px-6 py-3 lg:py-4 xl:py-5 text-sm lg:text-base xl:text-lg ${submitStatus.includes('successfully') ? 'bg-emerald-500/10 text-emerald-100 ring-1 ring-emerald-400/30' : 'bg-red-500/10 text-red-100 ring-1 ring-red-400/30'}`}>
 											{submitStatus.includes('successfully') ? (
-												<CheckCircle2 className="h-5 w-5" />
+												<CheckCircle2 className="h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7" />
 											) : (
-												<AlertCircle className="h-5 w-5" />
+												<AlertCircle className="h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7" />
 											)}
 											<span>{submitStatus}</span>
 										</div>

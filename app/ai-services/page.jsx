@@ -753,7 +753,7 @@ const industries = [
         {/* Background Image Section with Scrollable Cards */}
         <div ref={imageContainerRef} className="relative w-full max-w-6xl mx-auto mb-16 cursor-pointer overflow-hidden">
           {/* Background Image */}
-          <div className="relative ">
+          <div className="relative  ">
             <img
               src="/images/ecommerce23.webp"
               alt="E-commerce Solutions"
@@ -784,15 +784,15 @@ const industries = [
                           <img
                             src={industry.img}
                             alt={industry.title}
-                            className="w-full h-64 lg:h-80 object-contain  "
+                            className="w-full h-48 lg:h-56 object-contain"
                           />
                           <div className="absolute inset-0 rounded-"></div>
                         </div>
                       </div>
 
                       {/* Content Side */}
-                      <div className="w-full lg:w-1/2 text-center lg:text-left">
-                        <h3 className="text-2xl lg:text-4xl font-bold text-black mb-4 ">
+                      <div className="w-90% lg:w-1/2 text-center lg:text-center px-4 lg:px-6">
+                        <h3 className="text-2xl lg:text-4xl font-bold text-black mb-4">
                           {industry.title}
                         </h3>
                         <p className="text-gray-600 text-xl leading-relaxed">
@@ -825,16 +825,11 @@ const industries = [
 const AIServicesPage = () => {
   return (
     <main className="@/ai-services">
-      <Scroll3DSections>
       <HeroSection />
-     
-      <UseCasesSection />
-    
-
-      <SecondUseCasesSection />
+      <Scroll3DSections>
+        <UseCasesSection />
+        <SecondUseCasesSection />
       </Scroll3DSections>
-      
-    
       <SpecializedSolutionsSection />
       <FAQSection />
       <Footer />
