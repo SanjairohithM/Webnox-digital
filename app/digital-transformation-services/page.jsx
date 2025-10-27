@@ -333,7 +333,7 @@ const TechnologyWorkSection = () => {
               ref={descRef}
               className="text-gray-700 text-base md:text-lg lg:text-xl font-sans leading-relaxed lg:leading-relaxed max-w-none lg:max-w-xl xl:max-w-2xl"
             >
-              At WEBNOX DIGITAL, we combine digital transformation with smart digital marketing strategies. We help you fix the backend systems, automation, ditch the white-label copy, we improve the frontend branding, SEO, online visibility!
+              At WEBNOX DIGITAL, we combine digital transformation with smart digital marketing strategies. We help you fix the backend systems, automation, ditch the white-label copy, we improve the frontend branding, SEO, online visibility! Because real growth needs both.
             </p>
           </div>
         </div>
@@ -930,23 +930,28 @@ const WhyCustomerExperienceMattersSection = () => {
   const stats = [
       {
           icon: "/images/customer7.png",
-          number: "500+",
-          description: "Successful Digital Transformation Projects"
+          number: "40%",
+          description: "faster operations through automation"
       },
       {
           icon: "/images/customer9.png",
-          number: "98%",
-          description: "Client Satisfaction Rate"
+          number: "3X",
+          description: "better ROI with optimized ad campaigns"
       },
       {
           icon: "/images/customer10.png",
-          number: "95%",
-          description: "Project Delivery Rate"
+          number: "Higher",
+          description: "Google rankings with proper SEO"
       },
       {
           icon: "/images/customer7.png",
-          number: "5+",
-          description: "Global Operation Hubs"
+          number: "Data-driven",
+          description: "decision-making with dashboards"
+      },
+      {
+          icon: "/images/customer9.png",
+          number: "Improved",
+          description: "customer engagement through CRM + social channels"
       }
   ]
 
@@ -983,15 +988,15 @@ const WhyCustomerExperienceMattersSection = () => {
             {/* Main Grid Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
                 {/* Left Side: Text and Image - spans 2 columns */}
-                <div className="lg:col-span-2 space-y-8">
+                <div className="lg:col-span-2 space-y-8 flex flex-col items-center text-center">
                     {/* Title */}
                     <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-sans leading-tight">
-                        What Success Looks Like With <span className="text-7xl font-semibold font-sans">WEBNOX DIGITAL</span>
+                        When tech meets marketing, growth becomes real:
                     </h2>
 
                     {/* Subtitle */}
-                    <p ref={subtitleRef} className="text-white/90 text-xl font-sans leading-relaxed mb-8">
-                    Our track record speaks for itself.
+                    <p ref={subtitleRef} className="text-white/90 text-xl font-sans leading-relaxed mb-8 max-w-2xl">
+                    Transform your business with data-driven solutions that deliver measurable results.
                     </p>
 
                     {/* Image below text */}
@@ -1001,14 +1006,14 @@ const WhyCustomerExperienceMattersSection = () => {
                                     <div className="items-center justify-center">
                                         <Image src="/images/digital6.webp" alt="Success Guaranteed" width={600} height={600} />
                                     </div>
-                                 
+                                  
                                 </div>
                         
                     </div>
                 </div>
 
-                {/* Right Side: Stats Grid - spans 1 column */}
-                <div className="lg:col-span-1 grid grid-cols-2 gap-6 font-sans ">
+                {/* Right Side: Stats Grid - single column layout */}
+                <div className="lg:col-span-1 grid grid-cols-1 gap-4 font-sans">
                     {stats.map((stat, index) => (
                         <div
                             key={index}
@@ -1016,12 +1021,12 @@ const WhyCustomerExperienceMattersSection = () => {
                             className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300"
                         >
                             {/* Number */}
-                            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 font-sans">
+                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 font-sans">
                                 {stat.number}
                             </h3>
 
                             {/* Description */}
-                            <p className="text-white/90 text-base font-medium">
+                            <p className="text-white/90 text-sm md:text-base font-medium">
                                 {stat.description}
                             </p>
                         </div>

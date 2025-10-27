@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "reac
+import React, { useRef, useEffect, useState } from "react"
 import Scroll3DSections from "../sections/Components/scrollanimation";
-t"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
@@ -777,6 +776,19 @@ const CTASection = () => {
   )
 }
 
-  
+// Main Software Development Page
+const SoftwarePage = () => (
+  <main className="bg-white w-full mt-20">
+    <HeroSection />
+    <WhatDoesWebnoxDigitalDoSection />
+    <OurApproachSection />
+    <WhyCustomerExperienceMattersSection />
+    <BrandingPlanSteps />
+    
+    <CTASection />
+    <FAQSection />
+    <Footer />
+  </main>
+)
 
 export default SoftwarePage
