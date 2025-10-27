@@ -1,6 +1,8 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, us
+import Scroll3DSections from "../sections/Components/scrollanimation";
+eEffect, useState } from "react"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -10,13 +12,9 @@ import Link from "next/link"
 
 import Footer from "../sections/Footer";
 
-
-
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 }
-
-
 
 // Hero Section Component
 const HeroSection = () => {
@@ -160,9 +158,6 @@ const HeroSection = () => {
   )
 }
 
-
-
-
 // Technology Should Work for You Section Component
 const TechnologyWorkSection = () => {
   const sectionRef = useRef(null)
@@ -221,16 +216,13 @@ const TechnologyWorkSection = () => {
       className="relative min-h-[600px] md:min-h-[700px]  w-full overflow-hidden py-12 lg:py-20"
     >
 
-
       {/* No overlay - full background visibility */}
 
       <div className="relative w-full px-18 z-20 flex items-center py-36">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-10 items-center w-full">
 
-
           {/* right Side - Text Content */}
           <div className="flex flex-col justify-center text-center lg:text-left order-1 lg:order-2 lg:pl-4">
-
 
             <h2 ref={titleRef} className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-sans font-semibold text-gray-900 mb-6 lg:mb-8 leading-tight lg:leading-tight">
             Introduction
@@ -242,7 +234,6 @@ const TechnologyWorkSection = () => {
             >At Webnox Digital, we create digital realities. With over 2 years of hands-on experience building scalable web platforms, our team has evolved into a frontrunner in 3D website development. Leveraging technologies like Three.js, WebGL, and GSAP, we design experiential websites that blend motion, depth, and interaction, optimized for performance across all devices.
             </p>
           </div>
-
 
           {/* left Side - Image */}
           <div ref={imageRef} className="flex justify-center lg:justify-start order-2 lg:order-1">
@@ -290,9 +281,6 @@ const TechnologyWorkSection = () => {
     </section>
   )
 }
-
-
-
 
 // Services Grid Section Component
 const UseCasesSection = () => {
@@ -355,7 +343,6 @@ const UseCasesSection = () => {
         <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-black leading-tight">
         Why 3D Web Development?
         </h2>
-
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 p-4 mt-10">
           {useCases.map((item, index) => (
@@ -454,7 +441,6 @@ const SecondUseCasesSection = () => {
         </h2>
         <p className="text-gray-600 text-lg mb-4 text-center">We build 3D websites using a future-ready tech stack trusted by Fortune 500 brands</p>
 
-
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-4 mt-10">
           {useCases.map((item, index) => (
             <div
@@ -475,8 +461,6 @@ const SecondUseCasesSection = () => {
     </section>
   )
 }
-
-
 
 // Centered Use Cases panel matching the provided image
 const ShowcaseUseCasesPanel = () => {
@@ -553,8 +537,6 @@ const ShowcaseUseCasesPanel = () => {
   )
 }
 
-
-
 // Services Grid Section Component
 const ThirdUseCasesSection = () => {
   const sectionRef = useRef(null)
@@ -605,7 +587,6 @@ const ThirdUseCasesSection = () => {
      
     },
 
-
   
   ]
 
@@ -636,7 +617,6 @@ const ThirdUseCasesSection = () => {
         Our 3D Web Development Services Include
         </h2>
 
-
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-4 mt-10">
           {useCases.map((item, index) => (
             <div
@@ -656,12 +636,6 @@ const ThirdUseCasesSection = () => {
     </section>
   )
 }
-
-
-
-
-
-
 
 // Call to Action Section Component
 const CTASection = () => {
@@ -796,11 +770,6 @@ const CTASection = () => {
   )
 }
 
-
-
-
-
-
 const FAQSection = () => {
   const faqs = [
     {
@@ -878,85 +847,6 @@ const FAQSection = () => {
     </section>
   );
 };
-
-
-
-
-const Scroll3DSections = ({ children }) => {
-  const containerRef = useRef(null)
-  const sectionsRef = useRef([])
-
-  useEffect(() => {
-    const mm = ScrollTrigger.matchMedia()
-
-    mm.add("(min-width: 1024px)", () => {
-      const ctx = gsap.context(() => {
-        const sections = sectionsRef.current.filter(Boolean)
-        sections.forEach((sectionEl) => {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionEl,
-              start: "top 80%",
-              end: "bottom 20%",
-              scrub: true,
-            }
-          })
-
-          tl.fromTo(
-            sectionEl,
-            {
-              opacity: 0,
-              y: 60,
-              rotationX: 8,
-              z: -80,
-              transformPerspective: 1000,
-              transformOrigin: "50% 50%",
-            },
-            {
-              opacity: 1,
-              y: 0,
-              rotationX: 0,
-              z: 0,
-              ease: "power2.out",
-              duration: 1,
-            }
-          ).to(sectionEl, {
-            opacity: 0,
-            y: -60,
-            rotationX: -6,
-            z: -80,
-            ease: "power2.in",
-            duration: 1,
-          })
-        })
-      }, containerRef)
-
-      return () => ctx.revert()
-    })
-
-    return () => mm.revert()
-  }, [])
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative space-y-8 md:space-y-12 "
-      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-    >
-      {React.Children.map(children, (child, idx) => (
-        <div
-          ref={(el) => (sectionsRef.current[idx] = el)}
-          className="will-change-transform"
-        >
-          {child}
-        </div>
-      ))}
-    </div>
-  )
-}
-
-
-
 
 const CustomWebPage = () => {
   return (

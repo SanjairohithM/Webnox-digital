@@ -1,6 +1,8 @@
 "use client"
 
-import React, { useRef, useEffect, useLayoutEffect, useState } from "react"
+import React, { useRef, useEffect, useLayoutEffect, useS
+import Scroll3DSections from "../sections/Components/scrollanimation";
+tate } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
@@ -8,13 +10,9 @@ import Image from "next/image"
 import Link from "next/link";
 import Footer from "../sections/Footer";
 
-
-
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 }
-
-
 
 // Hero Section Component
 const HeroSection = () => {
@@ -192,11 +190,6 @@ const HeroSection = () => {
   )
 }
 
-
-
-
-
-
 const FAQSection = () => {
   const faqs = [
     {
@@ -274,82 +267,6 @@ const FAQSection = () => {
     </section>
   );
 };
-
-
-const Scroll3DSections = ({ children }) => {
-  const containerRef = useRef(null)
-  const sectionsRef = useRef([])
-
-  useEffect(() => {
-    const mm = ScrollTrigger.matchMedia()
-
-    mm.add("(min-width: 1024px)", () => {
-      const ctx = gsap.context(() => {
-        const sections = sectionsRef.current.filter(Boolean)
-        sections.forEach((sectionEl) => {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionEl,
-              start: "top 80%",
-              end: "bottom 20%",
-              scrub: true,
-            }
-          })
-
-          tl.fromTo(
-            sectionEl,
-            {
-              opacity: 0,
-              y: 60,
-              rotationX: 8,
-              z: -80,
-              transformPerspective: 1000,
-              transformOrigin: "50% 50%",
-            },
-            {
-              opacity: 1,
-              y: 0,
-              rotationX: 0,
-              z: 0,
-              ease: "power2.out",
-              duration: 1,
-            }
-          ).to(sectionEl, {
-            opacity: 0,
-            y: -60,
-            rotationX: -6,
-            z: -80,
-            ease: "power2.in",
-            duration: 1,
-          })
-        })
-      }, containerRef)
-
-      return () => ctx.revert()
-    })
-
-    return () => mm.revert()
-  }, [])
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative space-y-8 md:space-y-12 "
-      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-    >
-      {React.Children.map(children, (child, idx) => (
-        <div
-          ref={(el) => (sectionsRef.current[idx] = el)}
-          className="will-change-transform"
-        >
-          {child}
-        </div>
-      ))}
-    </div>
-  )
-}
-
-
 
 // Top 3 Framework Section Component
 const FrameworkSection = () => {
@@ -545,9 +462,6 @@ const FrameworkSection = () => {
   )
 }
 
-
-
-
 // Technologies Section Component
 const TechnologiesSection = () => {
   const sectionRef = useRef(null)
@@ -697,9 +611,6 @@ const TechnologiesSection = () => {
   )
 }
 
-
-
-
 // Technology Should Work for You Section Component
 const TechnologyWorkSection = () => {
   const sectionRef = useRef(null)
@@ -759,7 +670,6 @@ const TechnologyWorkSection = () => {
       ref={sectionRef}
       className="relative min-h-[600px] md:min-h-[700px]  w-full overflow-hidden py-12 lg:py-20"
     >
-
 
       {/* No overlay - full background visibility */}
 
@@ -860,7 +770,6 @@ const TechnologyWorkSection = () => {
     </section>
   )
 }
-
 
 const MarketingStackSection = () => {
   const sectionRef = useRef(null)
@@ -985,10 +894,6 @@ const MarketingStackSection = () => {
     </section>
   )
 }
-
-
-
-
 
 // Specialized E-Commerce Solutions Section
 const SpecializedSolutionsSection = () => {
@@ -1170,8 +1075,6 @@ const SpecializedSolutionsSection = () => {
       image: "/images/ecommerce29.webp",
     },
 
-
-
   ]
 
   return (
@@ -1252,7 +1155,6 @@ const SpecializedSolutionsSection = () => {
             display: none;
           }
         `}</style>
-
 
       </div>
     </section>

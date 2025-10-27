@@ -1,6 +1,8 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useEffect, useState } from "reac
+import Scroll3DSections from "../sections/Components/scrollanimation";
+t"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
@@ -8,13 +10,9 @@ import Image from "next/image"
 import Link from "next/link";
 import Footer from "../sections/Footer";
 
-
-
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 }
-
-
 
 // Hero Section Component
 const HeroSection = () => {
@@ -373,8 +371,6 @@ const OurApproachSection = () => {
     )
 }
 
-
-
 const WhyCustomerExperienceMattersSection = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
@@ -527,7 +523,6 @@ const WhyCustomerExperienceMattersSection = () => {
   )
 }
 
-
 const BrandingPlanSteps = () => (
     <section className="bg-white py-20 px-4 md:px-12 lg:px-24 font-sans">
       <div className="flex flex-col items-center w-full">
@@ -575,9 +570,6 @@ const BrandingPlanSteps = () => (
       </div>
     </section>
   )
-
-
-
 
 const FAQSection = () => {
     const faqs = [
@@ -785,98 +777,6 @@ const CTASection = () => {
   )
 }
 
-
-  const Scroll3DSections = ({ children }) => {
-    const containerRef = useRef(null)
-    const sectionsRef = useRef([])
   
-    useEffect(() => {
-      const mm = ScrollTrigger.matchMedia()
-  
-      mm.add("(min-width: 1024px)", () => {
-        const ctx = gsap.context(() => {
-          const sections = sectionsRef.current.filter(Boolean)
-          sections.forEach((sectionEl) => {
-            const tl = gsap.timeline({
-              scrollTrigger: {
-                trigger: sectionEl,
-                start: "top 80%",
-                end: "bottom 20%",
-                scrub: true,
-              }
-            })
-  
-            tl.fromTo(
-              sectionEl,
-              {
-                opacity: 0,
-                y: 60,
-                rotationX: 8,
-                z: -80,
-                transformPerspective: 1000,
-                transformOrigin: "50% 50%",
-              },
-              {
-                opacity: 1,
-                y: 0,
-                rotationX: 0,
-                z: 0,
-                ease: "power2.out",
-                duration: 1,
-              }
-            ).to(sectionEl, {
-              opacity: 0,
-              y: -60,
-              rotationX: -6,
-              z: -80,
-              ease: "power2.in",
-              duration: 1,
-            })
-          })
-        }, containerRef)
-  
-        return () => ctx.revert()
-      })
-  
-      return () => mm.revert()
-    }, [])
-  
-    return (
-      <div
-        ref={containerRef}
-        className="relative space-y-8  "
-        style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-      >
-        {React.Children.map(children, (child, idx) => (
-          <div
-            ref={(el) => (sectionsRef.current[idx] = el)}
-            className="will-change-transform"
-          >
-            {child}
-          </div>
-        ))}
-      </div>
-    )
-  }
-  
-
-  
-const SoftwarePage = () => {
-  return (
-    <main className="@/software">
-      <Scroll3DSections>
-      <HeroSection />
-      <WhatDoesWebnoxDigitalDoSection />
-      <BrandingPlanSteps />
-      <WhyCustomerExperienceMattersSection />
-      <OurApproachSection />
-      <CTASection />
-      </Scroll3DSections>
-     
-      <FAQSection />
-      <Footer />
-    </main>
-  )
-}
 
 export default SoftwarePage

@@ -64,7 +64,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative font-sans text-gray-800 bg-gradient-to-b from-white via-[#e0f8ff] to-[#e8e0ff] overflow-hidden pt-20 "
+      className="relative font-sans text-gray-800 bg-gradient-to-b from-white via-[#e0f8ff] to-[#e8e0ff] overflow-hidden"
     >
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 ">
         {/* Top: Robot centered */}

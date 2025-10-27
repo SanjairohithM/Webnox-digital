@@ -1,6 +1,8 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useEffect, useState } from "react
+import Scroll3DSections from "../sections/Components/scrollanimation";
+"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -10,13 +12,9 @@ import Link from "next/link";
 
 import Footer from "../sections/Footer";
 
-
-
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 }
-
-
 
 // Hero Section Component
 const HeroSection = () => {
@@ -170,8 +168,6 @@ const HeroSection = () => {
   )
 }
 
-
-
 const WhyCustomerExperienceMattersSection = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
@@ -259,9 +255,6 @@ const WhyCustomerExperienceMattersSection = () => {
       }}
     >
 
-
-
-
       {/* Background Image Overlay */}
       <div className="absolute inset-0 z-40">
         <Image
@@ -283,7 +276,6 @@ const WhyCustomerExperienceMattersSection = () => {
       ></div>
 
       <div className="max-w-7xl mx-auto relative z-20">
-
 
         {/* Feature Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12 max-w-6xl mx-auto">
@@ -307,8 +299,6 @@ const WhyCustomerExperienceMattersSection = () => {
     </div>
   </>)
 }
-
-
 
 // Technology Should Work for You Section Component
 const TechnologyWorkSection = () => {
@@ -368,16 +358,13 @@ const TechnologyWorkSection = () => {
       className="relative min-h-[600px] md:min-h-[700px]  w-full overflow-hidden py-12 lg:py-20"
     >
 
-
       {/* No overlay - full background visibility */}
 
       <div className="relative w-full px-18 z-20 flex items-center py-36">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-10 items-center w-full">
 
-
           {/* left Side - Text Content */}
           <div className="flex flex-col justify-center text-center lg:text-left order-2 lg:order-1 lg:pl-4">
-
 
             <h2 ref={titleRef} className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-sans font-semibold text-gray-900 mb-6 lg:mb-8 leading-tight lg:leading-tight">
               Our Methodical & Results-Driven Approach
@@ -389,7 +376,6 @@ const TechnologyWorkSection = () => {
             >Because your business deserves a website as unique and powerful as your vision.<span className="text-[#00B9FF]">We listen, plan, design, develop, test, and launch—without relying on templates, shortcuts, or generic solutions.</span>
             </p>
           </div>
-
 
           {/* Right Side - Image */}
           <div ref={imageRef} className="flex justify-center lg:justify-start order-1 lg:order-2">
@@ -437,9 +423,6 @@ const TechnologyWorkSection = () => {
     </section>
   )
 }
-
-
-
 
 // Services Grid Section Component
 const UseCasesSection = () => {
@@ -554,8 +537,6 @@ const UseCasesSection = () => {
   )
 }
 
-
-
  const industries = [
    {
      step: "01",
@@ -664,9 +645,6 @@ const IndustriesSection = () => {
     </section>
   )
 }
-
-
-
 
 // Call to Action Section Component
 const CTASection = () => {
@@ -803,11 +781,6 @@ const CTASection = () => {
   )
 }
 
-
-
-
-
-
 const FAQSection = () => {
   const faqs = [
     {
@@ -882,88 +855,6 @@ const FAQSection = () => {
     </section>
   );
 };
-
-
-
-const Scroll3DSections = ({ children }) => {
-  const containerRef = useRef(null)
-  const sectionsRef = useRef([])
-
-  useEffect(() => {
-    const mm = ScrollTrigger.matchMedia()
-
-    mm.add("(min-width: 1024px)", () => {
-      const ctx = gsap.context(() => {
-        const sections = sectionsRef.current.filter(Boolean)
-        sections.forEach((sectionEl) => {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionEl,
-              start: "top 80%",
-              end: "bottom 20%",
-              scrub: true,
-            }
-          })
-
-          tl.fromTo(
-            sectionEl,
-            {
-              opacity: 0,
-              y: 60,
-              rotationX: 8,
-              z: -80,
-              transformPerspective: 1000,
-              transformOrigin: "50% 50%",
-            },
-            {
-              opacity: 1,
-              y: 0,
-              rotationX: 0,
-              z: 0,
-              ease: "power2.out",
-              duration: 1,
-            }
-          ).to(sectionEl, {
-            opacity: 0,
-            y: -60,
-            rotationX: -6,
-            z: -80,
-            ease: "power2.in",
-            duration: 1,
-          })
-        })
-      }, containerRef)
-
-      return () => ctx.revert()
-    })
-
-    return () => mm.revert()
-  }, [])
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative space-y-8 md:space-y-12 "
-      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-    >
-      {React.Children.map(children, (child, idx) => (
-        <div
-          ref={(el) => (sectionsRef.current[idx] = el)}
-          className="will-change-transform"
-        >
-          {child}
-        </div>
-      ))}
-    </div>
-  )
-}
-
-
-
-
-
-
-
 
 const CustomWebPage = () => {
   return (

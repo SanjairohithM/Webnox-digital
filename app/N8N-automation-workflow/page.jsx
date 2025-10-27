@@ -7,6 +7,7 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Footer from "../sections/Footer";
 import Link from "next/link";
+import Scroll3DSections from "../sections/Components/scrollanimation";
 // import FAQSection from "../components/FAQSection";
 // import TickerSection from "../components/TickerSection";
 
@@ -591,15 +592,16 @@ const WhyN8nWebnoxSection = () => {
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">
           Why n8n + Webnox Is the Smartest Automation Decision
         </h2>
-        <p className="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
+        <p className="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-8">
         At Webnox Digital, we build intelligent systems that scale with you using n8n + AI + your business logic.
         </p>
+        <button 
+          className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer hover:scale-105 transform"
+          onClick={() => window.location.href = '/contact-us'}
+        >
+          Get My Workflow Plan Now
+        </button>
       </div>
-      <Link href="/contact-us">
-        <button className="bg-white hover:bg-gray-50 text-[#00B9FF] font-semibold px-6 py-3 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-[#00B9FF] w-full">
-             Get My Workflow Plan Now
-         </button>
-       </Link>
     </section>
   )
 }
@@ -683,78 +685,6 @@ const FAQSection = () => {
 };
 
 
-const Scroll3DSections = ({ children }) => {
-  const containerRef = useRef(null)
-  const sectionsRef = useRef([])
-
-  useEffect(() => {
-    const mm = ScrollTrigger.matchMedia()
-
-    mm.add("(min-width: 1024px)", () => {
-      const ctx = gsap.context(() => {
-        const sections = sectionsRef.current.filter(Boolean)
-        sections.forEach((sectionEl) => {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionEl,
-              start: "top 80%",
-              end: "bottom 20%",
-              scrub: true,
-            }
-          })
-
-          tl.fromTo(
-            sectionEl,
-            {
-              opacity: 0,
-              y: 60,
-              rotationX: 8,
-              z: -80,
-              transformPerspective: 1000,
-              transformOrigin: "50% 50%",
-            },
-            {
-              opacity: 1,
-              y: 0,
-              rotationX: 0,
-              z: 0,
-              ease: "power2.out",
-              duration: 1,
-            }
-          ).to(sectionEl, {
-            opacity: 0,
-            y: -60,
-            rotationX: -6,
-            z: -80,
-            ease: "power2.in",
-            duration: 1,
-          })
-        })
-      }, containerRef)
-
-      return () => ctx.revert()
-    })
-
-    return () => mm.revert()
-  }, [])
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative space-y-8 md:space-y-12 "
-      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-    >
-      {React.Children.map(children, (child, idx) => (
-        <div
-          ref={(el) => (sectionsRef.current[idx] = el)}
-          className="will-change-transform"
-        >
-          {child}
-        </div>
-      ))}
-    </div>
-  )
-}
 
 // Main Outsourcing Page Component
     const n8nPage = () => {

@@ -8,6 +8,7 @@ import Image from "next/image"
 import TickerSection from "../components/TickerSection";
 import Footer from "../sections/Footer";
 import Link from "next/link";
+import Scroll3DSections from "../sections/Components/scrollanimation";
 
 
 
@@ -22,6 +23,7 @@ const HeroSection = () => {
   const heroRef = useRef(null)
   const titleRef = useRef(null)
   const descRef = useRef(null)
+  const buttonRef = useRef(null)
   const titleLettersRef = useRef([])
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const HeroSection = () => {
       
       if (isDesktop) {
         // Complex animations for desktop with letter-by-letter title animation
-        gsap.set([...titleLettersRef.current, descRef.current], { opacity: 0, y: 20 })
+        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 20 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -49,9 +51,10 @@ const HeroSection = () => {
           stagger: 0.03 // 30ms delay between each letter
         })
           .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
       } else {
         // Simple fade animations for mobile with letter-by-letter title animation
-        gsap.set([...titleLettersRef.current, descRef.current], { opacity: 0, y: 15 })
+        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 15 })
         
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -69,6 +72,7 @@ const HeroSection = () => {
           stagger: 0.02 // 20ms delay between each letter
         })
           .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
       }
     }, heroRef)
     return () => ctx.revert()
@@ -119,11 +123,13 @@ const HeroSection = () => {
           and let's build with them today.
         </p>
         <button
+          ref={buttonRef}
           className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-sans font-semibold px-8 py-4 rounded-lg text-lg md:text-xl transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer hover:scale-105 transform"
           onClick={() => window.location.href = '/contact-us'}
         >
           Building What's Next, Now
         </button>
+
       </div>
     </section>
   )
@@ -495,79 +501,6 @@ const FAQSection = () => {
 };
 
 
-// Scroll-driven 3D crossfade wrapper for sections
-const Scroll3DSections = ({ children }) => {
-  const containerRef = useRef(null)
-  const sectionsRef = useRef([])
-
-  useEffect(() => {
-    const mm = ScrollTrigger.matchMedia()
-
-    mm.add("(min-width: 1024px)", () => {
-      const ctx = gsap.context(() => {
-        const sections = sectionsRef.current.filter(Boolean)
-        sections.forEach((sectionEl) => {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: sectionEl,
-              start: "top 80%",
-              end: "bottom 20%",
-              scrub: true,
-            }
-          })
-
-          tl.fromTo(
-            sectionEl,
-            {
-              opacity: 0,
-              y: 60,
-              rotationX: 8,
-              z: -80,
-              transformPerspective: 1000,
-              transformOrigin: "50% 50%",
-            },
-            {
-              opacity: 1,
-              y: 0,
-              rotationX: 0,
-              z: 0,
-              ease: "power2.out",
-              duration: 1,
-            }
-          ).to(sectionEl, {
-            opacity: 0,
-            y: -60,
-            rotationX: -6,
-            z: -80,
-            ease: "power2.in",
-            duration: 1,
-          })
-        })
-      }, containerRef)
-
-      return () => ctx.revert()
-    })
-
-    return () => mm.revert()
-  }, [])
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative space-y-8 md:space-y-12 lg:space-y-24"
-      style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-    >
-      {React.Children.map(children, (child, idx) => (
-        <div
-          ref={(el) => (sectionsRef.current[idx] = el)}
-          className="will-change-transform"
-        >
-          {child}
-        </div>
-      ))}
-    </div>
-  )
-}
 
 
 const TechPage = () => {

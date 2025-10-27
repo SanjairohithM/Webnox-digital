@@ -1,6 +1,8 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "react"
+import React, { useRef, useEffect, useState } from "reac
+import Scroll3DSections from "../sections/Components/scrollanimation";
+t"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -9,13 +11,9 @@ import Image from "next/image"
 import Link from "next/link";
 import Footer from "../sections/Footer";
 
-
-
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
 }
-
-
 
 // Hero Section Component
 const HeroSection = () => {
@@ -218,7 +216,6 @@ const BrandingPlanSteps = () => (
     </section>
 )
 
-
 // Services Grid Section Component
 const SecondUseCasesSection = () => {
     const sectionRef = useRef(null)
@@ -271,7 +268,6 @@ const SecondUseCasesSection = () => {
 
         },
 
-
     ]
 
     useEffect(() => {
@@ -314,7 +310,6 @@ const SecondUseCasesSection = () => {
                 </h2>
                 <p className="text-gray-600 text-lg mb-4 text-center">Comprehensive design solutions that transform ideas into exceptional user experiences.</p>
 
-
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-4 mt-10">
                     {useCases.map((item, index) => (
                         <div
@@ -335,9 +330,6 @@ const SecondUseCasesSection = () => {
         </section>
     )
 }
-
-
-
 
 const WhyCustomerExperienceMattersSection = () => {
     const sectionRef = useRef(null)
@@ -514,7 +506,6 @@ const WhyCustomerExperienceMattersSection = () => {
     </>)
   }
 
-
 // Call to Action Section Component
 const CTASection = () => {
     const sectionRef = useRef(null)
@@ -648,11 +639,6 @@ const CTASection = () => {
     )
 }
 
-
-
-
-
-
 const FAQSection = () => {
     const faqs = [
         {
@@ -727,101 +713,5 @@ const FAQSection = () => {
         </section>
     );
 };
-
-
-const Scroll3DSections = ({ children }) => {
-    const containerRef = useRef(null)
-    const sectionsRef = useRef([])
-  
-    useEffect(() => {
-      const mm = ScrollTrigger.matchMedia()
-  
-      mm.add("(min-width: 1024px)", () => {
-        const ctx = gsap.context(() => {
-          const sections = sectionsRef.current.filter(Boolean)
-          sections.forEach((sectionEl) => {
-            const tl = gsap.timeline({
-              scrollTrigger: {
-                trigger: sectionEl,
-                start: "top 80%",
-                end: "bottom 20%",
-                scrub: true,
-              }
-            })
-  
-            tl.fromTo(
-              sectionEl,
-              {
-                opacity: 0,
-                y: 60,
-                rotationX: 8,
-                z: -80,
-                transformPerspective: 1000,
-                transformOrigin: "50% 50%",
-              },
-              {
-                opacity: 1,
-                y: 0,
-                rotationX: 0,
-                z: 0,
-                ease: "power2.out",
-                duration: 1,
-              }
-            ).to(sectionEl, {
-              opacity: 0,
-              y: -60,
-              rotationX: -6,
-              z: -80,
-              ease: "power2.in",
-              duration: 1,
-            })
-          })
-        }, containerRef)
-  
-        return () => ctx.revert()
-      })
-  
-      return () => mm.revert()
-    }, [])
-  
-    return (
-      <div
-        ref={containerRef}
-        className="relative space-y-8 md:space-y-12 "
-        style={{ perspective: 1200, transformStyle: "preserve-3d" }}
-      >
-        {React.Children.map(children, (child, idx) => (
-          <div
-            ref={(el) => (sectionsRef.current[idx] = el)}
-            className="will-change-transform"
-          >
-            {child}
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-
-
-
-
-
-const CustomWebPage = () => {
-    return (
-        <main className="@/customweb">
-            <Scroll3DSections>
-            <HeroSection />
-            <BrandingPlanSteps />
-            <SecondUseCasesSection />
-            <WhyCustomerExperienceMattersSection />
-
-            <CTASection />
-            </Scroll3DSections>
-            <FAQSection />
-            <Footer />
-        </main>
-    )
-}
 
 export default CustomWebPage
