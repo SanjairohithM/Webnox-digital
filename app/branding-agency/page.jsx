@@ -229,22 +229,39 @@ const BrandingFeatures = () => (
         </p>
         <ul className="space-y-4 font-sans font-normal">
           <li className="flex items-start gap-3 text-[#222] text-base md:text-lg">
-            <span className="inline-flex items-center justify-center w-7 h-7 bg-green-500 rounded-md text-white text-xl">✔️</span>
+            <span className="inline-flex items-center justify-center w-7 h-7 bg-[#00B9FF] rounded-full text-white">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </span>
             Increased brand recognition across global markets
           </li>
           <li className="flex items-start gap-3 text-[#222] text-base md:text-lg">
-            <span className="inline-flex items-center justify-center w-7 h-7 bg-green-500 rounded-md text-white text-xl">✔️</span>
+            <span className="inline-flex items-center justify-center w-7 h-7 bg-[#00B9FF] rounded-full text-white">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </span>
             Consistent identity across all platforms and regions
           </li>
           <li className="flex items-start gap-3 text-[#222] text-base md:text-lg">
-            <span className="inline-flex items-center justify-center w-7 h-7 bg-green-500 rounded-md text-white text-xl">✔️</span>
+            <span className="inline-flex items-center justify-center w-7 h-7 bg-[#00B9FF] rounded-full text-white">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </span>
             Better leads through brand clarity and trust
           </li>
           <li className="flex items-start gap-3 text-[#222] text-base md:text-lg">
-            <span className="inline-flex items-center justify-center w-7 h-7 bg-green-500 rounded-md text-white text-xl">✔️</span>
+            <span className="inline-flex items-center justify-center w-7 h-7 bg-[#00B9FF] rounded-full text-white">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </span>
             Deeper customer loyalty through story-based branding
           </li>
         </ul>
+     
       </div>
       {/* Right: Custom Grid Image Layout */}
       <div className="grid grid-cols-2 grid-rows-2 gap-4 h-full">
@@ -299,6 +316,63 @@ const BrandingPlanSteps = () => (
             <h3 className="text-base font-semibold text-[#00b9ff] mb-1 text-center">Build & Launch A World-Class Brand</h3>
             <p className="text-gray-600 text-sm text-center">From logo to brand voice to digital presence, we’ll create everything your brand needs to make a bold and lasting impression.</p>
           </div>
+        </div>
+
+          {/* CTA Button */}
+          <div className="mt-8 flex justify-center">
+           <a 
+             href="/contact-us#contact-form"
+             className="bg-[#00B9FF] hover:bg-[#0099cc] text-white font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-lg"
+           >
+             Talk Now!!!
+           </a>
+         </div>
+        </div>
+      </div>
+    </section>
+)
+
+// Results Section
+const ResultsSection = () => (
+  <section className="bg-gray-50 py-16 px-4">
+    <div className="max-w-7xl mx-auto">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-sans font-bold text-black mb-4">
+          Results You Can Expect
+        </h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="flex items-start gap-4">
+          <span className="inline-flex items-center justify-center w-8 h-8 bg-[#00B9FF] rounded-full text-white flex-shrink-0 mt-1">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+          </span>
+          <p className="text-gray-700 text-lg font-sans">Increased brand recognition across global markets</p>
+        </div>
+        <div className="flex items-start gap-4">
+          <span className="inline-flex items-center justify-center w-8 h-8 bg-[#00B9FF] rounded-full text-white flex-shrink-0 mt-1">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+          </span>
+          <p className="text-gray-700 text-lg font-sans">Consistent identity across all platforms and regions</p>
+        </div>
+        <div className="flex items-start gap-4">
+          <span className="inline-flex items-center justify-center w-8 h-8 bg-[#00B9FF] rounded-full text-white flex-shrink-0 mt-1">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+          </span>
+          <p className="text-gray-700 text-lg font-sans">Better leads through brand clarity and trust</p>
+        </div>
+        <div className="flex items-start gap-4">
+          <span className="inline-flex items-center justify-center w-8 h-8 bg-[#00B9FF] rounded-full text-white flex-shrink-0 mt-1">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+          </span>
+          <p className="text-gray-700 text-lg font-sans">Deeper customer loyalty through story-based branding</p>
         </div>
       </div>
     </div>
@@ -436,6 +510,7 @@ const BrandingPage = () => (
     <BrandingFeatures />
     <BrandingPlanSteps />
     </Scroll3DSections>
+    <ResultsSection />
     <IndustriesSection />
    
     <TickerSection />
