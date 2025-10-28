@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useRef, us
+import React, { useRef, useEffect, useState } from "react"
 import Scroll3DSections from "../sections/Components/scrollanimation";
-eEffect, useState } from "react"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"

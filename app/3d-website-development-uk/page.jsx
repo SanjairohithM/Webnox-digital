@@ -44,7 +44,7 @@ const HeroSection = () => {
           In the UK, businesses are embracing <span className="text-[#00B9FF] font-semibold">3D websites</span> to captivate audiences and stand apart from competitors. At Webnox Digital, we design and develop{" "}
           <span className="text-[#00B9FF] font-semibold">interactive 3D websites</span> for enterprises across the United Kingdom, delivering engaging, conversion-focused experiences.
         </p>
-        <Link href="/contact">
+        <Link href="/contact-us">
           <button
             ref={buttonRef}
             className="inline-flex items-center px-10 py-5 bg-[#00B9FF] text-white font-bold text-lg rounded-full shadow-xl hover:scale-105 hover:shadow-2xl transition-transform duration-300"
@@ -154,7 +154,7 @@ const CTASection = () => {
   return (
     <section className="py-28 bg-white text-center">
       <h2 className="text-4xl md:text-5xl font-bold mb-10">Transform Your UK Website into an Immersive Experience</h2>
-      <Link href="/contact">
+      <Link href="/contact-us#contact-form">
         <button className="inline-flex items-center px-10 py-5 bg-[#00B9FF] text-white font-bold text-lg rounded-full shadow-xl hover:scale-105 hover:shadow-2xl transition-transform duration-300">
           Request a Free Strategy Call
           <ArrowRight className="ml-3 w-6 h-6" />

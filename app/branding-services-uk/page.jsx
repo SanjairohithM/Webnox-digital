@@ -927,7 +927,7 @@ const MagneticCTASection = () => {
                 className="group relative inline-flex items-center px-12 py-6 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] text-white font-bold text-xl rounded-full shadow-2xl hover:shadow-[#00B9FF]/50 transition-all duration-300 transform hover:scale-110 hover:-translate-y-2"
               >
                 <span className="relative z-10 flex items-center">
-                  Request a Free Strategy Call
+                Get My Free Growth Plan
                   <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0097D9] to-[#007AC3] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

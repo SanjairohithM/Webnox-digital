@@ -48,7 +48,7 @@ const solutions = [
   },
 
   {
-    title: "Clouds & devOps",
+    title: "Clouds & DevOps",
     description: " Optimizing performance, speed, and reliability with expert DevOps practices and cloud architecture.",
     image: "/images/solution4.webp",
     href: "/cloud-devops-services"

@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useRef, useEffect, useLayoutEffect, useS
+import React, { useRef, useEffect, useLayoutEffect, useState } from "react"
 import Scroll3DSections from "../sections/Components/scrollanimation";
-tate } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
@@ -1123,17 +1122,17 @@ const SpecializedSolutionsSection = () => {
                       {/* Image Side */}
                       <div className="w-full lg:w-1/2">
                         <div className="relative overflow-hidden ">
-                          <img
-                            src={industry.image}
-                            alt={industry.title}
-                            className="w-full h-64 lg:h-80 object-contain  rounded-2xl"
-                          />
+                           <img
+                             src={industry.image}
+                             alt={industry.title}
+                             className="w-full h-48 lg:h-56 object-contain  rounded-2xl"
+                           />
                           <div className="absolute inset-0  rounded-2xl"></div>
                         </div>
                       </div>
 
                       {/* Content Side */}
-                      <div className="w-full lg:w-1/2 text-center lg:text-left">
+                      <div className="w-full lg:w-1/2 text-center lg:text-left pl-4 lg:pl-10">
                         <h3 className="text-2xl lg:text-4xl font-bold text-black mb-4 ">
                           {industry.title}
                         </h3>

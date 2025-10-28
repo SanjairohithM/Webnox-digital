@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "reac
+import React, { useRef, useEffect, useState } from "react"
 import Scroll3DSections from "../sections/Components/scrollanimation";
-t"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -422,24 +421,28 @@ const WhyCustomerExperienceMattersSection = () => {
         <p className="text-[#00B9FF] text-center mb-6 max-w-3xl mx-auto text-2xl font-sans">Our UI/UX solutions help brands</p>
 
         {/* Horizontal Benefit Bars */}
-        <div className="w-full ">
+        <div className="w-full max-w-6xl mx-auto shadow-2xl rounded-xl overflow-hidden">
           {/* Top (Blue) bar */}
-          <div className="bg-[#00B9FF] text-white rounded-sm">
-            <div className="flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-white/20">
+          <div className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] text-white">
+            <div className="flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-white/30">
               {benefitsTop.map((text, idx) => (
-                <p key={idx} className="px-4 py-2 text-[10px] md:text-xs lg:text-sm text-center">
-                  {text}
-                </p>
+                <div key={idx} className="px-6 py-4 text-center flex-1">
+                  <p className="text-sm md:text-base lg:text-lg font-semibold leading-relaxed">
+                    {text}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
           {/* Bottom (Black) bar */}
-          <div className="bg-black text-white rounded-sm">
-            <div className="flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+          <div className="bg-gradient-to-r from-gray-900 to-black text-white">
+            <div className="flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-white/20">
               {benefitsBottom.map((text, idx) => (
-                <p key={idx} className="px-4 py-2 text-[10px] md:text-xs lg:text-sm text-center">
-                  {text}
-                </p>
+                <div key={idx} className="px-6 py-4 text-center flex-1">
+                  <p className="text-sm md:text-base lg:text-lg font-semibold leading-relaxed">
+                    {text}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
@@ -714,4 +717,18 @@ const FAQSection = () => {
     );
 };
 
-export default CustomWebPage
+const UIUXDesignPage = () => {
+    return (
+        <main className="@/uiuxdesign">
+            <Scroll3DSections>
+                <HeroSection />
+                <BrandingPlanSteps />
+                <SecondUseCasesSection />
+                <WhyCustomerExperienceMattersSection />
+            </Scroll3DSections>
+            <Footer />
+        </main>
+    )
+}
+
+export default UIUXDesignPage

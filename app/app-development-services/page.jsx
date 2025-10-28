@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "reac
+import React, { useRef, useEffect, useState } from "react"
 import Scroll3DSections from "../sections/Components/scrollanimation";
-t"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
@@ -1025,6 +1024,18 @@ const FAQSection = () => {
     );
   };
 
-  
+const MobileAppPage = () => {
+  return (
+    <main className="@/mobileapp">
+      <Scroll3DSections>
+        <HeroSection />
+        <UseCasesSection />
+        <CTASection />
+      </Scroll3DSections>
+      <FAQSection />
+      <Footer />
+    </main>
+  )
+}
 
 export default MobileAppPage

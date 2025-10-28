@@ -458,27 +458,6 @@ const ServicesSection = () => {
           ))}
         </div>
 
-        {/* Bottom CTA Section */}
-        <div className="text-center mt-16 bg-white rounded-3xl p-12 shadow-xl border border-gray-100">
-          <h3 className="text-3xl font-bold text-gray-900 mb-4">
-            Ready to Transform Your Enterprise?
-          </h3>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Let's discuss how our enterprise web solutions can drive your business forward
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact-us">
-              <button className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-300 shadow-lg hover:shadow-xl">
-                Get Free Consultation
-              </button>
-            </Link>
-            <Link href="/contact-us">
-              <button className="border-2 border-[#00B9FF] text-[#00B9FF] hover:bg-[#00B9FF] hover:text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300">
-                View Our Portfolio
-              </button>
-            </Link>
-          </div>
-        </div>
       </div>
     </section>
   )

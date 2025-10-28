@@ -1045,6 +1045,145 @@ const WhyCustomerExperienceMattersSection = () => {
   )
 }
 
+// Trusted by Businesses Section Component
+const TrustedByBusinessesSection = () => {
+  const sectionRef = useRef(null)
+  const titleRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const industriesRef = useRef([])
+  const ctaRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const isDesktop = window.innerWidth >= 1024
+      
+      if (isDesktop) {
+        // Desktop animations
+        gsap.set([titleRef.current, subtitleRef.current, ctaRef.current], { 
+          opacity: 0, 
+          y: 30 
+        })
+        gsap.set(industriesRef.current, { 
+          opacity: 0, 
+          y: 40,
+          scale: 0.9
+        })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+          .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+          .to(industriesRef.current, { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1, 
+            duration: 0.6, 
+            stagger: 0.1, 
+            ease: "power2.out" 
+          }, "-=0.3")
+          .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.2")
+      } else {
+        // Mobile animations
+        gsap.set([titleRef.current, subtitleRef.current, ctaRef.current], { 
+          opacity: 0, 
+          y: 20 
+        })
+        gsap.set(industriesRef.current, { 
+          opacity: 0, 
+          y: 30,
+          scale: 0.95
+        })
+        
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+          }
+        })
+        
+        tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")
+          .to(industriesRef.current, { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1, 
+            duration: 0.5, 
+            stagger: 0.08, 
+            ease: "power2.out" 
+          }, "-=0.2")
+          .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.1")
+      }
+    }, sectionRef)
+    
+    return () => ctx.revert()
+  }, [])
+
+  const industries = [
+    "Manufacturing",
+    "Retail", 
+    "Healthcare",
+    "Consulting"
+  ]
+
+  return (
+    <section 
+      ref={sectionRef}
+      className="relative py-16 lg:py-24 bg-gray-50 overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center">
+          <h2 
+            ref={titleRef}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight"
+          >
+            Trusted by Businesses Across Industries
+          </h2>
+          
+          <p 
+            ref={subtitleRef}
+            className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
+          >
+            From startups to SMEs and export firms—we've helped companies in
+          </p>
+
+          {/* Industries Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            {industries.map((industry, index) => (
+              <div
+                key={index}
+                ref={el => industriesRef.current[index] = el}
+                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#00B9FF] group"
+              >
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-[#00B9FF] transition-colors duration-300">
+                    {industry}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div ref={ctaRef} className="text-center">
+            <p className="text-xl md:text-2xl font-semibold text-gray-900 mb-8">
+              Let us do the same for you.
+            </p>
+            <Link href="/contact-us">
+              <button className="bg-[#00B9FF] hover:bg-[#0097a7] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors duration-300 ease-in-out shadow-lg hover:shadow-xl cursor-pointer">
+                Start Your Digital Transformation
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 const FAQSection = () => {
     const faqs = [
       {
@@ -1131,7 +1270,7 @@ const DigitalTransformationPage = () => {
       </Scroll3DSections>
       <OutdatedToolsSection />
       <WhyCustomerExperienceMattersSection />
-      
+      <TrustedByBusinessesSection />
       <FAQSection />
       <Footer />
     </main>

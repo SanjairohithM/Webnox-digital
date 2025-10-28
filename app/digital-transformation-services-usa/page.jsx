@@ -130,8 +130,7 @@ const DigitalTransformationHero = () => {
             ref={subtitleRef}
             className="text-xl md:text-2xl text-dark mb-12 leading-relaxed max-w-4xl mx-auto"
           >
-            Empowering American enterprises to modernize, innovate, and compete globally with 
-            cutting-edge digital solutions tailored for the US market
+            In today’s fast-paced US market, enterprises must evolve or risk being left behind. At Webnox Digital, we deliver enterprise-grade digital transformation services across the United States, helping businesses modernize legacy systems, adopt cloud-first strategies, and unlock growth through technology.
           </p>
         </div>
       </div>
@@ -793,7 +792,7 @@ const MagneticCTASection = () => {
           digital transformation strategy and unlock your business potential.
         </p>
         <Link
-          href="/contact"
+          href="/contact-us#contact-form"
           ref={buttonRef}
           className="inline-flex items-center gap-3 bg-white text-[#00B9FF] px-12 py-6 rounded-full text-xl font-semibold border-4 border-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] hover:bg-[#00B9FF] hover:text-white hover:border-[#00B9FF] transition-all duration-300 shadow-2xl"
         >

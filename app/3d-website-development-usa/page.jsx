@@ -55,7 +55,7 @@ const HeroSection = () => {
           In the United States, standing out online requires more than a traditional website. Today’s consumers expect interactive, visually stunning, and engaging digital experiences. At Webnox Digital, we specialize in custom{" "}
           <span className="text-[#00B9FF] font-semibold">3D website design and development</span> across the USA, leveraging Three.js, WebGL, and cutting-edge technologies to transform how enterprises connect with their audiences.
         </p>
-        <Link href="/contact">
+        <Link href="/contact-us#contact-form">
           <button
             ref={buttonRef}
             className="inline-flex items-center px-10 py-5 bg-[#00B9FF] text-white font-bold text-lg rounded-full shadow-xl hover:scale-105 hover:shadow-2xl transition-transform duration-300"
@@ -154,7 +154,7 @@ const CTASection = () => {
   return (
     <section className="py-28 bg-white text-center">
       <h2 className="text-4xl md:text-5xl font-bold mb-10">Ready to build your 3D website in the USA?</h2>
-      <Link href="/contact">
+      <Link href="/contact-us#contact-form">
         <button className="inline-flex items-center px-10 py-5 bg-[#00B9FF] text-white font-bold text-lg rounded-full shadow-xl hover:scale-105 hover:shadow-2xl transition-transform duration-300">
           Book a Free Consultation
           <ArrowRight className="ml-3 w-6 h-6" />

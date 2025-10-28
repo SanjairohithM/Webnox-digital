@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useRef, useEffect, useState } from "react
+import React, { useRef, useEffect, useState } from "react"
 import Scroll3DSections from "../sections/Components/scrollanimation";
-"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -150,11 +149,6 @@ const HeroSection = () => {
           At WEBNOX DIGITAL, we build custom websites from scratch—designed for your business, your audience, and your goals.
         </p>
         {/* Highlighted statement */}
-        <div className="mx-auto mb-6 max-w-3xl">
-          <div className="bg-[#E6F7FD] text-[#00B9FF] text-sm md:text-base rounded-xl px-4 py-3 font-medium">
-            At WEBNOX DIGITAL, we build custom websites from scratch—designed for your business, your audience, and your goals.
-          </div>
-        </div>
           <Link href="/contact-us">
         <button
           ref={buttonRef}
