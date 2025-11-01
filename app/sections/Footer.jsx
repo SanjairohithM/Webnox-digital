@@ -1,174 +1,257 @@
 "use client"
 
-import React, { useRef, useEffect } from "react"
-import Image from "next/image"
+import React, { useState } from "react"
 import Link from "next/link"
-import { MapPin, Phone, Mail, Facebook, Instagram, Twitter, Linkedin } from "lucide-react"
-// import Robot from "@/Three/Models/Robot"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-gsap.registerPlugin(ScrollTrigger)
-
-const quickLinks = ["About", "Solutions", "Industries", "Expertise", "Resources"]
-const designServices = [
-  "Branding",
-  "Web Development",
-  "Staff Augmentation",
-  "Mobile App Development",
-  "SaaS Development",
-]
-const products = [
-  "Billing Software",
-  "Field Service Management",
-  "Multichannel Development",
-  "Job Portal Development",
-  "CRM Software Development",
-]
+import Image from "next/image"
+import { ChevronDown, Instagram, Linkedin } from "lucide-react"
 
 export default function Footer() {
-  const robotRef = useRef(null)
+  const [email, setEmail] = useState("")
+  const [disclaimerOpen, setDisclaimerOpen] = useState(false)
+  const [servicesMenuOpen, setServicesMenuOpen] = useState(false)
+  const [solutionsMenuOpen, setSolutionsMenuOpen] = useState(false)
 
-  useEffect(() => {
-    const isDesktop = window.innerWidth >= 1024
-    if (robotRef.current) {
-      // entrance
-      gsap.to(robotRef.current, {
-        scale: 1,
-        duration: isDesktop ? 1.6 : 1,
-        ease: isDesktop ? "back.out(1.4)" : "power2.out",
-        delay: 0.3,
-      })
-      // float
-      gsap.to(robotRef.current, {
-        y: "+=12",
-        duration: 4,
-        ease: "power1.inOut",
-        yoyo: true,
-        repeat: -1,
-      })
-      // gentle rotate
-      gsap.to(robotRef.current, {
-        rotation: "+=3",
-        duration: 6,
-        ease: "power1.inOut",
-        yoyo: true,
-        repeat: -1,
-      })
-    }
+  const navigationLinks = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about-us" },
+    { name: "Solutions:", href: "/solutions" },
+    { name: "Services:", href: "/services" },
+    { name: "AI", href: "/ai-services" },
+    { name: "Resource", href: "/resources" },
+  ]
 
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill())
-    }
-  }, [])
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Handle email submission
+    console.log("Email submitted:", email)
+    setEmail("")
+  }
+
+  const services = [
+    { name: "IT Consulting", href: "/IT-consulting" },
+    { name: "AI Automation", href: "/AI-automation" },
+    { name: "Data Analytics", href: "/Data-analytics" },
+    { name: "Next-gen Marketing", href: "/Next-gen-marketing" },
+    { name: "Emerging Tech", href: "/Emerging-tech" },
+    { name: "Outsourcing", href: "/outsourcing" },
+    { name: "N8N Workflow", href: "/N8N-automation-workflow" },
+    { name: "Customer Experience", href: "/customer-experience" },
+  ]
+
+  const solutions = [
+    { name: "Branding", href: "/branding-agency" },
+    { name: "Software Development", href: "/software-development" },
+    { name: "Online Store Solutions", href: "/e-commerce-services" },
+    { name: "IOS & Android App Dev", href: "/app-development-services" },
+    { name: "Custom Web Solutions", href: "/custom-web-solutions" },
+    { name: "UI/UX", href: "/ui-ux-design-services" },
+    { name: "Cloud & DevOps", href: "/cloud-devops-services" },
+    { name: "3D Website", href: "/3d-web-design-services" },
+  ]
 
   return (
-    <footer
-      className="relative font-sans text-gray-800 bg-gradient-to-b from-white via-[#e0f8ff] to-[#e8e0ff] overflow-hidden"
-    >
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 ">
-        {/* Top: Robot centered */}
-        {/* <div className="flex items-center justify-center mb-10">
-          <div className="relative -left-60 -top-20 md:-left-68 md:-top-46 z-[80]">
-            <div
-              ref={robotRef}
-              className="transform-gpu w-[34px] h-[34px] md:w-[140px] md:h-[140px] z-[80]"
-              style={{ transform: "scale(0)" }}
-            >
-              <Robot />
+    <footer className="relative font-sans bg-gray-100 text-gray-800">
+      <div className="w-full px-6 lg:px-20">
+        {/* Top Section - Inquiry and Subscription */}
+        <div className="py-12 border-b border-gray-200">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="flex-1">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-800 mb-3">
+                Do you have any questions?
+              </h2>
+              <p className="text-base md:text-lg text-gray-600">
+                Feel free to send us your questions or request a free consultation.
+              </p>
             </div>
-          </div>
-        </div> */}
-
-        {/* Bottom: 4 columns of links/info under the robot */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-start mt-120 md:mt-50">
-          {/* Quick Link */}
-          <div>
-            <h4 className="text-sm uppercase tracking-wide text-gray-500 mb-4">Quick Link</h4>
-            <ul className="space-y-2 text-sm">
-              {quickLinks.map((item) => {
-                const linkMap = {
-                  About: "/about-us",
-                  Solutions: "/solutions",
-                  Industries: "/industries",
-                  Expertise: "/expertise",
-                  Resources: "/resources",
-                }
-
-                
-                const href = linkMap[item] || "/"
-                return (
-                  <li key={item}>
-                    <Link href={href} className="hover:text-black transition-colors">
-                      {item}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-
-          {/* Design Service */}
-          <div>
-            <h4 className="text-sm uppercase tracking-wide text-gray-500 mb-4">Design Service</h4>
-            <ul className="space-y-2 text-sm">
-              {designServices.map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-black transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Products */}
-          <div>
-            <h4 className="text-sm uppercase tracking-wide text-gray-500 mb-4">Products</h4>
-            <ul className="space-y-2 text-sm">
-              {products.map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-black transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Address */}
-          <div className="space-y-3 text-sm">
-            <h4 className="text-sm uppercase tracking-wide text-gray-500 mb-4">Address</h4>
-            <div className="flex items-start gap-3">
-              <MapPin size={16} className="mt-0.5 text-gray-500" />
-              <p>Coimbatore, Tamil Nadu, India</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <Phone size={16} className="text-gray-500" />
-              <a href="tel:+919786557739" className="hover:text-black transition-colors">
-                +91 97865 57739
-              </a>
-            </div>
-            <div className="flex items-center gap-3">
-              <Mail size={16} className="text-gray-500" />
-              <a href="mailto:info@webnoxdigital.com" className="hover:text-black transition-colors">
-                info@webnoxdigital.com
-              </a>
-            </div>
-
-            {/* Socials */}
-            <div className="flex items-center gap-4 pt-1 text-gray-600">
-              <a href="#" aria-label="Facebook" className="hover:text-black"><Facebook size={16} /></a>
-              <a href="#" aria-label="Instagram" className="hover:text-black"><Instagram size={16} /></a>
-              <a href="#" aria-label="Twitter" className="hover:text-black"><Twitter size={16} /></a>
-              <a href="#" aria-label="LinkedIn" className="hover:text-black"><Linkedin size={16} /></a>
-            </div>
+            <form onSubmit={handleSubmit} className="flex gap-3 w-full md:w-auto flex-shrink-0">
+              <input
+                type="email"
+                placeholder="Enter Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#25C3E5] text-gray-800 placeholder-gray-400 flex-1 md:flex-initial md:w-64"
+                required
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap"
+              >
+                Get Started
+              </button>
+            </form>
           </div>
         </div>
 
-        {/* Bottom tiny copyright */}
-        <div className="mt-12 border-t border-gray-200 pt-4">
-          <p className="text-xs text-gray-500">© {new Date().getFullYear()} Webnox Digital</p>
+        {/* Disclaimer Section */}
+        <div className="py-4 border-b border-gray-200">
+          <button
+            onClick={() => setDisclaimerOpen(!disclaimerOpen)}
+            className="flex items-center gap-2 text-gray-800 hover:text-gray-600 transition-colors"
+          >
+            <span className="font-medium">Disclaimer</span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-200 ${disclaimerOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+          {disclaimerOpen && (
+            <div className="mt-4 text-sm text-gray-600 space-y-2">
+              <p>
+                The information provided on this website is for general informational purposes only. While we strive to
+                keep the information up to date and correct, we make no representations or warranties of any kind, express
+                or implied, about the completeness, accuracy, reliability, suitability, or availability of the website or
+                the information, products, services, or related graphics contained on the website for any purpose.
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Main Footer Content */}
+        <div className="py-12 grid grid-cols-1 md:grid-cols-5 gap-12">
+          {/* Left: Navigation Links */}
+          <div className="md:col-span-3 space-y-6">
+            <nav className="flex flex-wrap gap-x-20 gap-y-4 text-lg relative">
+              {navigationLinks.map((link) => {
+                if (link.name === "Services:") {
+                  return (
+                    <button
+                      key={link.name}
+                      type="button"
+                      onClick={() => setServicesMenuOpen((v) => !v)}
+                      className="text-gray-700 hover:text-gray-900 transition-colors inline-flex items-center gap-2"
+                      aria-expanded={servicesMenuOpen}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown className={`w-5 h-5 transition-transform ${servicesMenuOpen ? "rotate-180" : ""}`} />
+                    </button>
+                  )
+                }
+                if (link.name === "Solutions:") {
+                  return (
+                    <button
+                      key={link.name}
+                      type="button"
+                      onClick={() => setSolutionsMenuOpen((v) => !v)}
+                      className="text-gray-700 hover:text-gray-900 transition-colors inline-flex items-center gap-2"
+                      aria-expanded={solutionsMenuOpen}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown className={`w-5 h-5 transition-transform ${solutionsMenuOpen ? "rotate-180" : ""}`} />
+                    </button>
+                  )
+                }
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-gray-700 hover:text-gray-900 transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                )
+              })}
+            </nav>
+
+            {servicesMenuOpen && (
+              <div className="mt-4 p-4 rounded-lg border border-gray-200 bg-white shadow-sm">
+                <h5 className="text-sm uppercase tracking-wide text-gray-600 mb-3">Services</h5>
+                <ul className="space-y-2 text-base">
+                  {services.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-gray-700 hover:text-gray-900 transition-colors">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {solutionsMenuOpen && (
+              <div className="mt-4 p-4 rounded-lg border border-gray-200 bg-white shadow-sm">
+                <h5 className="text-sm uppercase tracking-wide text-gray-600 mb-3">Solutions</h5>
+                <ul className="space-y-2 text-base">
+                  {solutions.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-gray-700 hover:text-gray-900 transition-colors">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Removed separate Services/Solutions blocks in favor of single dropdown above */}
+
+            {/* Contact Information - Three Columns */}
+            <div className="grid grid-cols-3 gap-3 text-base">
+              <div>
+                <h5 className="font-semibold text-gray-800 mb-2 uppercase tracking-wide">Opening Hours</h5>
+                <p className="text-gray-600">Mon-Sat: 09.00 AM - 06.00 PM</p>
+              </div>
+              <div>
+                <h5 className="font-semibold text-gray-800 mb-2 uppercase tracking-wide">Email</h5>
+                <a href="mailto:info@webnoxdigital.com" className="text-gray-600 hover:text-gray-800 transition-colors">
+                  info@webnoxdigital.com
+                </a>
+              </div>
+              <div>
+                <h5 className="font-semibold text-gray-800 mb-2 uppercase tracking-wide">Sign Up</h5>
+                <a href="tel:+919786557739" className="text-gray-600 hover:text-gray-800 transition-colors">
+                  +91 97865 57739
+                </a>
+              </div>
+            </div>
+
+            {/* Social Media Icons */}
+            <div className="flex items-center gap-4 pt-4">
+              <a
+                href="https://www.instagram.com/webnox_digital_official/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <Instagram size={20} />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/webnox-digital/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <Linkedin size={20} />
+              </a>
+            </div>
+          </div>
+
+          {/* Right: Logo and Tagline */}
+          <div className="md:col-span-2 flex flex-col items-start md:items-end justify-start md:justify-center">
+            <div className="mb-4">
+              <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
+                <Image
+                  src="/webnox-logo.png"
+                  alt="Webnox Digital Logo"
+                  width={160}
+                  height={160}
+                  className="object-contain"
+                />
+              </Link>
+            </div>
+            <p className="text-base md:text-lg text-gray-600 text-center md:text-right">
+              Transforming Ideas into Intelligent Solutions
+            </p>
+          </div>
+        </div>
+
+        {/* Copyright Notice */}
+        <div className="py-6 border-t border-gray-200">
+          <div className="text-center">
+            <p className="text-sm text-gray-400">
+              © {new Date().getFullYear()} – Copyright
+            </p>
+          </div>
         </div>
       </div>
     </footer>
