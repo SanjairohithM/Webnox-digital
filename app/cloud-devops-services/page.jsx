@@ -1,8 +1,6 @@
 "use client"
 
-import React, { useRef, us
-import Scroll3DSections from "../sections/Components/scrollanimation";
-eEffect, useState } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import { gsap } from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -10,6 +8,7 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Lottie from "lottie-react"
 import Link from "next/link"
+import Scroll3DSections from "../sections/Components/scrollanimation";
 import Footer from "../sections/Footer";
 
 if (typeof window !== "undefined") {
