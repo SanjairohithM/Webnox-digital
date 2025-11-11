@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { X, Info, Lightbulb, Building2, GraduationCap, Bot, BookOpen } from "lucide-react"
+import { X, Info, Lightbulb, Building2, GraduationCap, Bot, BookOpen, Mail } from "lucide-react"
 import Image from "next/image"
 import { FloatingNav } from "@/components/ui/floating-navbar"
 import Link from 'next/link';
@@ -50,6 +50,11 @@ const navItems = [
     link: "#resources",
     icon: <BookOpen className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
+  {
+    name: "Contact",
+    link: "/contact-us",
+    icon: <Mail className="h-4 w-4 text-neutral-500 dark:text-white" />,
+  },
 ]
 
 const AnimatedNavbar = ({
@@ -88,6 +93,11 @@ const AnimatedNavbar = ({
       name: "Resources",
       href: "#resources",
       IconComponent: BookOpen,
+    },
+    {
+      name: "Contact",
+      href: "/contact-us",
+      IconComponent: Mail,
     },
   ],
   logo = "/webnox-logo.png",

@@ -16,6 +16,8 @@ import LetsConnect from "./sections/LetsConnect";
 import WebnoxLogoLoader from "./sections/WebnoxLogoIntro";
 import Demoballsection from "./sections/Demoballsection";
 import CallbackPopup from "./components/CallbackPopup";
+import FAQSection from "./sections/FAQSection";
+import TestimonialSection from "./sections/TestimonialSection";
  // import AnimatedNavbar from "./sections/Components/Header/AnimatedNavbar";
 // import Footer from "./sections/Footer"; 
 
@@ -71,6 +73,8 @@ export default function Home() {
           {/* <Demoballsection/>  */}
           {/* <OurSolutions/> */}
           <NextGen/>
+          <FAQSection/>
+          <TestimonialSection/>
           <LetsConnect/>
           {/* <Footer/> */}
         </>

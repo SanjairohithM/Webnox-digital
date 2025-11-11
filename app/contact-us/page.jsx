@@ -3,8 +3,9 @@ import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { MoveUpRight, User, Mail, Phone, MessageSquare, Loader2, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react'
+import { MoveUpRight, User, Mail, Phone, MessageSquare, Loader2, CheckCircle2, AlertCircle, ArrowRight, MapPin } from 'lucide-react'
 import Robot from "@/Three/Models/Robot"
+import Footer from "@/app/sections/Footer"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -70,40 +71,43 @@ const ContactPage = () => {
 
             // Robot animation setup for Spline component
             const setupRobotAnimations = () => {
-                console.log('Setting up robot animations...')
-                console.log('Robot ref current:', robotRef.current)
-                
                 if (robotRef.current) {
-                    console.log('Robot container found, setting up CSS animations')
+                    // Set initial state
+                    gsap.set(robotRef.current, { scale: 0, opacity: 0 })
                     
-                    // Entrance animation - scale from 0 to 1
+                    // Entrance animation with ScrollTrigger - scale from 0 to 1 and fade in
                     gsap.to(robotRef.current, {
                         scale: 1,
+                        opacity: 1,
                         duration: 2,
                         ease: "back.out(1.7)",
                         delay: 0.5,
-                        onComplete: () => console.log('Robot entrance animation complete')
-                    })
+                        scrollTrigger: {
+                            trigger: robotRef.current,
+                            start: "top 80%",
+                            toggleActions: "play none none none"
+                        },
+                        onComplete: () => {
+                            // Continuous floating animation using CSS transforms
+                            gsap.to(robotRef.current, {
+                                y: "+=15",
+                                duration: 4,
+                                ease: "power1.inOut",
+                                yoyo: true,
+                                repeat: -1
+                            })
 
-                    // Continuous floating animation using CSS transforms
-                    gsap.to(robotRef.current, {
-                        y: "+=15",
-                        duration: 4,
-                        ease: "power1.inOut",
-                        yoyo: true,
-                        repeat: -1
-                    })
-
-                    // Gentle rotation animation
-                    gsap.to(robotRef.current, {
-                        rotation: "+=5",
-                        duration: 8,
-                        ease: "power1.inOut",
-                        yoyo: true,
-                        repeat: -1
+                            // Gentle rotation animation
+                            gsap.to(robotRef.current, {
+                                rotation: "+=5",
+                                duration: 8,
+                                ease: "power1.inOut",
+                                yoyo: true,
+                                repeat: -1
+                            })
+                        }
                     })
                 } else {
-                    console.log('Robot container not found, retrying in 200ms...')
                     setTimeout(setupRobotAnimations, 200)
                 }
             }
@@ -134,9 +138,13 @@ const ContactPage = () => {
             // Simple robot animation for mobile
             const setupMobileRobotAnimations = () => {
                 if (robotRef.current) {
+                    // Set initial state
+                    gsap.set(robotRef.current, { scale: 0, opacity: 0 })
+                    
                     // Simple entrance animation for mobile
                     gsap.to(robotRef.current, {
                         scale: 1,
+                        opacity: 1,
                         duration: 1,
                         ease: "power2.out",
                         delay: 0.3
@@ -253,11 +261,8 @@ const ContactPage = () => {
     }
 
     return (
-        <div className=" bg-white mt-55 ">
+        <div className="bg-white mt-55">
             {/* Hero Section */}
-       
-
-            {/* demobero */}
             <section
                 ref={heroRef}
                 className="max-w-[calc(100%-10rem)] mx-auto rounded-xl my-10 flex items-center"
@@ -272,203 +277,202 @@ const ContactPage = () => {
                 }}
             >
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 w-full p-12">
-                    {/* Left Text Section */}
-                    <div className="flex-1 flex flex-col justify-center items-start space-y-4 ">
-                        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white bg-[#19b5fe] px-4 py-2 rounded-xl shadow-lg">
-                            We Would Love To
-                        </h1>
-                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black">
-                            Hear From You
-                        </h2>
-                    </div>
-
-                    {/* Right Quote Section */}
-                    <div className="flex-1 flex items-center justify-center">
-                        <blockquote className="text-lg md:text-2xl lg:text-3xl font-semibold text-gray-800 italic max-w-md">
+                    {/* Left Text Section with Quote */}
+                    <div className="flex-1 flex flex-col justify-center items-start space-y-6">
+                        <div className="space-y-4">
+                            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white bg-[#19b5fe] px-4 py-2 rounded-xl shadow-lg">
+                                We Would Love To
+                            </h1>
+                            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black">
+                                Hear From You
+                            </h2>
+                        </div>
+                        <blockquote className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 italic max-w-lg">
                             "Whether you're exploring our services, need expert guidance, or just want to get in touch — we're here to support you every step of the way."
                         </blockquote>
                     </div>
-                </div>
-            </section>
 
-
-            {/* Contact Information */}
-            <section ref={contactInfoRef} className="py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        
-                      
-
-                        {/* Email */}
-                        <div className="bg-gray-100 rounded-xl p-4 sm:p-6 md:p-8 shadow-sm transition-shadow duration-300" 
-                             onClick={() => {
-                                // Try Gmail first, fallback to mailto
-                                const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=info@webnoxdigital.com&su=Contact from Website&body=Hello, I would like to get in touch with you.';
-                                const mailtoUrl = 'mailto:info@webnoxdigital.com?subject=Contact from Website&body=Hello, I would like to get in touch with you.';
-                                
-                                // Open Gmail in new tab
-                                window.open(gmailUrl, '_blank');
-                                
-                                // Fallback: also try mailto (for desktop email clients)
-                                setTimeout(() => {
-                                    window.open(mailtoUrl, '_self');
-                                }, 100);
-                             }}>
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 md:mb-6 gap-3 sm:gap-4">
-                                <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">You can E-mail here</h3>
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#00b9ff] rounded-full flex items-center justify-center self-start sm:self-auto">
-                                    <span className="text-black text-sm sm:text-base md:text-xl"><MoveUpRight /></span>
-                                </div>
-                            </div>
-                            <div className="space-y-2 text-gray-600">
-                                <p className="break-all sm:break-normal text-sm sm:text-base md:text-base font-medium underline hover:text-[#00b9ff] hover:no-underline transition-all duration-200 cursor-pointer">
-                                    info@webnoxdigital.com
-                                </p>
-                                <p className="text-xs sm:text-sm text-gray-500">
-                                    Click to open Gmail with pre-filled details
+                    {/* Right Form Section */}
+                    <div className="flex-1 w-full">
+                        <div className="bg-white rounded-2xl p-8 md:p-10 lg:p-12 shadow-lg">
+                            <div className="mb-8">
+                                <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Get In Touch</h3>
+                                <p className="text-gray-600">
+                                    Have a question, suggestion, or just want to say hi? Fill out the form below and we'll get back to you soon.
                                 </p>
                             </div>
-                        </div>
 
-                        {/* Phone */}
-                        <div className="bg-gray-100 rounded-xl p-4 sm:p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 md:mb-6 gap-3 sm:gap-4">
+                            <form onSubmit={handleSubmit} className="space-y-6">
                                 <div>
-                                    <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">Call us on</h3>
-                                    <p className="text-xs sm:text-sm text-gray-500 mt-1">Tap any number to call directly</p>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Your Name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all"
+                                        required
+                                    />
                                 </div>
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#00b9ff] rounded-full flex items-center justify-center self-start sm:self-auto">
-                                    <span className="text-black text-sm sm:text-base md:text-xl"><MoveUpRight /></span>
+                                <div>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Your Email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all"
+                                        required
+                                    />
                                 </div>
-                            </div>
-                            <div className="space-y-3 text-gray-600 text-sm sm:text-base md:text-base">
-                                <a href="tel:+919786557739" className="block hover:text-[#00b9ff] transition-colors duration-200 cursor-pointer underline hover:no-underline p-2 rounded-lg hover:bg-blue-50 transition-all duration-200">
-                                    <span className="font-medium">+91 97865 57739</span>
-                                    <span className="text-xs text-gray-500 ml-2">(Tap to call)</span>
-                                </a>
-                                <a href="tel:+919585125566" className="block hover:text-[#00b9ff] transition-colors duration-200 cursor-pointer underline hover:no-underline p-2 rounded-lg hover:bg-blue-50 transition-all duration-200">
-                                    <span className="font-medium">+91 95851 25566</span>
-                                    <span className="text-xs text-gray-500 ml-2">(Tap to call)</span>
-                                </a>
-                                <a href="tel:+916380072252" className="block hover:text-[#00b9ff] transition-colors duration-200 cursor-pointer underline hover:no-underline p-2 rounded-lg hover:bg-blue-50 transition-all duration-200">
-                                    <span className="font-medium">+91 63800 72252</span>
-                                    <span className="text-xs text-gray-500 ml-2">(Tap to call)</span>
-                                </a>
-                            </div>
+                                <div>
+                                    <input
+                                        type="tel"
+                                        name="contactNumber"
+                                        placeholder="Phone Number"
+                                        value={formData.contactNumber}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <textarea
+                                        name="enquiry"
+                                        placeholder="Your Message"
+                                        value={formData.enquiry}
+                                        onChange={handleChange}
+                                        rows={6}
+                                        className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all resize-none"
+                                        required
+                                    />
+                                </div>
+                                <button
+                                    type="submit"
+                                    className="w-full bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] hover:from-[#25C3E5] hover:to-[#19b5fe] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-md"
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <Loader2 className="h-5 w-5 animate-spin" />
+                                            <span>Sending...</span>
+                                        </>
+                                    ) : (
+                                        <span>Send Message</span>
+                                    )}
+                                </button>
+                                {submitStatus && (
+                                    <div className={`mt-4 flex items-center gap-2 rounded-lg px-4 py-3 text-sm ${
+                                        submitStatus.includes('successfully') 
+                                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
+                                            : 'bg-red-50 text-red-700 border border-red-200'
+                                    }`}>
+                                        {submitStatus.includes('successfully') ? (
+                                            <CheckCircle2 className="h-5 w-5" />
+                                        ) : (
+                                            <AlertCircle className="h-5 w-5" />
+                                        )}
+                                        <span>{submitStatus}</span>
+                                    </div>
+                                )}
+                            </form>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Contact Form */}
-            <section id="contact-form" ref={formRef} className="py-5 bg-gradient-to-t from-[#00b9ff] via-[#bfefff] to-white">
-                <div className=" px-4  ">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8  items-center">
-                        {/* Left: Robot Model (spans two columns on desktop, full width on mobile) */}
-                        <div className="lg:col-span-2 flex items-center justify-center w-full h-[400px] md:h-[500px] lg:h-[700px]  relative ">
-                            {/* Robot Container with ref for animations */}
+            {/* Contact Section with Two Columns */}
+            <section id="contact-form" ref={formRef} className="py-16 md:py-20 lg:py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                        {/* Left Column: Robot */}
+                        <div className="flex items-center justify-center w-full min-h-[400px] md:min-h-[500px] lg:min-h-[600px] relative mx-auto">
                             <div 
                                 ref={robotRef} 
-                                className="w-full h-full flex items-center justify-center transform-gpu"
-                                style={{ transform: 'scale(0)' }}
+                                className="flex items-center justify-center transform-gpu mx-auto"
+                                style={{ transform: 'scale(0)', opacity: 0 }}
                             >
                                 <Robot />
                             </div>
                         </div>
-					{/* Right: Contact Form (spans one column) */}
-					<div className="max-w-md lg:max-w-lg xl:max-w-xl w-full mx-auto">
-						<div className="relative overflow-hidden rounded-2xl p-8 md:p-10 lg:p-12 xl:p-16 shadow-2xl bg-gradient-to-t from-[#00b9ff]/40 via-white/40 to-white/60 backdrop-blur-xl border border-white/40">
-							<div className="pointer-events-none absolute -top-16 -right-10 h-48 w-48 rounded-full bg-white/25 blur-3xl" />
-							<div className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
-							<div className="pointer-events-none absolute -top-20 left-1/4 h-24 w-96 rotate-12 bg-white/40 blur-2xl opacity-60" />
-							<div className="relative">
-								<div className="mb-6 lg:mb-8 xl:mb-10">
-									<h3 className="text-black text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">Let's connect</h3>
-									<p className="text-black/80 text-sm md:text-base lg:text-lg xl:text-xl">Tell us about your project and we'll reach out.</p>
-								</div>
-								<form onSubmit={handleSubmit} className="space-y-5 lg:space-y-6 xl:space-y-8">
-									<div className="relative">
-										<User className="absolute left-3 lg:left-4 xl:left-5 top-1/2 -translate-y-1/2 h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-black/70" />
-										<input
-											type="text"
-											name="name"
-											placeholder="Your name"
-											value={formData.name}
-											onChange={handleChange}
-											className="w-full pl-10 lg:pl-12 xl:pl-14 pr-3 md:pr-4 lg:pr-5 xl:pr-6 py-3 md:py-4 lg:py-5 xl:py-6 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base lg:text-lg xl:text-xl"
-											required
-										/>
-									</div>
-									<div className="relative">
-										<Mail className="absolute left-3 lg:left-4 xl:left-5 top-1/2 -translate-y-1/2 h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-black/70" />
-										<input
-											type="email"
-											name="email"
-											placeholder="Work email"
-											value={formData.email}
-											onChange={handleChange}
-											className="w-full pl-10 lg:pl-12 xl:pl-14 pr-3 md:pr-4 lg:pr-5 xl:pr-6 py-3 md:py-4 lg:py-5 xl:py-6 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base lg:text-lg xl:text-xl"
-											required
-										/>
-									</div>
-									<div className="relative">
-										<Phone className="absolute left-3 lg:left-4 xl:left-5 top-1/2 -translate-y-1/2 h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-black/70" />
-										<input
-											type="tel"
-											name="contactNumber"
-											placeholder="Phone number"
-											value={formData.contactNumber}
-											onChange={handleChange}
-											className="w-full pl-10 lg:pl-12 xl:pl-14 pr-3 md:pr-4 lg:pr-5 xl:pr-6 py-3 md:py-4 lg:py-5 xl:py-6 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none text-sm md:text-base lg:text-lg xl:text-xl"
-											required
-										/>
-									</div>
-									<div className="relative">
-										<MessageSquare className="absolute left-3 lg:left-4 xl:left-5 top-4 lg:top-5 xl:top-6 h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7 text-black/70" />
-										<textarea
-											name="enquiry"
-											placeholder="How can we help?"
-											value={formData.enquiry}
-											onChange={handleChange}
-											rows={6}
-											className="w-full pl-10 lg:pl-12 xl:pl-14 pr-3 md:pr-4 lg:pr-5 xl:pr-6 py-3 md:py-4 lg:py-5 xl:py-6 rounded-lg bg-white/30 backdrop-blur-sm text-black placeholder-black/70 ring-1 ring-white/30 focus:ring-2 focus:ring-white/60 outline-none resize-none text-sm md:text-base lg:text-lg xl:text-xl"
-											required
-										/>
-									</div>
-									<button
-										type="submit"
-										className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-white px-4 md:px-6 lg:px-8 xl:px-10 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-slate-900 transition-transform [box-shadow:0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-0.5 active:translate-y-0 disabled:bg-white/70 disabled:text-slate-700 text-sm md:text-base lg:text-lg xl:text-xl"
-										disabled={isSubmitting}
-									>
-										{isSubmitting ? (
-											<>
-												<Loader2 className="h-5 w-5 animate-spin" />
-												<span>Sending...</span>
-											</>
-										) : (
-											<>
-												<span>Send message</span>
-												<ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-											</>
-										)}
-									</button>
-									{submitStatus && (
-										<div className={`mt-3 lg:mt-4 xl:mt-5 flex items-center gap-2 rounded-lg px-4 lg:px-5 xl:px-6 py-3 lg:py-4 xl:py-5 text-sm lg:text-base xl:text-lg ${submitStatus.includes('successfully') ? 'bg-emerald-500/10 text-emerald-100 ring-1 ring-emerald-400/30' : 'bg-red-500/10 text-red-100 ring-1 ring-red-400/30'}`}>
-											{submitStatus.includes('successfully') ? (
-												<CheckCircle2 className="h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7" />
-											) : (
-												<AlertCircle className="h-5 w-5 lg:h-6 lg:w-6 xl:h-7 xl:w-7" />
-											)}
-											<span>{submitStatus}</span>
-										</div>
-									)}
-								</form>
-							</div>
-						</div>
+
+                        {/* Right Column: Contact Information */}
+                        <div className="space-y-8 pt-8 md:pt-12 lg:pt-16">
+                            <div>
+                                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+                                    We're here to answer your questions.
+                                </h2>
+                                <p className="text-lg md:text-xl text-gray-600">
+                                    Have a question, suggestion, or just want to say hi? We're here and happy to hear from you!
+                                </p>
+                            </div>
+
+                            {/* Contact Options */}
+                            <div className="space-y-6">
+                                {/* Office Location */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                                        <MapPin className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Office Location</h3>
+                                        <div className="text-gray-600">
+                                          
+                                            <p>No 721/2, Venky complex,Second floor, cross-cut road,</p>
+                                            <p>Seth Narang Das Layout,Coimbatore – 641 012.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Email */}
+                                <div 
+                                    className="flex items-start gap-4 cursor-pointer group"
+                                    onClick={() => {
+                                        const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=info@webnoxdigital.com&su=Contact from Website&body=Hello, I would like to get in touch with you.';
+                                        const mailtoUrl = 'mailto:info@webnoxdigital.com?subject=Contact from Website&body=Hello, I would like to get in touch with you.';
+                                        window.open(gmailUrl, '_blank');
+                                        setTimeout(() => {
+                                            window.open(mailtoUrl, '_self');
+                                        }, 100);
+                                    }}
+                                >
+                                    <div className="w-12 h-12 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:from-[#25C3E5] group-hover:to-[#19b5fe] transition-all shadow-md">
+                                        <Mail className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Send a Message</h3>
+                                        <p className="text-gray-600 group-hover:text-[#25C3E5] transition-colors">info@webnoxdigital.com</p>
+                                    </div>
+                                </div>
+
+                                {/* Phone */}
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                                        <Phone className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Make a Phone Call</h3>
+                                        <div className="space-y-1">
+                                            <a href="tel:+919786557739" className="block text-gray-600 hover:text-[#25C3E5] transition-colors">
+                                                +91 97865 57739
+                                            </a>
+                                            <a href="tel:+919585125566" className="block text-gray-600 hover:text-[#25C3E5] transition-colors">
+                                                +91 95851 25566
+                                            </a>
+                                            <a href="tel:+916380072252" className="block text-gray-600 hover:text-[#25C3E5] transition-colors">
+                                                +91 63800 72252
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </div>
             </section>
+
+            {/* Footer */}
+            <Footer />
         </div>
     )
 }

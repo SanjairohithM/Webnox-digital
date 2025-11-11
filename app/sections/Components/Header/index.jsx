@@ -14,7 +14,8 @@ export default function Header() {
       // { name: "Industries", href: "/commingsoon", icon: null },
       // { name: "Expertise", href: "/commingsoon", icon: null },
     { name: "AI", href: "/ai-services", icon: null },
-    { name: "Resources", href: "/#resources", icon: null }
+    { name: "Resources", href: "/#resources", icon: null },
+    { name: "Contact", href: "/contact-us", icon: null }
   ]
 
   return (
