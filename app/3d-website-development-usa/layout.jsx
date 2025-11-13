@@ -3,34 +3,25 @@ import { Urbanist } from "next/font/google";
 const urbanist = Urbanist({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Digital Transformation Services in the UK | Webnox Digital",
-  description: "Leading digital transformation solutions for UK businesses. Modernise your enterprise with cloud enablement, AI automation, and data analytics. GDPR compliant solutions.",
-  keywords: "digital transformation UK, enterprise modernisation UK, cloud solutions UK, AI automation UK, legacy system modernisation, GDPR compliance",
+  title: "3D Website Development USA | Webnox Digital",
+  description: "Cutting-edge 3D website development services for US businesses. Immersive web experiences, interactive 3D designs, and modern web solutions across the United States.",
+  keywords: "3D website development USA, immersive web design, interactive 3D websites, 3D web development, modern web solutions USA",
   openGraph: {
-    title: "Digital Transformation Services in the UK | Webnox Digital",
-    description: "Leading digital transformation solutions for UK businesses. Modernise your enterprise with cloud enablement, AI automation, and data analytics.",
-    url: "https://webnoxdigital.com/digital-transformation-services-uk",
+    title: "3D Website Development USA | Webnox Digital",
+    description: "Cutting-edge 3D website development services for US businesses. Immersive web experiences and interactive 3D designs.",
+    url: "/3d-website-development-usa",
     siteName: "Webnox Digital",
-    images: [
-      {
-        url: "/images/digital-transformation-uk-og.webp",
-        width: 1200,
-        height: 630,
-        alt: "Digital Transformation Services UK",
-      },
-    ],
-    locale: "en_GB",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Digital Transformation Services in the UK | Webnox Digital",
-    description: "Leading digital transformation solutions for UK businesses. Modernise your enterprise with cloud enablement, AI automation, and data analytics.",
-    images: ["/images/digital-transformation-uk-og.webp"],
+    title: "3D Website Development USA | Webnox Digital",
+    description: "Cutting-edge 3D website development services for US businesses. Immersive web experiences and interactive 3D designs.",
   },
   alternates: {
-    canonical: "https://webnoxdigital.com/digital-transformation-services-uk",
+    canonical: "/3d-website-development-usa",
   },
+  robots: { index: true, follow: true },
 };
 
 export default function DigitalTransformationUKLayout({ children }) {

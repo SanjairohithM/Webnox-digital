@@ -29,8 +29,9 @@ export const metadata = {
     images: ["/images/digital-transformation-uk-og.webp"],
   },
   alternates: {
-    canonical: "https://webnoxdigital.com/digital-transformation-services-uk",
+    canonical: "/3d-website-development-uk",
   },
+  robots: { index: true, follow: true },
 };
 
 export default function DigitalTransformationUKLayout({ children }) {
