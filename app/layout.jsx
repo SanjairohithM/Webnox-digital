@@ -14,13 +14,15 @@ export const metadata = {
   },
   icons: {
     icon: [
+      { url: '/logo/Webnox Digital logo-05.jpg', sizes: 'any' },
       { url: '/logo/Webnox Digital logo-05.jpg', sizes: '32x32', type: 'image/jpeg' },
-      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '16x16', type: 'image/jpeg' },
       { url: '/logo/Webnox Digital logo-05.jpg', sizes: '192x192', type: 'image/jpeg' },
       { url: '/logo/Webnox Digital logo-05.jpg', sizes: '512x512', type: 'image/jpeg' },
     ],
     shortcut: '/logo/Webnox Digital logo-05.jpg',
-    apple: '/logo/Webnox Digital logo-05.jpg',
+    apple: [
+      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '180x180', type: 'image/jpeg' },
+    ],
   },
 }
 const urbanist = Urbanist({

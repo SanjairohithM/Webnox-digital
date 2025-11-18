@@ -695,14 +695,14 @@ const AnimatedNavbar = ({
             }}
           >
             {/* Logo Section - Left */}
-            <div ref={heroLogoRef} className="flex items-center gap-2 md:gap-3 flex-shrink-0 -my-1">
+            <div ref={heroLogoRef} className="flex items-center gap-2 md:gap-3 flex-shrink-0 -my-3">
               <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
                 <Image
                   src={logo || "/placeholder.svg"}
                   alt="Logo"
-                  width={100}
-                  height={100}
-                  className="object-contain drop-shadow-lg w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20"
+                  width={200}
+                  height={200}
+                  className="object-contain drop-shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24"
                 />
               </Link>
             </div>
@@ -764,9 +764,9 @@ const AnimatedNavbar = ({
             <Image
               src={logo || "/placeholder.svg"}
               alt="Logo"
-              width={70}
-              height={70}
-              className="object-contain drop-shadow-2xl w-14 h-14 sm:w-16 sm:h-16"
+              width={120}
+              height={120}
+              className="object-contain drop-shadow-2xl w-16 h-16 sm:w-20 sm:h-20"
             />
           </Link>
         </div>

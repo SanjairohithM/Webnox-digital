@@ -47,6 +47,13 @@ function About() {
             icon: <User className="w-6 h-6 text-gray-600" />,
             
         },
+        {
+            id: 4,
+            name: "Subashini",
+            designation: "HR",
+            icon: <User className="w-6 h-6 text-gray-600" />,
+            
+        },
     
     ]
 
