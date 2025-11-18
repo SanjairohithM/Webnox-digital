@@ -2,7 +2,7 @@ export const metadata = {
   title: "Custom App Development & Native Solutions | US & UK",
   description:
     "Webnox Digital creates mobile and web apps with intuitive UX, scalable backends, and cross-platform performance for businesses in the US & UK.",
-  alternates: { canonical: "/app-development-services" },
+  alternates: { canonical: "https://www.webnoxdigital.com/app-development-services" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "Custom App Development & Native Solutions | US & UK",

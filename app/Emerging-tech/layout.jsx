@@ -2,7 +2,7 @@ export const metadata = {
   title: "Emerging Tech & AI Solutions | IoT & Conversational AI in US & UK",
   description:
     "Webnox Digital offers AI & ML services, IoT solutions, and conversational AI development for businesses in the US & UK.",
-  alternates: { canonical: "/Emerging-tech" },
+  alternates: { canonical: "https://www.webnoxdigital.com/Emerging-tech" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "Emerging Tech & AI Solutions | IoT & Conversational AI in US & UK",

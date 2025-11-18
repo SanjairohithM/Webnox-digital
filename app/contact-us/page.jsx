@@ -261,48 +261,66 @@ const ContactPage = () => {
     }
 
     return (
-        <div className="bg-white mt-55">
+        <div className="bg-white mt-16 md:mt-20 lg:mt-24">
+            {/* Banner Section */}
+            <section
+                className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] flex items-center"
+                style={{
+                    backgroundImage: 'url(/contactus-banner.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                }}
+            >
+                <div className="absolute inset-0 bg-black/20"></div>
+                <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 lg:px-12">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white drop-shadow-lg">
+                        Contact Us
+                    </h1>
+                </div>
+            </section>
+
             {/* Hero Section */}
             <section
                 ref={heroRef}
-                className="max-w-[calc(100%-10rem)] mx-auto rounded-xl my-10 flex items-center"
+                className="w-full mx-auto rounded-xl my-4 md:my-6 lg:my-10 flex items-center px-4 sm:px-6 md:px-8 lg:px-12"
                 style={{
                     backgroundImage: 'url(/images/maskgroup.webp)',
                     backgroundColor: '#E2F7FF',
-                    // backgroundSize: 'cover',
-                    backgroundPosition: 'left',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    minHeight: '600px',
-                    backgroundBlendMode: 'multiply',
+                    minHeight: 'auto',
+                    height: 'auto',
                 }}
             >
-                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 w-full p-12">
+                <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8 w-full py-8 md:py-12 lg:py-16">
                     {/* Left Text Section with Quote */}
-                    <div className="flex-1 flex flex-col justify-center items-start space-y-6">
-                        <div className="space-y-4">
-                            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white bg-[#19b5fe] px-4 py-2 rounded-xl shadow-lg">
+                    <div className="flex-1 flex flex-col justify-center items-start space-y-4 md:space-y-6 w-full lg:w-auto">
+                        <div className="space-y-3 md:space-y-4">
+                            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white bg-[#19b5fe] px-3 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl shadow-lg">
                                 We Would Love To
                             </h1>
-                            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black">
                                 Hear From You
                             </h2>
                         </div>
-                        <blockquote className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 italic max-w-lg">
+                        <blockquote className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 italic max-w-lg">
                             "Whether you're exploring our services, need expert guidance, or just want to get in touch — we're here to support you every step of the way."
                         </blockquote>
                     </div>
 
                     {/* Right Form Section */}
-                    <div className="flex-1 w-full">
-                        <div className="bg-white rounded-2xl p-8 md:p-10 lg:p-12 shadow-lg">
-                            <div className="mb-8">
-                                <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">Get In Touch</h3>
-                                <p className="text-gray-600">
+                    <div className="flex-1 w-full lg:w-auto">
+                        <div className="bg-white rounded-xl md:rounded-2xl p-6 md:p-8 lg:p-10 xl:p-12 shadow-lg">
+                            <div className="mb-6 md:mb-8">
+                                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-2 md:mb-3">Get In Touch</h3>
+                                <p className="text-sm md:text-base text-gray-600">
                                     Have a question, suggestion, or just want to say hi? Fill out the form below and we'll get back to you soon.
                                 </p>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="space-y-6">
+                            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                                 <div>
                                     <input
                                         type="text"
@@ -310,7 +328,7 @@ const ContactPage = () => {
                                         placeholder="Your Name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all"
+                                        className="w-full px-4 py-2.5 md:py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all text-sm md:text-base"
                                         required
                                     />
                                 </div>
@@ -321,7 +339,7 @@ const ContactPage = () => {
                                         placeholder="Your Email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all"
+                                        className="w-full px-4 py-2.5 md:py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all text-sm md:text-base"
                                         required
                                     />
                                 </div>
@@ -332,7 +350,7 @@ const ContactPage = () => {
                                         placeholder="Phone Number"
                                         value={formData.contactNumber}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all"
+                                        className="w-full px-4 py-2.5 md:py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all text-sm md:text-base"
                                         required
                                     />
                                 </div>
@@ -342,8 +360,8 @@ const ContactPage = () => {
                                         placeholder="Your Message"
                                         value={formData.enquiry}
                                         onChange={handleChange}
-                                        rows={6}
-                                        className="w-full px-4 py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all resize-none"
+                                        rows={5}
+                                        className="w-full px-4 py-2.5 md:py-3 rounded-lg bg-white border border-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent transition-all resize-none text-sm md:text-base"
                                         required
                                     />
                                 </div>
@@ -382,11 +400,11 @@ const ContactPage = () => {
             </section>
 
             {/* Contact Section with Two Columns */}
-            <section id="contact-form" ref={formRef} className="py-16 md:py-20 lg:py-24 bg-white">
+            <section id="contact-form" ref={formRef} className="py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
                         {/* Left Column: Robot */}
-                        <div className="flex items-center justify-center w-full min-h-[400px] md:min-h-[500px] lg:min-h-[600px] relative mx-auto">
+                        <div className="flex items-center justify-center w-full min-h-[300px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[500px] xl:min-h-[600px] relative mx-auto">
                             <div 
                                 ref={robotRef} 
                                 className="flex items-center justify-center transform-gpu mx-auto"
@@ -397,27 +415,26 @@ const ContactPage = () => {
                         </div>
 
                         {/* Right Column: Contact Information */}
-                        <div className="space-y-8 pt-8 md:pt-12 lg:pt-16">
+                        <div className="space-y-6 md:space-y-8 pt-4 md:pt-8 lg:pt-12 xl:pt-16">
                             <div>
-                                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-4">
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-3 md:mb-4">
                                     We're here to answer your questions.
                                 </h2>
-                                <p className="text-lg md:text-xl text-gray-600">
+                                <p className="text-base sm:text-lg md:text-xl text-gray-600">
                                     Have a question, suggestion, or just want to say hi? We're here and happy to hear from you!
                                 </p>
                             </div>
 
                             {/* Contact Options */}
-                            <div className="space-y-6">
+                            <div className="space-y-4 md:space-y-6">
                                 {/* Office Location */}
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
-                                        <MapPin className="w-6 h-6 text-white" />
+                                <div className="flex items-start gap-3 md:gap-4">
+                                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                                        <MapPin className="w-5 h-5 md:w-6 md:h-6 text-white" />
                                     </div>
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Office Location</h3>
-                                        <div className="text-gray-600">
-                                          
+                                    <div className="flex-1">
+                                        <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-1">Office Location</h3>
+                                        <div className="text-sm md:text-base text-gray-600">
                                             <p>No 721/2, Venky complex,Second floor, cross-cut road,</p>
                                             <p>Seth Narang Das Layout,Coimbatore – 641 012.</p>
                                         </div>
@@ -426,7 +443,7 @@ const ContactPage = () => {
 
                                 {/* Email */}
                                 <div 
-                                    className="flex items-start gap-4 cursor-pointer group"
+                                    className="flex items-start gap-3 md:gap-4 cursor-pointer group"
                                     onClick={() => {
                                         const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=info@webnoxdigital.com&su=Contact from Website&body=Hello, I would like to get in touch with you.';
                                         const mailtoUrl = 'mailto:info@webnoxdigital.com?subject=Contact from Website&body=Hello, I would like to get in touch with you.';
@@ -436,30 +453,30 @@ const ContactPage = () => {
                                         }, 100);
                                     }}
                                 >
-                                    <div className="w-12 h-12 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:from-[#25C3E5] group-hover:to-[#19b5fe] transition-all shadow-md">
-                                        <Mail className="w-6 h-6 text-white" />
+                                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:from-[#25C3E5] group-hover:to-[#19b5fe] transition-all shadow-md">
+                                        <Mail className="w-5 h-5 md:w-6 md:h-6 text-white" />
                                     </div>
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Send a Message</h3>
-                                        <p className="text-gray-600 group-hover:text-[#25C3E5] transition-colors">info@webnoxdigital.com</p>
+                                    <div className="flex-1">
+                                        <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-1">Send a Message</h3>
+                                        <p className="text-sm md:text-base text-gray-600 group-hover:text-[#25C3E5] transition-colors break-all">info@webnoxdigital.com</p>
                                     </div>
                                 </div>
 
                                 {/* Phone */}
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
-                                        <Phone className="w-6 h-6 text-white" />
+                                <div className="flex items-start gap-3 md:gap-4">
+                                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
+                                        <Phone className="w-5 h-5 md:w-6 md:h-6 text-white" />
                                     </div>
-                                    <div>
-                                        <h3 className="text-lg font-semibold text-gray-800 mb-1">Make a Phone Call</h3>
+                                    <div className="flex-1">
+                                        <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-1">Make a Phone Call</h3>
                                         <div className="space-y-1">
-                                            <a href="tel:+919786557739" className="block text-gray-600 hover:text-[#25C3E5] transition-colors">
+                                            <a href="tel:+919786557739" className="block text-sm md:text-base text-gray-600 hover:text-[#25C3E5] transition-colors">
                                                 +91 97865 57739
                                             </a>
-                                            <a href="tel:+919585125566" className="block text-gray-600 hover:text-[#25C3E5] transition-colors">
+                                            <a href="tel:+919585125566" className="block text-sm md:text-base text-gray-600 hover:text-[#25C3E5] transition-colors">
                                                 +91 95851 25566
                                             </a>
-                                            <a href="tel:+916380072252" className="block text-gray-600 hover:text-[#25C3E5] transition-colors">
+                                            <a href="tel:+916380072252" className="block text-sm md:text-base text-gray-600 hover:text-[#25C3E5] transition-colors">
                                                 +91 63800 72252
                                             </a>
                                         </div>

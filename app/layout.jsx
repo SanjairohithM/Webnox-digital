@@ -7,18 +7,20 @@ export const metadata = {
   title: "Webnox Digital | Software Development Company, Website & App Development Experts",
   description:
     "Webnox Digital is a leading software development company offering website development, AI software solutions, mobile app development, and digital marketing services. We help businesses innovate, scale, and succeed online.",
-  alternates: { canonical: "/" },
+  alternates: { canonical: "https://www.webnoxdigital.com/" },
   robots: { index: true, follow: true },
   verification: {
     google: "dPoW0wzIi2VpSOg4ew-Ov7FLsv21XKLexjM8WpR6nlA",
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/ico' },
-      { url: '/favicon.ico', sizes: '16x16', type: 'image/ico' },
+      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '16x16', type: 'image/jpeg' },
+      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '192x192', type: 'image/jpeg' },
+      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '512x512', type: 'image/jpeg' },
     ],
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    shortcut: '/logo/Webnox Digital logo-05.jpg',
+    apple: '/logo/Webnox Digital logo-05.jpg',
   },
 }
 const urbanist = Urbanist({

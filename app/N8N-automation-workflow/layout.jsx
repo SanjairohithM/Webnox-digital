@@ -2,7 +2,7 @@ export const metadata = {
   title: "N8n Workflow Automation & Integration Services | US & UK",
   description:
     "Webnox Digital offers N8n automation, no-code integrations, and workflow optimization for US & UK businesses to streamline processes and boost efficiency.",
-  alternates: { canonical: "/N8N-automation-workflow" },
+  alternates: { canonical: "https://www.webnoxdigital.com/N8N-automation-workflow" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "N8n Workflow Automation & Integration Services | US & UK",

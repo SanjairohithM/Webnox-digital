@@ -100,7 +100,7 @@ const AnimatedNavbar = ({
       IconComponent: Mail,
     },
   ],
-  logo = "/webnox-logo.png",
+  logo = "/logo/normallogo.png",
 }) => {
   const navRef = useRef(null)
   const hamburgerRef = useRef(null)
@@ -641,7 +641,8 @@ const AnimatedNavbar = ({
       <div className="hidden md:block">
         <FloatingNav
           navItems={navItems}
-          className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl"
+          logo={logo}
+          className=""
           onServicesClick={() => setShowServicesOverlay(true)}
           onSolutionsClick={() => setShowSolutionsOverlay(true)}
           onResourcesClick={() => setShowResourcesOverlay(true)}
@@ -672,41 +673,20 @@ const AnimatedNavbar = ({
         </div>
       </div>
 
-      {/* Hero Logo - Top Left - Separate Element (Desktop Only) */}
+      {/* Unified Navbar Bar - Desktop Only - Logo, Menu Items, and Button Inside */}
       {!isMobile && (
-        <div ref={heroLogoRef} className="fixed top-12 left-12 z-50 transition-all duration-300">
-          <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
-            <Image
-              src={logo || "/placeholder.svg"}
-              alt="Logo"
-              width={160}
-              height={160}
-              className="object-contain drop-shadow-2xl"
-            />
-          </Link>
-        </div>
-      )}
-
-      {/* Mobile Logo - Top Left - Only on Mobile */}
-      {isMobile && (
-        <div className="fixed top-6 left-6 z-50 transition-all duration-300">
-          <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
-            <Image
-              src={logo || "/placeholder.svg"}
-              alt="Logo"
-              width={90}
-              height={90}
-              className="object-contain drop-shadow-2xl"
-            />
-          </Link>
-        </div>
-      )}
-
-      {/* Hero Menu Items - Top Center - Separate Element (Desktop Only) */}
-      {!isMobile && (
-        <div ref={heroMenuRef} className="hidden md:block fixed top-12 z-50 transition-all duration-300" style={{ left: "50%", transform: "translateX(-50%)" }}>
+        <div 
+          ref={heroMenuRef} 
+          className="hidden md:flex fixed top-4 md:top-6 lg:top-8 z-50 transition-all duration-300 items-center justify-between"
+          style={{ 
+            left: "50%", 
+            transform: "translateX(-50%)",
+            width: "calc(100% - 2rem)",
+            maxWidth: "1600px",
+          }}
+        >
           <div 
-            className="flex items-center gap-8 py-4 px-8 rounded-full"
+            className="flex items-center justify-between w-full py-1.5 px-4 md:px-6 lg:px-10 rounded-full"
             style={{
               backgroundColor: "rgba(255, 255, 255, 0.1)",
               backdropFilter: "blur(20px)",
@@ -714,48 +694,80 @@ const AnimatedNavbar = ({
               boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
             }}
           >
-            {items.map((item, index) => (
-              <a
-                key={index}
-                href={item.href}
-                className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-2 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full"
-                onClick={(e) => {
-                  e.preventDefault()
-                  if (item.name === "Services") {
-                    handleServicesClick(e)
-                  } else if (item.name === "Solutions") {
-                    handleSolutionsClick(e)
-                  } else if (item.name === "Resources") {
-                    handleResourcesClick(e)
-                  } else if (item.href.startsWith('/')) {
-                    // Handle page navigation for routes like /about
-                    window.location.href = item.href
-                  } else {
-                    // Handle anchor links like #services
-                    const element = document.querySelector(item.href)
-                    if (element) {
-                      element.scrollIntoView({ behavior: "smooth" })
+            {/* Logo Section - Left */}
+            <div ref={heroLogoRef} className="flex items-center gap-2 md:gap-3 flex-shrink-0 -my-1">
+              <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
+                <Image
+                  src={logo || "/placeholder.svg"}
+                  alt="Logo"
+                  width={100}
+                  height={100}
+                  className="object-contain drop-shadow-lg w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20"
+                />
+              </Link>
+            </div>
+
+            {/* Menu Items - Center */}
+            <div className="flex items-center gap-3 md:gap-5 lg:gap-8 flex-1 justify-center">
+              {items.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-2 text-sm md:text-base font-semibold whitespace-nowrap relative group px-2 md:px-4 py-1 md:py-2 rounded-full"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    if (item.name === "Services") {
+                      handleServicesClick(e)
+                    } else if (item.name === "Solutions") {
+                      handleSolutionsClick(e)
+                    } else if (item.name === "Resources") {
+                      handleResourcesClick(e)
+                    } else if (item.href.startsWith('/')) {
+                      // Handle page navigation for routes like /about
+                      window.location.href = item.href
+                    } else {
+                      // Handle anchor links like #services
+                      const element = document.querySelector(item.href)
+                      if (element) {
+                        element.scrollIntoView({ behavior: "smooth" })
+                      }
                     }
-                  }
-                }}
-              >
-                {item.name}
-                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#2acbec] group-hover:w-full transition-all duration-300"></div>
-              </a>
-            ))}
+                  }}
+                >
+                  {item.name}
+                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#2acbec] group-hover:w-full transition-all duration-300"></div>
+                </a>
+              ))}
+            </div>
+
+            {/* Let's Talk Button - Right */}
+            <div ref={letsTalkRef} className="flex-shrink-0 ml-2 md:ml-4">
+              <Link href="/contact-us">
+                <button
+                  className="bg-[#2acbec] hover:bg-[#25b8d8] text-white font-semibold px-4 md:px-6 lg:px-8 py-1.5 md:py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-xs md:text-sm lg:text-base cursor-pointer whitespace-nowrap"
+                  style={{
+                    boxShadow: "0 4px 12px rgba(42, 203, 236, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                  }}
+                >
+                  Let's Talk
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       )}
 
-      {/* Let's Talk Button - Top Right - Separate Element (Desktop Only) */}
-      {!isMobile && (
-        <div ref={letsTalkRef} className="fixed top-12 right-12 z-30 transition-all duration-300">
-          <Link href="/contact-us">
-            <button
-              className="bg-[#2acbec] hover:bg-[#1fb8d9] text-white font-bold p-4 rounded-lg shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl cursor-pointer"
-            >
-              Let's Talk
-            </button>
+      {/* Mobile Logo - Top Left - Only on Mobile */}
+      {isMobile && (
+        <div className="fixed top-4 left-4 md:top-6 md:left-6 z-50 transition-all duration-300">
+          <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
+            <Image
+              src={logo || "/placeholder.svg"}
+              alt="Logo"
+              width={70}
+              height={70}
+              className="object-contain drop-shadow-2xl w-14 h-14 sm:w-16 sm:h-16"
+            />
           </Link>
         </div>
       )}
@@ -764,8 +776,9 @@ const AnimatedNavbar = ({
       {isMobile && (
         <div
           ref={hamburgerRef}
-          className="fixed top-6 right-6 z-50 cursor-pointer"
+          className="fixed top-4 right-4 md:top-6 md:right-6 z-50 cursor-pointer p-2 -m-2"
           onClick={toggleMenu}
+          aria-label="Toggle menu"
         >
           <div className="flex flex-col gap-1.5">
             <div className="hamburger-line-1 w-6 h-0.5 bg-gray-800 rounded-full transform origin-center transition-all duration-300"></div>
@@ -805,23 +818,24 @@ const AnimatedNavbar = ({
       >
         {/* Close X Icon */}
         <button
-          className="absolute top-8 right-8 text-white hover:text-[#2acbec] transition-colors duration-300 z-50 group cursor-pointer"
+          className="absolute top-4 right-4 md:top-8 md:right-8 text-white hover:text-[#2acbec] transition-colors duration-300 z-50 group cursor-pointer p-2 -m-2"
           onClick={toggleMenu}
+          aria-label="Close menu"
         >
-          <div className="relative w-12 h-12 flex items-center justify-center">
-            <X size={40} strokeWidth={2} className="group-hover:scale-110 transition-transform duration-300" />
+          <div className="relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+            <X size={32} strokeWidth={2} className="md:w-10 md:h-10 group-hover:scale-110 transition-transform duration-300" />
             <div className="absolute inset-0 border-2 border-white/20 rounded-full group-hover:border-[#2acbec]/50 transition-colors duration-300"></div>
           </div>
         </button>
 
         <div
           ref={menuItemsRef}
-          className="absolute inset-0 overflow-hidden"
+          className="absolute inset-0 overflow-hidden overflow-y-auto"
           style={{
-            paddingTop: "8vh",
+            paddingTop: "12vh",
             paddingBottom: "8vh",
-            paddingLeft: "5vw",
-            paddingRight: "5vw",
+            paddingLeft: "4vw",
+            paddingRight: "4vw",
           }}
         >
           <div className="flex flex-col justify-center h-full">
@@ -835,8 +849,8 @@ const AnimatedNavbar = ({
                   href={item.href}
                   className="menu-item block text-white font-bold hover:text-[#2acbec] transition-colors duration-500 group relative overflow-hidden cursor-none"
                   style={{
-                    fontSize: `clamp(2.5rem, ${Math.min(12, 100 / items.length)}vw, ${Math.min(6, 50 / items.length)}rem)`,
-                    lineHeight: "1.2",
+                    fontSize: `clamp(1.75rem, ${Math.min(8, 80 / items.length)}vw, ${Math.min(4, 40 / items.length)}rem)`,
+                    lineHeight: "1.3",
                   }}
                   onMouseEnter={(e) => {
                     handleMenuItemHover(item, true)

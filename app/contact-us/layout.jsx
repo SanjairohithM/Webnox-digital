@@ -2,7 +2,7 @@ export const metadata = {
   title: "Contact Webnox Digital – US & UK Services",
   description:
     "Get in touch with Webnox Digital for expert digital services in the US & UK. Whether you need branding, development, or marketing support—we’re eager to help.",
-  alternates: { canonical: "/contact-us" },
+  alternates: { canonical: "https://www.webnoxdigital.com/contact-us" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "Contact Webnox Digital – US & UK Services",

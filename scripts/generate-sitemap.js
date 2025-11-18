@@ -35,6 +35,12 @@ const routes = [
     priority: 0.9,
     lastmod: new Date().toISOString(),
   },
+  {
+    loc: '/AI-automation',
+    changefreq: 'weekly',
+    priority: 0.9,
+    lastmod: new Date().toISOString(),
+  },
   // High-value service pages
   {
     loc: '/app-development-services',
@@ -50,6 +56,18 @@ const routes = [
   },
   {
     loc: '/digital-transformation-services',
+    changefreq: 'weekly',
+    priority: 0.8,
+    lastmod: new Date().toISOString(),
+  },
+  {
+    loc: '/digital-transformation-services-uk',
+    changefreq: 'weekly',
+    priority: 0.8,
+    lastmod: new Date().toISOString(),
+  },
+  {
+    loc: '/digital-transformation-services-usa',
     changefreq: 'weekly',
     priority: 0.8,
     lastmod: new Date().toISOString(),
@@ -92,6 +110,12 @@ const routes = [
     lastmod: new Date().toISOString(),
   },
   {
+    loc: '/Data-analytics',
+    changefreq: 'monthly',
+    priority: 0.7,
+    lastmod: new Date().toISOString(),
+  },
+  {
     loc: '/customer-experience',
     changefreq: 'monthly',
     priority: 0.7,
@@ -104,13 +128,31 @@ const routes = [
     lastmod: new Date().toISOString(),
   },
   {
+    loc: '/Emerging-tech',
+    changefreq: 'monthly',
+    priority: 0.7,
+    lastmod: new Date().toISOString(),
+  },
+  {
     loc: '/it-consulting',
     changefreq: 'monthly',
     priority: 0.7,
     lastmod: new Date().toISOString(),
   },
   {
+    loc: '/IT-consulting',
+    changefreq: 'monthly',
+    priority: 0.7,
+    lastmod: new Date().toISOString(),
+  },
+  {
     loc: '/next-gen-marketing',
+    changefreq: 'monthly',
+    priority: 0.7,
+    lastmod: new Date().toISOString(),
+  },
+  {
+    loc: '/Next-gen-marketing',
     changefreq: 'monthly',
     priority: 0.7,
     lastmod: new Date().toISOString(),
@@ -128,7 +170,25 @@ const routes = [
     lastmod: new Date().toISOString(),
   },
   {
+    loc: '/3d-website-development-uk',
+    changefreq: 'monthly',
+    priority: 0.7,
+    lastmod: new Date().toISOString(),
+  },
+  {
+    loc: '/3d-website-development-usa',
+    changefreq: 'monthly',
+    priority: 0.7,
+    lastmod: new Date().toISOString(),
+  },
+  {
     loc: '/n8n-automation-workflow',
+    changefreq: 'monthly',
+    priority: 0.7,
+    lastmod: new Date().toISOString(),
+  },
+  {
+    loc: '/N8N-automation-workflow',
     changefreq: 'monthly',
     priority: 0.7,
     lastmod: new Date().toISOString(),
@@ -171,6 +231,19 @@ const routes = [
     priority: 0.5,
     lastmod: new Date().toISOString(),
   },
+  // Legal/Policy pages
+  {
+    loc: '/privacy-policy',
+    changefreq: 'yearly',
+    priority: 0.3,
+    lastmod: new Date().toISOString(),
+  },
+  {
+    loc: '/refund-cancellation-policy',
+    changefreq: 'yearly',
+    priority: 0.3,
+    lastmod: new Date().toISOString(),
+  },
 ];
 
 // Generate sitemap XML
@@ -211,12 +284,6 @@ Disallow: /demo/
 Disallow: /*.json$
 Disallow: /*.xml$
 Disallow: /*?*
-
-# Crawl delay (optional - helps with server load)
-Crawl-delay: 1
-
-# Host directive
-Host: https://www.webnoxdigital.com
 
 # Sitemap location
 Sitemap: https://www.webnoxdigital.com/sitemap.xml`;

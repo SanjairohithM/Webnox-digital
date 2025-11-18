@@ -2,7 +2,7 @@ export const metadata = {
   title: "3D Web Design Services for Businesses in the US & UK",
   description:
     "We provide professional 3D web design services for businesses across the US & UK. From immersive visuals to interactive experiences, we deliver high-performance, visually stunning websites.",
-  alternates: { canonical: "/3d-web-design-services" },
+  alternates: { canonical: "https://www.webnoxdigital.com/3d-web-design-services" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "3D Web Design Services for Businesses in the US & UK",

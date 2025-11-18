@@ -19,7 +19,7 @@ export const metadata = {
     description: "Cutting-edge 3D website development services for US businesses. Immersive web experiences and interactive 3D designs.",
   },
   alternates: {
-    canonical: "/3d-website-development-usa",
+    canonical: "https://www.webnoxdigital.com/3d-website-development-usa",
   },
   robots: { index: true, follow: true },
 };

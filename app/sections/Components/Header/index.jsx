@@ -21,7 +21,7 @@ export default function Header() {
   return (
     <AnimatedNavbar 
       items={navItems}
-      logo="/webnox-logo.png"
+      logo="/logo/normallogo.png"
       brandName="Webnox"
     />
   )

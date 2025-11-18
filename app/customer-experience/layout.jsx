@@ -2,7 +2,7 @@ export const metadata = {
   title: "Customer Experience (CX) & Support Services | US & UK",
   description:
     "Webnox Digital offers top outsourced CX, best-value consulting, and CX strategy services for US & UK companies seeking the best customer service experience.",
-  alternates: { canonical: "/customer-experience" },
+  alternates: { canonical: "https://www.webnoxdigital.com/customer-experience" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "Customer Experience (CX) & Support Services | US & UK",

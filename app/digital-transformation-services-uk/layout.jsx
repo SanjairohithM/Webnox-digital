@@ -29,7 +29,7 @@ export const metadata = {
     images: ["/images/digital-transformation-uk-og.webp"],
   },
   alternates: {
-    canonical: "/digital-transformation-services-uk",
+    canonical: "https://www.webnoxdigital.com/digital-transformation-services-uk",
   },
   robots: { index: true, follow: true },
 };

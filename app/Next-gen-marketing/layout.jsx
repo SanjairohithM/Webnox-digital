@@ -2,7 +2,7 @@ export const metadata = {
   title: "Webnox Digital | Next-Gen AI-Powered Marketing & Data-Driven Strategies",
   description:
     "Webnox Digital delivers AI-powered digital marketing, data-driven strategies, and omnichannel customer service. Among the top performance marketing agencies in the US & UK.",
-  alternates: { canonical: "/Next-gen-marketing" },
+  alternates: { canonical: "https://www.webnoxdigital.com/Next-gen-marketing" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "Webnox Digital | Next-Gen AI-Powered Marketing & Data-Driven Strategies",

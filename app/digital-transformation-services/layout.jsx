@@ -2,7 +2,7 @@ export const metadata = {
   title: "Innovative Digital Transformation Solutions | US & UK",
   description:
     "Webnox Digital drives business innovation in the US & UK with AI-powered automation, data-driven strategies, and seamless cloud transformation.",
-  alternates: { canonical: "/digital-transformation-services" },
+  alternates: { canonical: "https://www.webnoxdigital.com/digital-transformation-services" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "Innovative Digital Transformation Solutions | US & UK",

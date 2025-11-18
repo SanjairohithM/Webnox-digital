@@ -225,3 +225,31 @@ body {
 
 /* Utility class to force Urbanist via CSS variable if needed */
 .font-urbanist { font-family: var(--font-urbanist); }
+
+/* SEO Optimization: Ensure content is visible to crawlers even without JavaScript */
+/* This ensures that content wrapped in scroll animations is visible in initial HTML */
+.scroll-3d-wrapper {
+  /* Ensure content is visible in initial render for SEO crawlers */
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Fallback for when JavaScript is disabled or fails to load */
+.no-js .scroll-3d-wrapper,
+.no-js [class*="scroll-3d"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+/* Ensure will-change is only applied when needed (performance optimization) */
+.will-change-transform {
+  /* Only apply will-change on hover/interaction, not initially */
+  will-change: auto;
+}
+
+/* Apply will-change only when animation is active */
+.scroll-3d-wrapper:is(:hover, :focus-within),
+[class*="scroll-3d"]:is(:hover, :focus-within) {
+  will-change: transform;
+}

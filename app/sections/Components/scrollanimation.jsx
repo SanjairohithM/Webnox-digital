@@ -12,7 +12,7 @@
   
     useEffect(() => {
       const mm = ScrollTrigger.matchMedia()
-  
+
       mm.add("(min-width: 1024px)", () => {
         const ctx = gsap.context(() => {
           const sections = sectionsRef.current.filter(Boolean)
@@ -21,12 +21,24 @@
             const wrapper = sectionEl.querySelector('.scroll-3d-wrapper')
             
             if (wrapper) {
+              // SEO: Ensure content starts visible, then animate on scroll
+              // This ensures crawlers see the content in initial HTML
+              gsap.set(wrapper, { 
+                opacity: 1, 
+                visibility: 'visible',
+                // Start with visible state, animation will handle the rest
+              })
+              
               const tl = gsap.timeline({
                 scrollTrigger: {
                   trigger: sectionEl,
                   start: "top 80%",
                   end: "bottom 20%",
                   scrub: true,
+                  // Ensure content is visible before animation starts
+                  onEnter: () => {
+                    gsap.set(wrapper, { opacity: 1, visibility: 'visible' })
+                  },
                 }
               })
     
@@ -58,12 +70,20 @@
               })
             } else {
               // Fallback to original animation if wrapper not found
+              gsap.set(sectionEl, { 
+                opacity: 1, 
+                visibility: 'visible' 
+              })
+              
               const tl = gsap.timeline({
                 scrollTrigger: {
                   trigger: sectionEl,
                   start: "top 80%",
                   end: "bottom 20%",
                   scrub: true,
+                  onEnter: () => {
+                    gsap.set(sectionEl, { opacity: 1, visibility: 'visible' })
+                  },
                 }
               })
     
@@ -99,7 +119,7 @@
   
         return () => ctx.revert()
       })
-  
+
       return () => mm.revert()
     }, [])
   
@@ -112,7 +132,7 @@
         {React.Children.map(children, (child, idx) => (
           <div
             ref={(el) => (sectionsRef.current[idx] = el)}
-            className="will-change-transform"
+            className=""
             style={{ 
               pointerEvents: 'auto',
               position: 'relative',

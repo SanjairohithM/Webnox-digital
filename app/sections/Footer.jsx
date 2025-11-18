@@ -78,28 +78,28 @@ export default function Footer() {
     <footer className="relative font-sans bg-gray-100 text-gray-800">
       <div className="w-full px-6 lg:px-20">
         {/* Top Section - Inquiry and Subscription */}
-        <div className="py-12 border-b border-gray-200">
+        <div className="py-8 md:py-12 border-b border-gray-200">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex-1">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-800 mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-800 mb-3">
                 Do you have any questions?
               </h2>
-              <p className="text-base md:text-lg text-gray-600">
+              <p className="text-sm md:text-base lg:text-lg text-gray-600">
                 Feel free to send us your questions or request a free consultation.
               </p>
             </div>
-            <form onSubmit={handleSubmit} className="flex gap-3 w-full md:w-auto flex-shrink-0">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full md:w-auto flex-shrink-0">
               <input
                 type="email"
                 placeholder="Enter Your Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#25C3E5] text-gray-800 placeholder-gray-400 flex-1 md:flex-initial md:w-64"
+                className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#25C3E5] text-gray-800 placeholder-gray-400 flex-1 md:flex-initial md:w-64 text-sm md:text-base"
                 required
               />
               <button
                 type="submit"
-                className="px-6 py-3 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap"
+                className="px-6 py-3 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap text-sm md:text-base"
               >
                 Get Started
               </button>
@@ -134,7 +134,7 @@ export default function Footer() {
         <div className="py-12 grid grid-cols-1 md:grid-cols-5 gap-12">
           {/* Left: Navigation Links */}
           <div className="md:col-span-3 space-y-6">
-            <nav className="flex flex-wrap gap-x-20 gap-y-4 text-lg relative">
+            <nav className="flex flex-wrap gap-x-8 md:gap-x-12 lg:gap-x-20 gap-y-4 text-base md:text-lg relative">
               {navigationLinks.map((link) => {
                 if (link.name === "Services:") {
                   return (
@@ -156,7 +156,7 @@ export default function Footer() {
                       {servicesMenuOpen && (
                         <div 
                           ref={servicesDropdownRef}
-                          className="absolute top-full left-0 mt-2 p-5 rounded-xl border-2 border-gray-300 bg-white shadow-lg w-55 transition-all duration-300 ease-in-out z-10"
+                          className="absolute top-full left-0 mt-2 p-4 md:p-5 rounded-xl border-2 border-gray-300 bg-white shadow-lg w-56 md:w-64 lg:w-72 transition-all duration-300 ease-in-out z-10"
                         >
                           <h5 className="text-sm uppercase tracking-wide text-gray-700 font-bold mb-4 pb-2 border-b border-gray-200">Services</h5>
                           <ul className="space-y-2.5 text-sm">
@@ -196,7 +196,7 @@ export default function Footer() {
                       {solutionsMenuOpen && (
                         <div 
                           ref={solutionsDropdownRef}
-                          className="absolute top-full left-0 mt-2 p-5 rounded-xl border-2 border-gray-300 bg-white shadow-lg w-55 transition-all duration-300 ease-in-out z-10"
+                          className="absolute top-full left-0 mt-2 p-4 md:p-5 rounded-xl border-2 border-gray-300 bg-white shadow-lg w-56 md:w-64 lg:w-72 transition-all duration-300 ease-in-out z-10"
                         >
                           <h5 className="text-sm uppercase tracking-wide text-gray-700 font-bold mb-4 pb-2 border-b border-gray-200">Solutions</h5>
                           <ul className="space-y-2.5 text-sm">
@@ -231,7 +231,7 @@ export default function Footer() {
             {/* Removed separate Services/Solutions blocks in favor of single dropdown above */}
 
             {/* Contact Information - Three Columns */}
-            <div className={`grid grid-cols-3 gap-3 text-base transition-all duration-300 ${servicesMenuOpen || solutionsMenuOpen ? 'mt-64' : 'mt-0'}`}>
+            <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-3 text-sm md:text-base transition-all duration-300 ${servicesMenuOpen || solutionsMenuOpen ? 'mt-64 md:mt-64' : 'mt-0'}`}>
               <div>
                 <h5 className="font-semibold text-gray-800 mb-2 uppercase tracking-wide">Opening Hours</h5>
                 <p className="text-gray-600">Mon-Sat: 09.00 AM - 06.00 PM</p>
@@ -287,19 +287,19 @@ export default function Footer() {
           </div>
 
           {/* Right: Logo and Tagline */}
-          <div className="md:col-span-2 flex flex-col items-start md:items-end justify-start md:justify-center">
+          <div className="md:col-span-2 flex flex-col items-center md:items-start lg:items-end justify-start md:justify-center mt-8 md:mt-0">
             <div className="mb-4">
               <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="/webnox-logo.png"
+                  src="/logo/normallogo.png"
                   alt="Webnox Digital Logo"
                   width={160}
                   height={160}
-                  className="object-contain"
+                  className="object-contain w-32 h-32 md:w-40 md:h-40 lg:w-[160px] lg:h-[160px]"
                 />
               </Link>
             </div>
-            <p className="text-base md:text-lg text-gray-600 text-center md:text-right">
+            <p className="text-sm md:text-base lg:text-lg text-gray-600 text-center md:text-left lg:text-right max-w-md">
               Transforming Ideas into Intelligent Solutions
             </p>
           </div>

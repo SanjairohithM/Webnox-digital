@@ -2,7 +2,7 @@ export const metadata = {
   title: "E-Commerce Solutions & Store Development | Global Services",
   description:
     "Webnox Digital builds powerful e-commerce platforms with seamless store development, payment integrations, and UX optimization for businesses worldwide.",
-  alternates: { canonical: "/e-commerce-services" },
+  alternates: { canonical: "https://www.webnoxdigital.com/e-commerce-services" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "E-Commerce Solutions & Store Development | Global Services",

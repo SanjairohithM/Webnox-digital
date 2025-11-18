@@ -2,7 +2,7 @@ export const metadata = {
   title: "Enterprise Web Solutions UK | Webnox Digital",
   description: "Comprehensive enterprise web solutions for UK businesses. Custom web development, cloud solutions, and digital transformation services for large-scale enterprises across the United Kingdom.",
   keywords: "enterprise web solutions UK, enterprise web development, corporate web solutions, large scale web development, enterprise software UK",
-  alternates: { canonical: "/enterprise-web-solutions-uk" },
+  alternates: { canonical: "https://www.webnoxdigital.com/enterprise-web-solutions-uk" },
   robots: { index: true, follow: true },
   openGraph: {
     title: "Enterprise Web Solutions UK | Webnox Digital",

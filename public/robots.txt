@@ -15,11 +15,5 @@ Disallow: /*.json$
 Disallow: /*.xml$
 Disallow: /*?*
 
-# Crawl delay (optional - helps with server load)
-Crawl-delay: 1
-
-# Host directive
-Host: https://www.webnoxdigital.com
-
 # Sitemap location
 Sitemap: https://www.webnoxdigital.com/sitemap.xml

@@ -19,7 +19,7 @@ export const metadata = {
     description: "Leading digital transformation solutions for US businesses. Modernise your enterprise with cloud enablement, AI automation, and data analytics.",
   },
   alternates: {
-    canonical: "/digital-transformation-services-usa",
+    canonical: "https://www.webnoxdigital.com/digital-transformation-services-usa",
   },
   robots: { index: true, follow: true },
 };
