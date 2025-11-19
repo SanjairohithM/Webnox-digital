@@ -270,6 +270,7 @@ function generateSitemapXMLContent() {
 function generateRobotsTxt() {
   const robotsContent = `# Webnox Digital Robots.txt
 # Allow all web crawlers access to all content
+
 User-agent: *
 Allow: /
 
@@ -280,10 +281,8 @@ Disallow: /admin/
 Disallow: /test/
 Disallow: /demo/
 
-# Disallow access to certain file types and paths
+# Disallow access to certain file types
 Disallow: /*.json$
-Disallow: /*.xml$
-Disallow: /*?*
 
 # Sitemap location
 Sitemap: https://www.webnoxdigital.com/sitemap.xml`;

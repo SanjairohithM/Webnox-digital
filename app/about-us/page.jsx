@@ -54,7 +54,6 @@ function About() {
             icon: <User className="w-6 h-6 text-gray-600" />,
             
         },
-    
     ]
 
     useGSAP(
