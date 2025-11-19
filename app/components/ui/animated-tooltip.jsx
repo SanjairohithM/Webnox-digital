@@ -33,7 +33,46 @@ export const AnimatedTooltip = ({
           onMouseEnter={() => setHoveredIndex(item.id)}
           onMouseLeave={() => setHoveredIndex(null)}>
           <AnimatePresence mode="popLayout">
-            {hoveredIndex === item.id && (
+            {hoveredIndex === item.id && item.image && (
+              <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.6 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: {
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 10,
+                  },
+                }}
+                exit={{ opacity: 0, y: 20, scale: 0.6 }}
+                style={{
+                  translateX: translateX,
+                  rotate: rotate,
+                  backgroundColor: item.bgColor || '#b2e5d4',
+                }}
+                className="absolute -top-64 left-1/2 z-50 -translate-x-1/2 w-48 h-56 rounded-lg overflow-hidden shadow-2xl">
+                {/* Profile Image */}
+                <div className="relative w-full h-full">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover object-center"
+                  />
+                  {/* White Text Box Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-lg px-4 py-3 shadow-lg">
+                    <div className="font-bold text-black text-base leading-tight">
+                      {item.name}
+                    </div>
+                    <div className="text-sm text-black mt-1">
+                      {item.designation}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+            {hoveredIndex === item.id && !item.image && (
               <motion.div
                 initial={{ opacity: 0, y: 20, scale: 0.6 }}
                 animate={{
@@ -53,10 +92,6 @@ export const AnimatedTooltip = ({
                   whiteSpace: "nowrap",
                 }}
                 className="absolute -top-16 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center justify-center rounded-md bg-black px-4 py-2 text-xs shadow-xl">
-                <div
-                  className="absolute inset-x-10 -bottom-px z-30 h-px w-[20%] bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
-                <div
-                  className="absolute -bottom-px left-10 z-30 h-px w-[40%] bg-gradient-to-r from-transparent via-sky-500 to-transparent" />
                 <div className="relative z-30 text-base font-bold text-white">
                   {item.name}
                 </div>
@@ -65,13 +100,17 @@ export const AnimatedTooltip = ({
             )}
           </AnimatePresence>
           {item.image ? (
-            <img
+            <div
               onMouseMove={handleMouseMove}
-              height={100}
-              width={100}
-              src={item.image}
-              alt={item.name}
-              className="relative !m-0 h-14 w-14 rounded-full border-2 border-white object-cover object-top !p-0 transition duration-500 group-hover:z-30 group-hover:scale-105" />
+              className="relative !m-0 h-14 w-14 rounded-full p-1.5 flex items-center justify-center transition duration-500 group-hover:z-30 group-hover:scale-105"
+              style={{ backgroundColor: item.bgColor || '#b2e5d4' }}>
+              <img
+                height={100}
+                width={100}
+                src={item.image}
+                alt={item.name}
+                className="h-full w-full rounded-full object-cover object-center" />
+            </div>
           ) : (
             <div
               onMouseMove={handleMouseMove}

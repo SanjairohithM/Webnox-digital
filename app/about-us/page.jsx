@@ -30,6 +30,8 @@ function About() {
             id: 1,
             name: "Rathina Kumar",
             designation: "CMO",
+            image: "/TEAM/Rathinakumar.png",
+            bgColor: "#b2e5d4",
             icon: <User className="w-6 h-6 text-gray-600" />,
            
         },
@@ -37,6 +39,8 @@ function About() {
             id: 2,
             name: "Raj Kumar",
             designation: "CTO",
+            image: "/TEAM/RajKumar.png",
+            bgColor: "#a8d8ea",
             icon: <User className="w-6 h-6 text-gray-600" />,
             
         },
@@ -44,6 +48,8 @@ function About() {
             id: 3,
             name: "Asha ",
             designation: "Business Lead",
+            image: "/TEAM/Asha.png",
+            bgColor: "#c8e6d5",
             icon: <User className="w-6 h-6 text-gray-600" />,
             
         },
@@ -51,6 +57,8 @@ function About() {
             id: 4,
             name: "Subashini",
             designation: "HR",
+            image: "/TEAM/subashini.png",
+            bgColor: "#b2e5d4",
             icon: <User className="w-6 h-6 text-gray-600" />,
             
         },
