@@ -30,13 +30,13 @@ export default function Footer() {
   }
 
   const services = [
-    { name: "IT Consulting", href: "/IT-consulting" },
-    { name: "AI Automation", href: "/AI-automation" },
-    { name: "Data Analytics", href: "/Data-analytics" },
-    { name: "Next-gen Marketing", href: "/Next-gen-marketing" },
-    { name: "Emerging Tech", href: "/Emerging-tech" },
+    { name: "IT Consulting", href: "/it-consulting" },
+    { name: "AI Automation", href: "/ai-automation" },
+    { name: "Data Analytics", href: "/data-analytics" },
+    { name: "Next-gen Marketing", href: "/next-gen-marketing" },
+    { name: "Emerging Tech", href: "/emerging-tech" },
     { name: "Outsourcing", href: "/outsourcing" },
-    { name: "N8N Workflow", href: "/N8N-automation-workflow" },
+    { name: "N8N Workflow", href: "/n8n-automation-workflow" },
     { name: "Customer Experience", href: "/customer-experience" },
   ]
 

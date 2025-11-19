@@ -36,7 +36,7 @@ const routes = [
     lastmod: new Date().toISOString(),
   },
   {
-    loc: '/AI-automation',
+    loc: '/ai-automation',
     changefreq: 'weekly',
     priority: 0.9,
     lastmod: new Date().toISOString(),
@@ -110,12 +110,6 @@ const routes = [
     lastmod: new Date().toISOString(),
   },
   {
-    loc: '/Data-analytics',
-    changefreq: 'monthly',
-    priority: 0.7,
-    lastmod: new Date().toISOString(),
-  },
-  {
     loc: '/customer-experience',
     changefreq: 'monthly',
     priority: 0.7,
@@ -128,31 +122,13 @@ const routes = [
     lastmod: new Date().toISOString(),
   },
   {
-    loc: '/Emerging-tech',
-    changefreq: 'monthly',
-    priority: 0.7,
-    lastmod: new Date().toISOString(),
-  },
-  {
     loc: '/it-consulting',
     changefreq: 'monthly',
     priority: 0.7,
     lastmod: new Date().toISOString(),
   },
   {
-    loc: '/IT-consulting',
-    changefreq: 'monthly',
-    priority: 0.7,
-    lastmod: new Date().toISOString(),
-  },
-  {
     loc: '/next-gen-marketing',
-    changefreq: 'monthly',
-    priority: 0.7,
-    lastmod: new Date().toISOString(),
-  },
-  {
-    loc: '/Next-gen-marketing',
     changefreq: 'monthly',
     priority: 0.7,
     lastmod: new Date().toISOString(),
@@ -183,12 +159,6 @@ const routes = [
   },
   {
     loc: '/n8n-automation-workflow',
-    changefreq: 'monthly',
-    priority: 0.7,
-    lastmod: new Date().toISOString(),
-  },
-  {
-    loc: '/N8N-automation-workflow',
     changefreq: 'monthly',
     priority: 0.7,
     lastmod: new Date().toISOString(),
