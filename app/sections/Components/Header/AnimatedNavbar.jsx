@@ -673,87 +673,81 @@ const AnimatedNavbar = ({
         </div>
       </div>
 
-      {/* Unified Navbar Bar - Desktop Only - Logo, Menu Items, and Button Inside */}
+      {/* Hero Logo - Top Left - Separate Element (Desktop Only) */}
       {!isMobile && (
-        <div 
-          ref={heroMenuRef} 
-          className="hidden md:flex fixed top-4 md:top-6 lg:top-8 z-50 transition-all duration-300 items-center justify-between"
-          style={{ 
-            left: "50%", 
-            transform: "translateX(-50%)",
-            width: "calc(100% - 2rem)",
-            maxWidth: "1600px",
-          }}
-        >
+        <div ref={heroLogoRef} className="fixed top-12 left-40 z-50 transition-all duration-300">
+          <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
+            <Image
+              src={logo || "/placeholder.svg"}
+              alt="Logo"
+              width={160}
+              height={160}
+              className="object-contain drop-shadow-2xl"
+            />
+          </Link>
+        </div>
+      )}
+
+      {/* Hero Menu Items - Top Center - Separate Element (Desktop Only) */}
+      {!isMobile && (
+        <div ref={heroMenuRef} className="hidden md:block fixed top-12 z-50 transition-all duration-300" style={{ left: "50%", transform: "translateX(-50%)" }}>
           <div 
-            className="flex items-center justify-between w-full py-1.5 px-4 md:px-6 lg:px-10 rounded-full"
+            className="flex items-center gap-8 py-4 px-8 rounded-full"
             style={{
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              backdropFilter: "blur(20px)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+              backgroundColor: "rgba(255, 255, 255, 0.15)",
+              backdropFilter: "blur(20px) saturate(180%)",
+              WebkitBackdropFilter: "blur(20px) saturate(180%)",
+              border: "1px solid rgba(255, 255, 255, 0.3)",
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.4)",
             }}
           >
-            {/* Logo Section - Left */}
-            <div ref={heroLogoRef} className="flex items-center gap-2 md:gap-3 flex-shrink-0 -my-3">
-              <Link href="/" className="flex items-center cursor-pointer hover:scale-105 transition-transform duration-300">
-                <Image
-                  src={logo || "/placeholder.svg"}
-                  alt="Logo"
-                  width={200}
-                  height={200}
-                  className="object-contain drop-shadow-lg w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24"
-                />
-              </Link>
-            </div>
-
-            {/* Menu Items - Center */}
-            <div className="flex items-center gap-3 md:gap-5 lg:gap-8 flex-1 justify-center">
-              {items.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.href}
-                  className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-2 text-sm md:text-base font-semibold whitespace-nowrap relative group px-2 md:px-4 py-1 md:py-2 rounded-full"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    if (item.name === "Services") {
-                      handleServicesClick(e)
-                    } else if (item.name === "Solutions") {
-                      handleSolutionsClick(e)
-                    } else if (item.name === "Resources") {
-                      handleResourcesClick(e)
-                    } else if (item.href.startsWith('/')) {
-                      // Handle page navigation for routes like /about
-                      window.location.href = item.href
-                    } else {
-                      // Handle anchor links like #services
-                      const element = document.querySelector(item.href)
-                      if (element) {
-                        element.scrollIntoView({ behavior: "smooth" })
-                      }
+            {items.map((item, index) => (
+              <a
+                key={index}
+                href={item.href}
+                className="text-gray-700 hover:text-[#2acbec] transition-all duration-300 flex items-center gap-2 text-base font-semibold whitespace-nowrap relative group px-3 py-2 rounded-full"
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (item.name === "Services") {
+                    handleServicesClick(e)
+                  } else if (item.name === "Solutions") {
+                    handleSolutionsClick(e)
+                  } else if (item.name === "Resources") {
+                    handleResourcesClick(e)
+                  } else if (item.href.startsWith('/')) {
+                    // Handle page navigation for routes like /about
+                    window.location.href = item.href
+                  } else {
+                    // Handle anchor links like #services
+                    const element = document.querySelector(item.href)
+                    if (element) {
+                      element.scrollIntoView({ behavior: "smooth" })
                     }
-                  }}
-                >
-                  {item.name}
-                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#2acbec] group-hover:w-full transition-all duration-300"></div>
-                </a>
-              ))}
-            </div>
-
-            {/* Let's Talk Button - Right */}
-            <div ref={letsTalkRef} className="flex-shrink-0 ml-2 md:ml-4">
-              <Link href="/contact-us">
-                <button
-                  className="bg-[#2acbec] hover:bg-[#25b8d8] text-white font-semibold px-4 md:px-6 lg:px-8 py-1.5 md:py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-xs md:text-sm lg:text-base cursor-pointer whitespace-nowrap"
-                  style={{
-                    boxShadow: "0 4px 12px rgba(42, 203, 236, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                  }}
-                >
-                  Let's Talk
-                </button>
-              </Link>
-            </div>
+                  }
+                }}
+              >
+                {item.name}
+                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#2acbec] group-hover:w-full transition-all duration-300"></div>
+              </a>
+            ))}
           </div>
+        </div>
+      )}
+
+      {/* Let's Talk Button - Top Right - Separate Element (Desktop Only) */}
+      {!isMobile && (
+        <div ref={letsTalkRef} className="fixed top-12 right-50 z-30 transition-all duration-300">
+          <Link href="/contact-us">
+            <button
+              className="bg-[#2acbec] hover:bg-[#1fb8d9] text-white font-bold p-4 rounded-lg shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl cursor-pointer"
+              style={{
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
+              }}
+            >
+              Let's Talk
+            </button>
+          </Link>
         </div>
       )}
 
@@ -764,9 +758,9 @@ const AnimatedNavbar = ({
             <Image
               src={logo || "/placeholder.svg"}
               alt="Logo"
-              width={120}
-              height={120}
-              className="object-contain drop-shadow-2xl w-16 h-16 sm:w-20 sm:h-20"
+              width={70}
+              height={70}
+              className="object-contain drop-shadow-2xl w-14 h-14 sm:w-16 sm:h-16"
             />
           </Link>
         </div>

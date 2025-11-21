@@ -34,7 +34,7 @@ const services = [
     href: "/emerging-tech"
   },
   {
-    title: "OutSourcing",
+    title: "Outsourcing",
     description: "Flexible, cost-effective outsourcing for dev, support, and ops.",
     image: "/images/service3.webp",
     href: "/outsourcing"

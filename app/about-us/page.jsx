@@ -28,35 +28,36 @@ function About() {
     const customerReviews = [
         {
             id: 1,
-            name: "Rathina Kumar",
-            designation: "CMO",
-            image: "/TEAM/Rathinakumar.png",
-            bgColor: "#b2e5d4",
-            icon: <User className="w-6 h-6 text-gray-600" />,
+            name: "Raj Kumar",
+        designation: "Founder & CMO",
+        image: "/TEAM/RajKumar.png",
+        bgColor: "#b2e5d4",
+        icon: <User className="w-6 h-6 text-gray-600" />,
            
         },
         {
             id: 2,
-            name: "Raj Kumar",
-            designation: "CTO",
-            image: "/TEAM/RajKumar.png",
-            bgColor: "#a8d8ea",
+            name: "Rathina Kumar",
+            designation: "CEO & CTO",
+            image: "/TEAM/Rathinakumar.png",
+            bgColor: "#b2e5d4",
             icon: <User className="w-6 h-6 text-gray-600" />,
-            
         },
+
+       
         {
             id: 3,
             name: "Asha ",
-            designation: "Business Lead",
+            designation: "Business Analyst Head",
             image: "/TEAM/Asha.png",
-            bgColor: "#c8e6d5",
+            bgColor: "#b2e5d4",
             icon: <User className="w-6 h-6 text-gray-600" />,
             
         },
         {
             id: 4,
             name: "Subashini",
-            designation: "HR",
+            designation: "HR Business Partner",
             image: "/TEAM/subashini.png",
             bgColor: "#b2e5d4",
             icon: <User className="w-6 h-6 text-gray-600" />,

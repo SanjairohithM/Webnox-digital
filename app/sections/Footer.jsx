@@ -107,28 +107,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Disclaimer Section */}
-        <div className="py-4 border-b border-gray-200">
-          <button
-            onClick={() => setDisclaimerOpen(!disclaimerOpen)}
-            className="flex items-center gap-2 text-gray-800 hover:text-gray-600 transition-colors"
-          >
-            <span className="font-medium">Disclaimer</span>
-            <ChevronDown
-              className={`w-4 h-4 transition-transform duration-200 ${disclaimerOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-          {disclaimerOpen && (
-            <div className="mt-4 text-sm text-gray-600 space-y-2">
-              <p>
-                The information provided on this website is for general informational purposes only. While we strive to
-                keep the information up to date and correct, we make no representations or warranties of any kind, express
-                or implied, about the completeness, accuracy, reliability, suitability, or availability of the website or
-                the information, products, services, or related graphics contained on the website for any purpose.
-              </p>
-            </div>
-          )}
-        </div>
+        
 
         {/* Main Footer Content */}
         <div className="py-12 grid grid-cols-1 md:grid-cols-5 gap-12">

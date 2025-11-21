@@ -24,12 +24,6 @@ const routes = [
   },
   // Main service category pages
   {
-    loc: '/services',
-    changefreq: 'weekly',
-    priority: 0.9,
-    lastmod: new Date().toISOString(),
-  },
-  {
     loc: '/ai-services',
     changefreq: 'weekly',
     priority: 0.9,
@@ -253,6 +247,19 @@ Disallow: /demo/
 
 # Disallow access to certain file types
 Disallow: /*.json$
+Disallow: /*.html$
+
+# Disallow query parameters
+Disallow: /?j=
+Disallow: /?site=*
+Disallow: /*?site=*
+Disallow: /*?*
+
+# Disallow suspicious spam patterns
+Disallow: /*tafsir*
+Disallow: /*mimpi*
+Disallow: /*udang*
+Disallow: /*bergambar*
 
 # Sitemap location
 Sitemap: https://www.webnoxdigital.com/sitemap.xml`;
