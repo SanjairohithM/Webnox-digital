@@ -346,14 +346,14 @@ export default function Hero() {
             className="absolute left-1/2 top-[115%] -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full z-[-1] bg-gradient-to-b from-[#2acbec]/70 via-white/10 to-white/10  shadow-[inset_0px_0.91px_43.29px_0px_#F9F9F9] backdrop-blur-0 opacity-0"
           ></div>
           {/* <Image src="/robot.png" alt="AI Robot" width={400} height={400} className="mx-auto relative" /> */}
-          <div ref={robotRef} className="relative z-5 opacity-0">
+          <div ref={robotRef} className="relative z-10 opacity-0">
             <Robot />
           </div>
         </div>
 
         <h1 
           ref={headingRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 max-w-5xl mx-auto text-gray-800 relative z-5 opacity-0 font-sans"
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 max-w-5xl mx-auto text-gray-800 relative z-20 opacity-0 font-sans"
         >
         We Build. We Scale. We Transform. <span className="text-[#2acbec]"> Lead the Future
         </span>
@@ -361,7 +361,7 @@ export default function Hero() {
 
         <p 
           ref={paragraphRef}
-          className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10 relative z-5 font-sans opacity-0"
+          className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-10 relative z-20 font-sans opacity-0"
         >
         Webnox Digital is a leading software development company specializing in AI-powered solutions and business automation, and end-to-end digital transformation. We help organisations to streamline operations, improve efficiency, and scale faster through intelligent 
         </p>
