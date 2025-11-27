@@ -21,7 +21,7 @@ const navItems = [
     icon: <Info className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
-    name: "Services", 
+    name: "Services",
     link: "#services",
     icon: <Lightbulb className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
@@ -46,7 +46,7 @@ const navItems = [
     icon: <Bot className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
   {
-    name: "Resources", 
+    name: "Resources",
     link: "#resources",
     icon: <BookOpen className="h-4 w-4 text-neutral-500 dark:text-white" />,
   },
@@ -125,34 +125,34 @@ const AnimatedNavbar = ({
   const [showServicesOverlay, setShowServicesOverlay] = useState(false)
   const [showSolutionsOverlay, setShowSolutionsOverlay] = useState(false)
   const [showResourcesOverlay, setShowResourcesOverlay] = useState(false)
-  
+
   // Check if device is mobile
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
-    
+
     checkMobile()
     window.addEventListener('resize', checkMobile)
-    
+
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
-  
+
   // Sync ref with state on mount and add fallback scroll listener
   useEffect(() => {
     heroVisibleRef.current = isHeroVisible
-    
+
     const handleScroll = () => {
       const heroVisible = window.scrollY < (window.innerHeight * 0.8)
-      
+
       if (heroVisible !== heroVisibleRef.current) {
         heroVisibleRef.current = heroVisible
         setIsHeroVisible(heroVisible)
-        
+
         const heroLogo = heroLogoRef.current
         const heroMenu = heroMenuRef.current
         const letsTalk = letsTalkRef.current
-        
+
         if (heroLogo) {
           gsap.to(heroLogo, {
             opacity: heroVisible ? 1 : 0,
@@ -161,7 +161,7 @@ const AnimatedNavbar = ({
             ease: "power2.out",
           })
         }
-        
+
         if (heroMenu) {
           gsap.to(heroMenu, {
             opacity: heroVisible ? 1 : 0,
@@ -170,7 +170,7 @@ const AnimatedNavbar = ({
             ease: "power2.out",
           })
         }
-        
+
         if (letsTalk) {
           gsap.to(letsTalk, {
             opacity: heroVisible ? 1 : 0,
@@ -181,9 +181,9 @@ const AnimatedNavbar = ({
         }
       }
     }
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true })
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
@@ -215,7 +215,7 @@ const AnimatedNavbar = ({
     const heroLogo = heroLogoRef.current
     const heroMenu = heroMenuRef.current
     const letsTalk = letsTalkRef.current
-    
+
     if (!navbar || !hamburger || !fullscreenMenu || !menuItems) return
 
     // Initial animations for hero elements
@@ -340,7 +340,7 @@ const AnimatedNavbar = ({
     const heroLogo = heroLogoRef.current
     const heroMenu = heroMenuRef.current
     const letsTalk = letsTalkRef.current
-    
+
     if (!fullscreenMenu || !menuItems || !hamburger) return
 
     if (!isMenuOpen) {
@@ -597,7 +597,7 @@ const AnimatedNavbar = ({
     if (isEntering) {
       setCurrentHoveredIcon(item.name)
       if (cursor && cursorIcon) {
-        gsap.fromTo(cursorIcon, 
+        gsap.fromTo(cursorIcon,
           { scale: 0.5, opacity: 0 },
           {
             scale: 1,
@@ -691,7 +691,7 @@ const AnimatedNavbar = ({
       {/* Hero Menu Items - Top Center - Separate Element (Desktop Only) */}
       {!isMobile && (
         <div ref={heroMenuRef} className="hidden md:block fixed top-12 z-50 transition-all duration-300" style={{ left: "50%", transform: "translateX(-50%)" }}>
-          <div 
+          <div
             className="flex items-center gap-8 py-4 px-8 rounded-full"
             style={{
               backgroundColor: "rgba(255, 255, 255, 0.15)",
@@ -745,7 +745,7 @@ const AnimatedNavbar = ({
                 WebkitBackdropFilter: "blur(10px)",
               }}
             >
-              Let's Talk
+              Book a meeting!
             </button>
           </Link>
         </div>
