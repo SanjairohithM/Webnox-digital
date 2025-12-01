@@ -5,7 +5,6 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MoveUpRight, User, Mail, Phone, MessageSquare, Loader2, CheckCircle2, AlertCircle, ArrowRight, MapPin } from 'lucide-react'
 import Robot from "@/Three/Models/Robot"
-import Footer from "@/app/sections/Footer"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -43,7 +42,7 @@ const ContactPage = () => {
     useEffect(() => {
         // Check if we're on desktop (lg breakpoint and above)
         const isDesktop = window.innerWidth >= 1024
-        
+
         if (isDesktop) {
             // Complex animations for desktop
             // Card animations
@@ -74,7 +73,7 @@ const ContactPage = () => {
                 if (robotRef.current) {
                     // Set initial state
                     gsap.set(robotRef.current, { scale: 0, opacity: 0 })
-                    
+
                     // Entrance animation with ScrollTrigger - scale from 0 to 1 and fade in
                     gsap.to(robotRef.current, {
                         scale: 1,
@@ -119,9 +118,9 @@ const ContactPage = () => {
             // Card animations for mobile
             if (servicesGridRef.current) {
                 const validCards = cardRefs.current.filter(Boolean)
-                
+
                 gsap.set(validCards, { opacity: 0 })
-                
+
                 gsap.to(validCards, {
                     opacity: 1,
                     duration: 0.6,
@@ -140,7 +139,7 @@ const ContactPage = () => {
                 if (robotRef.current) {
                     // Set initial state
                     gsap.set(robotRef.current, { scale: 0, opacity: 0 })
-                    
+
                     // Simple entrance animation for mobile
                     gsap.to(robotRef.current, {
                         scale: 1,
@@ -209,7 +208,7 @@ const ContactPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        
+
         // Validate required fields
         if (!formData.name.trim() || !formData.email.trim() || !formData.contactNumber.trim() || !formData.enquiry.trim()) {
             setSubmitStatus('Please fill in all required fields')
@@ -283,7 +282,7 @@ const ContactPage = () => {
             {/* Hero Section */}
             <section
                 ref={heroRef}
-                className="w-full mx-auto rounded-xl my-4 md:my-6 lg:my-10 flex items-center px-4 sm:px-6 md:px-8 lg:px-12 bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white relative overflow-hidden"
+                className="w-full mx-auto rounded-xl mb-4 md:mb-6 lg:mb-10 flex items-center px-4 sm:px-6 md:px-8 lg:px-12 bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white relative overflow-hidden"
                 style={{
                     minHeight: 'auto',
                     height: 'auto',
@@ -318,7 +317,7 @@ const ContactPage = () => {
                             </div>
 
                             {/* Email */}
-                            <div 
+                            <div
                                 className="flex items-start gap-3 md:gap-4 cursor-pointer group"
                                 onClick={() => {
                                     const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=info@webnoxdigital.com&su=Contact from Website&body=Hello, I would like to get in touch with you.';
@@ -431,11 +430,10 @@ const ContactPage = () => {
                                     )}
                                 </button>
                                 {submitStatus && (
-                                    <div className={`mt-4 flex items-center gap-2 rounded-lg px-4 py-3 text-sm ${
-                                        submitStatus.includes('successfully') 
-                                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
-                                            : 'bg-red-50 text-red-700 border border-red-200'
-                                    }`}>
+                                    <div className={`mt-4 flex items-center gap-2 rounded-lg px-4 py-3 text-sm ${submitStatus.includes('successfully')
+                                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                        : 'bg-red-50 text-red-700 border border-red-200'
+                                        }`}>
                                         {submitStatus.includes('successfully') ? (
                                             <CheckCircle2 className="h-5 w-5" />
                                         ) : (
@@ -453,11 +451,11 @@ const ContactPage = () => {
             {/* Contact Section with Two Columns */}
             <section id="contact-form" ref={formRef} className="py-12 md:py-16 lg:py-20 xl:py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
                         {/* Left Column: Robot */}
                         <div className="flex items-center justify-center w-full min-h-[300px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[500px] xl:min-h-[600px] relative mx-auto">
-                            <div 
-                                ref={robotRef} 
+                            <div
+                                ref={robotRef}
                                 className="flex items-center justify-center transform-gpu mx-auto"
                                 style={{ transform: 'scale(0)', opacity: 0 }}
                             >
@@ -466,25 +464,22 @@ const ContactPage = () => {
                         </div>
 
                         {/* Right Column: Contact Information */}
-                        
-                        <div className="flex-1 flex flex-col justify-center items-start space-y-4 md:space-y-6 w-full lg:w-auto">
-                        <div className="space-y-4 md:space-y-5 lg:space-y-6">
-                            <h1 className="inline-block text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] px-4 py-2 md:px-5 md:py-2.5 lg:px-6 lg:py-3 rounded-lg md:rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            We Create Digital Momentum 
-                            </h1>
-                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text leading-tight">
-                            for Ambitious Brands
-                            </h2>
+
+                        <div className="flex-1 flex flex-col justify-center items-start space-y-4 md:space-y-6 w-full lg:w-auto pt-8 md:pt-12 lg:pt-16">
+                            <div className="space-y-4 md:space-y-5 lg:space-y-6">
+                                <h1 className="inline-block text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-white bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] px-4 py-2 md:px-5 md:py-2.5 lg:px-6 lg:py-3 rounded-lg md:rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                    We Create Digital Momentum
+                                </h1>
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-transparent bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text leading-tight">
+                                    for Ambitious Brands
+                                </h2>
+                            </div>
+                            <blockquote className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 italic max-w-lg">
+                                Need direction or deeper insight? Book a session with our team and move seamlessly into your next strategic phase.                       </blockquote>
                         </div>
-                        <blockquote className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-800 italic max-w-lg">
-                        Need direction or deeper insight? Book a session with our team and move seamlessly into your next strategic phase.                       </blockquote>
-                    </div>
                     </div>
                 </div>
             </section>
-
-            {/* Footer */}
-            <Footer />
         </div>
     )
 }
