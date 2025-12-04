@@ -261,14 +261,14 @@ const ContactPage = () => {
     }
 
     return (
-        <div className="bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white min-h-screen mt-16 md:mt-20 lg:mt-24">
+        <div className="bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white min-h-screen">
             {/* Banner Section */}
             <section
                 className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] flex items-center"
                 style={{
                     backgroundImage: 'url(/contactus-banner.png)',
                     backgroundSize: 'cover',
-                    backgroundPosition: 'center',
+                    backgroundPosition: 'top center',
                     backgroundRepeat: 'no-repeat',
                 }}
             >
