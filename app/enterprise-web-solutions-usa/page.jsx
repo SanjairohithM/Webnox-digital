@@ -7,7 +7,6 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Link from "next/link"
 import { Building2, Settings, Rocket, Shield, Handshake, Code, RefreshCw, Database, Zap, ShoppingCart, MapPin, Users, Briefcase, Factory } from "lucide-react"
-import Footer from "../sections/Footer"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
@@ -734,7 +733,6 @@ const EnterpriseWebSolutionsUSA = () => {
       <ServicesSection />
       <USACoverageSection />
       <CTASection />
-      <Footer />
     </main>
   )
 }

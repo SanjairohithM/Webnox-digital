@@ -8,7 +8,6 @@ import { Cpu } from "lucide-react"
 import WebnoxDigitalSection from "@/app/sections/Aiautomationsecond"
 import OurApproachSection from "@/app/sections/Aianimationthird"
 import AutomationServicesSection from "@/app/sections/Aianimationfourth"
-import Footer from "../sections/Footer"
 import Scroll3DSections from "../sections/Components/scrollanimation"
 import Aianimationfive from "../sections/Aianimationfive"
 import AianimationSix from "../sections/AianimationSix"
@@ -256,7 +255,6 @@ export default function AIAutomationHero() {
         <AianimationSix/>
         <Aianimationfaq/> 
         </Scroll3DSections>
-        <Footer/>
         
       </>
     )

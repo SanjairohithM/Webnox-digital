@@ -7,7 +7,6 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import { MoveUpRight } from "lucide-react"
 import TickerSection from "../components/TickerSection";
-import Footer from "../sections/Footer";
 import Scroll3DSections from "../sections/Components/scrollanimation";
 import Link from "next/link";
 
@@ -945,7 +944,6 @@ const NextgenPage = () => {
       <MarketingStackSection />
       </Scroll3DSections>
       <FAQSection />
-      <Footer />
     </main>
   )
 }

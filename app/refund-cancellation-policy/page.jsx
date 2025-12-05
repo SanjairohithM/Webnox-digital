@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Receipt, XCircle, DollarSign, AlertCircle, Mail, CheckCircle2 } from "lucide-react"
-import Footer from "../sections/Footer"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -402,7 +401,6 @@ export default function RefundCancellationPolicy() {
           </div>
         </div>
       </main>
-      <Footer />
       <style jsx>{`
         @keyframes gradient {
           0%,

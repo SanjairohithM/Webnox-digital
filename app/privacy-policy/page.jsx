@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Shield, Database, FileText, Lock } from "lucide-react"
-import Footer from "../sections/Footer"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -238,7 +237,6 @@ export default function PrivacyPolicy() {
           </div>
         </div>
       </main>
-      <Footer />
       <style jsx>{`
         @keyframes gradient {
           0%,

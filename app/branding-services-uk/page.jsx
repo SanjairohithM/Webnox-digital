@@ -7,7 +7,6 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Link from "next/link"
 import { Building2, Settings, Rocket, Shield, Handshake, Code, RefreshCw, Database, Zap, ShoppingCart, MapPin, Users, Briefcase, Factory, Star, ArrowRight, Sparkles, Globe, TrendingUp, Palette, Target, FileText, Monitor, RefreshCcw } from "lucide-react"
-import Footer from "../sections/Footer"
 import { useGSAP } from "@gsap/react"
 
 if (typeof window !== "undefined") {
@@ -23,7 +22,6 @@ export default function BrandingServicesUK() {
       <ParallaxServicesSection />
       <InteractiveUKCoverageSection />
       <MagneticCTASection />
-      <Footer />
     </div>
   )
 }

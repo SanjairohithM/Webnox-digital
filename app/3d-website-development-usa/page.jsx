@@ -5,7 +5,6 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Link from "next/link"
 import { Globe, Zap, ShoppingCart, Monitor, ArrowRight, Shield, Users } from "lucide-react"
-import Footer from "../sections/Footer"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger)
@@ -54,7 +53,6 @@ export default function ThreeDUSAServices() {
       <Services />
       <Coverage />
       <CTASection />
-      <Footer />
     </div>
   )
 }

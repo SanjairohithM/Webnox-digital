@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Link from "next/link";
-import Footer from "../sections/Footer";
 
 
 
@@ -1124,7 +1123,6 @@ const MobileAppPage = () => {
       <CTASection />
      
       <FAQSection />
-      <Footer />
     </main>
   )
 }

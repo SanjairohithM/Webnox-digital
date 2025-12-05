@@ -5,7 +5,6 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
-import Footer from "../sections/Footer";
 import Link from "next/link";
 import Scroll3DSections from "../sections/Components/scrollanimation";
 // import FAQSection from "../components/FAQSection";
@@ -701,7 +700,6 @@ const FAQSection = () => {
       </Scroll3DSections>
       <FAQSection />
   
-      <Footer />
     </main>
   )
 }

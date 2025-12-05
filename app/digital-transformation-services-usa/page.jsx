@@ -34,7 +34,6 @@ import {
   Cpu,
   Binary
 } from "lucide-react";
-import Footer from "../sections/Footer";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, useGSAP);
@@ -855,7 +854,6 @@ export default function DigitalTransformationUSAPage() {
       <DynamicServicesSection />
       <CleanUSCoverageSection />
       <MagneticCTASection />
-      <Footer />
     </main>
   );
 }

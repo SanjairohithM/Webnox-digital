@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Scroll3DSections from "../sections/Components/scrollanimation";
-import Footer from "../sections/Footer";
 import Link from "next/link";
 
 
@@ -511,7 +510,6 @@ const CustomerPage = () => {
             <WhyCustomerExperienceMattersSection />
       </Scroll3DSections>
       <FAQSection />
-      <Footer />
     </main>
   )
 }

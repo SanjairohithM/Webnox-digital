@@ -8,7 +8,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Link from "next/link";
-import Footer from "../sections/Footer";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
@@ -726,7 +725,6 @@ const UIUXDesignPage = () => {
                 <SecondUseCasesSection />
                 <WhyCustomerExperienceMattersSection />
             </Scroll3DSections>
-            <Footer />
         </main>
     )
 }

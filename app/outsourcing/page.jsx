@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import TickerSection from "../components/TickerSection";
-import Footer from "../sections/Footer";
 import Scroll3DSections from "../sections/Components/scrollanimation";
 import Link from "next/link";
 
@@ -781,7 +780,6 @@ const OutsourcingPage = () => {
       <FAQSection />
  
      
-      <Footer />
     </main>
   )
 }

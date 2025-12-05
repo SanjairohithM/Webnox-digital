@@ -9,7 +9,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { useLayoutEffect } from "react"
 
-import Footer from "../sections/Footer";
 import Scroll3DSections from "../sections/Components/scrollanimation";
 
 
@@ -113,7 +112,7 @@ const HeroSection = () => {
             className="w-4 h-4 md:w-5 md:h-5 object-contain"
           />
           <span className="text-[#00B9FF] text-sm md:text-base font-medium">
-          Transforming businesses with next-gen Artificial Intelligence
+            Transforming businesses with next-gen Artificial Intelligence
           </span>
         </div>
 
@@ -146,7 +145,7 @@ const HeroSection = () => {
           ref={descRef}
           className="text-gray-700 text-lg md:text-xl lg:text-2xl font-sans leading-relaxed text-center mx-auto mb-8 py-4 max-w-4xl"
         >
-            At WebnoxDigital, we help businesses harness the power of Artificial Intelligence (AI) to drive smarter decisions, automate processes, and deliver exceptional customer experiences. From AI consulting to building custom AI-powered applications, we partner with enterprises, startups, and SMBs to adopt future-ready solutions.
+          At WebnoxDigital, we help businesses harness the power of Artificial Intelligence (AI) to drive smarter decisions, automate processes, and deliver exceptional customer experiences. From AI consulting to building custom AI-powered applications, we partner with enterprises, startups, and SMBs to adopt future-ready solutions.
         </p>
 
         <Link href="/contact-us#contact-form">
@@ -182,34 +181,34 @@ const UseCasesSection = () => {
       icon: "/images/aiservice1.webp",
       title: " AI Consulting & Strategy",
       description: " Identify opportunities for AI adoption, roadmap design, and implementation strategy.",
-  
+
     },
     {
       icon: "/images/aiservice2.webp",
       title: " Generative AI Solutions",
       description: "AI-driven text, image, and video generation for marketing, design, and content automation.",
-     
+
     },
     {
       icon: "/images/aiservice6.webp",
       title: " Machine Learning & Predictive Analytics",
       description: "Data-driven models for demand forecasting, customer segmentation, and fraud detection.",
-     
+
     },
     {
       icon: "/images/aiservice3.webp",
       title: " AI-Powered Chatbots & Virtual Assistants",
       description: "Enhance customer support with conversational AI.",
-     
+
     },
     {
       icon: "/images/aiservice10.webp",
       title: " Process Automation with AI",
       description: "Reduce manual work by integrating AI.",
-     
+
     },
-    
-  
+
+
   ]
 
   useEffect(() => {
@@ -236,7 +235,7 @@ const UseCasesSection = () => {
     <section ref={sectionRef} className=" font-sans">
       <div className=" px-8">
         <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-black leading-tight">
-        Our AI Capabilities?
+          Our AI Capabilities?
         </h2>
         <p className="text-gray-600 text-lg mb-4 text-center">We specialize in delivering scalable AI solutions across industries:</p>
 
@@ -254,7 +253,7 @@ const UseCasesSection = () => {
               <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{useCases[0].title}</h3>
               <p className="text-gray-600 text-sm mb-4">{useCases[0].description}</p>
             </div>
-            
+
             <div
               ref={el => (cardsRef.current[1] = el)}
               className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:border-gray-300"
@@ -265,7 +264,7 @@ const UseCasesSection = () => {
               <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{useCases[1].title}</h3>
               <p className="text-gray-600 text-sm mb-4">{useCases[1].description}</p>
             </div>
-            
+
             <div
               ref={el => (cardsRef.current[2] = el)}
               className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:border-gray-300"
@@ -277,7 +276,7 @@ const UseCasesSection = () => {
               <p className="text-gray-600 text-sm mb-4">{useCases[2].description}</p>
             </div>
           </div>
-          
+
           {/* Second row with 2 items, centered like a triangle */}
           <div className="flex justify-center mt-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl">
@@ -291,7 +290,7 @@ const UseCasesSection = () => {
                 <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{useCases[3].title}</h3>
                 <p className="text-gray-600 text-sm mb-4">{useCases[3].description}</p>
               </div>
-              
+
               <div
                 ref={el => (cardsRef.current[4] = el)}
                 className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:border-gray-300"
@@ -322,40 +321,40 @@ const SecondUseCasesSection = () => {
       icon: "/images/mobile3.png",
       title: "Programming Languages",
       description: " Python, Next.js, React, PHP, 3js",
-  
+
     },
     {
       icon: "/images/aiservice8.webp",
       title: "Frameworks & Libraries",
       description: "TensorFlow, PyTorch, Keras, Scikit-Learn",
-     
+
     },
     {
       icon: "/images/aiservice9.webp",
       title: " Generative AI Models",
       description: " OpenAI GPT, Stable Diffusion, LLaMA, MidJourney APIs",
-     
+
     },
     {
       icon: "/images/aiservice7.webp",
       title: "Cloud & Platforms",
       description: "AWS AI/ML, Google Cloud AI, Microsoft Azure Cognitive Services",
-     
+
     },
     {
       icon: "/images/aiservice5.webp",
       title: " Databases",
       description: "MongoDB, MySQL, BigQuery",
-     
+
     },
     {
       icon: "/images/aiservice11.webp",
       title: "Automation Tools",
       description: "UiPath, n8n, Zapier with AI integration",
-     
+
     },
 
-  
+
   ]
 
   useEffect(() => {
@@ -382,7 +381,7 @@ const SecondUseCasesSection = () => {
     <section ref={sectionRef} className=" font-sans mt-20">
       <div className=" px-28 ">
         <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-black leading-tight">
-         AI Tech Stack We Use
+          AI Tech Stack We Use
         </h2>
 
 
@@ -398,7 +397,7 @@ const SecondUseCasesSection = () => {
               </div>
               <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
               <p className="text-gray-600 text-sm mb-4">{item.description}</p>
-           
+
             </div>
           ))}
         </div>
@@ -440,8 +439,9 @@ const FAQSection = () => {
     },
     {
       question: "Can AI integrate with my existing systems?",
-      answer: "Absolutely. AI can seamlessly integrate with your CRM, ERP, cloud services, and legacy software through APIs and middleware. Whether you’re using Salesforce, SAP, Microsoft Dynamics, or custom-built platforms, our AI development ensures smooth compatibility. This way, you don’t need to replace your current system — AI simply enhances it with automation, insights, and predictive capabilities."}
-   
+      answer: "Absolutely. AI can seamlessly integrate with your CRM, ERP, cloud services, and legacy software through APIs and middleware. Whether you’re using Salesforce, SAP, Microsoft Dynamics, or custom-built platforms, our AI development ensures smooth compatibility. This way, you don’t need to replace your current system — AI simply enhances it with automation, insights, and predictive capabilities."
+    }
+
   ];
   const [openIdx, setOpenIdx] = React.useState(0);
 
@@ -640,7 +640,7 @@ const SpecializedSolutionsSection = () => {
     }
   }, [])
 
-const industries = [
+  const industries = [
     {
       title: "Retail & E-Commerce",
       desc: "AI-powered retail: personalized recommendations, inventory management, and seamless customer experiences.",
@@ -666,7 +666,7 @@ const industries = [
       desc: "AI-powered learning: personalized content, adaptive assessments, and virtual tutors.",
       img: "/images/brand5-2.webp"
     },
-  
+
   ]
 
   return (
@@ -675,8 +675,8 @@ const industries = [
         {/* Header */}
         <div className="text-center mb-16">
           <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
-          Industries We Serve
-       </h2>
+            Industries We Serve
+          </h2>
         </div>
 
         {/* Background Image Section with Scrollable Cards */}
@@ -761,7 +761,6 @@ const AIServicesPage = () => {
       </Scroll3DSections>
       <SpecializedSolutionsSection />
       <FAQSection />
-      <Footer />
     </main>
   )
 }

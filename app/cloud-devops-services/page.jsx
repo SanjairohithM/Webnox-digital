@@ -9,7 +9,6 @@ import Image from "next/image"
 import Lottie from "lottie-react"
 import Link from "next/link"
 import Scroll3DSections from "../sections/Components/scrollanimation";
-import Footer from "../sections/Footer";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger, MotionPathPlugin)
@@ -472,7 +471,6 @@ const CustomWebPage = () => {
             <DevopsProcessSection />
             </Scroll3DSections>
             <FAQSection />
-            <Footer />
         </main>
     )
 }

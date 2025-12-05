@@ -12,7 +12,6 @@ import Aboutfifth from "@/app/sections/Aboutfifth"
 import AnimatedNavbar from "@/app/sections/Components/Header/AnimatedNavbar"
 import { AnimatedTooltip } from "@/app/components/ui/animated-tooltip"
 import { User, Plus } from "lucide-react"
-import Footer from "../sections/Footer"
 gsap.registerPlugin(ScrollTrigger)
 
 function About() {
@@ -362,7 +361,6 @@ function About() {
             <Aboutthird />
             <Aboutfour />
             <Aboutfifth />
-            <Footer />
             </>
 
     )
