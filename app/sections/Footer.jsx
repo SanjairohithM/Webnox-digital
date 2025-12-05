@@ -1,23 +1,22 @@
 "use client"
 
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ChevronDown, Instagram, Linkedin } from "lucide-react"
+import { Instagram, Linkedin } from "lucide-react"
+import ServicesOverlay from "./Components/Header/ServicesOverlay"
+import SolutionsOverlay from "./Components/Header/SolutionsOverlay"
 
 export default function Footer() {
   const [email, setEmail] = useState("")
-  const [disclaimerOpen, setDisclaimerOpen] = useState(false)
-  const [servicesMenuOpen, setServicesMenuOpen] = useState(false)
-  const [solutionsMenuOpen, setSolutionsMenuOpen] = useState(false)
-  const servicesDropdownRef = useRef(null)
-  const solutionsDropdownRef = useRef(null)
+  const [showServicesOverlay, setShowServicesOverlay] = useState(false)
+  const [showSolutionsOverlay, setShowSolutionsOverlay] = useState(false)
 
   const navigationLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about-us" },
-    { name: "Solutions:", href: "/solutions" },
-    { name: "Services:", href: "/services" },
+    { name: "Solutions", href: "/solutions" },
+    { name: "Services", href: "/services" },
     { name: "AI", href: "/ai-services" },
     { name: "Resource", href: "/resources" },
   ]
@@ -29,53 +28,20 @@ export default function Footer() {
     setEmail("")
   }
 
-  const services = [
-    { name: "IT Consulting", href: "/it-consulting" },
-    { name: "AI Automation", href: "/ai-automation" },
-    { name: "Data Analytics", href: "/data-analytics" },
-    { name: "Next-gen Marketing", href: "/next-gen-marketing" },
-    { name: "Emerging Tech", href: "/emerging-tech" },
-    { name: "Outsourcing", href: "/outsourcing" },
-    { name: "N8N Workflow", href: "/n8n-automation-workflow" },
-    { name: "Customer Experience", href: "/customer-experience" },
-  ]
-
-  const solutions = [
-    { name: "Branding", href: "/branding-agency" },
-    { name: "Software Development", href: "/software-development" },
-    { name: "Online Store Solutions", href: "/e-commerce-services" },
-    { name: "IOS & Android App Dev", href: "/app-development-services" },
-    { name: "Custom Web Solutions", href: "/custom-web-solutions" },
-    { name: "UI/UX", href: "/ui-ux-design-services" },
-    { name: "Cloud & DevOps", href: "/cloud-devops-services" },
-    { name: "3D Website", href: "/3d-web-design-services" },
-  ]
-
-  // Auto-scroll when dropdowns open/close
-  useEffect(() => {
-    if (servicesMenuOpen && servicesDropdownRef.current) {
-      setTimeout(() => {
-        servicesDropdownRef.current?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'nearest' 
-        })
-      }, 100)
-    }
-  }, [servicesMenuOpen])
-
-  useEffect(() => {
-    if (solutionsMenuOpen && solutionsDropdownRef.current) {
-      setTimeout(() => {
-        solutionsDropdownRef.current?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'nearest' 
-        })
-      }, 100)
-    }
-  }, [solutionsMenuOpen])
 
   return (
-    <footer className="relative font-sans bg-gray-100 text-gray-800">
+    <>
+      {/* Services Overlay */}
+      {showServicesOverlay && (
+        <ServicesOverlay onClose={() => setShowServicesOverlay(false)} />
+      )}
+
+      {/* Solutions Overlay */}
+      {showSolutionsOverlay && (
+        <SolutionsOverlay onClose={() => setShowSolutionsOverlay(false)} />
+      )}
+
+      <footer className="relative font-sans bg-gray-100 text-gray-800">
       <div className="w-full px-6 lg:px-20">
         {/* Top Section - Inquiry and Subscription */}
         <div className="py-8 md:py-12 border-b border-gray-200">
@@ -115,84 +81,28 @@ export default function Footer() {
           <div className="md:col-span-3 space-y-6">
             <nav className="flex flex-wrap gap-x-8 md:gap-x-12 lg:gap-x-20 gap-y-4 text-base md:text-lg relative">
               {navigationLinks.map((link) => {
-                if (link.name === "Services:") {
+                if (link.name === "Services") {
                   return (
-                    <div key={link.name} className="relative inline-block">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setServicesMenuOpen((v) => !v)
-                          if (!servicesMenuOpen) {
-                            setSolutionsMenuOpen(false)
-                          }
-                        }}
-                        className="text-gray-700 hover:text-gray-900 transition-colors inline-flex items-center gap-2"
-                        aria-expanded={servicesMenuOpen}
-                      >
-                        <span>{link.name}</span>
-                        <ChevronDown className={`w-5 h-5 transition-transform ${servicesMenuOpen ? "rotate-180" : ""}`} />
-                      </button>
-                      {servicesMenuOpen && (
-                        <div 
-                          ref={servicesDropdownRef}
-                          className="absolute top-full left-0 mt-2 p-4 md:p-5 rounded-xl border-2 border-gray-300 bg-white shadow-lg w-56 md:w-64 lg:w-72 transition-all duration-300 ease-in-out z-10"
-                        >
-                          <h5 className="text-sm uppercase tracking-wide text-gray-700 font-bold mb-4 pb-2 border-b border-gray-200">Services</h5>
-                          <ul className="space-y-2.5 text-sm">
-                            {services.map((item) => (
-                              <li key={item.name}>
-                                <Link 
-                                  href={item.href} 
-                                  className="text-gray-700 hover:text-[#25C3E5] transition-colors duration-200 block py-1 hover:pl-2 rounded-md"
-                                >
-                                  {item.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
+                    <button
+                      key={link.name}
+                      type="button"
+                      onClick={() => setShowServicesOverlay(true)}
+                      className="text-gray-700 hover:text-gray-900 transition-colors"
+                    >
+                      {link.name}
+                    </button>
                   )
                 }
-                if (link.name === "Solutions:") {
+                if (link.name === "Solutions") {
                   return (
-                    <div key={link.name} className="relative inline-block">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSolutionsMenuOpen((v) => !v)
-                          if (!solutionsMenuOpen) {
-                            setServicesMenuOpen(false)
-                          }
-                        }}
-                        className="text-gray-700 hover:text-gray-900 transition-colors inline-flex items-center gap-2"
-                        aria-expanded={solutionsMenuOpen}
-                      >
-                        <span>{link.name}</span>
-                        <ChevronDown className={`w-5 h-5 transition-transform ${solutionsMenuOpen ? "rotate-180" : ""}`} />
-                      </button>
-                      {solutionsMenuOpen && (
-                        <div 
-                          ref={solutionsDropdownRef}
-                          className="absolute top-full left-0 mt-2 p-4 md:p-5 rounded-xl border-2 border-gray-300 bg-white shadow-lg w-56 md:w-64 lg:w-72 transition-all duration-300 ease-in-out z-10"
-                        >
-                          <h5 className="text-sm uppercase tracking-wide text-gray-700 font-bold mb-4 pb-2 border-b border-gray-200">Solutions</h5>
-                          <ul className="space-y-2.5 text-sm">
-                            {solutions.map((item) => (
-                              <li key={item.name}>
-                                <Link 
-                                  href={item.href} 
-                                  className="text-gray-700 hover:text-[#25C3E5] transition-colors duration-200 block py-1 hover:pl-2 rounded-md"
-                                >
-                                  {item.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
+                    <button
+                      key={link.name}
+                      type="button"
+                      onClick={() => setShowSolutionsOverlay(true)}
+                      className="text-gray-700 hover:text-gray-900 transition-colors"
+                    >
+                      {link.name}
+                    </button>
                   )
                 }
                 return (
@@ -207,10 +117,8 @@ export default function Footer() {
               })}
             </nav>
 
-            {/* Removed separate Services/Solutions blocks in favor of single dropdown above */}
-
             {/* Contact Information - Three Columns */}
-            <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-3 text-sm md:text-base transition-all duration-300 ${servicesMenuOpen || solutionsMenuOpen ? 'mt-64 md:mt-64' : 'mt-0'}`}>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-3 text-sm md:text-base mt-0">
               <div>
                 <h5 className="font-semibold text-gray-800 mb-2 uppercase tracking-wide">Opening Hours</h5>
                 <p className="text-gray-600">Mon-Sat: 09.00 AM - 06.00 PM</p>
@@ -294,5 +202,6 @@ export default function Footer() {
         </div>
       </div>
     </footer>
+    </>
   )
 }

@@ -14,14 +14,14 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: '/logo/Webnox Digital logo-05.jpg', sizes: 'any' },
-      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '32x32', type: 'image/jpeg' },
-      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '192x192', type: 'image/jpeg' },
-      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '512x512', type: 'image/jpeg' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/favicon.ico', sizes: '192x192', type: 'image/jpeg' },
+      { url: '/favicon.ico', sizes: '512x512', type: 'image/jpeg' },
     ],
-    shortcut: '/logo/Webnox Digital logo-05.jpg',
+    shortcut: '/favicon.ico',
     apple: [
-      { url: '/logo/Webnox Digital logo-05.jpg', sizes: '180x180', type: 'image/jpeg' },
+      { url: '/favicon.ico', sizes: '180x180', type: 'image/jpeg' },
     ],
   },
 }
