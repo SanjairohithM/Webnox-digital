@@ -34,8 +34,8 @@ export default function FAQSection() {
   }
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="pt-16 md:pt-20 lg:pt-24 pb-0 bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff]">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
             Frequently Asked Questions
@@ -49,13 +49,13 @@ export default function FAQSection() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300"
+              className="border border-gray-200/50 rounded-xl overflow-hidden transition-all duration-300 backdrop-blur-sm"
             >
               <button
                 type="button"
                 onClick={() => toggleAccordion(index)}
-                className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-700 hover:bg-gradient-to-r hover:from-[#E2F7FF] hover:to-[#D0F0FF] transition-colors duration-200 ${
-                  openIndex === index ? "bg-gradient-to-r from-[#E2F7FF] to-[#D0F0FF] text-[#25C3E5]" : "bg-white"
+                className={`flex items-center justify-between w-full p-5 font-medium text-left text-gray-700 hover:bg-white/60 transition-colors duration-200 ${
+                  openIndex === index ? "bg-white/70 text-[#25C3E5]" : "bg-white/40"
                 }`}
                 aria-expanded={openIndex === index}
               >
@@ -71,7 +71,7 @@ export default function FAQSection() {
                   openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
                 }`}
               >
-                <div className="p-5 border-t border-gray-200 bg-gradient-to-br from-[#F0FAFF] to-white">
+                <div className="p-5 border-t border-gray-200/50 bg-white/50">
                   <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
                 </div>
               </div>

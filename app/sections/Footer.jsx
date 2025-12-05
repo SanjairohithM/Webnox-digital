@@ -3,14 +3,18 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Instagram, Linkedin } from "lucide-react"
+import { Instagram, Linkedin, Facebook } from "lucide-react"
 import ServicesOverlay from "./Components/Header/ServicesOverlay"
 import SolutionsOverlay from "./Components/Header/SolutionsOverlay"
+import UKOverlay from "./Components/Header/UKOverlay"
+import USAOverlay from "./Components/Header/USAOverlay"
 
 export default function Footer() {
   const [email, setEmail] = useState("")
   const [showServicesOverlay, setShowServicesOverlay] = useState(false)
   const [showSolutionsOverlay, setShowSolutionsOverlay] = useState(false)
+  const [showUKOverlay, setShowUKOverlay] = useState(false)
+  const [showUSAOverlay, setShowUSAOverlay] = useState(false)
 
   const navigationLinks = [
     { name: "Home", href: "/" },
@@ -39,6 +43,16 @@ export default function Footer() {
       {/* Solutions Overlay */}
       {showSolutionsOverlay && (
         <SolutionsOverlay onClose={() => setShowSolutionsOverlay(false)} />
+      )}
+
+      {/* UK Overlay */}
+      {showUKOverlay && (
+        <UKOverlay onClose={() => setShowUKOverlay(false)} />
+      )}
+
+      {/* USA Overlay */}
+      {showUSAOverlay && (
+        <USAOverlay onClose={() => setShowUSAOverlay(false)} />
       )}
 
       <footer className="relative font-sans bg-gray-100 text-gray-800">
@@ -79,7 +93,7 @@ export default function Footer() {
         <div className="py-12 grid grid-cols-1 md:grid-cols-5 gap-12">
           {/* Left: Navigation Links */}
           <div className="md:col-span-3 space-y-6">
-            <nav className="flex flex-wrap gap-x-8 md:gap-x-12 lg:gap-x-20 gap-y-4 text-base md:text-lg relative">
+            <nav className="flex flex-wrap gap-x-5 md:gap-x-6 lg:gap-x-7 gap-y-4 text-base md:text-lg relative">
               {navigationLinks.map((link) => {
                 if (link.name === "Services") {
                   return (
@@ -115,6 +129,20 @@ export default function Footer() {
                   </Link>
                 )
               })}
+              <button
+                type="button"
+                onClick={() => setShowUKOverlay(true)}
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+              >
+                UK
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowUSAOverlay(true)}
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+              >
+                USA
+              </button>
             </nav>
 
             {/* Contact Information - Three Columns */}
@@ -138,38 +166,52 @@ export default function Footer() {
             </div>
 
             {/* Social Media Icons */}
-            <div className="flex items-center gap-4 pt-4 flex-wrap relative">
-              <a
-                href="https://www.instagram.com/webnox_digital_official/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <Instagram size={20} />
-              </a>
-              <a
-                href="https://www.linkedin.com/company/webnox-digital/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                <Linkedin size={20} />
-              </a>
-              <span className="text-gray-400">|</span>
-              <Link
-                href="/privacy-policy"
-                className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
-              >
-                privacy-policy
-              </Link>
-              <Link
-                href="/refund-cancellation-policy"
-                className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
-              >
-               refund-cancellation-policy
-              </Link>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 pt-4">
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://www.facebook.com/webnoxdigital"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <Facebook size={20} />
+                </a>
+                <a
+                  href="https://www.instagram.com/webnox_digital_official/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <Instagram size={20} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/webnox-digital/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <Linkedin size={20} />
+                </a>
+              </div>
+              <span className="hidden sm:inline text-gray-400">|</span>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-0">
+                <Link
+                  href="/privacy-policy"
+                  className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
+                >
+                  privacy-policy
+                </Link>
+                <span className="hidden sm:inline text-gray-400 mx-2">|</span>
+                <Link
+                  href="/refund-cancellation-policy"
+                  className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
+                >
+                  refund-cancellation-policy
+                </Link>
+              </div>
             </div>
           </div>
 

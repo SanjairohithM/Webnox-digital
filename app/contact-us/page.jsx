@@ -260,10 +260,10 @@ const ContactPage = () => {
     }
 
     return (
-        <div className="bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white min-h-screen">
+        <div className="bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white min-h-screen overflow-x-hidden w-full">
             {/* Banner Section */}
             <section
-                className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] flex items-center"
+                className="relative w-full h-[200px] sm:h-[250px] md:h-[300px] lg:h-[400px] flex items-center overflow-hidden"
                 style={{
                     backgroundImage: 'url(/contactus-banner.png)',
                     backgroundSize: 'cover',
@@ -273,7 +273,7 @@ const ContactPage = () => {
             >
                 <div className="absolute inset-0 bg-black/20"></div>
                 <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 lg:px-12">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white drop-shadow-lg">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white drop-shadow-lg" style={{ transform: 'none', willChange: 'auto' }}>
                         Contact Us
                     </h1>
                 </div>
@@ -282,7 +282,7 @@ const ContactPage = () => {
             {/* Hero Section */}
             <section
                 ref={heroRef}
-                className="w-full mx-auto rounded-xl mb-4 md:mb-6 lg:mb-10 flex items-center px-4 sm:px-6 md:px-8 lg:px-12 bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white relative overflow-hidden"
+                className="w-full max-w-full mx-auto rounded-xl mb-4 md:mb-6 lg:mb-10 flex items-center px-4 sm:px-6 md:px-8 lg:px-12 bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white relative overflow-hidden"
                 style={{
                     minHeight: 'auto',
                     height: 'auto',
@@ -449,14 +449,14 @@ const ContactPage = () => {
             </section>
 
             {/* Contact Section with Two Columns */}
-            <section id="contact-form" ref={formRef} className="py-12 md:py-16 lg:py-20 xl:py-24">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section id="contact-form" ref={formRef} className="py-12 md:py-16 lg:py-20 xl:py-24 w-full max-w-full overflow-x-hidden">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
                         {/* Left Column: Robot */}
-                        <div className="flex items-center justify-center w-full min-h-[300px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[500px] xl:min-h-[600px] relative mx-auto">
+                        <div className="flex items-center justify-center w-full max-w-full min-h-[300px] sm:min-h-[350px] md:min-h-[400px] lg:min-h-[500px] xl:min-h-[600px] relative mx-auto overflow-hidden">
                             <div
                                 ref={robotRef}
-                                className="flex items-center justify-center transform-gpu mx-auto"
+                                className="flex items-center justify-center transform-gpu mx-auto w-full max-w-full"
                                 style={{ transform: 'scale(0)', opacity: 0 }}
                             >
                                 <Robot />

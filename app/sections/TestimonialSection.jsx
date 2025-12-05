@@ -76,8 +76,8 @@ export default function TestimonialSection() {
   }, [testimonials.length])
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="pt-0 pb-16 md:pb-20 lg:pb-24 bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-16 md:pb-20 lg:pb-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
             What Our Clients Say
@@ -89,7 +89,7 @@ export default function TestimonialSection() {
 
         <div className="relative">
           {/* Testimonial Card */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 lg:p-16 max-w-4xl mx-auto relative overflow-hidden">
+          <div className="bg-white/60 backdrop-blur-sm rounded-2xl shadow-xl p-8 md:p-12 lg:p-16 max-w-4xl mx-auto relative overflow-hidden">
             {/* Quote Icon */}
             <div className="absolute top-6 left-6 opacity-10">
               <Quote className="w-24 h-24 text-[#25C3E5]" />
