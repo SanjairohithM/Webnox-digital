@@ -37,6 +37,13 @@ export default function WebnoxLogoLoader({ onComplete }) {
           <WebnoxLogoScene />
         {/* </Suspense> */}
       </Canvas>
+      {/* SEO: Noscript fallback for crawlers */}
+      <noscript>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center' }}>
+          <h1 style={{ fontSize: '2rem', color: '#2acbec', fontWeight: 'bold' }}>Webnox Digital</h1>
+          <p style={{ fontSize: '1rem', color: '#666', marginTop: '1rem' }}>Transforming Ideas into Intelligent Solutions</p>
+        </div>
+      </noscript>
     </div>
   );
 } 

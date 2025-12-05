@@ -359,6 +359,12 @@ export default function PhysicsSpheres() {
           <BoundingBox />
         </Physics>
       </Canvas>
+      {/* SEO: Noscript fallback for crawlers */}
+      <noscript>
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'transparent' }}>
+          <p style={{ color: 'transparent', fontSize: '1px' }}>Interactive 3D Physics Simulation - Webnox Digital</p>
+        </div>
+      </noscript>
     </div>
   )
 } 

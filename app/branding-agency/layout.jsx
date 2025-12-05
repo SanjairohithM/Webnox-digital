@@ -8,7 +8,7 @@ export const metadata = {
     title: "Branding Agency Services | Webnox Digital – US & UK",
     description:
       "Webnox Digital delivers expert branding strategy, identity design, and brand management for businesses in the US & UK — build a brand that truly stands out.",
-    url: "/branding-agency",
+    url: "https://www.webnoxdigital.com/branding-agency",
     siteName: "Webnox Digital",
     type: "website",
   },

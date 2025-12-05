@@ -20,9 +20,16 @@ const HeroSection = () => {
   const buttonRef = useRef(null)
 
   useEffect(() => {
-    gsap.fromTo(titleRef.current, { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" })
-    gsap.fromTo(descRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.3 })
-    gsap.fromTo(buttonRef.current, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: 0.6 })
+    // SEO: Ensure content is visible initially for crawlers
+    gsap.set([titleRef.current, descRef.current, buttonRef.current], { 
+      opacity: 1, 
+      y: 0,
+      visibility: 'visible'
+    })
+    // Subtle animation from visible state
+    gsap.fromTo(titleRef.current, { y: 0, opacity: 1 }, { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" })
+    gsap.fromTo(descRef.current, { y: 0, opacity: 1 }, { y: 0, opacity: 1, duration: 1, delay: 0.3 })
+    gsap.fromTo(buttonRef.current, { y: 0, opacity: 1 }, { y: 0, opacity: 1, duration: 1, delay: 0.6 })
   }, [])
 
   return (
@@ -166,8 +173,43 @@ const CTASection = () => {
 
 
 export default function DigitalTransformationUKPage() {
+    // Structured Data (JSON-LD) for SEO
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "3D Website Development Services UK",
+      "provider": {
+        "@type": "Organization",
+        "name": "Webnox Digital",
+        "url": "https://www.webnoxdigital.com",
+        "logo": "https://www.webnoxdigital.com/logo/normallogo.png"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "description": "Cutting-edge 3D website development services for UK businesses. Immersive web experiences, interactive 3D designs, and modern web solutions across the United Kingdom."
+    }
+
+    const organizationData = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Webnox Digital",
+      "url": "https://www.webnoxdigital.com",
+      "logo": "https://www.webnoxdigital.com/logo/normallogo.png"
+    }
+
     return (
       <main className="overflow-hidden">
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
+        />
         <HeroSection />
         <WhyChoose />
         <Services />

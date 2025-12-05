@@ -8,7 +8,7 @@ export const metadata = {
     title: "Webnox Digital | Next-Gen AI-Powered Marketing & Data-Driven Strategies",
     description:
       "Webnox Digital delivers AI-powered digital marketing, data-driven strategies, and omnichannel customer service. Among the top performance marketing agencies in the US & UK.",
-    url: "/next-gen-marketing",
+    url: "https://www.webnoxdigital.com/next-gen-marketing",
     siteName: "Webnox Digital",
     type: "website",
   },
