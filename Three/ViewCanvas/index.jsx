@@ -36,6 +36,12 @@ export function ViewCanvas({}) {
           <View.Port />
         {/* </Suspense> */}
       </Canvas>
+      {/* SEO: Noscript fallback for crawlers */}
+      <noscript>
+        <div style={{ position: 'fixed', top: 0, left: '50%', transform: 'translateX(-50%)', zIndex: 1, pointerEvents: 'none' }}>
+          <p style={{ color: 'transparent', fontSize: '1px' }}>3D Interactive Web Experience - Webnox Digital</p>
+        </div>
+      </noscript>
       {/* <Loader /> */}
     </>
   );

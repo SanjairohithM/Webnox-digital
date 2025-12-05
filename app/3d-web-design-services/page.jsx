@@ -29,8 +29,13 @@ const HeroSection = () => {
       const isDesktop = window.innerWidth >= 1024
 
       if (isDesktop) {
-        // Complex animations for desktop with letter-by-letter title animation
-        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 20 })
+        // SEO: Ensure content is visible initially, then animate on scroll
+        // Set initial visible state for crawlers
+        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { 
+          opacity: 1, 
+          y: 0,
+          visibility: 'visible'
+        })
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -39,19 +44,30 @@ const HeroSection = () => {
           }
         })
 
-        // Animate title letters one by one
-        tl.to(titleLettersRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power2.out",
-          stagger: 0.03 // 30ms delay between each letter
-        })
-          .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
-          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
+        // Animate title letters one by one (from current visible state)
+        tl.fromTo(titleLettersRef.current, 
+          { opacity: 1, y: 0 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+            stagger: 0.03 // 30ms delay between each letter
+          }
+        )
+          .fromTo(descRef.current, 
+            { opacity: 1, y: 0 },
+            { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.5")
+          .fromTo(buttonRef.current, 
+            { opacity: 1, y: 0 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4")
       } else {
-        // Simple fade animations for mobile with letter-by-letter title animation
-        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { opacity: 0, y: 15 })
+        // SEO: Ensure content is visible initially for mobile
+        gsap.set([...titleLettersRef.current, descRef.current, buttonRef.current], { 
+          opacity: 1, 
+          y: 0,
+          visibility: 'visible'
+        })
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -60,16 +76,23 @@ const HeroSection = () => {
           }
         })
 
-        // Animate title letters one by one (faster on mobile)
-        tl.to(titleLettersRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.3,
-          ease: "power2.out",
-          stagger: 0.02 // 20ms delay between each letter
-        })
-          .to(descRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-          .to(buttonRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+        // Animate title letters one by one (faster on mobile) - content already visible
+        tl.fromTo(titleLettersRef.current,
+          { opacity: 1, y: 0 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out",
+            stagger: 0.02 // 20ms delay between each letter
+          }
+        )
+          .fromTo(descRef.current, 
+            { opacity: 1, y: 0 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+          .fromTo(buttonRef.current, 
+            { opacity: 1, y: 0 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
       }
     }, heroRef)
     return () => ctx.revert()
@@ -171,11 +194,10 @@ const TechnologyWorkSection = () => {
       const isDesktop = window.innerWidth >= 1024
 
       if (isDesktop) {
-        // Complex animations for desktop
-        // H2 comes from right side, P comes from bottom
-        gsap.set(titleRef.current, { opacity: 0, x: 100 }) // From right
-        gsap.set(descRef.current, { opacity: 0, y: 80 })   // From bottom
-        gsap.set(imageRef.current, { opacity: 0, y: 30 })  // Normal fade
+        // SEO: Ensure content is visible initially for crawlers
+        gsap.set(titleRef.current, { opacity: 1, x: 0, visibility: 'visible' })
+        gsap.set(descRef.current, { opacity: 1, y: 0, visibility: 'visible' })
+        gsap.set(imageRef.current, { opacity: 1, y: 0, visibility: 'visible' })
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -184,15 +206,21 @@ const TechnologyWorkSection = () => {
           }
         })
 
-        tl.to([imageRef.current], { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-          .to(titleRef.current, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.3") // Slide from right
-          .to(descRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.4")  // Slide from bottom
+        // Animate from visible state (subtle animation for UX, content already visible)
+        tl.fromTo([imageRef.current], 
+          { opacity: 1, y: 0 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .fromTo(titleRef.current, 
+            { opacity: 1, x: 0 },
+            { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }, "-=0.3")
+          .fromTo(descRef.current, 
+            { opacity: 1, y: 0 },
+            { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, "-=0.4")
       } else {
-        // Simple fade animations for mobile
-        // H2 comes from right side, P comes from bottom (reduced distance for mobile)
-        gsap.set(titleRef.current, { opacity: 0, x: 50 })  // From right (less distance)
-        gsap.set(descRef.current, { opacity: 0, y: 40 })   // From bottom (less distance)
-        gsap.set(imageRef.current, { opacity: 0, y: 20 })  // Normal fade
+        // SEO: Ensure content is visible initially for mobile crawlers
+        gsap.set(titleRef.current, { opacity: 1, x: 0, visibility: 'visible' })
+        gsap.set(descRef.current, { opacity: 1, y: 0, visibility: 'visible' })
+        gsap.set(imageRef.current, { opacity: 1, y: 0, visibility: 'visible' })
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -201,9 +229,16 @@ const TechnologyWorkSection = () => {
           }
         })
 
-        tl.to([imageRef.current], { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
-          .to(titleRef.current, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }, "-=0.2") // Slide from right
-          .to(descRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")  // Slide from bottom
+        // Animate from visible state
+        tl.fromTo([imageRef.current], 
+          { opacity: 1, y: 0 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+          .fromTo(titleRef.current, 
+            { opacity: 1, x: 0 },
+            { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" }, "-=0.2")
+          .fromTo(descRef.current, 
+            { opacity: 1, y: 0 },
+            { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "-=0.3")
       }
     }, sectionRef)
     return () => ctx.revert()
@@ -318,9 +353,10 @@ const UseCasesSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
+      // SEO: Ensure content is visible initially for crawlers
+      gsap.set([titleRef.current, subtitleRef.current], { opacity: 1, y: 0, visibility: 'visible' })
       const validCards = cardsRef.current.filter(Boolean)
-      gsap.set(validCards, { opacity: 0, y: 40 })
+      gsap.set(validCards, { opacity: 1, y: 0, visibility: 'visible' })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -329,9 +365,16 @@ const UseCasesSection = () => {
         }
       })
 
-      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-        .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-        .to(validCards, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.2")
+      // Animate from visible state (subtle animation)
+      tl.fromTo(titleRef.current, 
+        { opacity: 1, y: 0 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+        .fromTo(subtitleRef.current, 
+          { opacity: 1, y: 0 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+        .fromTo(validCards, 
+          { opacity: 1, y: 0 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.2")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -414,9 +457,10 @@ const SecondUseCasesSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
+      // SEO: Ensure content is visible initially for crawlers
+      gsap.set([titleRef.current, subtitleRef.current], { opacity: 1, y: 0, visibility: 'visible' })
       const validCards = cardsRef.current.filter(Boolean)
-      gsap.set(validCards, { opacity: 0, y: 40 })
+      gsap.set(validCards, { opacity: 1, y: 0, visibility: 'visible' })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -425,9 +469,16 @@ const SecondUseCasesSection = () => {
         }
       })
 
-      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-        .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-        .to(validCards, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.2")
+      // Animate from visible state (subtle animation)
+      tl.fromTo(titleRef.current, 
+        { opacity: 1, y: 0 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+        .fromTo(subtitleRef.current, 
+          { opacity: 1, y: 0 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+        .fromTo(validCards, 
+          { opacity: 1, y: 0 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.2")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -478,18 +529,24 @@ const ShowcaseUseCasesPanel = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([panelRef.current, ...itemsRef.current.filter(Boolean)], { opacity: 0, y: 30 })
+      // SEO: Ensure content is visible initially for crawlers
+      gsap.set([panelRef.current, ...itemsRef.current.filter(Boolean)], { opacity: 1, y: 0, visibility: 'visible' })
       const tl = gsap.timeline({
         scrollTrigger: { trigger: sectionRef.current, start: "top 80%" }
       })
-      tl.to(panelRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" })
-        .to(itemsRef.current.filter(Boolean), {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          stagger: 0.35
-        }, "-=0.1")
+      // Animate from visible state
+      tl.fromTo(panelRef.current, 
+        { opacity: 1, y: 0 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" })
+        .fromTo(itemsRef.current.filter(Boolean), 
+          { opacity: 1, y: 0 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            ease: "power3.out",
+            stagger: 0.35
+          }, "-=0.1")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -591,9 +648,10 @@ const ThirdUseCasesSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([titleRef.current, subtitleRef.current], { opacity: 0, y: 30 })
+      // SEO: Ensure content is visible initially for crawlers
+      gsap.set([titleRef.current, subtitleRef.current], { opacity: 1, y: 0, visibility: 'visible' })
       const validCards = cardsRef.current.filter(Boolean)
-      gsap.set(validCards, { opacity: 0, y: 40 })
+      gsap.set(validCards, { opacity: 1, y: 0, visibility: 'visible' })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -602,9 +660,16 @@ const ThirdUseCasesSection = () => {
         }
       })
 
-      tl.to(titleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-        .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-        .to(validCards, { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.2")
+      // Animate from visible state (subtle animation)
+      tl.fromTo(titleRef.current, 
+        { opacity: 1, y: 0 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+        .fromTo(subtitleRef.current, 
+          { opacity: 1, y: 0 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
+        .fromTo(validCards, 
+          { opacity: 1, y: 0 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.2")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -647,7 +712,8 @@ const CTASection = () => {
       const targets = [contentDesktopRef.current, contentMobileRef.current].filter(Boolean)
       if (targets.length === 0) return
 
-      gsap.set(targets, { opacity: 0, y: 50 })
+      // SEO: Ensure content is visible initially for crawlers
+      gsap.set(targets, { opacity: 1, y: 0, visibility: 'visible' })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -656,7 +722,10 @@ const CTASection = () => {
         }
       })
 
-      tl.to(targets, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.05 })
+      // Animate from visible state
+      tl.fromTo(targets, 
+        { opacity: 1, y: 0 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.05 })
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -780,7 +849,7 @@ const FAQSection = () => {
       answer: "Yes. Our 3D websites are fully optimized for mobile devices using adaptive rendering techniques and performance tuning."
     },
     {
-      question: "What’s the difference between 3D and traditional websites?",
+      question: "What's the difference between 3D and traditional websites?",
       answer: "Traditional websites are static or 2D. 3D websites provide interactive experiences with motion graphics, 3D models, and spatial navigation improving retention and brand value."
     },
     {
@@ -794,8 +863,27 @@ const FAQSection = () => {
   ];
   const [openIdx, setOpenIdx] = React.useState(0);
 
+  // FAQ Structured Data (JSON-LD) for SEO
+  const faqStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question.trim(),
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <section className="py-8 sm:py-12 lg:py-16 xl:py-20 bg-white">
+      {/* FAQ Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
         <div className="mb-8 sm:mb-12 lg:mb-16">
@@ -848,8 +936,60 @@ const FAQSection = () => {
 };
 
 const CustomWebPage = () => {
+  // Structured Data (JSON-LD) for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "3D Web Design Services",
+    "provider": {
+      "@type": "Organization",
+      "name": "Webnox Digital",
+      "url": "https://www.webnoxdigital.com",
+      "logo": "https://www.webnoxdigital.com/logo/normallogo.png",
+      "sameAs": [
+        "https://www.instagram.com/webnox_digital_official/",
+        "https://www.linkedin.com/company/webnox-digital/"
+      ]
+    },
+    "areaServed": ["US", "UK", "Worldwide"],
+    "description": "Professional 3D web design services for businesses across the US & UK. From immersive visuals to interactive experiences, we deliver high-performance, visually stunning websites.",
+    "offers": {
+      "@type": "Offer",
+      "description": "3D Web Design and Development Services"
+    }
+  }
+
+  const organizationData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Webnox Digital",
+    "url": "https://www.webnoxdigital.com",
+    "logo": "https://www.webnoxdigital.com/logo/normallogo.png",
+    "description": "Leading software development company offering 3D website development, AI software solutions, mobile app development, and digital marketing services.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-97865-57739",
+      "contactType": "Customer Service",
+      "email": "info@webnoxdigital.com"
+    },
+    "sameAs": [
+      "https://www.instagram.com/webnox_digital_official/",
+      "https://www.linkedin.com/company/webnox-digital/"
+    ]
+  }
+
   return (
     <main className="@/customweb">
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
+      />
+      
       <Scroll3DSections>
       <HeroSection />
       <TechnologyWorkSection />
