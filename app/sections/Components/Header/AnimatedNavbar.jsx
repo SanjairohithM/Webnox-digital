@@ -737,7 +737,11 @@ const AnimatedNavbar = ({
       {/* Let's Talk Button - Top Right - Separate Element (Desktop Only) */}
       {!isMobile && (
         <div ref={letsTalkRef} className="fixed top-12 right-50 z-30 transition-all duration-300">
-          <Link href="/contact-us">
+          <a 
+            href="https://cal.com/webnox-digital" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
             <button
               className="bg-[#2acbec] hover:bg-[#1fb8d9] text-white font-bold p-4 rounded-lg shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-xl cursor-pointer"
               style={{
@@ -747,7 +751,7 @@ const AnimatedNavbar = ({
             >
               Book a meeting!
             </button>
-          </Link>
+          </a>
         </div>
       )}
 

@@ -10,7 +10,6 @@ import UKOverlay from "./Components/Header/UKOverlay"
 import USAOverlay from "./Components/Header/USAOverlay"
 
 export default function Footer() {
-  const [email, setEmail] = useState("")
   const [showServicesOverlay, setShowServicesOverlay] = useState(false)
   const [showSolutionsOverlay, setShowSolutionsOverlay] = useState(false)
   const [showUKOverlay, setShowUKOverlay] = useState(false)
@@ -24,13 +23,6 @@ export default function Footer() {
     { name: "AI", href: "/ai-services" },
     { name: "Resource", href: "/resources" },
   ]
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Handle email submission
-    console.log("Email submitted:", email)
-    setEmail("")
-  }
 
 
   return (
@@ -68,22 +60,16 @@ export default function Footer() {
                 Feel free to send us your questions or request a free consultation.
               </p>
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full md:w-auto flex-shrink-0">
-              <input
-                type="email"
-                placeholder="Enter Your Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#25C3E5] text-gray-800 placeholder-gray-400 flex-1 md:flex-initial md:w-64 text-sm md:text-base"
-                required
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap text-sm md:text-base"
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto flex-shrink-0">
+              <a
+                href="https://cal.com/webnox-digital"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 bg-gradient-to-r from-[#3FD7F1] to-[#25C3E5] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap text-sm md:text-base text-center"
               >
-                Get Started
-              </button>
-            </form>
+                Book a Meeting
+              </a>
+            </div>
           </div>
         </div>
 
