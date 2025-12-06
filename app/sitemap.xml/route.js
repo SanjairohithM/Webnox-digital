@@ -6,9 +6,13 @@ export async function GET() {
     // Generate the sitemap XML content
     const sitemapContent = generateSitemapXMLContent();
     
-    // Return content - Vercel will handle headers via vercel.json
+    // Return content with proper headers
     return new Response(sitemapContent, {
       status: 200,
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+      },
     });
   } catch (error) {
     console.error('Error generating sitemap:', error);
@@ -26,6 +30,10 @@ export async function GET() {
     
     return new Response(fallbackSitemap, {
       status: 200,
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+      },
     });
   }
 }
