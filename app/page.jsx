@@ -18,7 +18,7 @@ import Demoballsection from "./sections/Demoballsection";
 import CallbackPopup from "./components/CallbackPopup";
 import FAQSection from "./sections/FAQSection";
 import TestimonialSection from "./sections/TestimonialSection";
- // import AnimatedNavbar from "./sections/Components/Header/AnimatedNavbar";
+// import AnimatedNavbar from "./sections/Components/Header/AnimatedNavbar";
 // import Footer from "./sections/Footer"; 
 
 
@@ -55,35 +55,38 @@ export default function Home() {
     <div className="w-full relative overflow-x-hidden">
       {/* Loader - shows only once when page loads */}
       {isLoading && <WebnoxLogoLoader onComplete={handleLoaderComplete} />}
-      
+
       {/* Main content - shows after loader completes */}
       {showContent && (
         <>
           <ViewCanvas />
           {/* Add the AnimatedNavbar here */}
-       
+
           {/* <CanvasWrapper> */}
           {/* <BoxRotationScene /> */}
           {/* <CarIdelScene /> */}
           {/* <Ground /> */}
           {/* </CanvasWrapper> */}
-          
+
           <Hero />
-          <Mission/>
+          <Mission />
           {/* <Demoballsection/>  */}
-          {/* <OurSolutions/> */}
-          <NextGen/>
-          <FAQSection/>
-          <TestimonialSection/>
-          <LetsConnect/>
+          {/* Mobile-only Our Solutions section */}
+          <div className="md:hidden">
+            <OurSolutions />
+          </div>
+          <NextGen />
+          <FAQSection />
+          <TestimonialSection />
+          <LetsConnect />
           {/* <Footer/> */}
         </>
       )}
 
       {/* Callback Popup */}
-      <CallbackPopup 
-        isOpen={showCallbackPopup} 
-        onClose={handleCloseCallbackPopup} 
+      <CallbackPopup
+        isOpen={showCallbackPopup}
+        onClose={handleCloseCallbackPopup}
       />
     </div>
   );
