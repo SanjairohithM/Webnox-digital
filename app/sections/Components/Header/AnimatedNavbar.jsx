@@ -737,9 +737,9 @@ const AnimatedNavbar = ({
       {/* Let's Talk Button - Top Right - Separate Element (Desktop Only) */}
       {!isMobile && (
         <div ref={letsTalkRef} className="fixed top-12 right-50 z-30 transition-all duration-300">
-          <a 
-            href="https://cal.com/webnox-digital" 
-            target="_blank" 
+          <a
+            href="https://cal.com/webnox-digital"
+            target="_blank"
             rel="noopener noreferrer"
           >
             <button
@@ -749,7 +749,7 @@ const AnimatedNavbar = ({
                 WebkitBackdropFilter: "blur(10px)",
               }}
             >
-              Book a meeting!
+              Book a Meeting
             </button>
           </a>
         </div>
