@@ -762,9 +762,9 @@ const AnimatedNavbar = ({
             <Image
               src={logo || "/placeholder.svg"}
               alt="Logo"
-              width={70}
-              height={70}
-              className="object-contain drop-shadow-2xl w-14 h-14 sm:w-16 sm:h-16"
+              width={90}
+              height={90}
+              className="object-contain drop-shadow-2xl w-16 h-16 sm:w-20 sm:h-20"
             />
           </Link>
         </div>
