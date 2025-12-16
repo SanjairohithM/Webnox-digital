@@ -6,16 +6,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
-import { 
-  Zap, 
-  Shield, 
-  TrendingUp, 
-  Users, 
-  CheckCircle, 
-  Cloud, 
-  Database, 
-  Briefcase, 
-  Bot, 
+import {
+  Zap,
+  Shield,
+  TrendingUp,
+  Users,
+  CheckCircle,
+  Cloud,
+  Database,
+  Briefcase,
+  Bot,
   RefreshCw,
   MapPin,
   Building2,
@@ -51,17 +51,17 @@ const DigitalTransformationHero = () => {
 
     // Main title with 3D entrance
     gsap.fromTo(titleRef.current,
-      { 
-        y: 150, 
+      {
+        y: 150,
         opacity: 0,
         rotationX: 90,
         transformPerspective: 1000,
       },
-      { 
-        y: 0, 
-        opacity: 1, 
+      {
+        y: 0,
+        opacity: 1,
         rotationX: 0,
-        duration: 2, 
+        duration: 2,
         ease: "power3.out",
         delay: 0.5
       }
@@ -122,7 +122,7 @@ const DigitalTransformationHero = () => {
             Digital Transformation Services in the USA
             <br />
             <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-            Innovate, Scale, and Compete Globally
+              Innovate, Scale, and Compete Globally
             </span>
           </h1>
           <p
@@ -189,7 +189,7 @@ const Floating3DFeaturesSection = () => {
     },
     {
       icon: TrendingUp,
-      title: "Enterprise Scale", 
+      title: "Enterprise Scale",
       description: "Cloud-native architectures designed for growing US enterprises",
     },
     {
@@ -208,7 +208,7 @@ const Floating3DFeaturesSection = () => {
         <div className="absolute bottom-32 left-40 w-28 h-28 border border-[#007AC3] rotate-45"></div>
         <div className="absolute bottom-20 right-20 w-20 h-20 border border-[#00B9FF] rotate-12"></div>
       </div>
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -218,43 +218,42 @@ const Floating3DFeaturesSection = () => {
             </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Built specifically for the US market with deep understanding of local regulations, 
+            Built specifically for the US market with deep understanding of local regulations,
             business practices, and industry requirements.
           </p>
         </div>
-        
+
         <div className="max-w-7xl mx-auto">
           <div className="space-y-20">
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
               const isEven = index % 2 === 0;
-              
+
               return (
                 <div
                   key={index}
                   ref={(el) => (featureRefs.current[index] = el)}
-                  className={`flex flex-col lg:flex-row items-center gap-16 ${
-                    isEven ? "" : "lg:flex-row-reverse"
-                  }`}
+                  className={`flex flex-col lg:flex-row items-center gap-16 ${isEven ? "" : "lg:flex-row-reverse"
+                    }`}
                 >
                   {/* Icon and Visual Element */}
-                  <div className="lg:w-1/2 flex justify-center lg:justify-start">
+                  <div className="lg:w-1/2 flex justify-center lg:justify-center">
                     <div className="relative">
                       {/* Main icon container */}
                       <div className="w-32 h-32 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-full flex items-center justify-center shadow-2xl">
                         <IconComponent size={48} className="text-white" />
                       </div>
-                      
+
                       {/* Decorative rings */}
                       <div className="absolute -inset-4 border-2 border-[#00B9FF]/20 rounded-full"></div>
                       <div className="absolute -inset-8 border border-[#0097D9]/10 rounded-full"></div>
-                      
+
                       {/* Floating elements */}
                       <div className="absolute -top-4 -right-4 w-6 h-6 bg-[#00B9FF]/20 rounded-full"></div>
                       <div className="absolute -bottom-4 -left-4 w-4 h-4 bg-[#0097D9]/20 rounded-full"></div>
                     </div>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="lg:w-1/2 text-center lg:text-left">
                     <div className="max-w-lg mx-auto lg:mx-0">
@@ -264,7 +263,7 @@ const Floating3DFeaturesSection = () => {
                       <p className="text-xl text-gray-600 leading-relaxed mb-8">
                         {feature.description}
                       </p>
-                      
+
                       {/* Feature highlight line */}
                       <div className="w-20 h-1 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] mx-auto lg:mx-0 rounded-full"></div>
                     </div>
@@ -285,64 +284,84 @@ const CleanAdvantageSection = () => {
   const advantageRefs = useRef([]);
 
   useGSAP(() => {
-    // Advantage items animation
-    advantageRefs.current.forEach((item, index) => {
-      if (item) {
-        gsap.fromTo(item,
-          {
-            y: 60,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            delay: index * 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 75%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+    // Advantage items animation - 1 by 1 Sequence
+    const totalCards = advantageRefs.current.length;
+    const centerIndex = Math.floor(totalCards / 2);
+
+    // Create a timeline for strict sequential control
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 60%", // Trigger earlier
+        end: "bottom top",
+        toggleActions: "play none none reverse", // Play on enter, Reverse "z to a" on leave back (scroll up)
       }
     });
+
+    // 1 by 1 Animation
+    tl.fromTo(advantageRefs.current.filter(Boolean),
+      {
+        x: (index) => (centerIndex - index) * 50, // Start closer to center
+        y: 100,
+        opacity: 0,
+        scale: 0.5,
+        rotation: (index) => (index - centerIndex) * 10,
+      },
+      {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+        stagger: {
+          each: 0.2, // Distinct 1-by-1 delay
+          from: "start", // Sequence: 1 -> 5 (and 5 -> 1 on reverse)
+        }
+      }
+    );
+
   }, { scope: sectionRef });
 
   const advantages = [
     {
       icon: Globe,
-      title: "US Industry Expertise", 
+      title: "US Industry Expertise",
       description: "Deep knowledge of finance, healthcare, e-commerce, and public sector requirements",
+      gradient: "from-[#F59E0B] to-[#D97706]", // Amber/Orange
     },
     {
       icon: Lock,
       title: "Compliance-Driven",
       description: "SOX, HIPAA, and ISO-certified digital solutions for regulatory confidence",
+      gradient: "from-[#8B5CF6] to-[#6D28D9]", // Purple
     },
     {
       icon: TrendingUp,
       title: "Enterprise Scalability",
       description: "Cloud-native architectures that grow with your US business",
+      gradient: "from-[#10B981] to-[#059669]", // Emerald/Green
     },
     {
       icon: Zap,
       title: "Proven Methodologies",
       description: "Agile delivery, design thinking, and data-led strategy approach",
+      gradient: "from-[#3B82F6] to-[#2563EB]", // Blue
     },
     {
       icon: Users,
       title: "Trusted Partner",
       description: "Successful case studies from US corporates and SMEs nationwide",
+      gradient: "from-[#EC4899] to-[#DB2777]", // Pink
     },
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section ref={sectionRef} className="py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Why Choose Our{" "}
             <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
               US Solutions?
@@ -350,36 +369,33 @@ const CleanAdvantageSection = () => {
           </h2>
         </div>
 
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {advantages.map((advantage, index) => {
               const IconComponent = advantage.icon;
               return (
                 <div
                   key={index}
                   ref={(el) => (advantageRefs.current[index] = el)}
-                  className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#00B9FF]/20 hover:-translate-y-2"
+                  className={`group relative rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br ${advantage.gradient}`}
                 >
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF]/5 to-[#0097D9]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
-                  {/* Icon container with enhanced styling */}
-                  <div className="relative z-10 w-16 h-16 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    <IconComponent size={28} className="text-white" />
+                  {/* Icon container */}
+                  <div className="relative z-10 w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-inner border border-white/20">
+                    <IconComponent size={24} className="text-white" />
                   </div>
-                  
+
                   {/* Content */}
                   <div className="relative z-10">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-[#0097D9] transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-white mb-3">
                       {advantage.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed text-base group-hover:text-gray-700 transition-colors duration-300">
+                    <p className="text-blue-50 leading-snug text-sm">
                       {advantage.description}
                     </p>
                   </div>
-                  
+
                   {/* Decorative element */}
-                  <div className="absolute top-6 right-6 w-2 h-2 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full blur-lg animate-pulse"></div>
                 </div>
               );
             })}
@@ -389,6 +405,7 @@ const CleanAdvantageSection = () => {
     </section>
   );
 };
+
 
 // Dynamic Services Showcase
 const DynamicServicesSection = () => {
@@ -414,7 +431,7 @@ const DynamicServicesSection = () => {
         gsap.fromTo(card,
           {
             opacity: 0,
-            y: 150,
+            y: 50,
             scale: 0.8,
             rotationX: 45,
           },
@@ -423,12 +440,12 @@ const DynamicServicesSection = () => {
             y: 0,
             scale: 1,
             rotationX: 0,
-            duration: 1.5,
-            delay: index * 0.2,
+            duration: 0.6,
+            delay: index * 0.1,
             ease: "power3.out",
             scrollTrigger: {
               trigger: card,
-              start: "top 80%",
+              start: "top 85%",
               toggleActions: "play none none reverse",
             },
           }
@@ -447,7 +464,7 @@ const DynamicServicesSection = () => {
     },
     {
       icon: Cloud,
-      title: "Cloud Enablement", 
+      title: "Cloud Enablement",
       description: "Scalable solutions on AWS, Azure, or US-based providers for optimal performance and compliance",
       features: ["Cloud Strategy", "Multi-Cloud Setup", "Cost Optimization"],
       gradient: "from-[#0097D9] to-[#007AC3]",
@@ -487,41 +504,56 @@ const DynamicServicesSection = () => {
           </h2>
         </div>
 
-        <div className="space-y-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {services.map((service, index) => {
             const IconComponent = service.icon;
-            const isReversed = index % 2 === 1;
-            
+
             return (
               <div
                 key={index}
                 ref={(el) => (serviceCardsRef.current[index] = el)}
-                className={`flex flex-col lg:flex-row items-center gap-16 ${
-                  isReversed ? "lg:flex-row-reverse " : ""
-                }`}
-                style={{ transformStyle: "preserve-3d" }}
+                className={`group w-full h-[400px] [perspective:1000px] ${index === services.length - 1 ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""
+                  }`}
               >
-                <div className="lg:w-1/2">
-                  <div className={`w-40 h-40 rounded-3xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-8 mx-auto lg:mx-0 shadow-2xl`}>
-                    <IconComponent size={60} className="text-white" />
+                <div className="relative w-full h-full transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                  {/* Front Face */}
+                  <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] bg-white rounded-3xl shadow-xl border border-gray-100 p-8 flex flex-col items-center justify-center text-center overflow-hidden">
+                    <div className={`absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${service.gradient}`}></div>
+
+                    <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
+                      <IconComponent size={40} className="text-white" />
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                      {service.title}
+                    </h3>
+
+                    <p className="text-sm text-gray-500 mt-4 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#00B9FF] animate-pulse"></span>
+                      Hover to explore
+                    </p>
                   </div>
-                </div>
-                <div className="lg:w-1/2 text-center lg:text-left">
-                  <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    {service.title}
-                  </h3>
-                  <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                    {service.description}
-                  </p>
-                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                    {service.features.map((feature, featureIndex) => (
-                      <span
-                        key={featureIndex}
-                        className="bg-[#00B9FF]/10 text-[#0097D9] px-4 py-2 rounded-full text-sm font-medium"
-                      >
-                        {feature}
-                      </span>
-                    ))}
+
+                  {/* Back Face */}
+                  <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center justify-center text-center">
+                    <h3 className="text-xl font-bold text-white mb-4">
+                      Why Choose This?
+                    </h3>
+
+                    <p className="text-gray-300 leading-relaxed mb-8 text-sm">
+                      {service.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 justify-center">
+                      {service.features.map((feature, featureIndex) => (
+                        <span
+                          key={featureIndex}
+                          className="bg-white/10 text-white border border-white/20 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -549,8 +581,8 @@ const CleanUSCoverageSection = () => {
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
-            delay: index * 0.1,
+            duration: 0.5,
+            delay: index * 0.05,
             ease: "power3.out",
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -585,7 +617,7 @@ const CleanUSCoverageSection = () => {
         <div className="absolute bottom-32 left-40 w-28 h-28 border border-[#007AC3] rotate-45"></div>
         <div className="absolute bottom-20 right-20 w-20 h-20 border border-[#00B9FF] rotate-12"></div>
       </div>
-      
+
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-12 md:mb-20">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
@@ -595,7 +627,7 @@ const CleanUSCoverageSection = () => {
             </span>
           </h2>
           <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
-            From financial hubs in New York to tech startups in San Francisco, we partner with 
+            From financial hubs in New York to tech startups in San Francisco, we partner with
             businesses nationwide to drive digital transformation success.
           </p>
         </div>
@@ -663,7 +695,7 @@ const CleanUSCoverageSection = () => {
                     <div className="col-span-1 flex justify-center">
                       <CityHexagon city={usCities[4]} index={4} cityRefs={cityRefs} />
                     </div>
-                    
+
                     {/* Row 2 - Offset for hexagonal effect */}
                     <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
                       <CityHexagon city={usCities[5]} index={5} cityRefs={cityRefs} />
@@ -787,7 +819,7 @@ const MagneticCTASection = () => {
           </span>
         </h2>
         <p className="text-xl text-white/80 mb-16 max-w-4xl mx-auto leading-relaxed">
-          Ready to modernize your enterprise and compete globally? Let's discuss your 
+          Ready to modernize your enterprise and compete globally? Let's discuss your
           digital transformation strategy and unlock your business potential.
         </p>
         <Link
@@ -806,7 +838,7 @@ const MagneticCTASection = () => {
 // Separate component for hexagonal city items
 const CityHexagon = ({ city, index, cityRefs }) => {
   const IconComponent = city.icon;
-  
+
   return (
     <div
       ref={(el) => (cityRefs.current[index] = el)}
@@ -821,22 +853,22 @@ const CityHexagon = ({ city, index, cityRefs }) => {
             <div className="w-8 h-8 xl:w-12 xl:h-12 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-xl flex items-center justify-center mb-2 xl:mb-3 group-hover:scale-110 transition-transform duration-300">
               <IconComponent size={16} className="text-white xl:w-5 xl:h-5" />
             </div>
-            
+
             {/* City Name */}
             <h3 className="text-sm xl:text-lg font-bold text-gray-900 mb-1 xl:mb-2 group-hover:text-[#0097D9] transition-colors duration-300 text-center leading-tight">
               {city.name}
             </h3>
-            
+
             {/* Description */}
             <p className="text-xs xl:text-sm text-gray-600 text-center leading-tight group-hover:text-gray-700 transition-colors duration-300">
               {city.description}
             </p>
           </div>
         </div>
-        
+
         {/* Connection Line to Center - Only on desktop */}
         <div className="absolute top-1/2 left-1/2 w-px h-16 xl:h-20 bg-gradient-to-b from-[#00B9FF]/30 to-transparent transform -translate-x-1/2 -translate-y-full origin-bottom"></div>
-        
+
         {/* Corner Accents */}
         <div className="absolute -top-1 -right-1 xl:-top-2 xl:-right-2 w-3 h-3 xl:w-4 xl:h-4 bg-[#00B9FF] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         <div className="absolute -bottom-1 -left-1 xl:-bottom-2 xl:-left-2 w-2 h-2 xl:w-3 xl:h-3 bg-[#0097D9] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

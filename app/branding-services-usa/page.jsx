@@ -61,7 +61,7 @@ const ParticleBackground = () => {
   }, []);
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="fixed inset-0 pointer-events-none z-0"
       style={{ willChange: 'transform', contain: 'layout style paint' }}
@@ -80,10 +80,10 @@ const useMagneticButton = (ref, strength = 0.2) => {
 
     const handleMouseMove = (e) => {
       if (!isHovering) return;
-      
+
       // Throttle with requestAnimationFrame
       if (rafId) return;
-      
+
       rafId = requestAnimationFrame(() => {
         const rect = button.getBoundingClientRect();
         const x = (e.clientX - rect.left - rect.width / 2) * strength;
@@ -96,7 +96,7 @@ const useMagneticButton = (ref, strength = 0.2) => {
           ease: "power2.out",
           force3D: true // GPU acceleration
         });
-        
+
         rafId = null;
       });
     };
@@ -112,7 +112,7 @@ const useMagneticButton = (ref, strength = 0.2) => {
         cancelAnimationFrame(rafId);
         rafId = null;
       }
-      
+
       gsap.to(button, {
         x: 0,
         y: 0,
@@ -145,7 +145,7 @@ export default function BrandingServicesUSA() {
       autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
       ignoreMobileResize: true
     });
-    
+
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
@@ -331,7 +331,7 @@ const HeroSection = () => {
         <div ref={orb1Ref} className="absolute top-10 sm:top-20 left-5 sm:left-10 w-48 sm:w-64 h-48 sm:h-64 bg-gradient-to-br from-[#2ACBEC]/20 to-[#6149CD]/20 rounded-full blur-3xl" style={{ willChange: 'transform' }} />
         <div ref={orb2Ref} className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-64 sm:w-96 h-64 sm:h-96 bg-gradient-to-br from-[#6149CD]/20 to-[#2ACBEC]/20 rounded-full blur-3xl" style={{ willChange: 'transform' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 sm:w-48 h-32 sm:h-48 bg-gradient-to-br from-[#2ACBEC]/10 to-[#6149CD]/10 rounded-full blur-2xl animate-pulse" />
-        
+
         {/* Reduced morphing shapes for better performance */}
         {[...Array(3)].map((_, i) => (
           <div
@@ -739,9 +739,9 @@ const DetailedServicesSection = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {services.map((service, i) => (
-            <div key={i} ref={el => cardsRef.current[i] = el} className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#2ACBEC]/30 hover:-translate-y-2">
+            <div key={i} ref={el => cardsRef.current[i] = el} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)] group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#2ACBEC]/30 hover:-translate-y-2">
               <div className="bg-gradient-to-br from-[#2ACBEC] to-[#6149CD] p-8">
                 <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4">
                   <service.icon className="w-7 h-7 text-white" />
@@ -1135,8 +1135,8 @@ const ToolsPlatformsSection = () => {
         </h2>
         <div className="flex flex-wrap justify-center gap-8">
           {tools.map((tool, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               ref={el => toolsRef.current[i] = el}
               className="group bg-gradient-to-br from-gray-50 to-white rounded-xl px-8 py-4 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#2ACBEC]/30 hover:-translate-y-2 hover:scale-105"
             >

@@ -68,7 +68,7 @@ const ParticleBackground = () => {
   }, [])
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="fixed inset-0 pointer-events-none z-0"
     />
@@ -99,7 +99,7 @@ const MorphingHeroSection = () => {
 
       // Professional title animation with split text effect
       gsap.set(titleRef.current, { opacity: 0, y: 80 })
-      
+
       gsap.to(titleRef.current, {
         opacity: 1,
         y: 0,
@@ -115,9 +115,9 @@ const MorphingHeroSection = () => {
       })
 
       // Add a subtle scale animation for professional feel
-      gsap.fromTo(titleRef.current, 
+      gsap.fromTo(titleRef.current,
         { scale: 0.95 },
-        { 
+        {
           scale: 1,
           duration: 1.5,
           ease: "power2.out",
@@ -132,13 +132,13 @@ const MorphingHeroSection = () => {
       )
 
       // Professional description animation
-      gsap.fromTo(descRef.current, 
-        { 
+      gsap.fromTo(descRef.current,
+        {
           opacity: 0,
           y: 40,
           scale: 0.98
         },
-        { 
+        {
           opacity: 1,
           y: 0,
           scale: 1,
@@ -155,14 +155,14 @@ const MorphingHeroSection = () => {
       )
 
       // Professional button animation
-      gsap.fromTo(buttonRef.current, 
-        { 
-          y: 60, 
+      gsap.fromTo(buttonRef.current,
+        {
+          y: 60,
           opacity: 0,
           scale: 0.9
         },
-        { 
-          y: 0, 
+        {
+          y: 0,
           opacity: 1,
           scale: 1,
           duration: 1,
@@ -217,7 +217,7 @@ const MorphingHeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        <h1 
+        <h1
           ref={titleRef}
           className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight text-gray-900"
           style={{
@@ -229,14 +229,14 @@ const MorphingHeroSection = () => {
         >
           Branding Services in the UK – Elevate Your Business Identity with Confidence
         </h1>
-        
-        <p 
+
+        <p
           ref={descRef}
           className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed"
         >
           In the UK, strong branding is what sets market leaders apart from competitors. At Webnox Digital, we deliver <span className="text-[#00B9FF] font-bold">creative and corporate branding solutions</span> across the <span className="text-[#00B9FF] font-bold">United Kingdom</span>, helping businesses <span className="text-[#00B9FF] font-bold">stand out in London, Manchester, Birmingham</span>, and beyond.
         </p>
-        
+
         <Link href="/contact-us">
           <button
             ref={buttonRef}
@@ -264,17 +264,17 @@ const FloatingIntroSection = () => {
     cardsRef.current.forEach((card, index) => {
       if (card) {
         // Clean scroll reveal only - no floating animation
-        gsap.fromTo(card, 
-          { 
-            y: 60, 
+        gsap.fromTo(card,
+          {
+            y: 60,
             opacity: 0,
             scale: 0.95
           },
-          { 
-            y: 0, 
+          {
+            y: 0,
             opacity: 1,
             scale: 1,
-            duration: 1, 
+            duration: 1,
             ease: "power3.out",
             delay: index * 0.15,
             scrollTrigger: {
@@ -289,7 +289,7 @@ const FloatingIntroSection = () => {
   }, { scope: sectionRef })
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
     >
@@ -309,7 +309,7 @@ const FloatingIntroSection = () => {
             </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Built specifically for the UK market with deep understanding of local culture, 
+            Built specifically for the UK market with deep understanding of local culture,
             business practices, and consumer preferences.
           </p>
         </div>
@@ -328,18 +328,18 @@ const FloatingIntroSection = () => {
               >
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF]/5 to-[#0097D9]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
+
                 {/* Icon container with enhanced styling */}
                 <div className="relative z-10 w-16 h-16 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                   <item.icon className="w-8 h-8 text-white" />
                 </div>
-                
+
                 {/* Content */}
                 <div className="relative z-10">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-[#0097D9] transition-colors duration-300">{item.title}</h3>
                   <p className="text-gray-600 leading-relaxed text-base group-hover:text-gray-700 transition-colors duration-300">{item.desc}</p>
                 </div>
-                
+
                 {/* Decorative element */}
                 <div className="absolute top-6 right-6 w-2 h-2 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
@@ -361,13 +361,13 @@ const RotatingWhyChooseSection = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Title animation
-      gsap.fromTo(titleRef.current, 
+      gsap.fromTo(titleRef.current,
         { y: 100, opacity: 0, rotationX: 45 },
-        { 
-          y: 0, 
+        {
+          y: 0,
           opacity: 1,
           rotationX: 0,
-          duration: 1.5, 
+          duration: 1.5,
           ease: "power3.out",
           scrollTrigger: {
             trigger: titleRef.current,
@@ -412,19 +412,19 @@ const RotatingWhyChooseSection = () => {
 
       // Individual feature animations
       featuresRef.current.forEach((feature, index) => {
-        gsap.fromTo(feature, 
-          { 
-            y: 150, 
+        gsap.fromTo(feature,
+          {
+            y: 150,
             opacity: 0,
             rotation: 180,
             scale: 0.5
           },
-          { 
-            y: 0, 
+          {
+            y: 0,
             opacity: 1,
             rotation: 0,
             scale: 1,
-            duration: 1.2, 
+            duration: 1.2,
             ease: "back.out(1.7)",
             delay: index * 0.3,
             scrollTrigger: {
@@ -449,13 +449,13 @@ const RotatingWhyChooseSection = () => {
   ]
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-32 relative overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50"
     >
       {/* Rotating Background */}
       <div className="absolute inset-0">
-        <div 
+        <div
           ref={rotatingContainerRef}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-[#00B9FF]/20 rounded-full"
         />
@@ -464,7 +464,7 @@ const RotatingWhyChooseSection = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <h2 
+        <h2
           ref={titleRef}
           className="text-5xl md:text-6xl lg:text-7xl font-bold mb-20 text-gray-900"
           style={{
@@ -485,16 +485,16 @@ const RotatingWhyChooseSection = () => {
               className="group relative bg-gradient-to-br from-white to-blue-50 rounded-3xl p-6 border border-gray-200 hover:border-[#00B9FF] transition-all duration-500 transform hover:scale-105 hover:rotate-2 shadow-lg hover:shadow-2xl"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF]/10 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <div className="relative z-10">
                 <div className="w-16 h-16 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:rotate-12 transition-transform duration-300 shadow-lg">
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
-                
+
                 <h5 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#00B9FF] transition-colors duration-300">
                   {feature.title}
                 </h5>
-                
+
                 <p className="text-gray-600 leading-relaxed text-sm">
                   {feature.desc}
                 </p>
@@ -529,13 +529,13 @@ const ParallaxServicesSection = () => {
       })
 
       // Title animation
-      gsap.fromTo(titleRef.current, 
+      gsap.fromTo(titleRef.current,
         { y: 100, opacity: 0, scale: 0.8 },
-        { 
-          y: 0, 
+        {
+          y: 0,
           opacity: 1,
           scale: 1,
-          duration: 1.5, 
+          duration: 1.5,
           ease: "power3.out",
           scrollTrigger: {
             trigger: titleRef.current,
@@ -548,19 +548,19 @@ const ParallaxServicesSection = () => {
 
       // Cards with different parallax speeds
       cardsRef.current.forEach((card, index) => {
-        gsap.fromTo(card, 
-          { 
-            y: 200, 
+        gsap.fromTo(card,
+          {
+            y: 200,
             opacity: 0,
             rotationY: 45,
             scale: 0.8
           },
-          { 
-            y: 0, 
+          {
+            y: 0,
             opacity: 1,
             rotationY: 0,
             scale: 1,
-            duration: 1.2, 
+            duration: 1.2,
             ease: "power3.out",
             delay: index * 0.2,
             scrollTrigger: {
@@ -622,18 +622,18 @@ const ParallaxServicesSection = () => {
   ]
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="pt-16 pb-32 relative overflow-hidden bg-white"
     >
-      {/* Parallax Background */} 
-      <div 
+      {/* Parallax Background */}
+      <div
         ref={parallaxRef}
         className="absolute inset-0 bg-gradient-to-br from-[#00B9FF]/5 to-[#0097D9]/5"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <h2 
+        <h2
           ref={titleRef}
           className="text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-20 text-gray-900"
           style={{
@@ -646,7 +646,7 @@ const ParallaxServicesSection = () => {
           Our UK Branding Solutions
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-15 space-x-3 space-y-10 max-w-6xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
           {services.map((service, index) => (
             <div
               key={index}
@@ -658,7 +658,7 @@ const ParallaxServicesSection = () => {
                 <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center transition-transform duration-300">
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
-                
+
                 {/* Decorative Elements */}
                 <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 rounded-full"></div>
                 <div className="absolute bottom-4 left-4 w-6 h-6 bg-white/20 rounded-full"></div>
@@ -669,7 +669,7 @@ const ParallaxServicesSection = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#00B9FF] transition-colors duration-300">
                   {service.title}
                 </h3>
-                
+
                 <p className="text-gray-600 mb-6 leading-relaxed text-sm">
                   {service.description}
                 </p>
@@ -701,13 +701,13 @@ const InteractiveUKCoverageSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(titleRef.current, 
+      gsap.fromTo(titleRef.current,
         { y: 100, opacity: 0, rotationX: 45 },
-        { 
-          y: 0, 
+        {
+          y: 0,
           opacity: 1,
           rotationX: 0,
-          duration: 1.5, 
+          duration: 1.5,
           ease: "power3.out",
           scrollTrigger: {
             trigger: titleRef.current,
@@ -718,12 +718,12 @@ const InteractiveUKCoverageSection = () => {
         }
       )
 
-      gsap.fromTo(descRef.current, 
+      gsap.fromTo(descRef.current,
         { y: 50, opacity: 0 },
-        { 
-          y: 0, 
+        {
+          y: 0,
           opacity: 1,
-          duration: 1, 
+          duration: 1,
           ease: "power3.out",
           delay: 0.3,
           scrollTrigger: {
@@ -737,19 +737,19 @@ const InteractiveUKCoverageSection = () => {
 
       // Cards with magnetic effect
       cardsRef.current.forEach((card, index) => {
-        gsap.fromTo(card, 
-          { 
-            y: 150, 
+        gsap.fromTo(card,
+          {
+            y: 150,
             opacity: 0,
             scale: 0.5,
             rotation: 45
           },
-          { 
-            y: 0, 
+          {
+            y: 0,
             opacity: 1,
             scale: 1,
             rotation: 0,
-            duration: 1.2, 
+            duration: 1.2,
             ease: "back.out(1.7)",
             delay: index * 0.2,
             scrollTrigger: {
@@ -773,12 +773,12 @@ const InteractiveUKCoverageSection = () => {
   ]
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="pt-16 pb-32 relative overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        <h2 
+        <h2
           ref={titleRef}
           className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-gray-900"
           style={{
@@ -790,8 +790,8 @@ const InteractiveUKCoverageSection = () => {
         >
           Serving Businesses Across the UK
         </h2>
-        
-        <p 
+
+        <p
           ref={descRef}
           className="text-xl md:text-2xl text-gray-600 mb-16 max-w-4xl mx-auto leading-relaxed"
         >
@@ -846,13 +846,13 @@ const MagneticCTASection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(contentRef.current, 
+      gsap.fromTo(contentRef.current,
         { y: 100, opacity: 0, scale: 0.8 },
-        { 
-          y: 0, 
+        {
+          y: 0,
           opacity: 1,
           scale: 1,
-          duration: 1.5, 
+          duration: 1.5,
           ease: "power3.out",
           scrollTrigger: {
             trigger: contentRef.current,
@@ -865,17 +865,17 @@ const MagneticCTASection = () => {
 
       // Magnetic effect for buttons
       buttonsRef.current.forEach((button, index) => {
-        gsap.fromTo(button, 
-          { 
-            y: 50, 
+        gsap.fromTo(button,
+          {
+            y: 50,
             opacity: 0,
             scale: 0.5
           },
-          { 
-            y: 0, 
+          {
+            y: 0,
             opacity: 1,
             scale: 1,
-            duration: 1.2, 
+            duration: 1.2,
             ease: "back.out(1.7)",
             delay: 0.5 + index * 0.3,
             scrollTrigger: {
@@ -893,7 +893,7 @@ const MagneticCTASection = () => {
   }, [])
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-32 relative overflow-hidden"
     >
@@ -901,7 +901,7 @@ const MagneticCTASection = () => {
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <div ref={contentRef}>
           <h3 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-            <span 
+            <span
               className="inline-block"
               style={{
                 background: "linear-gradient(45deg, #00B9FF, #0097D9, #007AC3)",
@@ -913,7 +913,7 @@ const MagneticCTASection = () => {
               Request a Free Strategy Call
             </span>
           </h3>
-          
+
           <p className="text-xl md:text-2xl text-gray-600 mb-16 max-w-3xl mx-auto leading-relaxed">
             Ready to elevate your business identity? Let's discuss how our branding services can help your UK business stand out.
           </p>
@@ -925,7 +925,7 @@ const MagneticCTASection = () => {
                 className="group relative inline-flex items-center px-12 py-6 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] text-white font-bold text-xl rounded-full shadow-2xl hover:shadow-[#00B9FF]/50 transition-all duration-300 transform hover:scale-110 hover:-translate-y-2"
               >
                 <span className="relative z-10 flex items-center">
-                Get My Free Growth Plan
+                  Get My Free Growth Plan
                   <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0097D9] to-[#007AC3] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

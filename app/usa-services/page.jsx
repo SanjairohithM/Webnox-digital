@@ -1,10 +1,10 @@
 "use client";
 import React, { useRef } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import ServiceCard from "../components/ServiceCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,7 +39,7 @@ function USAServices() {
     const sectionRef = useRef(null);
     const titleRef = useRef(null);
     const subtitleRef = useRef(null);
-    const cardsRef = useRef([]);
+    const cardsRef = useRef(null);
 
     useGSAP(() => {
         // Title animation
@@ -83,8 +83,8 @@ function USAServices() {
             }
         );
 
-        // Cards stagger animation
-        gsap.fromTo(cardsRef.current,
+        // Cards container stagger animation
+        gsap.fromTo(cardsRef.current.children,
             {
                 opacity: 0,
                 y: 50
@@ -93,16 +93,12 @@ function USAServices() {
                 opacity: 1,
                 y: 0,
                 duration: 0.8,
-                stagger: {
-                    each: 0.15,
-                    grid: [3, 3],
-                    from: "start"
-                },
+                stagger: 0.15,
                 ease: "power3.out",
                 scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top center",
-                    end: "bottom top+=100",
+                    trigger: cardsRef.current,
+                    start: "top 80%",
+                    end: "bottom 20%",
                     toggleActions: "play reverse play reverse"
                 }
             }
@@ -138,53 +134,14 @@ function USAServices() {
                     </div>
                 </div>
 
-                {/* Services Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 md:gap-x-16 gap-y-6 md:gap-y-16 px-2 md:px-6 max-w-6xl mx-auto">
+                {/* Services Grid using new Component */}
+                <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-2 md:px-6 max-w-[1600px] mx-auto">
                     {services.map((service, index) => (
-                        <Link
+                        <ServiceCard
                             key={index}
-                            href={service.href}
-                            ref={el => cardsRef.current[index] = el}
-                            className="flex items-start gap-4 md:gap-8 group cursor-pointer transition-all duration-500 
-                         bg-white/60 md:bg-white/70 backdrop-blur-sm 
-                         p-6 md:p-8 rounded-3xl 
-                         hover:bg-white/90 
-                         hover:shadow-2xl 
-                         hover:scale-[1.05] 
-                         active:scale-[0.98]
-                         border border-white/40 hover:border-[#2ACBEC]/30
-                         transform perspective-1000
-                         hover:-translate-y-2"
-                            style={{
-                                transformStyle: 'preserve-3d',
-                            }}
-                        >
-                            <div className="w-[80px] h-[80px] md:w-[120px] md:h-[120px] relative flex-shrink-0 transition-all duration-500 
-                            group-hover:scale-110
-                            group-hover:rotate-6">
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#2ACBEC]/30 to-[#6149CD]/30 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-                                <Image
-                                    src={service.image}
-                                    alt={service.title}
-                                    width={140}
-                                    height={140}
-                                    style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
-                                    className="object-contain relative z-10 drop-shadow-lg"
-                                />
-                            </div>
-                            <div className="flex-1 pt-2 md:pt-4">
-                                <h3 className="text-lg md:text-2xl font-bold text-gray-800 mb-3 md:mb-4 
-                             group-hover:text-[#2acbec] transition-all duration-300
-                             group-hover:translate-x-2
-                             leading-tight">
-                                    {service.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm md:text-base leading-relaxed 
-                            group-hover:text-gray-700 transition-colors duration-300">
-                                    {service.description}
-                                </p>
-                            </div>
-                        </Link>
+                            service={service}
+                            index={index}
+                        />
                     ))}
                 </div>
 
