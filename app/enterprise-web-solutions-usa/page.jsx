@@ -24,10 +24,10 @@ const HeroSection = () => {
     const ctx = gsap.context(() => {
       // Floating background elements animation
       gsap.set(floatingElementsRef.current, { opacity: 0, scale: 0.8 })
-      
+
       // Title animation
-      gsap.set([titleRef.current, descRef.current, buttonRef.current], { 
-        opacity: 0, 
+      gsap.set([titleRef.current, descRef.current, buttonRef.current], {
+        opacity: 0,
         y: 60,
         rotationX: 15
       })
@@ -47,28 +47,28 @@ const HeroSection = () => {
         ease: "back.out(1.7)",
         stagger: 0.2
       })
-      // Animate main content
-      .to(titleRef.current, {
-        opacity: 1,
-        y: 0,
-        rotationX: 0,
-        duration: 1,
-        ease: "power3.out"
-      }, "-=0.8")
-      .to(descRef.current, {
-        opacity: 1,
-        y: 0,
-        rotationX: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.6")
-      .to(buttonRef.current, {
-        opacity: 1,
-        y: 0,
-        rotationX: 0,
-        duration: 0.6,
-        ease: "power2.out"
-      }, "-=0.4")
+        // Animate main content
+        .to(titleRef.current, {
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+          duration: 1,
+          ease: "power3.out"
+        }, "-=0.8")
+        .to(descRef.current, {
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        }, "-=0.6")
+        .to(buttonRef.current, {
+          opacity: 1,
+          y: 0,
+          rotationX: 0,
+          duration: 0.6,
+          ease: "power2.out"
+        }, "-=0.4")
 
       // Continuous floating animation
       gsap.to(floatingElementsRef.current, {
@@ -110,20 +110,20 @@ const HeroSection = () => {
 
       {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        <h1 
+        <h1
           ref={titleRef}
           className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight text-[#00B9FF]"
         >
           Enterprise Web Solutions in the USA – Scalable, Secure, and Future-Ready
         </h1>
-        
-        <p 
+
+        <p
           ref={descRef}
           className="text-xl md:text-2xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed"
         >
           In today's fast-paced US market, enterprises need more than just a website—they need a <span className="text-[#00B9FF] font-bold">scalable digital ecosystem</span> that drives growth, efficiency, and customer trust. At Webnox Digital, we specialize in delivering <span className="text-[#00B9FF] font-bold">enterprise-grade web solutions</span> across the <span className="text-[#00B9FF] font-bold">United States</span>, tailored to the unique challenges of large organizations.
         </p>
-        
+
         <Link href="/contact-us">
           <button
             ref={buttonRef}
@@ -164,14 +164,14 @@ const WhyChooseSection = () => {
         duration: 0.8,
         ease: "power2.out"
       })
-      .to(cardsRef.current, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: "back.out(1.7)"
-      }, "-=0.4")
+        .to(cardsRef.current, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "back.out(1.7)"
+        }, "-=0.4")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
@@ -213,7 +213,7 @@ const WhyChooseSection = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <h2 
+        <h2
           ref={titleRef}
           className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-20 text-[#00B9FF]"
         >
@@ -229,16 +229,16 @@ const WhyChooseSection = () => {
             >
               {/* Card Background Gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
+
               <div className="relative z-10">
                 <div className="w-16 h-16 mb-6 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center bg-[#00B9FF] rounded-2xl text-white">
                   <feature.icon className="w-8 h-8" />
                 </div>
-                
+
                 <h5 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-[#00B9FF] transition-colors duration-300">
                   {feature.title}
                 </h5>
-                
+
                 <p className="text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
@@ -263,12 +263,12 @@ const ServicesSection = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Title animation
-      gsap.fromTo(titleRef.current, 
+      gsap.fromTo(titleRef.current,
         { y: 80, opacity: 0 },
-        { 
-          y: 0, 
+        {
+          y: 0,
           opacity: 1,
-          duration: 1.2, 
+          duration: 1.2,
           ease: "power3.out",
           scrollTrigger: {
             trigger: titleRef.current,
@@ -280,17 +280,17 @@ const ServicesSection = () => {
       )
 
       // Cards animation with stagger
-      gsap.fromTo(cardsRef.current, 
-        { 
-          y: 100, 
+      gsap.fromTo(cardsRef.current,
+        {
+          y: 100,
           opacity: 0,
           scale: 0.9
         },
-        { 
-          y: 0, 
+        {
+          y: 0,
           opacity: 1,
           scale: 1,
-          duration: 1, 
+          duration: 1,
           ease: "power3.out",
           stagger: 0.2,
           scrollTrigger: {
@@ -307,16 +307,16 @@ const ServicesSection = () => {
         if (card) {
           const hoverTl = gsap.timeline({ paused: true })
           hoverTl
-            .to(card, { 
-              scale: 1.02, 
+            .to(card, {
+              scale: 1.02,
               y: -10,
-              duration: 0.3, 
-              ease: "power2.out" 
+              duration: 0.3,
+              ease: "power2.out"
             })
-            .to(card.querySelector('.service-image'), { 
+            .to(card.querySelector('.service-image'), {
               scale: 1.1,
-              duration: 0.3, 
-              ease: "power2.out" 
+              duration: 0.3,
+              ease: "power2.out"
             }, 0)
 
           card.addEventListener('mouseenter', () => hoverTl.play())
@@ -366,13 +366,13 @@ const ServicesSection = () => {
   ]
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-24 relative overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-30">
-        <div 
+        <div
           className="absolute top-0 left-0 w-full h-full"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300B9FF' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
@@ -383,7 +383,7 @@ const ServicesSection = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 
+          <h2
             ref={titleRef}
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#00B9FF]"
           >
@@ -409,7 +409,7 @@ const ServicesSection = () => {
                   className="service-image w-full h-full object-cover transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                
+
                 {/* Icon Overlay */}
                 <div className="absolute top-4 right-4 w-12 h-12 bg-[#00B9FF] rounded-xl flex items-center justify-center text-white shadow-lg">
                   <service.icon className="w-6 h-6" />
@@ -421,7 +421,7 @@ const ServicesSection = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#00B9FF] transition-colors duration-300">
                   {service.title}
                 </h3>
-                
+
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   {service.description}
                 </p>
@@ -436,18 +436,7 @@ const ServicesSection = () => {
                   ))}
                 </div>
 
-                {/* CTA Button */}
-                <button className="w-full bg-[#00B9FF] hover:bg-[#0097a7] text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center group">
-                  <span>Learn More</span>
-                  <svg 
-                    className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
+
               </div>
 
               {/* Hover Effect Overlay */}
@@ -507,33 +496,33 @@ const USACoverageSection = () => {
         duration: 0.8,
         ease: "power2.out"
       })
-      .to(descRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      }, "-=0.4")
-      .to(mapRef.current, {
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: "back.out(1.7)"
-      }, "-=0.6")
+        .to(descRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        }, "-=0.4")
+        .to(mapRef.current, {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          ease: "back.out(1.7)"
+        }, "-=0.6")
 
       // Animate individual city cards
       const cityCards = mapRef.current?.children
       if (cityCards) {
-        gsap.fromTo(cityCards, 
-          { 
-            y: 50, 
+        gsap.fromTo(cityCards,
+          {
+            y: 50,
             opacity: 0,
             scale: 0.9
           },
-          { 
-            y: 0, 
+          {
+            y: 0,
             opacity: 1,
             scale: 1,
-            duration: 0.8, 
+            duration: 0.8,
             ease: "power3.out",
             stagger: 0.15,
             delay: 0.5
@@ -545,7 +534,7 @@ const USACoverageSection = () => {
   }, [])
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-24 relative overflow-hidden"
       style={{
@@ -559,14 +548,14 @@ const USACoverageSection = () => {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        <h2 
+        <h2
           ref={titleRef}
           className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8"
         >
           Serving Enterprises Across the USA
         </h2>
-        
-        <p 
+
+        <p
           ref={descRef}
           className="text-xl md:text-2xl text-white/90 mb-16 max-w-4xl mx-auto leading-relaxed"
         >
@@ -574,7 +563,7 @@ const USACoverageSection = () => {
         </p>
 
         {/* USA Coverage Stats */}
-        <div 
+        <div
           ref={mapRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto"
         >
@@ -663,19 +652,19 @@ const CTASection = () => {
         duration: 1,
         ease: "power2.out"
       })
-      .to(buttonsRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.2,
-        ease: "back.out(1.7)"
-      }, "-=0.5")
+        .to(buttonsRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.2,
+          ease: "back.out(1.7)"
+        }, "-=0.5")
     }, sectionRef)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="py-24 relative overflow-hidden"
       style={{
@@ -693,7 +682,7 @@ const CTASection = () => {
           <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#00B9FF] mb-8 leading-tight">
             Let's Build Your Enterprise Web Solution
           </h3>
-          
+
           <p className="text-xl md:text-2xl text-gray-700 mb-16 max-w-3xl mx-auto leading-relaxed">
             Future-proof your enterprise with a partner who understands the <span className="text-[#00B9FF] font-semibold">complexity of US markets</span>.
           </p>
@@ -707,9 +696,9 @@ const CTASection = () => {
                 Schedule a Free Consultation
               </button>
             </Link>
-            
+
             <span className="text-gray-600 text-lg font-medium">or</span>
-            
+
             <Link href="/contact-us">
               <button
                 ref={el => buttonsRef.current[1] = el}

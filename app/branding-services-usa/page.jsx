@@ -389,7 +389,7 @@ const HeroSection = () => {
             {[
               { label: "Branding Projects", value: "500+" },
               { label: "Industries Served", value: "10+" },
-              { label: "Trusted by US Startups & Enterprises", value: "✓" }
+              { label: "Trusted by US Startups & Enterprises", value: "100 %" }
             ].map((stat, i) => (
               <div key={i} ref={el => statsRef.current[i] = el} className="text-center">
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-[#2ACBEC] to-[#6149CD] bg-clip-text text-transparent mb-2">
@@ -549,7 +549,7 @@ const WhyChooseUsSection = () => {
           <p className="text-base sm:text-lg text-gray-700 mb-6 sm:mb-8 max-w-3xl mx-auto px-2">
             US audiences expect clarity, trust, and a seamless brand experience. A strong brand helps you:
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-4xl mx-auto mb-6 sm:mb-8">
+          <div className="flex flex-col gap-3 sm:gap-4 max-w-2xl mx-auto mb-6 sm:mb-8">
             {["Increase customer trust", "Improve lead-to-customer conversions", "Strengthen digital presence", "Command higher pricing", "Stand out against well-funded competitors"].map((item, i) => (
               <div key={i} className="flex items-center justify-center bg-white rounded-lg p-3 sm:p-4 shadow-sm hover:shadow-md transition-shadow duration-300">
                 <Star className="w-4 h-4 sm:w-5 sm:h-5 text-[#2ACBEC] mr-2 flex-shrink-0" />
@@ -886,17 +886,17 @@ const NationwideCoverageSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {[
-            { icon: Building2, title: "Local businesses", desc: "Community-focused branding" },
-            { icon: Globe, title: "Multi-location brands", desc: "Consistent across regions" },
-            { icon: TrendingUp, title: "State-wide enterprises", desc: "Scalable brand systems" },
-            { icon: Sparkles, title: "Nationwide organizations", desc: "Coast-to-coast impact" }
+            { icon: Building2, title: "Local businesses", desc: "Community-focused branding", gradient: "from-[#2ACBEC] to-[#1facd3]" },
+            { icon: Globe, title: "Multi-location brands", desc: "Consistent across regions", gradient: "from-[#6149CD] to-[#4b33a8]" },
+            { icon: TrendingUp, title: "State-wide enterprises", desc: "Scalable brand systems", gradient: "from-[#00c6fb] to-[#005bea]" },
+            { icon: Sparkles, title: "Nationwide organizations", desc: "Coast-to-coast impact", gradient: "from-[#9D50BB] to-[#6E48AA]" }
           ].map((item, i) => (
-            <div key={i} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#2ACBEC] to-[#6149CD] rounded-lg flex items-center justify-center mx-auto mb-4">
+            <div key={i} className={`bg-gradient-to-br ${item.gradient} rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}>
+              <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
                 <item.icon className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-              <p className="text-sm text-gray-600">{item.desc}</p>
+              <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+              <p className="text-sm text-white/90">{item.desc}</p>
             </div>
           ))}
         </div>

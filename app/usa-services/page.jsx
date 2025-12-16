@@ -158,7 +158,7 @@ function USAServices() {
                             href="https://cal.com/webnox-digital"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block px-8 py-4 bg-gradient-to-r from-[#2ACBEC] to-[#6149CD] text-white font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300"
+                            className="inline-block px-8 py-4 bg-[#00B9FF] hover:bg-[#0097a7] text-white font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300"
                         >
                             Schedule a Free Consultation
                         </a>
