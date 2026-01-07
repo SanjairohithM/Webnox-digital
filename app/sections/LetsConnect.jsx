@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import TechImages2D from "./TechImages2D"
+// import TechImages2D from "./TechImages2D"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -69,15 +69,15 @@ function LetsConnect() {
   const handleNext = () => {
     const currentField = steps[currentStep].field
     const currentValue = formData[currentField]
-    
+
     // Validate current field
     if (!currentValue.trim()) {
       setSubmitStatus('Please fill in this field')
       return
     }
-    
+
     setSubmitStatus('')
-    
+
     // Animate out current content
     gsap.to([titleRef.current, inputRef.current, buttonRef.current], {
       opacity: 0,
@@ -101,7 +101,7 @@ function LetsConnect() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     // Validate final field
     if (!formData.enquiry.trim()) {
       setSubmitStatus('Please tell us about your enquiry')
@@ -198,26 +198,25 @@ function LetsConnect() {
       ref={sectionRef}
       className="relative w-full min-h-screen flex flex-col items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white overflow-hidden font-sans"
     >
-      <div
+      {/* <div
         ref={r3fContainerRef}
         className="absolute inset-0 z-0 hidden md:block"
       >
         <TechImages2D />
-      </div>
+      </div> */}
 
       <div className="relative z-30 flex flex-col items-center text-center space-y-8 max-w-xl w-full">
         <p ref={subtitleRef} className="text-lg text-gray-700 opacity-0 font-sans">
           Tell About Yourself
         </p>
-        
+
         {/* Progress indicator */}
         <div className="flex space-x-2 mb-4">
           {steps.map((_, index) => (
             <div
               key={index}
-              className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                index <= currentStep ? 'bg-[#4ecdc4]' : 'bg-gray-300'
-              }`}
+              className={`w-3 h-3 rounded-full transition-colors duration-300 ${index <= currentStep ? 'bg-[#4ecdc4]' : 'bg-gray-300'
+                }`}
             />
           ))}
         </div>
@@ -225,7 +224,7 @@ function LetsConnect() {
         <h1 ref={titleRef} className="text-4xl sm:text-5xl font-bold text-gray-900 opacity-0 font-sans">
           {currentStepData.title}
         </h1>
-        
+
         <form onSubmit={isLastStep ? handleSubmit : (e) => { e.preventDefault(); handleNext(); }} className="w-full max-w-md space-y-8">
           <div ref={inputRef} className="opacity-0">
             {currentStepData.type === 'textarea' ? (
@@ -237,12 +236,12 @@ function LetsConnect() {
                 value={formData[currentStepData.field]}
                 onChange={handleInputChange}
                 required
-          />
+              />
             ) : (
-          <input
+              <input
                 type={currentStepData.type}
                 placeholder={currentStepData.placeholder}
-            className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400 font-sans"
+                className="w-full p-4 text-lg rounded-full border-2 border-black/80 focus:ring-2 focus:ring-[#4ecdc4] focus:border-[#4ecdc4] transition-shadow placeholder:text-gray-400 font-sans"
                 name={currentStepData.field}
                 value={formData[currentStepData.field]}
                 onChange={handleInputChange}
@@ -250,7 +249,7 @@ function LetsConnect() {
               />
             )}
           </div>
-          
+
           <div ref={buttonRef} className="opacity-0 space-y-4">
             <div className="flex gap-4">
               {currentStep > 0 && (
@@ -262,23 +261,22 @@ function LetsConnect() {
                   Back
                 </button>
               )}
-          <button
-              type="submit"
-              disabled={isSubmitting}
+              <button
+                type="submit"
+                disabled={isSubmitting}
                 className="flex-1 px-12 py-4 text-lg bg-[#4ecdc4] hover:bg-[#45b8af] disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-full transition-colors"
-          >
+              >
                 {isSubmitting ? 'Sending...' : (isLastStep ? 'Send Message' : 'Next')}
-          </button>
+              </button>
             </div>
-        </div>
+          </div>
         </form>
 
-              {submitStatus && (
-          <div className={`mt-4 p-4 text-center text-sm rounded-lg ${
-            submitStatus.includes('successfully') 
-              ? 'bg-green-100 text-green-800 border border-green-200' 
-              : 'bg-red-100 text-red-800 border border-red-200'
-          }`}>
+        {submitStatus && (
+          <div className={`mt-4 p-4 text-center text-sm rounded-lg ${submitStatus.includes('successfully')
+            ? 'bg-green-100 text-green-800 border border-green-200'
+            : 'bg-red-100 text-red-800 border border-red-200'
+            }`}>
             {submitStatus}
           </div>
         )}
