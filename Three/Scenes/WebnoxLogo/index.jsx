@@ -1,12 +1,10 @@
 import { WebnoxLogo } from "@/Three/Models/WebnoxLogo";
-import { OrbitControls } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 
 const WebnoxLogoScene = () => {
   const { camera } = useThree();
-  const controlsRef = useRef();
   const logoRef = useRef();
 
   // Set initial camera position
@@ -54,18 +52,6 @@ const WebnoxLogoScene = () => {
         scale={[200, 200, 200]} 
         position={[-5.85, -0.9, 1]}
         rotation={[Math.PI / 2, 0, 0]}
-      />
-      
-      {/* Camera controls for interaction */}
-      <OrbitControls 
-        ref={controlsRef}
-        enablePan={true}
-        enableZoom={false}
-        enableRotate={true}
-        panSpeed={0.8}
-        rotateSpeed={0.5}
-        enableDamping={true}
-        dampingFactor={0.05}
       />
     </>
   );
