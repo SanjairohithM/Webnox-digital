@@ -76,7 +76,7 @@ export default function TestimonialSection() {
   }, [testimonials.length])
 
   return (
-    <section className="pt-0 pb-16 md:pb-20 lg:pb-24 bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff]">
+    <section className="pt-0 pb-16 md:pb-20 lg:pb-24">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-16 md:pb-20 lg:pb-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">

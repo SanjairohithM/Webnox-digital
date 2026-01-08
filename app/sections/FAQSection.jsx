@@ -34,7 +34,7 @@ export default function FAQSection() {
   }
 
   return (
-    <section className="pt-16 md:pt-20 lg:pt-24 pb-0 bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff]">
+    <section className="pt-16 md:pt-20 lg:pt-24 pb-0">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">

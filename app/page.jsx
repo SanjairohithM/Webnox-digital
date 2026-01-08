@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full relative overflow-x-hidden">
+    <div className="w-full relative overflow-x-hidden bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff]">
       {/* Loader - shows only once when page loads */}
       {isLoading && <WebnoxLogoLoader onComplete={handleLoaderComplete} />}
 
