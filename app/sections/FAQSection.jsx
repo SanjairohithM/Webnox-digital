@@ -3,10 +3,10 @@
 import React, { useState } from "react"
 import { ChevronDown } from "lucide-react"
 
-export default function FAQSection() {
+export default function FAQSection({ faqs: customFaqs }) {
   const [openIndex, setOpenIndex] = useState(0)
 
-  const faqs = [
+  const defaultFaqs = [
     {
       question: "What makes Webnox Digital a data-driven digital marketing agency?",
       answer: "Webnox Digital uses real-time analytics, performance metrics, and AI-powered tools to make informed marketing decisions. Our campaigns are backed by data, not guesswork, to deliver measurable results."
@@ -28,6 +28,8 @@ export default function FAQSection() {
       answer: "Absolutely. As an international web development agency, we create multilingual websites with localized SEO features to target global markets like Europe, the UK, and the GCC."
     }
   ]
+
+  const faqs = customFaqs || defaultFaqs
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index)

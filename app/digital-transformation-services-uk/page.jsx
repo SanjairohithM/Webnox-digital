@@ -1,843 +1,1086 @@
 "use client";
 
+import { useState } from "react";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { useGSAP } from "@gsap/react";
 import Link from "next/link";
+import Image from "next/image";
+import FAQSection from "../sections/FAQSection";
+import { Quote } from "lucide-react";
 import { 
-  Zap, 
-  Shield, 
-  TrendingUp, 
-  Users, 
-  CheckCircle, 
-  Cloud, 
-  Database, 
-  Briefcase, 
-  Bot, 
-  RefreshCw,
-  MapPin,
-  Building2,
-  Factory,
-  Laptop,
-  BarChart3,
-  Hospital,
-  Plane,
-  ArrowRight,
-  Sparkles,
-  Target,
-  Globe,
-  Lock,
-  Code,
-  Network,
-  Cpu,
-  Binary
+  Zap, Shield, TrendingUp, Users, Cloud, Database, 
+  Briefcase, Bot, RefreshCw, Building2, Factory, 
+  Laptop, BarChart3, Hospital, Plane, ArrowRight, 
+  Target, Globe, Lock, Code, Network, Cpu, 
+  LineChart, Workflow, Gauge, Layers, Sparkles,
+  Hand, Search, Heart, Package, MessageSquare, MapPin, 
+  PenTool, Truck, Leaf, ChefHat, Hammer, CheckCircle2, Book
 } from "lucide-react";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, useGSAP);
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
-// Advanced Hero Section with 3D Digital Elements
-const DigitalTransformationHero = () => {
-  const heroRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const digitalElementsRef = useRef([]);
-  const orbsRef = useRef([]);
+// -----------------------------------------------------------------------------
+// COMPONENTS
+// -----------------------------------------------------------------------------
+
+// 1. Hero Section: Refined Text Sizes & Reveal
+const Hero = () => {
+  const containerRef = useRef(null);
+  const textRef = useRef(null);
+  const subRef = useRef(null);
+  const ctaRef = useRef(null);
 
   useGSAP(() => {
+    const tl = gsap.timeline();
 
-    // Main title with 3D entrance
-    gsap.fromTo(titleRef.current,
-      { 
-        y: 150, 
-        opacity: 0,
-        rotationX: 90,
-        transformPerspective: 1000,
-      },
-      { 
-        y: 0, 
-        opacity: 1, 
-        rotationX: 0,
-        duration: 2, 
-        ease: "power3.out",
-        delay: 0.5
+    // Text Reveal from Mask
+    tl.fromTo(".hero-line-inner", 
+      { yPercent: 100, rotateX: 20 },
+      { yPercent: 0, rotateX: 0, duration: 1.2, ease: "power4.out", stagger: 0.1 }
+    );
+
+    // Fade in Sub & CTA
+    tl.fromTo(subRef.current, 
+      { opacity: 0, y: 20 }, 
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, 
+      "-=0.6"
+    );
+    tl.fromTo(ctaRef.current, 
+      { opacity: 0, scale: 0.9 }, 
+      { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.7)" }, 
+      "-=0.8"
+    );
+
+    // Background Parallax
+    gsap.to(".hero-bg-blob", {
+      yPercent: 30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true
       }
-    );
-
-    gsap.fromTo(subtitleRef.current,
-      { y: 80, opacity: 0, scale: 0.8 },
-      { y: 0, opacity: 1, scale: 1, duration: 1.5, delay: 1, ease: "power3.out" }
-    );
-
-  }, { scope: heroRef });
-
-  const digitalElements = [
-    { icon: Code, position: { top: "20%", left: "10%" } },
-    { icon: Network, position: { top: "30%", right: "15%" } },
-    { icon: Cpu, position: { top: "60%", left: "8%" } },
-    { icon: Binary, position: { top: "15%", right: "25%" } },
-    { icon: Database, position: { top: "70%", right: "10%" } },
-    { icon: Cloud, position: { top: "45%", left: "15%" } },
-  ];
+    });
+  }, { scope: containerRef });
 
   return (
-    <section ref={heroRef} className="relative min-h-screen mt-20 overflow-hidden flex items-center">
-      {/* Animated Background Orbs */}
-      {/* {[...Array(8)].map((_, index) => (
-        <div
-          key={index}
-          ref={(el) => (orbsRef.current[index] = el)}
-          className="absolute w-32 h-32 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-xl"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-        />
-      ))} */}
+    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent pt-32 pb-20">
+      {/* Animated Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="hero-bg-blob absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-blue-200/30 rounded-full blur-[100px] mix-blend-multiply" />
+        <div className="hero-bg-blob absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-cyan-200/30 rounded-full blur-[100px] mix-blend-multiply" />
+      </div>
 
-      {/* Static Digital Elements */}
-      {digitalElements.map((element, index) => {
-        const IconComponent = element.icon;
-        return (
-          <div
-            key={index}
-            className="absolute text-blue-300/30"
-            style={element.position}
-          >
-            <IconComponent size={40} />
-          </div>
-        );
-      })}
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1
-            ref={titleRef}
-            className="text-4xl md:text-4xl lg:text-7xl font-bold mb-8 text-dark leading-tight"
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            Digital Transformation
-            <br />
-            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-              Services in the UK
-            </span>
+      <div className="container mx-auto px-6 relative z-10 text-center">
+        {/* Main Headline with scaled down sizes */}
+        <div className="mb-8 max-w-6xl mx-auto">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.1] mb-6">
+             <div className="overflow-hidden"><span className="hero-line-inner block">Digital Transformation</span></div>
+             <div className="overflow-hidden"><span className="hero-line-inner block bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Services in the UK</span></div>
+             <div className="overflow-hidden"><span className="hero-line-inner block text-3xl md:text-5xl mt-4">For Scalable, Future-Ready Businesses</span></div>
           </h1>
-          <p
-            ref={subtitleRef}
-            className="text-xl md:text-2xl text-dark mb-12 leading-relaxed max-w-4xl mx-auto"
-          >
-            Enterprises across the United Kingdom face increasing pressure to adapt to new technologies, changing regulations, and rising customer expectations. At Webnox Digital, we provide digital transformation solutions tailored for UK businesses, enabling organisations to modernise, innovate, and compete on a global scale.
-          </p>
+        </div>
+
+        <p ref={subRef} className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+          In a rapidly evolving UK market, digital transformation enables organisations to stay competitive, resilient, and future-ready. At Webnox Digital, we provide digital transformation services in the UK that help organisations modernise systems, streamline operations, and build digital foundations aligned with long-term business outcomes.
+        </p>
+
+        <div ref={ctaRef} className="flex flex-col items-center gap-8">
+          <Link href="/contact-us#contact-form" className="group relative px-10 py-5 bg-blue-600 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-blue-500/40 transition-all">
+            <div className="absolute inset-0 bg-blue-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+            <span className="relative font-bold text-lg flex items-center gap-2">
+              Book a Free Strategy Consultation <ArrowRight size={20} />
+            </span>
+          </Link>
+          
+          {/* Trust Indicators */}
+          <div className="flex flex-wrap justify-center gap-6 text-slate-500 text-sm font-medium">
+            <span className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full border border-slate-200 backdrop-blur-sm">
+              <Shield size={16} className="text-blue-500"/> Enterprise & SME Expertise
+            </span>
+            <span className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full border border-slate-200 backdrop-blur-sm">
+              <CheckCircle2 size={16} className="text-blue-500"/> Proven Digital Transformation Delivery
+            </span>
+            <span className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full border border-slate-200 backdrop-blur-sm">
+              <Globe size={16} className="text-blue-500"/> Serving Businesses Across the UK
+            </span>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-// Professional Features Section
-const Floating3DFeaturesSection = () => {
-  const sectionRef = useRef(null);
-  const featureRefs = useRef([]);
-  const backgroundRef = useRef(null);
+
+// 2. Benefits: Clean Book Page-Turn Animation
+const Benefits = () => {
+  const bookRef = useRef(null);
+  
+  const pages = [
+    { 
+      id: 0, 
+      type: 'cover',
+      title: "Why Digital Transformation Matters for UK Businesses",
+      subtitle: "Digital transformation empowers organisations to improve efficiency, reduce operational risk, and respond faster to changing customer and market demands."
+    },
+    { id: 1, title: "Operational Efficiency", desc: "Streamline processes and reduce manual overhead.", icon: Gauge, image: "/images/usa/metro.jpg" },
+    { id: 2, title: "Scalability & Flexibility", desc: "Build systems that adapt as your business grows.", icon: TrendingUp, image: "/images/usa/test.jpg" },
+    { id: 3, title: "Cost Control & Optimisation", desc: "Replace legacy infrastructure with efficient digital platforms.", icon: LineChart, image: "/images/aboutimg1.webp" },
+    { id: 4, title: "Data-Led Decisions", desc: "Gain real-time visibility and actionable insights.", icon: Database, image: "/images/aboutimg2.webp" },
+    { id: 5, title: "Customer Experience Enhancement", desc: "Deliver consistent, digital-first customer journeys.", icon: Users, image: "/images/aboutimg3.webp" },
+    { id: 6, title: "Future-Ready Technology", desc: "Prepare your organisation for innovation and emerging technologies.", icon: Zap, image: "/images/aboutrobot.png" }
+  ];
 
   useGSAP(() => {
-    // Background parallax
-    gsap.to(backgroundRef.current, {
-      yPercent: -30,
+    // Page turn animation
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: bookRef.current,
+        start: "top top",
+        end: "+=3000",
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1
+      }
+    });
+
+    pages.forEach((page, i) => {
+      if (i < pages.length - 1) {
+        tl.to(`#page-${i}`, {
+          rotateY: -180,
+          duration: 1,
+          ease: "power2.inOut",
+          onUpdate: function() {
+            // Midway through the turn, switch z-index so it doesn't block the next page
+            const progress = this.progress();
+            const element = document.getElementById(`page-${i}`);
+            if (element) {
+              if (progress > 0.5) {
+                element.style.zIndex = i + 1; // Lower z-index for turned pages
+              } else {
+                element.style.zIndex = pages.length - i; // Higher z-index for unturned pages
+              }
+            }
+          }
+        });
+      }
+    });
+
+    // Floating Animation (Water Effect)
+    gsap.to(".book-container", {
+      y: 20,
+      rotateZ: 0.5,
+      scale: 1.01,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+
+    gsap.to(".book-shadow", {
+      scale: 0.9,
+      opacity: 0.08,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  }, { scope: bookRef });
+
+  return (
+    <section ref={bookRef} className="relative h-screen bg-transparent overflow-hidden flex items-center justify-center">
+      <div className="container mx-auto px-6 h-full flex items-center justify-center" style={{ perspective: '2000px' }}>
+        
+        {/* Book Container - Clean & Floating */}
+        <div className="book-container relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center" style={{ transformStyle: 'preserve-3d' }}>
+          
+          {/* Enhanced clean shadow for floating effect */}
+          <div className="book-shadow absolute -bottom-16 w-[80%] h-8 bg-blue-900/10 blur-xl rounded-[100%] transition-transform duration-[3s] ease-in-out" />
+          
+          {/* Book - Two page spread */}
+          <div className="relative w-full h-full flex shadow-2xl rounded-xl" style={{ transformStyle: 'preserve-3d' }}>
+            
+            {/* Left page - Base background (first image) */}
+            <div className="w-1/2 h-full bg-[#f8fbff] rounded-l-xl border-r border-blue-100 relative overflow-hidden flex items-center justify-center">
+                {/* Initial background shown when book is closed or just opened */}
+                <div className="text-blue-100/50 flex flex-col items-center">
+                    <Book size={120} strokeWidth={1} />
+                </div>
+            </div>
+            
+            {/* Pages mapping */}
+            <div className="w-1/2 h-full relative" style={{ transformStyle: 'preserve-3d' }}>
+              
+              {/* Spiral Spine / Binding */}
+              <div className="absolute left-0 -translate-x-1/2 top-4 bottom-4 w-8 z-[100] flex flex-col justify-between py-2 pointer-events-none">
+                {Array.from({ length: 15 }).map((_, i) => (
+                  <div key={i} className="relative group">
+                    {/* Metal Ring */}
+                    <div className="w-10 h-2.5 bg-gradient-to-r from-slate-400 via-slate-200 to-slate-400 rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.3)] -rotate-[15deg] border border-slate-300 relative z-10" />
+                    {/* Ring Hole Shadow */}
+                    <div className="absolute top-1/2 left-0 w-2 h-2 bg-black/20 rounded-full -translate-y-1/2" />
+                    <div className="absolute top-1/2 right-0 w-2 h-2 bg-black/20 rounded-full -translate-y-1/2" />
+                  </div>
+                ))}
+                {/* Vertical Spine Shadow */}
+                <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-black/10 blur-[2px]" />
+              </div>
+
+              {/* Static Back Page (Reveal at the end) */}
+              <div className="absolute inset-0 bg-[#f8fbff] rounded-r-xl p-8 md:p-12 border-l border-blue-50 flex items-center justify-center">
+                <div className="text-center text-blue-200">
+                   <Zap size={48} className="mx-auto mb-4 opacity-50" />
+                   <p className="font-bold">Next Phase Ready</p>
+                </div>
+              </div>
+
+              {pages.map((page, index) => {
+                // Get the next page's data for the back of this page
+                const nextPage = index + 1 < pages.length ? pages[index + 1] : null;
+                
+                return (
+                <div
+                  key={page.id}
+                  id={`page-${index}`}
+                  className="absolute inset-0"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    transformOrigin: 'left center',
+                    zIndex: pages.length - index
+                  }}
+                >
+                  {/* Page Front: Shows Text for spread [index] */}
+                  <div 
+                    className="absolute inset-0 bg-[#f8fbff] rounded-r-xl border-l border-blue-50"
+                    style={{ backfaceVisibility: 'hidden', zIndex: 2 }}
+                  >
+                    <div className="h-full p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
+                      {/* Internal Page Doodles (Background) */}
+                      <div className="absolute top-6 right-6 text-blue-100 opacity-60">
+                        <Sparkles size={60} />
+                      </div>
+                      <div className="absolute bottom-10 left-8 text-cyan-50 opacity-50 rotate-12">
+                         <svg width="80" height="80" viewBox="0 0 100 100">
+                           <path d="M10,90 Q50,10 90,90" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                         </svg>
+                      </div>
+
+                      {page.type === 'cover' ? (
+                        <div className="text-center space-y-6 relative z-10">
+                          <div className="inline-block px-4 py-2 bg-blue-50 rounded-full border border-blue-200 mb-4">
+                            <span className="text-xs font-semibold text-blue-600 uppercase tracking-wider">Strategic Benefits</span>
+                          </div>
+                          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">
+                            {page.title}
+                          </h2>
+                          <p className="text-base md:text-lg text-slate-600 max-w-xl mx-auto leading-relaxed">
+                            {page.subtitle}
+                          </p>
+                          {/* Specific Cover Doodle */}
+                          <div className="absolute -top-10 -right-4 text-yellow-400 opacity-40 rotate-[15deg]">
+                            <Zap size={40} fill="currentColor" />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-6 relative z-10">
+                          <h3 className="text-2xl md:text-3xl font-bold text-slate-900 leading-tight flex items-start gap-3">
+                            {page.title}
+                            {/* Title Doodle */}
+                             <span className="text-yellow-400 animate-pulse mt-1 opacity-80"><Sparkles size={20} fill="currentColor" /></span>
+                          </h3>
+                          <p className="text-lg text-slate-600 leading-relaxed font-medium">
+                            {page.desc}
+                          </p>
+                          <div className="pt-4">
+                            <div className="h-px bg-gradient-to-r from-blue-500/40 to-transparent" />
+                          </div>
+                          <div className="absolute bottom-6 right-8 text-xs text-blue-400 font-bold flex items-center gap-2">
+                            <span>Benefit {page.id}</span>
+                            <div className="w-8 h-1 bg-cyan-200 rounded-full" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Page Back: Shows Image for the NEXT page */}
+                  <div 
+                    className="absolute inset-0 bg-[#f8fbff] rounded-l-xl p-8 overflow-hidden"
+                    style={{
+                      backfaceVisibility: 'hidden',
+                      transform: 'rotateY(180deg)',
+                      zIndex: 1
+                    }}
+                  >
+                    {nextPage && nextPage.image && (
+                      <div className="h-full w-full flex flex-col items-center justify-center space-y-4">
+                        {/* Scrapbook Image Layout */}
+                        <div className="relative group w-full flex flex-col items-center">
+                           {/* Sellotape */}
+                           <div className={`absolute -top-6 left-1/2 -translate-x-1/2 w-28 h-10 ${index % 2 === 0 ? 'bg-cyan-400/30' : 'bg-blue-400/30'} backdrop-blur-[2px] ${index % 2 === 0 ? 'rotate-[-15deg]' : 'rotate-[12deg]'} border border-white/30 shadow-sm z-30 pointer-events-none`} 
+                           style={{ clipPath: 'polygon(2% 15%, 98% 5%, 100% 50%, 97% 95%, 5% 90%, 0% 50%)' }} />
+                           
+                           <div className={`relative ${index % 3 === 0 ? 'w-64 h-64 md:w-72 md:h-72' : 'w-56 h-56 md:w-64 md:h-64'} transform ${index % 2 === 0 ? 'rotate-[-4deg]' : 'rotate-[3deg]'} shadow-2xl p-2 bg-white ring-1 ring-blue-100`}>
+                             <Image 
+                               src={nextPage.image}
+                               alt={nextPage.title}
+                               fill
+                               className="object-cover"
+                             />
+                           </div>
+                           <div className="mt-6 text-center">
+                              <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center border border-blue-200 shadow-sm mx-auto mb-2 text-blue-600 font-bold text-xs">
+                                {nextPage.id}
+                              </div>
+                              <p className="text-[10px] text-blue-400/70 font-black uppercase tracking-widest">Evidence Item</p>
+                           </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )})}
+            </div>
+          </div>
+        </div>
+
+        {/* Floating Instruction */}
+        <div className="absolute bottom-12 left-0 right-0 text-center z-20">
+          <p className="text-blue-500/50 font-bold text-xs uppercase tracking-[0.3em] mb-4">Scroll to Flip Pages</p>
+          <div className="w-6 h-10 border-2 border-blue-200 rounded-full mx-auto relative mb-6">
+             <div className="w-1.5 h-1.5 bg-blue-400 rounded-full absolute top-2 left-1/2 -translate-x-1/2 animate-bounce" />
+          </div>
+          <Link href="/contact-us#contact-form" className="inline-flex items-center gap-2 text-blue-600 font-bold text-lg hover:gap-4 transition-all">
+            Start Your Digital Transformation Journey <ArrowRight />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+
+
+
+
+// 3. Why Choose Us: Horizontal Scroll Timeline
+const Differentiators = () => {
+  const sectionRef = useRef(null);
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    const scrollContainer = containerRef.current;
+    
+    gsap.to(scrollContainer, {
+      x: () => -(scrollContainer.scrollWidth - window.innerWidth),
       ease: "none",
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: "top bottom",
-        end: "bottom top",
+        pin: true,
         scrub: 1,
-      },
-    });
-
-    // Feature items animation
-    featureRefs.current.forEach((feature, index) => {
-      if (feature) {
-        gsap.fromTo(feature,
-          {
-            y: 80,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            delay: index * 0.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: feature,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+        end: () => "+=" + scrollContainer.scrollWidth,
+        invalidateOnRefresh: true,
       }
     });
+
   }, { scope: sectionRef });
 
-  const features = [
-    {
-      icon: Shield,
-      title: "UK Compliance Ready",
-      description: "GDPR, FCA, and ISO-certified solutions built for British regulatory standards",
-    },
-    {
-      icon: TrendingUp,
-      title: "Enterprise Scale", 
-      description: "Cloud-native architectures designed for growing UK enterprises",
-    },
-    {
-      icon: Target,
-      title: "Industry Expertise",
-      description: "Specialists in finance, healthcare, e-commerce, and public sector",
-    },
+  const items = [
+    { title: "UK Market Understanding", desc: "Experience across finance, healthcare, retail, SaaS, and professional services.", icon: Globe },
+    { title: "Security & Compliance Focused", desc: "GDPR-ready, enterprise-grade security and governance practices.", icon: Lock },
+    { title: "Scalable Architectures", desc: "Designed for growth, resilience, and performance.", icon: Layers },
+    { title: "Proven Delivery Frameworks", desc: "Agile, data-driven, and user-centric transformation methodologies.", icon: Workflow },
+    { title: "Long-Term Digital Partnership", desc: "Ongoing optimisation, support, and strategic guidance.", icon: Users },
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-      <div
-        ref={backgroundRef}
-        className="absolute inset-0 bg-gradient-to-br from-blue-50/20 to-transparent"
-      />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="space-y-20">
-            {features.map((feature, index) => {
-              const IconComponent = feature.icon;
-              const isEven = index % 2 === 0;
-              
-              return (
-                <div
-                  key={index}
-                  ref={(el) => (featureRefs.current[index] = el)}
-                  className={`flex flex-col lg:flex-row items-center gap-16 ${
-                    isEven ? "" : "lg:flex-row-reverse"
-                  }`}
-                >
-                  {/* Icon and Visual Element */}
-                  <div className="lg:w-1/2 flex justify-center lg:justify-start">
-                    <div className="relative">
-                      {/* Main icon container */}
-                      <div className="w-32 h-32 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-full flex items-center justify-center shadow-2xl">
-                        <IconComponent size={48} className="text-white" />
-                      </div>
-                      
-                      {/* Decorative rings */}
-                      <div className="absolute -inset-4 border-2 border-[#00B9FF]/20 rounded-full"></div>
-                      <div className="absolute -inset-8 border border-[#0097D9]/10 rounded-full"></div>
-                      
-                      {/* Floating elements */}
-                      <div className="absolute -top-4 -right-4 w-6 h-6 bg-[#00B9FF]/20 rounded-full"></div>
-                      <div className="absolute -bottom-4 -left-4 w-4 h-4 bg-[#0097D9]/20 rounded-full"></div>
-                    </div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="lg:w-1/2 text-center lg:text-left">
-                    <div className="max-w-lg mx-auto lg:mx-0">
-                      <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                        {feature.title}
-                      </h3>
-                      <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                        {feature.description}
-                      </p>
-                      
-                      {/* Feature highlight line */}
-                      <div className="w-20 h-1 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] mx-auto lg:mx-0 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+    <section ref={sectionRef} className="bg-transparent text-slate-900 overflow-hidden h-screen flex flex-col justify-center relative">
+      <div className="container mx-auto px-6 mb-12 flex-shrink-0">
+         <h2 className="text-4xl md:text-6xl font-bold mt-2 mb-6 text-slate-900">Why UK Organisations Choose Our <br/><span className="text-blue-600">Digital Transformation Services</span></h2>
+         <p className="text-xl text-slate-600 max-w-2xl font-medium">We deliver structured, outcome-driven transformation initiatives aligned with business goals and regulatory expectations.</p>
+      </div>
+
+      <div ref={containerRef} className="flex gap-8 px-6 w-max">
+        {items.map((item, i) => {
+           const Icon = item.icon;
+           return (
+            <div key={i} className="w-[85vw] md:w-[500px] h-[50vh] bg-white/40 backdrop-blur-md border border-slate-200/50 rounded-3xl p-10 flex flex-col justify-between hover:bg-white/60 transition-colors duration-300 shadow-xl shadow-blue-500/5">
+               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600">
+                 <Icon size={32} />
+               </div>
+               <div>
+                 <h3 className="text-3xl font-bold mb-4 text-slate-900">{item.title}</h3>
+                 <p className="text-slate-600 text-lg leading-relaxed">{item.desc}</p>
+               </div>
+               <div className="w-full h-1 bg-slate-200 rounded-full overflow-hidden">
+                  <div className="h-full bg-blue-500 w-1/3" />
+               </div>
+            </div>
+           );
+        })}
       </div>
     </section>
   );
 };
 
-// Professional Advantage Section
-const CleanAdvantageSection = () => {
-  const sectionRef = useRef(null);
-  const advantageRefs = useRef([]);
+// 4. Ecosystem: Sticky Scroll & Slanted Connected Cards
+const Ecosystem = () => {
+  const containerRef = useRef(null);
+  const triggerRef = useRef(null);
 
   useGSAP(() => {
-    // Advantage items animation
-    advantageRefs.current.forEach((item, index) => {
-      if (item) {
-        gsap.fromTo(item,
-          {
-            y: 60,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            delay: index * 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 75%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+    // Helper to setup SVG paths for drawing animation without plugins
+    const setupPath = (id) => {
+      const path = document.querySelector(id);
+      if (path && path.getTotalLength) {
+        const length = path.getTotalLength();
+        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length, opacity: 1 });
+        return length;
+      }
+      return 0;
+    };
+
+    const line1Length = setupPath("#line-1-2");
+    // For multiple lines with same class, we handle them carefully or just target by IDs for simplicity in this specific layout
+    const line3Paths = document.querySelectorAll(".line-to-3");
+    line3Paths.forEach(path => {
+      if(path.getTotalLength) {
+        const len = path.getTotalLength();
+        gsap.set(path, { strokeDasharray: len, strokeDashoffset: len, opacity: 1 });
       }
     });
-  }, { scope: sectionRef });
 
-  const advantages = [
-    {
-      icon: Globe,
-      title: "UK Industry Expertise", 
-      description: "Deep knowledge of finance, healthcare, e-commerce, and public sector requirements",
-    },
-    {
-      icon: Lock,
-      title: "Compliance-Driven",
-      description: "GDPR, FCA, and ISO-certified digital solutions for regulatory confidence",
-    },
-    {
-      icon: TrendingUp,
-      title: "Enterprise Scalability",
-      description: "Cloud-native architectures that grow with your UK business",
-    },
-    {
-      icon: Zap,
-      title: "Proven Methodologies",
-      description: "Agile delivery, design thinking, and data-led strategy approach",
-    },
-    {
-      icon: Users,
-      title: "Trusted Partner",
-      description: "Successful case studies from UK corporates and SMEs nationwide",
-    },
-  ];
-
-  return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-            Why Choose Our{" "}
-            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-              UK Solutions?
-            </span>
-          </h2>
-        </div>
-
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {advantages.map((advantage, index) => {
-              const IconComponent = advantage.icon;
-              return (
-                <div
-                  key={index}
-                  ref={(el) => (advantageRefs.current[index] = el)}
-                  className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#00B9FF]/20 hover:-translate-y-2"
-                >
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF]/5 to-[#0097D9]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
-                  {/* Icon container with enhanced styling */}
-                  <div className="relative z-10 w-16 h-16 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                    <IconComponent size={28} className="text-white" />
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-[#0097D9] transition-colors duration-300">
-                      {advantage.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed text-base group-hover:text-gray-700 transition-colors duration-300">
-                      {advantage.description}
-                    </p>
-                  </div>
-                  
-                  {/* Decorative element */}
-                  <div className="absolute top-6 right-6 w-2 h-2 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Dynamic Services Showcase
-const DynamicServicesSection = () => {
-  const sectionRef = useRef(null);
-  const serviceCardsRef = useRef([]);
-
-  useGSAP(() => {
-    serviceCardsRef.current.forEach((card, index) => {
-      if (card) {
-        // Parallax effect based on index
-        gsap.to(card, {
-          y: -100 + (index * 20),
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-
-        // Fade in animation
-        gsap.fromTo(card,
-          {
-            opacity: 0,
-            y: 150,
-            scale: 0.8,
-            rotationX: 45,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            rotationX: 0,
-            duration: 1.5,
-            delay: index * 0.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: triggerRef.current,
+        start: "top top",
+        end: "+=2500", // Long scroll distance for stepped animation
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1
       }
     });
-  }, { scope: sectionRef });
 
-  const services = [
-    {
-      icon: RefreshCw,
-      title: "IT & Legacy System Modernisation",
-      description: "Replace outdated systems with agile, scalable platforms that drive efficiency and innovation",
-      features: ["System Assessment", "Migration Planning", "Zero Downtime Deployment"],
-      gradient: "from-[#00B9FF] to-[#0097D9]",
-    },
-    {
-      icon: Cloud,
-      title: "Cloud Enablement", 
-      description: "Scalable solutions on AWS, Azure, or UK-based providers for optimal performance and compliance",
-      features: ["Cloud Strategy", "Multi-Cloud Setup", "Cost Optimization"],
-      gradient: "from-[#0097D9] to-[#007AC3]",
-    },
-    {
-      icon: Database,
-      title: "Data & Analytics",
-      description: "Real-time reporting, data compliance, and actionable insights for informed decision-making",
-      features: ["Data Pipeline", "Real-time Analytics", "GDPR Compliance"],
-      gradient: "from-[#007AC3] to-[#00B9FF]",
-    },
-    {
-      icon: Briefcase,
-      title: "Digital Workplace Solutions",
-      description: "Empower hybrid teams with advanced collaboration tools and seamless workflows",
-      features: ["Collaboration Tools", "Workflow Automation", "Remote Integration"],
-      gradient: "from-[#00B9FF] to-[#0097D9]",
-    },
-    {
-      icon: Bot,
-      title: "AI & Automation",
-      description: "Intelligent process automation for enhanced efficiency and competitive advantage",
-      features: ["Process Automation", "AI Integration", "Smart Analytics"],
-      gradient: "from-[#0097D9] to-[#007AC3]",
-    },
-  ];
-
-  return (
-    <section ref={sectionRef} className="py-32 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-            Our UK Digital{" "}
-            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-              Transformation Solutions
-            </span>
-          </h2>
-        </div>
-
-        <div className="space-y-20">
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
-            const isReversed = index % 2 === 1;
-            
-            return (
-              <div
-                key={index}
-                ref={(el) => (serviceCardsRef.current[index] = el)}
-                className={`flex flex-col lg:flex-row items-center gap-16 ${
-                  isReversed ? "lg:flex-row-reverse " : ""
-                }`}
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="lg:w-1/2">
-                  <div className={`w-40 h-40 rounded-3xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-8 mx-auto lg:mx-0 shadow-2xl`}>
-                    <IconComponent size={60} className="text-white" />
-                  </div>
-                </div>
-                <div className="lg:w-1/2 text-center lg:text-left">
-                  <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    {service.title}
-                  </h3>
-                  <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                    {service.description}
-                  </p>
-                  <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                    {service.features.map((feature, featureIndex) => (
-                      <span
-                        key={featureIndex}
-                        className="bg-[#00B9FF]/10 text-[#0097D9] px-4 py-2 rounded-full text-sm font-medium"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Professional UK Coverage Section
-const CleanUKCoverageSection = () => {
-  const sectionRef = useRef(null);
-  const cityRefs = useRef([]);
-
-  useGSAP(() => {
-    cityRefs.current.forEach((city, index) => {
-      if (city) {
-        gsap.fromTo(city,
-          {
-            y: 40,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            delay: index * 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 75%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
+    // 0. Initial Reveal for Header Text
+    tl.from(".eco-text-reveal", {
+      y: 30, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out"
     });
-  }, { scope: sectionRef });
 
-  const ukCities = [
-    { name: "London", icon: Building2, description: "Financial hubs and fintech innovation" },
-    { name: "Birmingham", icon: Factory, description: "Manufacturing and industrial automation" },
-    { name: "Manchester", icon: Laptop, description: "Tech startups and digital agencies" },
-    { name: "Leeds", icon: BarChart3, description: "Professional services and consultancy" },
-    { name: "Edinburgh", icon: Hospital, description: "Healthcare and life sciences" },
-    { name: "Bristol", icon: Plane, description: "Aerospace and engineering solutions" },
-    { name: "Newcastle", icon: Cpu, description: "Energy and renewable tech" },
-    { name: "Cardiff", icon: Globe, description: "Media and creative industries" },
-    { name: "Liverpool", icon: Network, description: "Maritime and logistics tech" },
-    { name: "Glasgow", icon: Code, description: "Software development hubs" },
-  ];
+    // 1. Reveal Strategy Card (Top Left)
+    tl.fromTo("#card-1", 
+      { y: 800, x: -150, rotation: -30, opacity: 0 },
+      { y: 0, x: 0, rotation: -6, opacity: 1, duration: 1, ease: "power3.out" }
+    );
+
+    // 2. Reveal Technology Card (Top Right)
+    tl.fromTo("#card-2", 
+      { y: 800, x: 150, rotation: 30, opacity: 0 },
+      { y: 0, x: 0, rotation: 6, opacity: 1, duration: 1, ease: "power3.out" }
+    );
+
+    // 3. Connect 1 & 2 (Now happens clearly AFTER cards are in place)
+    tl.to("#line-1-2", 
+      { strokeDashoffset: 0, duration: 0.8, ease: "none" },
+      "+=0.2" // Slight delay to separate from card entry
+    );
+
+    // 4. Reveal Optimisation Card (Bottom Center)
+    tl.fromTo("#card-3", 
+      { y: 800, rotation: 15, opacity: 0 },
+      { y: 0, rotation: -3, opacity: 1, duration: 1, ease: "power3.out" }
+    );
+
+    // 5. Connect to 3 (Happens clearly AFTER card 3 is in place)
+    tl.to(".line-to-3", 
+      { strokeDashoffset: 0, duration: 0.8, ease: "none" },
+      "+=0.2"
+    );
+
+    // 6. Final "Lock In"
+    tl.to([".eco-card"], {
+      scale: 1.05,
+      rotation: 0, 
+      duration: 0.5,
+      ease: "power1.inOut"
+    });
+
+  }, { scope: containerRef });
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-      {/* Geometric Background Elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 w-32 h-32 border border-[#00B9FF] rotate-45"></div>
-        <div className="absolute top-40 right-32 w-24 h-24 border border-[#0097D9] rotate-12"></div>
-        <div className="absolute bottom-32 left-40 w-28 h-28 border border-[#007AC3] rotate-45"></div>
-        <div className="absolute bottom-20 right-20 w-20 h-20 border border-[#00B9FF] rotate-12"></div>
-      </div>
-      
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center mb-12 md:mb-20">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-            Serving Enterprises{" "}
-            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-              Across the UK
-            </span>
-          </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
-            From financial hubs in London to tech startups in Manchester, we partner with 
-            businesses nationwide to drive digital transformation success.
-          </p>
-        </div>
-
-        <div className="max-w-7xl mx-auto">
-          {/* Responsive Grid Layout */}
-          <div className="relative">
-            {/* Central Hub - Hidden on mobile, shown on larger screens */}
-            <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
-              <div className="w-24 h-24 xl:w-32 xl:h-32 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-full flex items-center justify-center shadow-2xl">
-                <Globe size={32} className="text-white xl:w-10 xl:h-10" />
-              </div>
-              <div className="absolute -inset-3 xl:-inset-4 border-2 border-[#00B9FF]/30 rounded-full"></div>
-            </div>
-
-            {/* Mobile Layout: Simple Grid */}
-            <div className="lg:hidden">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {ukCities.map((city, index) => {
-                  const IconComponent = city.icon;
-                  return (
-                    <div
-                      key={index}
-                      ref={(el) => (cityRefs.current[index] = el)}
-                      className="group bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-[#00B9FF] transition-all duration-300 hover:shadow-lg"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                          <IconComponent size={20} className="text-white" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-[#0097D9] transition-colors duration-300">
-                            {city.name}
-                          </h3>
-                          <p className="text-sm text-gray-600 leading-relaxed">
-                            {city.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Desktop Layout: Hexagonal Grid with Perfect Alignment */}
-            <div className="hidden lg:block">
-              <div className="relative min-h-[600px] xl:min-h-[500px]">
-                {/* Perfectly Aligned Hexagonal Grid */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="grid grid-cols-5 gap-8 xl:gap-12 w-full max-w-5xl">
-                    {/* Row 1 */}
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={ukCities[0]} index={0} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={ukCities[1]} index={1} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={ukCities[2]} index={2} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={ukCities[3]} index={3} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={ukCities[4]} index={4} cityRefs={cityRefs} />
-                    </div>
-                    
-                    {/* Row 2 - Offset for hexagonal effect */}
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={ukCities[5]} index={5} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={ukCities[6]} index={6} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={ukCities[7]} index={7} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={ukCities[8]} index={8} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={ukCities[9]} index={9} cityRefs={cityRefs} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Metrics Bar - Responsive */}
-          <div className="mt-16 md:mt-20 lg:mt-24 bg-gradient-to-r from-[#00B9FF]/10 via-[#0097D9]/10 to-[#007AC3]/10 rounded-2xl p-6 md:p-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 text-center">
-              <div className="space-y-2">
-                <div className="text-2xl md:text-3xl font-bold text-[#00B9FF]">10+</div>
-                <div className="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wide">Cities Served</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl md:text-3xl font-bold text-[#0097D9]">500+</div>
-                <div className="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wide">Projects Completed</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl md:text-3xl font-bold text-[#007AC3]">98%</div>
-                <div className="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wide">Success Rate</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Separate component for hexagonal city items
-const CityHexagon = ({ city, index, cityRefs }) => {
-  const IconComponent = city.icon;
-  
-  return (
-    <div
-      ref={(el) => (cityRefs.current[index] = el)}
-      className="relative group"
-    >
-      {/* Hexagonal Container */}
-      <div className="relative w-32 h-32 xl:w-40 xl:h-40">
-        {/* Hexagon Shape */}
-        <div className="absolute inset-0 bg-white border-2 border-gray-200 transform rotate-45 group-hover:border-[#00B9FF] transition-colors duration-300 shadow-lg group-hover:shadow-xl">
-          <div className="absolute inset-0 flex flex-col items-center justify-center transform -rotate-45 p-4 xl:p-6">
-            {/* Icon */}
-            <div className="w-8 h-8 xl:w-12 xl:h-12 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-xl flex items-center justify-center mb-2 xl:mb-3 group-hover:scale-110 transition-transform duration-300">
-              <IconComponent size={16} className="text-white xl:w-5 xl:h-5" />
-            </div>
-            
-            {/* City Name */}
-            <h3 className="text-sm xl:text-lg font-bold text-gray-900 mb-1 xl:mb-2 group-hover:text-[#0097D9] transition-colors duration-300 text-center leading-tight">
-              {city.name}
-            </h3>
-            
-            {/* Description */}
-            <p className="text-xs xl:text-sm text-gray-600 text-center leading-tight group-hover:text-gray-700 transition-colors duration-300">
-              {city.description}
-            </p>
-          </div>
-        </div>
+    <section ref={triggerRef} className="bg-transparent relative"> 
+      <div ref={containerRef} className="h-[85vh] min-h-[900px] w-full flex flex-col items-center justify-center overflow-hidden relative bg-transparent">
         
-        {/* Connection Line to Center - Only on desktop */}
-        <div className="absolute top-1/2 left-1/2 w-px h-16 xl:h-20 bg-gradient-to-b from-[#00B9FF]/30 to-transparent transform -translate-x-1/2 -translate-y-full origin-bottom"></div>
-        
-        {/* Corner Accents */}
-        <div className="absolute -top-1 -right-1 xl:-top-2 xl:-right-2 w-3 h-3 xl:w-4 xl:h-4 bg-[#00B9FF] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div className="absolute -bottom-1 -left-1 xl:-bottom-2 xl:-left-2 w-2 h-2 xl:w-3 xl:h-3 bg-[#0097D9] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        {/* Background Text - Scaled down */}
+        <div className="absolute top-16 md:top-20 text-center z-10 px-6 max-w-4xl mx-auto">
+          <h2 className="eco-text-reveal text-3xl md:text-5xl font-black text-slate-900 mb-4">A Complete Digital Transformation Ecosystem</h2>
+          <p className="eco-text-reveal text-lg text-slate-600">Successful transformation depends on a connected ecosystem—not isolated initiatives.</p>
+        </div>
+
+        {/* Animation Stage - Desktop */}
+        <div className="relative w-full max-w-6xl h-full mt-20 hidden md:block">
+          
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
+            {/* Pronounced curved "string" connection - Higher up now */}
+            <path 
+              id="line-1-2" 
+              d="M320 340 Q 570 140 820 340" 
+              stroke="#CBD5E1" 
+              strokeWidth="4" 
+              strokeDasharray="10 10" 
+              fill="none" 
+              className="opacity-0"
+            />
+            {/* Curves to the bottom card */}
+            <path 
+              d="M320 340 Q 350 600 570 730" 
+              stroke="#3B82F6" 
+              strokeWidth="4" 
+              fill="none" 
+              className="line-to-3 opacity-0"
+            />
+            <path 
+              d="M820 340 Q 790 600 570 730" 
+              stroke="#3B82F6" 
+              strokeWidth="4" 
+              fill="none" 
+              className="line-to-3 opacity-0"
+            />
+          </svg>
+
+          {/* Card 1: Strategy - Positioned even higher at 32% top */}
+          <div id="card-1" className="eco-card absolute top-[32%] left-[10%] w-80 bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-2xl border-2 border-slate-100/50 transform -rotate-6 z-10 origin-center will-change-transform">
+            <div className="flex items-center gap-4 mb-4">
+               <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">01</div>
+               <Target size={32} className="text-blue-600"/>
+            </div>
+            <h3 className="text-xl font-bold text-slate-800 mb-2">Strategy & Assessment</h3>
+            <p className="text-sm text-slate-500 font-medium">We assess digital maturity chains and systems to define clearer workflows.</p>
+          </div>
+
+          {/* Card 2: Technology - Positioned at 32% top */}
+          <div id="card-2" className="eco-card absolute top-[32%] right-[10%] w-80 bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-2xl border-2 border-slate-100/50 transform rotate-6 z-10 origin-center will-change-transform">
+             <div className="flex items-center gap-4 mb-4">
+               <div className="w-12 h-12 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold">02</div>
+               <Code size={32} className="text-cyan-600"/>
+            </div>
+            <h3 className="text-xl font-bold text-slate-800 mb-2">Tech & Implementation</h3>
+            <p className="text-sm text-slate-500 font-medium">Upgrade legacy environments and implement scalable digital solutions.</p>
+          </div>
+
+          {/* Card 3: Optimisation */}
+          <div id="card-3" className="eco-card absolute bottom-[5%] left-1/2 -translate-x-1/2 w-96 bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl border-2 border-slate-100/50 transform -rotate-3 z-20 origin-center will-change-transform">
+             <div className="flex items-center gap-4 mb-4">
+               <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">03</div>
+               <TrendingUp size={32} className="text-indigo-600"/>
+            </div>
+            <h3 className="text-2xl font-bold text-slate-800 mb-2">Optimisation & Growth</h3>
+            <p className="text-slate-500 font-medium text-base">Automation, analytics, and continuous improvement for long-term growth.</p>
+          </div>
+
+        </div>
+
+        {/* Mobile Fallback */}
+        <div className="md:hidden w-full px-6 space-y-8 mt-12 pb-20">
+            <NodeCard title="Strategy & Assessment" desc="Assess digital maturity chains and systems." icon={Target} color="bg-blue-500" mobile />
+            <div className="h-12 w-0.5 bg-slate-300 mx-auto" />
+            <NodeCard title="Tech & Implementation" desc="Upgrade legacy environments and solutions." icon={Code} color="bg-cyan-500" mobile />
+             <div className="h-12 w-0.5 bg-slate-300 mx-auto" />
+            <NodeCard title="Optimisation & Growth" desc="Automation, analytics, and continuous growth." icon={TrendingUp} color="bg-indigo-500" mobile />
+        </div>
       </div>
+    </section>
+  );
+};
+
+const NodeCard = ({ title, desc, icon: Icon, color, mobile }) => (
+  <div className={`bg-white p-6 rounded-2xl shadow-lg border border-slate-100 flex flex-col gap-3 text-left z-20 relative`}>
+    <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center text-white shrink-0`}>
+      <Icon size={24} />
     </div>
-  );
-};
+    <div>
+      <h3 className="text-lg font-bold text-slate-800 leading-tight mb-2">{title}</h3>
+      <p className="text-sm text-slate-500">{desc}</p>
+    </div>
+  </div>
+);
 
-// Magnetic CTA Section
-const MagneticCTASection = () => {
-  const sectionRef = useRef(null);
-  const buttonRef = useRef(null);
-  const sparklesRef = useRef([]);
+// 5. Services: Hover Accordion Grid
+const Services = () => {
+  const containerRef = useRef(null);
+  
+  const services = [
+    { title: "IT & Legacy System Modernisation", desc: "We modernise legacy environments to reduce technical debt and improve reliability and performance.", icon: RefreshCw },
+    { title: "Cloud Enablement & Infrastructure", desc: "Secure, scalable cloud adoption that improves flexibility and operational resilience.", icon: Cloud },
+    { title: "Data Modernisation & Analytics", desc: "Our data modernisation consulting in the UK consolidates data sources and enables accurate, real-time insights.", icon: Database },
+    { title: "Digital Workplace Solutions", desc: "Tools and platforms that enhance collaboration, productivity, and workforce efficiency.", icon: Laptop },
+    { title: "AI & Intelligent Automation", desc: "Where appropriate, we apply intelligent automation to improve operational speed and decision-making.", icon: Bot },
+    { title: "Business Transformation Consulting", desc: "We align people, processes, and technology for sustainable change.", icon: Briefcase },
+  ];
 
   useGSAP(() => {
-    const button = buttonRef.current;
-
-    if (button) {
-      // Floating animation
-      gsap.to(button, {
-        y: -15,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut",
-      });
-
-      // Sparkles animation
-      sparklesRef.current.forEach((sparkle, index) => {
-        if (sparkle) {
-          gsap.to(sparkle, {
-            rotation: 360,
-            scale: 1.5,
-            duration: 4 + index,
-            repeat: -1,
-            ease: "power2.inOut",
-            yoyo: true,
-          });
-        }
-      });
-
-      button.addEventListener("mouseenter", () => {
-        gsap.to(button, {
-          scale: 1.1,
-          boxShadow: "0 30px 60px rgba(59, 130, 246, 0.4)",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
-
-      button.addEventListener("mouseleave", () => {
-        gsap.to(button, {
-          scale: 1,
-          boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
-    }
-  }, { scope: sectionRef });
+    gsap.from(".service-item", {
+      y: 50, opacity: 0, stagger: 0.1,
+      scrollTrigger: { trigger: containerRef.current, start: "top 80%" }
+    });
+  }, { scope: containerRef });
 
   return (
-    <section ref={sectionRef} className="py-32 bg-gradient-to-br from-[#00B9FF] via-[#0097D9] to-[#007AC3] relative overflow-hidden">
-      {/* Sparkle elements */}
-      {[...Array(6)].map((_, index) => (
-        <div
-          key={index}
-          ref={(el) => (sparklesRef.current[index] = el)}
-          className="absolute text-cyan-400 opacity-30"
-          style={{
-            left: `${10 + index * 15}%`,
-            top: `${20 + index * 10}%`,
-          }}
-        >
-          <Sparkles size={24} />
-        </div>
-      ))}
-
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
-          Accelerate Your{" "}
-          <span className="text-white/90">
-            UK Digital Transformation
-          </span>
-        </h2>
-        <p className="text-xl text-white/80 mb-16 max-w-4xl mx-auto leading-relaxed">
-          Ready to modernise your enterprise and compete globally? Let's discuss your 
-          digital transformation strategy and unlock your business potential.
-        </p>
-        <Link
-          href="/contact-us#contact-form"
-          ref={buttonRef}
-          className="inline-flex items-center gap-3 bg-white text-[#00B9FF] px-12 py-6 rounded-full text-xl font-semibold border-4 border-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] hover:bg-[#00B9FF] hover:text-white hover:border-[#00B9FF] transition-all duration-300 shadow-2xl"
-        >
-          Request a Free Strategy Call
-          <ArrowRight size={24} />
+    <section ref={containerRef} className="py-24 bg-transparent">
+      <div className="container mx-auto px-6 mb-16">
+        <h2 className="text-5xl font-black text-slate-900 mb-6">Our Digital Transformation Services in the UK</h2>
+        <p className="text-xl text-slate-600 max-w-4xl">Our digital transformation services for modern businesses are tailored to organisational size, industry, and complexity.</p>
+      </div>
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-200 border border-slate-200">
+        {services.map((s, i) => {
+          const Icon = s.icon;
+          return (
+            <div key={i} className="service-item bg-white/40 backdrop-blur-md p-10 hover:bg-white/60 transition-colors duration-500 group cursor-pointer group h-full">
+              <div className="flex justify-between items-start mb-8">
+                <Icon size={40} className="text-slate-300 group-hover:text-blue-500 transition-colors duration-300" />
+                <ArrowRight className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-blue-500"/>
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-3 leading-tight">{s.title}</h3>
+              <p className="text-slate-500 group-hover:text-slate-800 transition-colors">{s.desc}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div className="container mx-auto px-6 mt-12 text-center">
+        <p className="text-slate-500 mb-6">We also deliver digital transformation consulting London and UK-wide support for organisations at different stages of growth.</p>
+        <Link href="/contact-us#contact-form" className="inline-block px-8 py-4 border-2 border-slate-900 text-slate-900 rounded-full font-bold hover:bg-slate-900 hover:text-white transition-colors">
+          Request a Digital Transformation Consultation
         </Link>
       </div>
     </section>
   );
 };
 
-export default function DigitalTransformationUKPage() {
+// 6. Industries: Reference-Based Bento Grid
+const Industries = () => {
+  const containerRef = useRef(null);
+  
+  useGSAP(() => {
+    gsap.from(".bento-card", {
+      y: 100,
+      opacity: 0,
+      stagger: 0.1,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    });
+  }, { scope: containerRef });
+
   return (
-    <main className="overflow-hidden">
-      <DigitalTransformationHero />
-      <Floating3DFeaturesSection />
-      <CleanAdvantageSection />
-      <DynamicServicesSection />
-      <CleanUKCoverageSection />
-      <MagneticCTASection />
+    <section ref={containerRef} className="py-24 bg-transparent overflow-hidden">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Industries We Support</h2>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto font-medium">Driving measurable growth across key UK sectors with tailored digital solutions.</p>
+        </div>
+
+        {/* 4x3 Grid Layout on Desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 min-h-[900px]">
+          
+          {/* 1. Finance & FinTech - Cyan */}
+          <div className="bento-card bg-cyan-500 rounded-[40px] p-8 flex items-center justify-center relative overflow-hidden group shadow-xl shadow-cyan-500/10">
+            <div className="relative z-10 text-slate-900 flex flex-col items-center gap-4">
+              <div className="w-24 h-24 bg-white/30 rounded-3xl flex items-center justify-center backdrop-blur-md border border-white/40">
+                 <Hand size={48} className="text-slate-900 rotate-12 group-hover:rotate-0 transition-transform duration-500" />
+              </div>
+              <span className="text-xl font-bold">Finance</span>
+            </div>
+            <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
+          </div>
+
+          {/* 2. Retail - Blue */}
+          <div className="bento-card bg-blue-600 rounded-[40px] p-8 flex flex-col justify-between items-start group shadow-xl shadow-blue-600/10">
+            <div className="w-full">
+              <div className="bg-white/20 rounded-full py-3 px-6 inline-flex items-center gap-2 border border-white/30 backdrop-blur-sm">
+                <span className="text-white font-bold">Scale Up</span>
+                <ArrowRight size={18} className="text-white" />
+              </div>
+            </div>
+            <h3 className="text-3xl font-black text-white leading-none">Retail &<br/>E-commerce</h3>
+          </div>
+
+          {/* 3. Healthcare & Public - Soft Blue Glass (2x2) */}
+          <div className="bento-card md:col-span-2 md:row-span-2 bg-blue-50/80 backdrop-blur-md rounded-[40px] p-10 flex flex-col justify-between relative overflow-hidden border border-blue-100 shadow-xl shadow-blue-500/5">
+             <div className="flex gap-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="flex-1 bg-white rounded-[30px] p-6 flex flex-col items-center gap-3 text-center border-b-8 border-blue-200 shadow-sm">
+                    <div className="w-16 h-16 rounded-full bg-slate-100 overflow-hidden relative border-2 border-white shadow-md">
+                       <Image src={`/images/cons${i+3}.png`} alt="Person" fill className="object-cover" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-lg text-nowrap">Sector Lead</h4>
+                      <p className="text-xs text-slate-500 font-medium">Healthcare Div</p>
+                    </div>
+                    <button className="mt-2 bg-blue-600 text-white text-xs font-bold py-2 px-4 rounded-full shadow-md hover:bg-blue-700 transition-colors">
+                      Contact now
+                    </button>
+                  </div>
+                ))}
+             </div>
+             <div className="mt-8">
+                <h3 className="text-4xl font-black text-slate-900 mb-4">Healthcare & Public Sector</h3>
+                <p className="text-slate-600 text-lg max-w-md font-medium">Modernising critical infrastructure for nationwide service delivery.</p>
+             </div>
+             <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl opacity-50" />
+          </div>
+
+          {/* 4. Security & Legal - Slate Blue */}
+          <div className="bento-card bg-slate-900 rounded-[40px] p-8 flex flex-col justify-center gap-6 group shadow-2xl">
+            <div className="grid grid-cols-3 gap-4">
+              {[Search, Heart, Package, Users, MessageSquare, MapPin].map((Icon, i) => (
+                <div key={i} className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-white border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                  <Icon size={24} />
+                </div>
+              ))}
+            </div>
+            <h3 className="text-2xl font-bold text-white text-center">Security & Compliance</h3>
+          </div>
+
+          {/* 5. Strategy & Tech - Light Blue */}
+          <div className="bento-card bg-blue-100 rounded-[40px] p-8 flex flex-col justify-center items-center relative group shadow-xl shadow-blue-500/5 border border-blue-200">
+             <div className="relative w-40 h-40 transform group-hover:scale-110 transition-transform duration-700">
+                <div className="absolute inset-0 bg-white/50 rounded-3xl rotate-6" />
+                <div className="relative z-10 w-full h-full bg-[#fdfcf8] rounded-3xl p-6 shadow-xl flex flex-col justify-between border border-white">
+                   <div className="flex justify-between items-start">
+                      <div className="w-4 h-4 rounded-full bg-blue-400" />
+                      <div className="w-4 h-4 rounded-full bg-blue-400" />
+                   </div>
+                   <div className="text-5xl font-black text-blue-600 text-center">27</div>
+                   <div className="w-full h-2 bg-slate-200 rounded-full" />
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg rotate-12">
+                   <PenTool size={32} className="text-white" />
+                </div>
+             </div>
+             <span className="mt-6 text-2xl font-black text-blue-900">Strategy & Tech</span>
+          </div>
+
+          {/* 6. Manufacturing - Deep Royal Blue */}
+          <div className="bento-card bg-blue-700 rounded-[40px] p-10 flex flex-col justify-center relative overflow-hidden group shadow-xl shadow-blue-700/20">
+             <div className="relative z-10 text-center md:text-left">
+                <div className="text-6xl md:text-7xl font-black text-white mb-2">$171</div>
+                <div className="bg-white/20 backdrop-blur-md text-white px-6 py-2 rounded-full inline-flex items-center gap-2 font-black text-lg mb-6 shadow-xl border border-white/30">
+                  <Factory size={24} />
+                  Manufacturing
+                </div>
+                <p className="text-blue-100 text-sm font-medium">Digital supply chain and automated production efficiency.</p>
+             </div>
+             <div className="absolute top-0 right-0 w-full h-full bg-white/5 mask-diagonal opacity-10" />
+          </div>
+
+          {/* 7. Services - Cyan variant */}
+          <div className="bento-card bg-cyan-600 rounded-[40px] p-8 flex flex-col justify-center gap-4 shadow-xl shadow-cyan-600/20">
+             {[
+               { icon: Truck, name: "Logistics", count: 13 },
+               { icon: Leaf, name: "Garden Tech", count: 8 },
+               { icon: ChefHat, name: "Hospitality", count: 24 },
+               { icon: Hammer, name: "Real Estate", count: 16 }
+             ].map((item, i) => (
+                <div key={i} className="bg-white/10 backdrop-blur-sm rounded-full py-3 px-6 flex justify-between items-center group cursor-pointer hover:bg-white/20 transition-colors border border-white/10">
+                  <div className="flex items-center gap-3 text-white">
+                    <item.icon size={20} />
+                    <span className="font-bold text-lg">{item.name}</span>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-white text-cyan-600 flex items-center justify-center font-black shadow-lg">
+                    {item.count}
+                  </div>
+                </div>
+             ))}
+          </div>
+
+          {/* 8. Tech & SaaS - White Glass */}
+          <div className="bento-card md:col-span-2 bg-white/40 backdrop-blur-md rounded-[40px] p-12 flex flex-col justify-center relative overflow-hidden group border border-white/40 shadow-xl shadow-blue-500/5">
+             <div className="relative z-10 max-w-xl">
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-4 block">Future Proof</span>
+                <h3 className="text-4xl md:text-5xl font-black text-slate-900 leading-[0.9] mb-6">
+                  CRAFTED ANSWERS<br/>FOR YOUR TECHNOLOGY
+                </h3>
+                <Link href="/contact-us" className="inline-block bg-blue-600 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-blue-700 transition-all hover:scale-105">
+                  Learn more
+                </Link>
+             </div>
+             <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-blue-400/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000" />
+          </div>
+
+        </div>
+
+        <div className="text-center mt-12">
+          <Link href="/contact-us" className="inline-flex items-center gap-2 text-blue-600 font-bold hover:gap-4 transition-all group text-lg">
+            Explore All Industry Transformations 
+            <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// 7. Coverage
+const Coverage = () => {
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.from(".coverage-item", {
+      opacity: 0,
+      y: 20,
+      stagger: 0.2,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%"
+      }
+    });
+  }, { scope: containerRef });
+
+  return (
+    <section ref={containerRef} className="py-24 bg-transparent">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 tracking-tight leading-tight">Serving UK Enterprises & SMEs</h2>
+          <div className="w-20 h-1.5 bg-blue-600 mx-auto rounded-full mb-8" />
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            We work with enterprises and SMEs across the UK, delivering scalable solutions that grow with organisational complexity.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          {[
+            { city: "London", desc: "Finance, Enterprise & Innovation" },
+            { city: "Manchester", desc: "Digital & Technology Growth" },
+            { city: "Birmingham", desc: "Manufacturing & Services" },
+            { city: "Nationwide", desc: "Complete UK Support" }
+          ].map((c, i) => (
+            <div key={i} className="coverage-item flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                <MapPin size={24} />
+              </div>
+              <h3 className="text-2xl font-bold mb-3 text-slate-900">{c.city}</h3>
+              <p className="text-slate-500 leading-relaxed px-4">{c.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// 8. Modern Testimonial (Matching Image Design)
+const ModernTestimonial = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef(null);
+  const contentRef = useRef(null);
+
+  const testimonials = [
+    {
+      id: 1,
+      name: "Mark Smith",
+      role: "CEO & Founder",
+      content: "Webnox digital transformation services have been instrumental in our shift towards a data-driven culture. Their expertise helped us streamline operations significantly.",
+      company: "webflow",
+      image: "/images/cons4.png"
+    },
+    {
+      id: 2,
+      name: "Sarah Jenkins",
+      role: "Operational Director",
+      content: "The transition to a cloud-first ecosystem was seamless thanks to the strategic guidance from the Webnox team. Our efficiency has increased by 40%.",
+      company: "Salesforce",
+      image: "/images/cons5.png"
+    },
+    {
+       id: 3,
+       name: "David Ross",
+       role: "Tech Lead",
+       content: "A professional and outcome-driven approach. They understood our complex constraints and built a transformation roadmap that actually worked.",
+       company: "Microsoft",
+       image: "/images/cons6.png"
+    }
+  ];
+
+  const handleNext = () => {
+    gsap.to(contentRef.current, {
+      opacity: 0,
+      x: -10,
+      duration: 0.2,
+      onComplete: () => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        gsap.fromTo(contentRef.current, 
+          { opacity: 0, x: 10 }, 
+          { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }
+        );
+      }
+    });
+  };
+
+  const handlePrev = () => {
+    gsap.to(contentRef.current, {
+      opacity: 0,
+      x: 10,
+      duration: 0.2,
+      onComplete: () => {
+        setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+        gsap.fromTo(contentRef.current, 
+          { opacity: 0, x: -10 }, 
+          { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }
+        );
+      }
+    });
+  };
+
+  useGSAP(() => {
+    gsap.fromTo(".doodle-fade", 
+      { opacity: 0, scale: 0.8 }, 
+      { 
+        opacity: 0.4, 
+        scale: 1, 
+        duration: 1.5, 
+        stagger: 0.3, 
+        ease: "elastic.out(1, 0.5)",
+        scrollTrigger: { trigger: containerRef.current, start: "top 80%" }
+      }
+    );
+  }, { scope: containerRef });
+
+  return (
+    <section ref={containerRef} className="py-20 bg-transparent testimonial-reveal">
+      <div className="container mx-auto px-6">
+        {/* Compact Rectangular Card */}
+        <div className="max-w-4xl mx-auto bg-white rounded-[32px] shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)] overflow-hidden border border-slate-100 relative group">
+          
+          {/* Hand-drawn Doodles */}
+          <div className="absolute top-6 right-10 doodle-fade pointer-events-none text-blue-400 rotate-12">
+             <Sparkles size={32} />
+          </div>
+          <div className="absolute bottom-10 left-6 doodle-fade pointer-events-none text-yellow-400 -rotate-12 opacity-40">
+             <Zap size={24} fill="currentColor" />
+          </div>
+          {/* Swirly SVG Doodle */}
+          <svg className="absolute top-1/2 right-4 w-12 h-12 text-blue-200 doodle-fade -translate-y-1/2" viewBox="0 0 100 100">
+             <path d="M10,50 Q40,10 70,50 T130,50" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" opacity="0.5" />
+          </svg>
+
+          <div className="flex flex-col md:flex-row items-center gap-8 p-6 md:p-10 relative z-10">
+            
+            {/* Left Column: Compact Teardrop */}
+            <div className="relative w-full max-w-[240px] md:max-w-[280px]">
+              <div 
+                className="absolute inset-0 bg-[#fbc02d] rounded-[50%_0%_50%_50%] transform rotate-[-3deg]" 
+                style={{ width: '100%', paddingBottom: '100%' }}
+              />
+              <div className="relative z-10 p-2">
+                <div className="relative w-full overflow-hidden rounded-[50%_0%_50%_50%] bg-[#fbc02d]">
+                  <div style={{ width: '100%', paddingBottom: '100%' }} className="relative">
+                    <Image 
+                      src={testimonials[currentIndex].image}
+                      alt={testimonials[currentIndex].name}
+                      fill
+                      className="object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Content */}
+            <div className="flex-1 flex flex-col items-start text-left">
+              <div ref={contentRef} className="w-full">
+                <div className="text-[#edf2f7] mb-4">
+                  <Quote size={48} fill="currentColor" />
+                </div>
+
+                <p className="text-lg md:text-xl text-slate-700 font-medium leading-relaxed mb-6">
+                  "{testimonials[currentIndex].content}"
+                </p>
+
+                <div className="mb-6">
+                  <div className="text-xl font-black text-blue-600 lowercase mb-1 tracking-tight">
+                    {testimonials[currentIndex].company}
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-base font-bold text-slate-900">{testimonials[currentIndex].name}</span>
+                    <span className="text-xs text-slate-400 font-bold uppercase tracking-widest leading-none mt-1">{testimonials[currentIndex].role}</span>
+                  </div>
+                </div>
+
+                {/* Compact Nav */}
+                <div className="flex items-center gap-4">
+                  <button onClick={handlePrev} className="w-10 h-10 flex items-center justify-center text-slate-300 hover:text-blue-600 transition-colors">
+                    <ArrowRight className="rotate-180" size={20} />
+                  </button>
+                  <div className="w-10 h-px bg-slate-100" />
+                  <button 
+                    onClick={handleNext} 
+                    className="w-14 h-11 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
+                  >
+                    <ArrowRight size={22} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// 8. Custom FAQ Wrapper
+const FAQWrapper = () => (
+  <div className="py-12 bg-transparent">
+    <FAQSection faqs={[
+      { question: "Is digital transformation suitable for small and medium businesses?", answer: "Yes. We deliver digital transformation strategies for small business as well as enterprise-scale initiatives." },
+      { question: "Do you provide consulting as well as implementation?", answer: "Yes. Our work is consulting-led, with implementation aligned to strategic goals." },
+      { question: "Is transformation delivered all at once?", answer: "No. Most programmes are delivered in phases to manage risk and adoption." },
+      { question: "How do you measure success?", answer: "Success is measured through efficiency gains, system performance, adoption, and business impact." }
+    ]} />
+  </div>
+);
+
+// 9. Final CTA
+const FinalCTA = () => (
+  <section className="py-32 bg-gradient-to-br from-blue-400 to-cyan-300 relative overflow-hidden flex items-center justify-center text-center">
+    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
+    <div className="container mx-auto px-6 relative z-10 max-w-4xl">
+      <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight">Ready to Transform How Your Organisation Operates?</h2>
+      <p className="text-xl text-slate-700 mb-12 font-medium">If you’re looking for digital transformation services in the UK that focus on efficiency, scalability, and long-term value, our team is ready to help.</p>
+      <Link href="/contact-us#contact-form" className="inline-block bg-blue-600 text-white px-12 py-5 rounded-full text-xl font-bold hover:scale-105 transition-transform shadow-2xl">
+        Get a free Consultation
+      </Link>
+    </div>
+  </section>
+);
+
+export default function DigitalTransformationNew() {
+  return (
+    <main className="w-full relative overflow-x-hidden bg-white min-h-screen">
+      <div className="fixed inset-0 z-0 bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff] pointer-events-none" />
+      <div className="relative z-10">
+      <Hero />
+      <Benefits />
+      <Differentiators />
+      <Ecosystem />
+      <Services />
+      <Industries />
+      <Coverage />
+      <ModernTestimonial />
+      <FAQWrapper />
+      <FinalCTA />
+      </div>
     </main>
   );
 }
