@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { ChevronDown } from "lucide-react"
-
+ 
 export default function FAQSection({ faqs: customFaqs }) {
   const [openIndex, setOpenIndex] = useState(0)
 
