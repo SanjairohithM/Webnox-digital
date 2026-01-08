@@ -277,12 +277,12 @@ export default function Component() {
     const finalTextContainer = document.createElement("div")
     finalTextContainer.className = "final-text-container absolute w-full text-center flex items-center justify-center font-sans"
     finalTextContainer.innerHTML = `
-      <div class="w-full max-w-6xl mx-auto px-4">
-        <h1 class="text-2xl sm:text-base md:text-lg lg:text-4xl xl:text-5xl 2xl:text-6xl font-semibold text-white mb-2 md:mb-4 lg:mb-6 text-center leading-tight px-2">
+      <div class="w-full max-w-4xl mx-auto px-3">
+        <h1 class="text-xl sm:text-base md:text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-semibold text-white mb-2 md:mb-3 lg:mb-4 text-center leading-tight px-2">
           <span class="block sm:inline">Transforming Businesses Through</span>
           <span class="block sm:inline">&nbsp;Intelligent Automation</span>
         </h1>
-        <p class="text-white/80 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl mx-auto text-center leading-relaxed max-w-4xl px-4 hidden sm:block">
+        <p class="text-white/80 text-xs sm:text-xs md:text-sm lg:text-base xl:text-lg mx-auto text-center leading-relaxed max-w-3xl px-3 hidden sm:block">
           At Webnox Digital, we harness the power of AI, cloud, and automation to help businesses operate smarter, scale faster, and innovate at speed. Our agile-driven software solutions are designed to streamline operations, enhance customer experiences, and unlock new digital value.
         </p>
       </div>
@@ -292,9 +292,9 @@ export default function Component() {
     const solutionsContainer = document.createElement("div")
     solutionsContainer.className = "solutions-text-container absolute w-full hidden md:block"
     solutionsContainer.innerHTML = `
-      <div class="flex items-center justify-center gap-[8vw] sm:gap-[12vw] md:gap-[18vw] ml-[-4vw] sm:ml-[-8vw] md:ml-[-12vw]">
-        <h1 class="our-text text-[8vw] sm:text-[7vw] md:text-[6vw] font-bold bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] text-transparent bg-clip-text">OUR</h1>
-        <h1 class="solutions-text text-[8vw] sm:text-[7vw] md:text-[6vw] font-bold bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] text-transparent bg-clip-text">SOLUTIONS</h1>
+      <div class="flex items-center justify-center gap-[6vw] sm:gap-[9vw] md:gap-[13vw] ml-[-3vw] sm:ml-[-6vw] md:ml-[-9vw]">
+        <h1 class="our-text text-[6vw] sm:text-[5.5vw] md:text-[4.5vw] font-bold bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] text-transparent bg-clip-text">OUR</h1>
+        <h1 class="solutions-text text-[6vw] sm:text-[5.5vw] md:text-[4.5vw] font-bold bg-gradient-to-r from-[#3FD7F1] to-[#1B80D5] text-transparent bg-clip-text">SOLUTIONS</h1>
       </div>
     `
 
@@ -308,41 +308,41 @@ export default function Component() {
         }
         @media (min-width: 640px) {
           .solutions-container {
-            max-width: 600px;
+            max-width: 450px;
           }
         }
         @media (min-width: 768px) {
           .solutions-container {
-            max-width: 800px;
+            max-width: 600px;
           }
         }
         @media (min-width: 1024px) {
           .solutions-container {
-            max-width: 1000px;
+            max-width: 750px;
           }
         }
         @media (min-width: 1280px) {
           .solutions-container {
-            max-width: 1100px;
+            max-width: 825px;
           }
         }
         @media (min-width: 1536px) {
           .solutions-container {
-            max-width: 1600px;
+            max-width: 1200px;
           }
         }
       </style>
-      <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-16 sm:pt-20 md:pt-24 lg:pt-28 2xl:pt-32 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-6 md:px-8 overflow-y-auto flex items-center justify-center">
-        <div class="w-full mx-auto solutions-container px-2 sm:px-4 md:px-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-3 sm:gap-x-4 md:gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-6 gap-y-6 sm:gap-y-8 md:gap-y-12 lg:gap-y-16 xl:gap-y-20 2xl:gap-y-16 w-full px-2 sm:px-4 md:px-6 ml-0 sm:ml-[-4rem] md:ml-[-8rem] lg:ml-[-12rem] xl:ml-[-14rem]">
+      <div class="w-full h-full bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white pt-12 sm:pt-15 md:pt-18 lg:pt-21 2xl:pt-24 pb-6 sm:pb-9 md:pb-12 px-3 sm:px-4 md:px-6 overflow-y-auto flex items-center justify-center">
+        <div class="w-full mx-auto solutions-container px-1 sm:px-3 md:px-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 sm:gap-x-3 md:gap-x-4 lg:gap-x-6 xl:gap-x-9 2xl:gap-x-4 gap-y-4 sm:gap-y-6 md:gap-y-9 lg:gap-y-12 xl:gap-y-15 2xl:gap-y-12 w-full px-1 sm:px-3 md:px-4 ml-0 sm:ml-[-3rem] md:ml-[-6rem] lg:ml-[-9rem] xl:ml-[-10.5rem]">
             ${solutions.map((solution, index) => `
-              <div class="solution-card flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 group opacity-0 w-full min-w-[250px] sm:min-w-[280px] md:min-w-[320px] lg:min-w-[360px] xl:min-w-[380px] 2xl:min-w-[500px] max-w-[600px] pl-2 sm:pl-4 md:pl-6" data-index="${index}">
-                <div class="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[60px] md:h-[60px] lg:w-[70px] lg:h-[70px] xl:w-[80px] xl:h-[80px] 2xl:w-[110px] 2xl:h-[110px] relative flex-shrink-0 transition-all duration-300 flex items-center justify-center">
+              <div class="solution-card flex items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-4 group opacity-0 w-full min-w-[190px] sm:min-w-[210px] md:min-w-[240px] lg:min-w-[270px] xl:min-w-[285px] 2xl:min-w-[375px] max-w-[450px] pl-1 sm:pl-3 md:pl-4" data-index="${index}">
+                <div class="w-[30px] h-[30px] sm:w-[38px] sm:h-[38px] md:w-[45px] md:h-[45px] lg:w-[52px] lg:h-[52px] xl:w-[60px] xl:h-[60px] 2xl:w-[82px] 2xl:h-[82px] relative flex-shrink-0 transition-all duration-300 flex items-center justify-center">
                   <img src="${solution.image}" alt="${solution.title}" class="w-full h-full object-contain" />
                 </div>
                 <div class="flex-1 min-w-0 w-full text-left">
-                  <h3 class="text-sm sm:text-base md:text-lg lg:text-lg xl:text-lg 2xl:text-2xl font-bold text-gray-800 mb-1 sm:mb-2 md:mb-3 lg:mb-4 leading-tight">${solution.title}</h3>
-                  <p class="hidden lg:block xl:hidden 2xl:block text-gray-600 text-sm sm:text-base leading-relaxed">${solution.description}</p>
+                  <h3 class="text-xs sm:text-sm md:text-base lg:text-base xl:text-base 2xl:text-lg font-bold text-gray-800 mb-0.5 sm:mb-1 md:mb-2 lg:mb-3 leading-tight">${solution.title}</h3>
+                  <p class="hidden lg:block xl:hidden 2xl:block text-gray-600 text-xs sm:text-sm leading-relaxed">${solution.description}</p>
                 </div>
               </div>
             `).join('')}
@@ -576,24 +576,24 @@ export default function Component() {
     <div ref={mainRef} className="relative w-full">
       <div ref={stickyRef} className="relative h-screen w-full overflow-hidden">
         <main className="bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff] h-full w-full">
-          <div className="pl-4 sm:pl-8 md:pl-12 lg:pl-[10rem] h-full">
-            <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center h-full">
+          <div className="pl-3 sm:pl-6 md:pl-9 lg:pl-[7.5rem] h-full">
+            <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 md:gap-9 items-center h-full">
               {/* Left Content */}
-              <div className="space-y-6 sm:space-y-8 md:space-y-12">
+              <div className="space-y-4 sm:space-y-6 md:space-y-9">
                 {/* Main Headline */}
-                <div ref={contentRefs.headlines} className="space-y-2 sm:space-y-4">
-                  <div className="flex items-center gap-2 sm:gap-4 flex-wrap mb-3 sm:mb-5 pt-2">
-                    <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-sans font-semibold text-gray-800 tracking-tight leading-tight">
+                <div ref={contentRefs.headlines} className="space-y-1 sm:space-y-3">
+                  <div className="flex items-center gap-1.5 sm:gap-3 flex-wrap mb-2 sm:mb-4 pt-1.5">
+                    <h1 className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-sans font-semibold text-gray-800 tracking-tight leading-tight">
                       AI-Driven Innovation for a Smarter, 
                     </h1>
                   </div>
 
-                  <div className="flex items-center gap-2 sm:gap-4 flex-wrap mb-3 sm:mb-5">
+                  <div className="flex items-center gap-1.5 sm:gap-3 flex-wrap mb-2 sm:mb-4">
                     <div
                       ref={miniRobotContainerRef}
                       className={
                         "mini-robot_container bg-gradient-to-b from-[#3FD7F1] to-[#1B80D5] overflow-hidden" +
-                        (typeof window !== 'undefined' && window.innerWidth < 768 ? ' mb-4' : '')
+                        (typeof window !== 'undefined' && window.innerWidth < 768 ? ' mb-3' : '')
                       }
                       style={{ borderRadius: "9999px" }}
                     >
@@ -607,18 +607,18 @@ export default function Component() {
                       />
                     </div>
 
-                    <h1 className="smarter-text text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-sans font-semibold text-gray-800 tracking-tight leading-tight">
+                    <h1 className="smarter-text text-3xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-sans font-semibold text-gray-800 tracking-tight leading-tight">
                       Digitally Connected World
                     </h1>
                   </div>
                 </div>
 
                 {/* Content Sections */}
-                <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 md:mt-16">
+                <div className="grid md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 mt-6 sm:mt-9 md:mt-12">
                  
                   <div
                     ref={contentRefs.strategy}
-                    className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[16rem] sm:min-h-[20rem] md:min-h-[24rem] rounded-2xl sm:rounded-3xl md:rounded-4xl flex flex-col justify-center p-4 sm:p-6 md:p-8 hidden md:flex"
+                    className="relative space-y-3 bg-[#2ACBEC]/20 min-h-[12rem] sm:min-h-[15rem] md:min-h-[18rem] rounded-xl sm:rounded-2xl md:rounded-3xl flex flex-col justify-center p-3 sm:p-4 md:p-6 hidden md:flex"
                   >
                     <Image
                       src="/images/robot1.webp"
@@ -628,9 +628,9 @@ export default function Component() {
                       height={1000}
                     />
                     <div className="relative z-10 h-full flex flex-col justify-center">
-                      <h1 className="text-lg sm:text-xl md:text-2xl font-extrabold text-black text-right pr-2 sm:pr-4 mb-3 sm:mb-4 md:mb-6">Approach</h1>
-                      <div className="text-gray-700 text-right pr-2 sm:pr-4">
-                        <p className="text-sm sm:text-base md:text-lg">
+                      <h1 className="text-base sm:text-lg md:text-xl font-extrabold text-black text-right pr-1.5 sm:pr-3 mb-2 sm:mb-3 md:mb-4">Approach</h1>
+                      <div className="text-gray-700 text-right pr-1.5 sm:pr-3">
+                        <p className="text-xs sm:text-sm md:text-base">
                         Innovation meets precision in everything we do. We blend creativity and code to build digital success stories. Think globally.
                         </p>
                       </div>
@@ -639,7 +639,7 @@ export default function Component() {
 
                   <div
                     ref={contentRefs.mission}
-                    className="relative space-y-4 bg-[#2ACBEC]/20 min-h-[16rem] sm:min-h-[20rem] md:min-h-[24rem] rounded-2xl sm:rounded-3xl md:rounded-4xl flex flex-col justify-center p-4 sm:p-6 md:p-8 overflow-hidden hidden md:flex"
+                    className="relative space-y-3 bg-[#2ACBEC]/20 min-h-[12rem] sm:min-h-[15rem] md:min-h-[18rem] rounded-xl sm:rounded-2xl md:rounded-3xl flex flex-col justify-center p-3 sm:p-4 md:p-6 overflow-hidden hidden md:flex"
                   >
                     <Image
                       src="/images/robot2.webp"
@@ -649,9 +649,9 @@ export default function Component() {
                       height={1000}
                     />
                     <div className="relative z-10 h-full flex flex-col justify-center">
-                      <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-black pl-2 sm:pl-4 mb-3 sm:mb-4 md:mb-6">Our Mission</h2>
-                      <div className="text-gray-700 pl-2 sm:pl-4">
-                        <p className="text-sm sm:text-base md:text-lg">
+                      <h2 className="text-base sm:text-lg md:text-xl font-extrabold text-black pl-1.5 sm:pl-3 mb-2 sm:mb-3 md:mb-4">Our Mission</h2>
+                      <div className="text-gray-700 pl-1.5 sm:pl-3">
+                        <p className="text-xs sm:text-sm md:text-base">
                           To empower visionary businesses with transformative digital power. We're here to turn your
                           global ambition into a digital reality.
                         </p>
@@ -708,7 +708,7 @@ export default function Component() {
                       <MisssionRobot
                         rotation={[0, -Math.PI / 2 + 0.8, 0]}
                         targetRotation={robotRotation}
-                        scale={typeof window !== 'undefined' && window.innerWidth < 768 ? 1.60 : 1.3}
+                        scale={typeof window !== 'undefined' && window.innerWidth < 768 ? 1.20 : 0.975}
                         position={typeof window !== 'undefined' && window.innerWidth < 768 ? [-0.3, -0.3, 0] : [-0.3, -0.5, 0]}
                       />
                       <ambientLight intensity={1} />
