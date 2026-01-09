@@ -246,10 +246,26 @@ const WhyChooseUsSection = () => {
     const advantageRefs = useRef([]);
   
     useGSAP(() => {
-      // Simple Fade Up Stagger
+      // Clear Slide From Bottom Stagger
       gsap.fromTo(advantageRefs.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power2.out", scrollTrigger: { trigger: sectionRef.current, start: "top 75%" } }
+        { 
+          y: 100, 
+          opacity: 0,
+          scale: 0.95 
+        },
+        { 
+          y: 0, 
+          opacity: 1, 
+          scale: 1,
+          duration: 1, 
+          stagger: 0.2, 
+          ease: "power3.out", 
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: "top 80%",
+            toggleActions: "play none none none"
+          } 
+        }
       );
     }, { scope: sectionRef });
   
