@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
@@ -8,10 +8,8 @@ import { useGSAP } from "@gsap/react";
 import Link from "next/link";
 import {
   Zap,
-  Shield,
   TrendingUp,
   Users,
-  CheckCircle,
   Cloud,
   Database,
   Briefcase,
@@ -23,55 +21,44 @@ import {
   Laptop,
   BarChart3,
   Hospital,
-  Plane,
   ArrowRight,
   Sparkles,
   Target,
   Globe,
-  Lock,
   Code,
   Network,
   Cpu,
-  Binary
+  Binary,
+  Settings,
+  DollarSign,
+  ShoppingBag,
+  Lightbulb,
+  Layers,
+  Scale,
+  ChevronDown,
+  ChevronUp,
+  CheckCircle
 } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, useGSAP);
 }
 
-// Advanced Hero Section with 3D Digital Elements
+// SECTION 1: HERO
 const DigitalTransformationHero = () => {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
-  const digitalElementsRef = useRef([]);
-  const orbsRef = useRef([]);
 
   useGSAP(() => {
-
-    // Main title with 3D entrance
     gsap.fromTo(titleRef.current,
-      {
-        y: 150,
-        opacity: 0,
-        rotationX: 90,
-        transformPerspective: 1000,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        rotationX: 0,
-        duration: 2,
-        ease: "power3.out",
-        delay: 0.5
-      }
+      { y: 150, opacity: 0, rotationX: 90, transformPerspective: 1000 },
+      { y: 0, opacity: 1, rotationX: 0, duration: 2, ease: "power3.out", delay: 0.5 }
     );
-
     gsap.fromTo(subtitleRef.current,
       { y: 80, opacity: 0, scale: 0.8 },
       { y: 0, opacity: 1, scale: 1, duration: 1.5, delay: 1, ease: "power3.out" }
     );
-
   }, { scope: heroRef });
 
   const digitalElements = [
@@ -84,477 +71,292 @@ const DigitalTransformationHero = () => {
   ];
 
   return (
-    <section ref={heroRef} className="relative min-h-screen mt-20 overflow-hidden flex items-center">
-      {/* Animated Background Orbs */}
-      {/* {[...Array(8)].map((_, index) => (
-        <div
-          key={index}
-          ref={(el) => (orbsRef.current[index] = el)}
-          className="absolute w-32 h-32 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-xl"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-        />
-      ))} */}
-
-      {/* Static Digital Elements */}
+    <section ref={heroRef} className="relative min-h-screen pt-40 pb-20 overflow-hidden bg-transparent">
+      {/* Decorative large blurred circles like home page */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-400/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-400/10 rounded-full blur-[130px] pointer-events-none" />
+      
+      {[...Array(6)].map((_, index) => (
+         <div key={index} className="absolute w-64 h-64 bg-[#00B9FF]/5 rounded-full blur-3xl animate-pulse"
+           style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, animationDelay: `${index}s`, animationDuration: `${5 + index}s` }}
+         />
+      ))}
       {digitalElements.map((element, index) => {
         const IconComponent = element.icon;
         return (
-          <div
-            key={index}
-            className="absolute text-blue-300/30"
-            style={element.position}
-          >
+          <div key={index} className="absolute text-blue-300/30" style={element.position}>
             <IconComponent size={40} />
           </div>
         );
       })}
-
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
-          <h1
-            ref={titleRef}
-            className="text-4xl md:text-4xl lg:text-7xl font-bold mb-8 text-dark leading-tight"
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            Digital Transformation Services in the USA
-            <br />
-            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-              Innovate, Scale, and Compete Globally
-            </span>
+          <h1 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-8 text-gray-900 leading-tight" style={{ transformStyle: "preserve-3d" }}>
+            Digital Transformation Services in the USA for<br />
+            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">Scalable, Future-Ready Businesses</span>
           </h1>
-          <p
-            ref={subtitleRef}
-            className="text-xl md:text-2xl text-dark mb-12 leading-relaxed max-w-4xl mx-auto"
-          >
-            In today’s fast-paced US market, enterprises must evolve or risk being left behind. At Webnox Digital, we deliver enterprise-grade digital transformation services across the United States, helping businesses modernize legacy systems, adopt cloud-first strategies, and unlock growth through technology.
+          <p ref={subtitleRef} className="text-lg md:text-xl text-gray-600 mb-12 leading-relaxed max-w-4xl mx-auto font-medium">
+            Digital transformation is no longer about adopting new tools, it's about redesigning how businesses operate, make decisions, and scale in a digital-first economy. At Webnox Digital, we deliver digital transformation services in the USA that help organisations modernise systems, optimise processes, and align technology with real business outcomes.
           </p>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-16">
+            <Link href="/contact-us" className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2">
+              Book a Free Strategy Consultation <ArrowRight size={20}/>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto border-t border-gray-100 pt-12">
+             <div className="flex items-center justify-center gap-3">
+               <span className="text-3xl font-bold text-[#00B9FF]">500+</span>
+               <span className="text-gray-600 text-left text-sm font-semibold">Projects <br/>Delivered</span>
+             </div>
+             <div className="flex items-center justify-center gap-3 border-l border-r border-gray-100 px-6">
+                <Building2 className="text-[#0097D9]" size={32}/>
+               <span className="text-gray-600 text-left text-sm font-semibold">Enterprise & SME <br/>Experience</span>
+             </div>
+             <div className="flex items-center justify-center gap-3">
+                <Globe className="text-[#007AC3]" size={32}/>
+               <span className="text-gray-600 text-left text-sm font-semibold">Serving Businesses <br/>Across the USA</span>
+             </div>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-// Professional Features Section
-const Floating3DFeaturesSection = () => {
-  const sectionRef = useRef(null);
-  const featureRefs = useRef([]);
-  const backgroundRef = useRef(null);
+// SECTION 2: WHY MATTERS (YIN YANG STACKED/PORTAL ANIMATION - OPTIMIZED)
+const WhyMattersSection = () => {
+    const sectionRef = useRef(null);
+    const triggerRef = useRef(null);
+    const row1Left = useRef(null);
+    const row1Right = useRef(null);
+    const row2Container = useRef(null);
+    const row2Left = useRef(null);
+    const row2Right = useRef(null);
+    const row3Container = useRef(null);
 
-  useGSAP(() => {
-    // Background parallax
-    gsap.to(backgroundRef.current, {
-      yPercent: -30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1,
-      },
-    });
+    const benefits = [
+        { title: "Operational Efficiency", desc: "Reduce manual processes and improve workflow automation across teams.", icon: Settings },
+        { title: "Scalability & Agility", desc: "Build systems that grow with your business and adapt to market changes.", icon: TrendingUp },
+        { title: "Cost Optimization", desc: "Replace outdated infrastructure with efficient, cloud-based solutions.", icon: DollarSign },
+        { title: "Data-Driven Decisions", desc: "Turn real-time data into actionable insights.", icon: BarChart3 },
+        { title: "Enhanced Experience", desc: "Deliver consistent, seamless digital experiences across touchpoints.", icon: Users },
+        { title: "Future-Ready Architecture", desc: "Prepare your business for emerging technologies and innovation.", icon: Layers }
+    ];
 
-    // Feature items animation
-    featureRefs.current.forEach((feature, index) => {
-      if (feature) {
-        gsap.fromTo(feature,
-          {
-            y: 80,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            delay: index * 0.2,
-            ease: "power3.out",
+    useGSAP(() => {
+        const tl = gsap.timeline({
             scrollTrigger: {
-              trigger: feature,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-    });
-  }, { scope: sectionRef });
-
-  const features = [
-    {
-      icon: Shield,
-      title: "US Compliance Ready",
-      description: "SOX, HIPAA, and ISO-certified solutions built for American regulatory standards",
-    },
-    {
-      icon: TrendingUp,
-      title: "Enterprise Scale",
-      description: "Cloud-native architectures designed for growing US enterprises",
-    },
-    {
-      icon: Target,
-      title: "Industry Expertise",
-      description: "Specialists in finance, healthcare, e-commerce, and public sector",
-    },
-  ];
-
-  return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-      {/* Geometric Background Elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 w-32 h-32 border border-[#00B9FF] rotate-45"></div>
-        <div className="absolute top-40 right-32 w-24 h-24 border border-[#0097D9] rotate-12"></div>
-        <div className="absolute bottom-32 left-40 w-28 h-28 border border-[#007AC3] rotate-45"></div>
-        <div className="absolute bottom-20 right-20 w-20 h-20 border border-[#00B9FF] rotate-12"></div>
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Why Choose Our{" "}
-            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-              US Solutions?
-            </span>
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Built specifically for the US market with deep understanding of local regulations,
-            business practices, and industry requirements.
-          </p>
-        </div>
-
-        <div className="max-w-7xl mx-auto">
-          <div className="space-y-20">
-            {features.map((feature, index) => {
-              const IconComponent = feature.icon;
-              const isEven = index % 2 === 0;
-
-              return (
-                <div
-                  key={index}
-                  ref={(el) => (featureRefs.current[index] = el)}
-                  className={`flex flex-col lg:flex-row items-center gap-16 ${isEven ? "" : "lg:flex-row-reverse"
-                    }`}
-                >
-                  {/* Icon and Visual Element */}
-                  <div className="lg:w-1/2 flex justify-center lg:justify-center">
-                    <div className="relative">
-                      {/* Main icon container */}
-                      <div className="w-32 h-32 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-full flex items-center justify-center shadow-2xl">
-                        <IconComponent size={48} className="text-white" />
-                      </div>
-
-                      {/* Decorative rings */}
-                      <div className="absolute -inset-4 border-2 border-[#00B9FF]/20 rounded-full"></div>
-                      <div className="absolute -inset-8 border border-[#0097D9]/10 rounded-full"></div>
-
-                      {/* Floating elements */}
-                      <div className="absolute -top-4 -right-4 w-6 h-6 bg-[#00B9FF]/20 rounded-full"></div>
-                      <div className="absolute -bottom-4 -left-4 w-4 h-4 bg-[#0097D9]/20 rounded-full"></div>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="lg:w-1/2 text-center lg:text-left">
-                    <div className="max-w-lg mx-auto lg:mx-0">
-                      <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                        {feature.title}
-                      </h3>
-                      <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                        {feature.description}
-                      </p>
-
-                      {/* Feature highlight line */}
-                      <div className="w-20 h-1 bg-gradient-to-r from-[#00B9FF] to-[#0097D9] mx-auto lg:mx-0 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Professional Advantage Section
-const CleanAdvantageSection = () => {
-  const sectionRef = useRef(null);
-  const advantageRefs = useRef([]);
-
-  useGSAP(() => {
-    // Advantage items animation - 1 by 1 Sequence
-    const totalCards = advantageRefs.current.length;
-    const centerIndex = Math.floor(totalCards / 2);
-
-    // Create a timeline for strict sequential control
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 60%", // Trigger earlier
-        end: "bottom top",
-        toggleActions: "play none none reverse", // Play on enter, Reverse "z to a" on leave back (scroll up)
-      }
-    });
-
-    // 1 by 1 Animation
-    tl.fromTo(advantageRefs.current.filter(Boolean),
-      {
-        x: (index) => (centerIndex - index) * 50, // Start closer to center
-        y: 100,
-        opacity: 0,
-        scale: 0.5,
-        rotation: (index) => (index - centerIndex) * 10,
-      },
-      {
-        x: 0,
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        rotation: 0,
-        duration: 0.8,
-        ease: "back.out(1.7)",
-        stagger: {
-          each: 0.2, // Distinct 1-by-1 delay
-          from: "start", // Sequence: 1 -> 5 (and 5 -> 1 on reverse)
-        }
-      }
-    );
-
-  }, { scope: sectionRef });
-
-  const advantages = [
-    {
-      icon: Globe,
-      title: "US Industry Expertise",
-      description: "Deep knowledge of finance, healthcare, e-commerce, and public sector requirements",
-      gradient: "from-[#F59E0B] to-[#D97706]", // Amber/Orange
-    },
-    {
-      icon: Lock,
-      title: "Compliance-Driven",
-      description: "SOX, HIPAA, and ISO-certified digital solutions for regulatory confidence",
-      gradient: "from-[#8B5CF6] to-[#6D28D9]", // Purple
-    },
-    {
-      icon: TrendingUp,
-      title: "Enterprise Scalability",
-      description: "Cloud-native architectures that grow with your US business",
-      gradient: "from-[#10B981] to-[#059669]", // Emerald/Green
-    },
-    {
-      icon: Zap,
-      title: "Proven Methodologies",
-      description: "Agile delivery, design thinking, and data-led strategy approach",
-      gradient: "from-[#3B82F6] to-[#2563EB]", // Blue
-    },
-    {
-      icon: Users,
-      title: "Trusted Partner",
-      description: "Successful case studies from US corporates and SMEs nationwide",
-      gradient: "from-[#EC4899] to-[#DB2777]", // Pink
-    },
-  ];
-
-  return (
-    <section ref={sectionRef} className="py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Why Choose Our{" "}
-            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-              US Solutions?
-            </span>
-          </h2>
-        </div>
-
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {advantages.map((advantage, index) => {
-              const IconComponent = advantage.icon;
-              return (
-                <div
-                  key={index}
-                  ref={(el) => (advantageRefs.current[index] = el)}
-                  className={`group relative rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-br ${advantage.gradient}`}
-                >
-                  {/* Icon container */}
-                  <div className="relative z-10 w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-inner border border-white/20">
-                    <IconComponent size={24} className="text-white" />
-                  </div>
-
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <h3 className="text-xl font-bold text-white mb-3">
-                      {advantage.title}
-                    </h3>
-                    <p className="text-blue-50 leading-snug text-sm">
-                      {advantage.description}
-                    </p>
-                  </div>
-
-                  {/* Decorative element */}
-                  <div className="absolute top-4 right-4 w-8 h-8 bg-white/10 rounded-full blur-lg animate-pulse"></div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-
-// Dynamic Services Showcase
-const DynamicServicesSection = () => {
-  const sectionRef = useRef(null);
-  const serviceCardsRef = useRef([]);
-
-  useGSAP(() => {
-    serviceCardsRef.current.forEach((card, index) => {
-      if (card) {
-        // Parallax effect based on index
-        gsap.to(card, {
-          y: -100 + (index * 20),
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
+                trigger: triggerRef.current,
+                start: "top top",
+                end: "+=1800", // Reduced scroll distance for smoother performance
+                scrub: 0.5, // Reduced scrub for better responsiveness
+                pin: true,
+                anticipatePin: 1,
+            }
         });
 
-        // Fade in animation
-        gsap.fromTo(card,
-          {
-            opacity: 0,
-            y: 50,
-            scale: 0.8,
-            rotationX: 45,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            rotationX: 0,
-            duration: 0.6,
-            delay: index * 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
+        // Initial setup with force3D for GPU acceleration
+        gsap.set(row2Container.current, { scale: 0.6, autoAlpha: 0, force3D: true });
+        gsap.set(row3Container.current, { scale: 0.6, autoAlpha: 0, force3D: true });
+        gsap.set([row1Left.current, row1Right.current], { force3D: true });
+        gsap.set([row2Left.current, row2Right.current], { force3D: true });
+
+        // Phase 1: Row 1 Splits, Row 2 Emerges (Simplified)
+        tl.to(row1Left.current, { x: -600, rotation: -10, autoAlpha: 0, duration: 1.5, ease: "power1.inOut", force3D: true }, 0)
+          .to(row1Right.current, { x: 600, rotation: 10, autoAlpha: 0, duration: 1.5, ease: "power1.inOut", force3D: true }, 0)
+          .to(row2Container.current, { scale: 1, autoAlpha: 1, duration: 1.5, ease: "power1.out", force3D: true }, 0.3);
+
+        // Phase 2: Row 2 Splits, Row 3 Emerges (Simplified)
+        tl.to(row2Left.current, { x: -600, rotation: -10, autoAlpha: 0, duration: 1.5, ease: "power1.inOut", force3D: true }, "+=0.3")
+          .to(row2Right.current, { x: 600, rotation: 10, autoAlpha: 0, duration: 1.5, ease: "power1.inOut", force3D: true }, "<")
+          .to(row3Container.current, { scale: 1, autoAlpha: 1, duration: 1.5, ease: "power1.out", force3D: true }, "<0.3");
+
+    }, { scope: sectionRef });
+
+    const Card = ({ item }) => (
+        <div className="relative h-[280px] w-full rounded-[30px] overflow-hidden shadow-2xl bg-white flex" style={{ willChange: 'transform' }}>
+             <div className="w-[50%] h-full bg-[#111] flex flex-col justify-center p-8 pl-10 relative z-10 text-white">
+                 <div className="mb-4 text-[#00B9FF]">
+                     <item.icon size={40} />
+                 </div>
+                 <h3 className="text-2xl font-bold leading-tight max-w-[90%]">
+                     {item.title}
+                 </h3>
+             </div>
+             <div className="flex-1 bg-white flex items-center p-8 pr-10 relative z-0">
+                 <p className="text-gray-600 font-medium leading-relaxed pl-6">
+                     {item.desc}
+                 </p>
+             </div>
+             {/* Divider */}
+             <div className="absolute left-[50%] top-0 bottom-0 w-[60px] h-[105%] -translate-x-1/2 -translate-y-[2%] z-20 pointer-events-none">
+                  <svg viewBox="0 0 100 200" preserveAspectRatio="none" className="w-full h-full">
+                      <path d="M50,0 C90,60 10,140 50,200 L100,200 L100,0 Z" fill="white" />
+                  </svg>
+             </div>
+        </div>
+    );
+
+    return (
+        <section ref={sectionRef} className="bg-transparent relative">
+            {/* The Trigger/Pin Container */}
+            <div ref={triggerRef} className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">
+                
+                <div className="absolute top-10 w-full text-center z-50 pointer-events-none">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 bg-gray-50/80 backdrop-blur-sm inline-block px-10 py-3 rounded-full border border-gray-200 shadow-sm">
+                        Why Digital Transformation Matters
+                    </h2>
+                </div>
+
+                {/* Card Stack Container */}
+                <div className="relative w-full max-w-5xl h-[300px] flex items-center justify-center">
+                    
+                    {/* Row 3 (Bottom Layer) */}
+                    <div ref={row3Container} className="absolute inset-0 grid grid-cols-2 gap-8 z-10 origin-center" style={{ willChange: 'transform, opacity' }}>
+                        {benefits.slice(4, 6).map((item, i) => (
+                             <Card key={i} item={item} />
+                        ))}
+                    </div>
+
+                    {/* Row 2 (Middle Layer) */}
+                    <div ref={row2Container} className="absolute inset-0 grid grid-cols-2 gap-8 z-20 origin-center" style={{ willChange: 'transform, opacity' }}>
+                        <div ref={row2Left} className="w-full" style={{ willChange: 'transform, opacity' }}><Card item={benefits[2]} /></div>
+                        <div ref={row2Right} className="w-full" style={{ willChange: 'transform, opacity' }}><Card item={benefits[3]} /></div>
+                    </div>
+
+                    {/* Row 1 (Top Layer) */}
+                    <div className="absolute inset-0 grid grid-cols-2 gap-8 z-30 origin-center">
+                        <div ref={row1Left} className="w-full" style={{ willChange: 'transform, opacity' }}><Card item={benefits[0]} /></div>
+                        <div ref={row1Right} className="w-full" style={{ willChange: 'transform, opacity' }}><Card item={benefits[1]} /></div>
+                    </div>
+
+                </div>
+
+                <div className="absolute bottom-10 text-gray-400 text-sm pointer-events-none">
+                    Scroll to Explore
+                </div>
+            </div>
+        </section>
+    );
+};
+
+// SECTION 3: WHY CHOOSE US
+const WhyChooseUsSection = () => {
+    const sectionRef = useRef(null);
+    const advantageRefs = useRef([]);
+  
+    useGSAP(() => {
+      // Simple Fade Up Stagger
+      gsap.fromTo(advantageRefs.current,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power2.out", scrollTrigger: { trigger: sectionRef.current, start: "top 75%" } }
+      );
+    }, { scope: sectionRef });
+  
+    const reasons = [
+      { title: "Strategy-led Consulting", desc: "Business objectives first, technology second.", icon: Lightbulb, color: "text-amber-500", bg: "bg-amber-50" },
+      { title: "Enterprise-ready Execution", desc: "Solutions designed for scale and governance.", icon: Building2, color: "text-purple-600", bg: "bg-purple-50" },
+      { title: "Integrated Delivery", desc: "Systems, platforms, and data working together.", icon: Network, color: "text-emerald-600", bg: "bg-emerald-50" },
+      { title: "Regional Expertise", desc: "Supporting Austin, Dallas, Chicago & beyond.", icon: MapPin, color: "text-blue-600", bg: "bg-blue-50" },
+      { title: "Phased Approach", desc: "Manageable phases to reduce risk.", icon: Scale, color: "text-pink-600", bg: "bg-pink-50" }
+    ];
+  
+    return (
+      <section ref={sectionRef} className="py-24 bg-transparent overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+              Why Businesses Across the USA Choose Our
+              <span className="block bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent mt-2">
+                Digital Transformation Services
+              </span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Businesses across the United States choose our digital transformation consulting services because we focus on outcomes, not tools.
+            </p>
+          </div>
+          <div className="max-w-[1400px] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+              {reasons.map((reason, index) => (
+                <div 
+                    key={index} 
+                    ref={(el) => (advantageRefs.current[index] = el)} 
+                    className="group relative rounded-2xl p-8 bg-white border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                >
+                  <div className={`w-14 h-14 ${reason.bg} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <reason.icon size={28} className={reason.color} />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight">{reason.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{reason.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+};
+
+// SECTION 4: ECOSYSTEM
+const EcosystemSection = () => {
+  const sectionRef = useRef(null);
+  const featureRefs = useRef([]);
+  // No complex background movement, cleaner look
+
+  useGSAP(() => {
+    featureRefs.current.forEach((feature, index) => {
+      if (feature) {
+        gsap.fromTo(feature, 
+          { y: 50, opacity: 0 }, 
+          { y: 0, opacity: 1, duration: 1, delay: index * 0.2, ease: "power2.out", scrollTrigger: { trigger: feature, start: "top 85%" } }
         );
       }
     });
   }, { scope: sectionRef });
 
-  const services = [
-    {
-      icon: RefreshCw,
-      title: "IT & Legacy System Modernisation",
-      description: "Replace outdated systems with agile, scalable platforms that drive efficiency and innovation",
-      features: ["System Assessment", "Migration Planning", "Zero Downtime Deployment"],
-      gradient: "from-[#00B9FF] to-[#0097D9]",
-    },
-    {
-      icon: Cloud,
-      title: "Cloud Enablement",
-      description: "Scalable solutions on AWS, Azure, or US-based providers for optimal performance and compliance",
-      features: ["Cloud Strategy", "Multi-Cloud Setup", "Cost Optimization"],
-      gradient: "from-[#0097D9] to-[#007AC3]",
-    },
-    {
-      icon: Database,
-      title: "Data & Analytics",
-      description: "Real-time reporting, data compliance, and actionable insights for informed decision-making",
-      features: ["Data Pipeline", "Real-time Analytics", "SOX Compliance"],
-      gradient: "from-[#007AC3] to-[#00B9FF]",
-    },
-    {
-      icon: Briefcase,
-      title: "Digital Workplace Solutions",
-      description: "Empower hybrid teams with advanced collaboration tools and seamless workflows",
-      features: ["Collaboration Tools", "Workflow Automation", "Remote Integration"],
-      gradient: "from-[#00B9FF] to-[#0097D9]",
-    },
-    {
-      icon: Bot,
-      title: "AI & Automation",
-      description: "Intelligent process automation for enhanced efficiency and competitive advantage",
-      features: ["Process Automation", "AI Integration", "Smart Analytics"],
-      gradient: "from-[#0097D9] to-[#007AC3]",
-    },
+  const items = [
+    { title: "Strategy & Assessment", desc: "We evaluate digital maturity, operational workflows, and existing systems to define a clear transformation roadmap aligned with business objectives.", icon: Target },
+    { title: "Technology & Implementation", desc: "Through application modernization consulting and legacy application modernization services, we upgrade outdated systems and implement scalable digital platforms.", icon: Cpu },
+    { title: "Optimization & Growth", desc: "Using intelligent automation consulting, data modernisation, and continuous optimisation, we help businesses improve performance and sustain long-term growth.", icon: TrendingUp }
   ];
 
   return (
-    <section ref={sectionRef} className="py-32 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
-            Our US Digital{" "}
-            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-              Transformation Solutions
-            </span>
+    <section ref={sectionRef} className="py-24 bg-transparent relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+            A Complete Digital Transformation 
+            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent ml-2">Ecosystem</span>
           </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Successful transformation requires more than isolated improvements; it demands a connected ecosystem.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
-
+        <div className="max-w-7xl mx-auto space-y-20">
+          {items.map((item, index) => {
+            const isEven = index % 2 === 0;
             return (
               <div
                 key={index}
-                ref={(el) => (serviceCardsRef.current[index] = el)}
-                className={`group w-full h-[400px] [perspective:1000px] ${index === services.length - 1 ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""
-                  }`}
+                ref={(el) => (featureRefs.current[index] = el)}
+                className={`flex flex-col lg:flex-row items-center gap-16 ${!isEven ? 'lg:flex-row-reverse' : ''}`}
               >
-                <div className="relative w-full h-full transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
-                  {/* Front Face */}
-                  <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] bg-white rounded-3xl shadow-xl border border-gray-100 p-8 flex flex-col items-center justify-center text-center overflow-hidden">
-                    <div className={`absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${service.gradient}`}></div>
-
-                    <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform duration-500`}>
-                      <IconComponent size={40} className="text-white" />
+                <div className="lg:w-1/2 flex justify-center">
+                  <div className="relative">
+                    {/* Main Circle */}
+                    <div className="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-full flex items-center justify-center shadow-2xl z-10 relative">
+                      <item.icon size={48} className="text-white" />
                     </div>
-
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      {service.title}
-                    </h3>
-
-                    <p className="text-sm text-gray-500 mt-4 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-[#00B9FF] animate-pulse"></span>
-                      Hover to explore
-                    </p>
+                    {/* Pulsing Waves */}
+                    <div className="absolute inset-0 border-2 border-[#00B9FF] rounded-full animate-ping opacity-20 duration-[3s]"></div>
+                    <div className="absolute -inset-4 border border-[#00B9FF] rounded-full animate-ping opacity-15 duration-[3s] delay-[1s]"></div>
+                    <div className="absolute -inset-8 border border-[#0097D9] rounded-full animate-ping opacity-10 duration-[3s] delay-[2s]"></div>
                   </div>
-
-                  {/* Back Face */}
-                  <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center justify-center text-center">
-                    <h3 className="text-xl font-bold text-white mb-4">
-                      Why Choose This?
-                    </h3>
-
-                    <p className="text-gray-300 leading-relaxed mb-8 text-sm">
-                      {service.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 justify-center">
-                      {service.features.map((feature, featureIndex) => (
-                        <span
-                          key={featureIndex}
-                          className="bg-white/10 text-white border border-white/20 px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm"
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                </div>
+                <div className="lg:w-1/2 text-center lg:text-left">
+                  <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">{item.title}</h3>
+                  <p className="text-xl text-gray-600 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             );
@@ -565,327 +367,410 @@ const DynamicServicesSection = () => {
   );
 };
 
-// Professional US Coverage Section
-const CleanUSCoverageSection = () => {
-  const sectionRef = useRef(null);
-  const cityRefs = useRef([]);
+// SECTION 5: SEQUENTIAL SCROLL SERVICES (CENTER TO LEFT)
+const SequentialServicesSection = () => {
+    const sectionRef = useRef(null);
+    const triggerRef = useRef(null);
+    const titleRefs = useRef([]);
+    const imageCardRefs = useRef([]);
+    const contentCardRefs = useRef([]);
 
-  useGSAP(() => {
-    cityRefs.current.forEach((city, index) => {
-      if (city) {
-        gsap.fromTo(city,
-          {
-            y: 40,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.5,
-            delay: index * 0.05,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 75%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+    const services = [
+      { 
+          title: "IT & Legacy System Modernization", 
+          desc: "Reduce technical debt and enable future innovation.", 
+          list: ["System Audit", "Refactoring", "Cloud Migration"],
+          image: "https://images.unsplash.com/photo-1558494949-efdeb6bf80d1?q=80&w=2874&auto=format&fit=crop", 
+          id: "01",
+          icon: RefreshCw
+      },
+      { 
+          title: "Cloud Enablement", 
+          desc: "Secure, scalable cloud adoption for operational resilience.", 
+          list: ["AWS/Azure", "Migration", "Optimization"],
+          image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2672&auto=format&fit=crop", 
+          id: "02",
+          icon: Cloud
+      },
+      { 
+          title: "Data Modernization", 
+          desc: "Consolidate data sources and enable real-time insights.", 
+          list: ["Analytics", "Warehousing", "Governance"],
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop", 
+          id: "03",
+          icon: Database
+      },
+      { 
+          title: "Digital Workplace", 
+          desc: "Tools to improve collaboration and workforce efficiency.", 
+          list: ["Collaboration", "Remote Work", "Security"],
+          image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2670&auto=format&fit=crop", 
+          id: "04",
+          icon: Laptop
+      },
+      { 
+          title: "AI & Intelligent Automation", 
+          desc: "Enhance automation, analytics, and operational intelligence.", 
+          list: ["Process Auto", "AI Ops", "Predictive"],
+          image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2565&auto=format&fit=crop", 
+          id: "05",
+          icon: Bot
+      },
+      { 
+          title: "Business Consulting", 
+          desc: "Align people, processes, and technology for change.", 
+          list: ["Strategy", "Change Mgmt", "Roadmapping"],
+          image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2670&auto=format&fit=crop", 
+          id: "06",
+          icon: Briefcase
       }
-    });
-  }, { scope: sectionRef });
+    ];
 
-  const usCities = [
-    { name: "New York", icon: Building2, description: "Financial hubs and fintech innovation" },
-    { name: "Los Angeles", icon: Factory, description: "Entertainment and media technology" },
-    { name: "San Francisco", icon: Laptop, description: "Tech startups and digital agencies" },
-    { name: "Chicago", icon: BarChart3, description: "Professional services and consultancy" },
-    { name: "Boston", icon: Hospital, description: "Healthcare and life sciences" },
-    { name: "Seattle", icon: Plane, description: "Aerospace and cloud technology" },
-    { name: "Austin", icon: Cpu, description: "Energy and renewable tech" },
-    { name: "Miami", icon: Globe, description: "Media and creative industries" },
-    { name: "Denver", icon: Network, description: "Maritime and logistics tech" },
-    { name: "Atlanta", icon: Code, description: "Software development hubs" },
+    useGSAP(() => {
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: triggerRef.current,
+                start: "top top",
+                end: "+=6000",
+                scrub: 1, 
+                pin: true,
+                anticipatePin: 1
+            }
+        });
+
+        titleRefs.current.forEach((el) => { if(el) gsap.set(el, { autoAlpha: 0, left: "50%", top: "50%", xPercent: -50, yPercent: -50, scale: 2.5, position: "absolute" }); });
+        imageCardRefs.current.forEach((el) => { if(el) gsap.set(el, { autoAlpha: 0, x: 100, y: 200 }); });
+        contentCardRefs.current.forEach((el) => { if(el) gsap.set(el, { autoAlpha: 0, x: 100, y: 200 }); });
+
+        services.forEach((_, i) => {
+            const title = titleRefs.current[i];
+            const imgCard = imageCardRefs.current[i];
+            const contentCard = contentCardRefs.current[i];
+            const nextTitle = titleRefs.current[i + 1];
+
+            if(title && imgCard && contentCard) {
+                const entryLabel = `entry-${i}`;
+                tl.addLabel(entryLabel);
+                tl.to(title, { autoAlpha: 1, scale: 2.5, left: "50%", top: "50%", xPercent: -50, yPercent: -50, duration: 1.5, ease: "power2.out" }, entryLabel);
+                tl.to(title, { scale: 1, left: "1%", top: "50%", xPercent: 0, yPercent: -50, duration: 2, ease: "power3.inOut" }, ">-0.5");
+                tl.to(imgCard, { autoAlpha: 1, x: 0, y: 0, duration: 2, ease: "power3.out" }, "<+=1");
+                tl.to(contentCard, { autoAlpha: 1, x: 0, y: 0, duration: 2.2, ease: "power3.out" }, "<+=0.2");
+                tl.to({}, { duration: 4 });
+                const exitLabel = `exit-${i}`;
+                tl.addLabel(exitLabel);
+                tl.to([imgCard, contentCard], { y: -150, autoAlpha: 0, duration: 1.5, ease: "power2.in" }, exitLabel);
+                if (nextTitle) {
+                     tl.to(nextTitle, { autoAlpha: 1, scale: 2.5, left: "50%", top: "50%", duration: 1.5 }, exitLabel + "+=0.5");
+                     tl.to(title, { autoAlpha: 0, duration: 1 }, exitLabel + "+=0.5"); 
+                } else {
+                     tl.to(title, { autoAlpha: 0, duration: 1 }, exitLabel);
+                }
+            }
+        });
+    }, { scope: sectionRef });
+
+    return (
+        <section ref={sectionRef} className="bg-transparent">
+            <div ref={triggerRef} className="h-screen w-full relative overflow-hidden flex bg-transparent">
+                <div className="hidden lg:block absolute left-0 top-0 h-full w-[35%] z-10 px-12 pointer-events-none"></div>
+                <div className="absolute inset-0 z-20 pointer-events-none">
+                    {services.map((service, i) => (
+                        <div key={i} ref={el => titleRefs.current[i] = el} className="absolute w-[80%] lg:w-[30%] origin-center" style={{ willChange: 'transform, opacity' }}>
+                            <div className="flex items-center gap-4 mb-6"><span className="text-sm font-mono tracking-widest text-[#00B9FF] font-bold">{service.id}</span><div className="h-px w-12 bg-gray-200"></div></div>
+                            <h3 className="text-4xl xl:text-5xl font-bold leading-tight mb-4 text-gray-900">{service.title}</h3>
+                            <p className="text-gray-400 text-lg hidden md:block">Webnox Digital Transformation</p>
+                        </div>
+                    ))}
+                </div>
+                <div className="w-full lg:w-[65%] h-full relative ml-auto flex items-center justify-center p-6 lg:p-12 overflow-hidden">
+                    <div className="absolute inset-0 pointer-events-none">
+                         <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-[#00B9FF]/5 rounded-full blur-[100px]"></div>
+                         <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-[#0097D9]/5 rounded-full blur-[80px]"></div>
+                    </div>
+                    {services.map((service, i) => (
+                        <div key={i} className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none">
+                            <div className="relative w-full max-w-5xl h-[80%] lg:h-[600px]">
+                                <div ref={el => imageCardRefs.current[i] = el} className="absolute left-0 top-0 lg:left-0 lg:top-10 w-full md:w-[60%] h-[250px] md:h-[320px] lg:h-[380px] z-20 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto group border border-gray-100" style={{ willChange: 'transform, opacity' }}>
+                                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${service.image})` }}></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                                    <div className="absolute bottom-0 left-0 p-8 w-full">
+                                        <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center mb-4 border border-white/30"><service.icon className="text-white" size={24} /></div>
+                                        <h4 className="text-2xl font-bold text-white">{service.title}</h4>
+                                    </div>
+                                </div>
+                                <div ref={el => contentCardRefs.current[i] = el} className="absolute right-0 bottom-0 lg:right-10 lg:bottom-10 w-full md:w-[50%] bg-white text-gray-900 p-8 md:p-10 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] z-30 pointer-events-auto border border-gray-100" style={{ willChange: 'transform, opacity' }}>
+                                    <h4 className="text-xl font-bold mb-4 text-gray-800 flex items-center gap-2"><Zap className="fill-[#00B9FF] text-[#00B9FF]" size={18} />Key Benefits</h4>
+                                    <p className="text-gray-600 mb-6 leading-relaxed">{service.desc}</p>
+                                    <ul className="space-y-3">{service.list.map((item, idx) => (<li key={idx} className="flex items-center gap-3 text-sm font-semibold text-gray-700"><div className="w-1.5 h-1.5 rounded-full bg-[#00B9FF]"></div>{item}</li>))}</ul>
+                                    <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between group cursor-pointer hover:bg-gray-50 -mx-10 -mb-10 p-10 rounded-b-3xl transition-colors">
+                                        <Link href="/contact-us" className="text-sm font-bold text-[#0097D9] group-hover:text-[#00B9FF] transition-colors">
+                                            EXPLORE SOLUTION
+                                        </Link>
+                                        <ArrowRight className="text-gray-400 group-hover:translate-x-1 group-hover:text-[#00B9FF] transition-all" size={18}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+// SECTION 6: INDUSTRIES
+const IndustriesSection = () => {
+    const sectionRef = useRef(null);
+    const itemRefs = useRef([]);
+
+    useGSAP(() => {
+        gsap.fromTo(itemRefs.current, 
+            { y: 30, opacity: 0 },
+            { 
+               y: 0, opacity: 1, duration: 0.5, stagger: 0.1,
+               scrollTrigger: { trigger: sectionRef.current, start: "top 80%" }
+            }
+        );
+    }, { scope: sectionRef });
+
+    const industries = [
+        { name: "Finance & FinTech", icon: DollarSign },
+        { name: "Healthcare & Life Sciences", icon: Hospital },
+        { name: "Technology & SaaS", icon: Cpu },
+        { name: "E-commerce & Retail", icon: ShoppingBag },
+        { name: "Manufacturing", icon: Factory },
+        { name: "Professional Services", icon: Briefcase },
+        { name: "Public Sector", icon: Building2 }
+    ];
+
+    return (
+        <section ref={sectionRef} className="py-24 bg-transparent border-t border-gray-100">
+             <div className="container mx-auto px-6 text-center">
+                 <h2 className="text-4xl font-bold text-gray-900 mb-12">Industries We Support Across the USA</h2>
+                 <div className="flex flex-wrap justify-center gap-6">
+                    {industries.map((item, index) => (
+                        <div 
+                            key={index}
+                            ref={el => itemRefs.current[index] = el}
+                            className="bg-white px-8 py-5 rounded-full shadow-md hover:shadow-lg transition-all hover:scale-105 border border-gray-200 flex items-center gap-3 cursor-default"
+                        >
+                            <item.icon className="text-[#00B9FF]" size={20}/>
+                            <span className="font-bold text-gray-800">{item.name}</span>
+                        </div>
+                    ))}
+                 </div>
+                 <div className="mt-12">
+                     <Link href="/case-studies" className="text-[#00B9FF] font-bold text-lg hover:underline inline-flex items-center gap-2">
+                         See Digital Transformation Examples by Industry <ArrowRight size={20}/>
+                     </Link>
+                 </div>
+             </div>
+        </section>
+    );
+};
+
+// SECTION 7: USA COVERAGE (THREAD LAYOUT)
+const USACoverageSection = () => {
+  const containerRef = useRef(null);
+  
+  useGSAP(() => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: containerRef.current, start: "top 70%" } });
+    
+    const path = containerRef.current.querySelectorAll('.thread-path');
+    const nodes = containerRef.current.querySelectorAll('.map-node');
+    
+    gsap.set(path, { strokeDashoffset: 1300, strokeDasharray: 1300 });
+    gsap.set(nodes, { scale: 0, opacity: 0 });
+
+    tl.to(path, {
+      strokeDashoffset: 0,
+      duration: 3,
+      ease: "power2.out"
+    });
+    
+    // Sync nodes with path progress
+    nodes.forEach((node, i) => {
+      const revealTime = i === 0 ? 0.4 : i === 1 ? 1.2 : i === 2 ? 1.9 : 2.5;
+      tl.to(node, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.5,
+        ease: "back.out(1.7)"
+      }, revealTime);
+    });
+
+  }, { scope: containerRef });
+  
+  const hubs = [
+    { name: "San Francisco", icon: Laptop, x: "15%", y: "31%", color: "text-blue-600", desc: "Tech Hubs" },
+    { name: "Austin", icon: Cpu, x: "40%", y: "66%", color: "text-cyan-600", desc: "Innovation & Tech" },
+    { name: "Chicago", icon: BarChart3, x: "65%", y: "46%", color: "text-purple-600", desc: "Business Hub" },
+    { name: "New York", icon: Building2, x: "85%", y: "31%", color: "text-emerald-600", desc: "Financial Innovation" }
   ];
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-      {/* Geometric Background Elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 w-32 h-32 border border-[#00B9FF] rotate-45"></div>
-        <div className="absolute top-40 right-32 w-24 h-24 border border-[#0097D9] rotate-12"></div>
-        <div className="absolute bottom-32 left-40 w-28 h-28 border border-[#007AC3] rotate-45"></div>
-        <div className="absolute bottom-20 right-20 w-20 h-20 border border-[#00B9FF] rotate-12"></div>
-      </div>
+    <section ref={containerRef} className="py-32 border-t border-gray-100 overflow-hidden relative bg-transparent">
+      <div className="container mx-auto px-6 text-center relative z-10">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-20 leading-tight">
+          Nationwide <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">Connectivity</span>
+        </h2>
+        
+        <div className="relative w-full max-w-6xl mx-auto h-[400px] md:h-[300px]">
+           {/* The Thread (SVG Path) */}
+           <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1200 300" preserveAspectRatio="none">
+             <path 
+               d="M0,150 C150,150 200,50 300,50 S450,250 600,250 S800,50 900,50 S1050,150 1200,150" 
+               fill="none" 
+               stroke="#e2e8f0" 
+               strokeWidth="4" 
+               className="thread-path opacity-40"
+             />
+             <path 
+               d="M0,150 C150,150 200,50 300,50 S450,250 600,250 S800,50 900,50 S1050,150 1200,150" 
+               fill="none" 
+               stroke="#00B9FF" 
+               strokeWidth="2" 
+               strokeDasharray="8 4"
+               className="thread-path opacity-80"
+             />
+           </svg>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center mb-12 md:mb-20">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-            Serving Enterprises{" "}
-            <span className="bg-gradient-to-r from-[#00B9FF] to-[#0097D9] bg-clip-text text-transparent">
-              Across the US
-            </span>
-          </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
-            From financial hubs in New York to tech startups in San Francisco, we partner with
-            businesses nationwide to drive digital transformation success.
-          </p>
+           {hubs.map((hub, i) => (
+             <div 
+               key={i} 
+               className="map-node absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+               style={{ left: hub.x, top: hub.y }}
+             >
+               <div className="absolute inset-0 bg-[#00B9FF]/20 rounded-full blur-xl scale-0 group-hover:scale-150 transition-transform duration-500" />
+               <div className={`relative w-20 h-20 md:w-24 md:h-24 bg-white rounded-full border-2 border-gray-100 shadow-xl flex flex-col items-center justify-center gap-1 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-300 z-10 ${hub.color}`}>
+                 <hub.icon size={28} />
+                 <span className="text-[10px] font-bold text-gray-400 opacity-60 group-hover:opacity-100 transition-opacity uppercase tracking-tighter">US Hub</span>
+               </div>
+               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+                  <span className="px-4 py-2 rounded-full text-sm font-bold shadow-lg bg-white text-gray-800 block">
+                    {hub.name}
+                  </span>
+                  <span className="text-[10px] text-gray-500 block mt-1">{hub.desc}</span>
+               </div>
+               <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-bold text-gray-400 group-hover:opacity-0 transition-opacity">
+                 {hub.name}
+               </span>
+             </div>
+           ))}
         </div>
+      </div>
+    </section>
+  );
+};
 
-        <div className="max-w-7xl mx-auto">
-          {/* Responsive Grid Layout */}
-          <div className="relative">
-            {/* Central Hub - Hidden on mobile, shown on larger screens */}
-            <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0">
-              <div className="w-24 h-24 xl:w-32 xl:h-32 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-full flex items-center justify-center shadow-2xl">
-                <Globe size={32} className="text-white xl:w-10 xl:h-10" />
-              </div>
-              <div className="absolute -inset-3 xl:-inset-4 border-2 border-[#00B9FF]/30 rounded-full"></div>
-            </div>
-
-            {/* Mobile Layout: Simple Grid */}
-            <div className="lg:hidden">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {usCities.map((city, index) => {
-                  const IconComponent = city.icon;
-                  return (
-                    <div
-                      key={index}
-                      ref={(el) => (cityRefs.current[index] = el)}
-                      className="group bg-white border-2 border-gray-200 rounded-2xl p-6 hover:border-[#00B9FF] transition-all duration-300 hover:shadow-lg"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                          <IconComponent size={20} className="text-white" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-[#0097D9] transition-colors duration-300">
-                            {city.name}
-                          </h3>
-                          <p className="text-sm text-gray-600 leading-relaxed">
-                            {city.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Desktop Layout: Hexagonal Grid with Perfect Alignment */}
-            <div className="hidden lg:block">
-              <div className="relative min-h-[600px] xl:min-h-[500px]">
-                {/* Perfectly Aligned Hexagonal Grid */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="grid grid-cols-5 gap-8 xl:gap-12 w-full max-w-5xl">
-                    {/* Row 1 */}
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={usCities[0]} index={0} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={usCities[1]} index={1} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={usCities[2]} index={2} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={usCities[3]} index={3} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center">
-                      <CityHexagon city={usCities[4]} index={4} cityRefs={cityRefs} />
-                    </div>
-
-                    {/* Row 2 - Offset for hexagonal effect */}
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={usCities[5]} index={5} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={usCities[6]} index={6} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={usCities[7]} index={7} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={usCities[8]} index={8} cityRefs={cityRefs} />
-                    </div>
-                    <div className="col-span-1 flex justify-center mt-8 xl:mt-12">
-                      <CityHexagon city={usCities[9]} index={9} cityRefs={cityRefs} />
-                    </div>
-                  </div>
+// SECTION 8: FAQ (Accordion)
+const FAQSection = () => {
+    const [openIndex, setOpenIndex] = useState(null);
+  
+    const faqs = [
+      { q: "Is digital transformation only for large enterprises?", a: "No. We provide digital transformation services for SMEs as well as enterprise organisations." },
+      { q: "Do you focus more on consulting or implementation?", a: "Our engagements are consulting-led, with implementation aligned to business strategy." },
+      { q: "Can digital transformation be delivered in phases?", a: "Yes. Most initiatives are executed in structured phases to reduce risk and improve adoption." },
+      { q: "How do you measure success?", a: "Success is measured through operational efficiency, system performance, adoption, and business impact." }
+    ];
+  
+    return (
+      <section className="py-24 bg-transparent">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions</h2>
+          </div>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-gray-50 rounded-2xl transition-all duration-300 hover:shadow-md">
+                <button
+                  className="w-full flex items-center justify-between p-6 text-left font-bold text-gray-900"
+                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                >
+                  {faq.q}
+                  {openIndex === index ? <ChevronUp className="text-[#00B9FF]" /> : <ChevronDown className="text-gray-400" />}
+                </button>
+                <div 
+                  className={`overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-40 p-6 pt-0' : 'max-h-0'}`}
+                >
+                  <p className="text-gray-600 leading-relaxed">{faq.a}</p>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* Bottom Metrics Bar - Responsive */}
-          <div className="mt-16 md:mt-20 lg:mt-24 bg-gradient-to-r from-[#00B9FF]/10 via-[#0097D9]/10 to-[#007AC3]/10 rounded-2xl p-6 md:p-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 text-center">
-              <div className="space-y-2">
-                <div className="text-2xl md:text-3xl font-bold text-[#00B9FF]">10+</div>
-                <div className="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wide">Cities Served</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl md:text-3xl font-bold text-[#0097D9]">500+</div>
-                <div className="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wide">Projects Completed</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-2xl md:text-3xl font-bold text-[#007AC3]">98%</div>
-                <div className="text-xs md:text-sm font-semibold text-gray-700 uppercase tracking-wide">Success Rate</div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
 };
 
-// Magnetic CTA Section
+// SECTION 9: CTA (Magnetic with Animation)
 const MagneticCTASection = () => {
-  const sectionRef = useRef(null);
-  const buttonRef = useRef(null);
-  const sparklesRef = useRef([]);
-
-  useGSAP(() => {
-    const button = buttonRef.current;
-
-    if (button) {
-      // Floating animation
-      gsap.to(button, {
-        y: -15,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut",
-      });
-
-      // Sparkles animation
-      sparklesRef.current.forEach((sparkle, index) => {
-        if (sparkle) {
-          gsap.to(sparkle, {
-            rotation: 360,
-            scale: 1.5,
-            duration: 4 + index,
-            repeat: -1,
-            ease: "power2.inOut",
-            yoyo: true,
-          });
+    const sectionRef = useRef(null);
+    const buttonRef = useRef(null);
+  
+    useGSAP(() => {
+        if(buttonRef.current) {
+            gsap.to(buttonRef.current, {
+                y: -10,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: "power1.inOut"
+            })
         }
-      });
+    }, { scope: sectionRef });
+  
+    return (
+      <section ref={sectionRef} className="py-32 bg-gradient-to-br from-[#00B9FF] via-[#0097D9] to-[#007AC3] relative overflow-hidden text-center">
+        {/* Sparkles */}
+        {[...Array(5)].map((_, i) => (
+            <Sparkles key={i} className="absolute text-white opacity-40 animate-pulse" 
+            style={{top: `${Math.random()*80}%`, left: `${Math.random()*90}%`, width: 20 + Math.random()*20}} />
+        ))}
 
-      button.addEventListener("mouseenter", () => {
-        gsap.to(button, {
-          scale: 1.1,
-          boxShadow: "0 30px 60px rgba(59, 130, 246, 0.4)",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
-
-      button.addEventListener("mouseleave", () => {
-        gsap.to(button, {
-          scale: 1,
-          boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
-    }
-  }, { scope: sectionRef });
-
-  return (
-    <section ref={sectionRef} className="py-32 bg-gradient-to-br from-[#00B9FF] via-[#0097D9] to-[#007AC3] relative overflow-hidden">
-      {/* Sparkle elements */}
-      {[...Array(6)].map((_, index) => (
-        <div
-          key={index}
-          ref={(el) => (sparklesRef.current[index] = el)}
-          className="absolute text-cyan-400 opacity-30"
-          style={{
-            left: `${10 + index * 15}%`,
-            top: `${20 + index * 10}%`,
-          }}
-        >
-          <Sparkles size={24} />
+        <div className="container mx-auto px-6 relative z-10 text-white">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 transform-gpu hover:scale-105 transition-transform duration-500">
+            Ready to Accelerate Your<br/>
+            <span className="text-white/90">Digital Transformation?</span>
+          </h2>
+          <p className="text-xl text-white/80 mb-16 max-w-4xl mx-auto leading-relaxed">
+            Whether you're modernizing legacy systems or planning enterprise-wide transformation, our team is ready to help you move forward with confidence.
+          </p>
+          <Link
+            href="/contact-us#contact-form"
+            ref={buttonRef}
+            className="inline-flex items-center gap-3 bg-white text-[#00B9FF] px-12 py-6 rounded-full text-xl font-semibold border-4 border-white shadow-2xl hover:scale-110 transition-transform duration-300"
+          >
+            Book a Free Strategy Call
+            <ArrowRight size={24} />
+          </Link>
         </div>
-      ))}
-
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
-          Accelerate Your{" "}
-          <span className="text-white/90">
-            US Digital Transformation
-          </span>
-        </h2>
-        <p className="text-xl text-white/80 mb-16 max-w-4xl mx-auto leading-relaxed">
-          Ready to modernize your enterprise and compete globally? Let's discuss your
-          digital transformation strategy and unlock your business potential.
-        </p>
-        <Link
-          href="/contact-us#contact-form"
-          ref={buttonRef}
-          className="inline-flex items-center gap-3 bg-white text-[#00B9FF] px-12 py-6 rounded-full text-xl font-semibold border-4 border-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] hover:bg-[#00B9FF] hover:text-white hover:border-[#00B9FF] transition-all duration-300 shadow-2xl"
-        >
-          Request a Free Strategy Call
-          <ArrowRight size={24} />
-        </Link>
-      </div>
-    </section>
-  );
-};
-
-// Separate component for hexagonal city items
-const CityHexagon = ({ city, index, cityRefs }) => {
-  const IconComponent = city.icon;
-
-  return (
-    <div
-      ref={(el) => (cityRefs.current[index] = el)}
-      className="relative group"
-    >
-      {/* Hexagonal Container */}
-      <div className="relative w-32 h-32 xl:w-40 xl:h-40">
-        {/* Hexagon Shape */}
-        <div className="absolute inset-0 bg-white border-2 border-gray-200 transform rotate-45 group-hover:border-[#00B9FF] transition-colors duration-300 shadow-lg group-hover:shadow-xl">
-          <div className="absolute inset-0 flex flex-col items-center justify-center transform -rotate-45 p-4 xl:p-6">
-            {/* Icon */}
-            <div className="w-8 h-8 xl:w-12 xl:h-12 bg-gradient-to-br from-[#00B9FF] to-[#0097D9] rounded-xl flex items-center justify-center mb-2 xl:mb-3 group-hover:scale-110 transition-transform duration-300">
-              <IconComponent size={16} className="text-white xl:w-5 xl:h-5" />
-            </div>
-
-            {/* City Name */}
-            <h3 className="text-sm xl:text-lg font-bold text-gray-900 mb-1 xl:mb-2 group-hover:text-[#0097D9] transition-colors duration-300 text-center leading-tight">
-              {city.name}
-            </h3>
-
-            {/* Description */}
-            <p className="text-xs xl:text-sm text-gray-600 text-center leading-tight group-hover:text-gray-700 transition-colors duration-300">
-              {city.description}
-            </p>
-          </div>
-        </div>
-
-        {/* Connection Line to Center - Only on desktop */}
-        <div className="absolute top-1/2 left-1/2 w-px h-16 xl:h-20 bg-gradient-to-b from-[#00B9FF]/30 to-transparent transform -translate-x-1/2 -translate-y-full origin-bottom"></div>
-
-        {/* Corner Accents */}
-        <div className="absolute -top-1 -right-1 xl:-top-2 xl:-right-2 w-3 h-3 xl:w-4 xl:h-4 bg-[#00B9FF] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div className="absolute -bottom-1 -left-1 xl:-bottom-2 xl:-left-2 w-2 h-2 xl:w-3 xl:h-3 bg-[#0097D9] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      </div>
-    </div>
-  );
+      </section>
+    );
 };
 
 export default function DigitalTransformationUSAPage() {
   return (
-    <main className="overflow-hidden">
-      <DigitalTransformationHero />
-      <Floating3DFeaturesSection />
-      <CleanAdvantageSection />
-      <DynamicServicesSection />
-      <CleanUSCoverageSection />
-      <MagneticCTASection />
+    <main className="overflow-hidden bg-gradient-to-br from-[#e8e0ff] via-[#e0f8ff] to-white relative">
+      {/* Dots Overlay */}
+      <div className="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-100" />
+      
+      {/* More global decorative backgrounds for depth */}
+      <div className="absolute top-[20%] right-[10%] w-[500px] h-[500px] bg-blue-300/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-[45%] left-[-5%] w-[600px] h-[600px] bg-purple-300/10 rounded-full blur-[110px] pointer-events-none" />
+      <div className="absolute top-[75%] right-[5%] w-[500px] h-[500px] bg-cyan-300/10 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="relative z-10">
+        <DigitalTransformationHero />
+        <WhyMattersSection />
+        <WhyChooseUsSection />
+        <EcosystemSection />
+        <SequentialServicesSection />
+        <IndustriesSection />
+        <USACoverageSection />
+        <FAQSection />
+        <MagneticCTASection />
+      </div>
     </main>
   );
 }
