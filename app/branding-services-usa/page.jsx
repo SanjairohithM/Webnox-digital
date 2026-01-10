@@ -29,7 +29,7 @@ export default function BrandingServicesUSA() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 relative overflow-hidden">
+    <div className="w-full relative overflow-x-hidden bg-gradient-to-bl from-white via-[#e0f8ff] to-[#e8e0ff]">
       <HeroSection />
       <WhyChooseUsSection />
       <WhyBrandingMattersSection />
@@ -45,85 +45,38 @@ export default function BrandingServicesUSA() {
   );
 }
 
-// Hero Section with USA Banner Background
+// Hero Section - Matching UK Branding Page Style
 const HeroSection = () => {
-  const sectionRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const ctaRef = useRef(null);
+  const heroRef = useRef(null);
   const statsRef = useRef([]);
-  const bgRef = useRef(null);
-  const globeRef = useRef(null);
-
+  
   useGSAP(() => {
-    // Parallax background image movement
-    gsap.to(bgRef.current, {
-      y: 150,
-      scale: 1.1,
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-        invalidateOnRefresh: true
-      }
+    const tl = gsap.timeline();
+    
+    tl.from(".hero-line", {
+      y: 50,
+      opacity: 0,
+      rotateX: 10,
+      duration: 1,
+      ease: "power3.out",
+      stagger: 0.1
     });
+    
+    tl.from(".hero-desc", {
+      y: 20,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out"
+    }, "-=0.4");
+    
+    tl.from(".hero-cta-btn", {
+      scale: 0.95,
+      opacity: 0,
+      duration: 0.6,
+      ease: "back.out(1.5)"
+    }, "-=0.6");
 
-    // Globe rotation animation
-    if (globeRef.current) {
-      gsap.to(globeRef.current, {
-        rotation: 360,
-        duration: 30,
-        repeat: -1,
-        ease: "none"
-      });
-    }
-
-    // Title animation
-    if (titleRef.current) {
-      gsap.fromTo(titleRef.current,
-        { opacity: 0, y: 80, scale: 0.9 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.2,
-          ease: "power3.out"
-        }
-      );
-    }
-
-    // Subtitle animation
-    if (subtitleRef.current) {
-      gsap.fromTo(subtitleRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 0.3,
-          ease: "power2.out"
-        }
-      );
-    }
-
-    // CTA animation
-    if (ctaRef.current) {
-      gsap.fromTo(ctaRef.current,
-        { opacity: 0, y: 40, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.9,
-          delay: 0.6,
-          ease: "back.out(1.4)"
-        }
-      );
-    }
-
-    // Stats stagger
+    // Stats stagger animation
     statsRef.current.forEach((stat, i) => {
       if (!stat) return;
       gsap.fromTo(stat,
@@ -138,67 +91,54 @@ const HeroSection = () => {
         }
       );
     });
-  }, { scope: sectionRef });
+  }, { scope: heroRef });
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gray-900 pt-32 pb-20 px-4">
-      {/* USA Banner Background */}
-      <div ref={bgRef} className="absolute inset-0">
-        <Image
-          src="/images/usa-banner.jpg"
-          alt="USA Banner"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9]/20 via-transparent to-[#8B5CF6]/20"></div>
-      </div>
-
-      {/* USA Globe Animation */}
-      <div className="absolute top-10 right-10 opacity-20 hidden lg:block">
-        <div ref={globeRef} className="relative w-64 h-64">
-          <Globe className="w-full h-full text-white" />
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
-        </div>
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto text-center">
-        <div ref={titleRef}>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-white drop-shadow-2xl">
-            A Branding Agency in the USA trusted by businesses that want to grow with clarity, consistency, and confidence.
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
+      <div className="container mx-auto px-6 text-center z-10">
+        <div className="mb-8 max-w-5xl mx-auto px-4">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.2] tracking-tight mb-6">
+            <div className="overflow-hidden"><span className="hero-line block bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent pb-1">A Branding Agency in the USA</span></div>
+            <div className="overflow-hidden"><span className="hero-line block">trusted by businesses that want to</span></div>
+            <div className="overflow-hidden"><span className="hero-line block text-3xl md:text-5xl mt-2">grow with clarity, consistency, and confidence.</span></div>
           </h1>
         </div>
-
-        <div ref={subtitleRef}>
-          <p className="text-lg sm:text-xl md:text-2xl text-white/95 max-w-5xl mx-auto mb-10 leading-relaxed drop-shadow-lg">
-            In a competitive US market, strong brands are built on clarity, consistency, and execution, not visuals alone. Webnox Digital partners with startups, SMBs, SaaS companies, and enterprises across the USA to build scalable brand systems that align strategy with digital experience and long-term business growth.
-          </p>
-
-          <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Link href="/contact-us">
-              <button className="group px-8 py-4 bg-white text-[#0EA5E9] font-semibold rounded-full shadow-2xl hover:shadow-white/50 hover:scale-105 transition-all duration-300 flex items-center">
-                Schedule a Branding Strategy Discussion
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </Link>
+        
+        <p className="hero-desc text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+          In a competitive US market, strong brands are built on clarity, consistency, and execution, not visuals alone. Webnox Digital partners with startups, SMBs, SaaS companies, and enterprises across the USA to build scalable brand systems that align strategy with digital experience and long-term business growth.
+        </p>
+        
+        <div className="hero-cta-btn flex flex-col items-center gap-8 mb-16">
+          <Link href="/contact-us" className="group relative px-10 py-5 bg-blue-600 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-blue-500/40 transition-all transform hover:scale-[1.02]">
+            <div className="absolute inset-0 bg-blue-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+            <span className="relative z-10 font-bold text-lg flex items-center gap-2">
+              Schedule a Branding Strategy Discussion <ArrowRight size={20} />
+            </span>
+          </Link>
+          <div className="flex flex-wrap justify-center gap-4 text-slate-500 text-sm font-medium">
+             <span className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full border border-slate-200 backdrop-blur-sm">
+               <Shield size={16} className="text-blue-500"/> Strategy-First Approach
+             </span>
+             <span className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full border border-slate-200 backdrop-blur-sm">
+               <CheckCircle2 size={16} className="text-blue-500"/> US-Wide Branding Support
+             </span>
           </div>
+        </div>
 
-          {/* Stats */}
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-8 border border-white/50 shadow-2xl">
-            <p className="text-sm font-semibold text-gray-700 mb-6">Trusted by Growing Brands Across the USA</p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              {[
-                { label: "Branding Projects", value: "500+" },
-                { label: "Industries Served", value: "15+" },
-                { label: "Trusted by US Startups & Enterprises", value: "100%" }
-              ].map((stat, i) => (
-                <div key={i} ref={el => statsRef.current[i] = el} className="text-center">
-                  <div className="text-4xl font-bold bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6] bg-clip-text text-transparent mb-2">{stat.value}</div>
-                  <div className="text-sm text-gray-700">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+        {/* Stats Box */}
+        <div className="bg-white/95 backdrop-blur-md rounded-2xl p-8 border border-white/50 shadow-2xl max-w-4xl mx-auto">
+          <p className="text-sm font-semibold text-gray-700 mb-6">Trusted by Growing Brands Across the USA</p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {[
+              { label: "Branding Projects", value: "500+" },
+              { label: "Industries Served", value: "15+" },
+              { label: "Trusted by US Startups & Enterprises", value: "100%" }
+            ].map((stat, i) => (
+              <div key={i} ref={el => statsRef.current[i] = el} className="text-center">
+                <div className="text-4xl font-bold bg-gradient-to-r from-[#0EA5E9] to-[#8B5CF6] bg-clip-text text-transparent mb-2">{stat.value}</div>
+                <div className="text-sm text-gray-700">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -309,7 +249,7 @@ const WhyChooseUsSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-gray-50 to-white px-6 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto">
         <div ref={titleRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -395,7 +335,7 @@ const WhyBrandingMattersSection = () => {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white px-6 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden">
       <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1/3 h-96 opacity-10 hidden lg:block">
         <div ref={imageRef}>
           <Image src="/images/aboutrobot.png" alt="Robot" fill className="object-contain" />
@@ -501,7 +441,7 @@ const BrandingEcosystemSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-purple-50 to-blue-50 px-6 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div ref={titleRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -618,7 +558,7 @@ const DetailedServicesSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white px-6">
+    <section ref={sectionRef} className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -706,7 +646,7 @@ const IndustriesSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-blue-50 to-purple-50 px-6">
+    <section ref={sectionRef} className="py-24 px-6">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Industries We Serve <span className="bg-gradient-to-r from-[#2ACBEC] to-[#6149CD] bg-clip-text text-transparent">Across the USA</span>
@@ -766,7 +706,7 @@ const NationwideCoverageSection = () => {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white px-6 relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 px-6 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
           <Globe className="w-full h-full text-[#2ACBEC]" />
@@ -857,7 +797,7 @@ const CaseStudiesSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-purple-50 to-blue-50 px-6">
+    <section ref={sectionRef} className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -945,7 +885,7 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white px-6">
+    <section ref={sectionRef} className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -1018,7 +958,7 @@ const FAQSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-gray-50 to-white px-6">
+    <section ref={sectionRef} className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">

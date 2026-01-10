@@ -42,7 +42,10 @@ function USAServices() {
     const cardsRef = useRef(null);
 
     useGSAP(() => {
-        // Title animation
+        // Ensure ScrollTrigger is refreshed
+        ScrollTrigger.refresh();
+
+        // Title animation - immediate on load
         gsap.fromTo(titleRef.current,
             {
                 opacity: 0,
@@ -53,16 +56,11 @@ function USAServices() {
                 y: 0,
                 duration: 1,
                 ease: "power3.out",
-                scrollTrigger: {
-                    trigger: titleRef.current,
-                    start: "top bottom-=100",
-                    end: "bottom top+=100",
-                    toggleActions: "play reverse play reverse"
-                }
+                delay: 0.2
             }
         );
 
-        // Subtitle animation
+        // Subtitle animation - immediate on load
         gsap.fromTo(subtitleRef.current,
             {
                 opacity: 0,
@@ -72,18 +70,12 @@ function USAServices() {
                 opacity: 1,
                 y: 0,
                 duration: 0.8,
-                delay: 0.2,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: subtitleRef.current,
-                    start: "top bottom-=100",
-                    end: "bottom top+=100",
-                    toggleActions: "play reverse play reverse"
-                }
+                delay: 0.4,
+                ease: "power3.out"
             }
         );
 
-        // Cards container stagger animation
+        // Cards container stagger animation - immediate on load
         gsap.fromTo(cardsRef.current.children,
             {
                 opacity: 0,
@@ -94,16 +86,16 @@ function USAServices() {
                 y: 0,
                 duration: 0.8,
                 stagger: 0.15,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: cardsRef.current,
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    toggleActions: "play reverse play reverse"
-                }
+                delay: 0.6,
+                ease: "power3.out"
             }
         );
-    }, []);
+
+        // Cleanup function
+        return () => {
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        };
+    }, { scope: sectionRef });
 
     return (
         <div
