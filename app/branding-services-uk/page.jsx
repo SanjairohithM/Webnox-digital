@@ -79,33 +79,33 @@ const HeroSection = () => {
   }, { scope: heroRef })
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center pt-28 pb-16 md:pt-32 md:pb-20 overflow-hidden">
       <div className="container mx-auto px-6 text-center z-10">
         <div className="mb-8 max-w-5xl mx-auto px-4">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.2] tracking-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
             <div className="overflow-hidden"><span className="hero-line block bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent pb-1">Branding Services UK</span></div>
             <div className="overflow-hidden"><span className="hero-line block">For Startups, Tech Teams,</span></div>
             <div className="overflow-hidden"><span className="hero-line block text-3xl md:text-5xl mt-2">& Growing Businesses</span></div>
           </h1>
         </div>
         
-        <p className="hero-desc text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed font-light">
+        <p className="hero-desc text-base md:text-xl text-slate-600 max-w-3xl mx-auto mb-10 md:mb-12 leading-relaxed font-light px-4">
           Your brand defines how people recognise, trust, and choose your business. We help startups and global brands create strategic, modern identities that strengthen credibility and support long-term growth across the UK market.
         </p>
         
-        <div className="hero-cta-btn flex flex-col items-center gap-8">
-          <Link href="/contact-us" className="group relative px-10 py-5 bg-blue-600 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-blue-500/40 transition-all transform hover:scale-[1.02]">
+        <div className="hero-cta-btn flex flex-col items-center gap-6 md:gap-8">
+          <Link href="/contact-us" className="group relative px-8 py-4 md:px-10 md:py-5 bg-blue-600 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-blue-500/40 transition-all transform hover:scale-[1.02]">
             <div className="absolute inset-0 bg-blue-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-            <span className="relative z-10 font-bold text-lg flex items-center gap-2">
+            <span className="relative z-10 font-bold text-base md:text-lg flex items-center gap-2">
               Get a Free Brand Audit <ArrowRight size={20} />
             </span>
           </Link>
-          <div className="flex flex-wrap justify-center gap-4 text-slate-500 text-sm font-medium">
-             <span className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full border border-slate-200 backdrop-blur-sm">
-               <Shield size={16} className="text-blue-500"/> Strategy-First Approach
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 text-slate-500 text-xs md:text-sm font-medium">
+             <span className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-white/50 rounded-full border border-slate-200 backdrop-blur-sm">
+               <Shield size={14} className="text-blue-500 md:w-4 md:h-4"/> Strategy-First Approach
              </span>
-             <span className="flex items-center gap-2 px-4 py-2 bg-white/50 rounded-full border border-slate-200 backdrop-blur-sm">
-               <CheckCircle2 size={16} className="text-blue-500"/> UK-Wide Branding Support
+             <span className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-white/50 rounded-full border border-slate-200 backdrop-blur-sm">
+               <CheckCircle2 size={14} className="text-blue-500 md:w-4 md:h-4"/> UK-Wide Branding Support
              </span>
           </div>
         </div>
@@ -193,9 +193,9 @@ const ProvenImpact = () => {
   ]
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden">
+    <section ref={sectionRef} className="py-12 md:py-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Proven <span className="text-blue-600">Impact</span></h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed">Quantifiable results that demonstrate our commitment to brand excellence and organisational growth.</p>
         </div>
@@ -206,9 +206,9 @@ const ProvenImpact = () => {
               <div 
                 key={i} 
                 ref={el => cardsRef.current[i] = el}
-                className="flex-1 text-center relative group"
+                className="flex-1 text-center relative group w-full md:w-auto"
               >
-                <div className="text-6xl md:text-7xl font-black bg-gradient-to-br from-blue-600 to-cyan-500 bg-clip-text text-transparent mb-3 tracking-tighter">
+                <div className="text-5xl md:text-7xl font-black bg-gradient-to-br from-blue-600 to-cyan-500 bg-clip-text text-transparent mb-3 tracking-tighter">
                   <span className="stat-number" data-target={s.number}>0</span>
                   <span>{s.suffix}</span>
                 </div>
@@ -218,6 +218,10 @@ const ProvenImpact = () => {
                 
                 {i < stats.length - 1 && (
                   <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-24 bg-gradient-to-b from-transparent via-slate-200 to-transparent" />
+                )}
+                {/* Mobile Divider */}
+                 {i < stats.length - 1 && (
+                  <div className="md:hidden w-24 h-px bg-slate-200 mx-auto my-6" />
                 )}
               </div>
             ))}
@@ -258,21 +262,21 @@ const WhyBusinessesChooseUs = () => {
   ]
 
   return (
-    <section ref={sectionRef} className="py-20">
+    <section ref={sectionRef} className="py-12 md:py-20">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
             Why Businesses <span className="text-blue-600">Choose Us</span>
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">Partnering with UK organisations to build resilient digital-first brands.</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
           {reasons.map((r, i) => (
             <div 
               key={i} 
               ref={el => cardsRef.current[i] = el}
-              className="bg-white/60 backdrop-blur-xl p-8 rounded-[2rem] border border-white/50 shadow-xl hover:shadow-2xl transition-all group relative overflow-hidden"
+              className="bg-white/60 backdrop-blur-xl p-6 md:p-8 rounded-[2rem] border border-white/50 shadow-xl hover:shadow-2xl transition-all group relative overflow-hidden"
             >
               {/* Top Right Corner Design */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-600 to-blue-500 rounded-bl-[3rem] -mr-0 -mt-0 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500 z-10">
@@ -330,62 +334,39 @@ const BrandingEcosystem = () => {
   const headerRef = useRef(null)
   
   useGSAP(() => {
-    // Media query for desktop only pinning (optional, but good for mobile UX)
-    // For now, we apply to all sizes as requested, but scale appropriately
+    // Apply the same animation logic globally (mobile + desktop)
+    // We adjust the end value slightly via a function if needed, but for now strict consistency is requested.
     
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top", // Start pinning when section hits top
-        end: "+=250%", // Scroll distance (3 cards * ~80vh)
-        pin: true,
-        scrub: 1, // Smooth scrubbing
-        anticipatePin: 1
+          trigger: containerRef.current,
+          start: "top top", 
+          end: "+=250%", 
+          pin: true,
+          scrub: 1, 
+          anticipatePin: 1
       }
     })
 
     // Init state: Cards off screen (bottom)
     gsap.set(cardsRef.current, { y: "150vh", rotate: 0, opacity: 0 })
     
-    // Header animation (happens quickly at start)
-    tl.from(headerRef.current, {
-      opacity: 0,
-      y: 30,
-      duration: 0.5,
-      ease: "power2.out"
-    })
+    // Header animation 
+    tl.from(headerRef.current, { opacity: 0, y: 30, duration: 0.5, ease: "power2.out" })
 
     // Card 1
-    tl.to(cardsRef.current[0], {
-      y: 0,
-      opacity: 1,
-      rotation: -6,
-      duration: 2,
-      ease: "power3.out"
-    }, "+=0.2")
+    tl.to(cardsRef.current[0], { y: 0, opacity: 1, rotation: -6, duration: 2, ease: "power3.out" }, "+=0.2")
 
     // Card 2
-    tl.to(cardsRef.current[1], {
-      y: 0,
-      opacity: 1,
-      rotation: 6,
-      duration: 2,
-      ease: "power3.out"
-    }, "+=0.2") // Little gap before next card
+    tl.to(cardsRef.current[1], { y: 0, opacity: 1, rotation: 6, duration: 2, ease: "power3.out" }, "+=0.2")
 
     // Card 3
-    tl.to(cardsRef.current[2], {
-      y: 0,
-      opacity: 1,
-      rotation: -3,
-      duration: 2,
-      ease: "power3.out"
-    }, "+=0.2")
+    tl.to(cardsRef.current[2], { y: 0, opacity: 1, rotation: -3, duration: 2, ease: "power3.out" }, "+=0.2")
     
-    // Small pause at end before unpinning
+    // Pause
     tl.to({}, { duration: 1 })
 
-  }, { scope: containerRef })
+  }, { scope: containerRef });
 
   const cards = [
     { title: "Brand Strategy", icon: Lightbulb, color: "bg-blue-100 text-blue-600", desc: "Positioning, messaging, and differentiation." },
@@ -394,7 +375,7 @@ const BrandingEcosystem = () => {
   ]
 
   return (
-    <section ref={containerRef} className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-transparent">
+    <section ref={containerRef} className="relative md:h-screen flex flex-col items-center justify-center overflow-hidden bg-transparent py-20 md:py-0">
       
       {/* Fixed Header */}
       <div ref={headerRef} className="text-center z-10 mb-12">
@@ -403,7 +384,7 @@ const BrandingEcosystem = () => {
       </div>
 
       {/* Card Stacking Area */}
-      <div ref={wrapperRef} className="relative w-full max-w-[320px] md:max-w-[380px] aspect-[2.5/3.5] mx-auto z-20 perspective-1000">
+      <div ref={wrapperRef} className="relative w-full max-w-[280px] md:max-w-[380px] aspect-[2.5/3.5] mx-auto z-20 perspective-1000">
         {cards.map((item, i) => (
           <div 
             key={i} 
@@ -499,10 +480,10 @@ const DetailedServices = () => {
         </div>
 
         {/* Reduced row height for more compact feel */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(200px,auto)] max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[minmax(180px,auto)] max-w-6xl mx-auto">
           
           {/* 1. Brand Strategy - Large Feature Card (2x2) - WITH IMAGE */}
-          <div className="bento-card md:col-span-2 md:row-span-2 relative rounded-[2rem] overflow-hidden group shadow-lg hover:shadow-xl transition-all duration-500">
+          <div className="bento-card col-span-2 md:col-span-2 md:row-span-2 relative rounded-[2rem] overflow-hidden group shadow-lg hover:shadow-xl transition-all duration-500">
             <div className="absolute inset-0">
                <Image 
                  src="/images/BRANDING.webp" 
@@ -513,9 +494,9 @@ const DetailedServices = () => {
                <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/40 backdrop-blur-[1px] group-hover:from-black/70 transition-colors duration-500" />
             </div>
             
-            <div className="relative z-10 h-full p-8 flex flex-col justify-between">
+            <div className="relative z-10 h-full p-6 md:p-8 flex flex-col justify-between">
               <div>
-                <div className="w-14 h-14 bg-white/20 text-white rounded-2xl flex items-center justify-center mb-6 shadow-md backdrop-blur-sm">
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-white/20 text-white rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-md backdrop-blur-sm">
                   <Target size={28} />
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-3">Brand Strategy & Positioning</h3>
@@ -529,7 +510,7 @@ const DetailedServices = () => {
           </div>
 
           {/* 2. Visual Identity - Tall Vertical Card (1x2) - LIGHT THEME */}
-          <div className="bento-card md:col-span-1 md:row-span-2 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-[2rem] p-8 border border-cyan-100 relative overflow-hidden group shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div className="bento-card col-span-2 md:col-span-1 md:row-span-2 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-[2rem] p-6 md:p-8 border border-cyan-100 relative overflow-hidden group shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-50" />
              <div className="absolute bottom-0 left-0 w-32 h-32 bg-cyan-100 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 opacity-50" />
              
@@ -548,7 +529,7 @@ const DetailedServices = () => {
           </div>
 
           {/* 3. Digital Branding - Wide Card (3-col) - WITH IMAGE & LIGHT THEME */}
-          <div className="bento-card md:col-span-3 bg-white rounded-[2rem] p-8 relative overflow-hidden group shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100">
+          <div className="bento-card col-span-2 md:col-span-3 bg-white rounded-[2rem] p-6 md:p-8 relative overflow-hidden group shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-100">
             <div className="absolute inset-y-0 right-0 w-1/3">
                  <Image 
                    src="/images/Digital Marketing.webp" 
@@ -578,7 +559,7 @@ const DetailedServices = () => {
           </div>
 
           {/* 4. Guidelines - Deep Navy Center Card */}
-          <div className="bento-card bg-slate-900 rounded-[2.5rem] p-8 shadow-xl hover:shadow-2xl transition-all group flex flex-col items-center text-center justify-center relative overflow-hidden">
+          <div className="bento-card col-span-1 bg-slate-900 rounded-[2.5rem] p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all group flex flex-col items-center text-center justify-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-cyan-400 opacity-50" />
             <div className="w-12 h-12 bg-white/10 text-white rounded-full flex items-center justify-center mb-6 backdrop-blur-md border border-white/20 group-hover:scale-110 transition-transform">
               <Book size={24} />
@@ -588,7 +569,7 @@ const DetailedServices = () => {
           </div>
 
           {/* 5. Rebranding - Light Sky Left Card */}
-          <div className="bento-card bg-blue-50 rounded-[2.5rem] p-8 border border-blue-100 shadow-lg hover:shadow-xl transition-all group flex flex-col items-start text-left">
+          <div className="bento-card col-span-1 bg-blue-50 rounded-[2.5rem] p-6 md:p-8 border border-blue-100 shadow-lg hover:shadow-xl transition-all group flex flex-col items-start text-left">
             <div className="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center mb-8 group-hover:rotate-180 transition-transform duration-700 shadow-lg shadow-blue-200">
               <RefreshCw size={20} />
             </div>
@@ -598,7 +579,7 @@ const DetailedServices = () => {
           </div>
 
           {/* 6. Messaging - Vibrant Royal Right Card */}
-          <div className="bento-card bg-blue-600 rounded-[2.5rem] p-8 shadow-xl hover:shadow-2xl transition-all group flex flex-col items-end text-right justify-end relative overflow-hidden">
+          <div className="bento-card col-span-2 md:col-span-1 bg-blue-600 rounded-[2.5rem] p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all group flex flex-col items-end text-right justify-end relative overflow-hidden">
             <div className="absolute top-6 left-6 opacity-20 group-hover:opacity-40 transition-opacity">
               <MessageSquare size={80} className="text-white" />
             </div>
@@ -672,32 +653,42 @@ const UKCoverageSection = () => {
   const containerRef = useRef(null)
   
   useGSAP(() => {
-    const tl = gsap.timeline({ scrollTrigger: { trigger: containerRef.current, start: "top 70%" } })
+    // Desktop Animation
+    const mm = gsap.matchMedia();
     
-    const path = containerRef.current.querySelectorAll('.thread-path')
-    const nodes = containerRef.current.querySelectorAll('.map-node')
+    mm.add("(min-width: 768px)", () => {
+      const tl = gsap.timeline({ scrollTrigger: { trigger: containerRef.current, start: "top 70%" } })
+      
+      const path = containerRef.current.querySelectorAll('.thread-path')
+      const nodes = containerRef.current.querySelectorAll('.map-node')
+      
+      gsap.set(path, { strokeDashoffset: 1300, strokeDasharray: 1300 })
+      gsap.set(nodes, { scale: 0, opacity: 0 })
+      
+      tl.to(path, { strokeDashoffset: 0, duration: 3, ease: "power2.out" })
+      tl.to(nodes, { scale: 1, opacity: 1, duration: 0.6, stagger: 0.3, ease: "back.out(1.7)" }, "-=2.5")
+    });
     
-    gsap.set(path, { strokeDashoffset: 1300, strokeDasharray: 1300 })
-    gsap.set(nodes, { scale: 0, opacity: 0 })
-
-    tl.to(path, {
-      strokeDashoffset: 0,
-      duration: 3,
-      ease: "power2.out"
-    })
-    
-    tl.to(nodes, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.6,
-      stagger: 0.3,
-      ease: "back.out(1.7)"
-    }, "-=2.5")
+    mm.add("(max-width: 767px)", () => {
+      const nodes = containerRef.current.querySelectorAll('.map-node-mobile');
+      gsap.from(nodes, {
+        opacity: 0,
+        x: -50,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: { trigger: containerRef.current, start: "top 80%" }
+      });
+      
+      gsap.from(".mobile-thread", {
+         height: 0,
+         duration: 1.5,
+         ease: "power1.inOut",
+         scrollTrigger: { trigger: containerRef.current, start: "top 80%" }
+      });
+    });
 
   }, { scope: containerRef })
-  
-  // Simple "Thread" Path: A gentle looping curve
-  // Used a viewBox of 1200x300 for the SVG coordinate system
   
   const regions = [
     { name: "London", icon: Building2, x: "15%", y: "30%", color: "text-blue-600", bg: "bg-blue-50" },
@@ -707,59 +698,48 @@ const UKCoverageSection = () => {
   ]
 
   return (
-    <section ref={containerRef} className="py-32 border-t border-slate-100 overflow-hidden relative">
+    <section ref={containerRef} className="py-20 md:py-32 border-t border-slate-100 overflow-hidden relative">
       <div className="container mx-auto px-6 text-center relative z-10">
-        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-20">Nationwide <span className="text-blue-600">Connectivity</span></h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-12 md:mb-20">Nationwide <span className="text-blue-600">Connectivity</span></h2>
         
-        <div className="relative w-full max-w-6xl mx-auto h-[400px] md:h-[300px]">
-           
-           {/* The Thread (SVG Path) */}
+        {/* DESKTOP VIEW */}
+        <div className="hidden md:block relative w-full max-w-6xl mx-auto h-[300px]">
            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1200 300" preserveAspectRatio="none">
-             {/* Shadow Path */}
-             <path 
-               d="M0,150 C150,150 200,50 300,50 S450,250 600,250 S800,50 900,50 S1050,150 1200,150" 
-               fill="none" 
-               stroke="#e2e8f0" 
-               strokeWidth="4" 
-             />
-             {/* Main Thread */}
-             <path 
-               d="M0,150 C150,150 200,50 300,50 S450,250 600,250 S800,50 900,50 S1050,150 1200,150" 
-               fill="none" 
-               stroke="#3b82f6" 
-               strokeWidth="2" 
-               strokeDasharray="8 4"
-               className="thread-path opacity-50"
-             />
+             <path d="M0,150 C150,150 200,50 300,50 S450,250 600,250 S800,50 900,50 S1050,150 1200,150" fill="none" stroke="#e2e8f0" strokeWidth="4" />
+             <path d="M0,150 C150,150 200,50 300,50 S450,250 600,250 S800,50 900,50 S1050,150 1200,150" fill="none" stroke="#3b82f6" strokeWidth="2" strokeDasharray="8 4" className="thread-path opacity-50" />
            </svg>
-
-             {regions.map((region, i) => (
-               <div 
-                 key={i} 
-                 className="map-node absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
-                 style={{ left: region.x, top: region.y }}
-               >
-               {/* Hover Ring Effect */}
+           {regions.map((region, i) => (
+             <div key={i} className="map-node absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer" style={{ left: region.x, top: region.y }}>
                <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl scale-0 group-hover:scale-150 transition-transform duration-500" />
-               
-               {/* Node Content */}
-               <div className={`relative w-20 h-20 md:w-24 md:h-24 bg-white rounded-full border-2 border-slate-100 shadow-xl flex flex-col items-center justify-center gap-1 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-300 z-10 ${region.color}`}>
+               <div className={`relative w-24 h-24 bg-white rounded-full border-2 border-slate-100 shadow-xl flex flex-col items-center justify-center gap-1 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-300 z-10 ${region.color}`}>
                  <region.icon size={28} />
                </div>
-               
-               {/* Label (Hanging below) */}
                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-                  <span className={`px-4 py-2 rounded-full text-sm font-bold shadow-lg bg-white text-slate-800`}>
-                    {region.name}
-                  </span>
+                  <span className={`px-4 py-2 rounded-full text-sm font-bold shadow-lg bg-white text-slate-800`}>{region.name}</span>
                </div>
-               
-               {/* Permanent Label (Small) */}
-               <span className={`absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-bold text-slate-400 group-hover:opacity-0 transition-opacity`}>
-                 {region.name}
-               </span>
+               <span className={`absolute -bottom-8 left-1/2 -translate-x-1/2 text-sm font-bold text-slate-400 group-hover:opacity-0 transition-opacity`}>{region.name}</span>
              </div>
            ))}
+        </div>
+
+        {/* MOBILE VIEW - Vertical Thread */}
+        <div className="md:hidden relative flex flex-col items-start pl-8 gap-10">
+            {/* Vertical Line */}
+            <div className="mobile-thread absolute left-[47px] top-0 bottom-0 w-1 bg-slate-200" />
+            
+            {regions.map((region, i) => (
+                <div key={i} className="map-node-mobile flex items-center gap-6 relative z-10 w-full">
+                    <div className={`w-16 h-16 bg-white rounded-full border-2 border-slate-100 shadow-lg flex items-center justify-center shrink-0 ${region.color} relative`}>
+                        <region.icon size={24} />
+                        {/* Connecting Dot */}
+                        <div className="absolute -left-[19px] top-1/2 -translate-y-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-white" />
+                    </div>
+                    <div className="text-left bg-white p-4 rounded-xl shadow-sm border border-slate-100 w-full">
+                        <h3 className="font-bold text-slate-900 text-lg">{region.name}</h3>
+                        <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Strategic Hub</p>
+                    </div>
+                </div>
+            ))}
         </div>
 
       </div>
