@@ -69,7 +69,7 @@ const Hero = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent pt-32 pb-20">
+    <section ref={containerRef} className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden bg-transparent pt-32 pb-20">
       {/* Animated Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="hero-bg-blob absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-blue-200/30 rounded-full blur-[100px] mix-blend-multiply" />
@@ -90,11 +90,11 @@ const Hero = () => {
           In a rapidly evolving UK market, digital transformation enables organisations to stay competitive, resilient, and future-ready. At Webnox Digital, we provide digital transformation services in the UK that help organisations modernise systems, streamline operations, and build digital foundations aligned with long-term business outcomes.
         </p>
 
-        <div ref={ctaRef} className="flex flex-col items-center gap-8">
-          <Link href="/contact-us#contact-form" className="group relative px-10 py-5 bg-blue-600 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-blue-500/40 transition-all">
+        <div ref={ctaRef} className="flex flex-col items-center gap-6">
+          <Link href="/contact-us#contact-form" className="group relative px-6 py-3 md:px-10 md:py-5 bg-blue-600 text-white rounded-full overflow-hidden shadow-2xl hover:shadow-blue-500/40 transition-all">
             <div className="absolute inset-0 bg-blue-700 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-            <span className="relative font-bold text-lg flex items-center gap-2">
-              Book a Free Strategy Consultation <ArrowRight size={20} />
+            <span className="relative font-bold text-base md:text-lg flex items-center gap-2 text-center leading-tight">
+              Book a Free Strategy Consultation <ArrowRight size={18} className="shrink-0" />
             </span>
           </Link>
           
@@ -137,67 +137,99 @@ const Benefits = () => {
   ];
 
   useGSAP(() => {
-    // Page turn animation
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: bookRef.current,
-        start: "top top",
-        end: "+=3000",
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1
-      }
-    });
+    const mm = gsap.matchMedia();
 
-    pages.forEach((page, i) => {
-      if (i < pages.length - 1) {
-        tl.to(`#page-${i}`, {
-          rotateY: -180,
-          duration: 1,
-          ease: "power2.inOut",
-          onUpdate: function() {
-            // Midway through the turn, switch z-index so it doesn't block the next page
-            const progress = this.progress();
-            const element = document.getElementById(`page-${i}`);
-            if (element) {
-              if (progress > 0.5) {
-                element.style.zIndex = i + 1; // Lower z-index for turned pages
-              } else {
-                element.style.zIndex = pages.length - i; // Higher z-index for unturned pages
+    mm.add("(min-width: 768px)", () => {
+      // Page turn animation
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: bookRef.current,
+          start: "top top",
+          end: "+=3000",
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1
+        }
+      });
+
+      pages.forEach((page, i) => {
+        if (i < pages.length - 1) {
+          tl.to(`#page-${i}`, {
+            rotateY: -180,
+            duration: 1,
+            ease: "power2.inOut",
+            onUpdate: function() {
+              // Midway through the turn, switch z-index so it doesn't block the next page
+              const progress = this.progress();
+              const element = document.getElementById(`page-${i}`);
+              if (element) {
+                if (progress > 0.5) {
+                  element.style.zIndex = i + 1; // Lower z-index for turned pages
+                } else {
+                  element.style.zIndex = pages.length - i; // Higher z-index for unturned pages
+                }
               }
             }
-          }
-        });
-      }
-    });
+          });
+        }
+      });
 
-    // Floating Animation (Water Effect)
-    gsap.to(".book-container", {
-      y: 20,
-      rotateZ: 0.5,
-      scale: 1.01,
-      duration: 3,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
-    });
+      // Floating Animation (Water Effect)
+      gsap.to(".book-container", {
+        y: 20,
+        rotateZ: 0.5,
+        scale: 1.01,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
 
-    gsap.to(".book-shadow", {
-      scale: 0.9,
-      opacity: 0.08,
-      duration: 3,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
+      gsap.to(".book-shadow", {
+        scale: 0.9,
+        opacity: 0.08,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
     });
   }, { scope: bookRef });
 
   return (
-    <section ref={bookRef} className="relative h-screen bg-transparent overflow-hidden flex items-center justify-center">
-      <div className="container mx-auto px-6 h-full flex items-center justify-center" style={{ perspective: '2000px' }}>
+    <section ref={bookRef} className="relative md:h-screen bg-transparent overflow-hidden flex flex-col items-center justify-center py-10 md:py-0">
+      <div className="container mx-auto px-6 h-full flex flex-col items-center justify-center" style={{ perspective: '2000px' }}>
         
-        {/* Book Container - Clean & Floating */}
-        <div className="book-container relative w-full max-w-5xl h-[500px] md:h-[600px] flex items-center justify-center" style={{ transformStyle: 'preserve-3d' }}>
+        {/* Mobile View: Vertical Stack of Cards */}
+        <div className="md:hidden w-full flex flex-col gap-6 pb-10">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl font-bold text-slate-900 leading-tight mb-2">Why Digital Transformation Matters</h2>
+            <p className="text-slate-600 text-sm">Empowering organisations to improve efficiency and reduce risk.</p>
+          </div>
+          {pages.slice(1).map((page) => {
+             const Icon = page.icon;
+             return (
+                <div key={page.id} className="bg-white p-6 rounded-2xl shadow-lg border border-slate-100 flex flex-col gap-3">
+                 <div className="flex items-center gap-3">
+                   <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                     <Icon size={20} />
+                   </div>
+                   <h3 className="text-xl font-bold text-slate-900 leading-tight">{page.title}</h3>
+                 </div>
+                 <p className="text-slate-600 text-sm">{page.desc}</p>
+                 {page.image && (
+                   <div className="relative w-full h-48 rounded-xl overflow-hidden mt-2">
+                     <Image src={page.image} alt={page.title} fill className="object-cover" />
+                   </div>
+                 )}
+               </div>
+             );
+          })}
+        </div>
+
+
+        {/* Desktop View: Book Animation */}
+        <div className="hidden md:flex book-container relative w-full max-w-5xl h-[600px] items-center justify-center" style={{ transformStyle: 'preserve-3d' }}>
           
           {/* Enhanced clean shadow for floating effect */}
           <div className="book-shadow absolute -bottom-16 w-[80%] h-8 bg-blue-900/10 blur-xl rounded-[100%] transition-transform duration-[3s] ease-in-out" />
@@ -349,8 +381,8 @@ const Benefits = () => {
           </div>
         </div>
 
-        {/* Floating Instruction */}
-        <div className="absolute bottom-12 left-0 right-0 text-center z-20">
+        {/* Floating Instruction - Desktop Only */}
+        <div className="hidden md:block absolute bottom-12 left-0 right-0 text-center z-20">
           <p className="text-blue-500/50 font-bold text-xs uppercase tracking-[0.3em] mb-4">Scroll to Flip Pages</p>
           <div className="w-6 h-10 border-2 border-blue-200 rounded-full mx-auto relative mb-6">
              <div className="w-1.5 h-1.5 bg-blue-400 rounded-full absolute top-2 left-1/2 -translate-x-1/2 animate-bounce" />
@@ -375,18 +407,21 @@ const Differentiators = () => {
   const containerRef = useRef(null);
 
   useGSAP(() => {
+    const mm = gsap.matchMedia();
     const scrollContainer = containerRef.current;
     
-    gsap.to(scrollContainer, {
-      x: () => -(scrollContainer.scrollWidth - window.innerWidth),
-      ease: "none",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        pin: true,
-        scrub: 1,
-        end: () => "+=" + scrollContainer.scrollWidth,
-        invalidateOnRefresh: true,
-      }
+    mm.add("(min-width: 768px)", () => {
+      gsap.to(scrollContainer, {
+        x: () => -(scrollContainer.scrollWidth - window.innerWidth),
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          pin: true,
+          scrub: 1,
+          end: () => "+=" + scrollContainer.scrollWidth,
+          invalidateOnRefresh: true,
+        }
+      });
     });
 
   }, { scope: sectionRef });
@@ -400,25 +435,25 @@ const Differentiators = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="bg-transparent text-slate-900 overflow-hidden h-screen flex flex-col justify-center relative">
-      <div className="container mx-auto px-6 mb-12 flex-shrink-0">
-         <h2 className="text-4xl md:text-6xl font-bold mt-2 mb-6 text-slate-900">Why UK Organisations Choose Our <br/><span className="text-blue-600">Digital Transformation Services</span></h2>
-         <p className="text-xl text-slate-600 max-w-2xl font-medium">We deliver structured, outcome-driven transformation initiatives aligned with business goals and regulatory expectations.</p>
+    <section ref={sectionRef} className="bg-transparent text-slate-900 overflow-hidden md:h-screen flex flex-col justify-center relative py-12 md:py-0">
+      <div className="container mx-auto px-6 mb-8 md:mb-12 flex-shrink-0">
+         <h2 className="text-3xl md:text-6xl font-bold mt-2 mb-4 md:mb-6 text-slate-900 leading-tight">Why UK Organisations Choose Our <br className="hidden md:block"/><span className="text-blue-600">Digital Transformation Services</span></h2>
+         <p className="text-lg md:text-xl text-slate-600 max-w-2xl font-medium leading-relaxed">We deliver structured, outcome-driven transformation initiatives aligned with business goals and regulatory expectations.</p>
       </div>
 
-      <div ref={containerRef} className="flex gap-8 px-6 w-max">
+      <div ref={containerRef} className="flex flex-col md:flex-row gap-6 md:gap-8 px-6 w-full md:w-max overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory font-sans">
         {items.map((item, i) => {
            const Icon = item.icon;
            return (
-            <div key={i} className="w-[85vw] md:w-[500px] h-[50vh] bg-white/40 backdrop-blur-md border border-slate-200/50 rounded-3xl p-10 flex flex-col justify-between hover:bg-white/60 transition-colors duration-300 shadow-xl shadow-blue-500/5">
-               <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600">
-                 <Icon size={32} />
+            <div key={i} className="flex-shrink-0 w-full md:w-[500px] h-auto md:h-[50vh] bg-white/40 backdrop-blur-md border border-slate-200/50 rounded-3xl p-6 md:p-10 flex flex-col gap-4 md:justify-between hover:bg-white/60 transition-colors duration-300 shadow-xl shadow-blue-500/5 snap-center">
+               <div className="w-12 h-12 md:w-16 md:h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600">
+                 <Icon size={28} className="md:size-[32px]" />
                </div>
                <div>
-                 <h3 className="text-3xl font-bold mb-4 text-slate-900">{item.title}</h3>
-                 <p className="text-slate-600 text-lg leading-relaxed">{item.desc}</p>
+                 <h3 className="text-2xl md:text-3xl font-bold mb-1 md:mb-4 text-slate-900 leading-tight">{item.title}</h3>
+                 <p className="text-slate-600 text-base md:text-lg leading-relaxed">{item.desc}</p>
                </div>
-               <div className="w-full h-1 bg-slate-200 rounded-full overflow-hidden">
+               <div className="hidden md:block w-full h-1 bg-slate-200 rounded-full overflow-hidden mt-6">
                   <div className="h-full bg-blue-500 w-1/3" />
                </div>
             </div>
@@ -435,89 +470,93 @@ const Ecosystem = () => {
   const triggerRef = useRef(null);
 
   useGSAP(() => {
-    // Helper to setup SVG paths for drawing animation without plugins
-    const setupPath = (id) => {
-      const path = document.querySelector(id);
-      if (path && path.getTotalLength) {
-        const length = path.getTotalLength();
-        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length, opacity: 1 });
-        return length;
-      }
-      return 0;
-    };
+    const mm = gsap.matchMedia();
+    
+    mm.add("(min-width: 768px)", () => {
+      // Helper to setup SVG paths for drawing animation without plugins
+      const setupPath = (id) => {
+        const path = document.querySelector(id);
+        if (path && path.getTotalLength) {
+          const length = path.getTotalLength();
+          gsap.set(path, { strokeDasharray: length, strokeDashoffset: length, opacity: 1 });
+          return length;
+        }
+        return 0;
+      };
 
-    const line1Length = setupPath("#line-1-2");
-    // For multiple lines with same class, we handle them carefully or just target by IDs for simplicity in this specific layout
-    const line3Paths = document.querySelectorAll(".line-to-3");
-    line3Paths.forEach(path => {
-      if(path.getTotalLength) {
-        const len = path.getTotalLength();
-        gsap.set(path, { strokeDasharray: len, strokeDashoffset: len, opacity: 1 });
-      }
-    });
+      const line1Length = setupPath("#line-1-2");
+      // For multiple lines with same class, we handle them carefully or just target by IDs for simplicity in this specific layout
+      const line3Paths = document.querySelectorAll(".line-to-3");
+      line3Paths.forEach(path => {
+        if(path.getTotalLength) {
+          const len = path.getTotalLength();
+          gsap.set(path, { strokeDasharray: len, strokeDashoffset: len, opacity: 1 });
+        }
+      });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: triggerRef.current,
-        start: "top top",
-        end: "+=2500", // Long scroll distance for stepped animation
-        pin: true,
-        scrub: 1,
-        anticipatePin: 1
-      }
-    });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: triggerRef.current,
+          start: "top top",
+          end: "+=2500", // Long scroll distance for stepped animation
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1
+        }
+      });
 
-    // 0. Initial Reveal for Header Text
-    tl.from(".eco-text-reveal", {
-      y: 30, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out"
-    });
+      // 0. Initial Reveal for Header Text
+      tl.from(".eco-text-reveal", {
+        y: 30, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out"
+      });
 
-    // 1. Reveal Strategy Card (Top Left)
-    tl.fromTo("#card-1", 
-      { y: 800, x: -150, rotation: -30, opacity: 0 },
-      { y: 0, x: 0, rotation: -6, opacity: 1, duration: 1, ease: "power3.out" }
-    );
+      // 1. Reveal Strategy Card (Top Left)
+      tl.fromTo("#card-1", 
+        { y: 800, x: -150, rotation: -30, opacity: 0 },
+        { y: 0, x: 0, rotation: -6, opacity: 1, duration: 1, ease: "power3.out" }
+      );
 
-    // 2. Reveal Technology Card (Top Right)
-    tl.fromTo("#card-2", 
-      { y: 800, x: 150, rotation: 30, opacity: 0 },
-      { y: 0, x: 0, rotation: 6, opacity: 1, duration: 1, ease: "power3.out" }
-    );
+      // 2. Reveal Technology Card (Top Right)
+      tl.fromTo("#card-2", 
+        { y: 800, x: 150, rotation: 30, opacity: 0 },
+        { y: 0, x: 0, rotation: 6, opacity: 1, duration: 1, ease: "power3.out" }
+      );
 
-    // 3. Connect 1 & 2 (Now happens clearly AFTER cards are in place)
-    tl.to("#line-1-2", 
-      { strokeDashoffset: 0, duration: 0.8, ease: "none" },
-      "+=0.2" // Slight delay to separate from card entry
-    );
+      // 3. Connect 1 & 2 (Now happens clearly AFTER cards are in place)
+      tl.to("#line-1-2", 
+        { strokeDashoffset: 0, duration: 0.8, ease: "none" },
+        "+=0.2" // Slight delay to separate from card entry
+      );
 
-    // 4. Reveal Optimisation Card (Bottom Center)
-    tl.fromTo("#card-3", 
-      { y: 800, rotation: 15, opacity: 0 },
-      { y: 0, rotation: -3, opacity: 1, duration: 1, ease: "power3.out" }
-    );
+      // 4. Reveal Optimisation Card (Bottom Center)
+      tl.fromTo("#card-3", 
+        { y: 800, rotation: 15, opacity: 0 },
+        { y: 0, rotation: -3, opacity: 1, duration: 1, ease: "power3.out" }
+      );
 
-    // 5. Connect to 3 (Happens clearly AFTER card 3 is in place)
-    tl.to(".line-to-3", 
-      { strokeDashoffset: 0, duration: 0.8, ease: "none" },
-      "+=0.2"
-    );
+      // 5. Connect to 3 (Happens clearly AFTER card 3 is in place)
+      tl.to(".line-to-3", 
+        { strokeDashoffset: 0, duration: 0.8, ease: "none" },
+        "+=0.2"
+      );
 
-    // 6. Final "Lock In"
-    tl.to([".eco-card"], {
-      scale: 1.05,
-      rotation: 0, 
-      duration: 0.5,
-      ease: "power1.inOut"
+      // 6. Final "Lock In"
+      tl.to([".eco-card"], {
+        scale: 1.05,
+        rotation: 0, 
+        duration: 0.5,
+        ease: "power1.inOut"
+      });
     });
 
   }, { scope: containerRef });
 
   return (
     <section ref={triggerRef} className="bg-transparent relative"> 
-      <div ref={containerRef} className="h-[85vh] min-h-[900px] w-full flex flex-col items-center justify-center overflow-hidden relative bg-transparent">
+      <div ref={containerRef} className="md:h-[85vh] md:min-h-[900px] w-full flex flex-col items-center justify-center overflow-hidden relative bg-transparent py-20 md:py-0">
         
         {/* Background Text - Scaled down */}
-        <div className="absolute top-16 md:top-20 text-center z-10 px-6 max-w-4xl mx-auto">
+        <div className="relative md:absolute top-0 md:top-16 lg:top-20 text-center z-10 px-6 max-w-4xl mx-auto mb-12 md:mb-0">
           <h2 className="eco-text-reveal text-3xl md:text-5xl font-black text-slate-900 mb-4">A Complete Digital Transformation Ecosystem</h2>
           <p className="eco-text-reveal text-lg text-slate-600">Successful transformation depends on a connected ecosystem—not isolated initiatives.</p>
         </div>
@@ -586,11 +625,11 @@ const Ecosystem = () => {
         </div>
 
         {/* Mobile Fallback */}
-        <div className="md:hidden w-full px-6 space-y-8 mt-12 pb-20">
+        <div className="md:hidden w-full px-6 space-y-4 mt-8 pb-12">
             <NodeCard title="Strategy & Assessment" desc="Assess digital maturity chains and systems." icon={Target} color="bg-blue-500" mobile />
-            <div className="h-12 w-0.5 bg-slate-300 mx-auto" />
+            <div className="h-6 w-0.5 bg-slate-300 mx-auto" />
             <NodeCard title="Tech & Implementation" desc="Upgrade legacy environments and solutions." icon={Code} color="bg-cyan-500" mobile />
-             <div className="h-12 w-0.5 bg-slate-300 mx-auto" />
+             <div className="h-6 w-0.5 bg-slate-300 mx-auto" />
             <NodeCard title="Optimisation & Growth" desc="Automation, analytics, and continuous growth." icon={TrendingUp} color="bg-indigo-500" mobile />
         </div>
       </div>
@@ -599,12 +638,12 @@ const Ecosystem = () => {
 };
 
 const NodeCard = ({ title, desc, icon: Icon, color, mobile }) => (
-  <div className={`bg-white p-6 rounded-2xl shadow-lg border border-slate-100 flex flex-col gap-3 text-left z-20 relative`}>
-    <div className={`w-12 h-12 rounded-xl ${color} flex items-center justify-center text-white shrink-0`}>
-      <Icon size={24} />
+  <div className={`bg-white p-5 rounded-2xl shadow-lg border border-slate-100 flex flex-col gap-2 text-left z-20 relative`}>
+    <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center text-white shrink-0`}>
+      <Icon size={20} />
     </div>
     <div>
-      <h3 className="text-lg font-bold text-slate-800 leading-tight mb-2">{title}</h3>
+      <h3 className="text-lg font-bold text-slate-800 leading-tight mb-1">{title}</h3>
       <p className="text-sm text-slate-500">{desc}</p>
     </div>
   </div>
@@ -631,29 +670,29 @@ const Services = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-24 bg-transparent">
-      <div className="container mx-auto px-6 mb-16">
-        <h2 className="text-5xl font-black text-slate-900 mb-6">Our Digital Transformation Services in the UK</h2>
-        <p className="text-xl text-slate-600 max-w-4xl">Our digital transformation services for modern businesses are tailored to organisational size, industry, and complexity.</p>
+    <section ref={containerRef} className="py-12 md:py-24 bg-transparent">
+      <div className="container mx-auto px-6 mb-10 md:mb-16">
+        <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-4 md:mb-6 leading-tight">Our Digital Transformation Services in the UK</h2>
+        <p className="text-lg md:text-xl text-slate-600 max-w-4xl leading-relaxed">Our digital transformation services for modern businesses are tailored to organisational size, industry, and complexity.</p>
       </div>
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-200 border border-slate-200">
         {services.map((s, i) => {
           const Icon = s.icon;
           return (
-            <div key={i} className="service-item bg-white/40 backdrop-blur-md p-10 hover:bg-white/60 transition-colors duration-500 group cursor-pointer group h-full">
-              <div className="flex justify-between items-start mb-8">
-                <Icon size={40} className="text-slate-300 group-hover:text-blue-500 transition-colors duration-300" />
+            <div key={i} className="service-item bg-white/40 backdrop-blur-md p-6 md:p-10 hover:bg-white/60 transition-colors duration-500 group cursor-pointer group h-full">
+              <div className="flex justify-between items-start mb-4 md:mb-8">
+                <Icon size={32} className="text-slate-300 md:size-[40px] group-hover:text-blue-500 transition-colors duration-300" />
                 <ArrowRight className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-blue-500"/>
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3 leading-tight">{s.title}</h3>
-              <p className="text-slate-500 group-hover:text-slate-800 transition-colors">{s.desc}</p>
+              <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2 md:mb-3 leading-tight">{s.title}</h3>
+              <p className="text-slate-500 group-hover:text-slate-800 transition-colors text-sm md:text-base leading-relaxed">{s.desc}</p>
             </div>
           );
         })}
       </div>
-      <div className="container mx-auto px-6 mt-12 text-center">
-        <p className="text-slate-500 mb-6">We also deliver digital transformation consulting London and UK-wide support for organisations at different stages of growth.</p>
-        <Link href="/contact-us#contact-form" className="inline-block px-8 py-4 border-2 border-slate-900 text-slate-900 rounded-full font-bold hover:bg-slate-900 hover:text-white transition-colors">
+      <div className="container mx-auto px-6 mt-10 md:mt-12 text-center">
+        <p className="text-slate-500 mb-6 text-sm md:text-base">We also deliver digital transformation consulting London and UK-wide support for organisations at different stages of growth.</p>
+        <Link href="/contact-us#contact-form" className="inline-block px-6 py-3 md:px-8 md:py-4 border-2 border-slate-900 text-slate-900 rounded-full font-bold md:text-lg text-sm hover:bg-slate-900 hover:text-white transition-colors leading-tight">
           Request a Digital Transformation Consultation
         </Link>
       </div>
@@ -679,11 +718,11 @@ const Industries = () => {
   ];
 
   return (
-    <section className="py-20 bg-transparent overflow-hidden relative z-20">
+    <section className="py-10 md:py-20 bg-transparent overflow-hidden relative z-20">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Industries We Support</h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">Driving measurable growth across key UK sectors with tailored digital solutions.</p>
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">Industries We Support</h2>
+          <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">Driving measurable growth across key UK sectors with tailored digital solutions.</p>
         </div>
 
         {/* Compact Card Grid */}
@@ -754,12 +793,12 @@ const Coverage = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-24 bg-transparent">
+    <section ref={containerRef} className="py-10 md:py-24 bg-transparent">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 tracking-tight leading-tight">Serving UK Enterprises & SMEs</h2>
-          <div className="w-20 h-1.5 bg-blue-600 mx-auto rounded-full mb-8" />
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        <div className="text-center mb-10 md:mb-20">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-slate-900 tracking-tight leading-tight">Serving UK Enterprises & SMEs</h2>
+          <div className="w-20 h-1.5 bg-blue-600 mx-auto rounded-full mb-6 md:mb-8" />
+          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
             We work with enterprises and SMEs across the UK, delivering scalable solutions that grow with organisational complexity.
           </p>
         </div>
@@ -863,7 +902,7 @@ const ModernTestimonial = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-20 bg-transparent testimonial-reveal">
+    <section ref={containerRef} className="py-10 md:py-20 bg-transparent testimonial-reveal">
       <div className="container mx-auto px-6">
         {/* Compact Rectangular Card */}
         <div className="max-w-4xl mx-auto bg-white rounded-[32px] shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08)] overflow-hidden border border-slate-100 relative group">
@@ -883,7 +922,7 @@ const ModernTestimonial = () => {
           <div className="flex flex-col md:flex-row items-center gap-8 p-6 md:p-10 relative z-10">
             
             {/* Left Column: Compact Teardrop */}
-            <div className="relative w-full max-w-[240px] md:max-w-[280px]">
+            <div className="relative w-full max-w-[240px] md:max-w-[280px] mx-auto md:mx-0">
               <div 
                 className="absolute inset-0 bg-[#fbc02d] rounded-[50%_0%_50%_50%] transform rotate-[-3deg]" 
                 style={{ width: '100%', paddingBottom: '100%' }}
@@ -947,7 +986,7 @@ const ModernTestimonial = () => {
 
 // 8. Custom FAQ Wrapper
 const FAQWrapper = () => (
-  <div className="py-12 bg-transparent">
+  <div className="py-6 md:py-12 bg-transparent">
     <FAQSection faqs={[
       { question: "Is digital transformation suitable for small and medium businesses?", answer: "Yes. We deliver digital transformation strategies for small business as well as enterprise-scale initiatives." },
       { question: "Do you provide consulting as well as implementation?", answer: "Yes. Our work is consulting-led, with implementation aligned to strategic goals." },
@@ -959,12 +998,12 @@ const FAQWrapper = () => (
 
 // 9. Final CTA
 const FinalCTA = () => (
-  <section className="py-32 bg-gradient-to-br from-blue-400 to-cyan-300 relative overflow-hidden flex items-center justify-center text-center">
+  <section className="py-16 md:py-32 bg-gradient-to-br from-blue-400 to-cyan-300 relative overflow-hidden flex items-center justify-center text-center">
     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
     <div className="container mx-auto px-6 relative z-10 max-w-4xl">
-      <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight">Ready to Transform How Your Organisation Operates?</h2>
-      <p className="text-xl text-slate-700 mb-12 font-medium">If you’re looking for digital transformation services in the UK that focus on efficiency, scalability, and long-term value, our team is ready to help.</p>
-      <Link href="/contact-us#contact-form" className="inline-block bg-blue-600 text-white px-12 py-5 rounded-full text-xl font-bold hover:scale-105 transition-transform shadow-2xl">
+      <h2 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 md:mb-8 leading-tight">Ready to Transform How Your Organisation Operates?</h2>
+      <p className="text-lg md:text-xl text-slate-700 mb-8 md:mb-12 font-medium leading-relaxed">If you’re looking for digital transformation services in the UK that focus on efficiency, scalability, and long-term value, our team is ready to help.</p>
+      <Link href="/contact-us#contact-form" className="inline-block bg-blue-600 text-white px-8 py-3 md:px-12 md:py-5 rounded-full text-lg md:text-xl font-bold hover:scale-105 transition-transform shadow-2xl leading-tight">
         Get a free Consultation
       </Link>
     </div>
