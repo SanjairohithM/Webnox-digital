@@ -159,6 +159,12 @@ const routes = [
   },
   // Specialized regional service pages
   {
+    loc: '/tech-branding-agency-uk',
+    changefreq: 'monthly',
+    priority: 0.6,
+    lastmod: new Date().toISOString(),
+  },
+  {
     loc: '/branding-services-uk',
     changefreq: 'monthly',
     priority: 0.6,
