@@ -37,6 +37,12 @@ const routes = [
   },
   // High-value service pages
   {
+    loc: '/digital-marketing-agency',
+    changefreq: 'weekly',
+    priority: 0.9,
+    lastmod: new Date().toISOString(),
+  },
+  {
     loc: '/app-development-services',
     changefreq: 'weekly',
     priority: 0.8,
