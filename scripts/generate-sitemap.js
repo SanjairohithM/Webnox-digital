@@ -43,6 +43,12 @@ const routes = [
     lastmod: new Date().toISOString(),
   },
   {
+    loc: '/seo-agency',
+    changefreq: 'weekly',
+    priority: 0.9,
+    lastmod: new Date().toISOString(),
+  },
+  {
     loc: '/app-development-services',
     changefreq: 'weekly',
     priority: 0.8,
