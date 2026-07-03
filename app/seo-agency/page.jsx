@@ -474,85 +474,23 @@ export default function SeoAgencyPage() {
          ABOUT SECTION: SEARCH TRAFFIC INTO REVENUE
          ───────────────────────────────────────────── */}
       <section className="relative py-20 md:py-28 px-4 sm:px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
-            <div className="lg:col-span-7 space-y-6">
-              <span className="text-[#00B9FF] text-xs font-bold uppercase tracking-wider">
-                Our Methodology
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-950 leading-tight">
-                SEO Services That Turn Search Traffic Into Revenue
-              </h2>
-              <p className="text-gray-700 text-lg md:text-xl leading-relaxed font-medium">
-                Most businesses have a website. Far fewer have a website that actually gets found. The difference isn't luck — it's a structured, data-driven approach to search engine optimisation that earns your pages the rankings they deserve.
-              </p>
-              <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-                At Webnox Digital, our SEO services are built around one goal: sustainable organic growth that compounds over time. We don't chase algorithm shortcuts or make promises we can't keep. What we do is combine 14+ years of search expertise with a technical-first methodology that has helped 1,200+ clients across 40+ countries build real, lasting visibility on Google and beyond.
-              </p>
-              <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-                Whether you're a startup trying to get noticed or an established business that's watched competitors outrank you for years, the right SEO strategy changes everything.
-              </p>
-            </div>
-
-            <div className="lg:col-span-5 relative flex justify-center lg:justify-end w-full">
-              {/* Stat card block wrapper */}
-              <div className="relative z-10 w-full max-w-[380px]">
-                <InteractiveTiltCard
-                  backgroundColor="transparent"
-                  borderRadius={24}
-                  tiltFactor={12}
-                  hoverScale={1.03}
-                  shadowIntensity={0.4}
-                  glareIntensity={0.25}
-                >
-                  <div className="relative w-full bg-gradient-to-br from-gray-950 to-slate-900 text-white rounded-3xl p-8 md:p-10 shadow-2xl overflow-hidden border border-white/10">
-                    <div
-                      className="absolute inset-0 opacity-[0.05]"
-                      style={{
-                        backgroundImage:
-                          "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)",
-                        backgroundSize: "20px 20px",
-                      }}
-                    />
-                    
-                    <div className="space-y-8">
-                      <div>
-                        <div className="text-4xl md:text-5xl font-extrabold text-[#00B9FF]">
-                          <AnimatedCounter target="1200" suffix="+" />
-                        </div>
-                        <div className="text-sm text-gray-400 font-semibold uppercase tracking-wider mt-1">Clients Served</div>
-                      </div>
-                      <div className="border-t border-white/10 pt-6">
-                        <div className="text-4xl md:text-5xl font-extrabold text-[#00B9FF]">
-                          <AnimatedCounter target="40" suffix="+" />
-                        </div>
-                        <div className="text-sm text-gray-400 font-semibold uppercase tracking-wider mt-1">Countries Covered</div>
-                      </div>
-                      <div className="border-t border-white/10 pt-6">
-                        <div className="text-4xl md:text-5xl font-extrabold text-[#00B9FF]">
-                          <AnimatedCounter target="14" suffix="+" />
-                        </div>
-                        <div className="text-sm text-gray-400 font-semibold uppercase tracking-wider mt-1">Years Experience</div>
-                      </div>
-                      <div className="border-t border-white/10 pt-6">
-                        <div className="text-4xl md:text-5xl font-extrabold text-[#00B9FF]">
-                          <AnimatedCounter target="15" suffix="+" />
-                        </div>
-                        <div className="text-sm text-gray-400 font-semibold uppercase tracking-wider mt-1">Awards Won</div>
-                      </div>
-                      <div className="border-t border-white/10 pt-6">
-                        <div className="text-4xl md:text-5xl font-extrabold text-[#00B9FF]">
-                          <AnimatedCounter target="70" suffix="+" />
-                        </div>
-                        <div className="text-sm text-gray-400 font-semibold uppercase tracking-wider mt-1">SEO Experts</div>
-                      </div>
-                    </div>
-                  </div>
-                </InteractiveTiltCard>
-              </div>
-            </div>
-
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-6">
+            <span className="text-[#00B9FF] text-xs font-bold uppercase tracking-wider">
+              Our Methodology
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-950 leading-tight">
+              SEO Services That Turn Search Traffic Into Revenue
+            </h2>
+            <p className="text-gray-700 text-lg md:text-xl leading-relaxed font-medium">
+              Most businesses have a website. Far fewer have a website that actually gets found. The difference isn't luck — it's a structured, data-driven approach to search engine optimisation that earns your pages the rankings they deserve.
+            </p>
+            <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+              At Webnox Digital, our SEO services are built around one goal: sustainable organic growth that compounds over time. We don't chase algorithm shortcuts or make promises we can't keep. What we do is combine 14+ years of search expertise with a technical-first methodology that has helped 1,200+ clients across 40+ countries build real, lasting visibility on Google and beyond.
+            </p>
+            <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+              Whether you're a startup trying to get noticed or an established business that's watched competitors outrank you for years, the right SEO strategy changes everything.
+            </p>
           </div>
         </div>
       </section>
