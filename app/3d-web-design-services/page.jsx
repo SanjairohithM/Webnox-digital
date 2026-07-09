@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Compass, Code, Boxes, MousePointer, Zap, Sparkles, Eye, Glasses, Map, User, Gamepad2, Sliders, Type, Layers, Cpu } from "lucide-react"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 
 
@@ -908,253 +908,236 @@ const IndustrySolutionsSection = () => {
 }
 
 // Services Grid Section Component (HeroParallax Aceternity UI Effect)
+// Sleek interactive 3D card for service showcase
+const ServiceCard = ({ title, description, icon: IconName }) => {
+  const cardRef = useRef(null)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [isHovered, setIsHovered] = useState(false)
+  const [coords, setCoords] = useState({ x: 0, y: 0 })
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    
+    // Spotlight position
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    })
+
+    // Parallax tilt (normalized -1 to 1)
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+    const mouseX = e.clientX - rect.left
+    const mouseY = e.clientY - rect.top
+    setCoords({
+      x: (mouseX - centerX) / centerX,
+      y: (mouseY - centerY) / centerY
+    })
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+    setCoords({ x: 0, y: 0 })
+  }
+
+  const rotationStyle = isHovered
+    ? `perspective(1000px) rotateX(${coords.y * -6}deg) rotateY(${coords.x * 6}deg) scale3d(1.02, 1.02, 1.02)`
+    : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
+
+  const activeIconMap = {
+    Compass,
+    Code,
+    Boxes,
+    MousePointer,
+    Zap,
+    Sparkles,
+    Eye,
+    Glasses,
+    Map,
+    User,
+    Gamepad2,
+    Sliders,
+    Type,
+    Layers,
+    Cpu
+  }
+
+  const IconComponent = activeIconMap[IconName] || Code
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      className="bg-white border border-gray-200/80 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-sky-100/40 hover:border-sky-300 flex flex-col h-full min-h-[225px] relative overflow-hidden group cursor-pointer [transform-style:preserve-3d]"
+      style={{
+        transform: rotationStyle,
+      }}
+    >
+      {/* Spotlight glow overlay */}
+      <div
+        className="absolute inset-0 transition-opacity duration-300 pointer-events-none opacity-0 group-hover:opacity-100"
+        style={{
+          background: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, rgba(0, 185, 255, 0.08), transparent)`
+        }}
+      />
+      
+      {/* Inner layout with 3D translation layers */}
+      <div className="relative z-10 flex flex-col h-full [transform-style:preserve-3d]">
+        <div 
+          className="w-12 h-12 flex items-center justify-center rounded-xl bg-sky-50 text-[#00B9FF] mb-4 group-hover:bg-[#00B9FF] group-hover:text-white transition-all duration-300 ease-out flex-shrink-0"
+          style={{
+            transform: isHovered ? `translate3d(${coords.x * 6}px, ${coords.y * 6}px, 15px)` : 'translate3d(0, 0, 0)'
+          }}
+        >
+          <IconComponent className="w-6 h-6 transition-transform duration-500 group-hover:rotate-12" />
+        </div>
+        
+        <h3 
+          className="text-lg font-bold text-gray-900 mb-2 leading-snug group-hover:text-sky-500 transition-colors duration-300"
+          style={{
+            transform: isHovered ? `translate3d(${coords.x * 4}px, ${coords.y * 4}px, 8px)` : 'translate3d(0, 0, 0)'
+          }}
+        >
+          {title}
+        </h3>
+        
+        <p 
+          className="text-gray-600 text-sm leading-relaxed text-justify mb-5"
+          style={{
+            transform: isHovered ? `translate3d(${coords.x * 2}px, ${coords.y * 2}px, 4px)` : 'translate3d(0, 0, 0)'
+          }}
+        >
+          {description}
+        </p>
+        
+        <Link href="/contact-us" className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-sky-500 group-hover:text-sky-600">
+          <span>Learn More</span>
+          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+// Services Grid Section Component
 const ThirdUseCasesSection = () => {
   const sectionRef = useRef(null)
 
   const services = [
     {
       title: "Custom 3D UI UX Design Strategy",
-      link: "/contact-us",
-      thumbnail: "/images/uiux1.webp",
+      icon: "Compass",
       description: "We plan user journeys, interaction points, content flow, and visual storytelling before development starts."
     },
     {
       title: "Interactive 3D Web Development",
-      link: "/contact-us",
-      thumbnail: "/images/3dbg.webp",
+      icon: "Code",
       description: "Building immersive, browser-based 3D experiences using Three.js and WebGL."
     },
     {
       title: "3D Product Visualization",
-      link: "/contact-us",
-      thumbnail: "/images/3dimagesolution.webp",
+      icon: "Boxes",
       description: "Creating highly detailed 3D viewers, configurations, material previews, and rotation tools."
     },
     {
       title: "Scroll Based Animations",
-      link: "/contact-us",
-      thumbnail: "/images/brand3-1.webp",
+      icon: "MousePointer",
       description: "Guiding users through your product story with smooth scroll-bound animations."
     },
     {
       title: "Performance Optimized 3D Websites",
-      link: "/contact-us",
-      thumbnail: "/images/brand3-2.webp",
+      icon: "Zap",
       description: "Compressing assets, lazy loading, and optimization to ensure fast browser speeds."
     },
     {
       title: "3D Landing Pages & Campaigns",
-      link: "/contact-us",
-      thumbnail: "/images/brand3-3.webp",
+      icon: "Sparkles",
       description: "Creating memorable, high-impact landing pages for product launches and campaigns."
     },
     {
       title: "Virtual Showroom Development",
-      link: "/contact-us",
-      thumbnail: "/images/brand5-1.webp",
+      icon: "Eye",
       description: "Building immersive digital showrooms and tours for ecommerce and real estate."
     },
     {
       title: "WebXR & WebVR Integration",
-      link: "/contact-us",
-      thumbnail: "/images/brand5-2.webp",
+      icon: "Glasses",
       description: "Immersive VR and AR headset experiences accessible directly inside the browser."
     },
     {
       title: "Interactive 3D Map Customization",
-      link: "/contact-us",
-      thumbnail: "/images/brand5-3.webp",
+      icon: "Map",
       description: "Interactive geographical mappings and spatial layouts for properties."
     },
     {
       title: "Custom 3D Character Design",
-      link: "/contact-us",
-      thumbnail: "/images/brand5-4.webp",
+      icon: "User",
       description: "Tailored 3D characters, controllers, and key-frame animations built for the web."
     },
     {
       title: "3D Interactive Games & Portals",
-      link: "/contact-us",
-      thumbnail: "/images/brand5-5.webp",
+      icon: "Gamepad2",
       description: "Developing custom gamified layouts to boost engagement and brand recall."
     },
     {
       title: "Real-time Product Configurators",
-      link: "/contact-us",
-      thumbnail: "/images/brand5-6.webp",
+      icon: "Sliders",
       description: "Allowing users to customize colorways, configurations, and sizing in real-time."
     },
     {
       title: "Dynamic 3D Typography",
-      link: "/contact-us",
-      thumbnail: "/images/aboutimg1.webp",
+      icon: "Type",
       description: "Spatial lettering, mouse-interactive fonts, and creative heading layouts."
     },
     {
       title: "Custom Shader & Canvas Effects",
-      link: "/contact-us",
-      thumbnail: "/images/aboutimg3.webp",
+      icon: "Layers",
       description: "High-end visual shaders, complex particle systems, and interactive canvases."
     },
     {
       title: "3D CAD Model Optimization",
-      link: "/contact-us",
-      thumbnail: "/images/thirdabout.webp",
+      icon: "Cpu",
       description: "Converting and optimizing raw CAD formats into lightweight web-ready assets."
     }
   ]
 
-  const firstRow = services.slice(0, 5)
-  const secondRow = services.slice(5, 10)
-  const thirdRow = services.slice(10, 15)
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  })
-
-  const springConfig = { stiffness: 300, damping: 30, bounce: 100 }
-
-  const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [-200, 800]),
-    springConfig
-  )
-  const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [200, -800]),
-    springConfig
-  )
-  const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [15, 0]),
-    springConfig
-  )
-  const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.6, 1]),
-    springConfig
-  )
-  const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [10, 0]),
-    springConfig
-  )
-  const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-200, 0]),
-    springConfig
-  )
-
   return (
     <section 
       ref={sectionRef} 
-      className="min-h-[180vh] py-24 bg-white overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+      className="py-20 lg:py-24 bg-gray-50/40 overflow-hidden font-sans border-y border-gray-150"
     >
-      {/* Header Container */}
-      <div className="max-w-7xl mx-auto px-8 w-full mb-16 relative z-10">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black leading-tight mb-4">
-          Our 3D Web Design and Development Services
-        </h2>
-        <p className="text-gray-600 text-lg md:text-xl max-w-3xl leading-relaxed">
-          Webnox Digital provides 3D web design and development services for businesses that need custom digital experiences, product visualization, immersive storytelling, and performance focused execution.
-        </p>
+      <div className="scroll-3d-wrapper max-w-7xl mx-auto px-6 md:px-8 w-full">
+        
+        {/* Header Container */}
+        <div className="mb-16 text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-50 border border-sky-200 rounded-full text-xs text-sky-500 font-semibold mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+            <span>15 Specialized Capabilities</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 text-gray-900">
+            Our 3D Web Design & Development Services
+          </h2>
+          <p className="text-gray-600 text-base md:text-lg leading-relaxed">
+            We provide interactive web solutions and 3D experiences that connect digital design with technical performance. Explore our specialized services below.
+          </p>
+        </div>
+
+        {/* Bento-style Minimalist Card Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((item, index) => (
+            <ServiceCard 
+              key={index}
+              title={item.title}
+              description={item.description}
+              icon={item.icon}
+            />
+          ))}
+        </div>
+
       </div>
-
-      {/* Parallax Container */}
-      <motion.div
-        style={{
-          rotateX,
-          rotateZ,
-          translateY,
-          opacity
-        }}
-        className="w-full flex flex-col gap-10 md:gap-16 mt-8"
-      >
-        {/* Row 1 */}
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 md:space-x-12 mb-4">
-          {firstRow.map((service, index) => (
-            <motion.div
-              style={{ x: translateX }}
-              whileHover={{ y: -10 }}
-              key={index}
-              className="group/product h-[260px] md:h-[320px] w-[260px] md:w-[380px] relative flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white"
-            >
-              <Link href={service.link} className="block w-full h-full relative">
-                <Image
-                  src={service.thumbnail}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover/product:scale-105"
-                  alt={service.title}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover/product:opacity-80 transition-opacity duration-300" />
-                <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
-                  <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs text-sky-200 leading-relaxed opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 text-justify line-clamp-3">
-                    {service.description}
-                  </p>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Row 2 */}
-        <motion.div className="flex flex-row space-x-8 md:space-x-12 mb-4">
-          {secondRow.map((service, index) => (
-            <motion.div
-              style={{ x: translateXReverse }}
-              whileHover={{ y: -10 }}
-              key={index}
-              className="group/product h-[260px] md:h-[320px] w-[260px] md:w-[380px] relative flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white animate-gpu"
-            >
-              <Link href={service.link} className="block w-full h-full relative">
-                <Image
-                  src={service.thumbnail}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover/product:scale-105"
-                  alt={service.title}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover/product:opacity-80 transition-opacity duration-300" />
-                <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
-                  <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs text-sky-200 leading-relaxed opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 text-justify line-clamp-3">
-                    {service.description}
-                  </p>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Row 3 */}
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 md:space-x-12">
-          {thirdRow.map((service, index) => (
-            <motion.div
-              style={{ x: translateX }}
-              whileHover={{ y: -10 }}
-              key={index}
-              className="group/product h-[260px] md:h-[320px] w-[260px] md:w-[380px] relative flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white"
-            >
-              <Link href={service.link} className="block w-full h-full relative">
-                <Image
-                  src={service.thumbnail}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover/product:scale-105"
-                  alt={service.title}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover/product:opacity-80 transition-opacity duration-300" />
-                <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
-                  <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs text-sky-200 leading-relaxed opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 text-justify line-clamp-3">
-                    {service.description}
-                  </p>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
     </section>
   )
 }
@@ -1896,11 +1879,9 @@ const CustomWebPage = () => {
       <TechnologyWorkSection />
       <WhatIs3DSection />
       <UseCasesSection />
-    
-
+      <ThirdUseCasesSection />
       <SecondUseCasesSection />
       <IndustrySolutionsSection />
-      <ThirdUseCasesSection />
       <SeoFriendlySection />
       <DesignProcessSection />
       <WhyChooseUsSection />
