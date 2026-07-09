@@ -110,17 +110,6 @@ const HeroSection = () => {
         background: "linear-gradient(180deg, #E6F7FD 0%, #ffffff 80%)"
       }}
     >
-      {/* Background Image Overlay - Right Side */}
-      <div className="absolute right-34 top-1/2 transform -translate-y-1/2 z-10 w-[35%] h-[50%] lg:w-[70%] lg:h-[65%]">
-        <Image
-          src="/images/custom1.webp"
-          alt="Mobile Development Background"
-          fill
-          className="object-contain opacity-85"
-          priority={false}
-        />
-      </div>
-
       <div className="relative w-full flex flex-col items-center justify-center text-center px-4 max-w-7xl mx-auto mt-50 z-20">
         {/* Introductory text */}
         <div className="mb-6 px-4 py-2 bg-[#E6F7FD] rounded-full border border-[#00B9FF] inline-flex items-center gap-2">
