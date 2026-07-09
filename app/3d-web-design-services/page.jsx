@@ -100,7 +100,22 @@ const HeroSection = () => {
   }, [])
 
   const firstTitlePart = "3D Web Design Services for"
-  const secondTitlePart = " Fast, High Performance Websites"
+  const secondTitlePart = "Fast, High Performance Websites"
+
+  let charCounter = 0
+  const firstWordsWithCharIndexes = firstTitlePart.split(" ").map(word => {
+    const chars = word.split("").map(char => {
+      return { char, index: charCounter++ }
+    })
+    return chars
+  })
+
+  const secondWordsWithCharIndexes = secondTitlePart.split(" ").map(word => {
+    const chars = word.split("").map(char => {
+      return { char, index: charCounter++ }
+    })
+    return chars
+  })
 
   return (
     <section
@@ -127,25 +142,33 @@ const HeroSection = () => {
 
         <h1 ref={titleRef} className="text-4xl md:text-5xl lg:text-6xl font-sans font-semibold mb-4 leading-tight">
           <span className="text-[#00B9FF]">
-            {firstTitlePart.split("").map((char, index) => (
-              <span
-                key={index}
-                ref={(el) => (titleLettersRef.current[index] = el)}
-                className="inline-block"
-              >
-                {char === " " ? "\u00A0" : char}
+            {firstWordsWithCharIndexes.map((wordChars, wIdx) => (
+              <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.25em]">
+                {wordChars.map((item) => (
+                  <span
+                    key={item.index}
+                    ref={(el) => (titleLettersRef.current[item.index] = el)}
+                    className="inline-block"
+                  >
+                    {item.char}
+                  </span>
+                ))}
               </span>
             ))}
           </span>
-
+          {" "}
           <span className="text-black">
-            {secondTitlePart.split("").map((char, index) => (
-              <span
-                key={index + firstTitlePart.length}
-                ref={(el) => (titleLettersRef.current[index + firstTitlePart.length] = el)}
-                className="inline-block"
-              >
-                {char === " " ? "\u00A0" : char}
+            {secondWordsWithCharIndexes.map((wordChars, wIdx) => (
+              <span key={wIdx} className="inline-block whitespace-nowrap mr-[0.25em]">
+                {wordChars.map((item) => (
+                  <span
+                    key={item.index}
+                    ref={(el) => (titleLettersRef.current[item.index] = el)}
+                    className="inline-block"
+                  >
+                    {item.char}
+                  </span>
+                ))}
               </span>
             ))}
           </span>
