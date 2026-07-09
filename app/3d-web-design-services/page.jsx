@@ -8,6 +8,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import Image from "next/image"
 import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion"
 
 
 if (typeof window !== "undefined") {
@@ -440,47 +442,117 @@ const WhatIs3DSection = () => {
   )
 }
 
-// Services Grid Section Component
+// Services Grid Section Component (Interactive Viewport Timeline)
 const UseCasesSection = () => {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
   const subtitleRef = useRef(null)
-  const cardsRef = useRef([])
+  const itemRefs = useRef([])
+  const sentinelRefs = useRef([])
+  const [activeIndex, setActiveIndex] = useState(0)
 
   const useCases = [
     {
       icon: "/images/3d1.png",
+      tag: "01 / Engagement",
       title: "Interactive Experiences That Increase Engagement",
-      description: "An interactive 3D website gives users a reason to explore. They can rotate a product, move through a scene, interact with visual elements, or follow a story through motion. This active experience keeps users involved and helps them spend more time understanding your offer."
+      description: "An interactive 3D website gives users a reason to explore. They can rotate a product, move through a scene, interact with visual elements, or follow a story through motion. This active experience keeps users involved and helps them spend more time understanding your offer.",
+      items: [
+        "Interactive rotations & zoom capabilities",
+        "Engaging hover effects & scroll animations",
+        "Active user involvement for better message retention"
+      ]
     },
     {
       icon: "/images/3d3.png",
+      tag: "02 / Visualization",
       title: "Advanced 3D Product Visualization",
-      description: "3D product visualization helps users understand products faster. Instead of relying only on static images, customers can view details, angles, features, materials, finishes, and variations in a more realistic way. This is useful for ecommerce, manufacturing, technology, furniture, real estate, fashion, and premium product brands that need to show product value clearly."
+      description: "3D product visualization helps users understand products faster. Instead of relying only on static images, customers can view details, angles, features, materials, finishes, and variations in a more realistic way. This is useful for ecommerce, manufacturing, technology, furniture, real estate, fashion, and premium product brands that need to show product value clearly.",
+      items: [
+        "Configurable materials, textures, and colorways",
+        "360-degree viewport control for detailed inspection",
+        "Intuitive hot-spots and feature highlight annotations"
+      ]
     },
     {
       icon: "/images/3d2.png",
+      tag: "03 / Branding",
       title: "Strong Brand Differentiation",
-      description: "Many websites use similar layouts, stock visuals, and predictable sections. Immersive website design helps your brand create a stronger identity. It shows that your business invests in experience, quality, and innovation. This is valuable for brands that want to position themselves as premium, modern, technical, creative, or future ready."
+      description: "Many websites use similar layouts, stock visuals, and predictable sections. Immersive website design helps your brand create a stronger identity. It shows that your business invests in experience, quality, and innovation. This is valuable for brands that want to position themselves as premium, modern, technical, creative, or future ready.",
+      items: [
+        "Unique web environments built custom from scratch",
+        "High-fidelity custom 3D model integration",
+        "Brand identity reinforcement through creative storytelling"
+      ]
     },
     {
       icon: "/images/3d4.png",
+      tag: "04 / Rendering",
       title: "Real Time Interactive User Experience",
-      description: "Real time rendering allows users to interact with 3D elements directly inside the browser. Users can scroll, click, rotate, zoom, move, or trigger animations based on their actions. This gives users more control over the experience and helps businesses explain products or services visually instead of depending only on long text."
+      description: "Real time rendering allows users to interact with 3D elements directly inside the browser. Users can scroll, click, rotate, zoom, move, or trigger animations based on their actions. This gives users more control over the experience and helps businesses explain products or services visually instead of depending only on long text.",
+      items: [
+        "Zero lag rendering using WebGL and WebGPU optimization",
+        "Interactive scroll-bound motion and click triggers",
+        "High-performance assets designed to prevent delays"
+      ]
     },
     {
       icon: "/images/3d6.png",
+      tag: "05 / Conversion",
       title: "Immersive Design That Drives Conversions",
-      description: "Conversion focused web design connects creativity with action. A 3D website should not distract users from the goal. It should guide them toward product understanding, service enquiry, booking, demo request, or purchase action. At Webnox Digital, we design 3D experiences with clear CTA placement, structured content flow, page speed, mobile usability, and lead generation in mind."
+      description: "Conversion focused web design connects creativity with action. A 3D website should not distract users from the goal. It should guide them toward product understanding, service enquiry, booking, demo request, or purchase action. At Webnox Digital, we design 3D experiences with clear CTA placement, structured content flow, page speed, mobile usability, and lead generation in mind.",
+      items: [
+        "Perfect blend of visual depth with accessibility",
+        "Clear call-to-actions placed inside and outside of scenes",
+        "Comprehensive tracking of user journeys and click-throughs"
+      ]
     }
   ]
 
+  // Set stable array refs
+  const setItemRef = (el, i) => {
+    itemRefs.current[i] = el
+  }
+  const setSentinelRef = (el, i) => {
+    sentinelRefs.current[i] = el
+  }
+
+  useEffect(() => {
+    if (!sentinelRefs.current.length) return
+
+    let frame = 0
+    const updateActiveByProximity = () => {
+      frame = requestAnimationFrame(updateActiveByProximity)
+      
+      const centerY = window.innerHeight / 2
+      let bestIndex = 0
+      let bestDist = Infinity
+
+      sentinelRefs.current.forEach((node, i) => {
+        if (!node) return
+        const rect = node.getBoundingClientRect()
+        const mid = rect.top + rect.height / 2
+        const dist = Math.abs(mid - centerY)
+        if (dist < bestDist) {
+          bestDist = dist
+          bestIndex = i
+        }
+      })
+
+      if (bestIndex !== activeIndex) {
+        setActiveIndex(bestIndex)
+      }
+    }
+
+    frame = requestAnimationFrame(updateActiveByProximity)
+    return () => cancelAnimationFrame(frame)
+  }, [activeIndex])
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // SEO: Ensure content is visible initially for crawlers
       gsap.set([titleRef.current, subtitleRef.current], { opacity: 1, y: 0, visibility: 'visible' })
-      const validCards = cardsRef.current.filter(Boolean)
-      gsap.set(validCards, { opacity: 1, y: 0, visibility: 'visible' })
+      const validItems = itemRefs.current.filter(Boolean)
+      gsap.set(validItems, { opacity: 1, y: 0, visibility: 'visible' })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -489,14 +561,13 @@ const UseCasesSection = () => {
         }
       })
 
-      // Animate from visible state (subtle animation)
       tl.fromTo(titleRef.current, 
         { opacity: 1, y: 0 },
         { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
         .fromTo(subtitleRef.current, 
           { opacity: 1, y: 0 },
           { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-        .fromTo(validCards, 
+        .fromTo(validItems, 
           { opacity: 1, y: 0 },
           { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.2")
     }, sectionRef)
@@ -504,29 +575,133 @@ const UseCasesSection = () => {
   }, [])
 
   return (
-    <section ref={sectionRef} className="font-sans py-16 bg-white">
-      <div className="px-8 max-w-7xl mx-auto">
+    <section ref={sectionRef} className="font-sans py-24 bg-white relative">
+      <div className="px-8 max-w-5xl mx-auto">
         <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-black leading-tight mb-4">
           Why Businesses Are Choosing 3D Website Design
         </h2>
-        <p ref={subtitleRef} className="text-gray-600 text-lg md:text-xl text-center max-w-3xl mx-auto mb-12">
+        <p ref={subtitleRef} className="text-gray-600 text-lg md:text-xl text-center max-w-3xl mx-auto mb-20">
           Businesses choose 3D website design to explain products clearly, increase engagement, build stronger brand impact, and turn a basic website into an interactive digital experience.
         </p>
 
-        <div className="flex flex-wrap justify-center gap-8 p-4">
-          {useCases.map((item, index) => (
-            <div
-              key={index}
-              ref={el => (cardsRef.current[index] = el)}
-              className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:border-sky-300 hover:-translate-y-1 flex flex-col w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.33rem)] xl:w-[calc(33.33%-1.33rem)] min-w-[280px]"
-            >
-              <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-lg bg-sky-50">
-                <Image src={item.icon} alt={item.title} width={40} height={40} className="object-contain" />
+        <div className="relative mt-16 space-y-16 md:mt-24 md:space-y-24">
+          {/* Vertical Timeline center line */}
+          <div className="absolute left-[24px] top-4 bottom-4 w-[2px] bg-sky-100 hidden md:block" />
+
+          {useCases.map((entry, index) => {
+            const isActive = index === activeIndex
+
+            return (
+              <div
+                key={index}
+                className="relative flex flex-col gap-4 md:flex-row md:gap-12"
+                ref={el => setItemRef(el, index)}
+                aria-current={isActive ? "true" : "false"}
+              >
+                {/* Left Meta Column */}
+                <div className="top-24 flex h-min w-full md:w-56 shrink-0 items-center gap-4 md:sticky z-10 bg-white md:bg-transparent py-2 md:py-0">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-xl transition-all duration-300 ${
+                      isActive ? "bg-[#00B9FF] text-white shadow-lg shadow-sky-100" : "bg-sky-50 text-sky-500"
+                    }`}>
+                      <Image src={entry.icon} alt={entry.title} width={28} height={28} className="object-contain" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className={`text-sm font-semibold transition-colors duration-300 ${
+                        isActive ? "text-gray-900" : "text-gray-500"
+                      }`}>
+                        {entry.title.split(' ').slice(0, 3).join(' ')}...
+                      </span>
+                      <span className="text-xs text-sky-500 font-medium">
+                        {entry.tag}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Invisible sentinel */}
+                <div
+                  ref={el => setSentinelRef(el, index)}
+                  aria-hidden
+                  className="absolute -top-24 left-0 h-12 w-12 opacity-0 pointer-events-none"
+                />
+
+                {/* Content Card Column */}
+                <article
+                  className={
+                    "flex-1 flex flex-col rounded-2xl border p-6 transition-all duration-500 " +
+                    (isActive
+                      ? "border-sky-300 bg-sky-50/20 shadow-xl shadow-sky-50/40"
+                      : "border-gray-200 bg-white shadow-sm")
+                  }
+                >
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <h3
+                        className={
+                          "text-xl font-bold leading-tight transition-colors duration-300 " +
+                          (isActive ? "text-gray-900" : "text-gray-700")
+                        }
+                      >
+                        {entry.title}
+                      </h3>
+                      
+                      <p
+                        className={
+                          "text-sm leading-relaxed text-justify transition-all duration-500 " +
+                          (isActive 
+                            ? "text-gray-600" 
+                            : "text-gray-500 line-clamp-2")
+                        }
+                      >
+                        {entry.description}
+                      </p>
+                    </div>
+
+                    {/* Expandable features */}
+                    <div
+                      aria-hidden={!isActive}
+                      className={
+                        "grid transition-all duration-500 ease-out " +
+                        (isActive 
+                          ? "grid-rows-[1fr] opacity-100 mt-4" 
+                          : "grid-rows-[0fr] opacity-0 pointer-events-none")
+                      }
+                    >
+                      <div className="overflow-hidden">
+                        <div className="space-y-4 pt-2">
+                          {entry.items && entry.items.length > 0 && (
+                            <div className="rounded-xl border border-sky-100 bg-sky-50/50 p-5">
+                              <ul className="space-y-3">
+                                {entry.items.map((item, itemIndex) => (
+                                  <li 
+                                    key={itemIndex} 
+                                    className="flex items-start gap-2.5 text-sm text-gray-700"
+                                  >
+                                    <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#00B9FF] flex-shrink-0" />
+                                    <span className="leading-relaxed font-medium">{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          <div className="flex justify-end">
+                            <Link href="/contact-us">
+                              <button className="flex items-center gap-1.5 bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-4 py-2 rounded-lg text-sm transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer">
+                                Learn More
+                                <ArrowUpRight className="h-4 w-4" />
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 leading-tight">{item.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed text-justify">{item.description}</p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
@@ -720,105 +895,254 @@ const IndustrySolutionsSection = () => {
   )
 }
 
-// Services Grid Section Component
+// Services Grid Section Component (HeroParallax Aceternity UI Effect)
 const ThirdUseCasesSection = () => {
   const sectionRef = useRef(null)
-  const titleRef = useRef(null)
-  const subtitleRef = useRef(null)
-  const cardsRef = useRef([])
 
-  const useCases = [
+  const services = [
     {
-      icon: "/images/3d11.png",
       title: "Custom 3D UI UX Design Strategy",
-      description: "Every successful 3D website starts with a clear user journey. We plan the structure, content flow, interactive sections, CTA placement, and visual hierarchy before development begins. Our 3D UI UX design process focuses on how users move through the website, what they need to understand first, and how each interaction supports the next action. This keeps the experience clear, purposeful, and conversion ready."
+      link: "/contact-us",
+      thumbnail: "/images/uiux1.webp",
+      description: "We plan user journeys, interaction points, content flow, and visual storytelling before development starts."
     },
     {
-      icon: "/images/3d12.png",
-      title: "Interactive 3D Web Development with WebGL and Three.js",
-      description: "We use Three.js development and WebGL development to create browser based 3D experiences that work smoothly across modern devices. These technologies allow us to build interactive scenes, product models, animations, visual effects, and guided website experiences. Our development team focuses on clean code, optimized assets, stable rendering, and smooth interaction. This helps your 3D website feel advanced while staying practical for real users."
+      title: "Interactive 3D Web Development",
+      link: "/contact-us",
+      thumbnail: "/images/3dbg.webp",
+      description: "Building immersive, browser-based 3D experiences using Three.js and WebGL."
     },
     {
-      icon: "/images/3d13.png",
-      title: "3D Product Visualization and Configurators",
-      description: "A 3D product visualization website helps users explore products in more detail. We create 3D viewers, product rotations, feature highlights, material previews, and interactive product configurators based on your business requirements. This service is useful for ecommerce brands, product companies, furniture businesses, real estate projects, industrial products, technology products, and premium consumer brands."
+      title: "3D Product Visualization",
+      link: "/contact-us",
+      thumbnail: "/images/3dimagesolution.webp",
+      description: "Creating highly detailed 3D viewers, configurations, material previews, and rotation tools."
     },
     {
-      icon: "/images/3d14.png",
-      title: "Scroll Based Animations and Interactions",
-      description: "Scroll based animation helps guide users through a story. As the user moves down the page, products can reveal features, scenes can change, and content can appear in a controlled sequence. We use motion design techniques to make the page feel smooth and intentional. Each animation supports content understanding and keeps the user focused on the next section."
+      title: "Scroll Based Animations",
+      link: "/contact-us",
+      thumbnail: "/images/brand3-1.webp",
+      description: "Guiding users through your product story with smooth scroll-bound animations."
     },
     {
-      icon: "/images/3d15.png",
       title: "Performance Optimized 3D Websites",
-      description: "3D websites can become slow when models, textures, scripts, and animations are not optimized. We build performance optimized 3D websites by reducing asset weight, lazy loading 3D elements, compressing models, using efficient rendering methods, and keeping core content fast. Speed matters because users will not wait for a heavy visual experience to load. Performance, stability, and interaction quality directly affect engagement and conversion."
+      link: "/contact-us",
+      thumbnail: "/images/brand3-2.webp",
+      description: "Compressing assets, lazy loading, and optimization to ensure fast browser speeds."
     },
     {
-      icon: "/images/3d16.png",
-      title: "3D Landing Pages and Campaign Experiences",
-      description: "Brands can use 3D landing pages for product launches, marketing campaigns, event promotions, investor presentations, and high impact brand experiences. These pages work well when the goal is to create attention, explain value quickly, and make the campaign memorable. We design these experiences with a strong message, focused CTA, clear sections, and measurable conversion actions."
+      title: "3D Landing Pages & Campaigns",
+      link: "/contact-us",
+      thumbnail: "/images/brand3-3.webp",
+      description: "Creating memorable, high-impact landing pages for product launches and campaigns."
     },
     {
-      icon: "/images/3d17.png",
       title: "Virtual Showroom Development",
-      description: "Virtual showroom development allows users to explore products, collections, spaces, or environments online. A virtual showroom can support ecommerce, real estate, interiors, manufacturing, luxury products, and product demonstrations. We build virtual experiences that help users move through visual spaces, interact with products, and understand offerings without visiting a physical location."
+      link: "/contact-us",
+      thumbnail: "/images/brand5-1.webp",
+      description: "Building immersive digital showrooms and tours for ecommerce and real estate."
+    },
+    {
+      title: "WebXR & WebVR Integration",
+      link: "/contact-us",
+      thumbnail: "/images/brand5-2.webp",
+      description: "Immersive VR and AR headset experiences accessible directly inside the browser."
+    },
+    {
+      title: "Interactive 3D Map Customization",
+      link: "/contact-us",
+      thumbnail: "/images/brand5-3.webp",
+      description: "Interactive geographical mappings and spatial layouts for properties."
+    },
+    {
+      title: "Custom 3D Character Design",
+      link: "/contact-us",
+      thumbnail: "/images/brand5-4.webp",
+      description: "Tailored 3D characters, controllers, and key-frame animations built for the web."
+    },
+    {
+      title: "3D Interactive Games & Portals",
+      link: "/contact-us",
+      thumbnail: "/images/brand5-5.webp",
+      description: "Developing custom gamified layouts to boost engagement and brand recall."
+    },
+    {
+      title: "Real-time Product Configurators",
+      link: "/contact-us",
+      thumbnail: "/images/brand5-6.webp",
+      description: "Allowing users to customize colorways, configurations, and sizing in real-time."
+    },
+    {
+      title: "Dynamic 3D Typography",
+      link: "/contact-us",
+      thumbnail: "/images/aboutimg1.webp",
+      description: "Spatial lettering, mouse-interactive fonts, and creative heading layouts."
+    },
+    {
+      title: "Custom Shader & Canvas Effects",
+      link: "/contact-us",
+      thumbnail: "/images/aboutimg3.webp",
+      description: "High-end visual shaders, complex particle systems, and interactive canvases."
+    },
+    {
+      title: "3D CAD Model Optimization",
+      link: "/contact-us",
+      thumbnail: "/images/thirdabout.webp",
+      description: "Converting and optimizing raw CAD formats into lightweight web-ready assets."
     }
   ]
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // SEO: Ensure content is visible initially for crawlers
-      gsap.set([titleRef.current, subtitleRef.current], { opacity: 1, y: 0, visibility: 'visible' })
-      const validCards = cardsRef.current.filter(Boolean)
-      gsap.set(validCards, { opacity: 1, y: 0, visibility: 'visible' })
+  const firstRow = services.slice(0, 5)
+  const secondRow = services.slice(5, 10)
+  const thirdRow = services.slice(10, 15)
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        }
-      })
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
 
-      // Animate from visible state (subtle animation)
-      tl.fromTo(titleRef.current, 
-        { opacity: 1, y: 0 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-        .fromTo(subtitleRef.current, 
-          { opacity: 1, y: 0 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.3")
-        .fromTo(validCards, 
-          { opacity: 1, y: 0 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.2")
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
+  const springConfig = { stiffness: 300, damping: 30, bounce: 100 }
+
+  const translateX = useSpring(
+    useTransform(scrollYProgress, [0, 1], [-200, 800]),
+    springConfig
+  )
+  const translateXReverse = useSpring(
+    useTransform(scrollYProgress, [0, 1], [200, -800]),
+    springConfig
+  )
+  const rotateX = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [15, 0]),
+    springConfig
+  )
+  const opacity = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [0.6, 1]),
+    springConfig
+  )
+  const rotateZ = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [10, 0]),
+    springConfig
+  )
+  const translateY = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [-200, 0]),
+    springConfig
+  )
 
   return (
-    <section ref={sectionRef} className="font-sans py-16 bg-white">
-      <div className="px-8 max-w-7xl mx-auto">
-        <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-black leading-tight mb-4">
+    <section 
+      ref={sectionRef} 
+      className="min-h-[180vh] py-24 bg-white overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d]"
+    >
+      {/* Header Container */}
+      <div className="max-w-7xl mx-auto px-8 w-full mb-16 relative z-10">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black leading-tight mb-4">
           Our 3D Web Design and Development Services
         </h2>
-        <p ref={subtitleRef} className="text-gray-600 text-lg md:text-xl text-center max-w-3xl mx-auto mb-12">
+        <p className="text-gray-600 text-lg md:text-xl max-w-3xl leading-relaxed">
           Webnox Digital provides 3D web design and development services for businesses that need custom digital experiences, product visualization, immersive storytelling, and performance focused execution.
         </p>
-
-        <div className="flex flex-wrap justify-center gap-8 p-4">
-          {useCases.map((item, index) => (
-            <div
-              key={index}
-              ref={el => (cardsRef.current[index] = el)}
-              className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:border-sky-300 hover:-translate-y-1 flex flex-col w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1.33rem)] xl:w-[calc(33.33%-1.33rem)] min-w-[280px]"
-            >
-              <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-lg bg-sky-50">
-                <Image src={item.icon} alt={item.title} width={40} height={40} className="object-contain" />
-              </div>
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 leading-tight">{item.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed text-justify">{item.description}</p>
-            </div>
-          ))}
-        </div>
       </div>
+
+      {/* Parallax Container */}
+      <motion.div
+        style={{
+          rotateX,
+          rotateZ,
+          translateY,
+          opacity
+        }}
+        className="w-full flex flex-col gap-10 md:gap-16 mt-8"
+      >
+        {/* Row 1 */}
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 md:space-x-12 mb-4">
+          {firstRow.map((service, index) => (
+            <motion.div
+              style={{ x: translateX }}
+              whileHover={{ y: -10 }}
+              key={index}
+              className="group/product h-[260px] md:h-[320px] w-[260px] md:w-[380px] relative flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white"
+            >
+              <Link href={service.link} className="block w-full h-full relative">
+                <Image
+                  src={service.thumbnail}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover/product:scale-105"
+                  alt={service.title}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover/product:opacity-80 transition-opacity duration-300" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs text-sky-200 leading-relaxed opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 text-justify line-clamp-3">
+                    {service.description}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Row 2 */}
+        <motion.div className="flex flex-row space-x-8 md:space-x-12 mb-4">
+          {secondRow.map((service, index) => (
+            <motion.div
+              style={{ x: translateXReverse }}
+              whileHover={{ y: -10 }}
+              key={index}
+              className="group/product h-[260px] md:h-[320px] w-[260px] md:w-[380px] relative flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white animate-gpu"
+            >
+              <Link href={service.link} className="block w-full h-full relative">
+                <Image
+                  src={service.thumbnail}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover/product:scale-105"
+                  alt={service.title}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover/product:opacity-80 transition-opacity duration-300" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs text-sky-200 leading-relaxed opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 text-justify line-clamp-3">
+                    {service.description}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Row 3 */}
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 md:space-x-12">
+          {thirdRow.map((service, index) => (
+            <motion.div
+              style={{ x: translateX }}
+              whileHover={{ y: -10 }}
+              key={index}
+              className="group/product h-[260px] md:h-[320px] w-[260px] md:w-[380px] relative flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white"
+            >
+              <Link href={service.link} className="block w-full h-full relative">
+                <Image
+                  src={service.thumbnail}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover/product:scale-105"
+                  alt={service.title}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover/product:opacity-80 transition-opacity duration-300" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-2 leading-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs text-sky-200 leading-relaxed opacity-0 group-hover/product:opacity-100 transition-opacity duration-300 text-justify line-clamp-3">
+                    {service.description}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
@@ -1105,154 +1429,199 @@ const WhyChooseUsSection = () => {
 }
 
 // Call to Action Section Component
+// Call to Action Section Component (Interactive Constellation Canvas Background)
 const CTASection = () => {
   const sectionRef = useRef(null)
-  const contentDesktopRef = useRef(null)
-  const contentMobileRef = useRef(null)
+  const contentRef = useRef(null)
+  const canvasRef = useRef(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    let animationFrameId
+    let width = (canvas.width = canvas.offsetWidth)
+    let height = (canvas.height = canvas.offsetHeight)
+
+    const particles = []
+    const particleCount = 75
+    const connectionDistance = 110
+    let mouse = { x: null, y: null }
+
+    // Initialize particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        radius: Math.random() * 2 + 1,
+      })
+    }
+
+    const handleMouseMove = (e) => {
+      const rect = canvas.getBoundingClientRect()
+      mouse.x = e.clientX - rect.left
+      mouse.y = e.clientY - rect.top
+    }
+
+    const handleMouseLeave = () => {
+      mouse.x = null
+      mouse.y = null
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+    canvas.addEventListener("mouseleave", handleMouseLeave)
+
+    const handleResize = () => {
+      if (!canvas) return
+      width = canvas.width = canvas.offsetWidth
+      height = canvas.height = canvas.offsetHeight
+    }
+    window.addEventListener("resize", handleResize)
+
+    const draw = () => {
+      ctx.clearRect(0, 0, width, height)
+
+      // Draw background gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, width, height)
+      bgGrad.addColorStop(0, "#080b18") // very deep navy space
+      bgGrad.addColorStop(1, "#030408") // near black space
+      ctx.fillStyle = bgGrad
+      ctx.fillRect(0, 0, width, height)
+
+      // Draw connecting lines and particles
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i]
+        
+        // Move particle
+        p1.x += p1.vx
+        p1.y += p1.vy
+
+        // Bounce off walls
+        if (p1.x < 0 || p1.x > width) p1.vx *= -1
+        if (p1.y < 0 || p1.y > height) p1.vy *= -1
+
+        // Mouse interaction (gentle attraction)
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - p1.x
+          const dy = mouse.y - p1.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist < 180) {
+            p1.x += dx * 0.006
+            p1.y += dy * 0.006
+          }
+        }
+
+        // Draw particle
+        ctx.beginPath()
+        ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2)
+        ctx.fillStyle = "rgba(0, 185, 255, 0.65)" // glow sky-blue
+        ctx.fill()
+
+        // Connect particles close to each other
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j]
+          const dx = p1.x - p2.x
+          const dy = p1.y - p2.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+
+          if (dist < connectionDistance) {
+            ctx.beginPath()
+            ctx.moveTo(p1.x, p1.y)
+            ctx.lineTo(p2.x, p2.y)
+            const alpha = (1 - dist / connectionDistance) * 0.22
+            ctx.strokeStyle = `rgba(0, 185, 255, ${alpha})`
+            ctx.lineWidth = 0.8
+            ctx.stroke()
+          }
+        }
+
+        // Connect particles to mouse
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = p1.x - mouse.x
+          const dy = p1.y - mouse.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist < 160) {
+            ctx.beginPath()
+            ctx.moveTo(p1.x, p1.y)
+            ctx.lineTo(mouse.x, mouse.y)
+            const alpha = (1 - dist / 160) * 0.32
+            ctx.strokeStyle = `rgba(0, 230, 255, ${alpha})`
+            ctx.lineWidth = 0.9
+            ctx.stroke()
+          }
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(draw)
+    }
+
+    draw()
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener("mousemove", handleMouseMove)
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const targets = [contentDesktopRef.current, contentMobileRef.current].filter(Boolean)
-      if (targets.length === 0) return
+      if (!contentRef.current) return
+      gsap.set(contentRef.current, { opacity: 1, y: 0, visibility: 'visible' })
 
-      // SEO: Ensure content is visible initially for crawlers
-      gsap.set(targets, { opacity: 1, y: 0, visibility: 'visible' })
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        }
-      })
-
-      // Animate from visible state
-      tl.fromTo(targets, 
+      gsap.fromTo(contentRef.current, 
         { opacity: 1, y: 0 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.05 })
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          }
+        })
     }, sectionRef)
     return () => ctx.revert()
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative w-full min-h-[500px] overflow-hidden font-sans">
-      {/* 3D Container for Desktop - wraps everything */}
-      <div className="hidden lg:block transform-gpu transition-all duration-700 ease-out cursor-pointer w-full h-full"
-        style={{
-          perspective: '1200px',
-          transformStyle: 'preserve-3d'
-        }}
-        onMouseEnter={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = (y - centerY) / 25;
-          const rotateY = (centerX - x) / 25;
-          e.currentTarget.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02) translateZ(15px)`;
-        }}
-        onMouseMove={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = (y - centerY) / 25;
-          const rotateY = (centerX - x) / 25;
-          e.currentTarget.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02) translateZ(15px)`;
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateZ(0px)';
-        }}>
+    <section ref={sectionRef} className="relative w-full min-h-[500px] overflow-hidden font-sans bg-[#030408] flex items-center justify-center py-20 md:py-28">
+      {/* Interactive Constellation Canvas */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-0" />
 
-        {/* Background Image - Desktop */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/Clientstech.png"
-            alt="CTA Background"
-            fill
-            className="object-contain w-full h-full transition-all duration-700 ease-out"
-            priority
-            style={{ backfaceVisibility: 'hidden' }}
-          />
+      {/* Content Overlay */}
+      <div
+        ref={contentRef}
+        className="relative z-10 w-full max-w-4xl mx-auto px-6 text-center flex flex-col items-center justify-center"
+      >
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+          Work With Experienced 3D Website Developers
+        </h2>
+        <div className="text-base md:text-lg text-gray-300 mb-10 max-w-3xl leading-relaxed space-y-4">
+          <p>
+            Work with experienced 3D website developers who understand design, development, performance, and conversion strategy. Webnox Digital can help you plan and build a custom 3D website development project that supports your product, brand, campaign, or digital platform.
+          </p>
+          <p>
+            Share your idea with our team. We will help you define the right structure, interaction level, technology stack, and launch plan.
+          </p>
         </div>
-
-        {/* Content - Desktop */}
-        <div
-          ref={contentDesktopRef}
-          className="relative z-10 flex flex-col justify-center min-h-[500px] px-4"
-          style={{ backfaceVisibility: 'hidden' }}
-        >
-          {/* Desktop Layout */}
-          <div className="flex flex-col items-center text-center max-w-4xl w-full mx-auto">
-            <h2 className="text-3xl md:text-4xl lg:text-4xl font-bold text-white pt-20 leading-tight text-center mt-6">
-              Work With Experienced 3D Website Developers
-            </h2>
-            <div className="text-base md:text-lg text-white/95 mb-10 max-w-3xl leading-relaxed text-center space-y-4">
-              <p>
-                Work with experienced 3D website developers who understand design, development, performance, and conversion strategy. Webnox Digital can help you plan and build a custom 3D website development project that supports your product, brand, campaign, or digital platform.
-              </p>
-              <p>
-                Share your idea with our team. We will help you define the right structure, interaction level, technology stack, and launch plan.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/contact-us">
-                <button className="bg-black hover:bg-gray-800 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer w-full sm:w-auto">
-                  Book a 3D Website Consultation
-                </button>
-              </Link>
-              <Link href="/contact-us">
-                <button className="bg-white hover:bg-gray-150 text-gray-900 font-semibold px-8 py-4 rounded-lg text-lg transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer w-full sm:w-auto">
-                  Request a Custom Proposal
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Layout - No 3D animation */}
-      <div className="block lg:hidden">
-        {/* Blue Background - Mobile Only */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#00B9FF] to-[#0090CC]"></div>
-
-        {/* Content - Mobile */}
-        <div
-          ref={contentMobileRef}
-          className="relative z-10 flex flex-col justify-center min-h-[500px] px-4"
-        >
-          {/* Mobile Card Layout */}
-          <div className="max-w-md mx-auto">
-            {/* Card Container */}
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl border border-white/30">
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 leading-tight text-center">
-                Work With Experienced 3D Website Developers
-              </h2>
-              <div className="text-xs sm:text-sm text-gray-700 mb-6 leading-relaxed text-center space-y-3">
-                <p>
-                  Work with experienced 3D website developers who understand design, development, performance, and conversion strategy. Webnox Digital can help you plan and build a custom 3D website development project that supports your product, brand, campaign, or digital platform.
-                </p>
-                <p>
-                  Share your idea with our team. We will help you define the right structure, interaction level, technology stack, and launch plan.
-                </p>
-              </div>
-
-              {/* Buttons in card */}
-              <div className="flex flex-col space-y-3">
-                <Link href="/contact-us">
-                  <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-6 py-4 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full cursor-pointer">
-                    Book a 3D Website Consultation
-                  </button>
-                </Link>
-                <Link href="/contact-us">
-                  <button className="bg-gray-100 hover:bg-gray-200 text-gray-900 font-semibold px-6 py-4 rounded-lg text-base transition-all duration-300 shadow-lg hover:shadow-xl w-full cursor-pointer">
-                    Request a Custom Proposal
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
+        <div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
+          <Link href="/contact-us" className="w-full sm:w-auto">
+            <button className="bg-[#00B9FF] hover:bg-[#0090CC] text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 shadow-lg shadow-sky-500/20 hover:shadow-sky-500/40 cursor-pointer w-full sm:w-auto">
+              Book a 3D Website Consultation
+            </button>
+          </Link>
+          <Link href="/contact-us" className="w-full sm:w-auto">
+            <button className="border border-white/30 hover:border-white text-white hover:bg-white hover:text-[#030408] font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-300 shadow-lg cursor-pointer w-full sm:w-auto">
+              Request a Custom Proposal
+            </button>
+          </Link>
         </div>
       </div>
     </section>
