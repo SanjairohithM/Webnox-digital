@@ -818,91 +818,179 @@ const SecondUseCasesSection = () => {
   )
 }
 
-// Industry Solutions Section Component
+// Industry Solutions Section Component (Parallax Scroll Effect)
 const IndustrySolutionsSection = () => {
   const sectionRef = useRef(null)
-  const titleRef = useRef(null)
-  const cardsRef = useRef([])
 
   const solutions = [
     {
       icon: "/images/3d1.png",
       title: "Ecommerce",
+      thumbnail: "/images/brand5-1.webp",
       description: "3D ecommerce website design helps shoppers view product details, rotate items, compare variations, and understand size, texture, or function before buying. This improves product confidence for furniture, fashion, electronics, luxury items, and custom products."
     },
     {
       icon: "/images/3d3.png",
       title: "SaaS Platforms",
+      thumbnail: "/images/3dbg.webp",
       description: "3D web design for SaaS companies helps explain dashboards, workflows, automation, and platform value through interactive product demos. It makes complex software easier to understand and supports faster user decision making."
     },
     {
       icon: "/images/3d2.png",
       title: "Real Estate",
+      thumbnail: "/images/brand5-3.webp",
       description: "A virtual property tour website helps real estate brands showcase spaces, layouts, amenities, and project features in an interactive way. It works well for developers, architects, interior brands, and property consultants."
     },
     {
       icon: "/images/3d4.png",
       title: "Luxury and Fashion Brands",
+      thumbnail: "/images/aboutimg1.webp",
       description: "An immersive brand experience website helps luxury and fashion brands present product detail, exclusivity, and visual identity with stronger impact. 3D supports launches, collections, premium ecommerce, and brand storytelling."
     },
     {
       icon: "/images/3d6.png",
       title: "Creative Portfolios",
+      thumbnail: "/images/brand3-1.webp",
       description: "A 3D portfolio website design helps designers, studios, architects, artists, and creators present work with a memorable digital experience. It gives the portfolio a distinct identity without overpowering the actual work."
     },
     {
       icon: "/images/3d10.png",
       title: "Startups and Enterprises",
+      thumbnail: "/images/brand3-2.webp",
       description: "Scalable 3D website solutions help startups explain new products and help enterprises support demos, virtual showrooms, customer education, and brand innovation. We define the scope based on goals, audience, budget, and technical needs."
     }
   ]
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.set(titleRef.current, { opacity: 1, y: 0, visibility: 'visible' })
-      const validCards = cardsRef.current.filter(Boolean)
-      gsap.set(validCards, { opacity: 1, y: 0, visibility: 'visible' })
+  const firstRow = [solutions[0], solutions[1], solutions[2], solutions[0], solutions[1], solutions[2]]
+  const secondRow = [solutions[3], solutions[4], solutions[5], solutions[3], solutions[4], solutions[5]]
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        }
-      })
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
 
-      tl.fromTo(titleRef.current, 
-        { opacity: 1, y: 0 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-        .fromTo(validCards, 
-          { opacity: 1, y: 0 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: "power2.out" }, "-=0.2")
-    }, sectionRef)
-    return () => ctx.revert()
-  }, [])
+  const springConfig = { stiffness: 300, damping: 30, bounce: 100 }
+
+  const translateX = useSpring(
+    useTransform(scrollYProgress, [0, 1], [-200, 600]),
+    springConfig
+  )
+  const translateXReverse = useSpring(
+    useTransform(scrollYProgress, [0, 1], [200, -600]),
+    springConfig
+  )
+  const rotateX = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [15, 0]),
+    springConfig
+  )
+  const opacity = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [0.6, 1]),
+    springConfig
+  )
+  const rotateZ = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [10, 0]),
+    springConfig
+  )
+  const translateY = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [-200, 0]),
+    springConfig
+  )
 
   return (
-    <section ref={sectionRef} className="font-sans py-16 bg-gray-50/30">
-      <div className="px-8 max-w-7xl mx-auto">
-        <h2 ref={titleRef} className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-black leading-tight mb-16">
+    <section 
+      ref={sectionRef} 
+      className="min-h-[135vh] py-20 bg-gray-50/20 overflow-hidden antialiased relative flex flex-col self-auto [perspective:1000px] [transform-style:preserve-3d] border-y border-gray-150"
+    >
+      {/* Header Container */}
+      <div className="max-w-7xl mx-auto px-8 w-full mb-12 relative z-10 text-center">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black leading-tight mb-4">
           3D Web Design Solutions Across Industries
         </h2>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
-          {solutions.map((item, index) => (
-            <div
-              key={index}
-              ref={el => (cardsRef.current[index] = el)}
-              className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:border-sky-300 hover:-translate-y-1 flex flex-col h-full"
-            >
-              <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-lg bg-sky-50">
-                <Image src={item.icon} alt={item.title} width={40} height={40} className="object-contain" />
-              </div>
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 leading-tight">{item.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed text-justify">{item.description}</p>
-            </div>
-          ))}
-        </div>
+        <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto">
+          We build tailored, interactive 3D solutions for leading companies across diverse industries, helping them engage customers and elevate their brand.
+        </p>
       </div>
+
+      {/* Parallax Container */}
+      <motion.div
+        style={{
+          rotateX,
+          rotateZ,
+          translateY,
+          opacity
+        }}
+        className="w-full flex flex-col gap-10 md:gap-14 mt-4"
+      >
+        {/* Row 1 */}
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-8 md:space-x-12 mb-4">
+          {firstRow.map((item, index) => (
+            <motion.div
+              style={{ x: translateX }}
+              whileHover={{ y: -10 }}
+              key={`ind-row1-${index}`}
+              className="group/product h-[260px] md:h-[320px] w-[260px] md:w-[380px] relative flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white cursor-pointer transform-gpu [backface-visibility:hidden] [transform-style:preserve-3d]"
+            >
+              <div className="block w-full h-full relative">
+                <Image
+                  src={item.thumbnail}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover/product:scale-105 transform-gpu [backface-visibility:hidden]"
+                  alt={item.title}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-65 group-hover/product:opacity-85 transition-opacity duration-300" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/20 backdrop-blur-md">
+                      <img src={item.icon} alt={item.title} className="w-4 h-4 object-contain filter invert brightness-200" />
+                    </div>
+                    <h3 className="text-lg md:text-xl font-bold text-white leading-tight">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-sky-100/90 leading-relaxed text-justify line-clamp-4 transform-gpu [backface-visibility:hidden]">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Row 2 */}
+        <motion.div className="flex flex-row space-x-8 md:space-x-12">
+          {secondRow.map((item, index) => (
+            <motion.div
+              style={{ x: translateXReverse }}
+              whileHover={{ y: -10 }}
+              key={`ind-row2-${index}`}
+              className="group/product h-[260px] md:h-[320px] w-[260px] md:w-[380px] relative flex-shrink-0 rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-white cursor-pointer transform-gpu [backface-visibility:hidden] [transform-style:preserve-3d]"
+            >
+              <div className="block w-full h-full relative">
+                <Image
+                  src={item.thumbnail}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover/product:scale-105 transform-gpu [backface-visibility:hidden]"
+                  alt={item.title}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-65 group-hover/product:opacity-85 transition-opacity duration-300" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/20 backdrop-blur-md">
+                      <img src={item.icon} alt={item.title} className="w-4 h-4 object-contain filter invert brightness-200" />
+                    </div>
+                    <h3 className="text-lg md:text-xl font-bold text-white leading-tight">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-sky-100/90 leading-relaxed text-justify line-clamp-4 transform-gpu [backface-visibility:hidden]">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
@@ -971,7 +1059,7 @@ const ServiceCard = ({ title, description, icon: IconName }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className="bg-white border border-gray-200/80 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-sky-100/40 hover:border-sky-300 flex flex-col h-full min-h-[225px] relative overflow-hidden group cursor-pointer [transform-style:preserve-3d]"
+      className="bg-white border border-gray-200/80 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-sky-100/40 hover:border-sky-300 flex flex-col h-full min-h-[190px] relative overflow-hidden group cursor-pointer [transform-style:preserve-3d]"
       style={{
         transform: rotationStyle,
       }}
@@ -1005,18 +1093,13 @@ const ServiceCard = ({ title, description, icon: IconName }) => {
         </h3>
         
         <p 
-          className="text-gray-600 text-sm leading-relaxed text-justify mb-5"
+          className="text-gray-600 text-sm leading-relaxed text-justify mb-0"
           style={{
             transform: isHovered ? `translate3d(${coords.x * 2}px, ${coords.y * 2}px, 4px)` : 'translate3d(0, 0, 0)'
           }}
         >
           {description}
         </p>
-        
-        <Link href="/contact-us" className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-sky-500 group-hover:text-sky-600">
-          <span>Learn More</span>
-          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </Link>
       </div>
     </div>
   )
