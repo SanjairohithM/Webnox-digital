@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "3D Web Design Services for Businesses in the US & UK",
+  title: "3D Web Design Services | Interactive 3D Website Agency",
   description:
-    "We provide professional 3D web design services for businesses across the US & UK. From immersive visuals to interactive experiences, we deliver high-performance, visually stunning websites.",
+    "Create interactive 3D websites with Webnox Digital. We build performance optimized 3D website experiences using Three.js, WebGL, and modern web technologies.",
   keywords: "3D web design services, 3D website development, immersive web design, interactive 3D websites, Three.js development, WebGL websites, 3D web solutions",
   alternates: { 
     canonical: "https://www.webnoxdigital.com/3d-web-design-services",
@@ -13,9 +13,9 @@ export const metadata = {
   },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "3D Web Design Services for Businesses in the US & UK",
+    title: "3D Web Design Services | Interactive 3D Website Agency",
     description:
-      "We provide professional 3D web design services for businesses across the US & UK. From immersive visuals to interactive experiences, we deliver high-performance, visually stunning websites.",
+      "Create interactive 3D websites with Webnox Digital. We build performance optimized 3D website experiences using Three.js, WebGL, and modern web technologies.",
     url: "https://www.webnoxdigital.com/3d-web-design-services",
     siteName: "Webnox Digital",
     images: [
@@ -30,9 +30,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "3D Web Design Services for Businesses in the US & UK",
+    title: "3D Web Design Services | Interactive 3D Website Agency",
     description:
-      "We provide professional 3D web design services for businesses across the US & UK. From immersive visuals to interactive experiences, we deliver high-performance, visually stunning websites.",
+      "Create interactive 3D websites with Webnox Digital. We build performance optimized 3D website experiences using Three.js, WebGL, and modern web technologies.",
     images: ["/images/3dbg.webp"],
   },
 }
