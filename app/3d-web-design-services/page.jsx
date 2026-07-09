@@ -1147,6 +1147,85 @@ const ThirdUseCasesSection = () => {
   )
 }
 
+// 3D Inner Layer Parallax Card Component for SEO Friendly Section
+const ParallaxCard = ({ icon, title, description }) => {
+  const cardRef = useRef(null)
+  const [coords, setCoords] = useState({ x: 0, y: 0 })
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+    const mouseX = e.clientX - rect.left
+    const mouseY = e.clientY - rect.top
+    
+    // Normalize coordinates between -1 and 1
+    const normX = (mouseX - centerX) / centerX
+    const normY = (mouseY - centerY) / centerY
+    
+    setCoords({ x: normX, y: normY })
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+    setCoords({ x: 0, y: 0 })
+  }
+
+  const rotationStyle = isHovered
+    ? `perspective(1000px) rotateX(${coords.y * -8}deg) rotateY(${coords.x * 8}deg) scale3d(1.02, 1.02, 1.02)`
+    : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
+
+  const shadowStyle = isHovered
+    ? `${coords.x * -10}px ${coords.y * -10}px 25px rgba(0, 185, 255, 0.08), 0 10px 20px rgba(0, 0, 0, 0.03)`
+    : '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)'
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      className="bg-white border border-gray-150 rounded-2xl p-8 flex flex-col h-full transition-all duration-300 ease-out cursor-pointer [transform-style:preserve-3d]"
+      style={{
+        transform: rotationStyle,
+        boxShadow: shadowStyle
+      }}
+    >
+      {/* Icon Wrapper (Translates most) */}
+      <div 
+        className="w-14 h-14 mb-6 flex items-center justify-center rounded-xl bg-sky-50 transition-transform duration-200 ease-out flex-shrink-0"
+        style={{
+          transform: `translate3d(${coords.x * 12}px, ${coords.y * 12}px, 20px)`,
+        }}
+      >
+        <Image src={icon} alt={title} width={42} height={42} className="object-contain" />
+      </div>
+
+      {/* Heading (Translates moderately) */}
+      <h3 
+        className="text-lg md:text-xl font-bold text-gray-900 mb-3 leading-tight transition-transform duration-200 ease-out group-hover:text-[#00B9FF]"
+        style={{
+          transform: `translate3d(${coords.x * 6}px, ${coords.y * 6}px, 10px)`,
+        }}
+      >
+        {title}
+      </h3>
+
+      {/* Description (Translates slightly) */}
+      <p 
+        className="text-gray-600 text-sm leading-relaxed text-justify transition-transform duration-200 ease-out"
+        style={{
+          transform: `translate3d(${coords.x * 3}px, ${coords.y * 3}px, 5px)`,
+        }}
+      >
+        {description}
+      </p>
+    </div>
+  )
+}
+
 // SEO Friendly Section Component
 const SeoFriendlySection = () => {
   const sectionRef = useRef(null)
@@ -1221,13 +1300,13 @@ const SeoFriendlySection = () => {
             <div
               key={index}
               ref={el => (cardsRef.current[index] = el)}
-              className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:border-sky-300 hover:-translate-y-1 flex flex-col h-full"
+              className="h-full"
             >
-              <div className="w-12 h-12 mb-4 flex items-center justify-center rounded-lg bg-sky-50">
-                <Image src={item.icon} alt={item.title} width={40} height={40} className="object-contain" />
-              </div>
-              <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 leading-tight">{item.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed text-justify">{item.description}</p>
+              <ParallaxCard
+                icon={item.icon}
+                title={item.title}
+                description={item.description}
+              />
             </div>
           ))}
         </div>
